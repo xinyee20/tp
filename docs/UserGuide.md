@@ -107,11 +107,83 @@ about goes here
 
 ### <ins>Class Participation</ins>
 
+This feature allows you to manage the class participation grades for each student in your classes.
+
+---
+
 #### Awarding class participation marks: `award`
+
+you can use this command to award class participation marks to a student from a specified tutorial group and tutorial 
+you wish to grade.
+
+##### Format:
+
+`award NAME TUTORIAL_GROUP TUTORIAL_NUMBER MARKS`
+
+##### Example:
+
+If you wish to award a student participation marks, follow the steps below to learn how. In this example you will learn
+how to award a student ,`Ryan`, from tutorial group `G04`, a class participation score of `4` for tutorial `3-1`.
+
+Awarding class participation:
+
+1. Type `award Ryan G04 3-1 4`
+
+2. Press `enter` to execute the command 
+
+outcome:
+
+
+
+---
 
 #### Viewing statistics of class participation: `stats`
 
+you can use this command to view the average score for each student for a specific tutorial group and tutorial.
+
+##### Format:
+
+`stats TUTORIAL_GROUP LESSON_NUMBER`
+
+##### Example:
+
+If you wish to view the average participation marks for tutorial group `GO9` and tutorial `7-2`, follow the steps below 
+to learn how. 
+
+Viewing the average class participation mark
+
+1. Type `stats G09 7-2`
+
+2. Press `enter` to execute the command 
+
+outcome:
+
+
+---
+
 #### Exporting of class participation grades to CSV: `exportCp`
+
+You can use this command to export the class participation marks of a specified tutorial group into a CSV file.
+
+##### Format:
+
+`exportcp TUTORIAL_GROUP`
+
+##### Example:
+
+Assuming you need to collate the class participation marks for tutorial group `GO7` into a CSV file for grading on a 
+different platform (i.e LuimiNUS). You can do the following steps
+
+exporting class participation marks:
+
+1. Type `exportcp G07`
+
+2. Press `enter` to execute the command 
+
+outcome:
+
+
+---
 
 ### <ins>Addressing Questions</ins>
 
