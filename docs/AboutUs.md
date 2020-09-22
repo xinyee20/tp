@@ -1,59 +1,57 @@
----
-layout: page
-title: About Us
----
+# About Us 
+
+**Serenity** was developed by the team `W12-4`
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Lim Chun Yong
 
-<img src="images/johndoe.png" width="200px">
+<img src="/docs/images/team-profile/LimChunYong.png" width="200px"/>
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[github](https://github.com/chunyongg) |
+[portfolio](team/johndoe.md)
 
-* Role: Project Advisor
+* Role: Team Leader
+* Responsibilities: UI
 
-### Jane Doe
+### Lim Jia Rui Ryan
 
-<img src="images/johndoe.png" width="200px">
+<img src="/docs/images/team-profile/LimJiaRui.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[github](https://github.com/ryanlimjr) |
+[portfolio](team/johndoe.md)
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Lau Xin Yee
 
-<img src="images/johndoe.png" width="200px">
+<img src="/docs/images/team-profile/LauXinYee.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[github](https://github.com/xinyee20) |
+[portfolio](team/johndoe.md)
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Neo Rui En Maybelline
 
-<img src="images/johndoe.png" width="200px">
+<img src="/docs/images/team-profile/NeoRuiEn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[github](https://github.com/successs404) |
+[portfolio](team/johndoe.md)
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Bu Wen Jin
 
-<img src="images/johndoe.png" width="200px">
+<img src="/docs/images/team-profile/BuWenJin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[github](https://github.com/Nijnxw) |
+[portfolio](team/johndoe.md)
 
 * Role: Developer
 * Responsibilities: UI
