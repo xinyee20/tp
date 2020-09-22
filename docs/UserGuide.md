@@ -1,4 +1,4 @@
-#Serenity - User Guide
+# Serenity - User Guide
 
 By: `Team Serenity` Since: `Aug 2020`
 
