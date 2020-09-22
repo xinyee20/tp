@@ -44,7 +44,7 @@ By: `Team Serenity` Since: `Aug 2020`
    
      * [Deleting a question: `deleteQn`](#deleting-a-question-deleteqn)
      
-     * [Marking a question as answered: `ansQn`](#-marking-a-question-as-answered-ansqn)
+     * [Marking a question as answered: `ansQn`](#marking-a-question-as-answered-ansqn)
      
 5. [FAQ](#faq)
 
@@ -52,8 +52,16 @@ By: `Team Serenity` Since: `Aug 2020`
 
 ## Introduction
 
-Introduction goes here
+Welcome to the User Guide of **Serenity**!
 
+Are you a tutor for CS2101, but annoyed at keeping track of attendance, questions and class participation grades on different 
+excel sheets for different classes? Fret not, our application ,**Serenity**, will help keep you sane when doing the necessary 
+administrative work. **Serenity** is a desktop application that helps CS2101 tutors **manage their classes**. This  
+application is optimized for use through a *Command Line Interface(CLI)*, meaning that you operate the application by 
+typing commands into a command box.
+
+This user guide serves to provide you with an in-depth documentation on how to set up and use our application. with that said
+let's get [started](#quick-start)!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
