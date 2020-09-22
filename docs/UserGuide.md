@@ -54,13 +54,7 @@ By: `Team Serenity` Since: `Aug 2020`
 
 Introduction goes here
 
----
-
-## About
-
-about goes here
-
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
@@ -76,6 +70,12 @@ about goes here
 1. Type the command in the command box and press Enter to execute it. 
 
 1. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## About
+
+about goes here
 
 --------------------------------------------------------------------------------------------------------------------
 
