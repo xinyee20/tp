@@ -8,7 +8,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Lim Chun Yong
 
-<img src="/images/team-profile/LimChunYong.png" width="200px"/>
+<img src="/docs/images/team-profile/LimChunYong.png" width="200px"/>
 
 [github](https://github.com/chunyongg) |
 [portfolio](team/johndoe.md)
