@@ -55,7 +55,7 @@ By: `Team Serenity` Since: `Aug 2020`
 Welcome to the User Guide of **Serenity**!
 
 Are you a tutor for CS2101, but annoyed at keeping track of attendance, questions and class participation grades on different 
-excel sheets for different classes? Fret not, our application ,**Serenity**, will help keep you sane when doing the necessary 
+excel sheets for different classes? Fret not, our application, **Serenity**, will help keep you sane when doing the necessary 
 administrative work. **Serenity** is a desktop application that helps CS2101 tutors **manage their classes**. This  
 application is optimized for use through a *Command Line Interface(CLI)*, meaning that you operate the application by 
 typing commands into a command box.
@@ -199,14 +199,8 @@ outcome:
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 
