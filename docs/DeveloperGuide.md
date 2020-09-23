@@ -249,9 +249,9 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: 
 
 * Serenity can help assist the management of a CS2101 class 
-faster than a typical mouse/GUI driven app.
-* Serenity consolidates the administrative information well so that 
-it can be easily referred to by the tutor and edited.
+faster than a typical mouse/GUI driven app through easy reference and editing of class data.
+* Serenity consolidates administrative information on a Graphical User Interface for convenient viewing. 
+* Serenity gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
 
 ### User stories
 
