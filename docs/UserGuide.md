@@ -94,7 +94,7 @@ about goes here
 
 ### <ins>Attendance Taking</ins>
 
-### Mark attendance for every student: `markAll`
+#### Mark attendance for every student: `markAll`
 Marks all students of a particular class for a single tutorial 
 session as present.
 
@@ -104,7 +104,7 @@ Examples:
 * `markAll G04 1-1`
 * `markAll G09 7-2`
 
-### Mark attendance for a single student as absent: `mark`
+#### Mark attendance for a single student as absent: `mark`
 
 Marks a student of a particular class for a 
 single tutorial session as absent.
@@ -121,7 +121,7 @@ Examples:
 * `mark G09 7-2 ryan`
 
 
-### Flag attendance for a single student: `flag`
+#### Flag attendance for a single student: `flag`
 
 Flag attendance so you will be reminded to check again 
 at the end of class.
@@ -132,7 +132,7 @@ Examples:
  * flag G04 1-1 john
  * flag G09 7-2 ryan
 
-### View attendance for each class: `attendance`
+#### View attendance for each class: `attendance`
 
 Provides a graphical view of all the student's 
 attendance for a particular lesson.
@@ -143,7 +143,7 @@ Examples:
  * attendance G04 1-1
  * attendance G09 7-2
 
-### Exporting of attendance to CSV: `exportAtt`
+#### Exporting of attendance to CSV: `exportAtt`
 
 Export the attendance for a particular tutorial group 
 in a CSV file.
