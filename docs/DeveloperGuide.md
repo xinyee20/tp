@@ -258,13 +258,24 @@ faster than a typical mouse/GUI driven app through easy reference and editing of
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| -------- | ------------------------------------------ | -------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | Tutor | Set up classes that I am teaching at the start of every semester | Perform administrative functions more efficiently |
+| `* * *`  | Tutor | Mark attendance across every lesson | Grade effectively at the end of the term |
+| `*` | Tutor | Flag the attendance of a student | Be reminded to check up on this student after lesson |
+| `* * *` | Tutor | View the attendance sheet for each class | Identify the students who did not attend a lesson |
+| `*` | Tutor | Export monthly attendance of all my classes as a CSV file | Submit attendance as a softcopy to the school |
+| `* * *` | Tutor | Give a participation score to a student | Grade the student's participation |
+| `* *` | Tutor | Use a participation system to keep track of participation | Grade effectively at the end of the term |
+| `* *` | Tutor | Generate the average score for each student across each session | Have an additional set of data to cross reference to |
+| `*` | Tutor | Export participation scores of all my classes as a CSV file | Submit it as a softcopy for marks generation |
+| `* * *` | Tutor | Add a question to the question list | Be reminded to answer the question after the lesson ends |
+| `* *` | Tutor | Remove a question from the question list | Prevent the list from becoming too cluttered |
+| `* *` | Tutor | View the list of questions for each class | Identify the questions that I have not answered in class |
+| `* *` | Forgetful tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class |
+| `* *` | Tutor | Import data of my students | Avoid manually entering the data |
+| `* *` | Tutor | Access the list of commands easily on the software without referring to the user guide | Operate the software easily while teaching in class |
+| `* *` | Tutor who dislikes clutter | Use an app that does not take up too much screen space | Continue to teach the content effectively |
+| `* *` | Tutor who has other important things to remember | The list of commands to be as short as possible | Be productive trying to recall more important things for the lesson |
 
 *{More to be added}*
 
@@ -300,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -308,7 +319,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
