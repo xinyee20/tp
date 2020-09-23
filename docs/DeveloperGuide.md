@@ -236,14 +236,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of students from various CS2101 classes
+* Has a need to keep track of the students' attendance throughout the semester
+* Has a need to keep track of the students' participation throughout the semester
+* Likes to keep track of the students' unanswered questions
+* Likes to handle most administrative work via one platform
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+* Serenity can help assist the management of a CS2101 class 
+faster than a typical mouse/GUI driven app through easy reference and editing of class data.
+* Serenity consolidates administrative information on a Graphical User Interface for convenient viewing. 
+* Serenity gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
 
 ### User stories
 
