@@ -58,6 +58,17 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+### Set Up
+
+**Setup classes at the start of a semester:** `importCsv`
+
+You can set up classes automatically by importing CSV data.
+
+1. Copy and paste CSV file into home folder. 
+2. Enter `importCsv` in the command line.
+3. The program will update the classes and students for you.
+4. The program now ready to assist you in managing your CS2101 class.
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
