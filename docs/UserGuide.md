@@ -1,62 +1,107 @@
----
-layout: page
-title: User Guide
----
+# Serenity - User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+![Serenity Logo](images/logo.png)
 
-* Table of Contents
-{:toc}
+By: `Team Serenity` Since: `Aug 2020`
 
---------------------------------------------------------------------------------------------------------------------
+1. [Introduction](#introduction)
+
+2. [Quick Start](#quick-start)
+
+3. [About](#about)
+
+4. [Features](#features)
+
+   4.1. [Setup](#setup)
+   
+     * [Setup classes at the start of a semester: `importCsv`](#setup-classes-at-the-start-of-a-semester-importcsv)
+   
+   4.2. [Attendance Taking](#attendance-taking)
+  
+     * [Mark attendance for a every student: `markAll`](#mark-attendance-for-every-student-markall)
+     
+     * [Mark attendance for a single student: `mark`](#mark-attendance-for-a-single-student-mark)
+     
+     * [Flag attendance for a single student: `flag`](#flag-attendance-for-a-single-student-flag)
+     
+     * [View attendance for a each class: `attendance`](#view-attendance-for-each-class-attendance)
+     
+     * [Exporting of attendance to CSV: `exportAtt`](#exporting-of-attendance-to-csv-exportatt)
+     
+   4.3. [Class Participation](#class-participation)
+   
+     * [Awarding class participation marks: `award`](#awarding-class-participation-marks-award)
+     
+     * [Viewing statistics of class participation `stats`](#viewing-statistics-of-class-participation-stats)
+     
+     * [Exporting of class participation grades to CSV: `exportCp`](#exporting-of-class-participation-grades-to-csv-exportcp)
+     
+   4.4 [Addressing Questions](#addressing-questions)
+   
+     * [Adding a question: `addQn`](#adding-a-question-addqn)
+     
+     * [Viewing all questions: `list`](#viewing-all-questions-list)
+   
+     * [Deleting a question: `deleteQn`](#deleting-a-question-deleteqn)
+     
+     * [Marking a question as answered: `ansQn`](#marking-a-question-as-answered-ansqn)
+     
+5. [FAQ](#faq)
+
+6. [Command Summary](#command-summary)
+
+## Introduction
+
+Welcome to the User Guide of **Serenity**!
+
+Are you a tutor for CS2101, but annoyed at keeping track of attendance, questions and class participation grades on different 
+excel sheets for different classes? Fret not, our application, **Serenity**, will help keep you sane when doing the necessary 
+administrative work. **Serenity** is a desktop application that helps CS2101 tutors **manage their classes**. This  
+application is optimized for use through a *Command Line Interface(CLI)*, meaning that you operate the application by 
+typing commands into a command box.
+
+This user guide serves to provide you with an in-depth documentation on how to set up and use our application. with that said
+let's get [started](#quick-start)!
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `Serenity.jar` from [here]().
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui]()
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * **`list`** : Lists all contacts.
-
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
+1. Type the command in the command box and press Enter to execute it. 
 
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## About
+
+about goes here
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
-<div markdown="block" class="alert alert-info">
+### <ins>Setup</ins>
 
-**:information_source: Notes about the command format:**<br>
+#### Setup classes at the start of a semester: `importCsv`
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+### <ins>Attendance Taking</ins>
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+#### Mark attendance for every student: `markAll`
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+#### Mark attendance for a single student: `mark`
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+#### Flag attendance for a single student: `flag`
 
-</div>
+#### View attendance for each class: `attendance`
+
 
 ### Set Up
 
@@ -69,121 +114,104 @@ You can set up classes automatically by importing CSV data.
 3. The program will update the classes and students for you.
 4. The program is now ready to assist you in managing your CS2101 class.
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
 
 
-### Adding a person: `add`
+### <ins>Class Participation</ins>
 
-Adds a person to the address book.
+This feature allows you to manage the class participation grades for each student in your classes.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+---
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+#### Awarding class participation marks: `award`
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+you can use this command to award class participation marks to a student from a specified tutorial group and tutorial 
+you wish to grade.
 
-### Listing all persons : `list`
+##### Format:
 
-Shows a list of all persons in the address book.
+`award NAME TUTORIAL_GROUP TUTORIAL_NUMBER MARKS`
 
-Format: `list`
+##### Example:
 
-### Editing a person : `edit`
+If you wish to award a student participation marks, follow the steps below to learn how. In this example you will learn
+how to award a student ,`Ryan`, from tutorial group `G04`, a class participation score of `4` for tutorial `3-1`.
 
-Edits an existing person in the address book.
+Awarding class participation:
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+1. Type `award Ryan G04 3-1 4`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+2. Press `enter` to execute the command 
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+outcome:
 
-### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+---
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+#### Viewing statistics of class participation: `stats`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+you can use this command to view the average score for each student for a specific tutorial group and tutorial.
 
-### Deleting a person : `delete`
+##### Format:
 
-Deletes the specified person from the address book.
+`stats TUTORIAL_GROUP LESSON_NUMBER`
 
-Format: `delete INDEX`
+##### Example:
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+If you wish to view the average participation marks for tutorial group `GO9` and tutorial `7-2`, follow the steps below 
+to learn how. 
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+Viewing the average class participation mark
 
-### Clearing all entries : `clear`
+1. Type `stats G09 7-2`
 
-Clears all entries from the address book.
+2. Press `enter` to execute the command 
 
-Format: `clear`
+outcome:
 
-### Exiting the program : `exit`
 
-Exits the program.
+---
 
-Format: `exit`
+#### Exporting of class participation grades to CSV: `exportCp`
 
-### Saving the data
+You can use this command to export the class participation marks of a specified tutorial group into a CSV file.
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+##### Format:
 
-### Archiving data files `[coming in v2.0]`
+`exportcp TUTORIAL_GROUP`
 
-_{explain the feature here}_
+##### Example:
+
+Assuming you need to collate the class participation marks for tutorial group `GO7` into a CSV file for grading on a 
+different platform (i.e LuimiNUS). You can do the following steps
+
+exporting class participation marks:
+
+1. Type `exportcp G07`
+
+2. Press `enter` to execute the command 
+
+outcome:
+
+
+---
+
+### <ins>Addressing Questions</ins>
+
+#### Adding a question: `addQn`
+
+#### Viewing all questions: `list`
+
+#### Deleting a question: `deleteQn`
+
+#### Marking a question as answered: `ansQn` 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+
