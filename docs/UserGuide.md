@@ -1,5 +1,7 @@
 # Serenity - User Guide
 
+![Serenity Logo](images/logo.png)
+
 By: `Team Serenity` Since: `Aug 2020`
 
 ![Serenity Logo]()
@@ -62,7 +64,6 @@ typing commands into a command box.
 
 This user guide serves to provide you with an in-depth documentation on how to set up and use our application. with that said
 let's get [started](#quick-start)!
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
