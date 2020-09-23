@@ -246,8 +246,12 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+* Serenity can help assist the management of a CS2101 class 
+faster than a typical mouse/GUI driven app.
+* Serenity consolidates the administrative information well so that 
+it can be easily referred to by the tutor and edited.
 
 ### User stories
 
