@@ -14,7 +14,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/johndoe.md)
 
 * Role: Team Leader
-* Responsibilities: UI
+* Responsibilities: Testing
 
 ### Lim Jia Rui Ryan
 
@@ -23,8 +23,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [github](https://github.com/ryanlimjr) |
 [portfolio](team/johndoe.md)
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Documentation
 
 ### Lau Xin Yee
 
@@ -34,7 +34,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/johndoe.md)
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Deliverables and deadlines
 
 ### Neo Rui En Maybelline
 
@@ -44,7 +44,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/johndoe.md)
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code quality
 
 ### Bu Wen Jin
 
@@ -54,4 +54,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/johndoe.md)
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking, Integration 
