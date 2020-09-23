@@ -60,7 +60,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Set Up
 
-**Setup classes at the start of a semester:** `importCsv`
+**Set up classes at the start of a semester:** `importCsv`
 
 You can set up classes automatically by importing CSV data.
 
