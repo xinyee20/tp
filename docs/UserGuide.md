@@ -4,8 +4,6 @@
 
 By: `Team Serenity` Since: `Aug 2020`
 
-![Serenity Logo]()
-
 1. [Introduction](#introduction)
 
 2. [Quick Start](#quick-start)
