@@ -90,7 +90,14 @@ about goes here
 
 ### <ins>Setup</ins>
 
-#### Setup classes at the start of a semester: `importCsv`
+**Set up classes at the start of a semester:** `importCsv`
+
+You can set up classes automatically by importing CSV data.
+
+1. Copy and paste CSV file into home folder. 
+2. Enter `importCsv` in the command line.
+3. The program will update the classes and students for you.
+4. The program is now ready to assist you in managing your CS2101 class.
 
 ### <ins>Attendance Taking</ins>
 
