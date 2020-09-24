@@ -40,8 +40,8 @@ By: `Team Serenity` Since: `Aug 2020`
    
      * [Adding a question: `addQn`](#adding-a-question-addqn)
      
-     * [Viewing all questions: `list`](#viewing-all-questions-list)
-   
+     * [Viewing all questions: `questions`](#viewing-all-questions-list)
+
      * [Deleting a question: `deleteQn`](#deleting-a-question-deleteqn)
      
      * [Marking a question as answered: `ansQn`](#marking-a-question-as-answered-ansqn)
@@ -90,7 +90,7 @@ about goes here
 
 ### <ins>Setup</ins>
 
-**Set up classes at the start of a semester:** `importCsv`
+#### Set up classes at the start of a semester: `importCsv`
 
 You can set up classes automatically by importing CSV data.
 
@@ -98,6 +98,8 @@ You can set up classes automatically by importing CSV data.
 2. Enter `importCsv` in the command line.
 3. The program will update the classes and students for you.
 4. The program is now ready to assist you in managing your CS2101 class.
+
+---
 
 ### <ins>Attendance Taking</ins>
 
@@ -123,9 +125,10 @@ Format: `mark TUTORIAL_GROUP LESSON_NUMBER NAME`
 and easy way to record attendance.
 
 Examples:
-
 * `mark G04 1-1 john`
 * `mark G09 7-2 ryan`
+
+Outcome:
 
 
 #### Flag attendance for a single student: `flag`
@@ -139,6 +142,9 @@ Examples:
  * flag G04 1-1 john
  * flag G09 7-2 ryan
 
+Outcome:
+
+
 #### View attendance for each class: `attendance`
 
 Provides a graphical view of all the student's 
@@ -149,6 +155,9 @@ Format: `attendance TUTORIAL_GROUP LESSON_NUMBER`
 Examples:
  * attendance G04 1-1
  * attendance G09 7-2
+
+Outcome:
+
 
 #### Exporting of attendance to CSV: `exportAtt`
 
@@ -164,12 +173,14 @@ Examples:
  * `exportAtt G04` saves the file as `G04.csv`
  * `exportAtt G09` saves the file as `G09.csv`
 
+Outcome:
+
+
+---
 
 ### <ins>Class Participation</ins>
 
 This feature allows you to manage the class participation grades for each student in your classes.
-
----
 
 #### Awarding class participation marks: `award`
 
@@ -191,11 +202,8 @@ Awarding class participation:
 
 2. Press `enter` to execute the command 
 
-outcome:
+Outcome:
 
-
-
----
 
 #### Viewing statistics of class participation: `stats`
 
@@ -216,10 +224,8 @@ Viewing the average class participation mark
 
 2. Press `enter` to execute the command 
 
-outcome:
+Outcome:
 
-
----
 
 #### Exporting of class participation grades to CSV: `exportCp`
 
@@ -234,13 +240,13 @@ You can use this command to export the class participation marks of a specified 
 Assuming you need to collate the class participation marks for tutorial group `GO7` into a CSV file for grading on a 
 different platform (i.e LuimiNUS). You can do the following steps
 
-exporting class participation marks:
+Exporting class participation marks:
 
 1. Type `exportcp G07`
 
 2. Press `enter` to execute the command 
 
-outcome:
+Outcome:
 
 
 ---
@@ -249,11 +255,69 @@ outcome:
 
 #### Adding a question: `addQn`
 
-#### Viewing all questions: `list`
+Adds a question to the list of questions of a specified tutorial group.
+
+##### Format:
+
+`addQn TUTORIAL_GROUP LESSON_NUMBER QUESTION_DESCRIPTION`
+
+##### Examples:
+* `addQn G07 7-1 Could you elaborate on the marking scheme for OP1?`
+* `addQn G07 7-1 What are the deadlines that students should take note of?`
+
+Outcome:
+
+
+#### Viewing all questions: `questions`
+
+View a list of all the questions from a specified tutorial group.
+
+##### Format:
+
+`questions TUTORIAL_GROUP LESSON_NUMBER`
+
+##### Examples:
+* `questions G07 7-1`
+* `questions G10 5-2`
+
+Outcome:
+
 
 #### Deleting a question: `deleteQn`
 
+Deletes the specific question from the list of questions of a specified tutorial group.
+
+##### Format:
+
+`deleteQn TUTORIAL_GROUP LESSON_NUMBER INDEX`
+* Deletes the question at the specified `INDEX`.
+* The index refers to the index number shown in the displayed question list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+##### Examples:
+* `deleteQn G07 7-1 1`
+* `deleteQn G10 5-2 3`
+
+Outcome:
+
+
 #### Marking a question as answered: `ansQn` 
+
+Marks the specified question from the list of questions of a specified tutorial group as answered.
+
+##### Format:
+
+`ansQn TUTORIAL_GROUP LESSON_NUMBER INDEX`
+* Marks the question at the specified `INDEX` as answered.
+* The index refers to the index number shown in the displayed question list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+##### Examples:
+* `ansQn G07 7-1 1`
+* `ansQn G10 5-2 3`
+
+Outcome:
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -277,4 +341,3 @@ Add A Question | Across all tutorial groups -<br>Format: `addQn QUESTION_DESCRIP
 View All Questions | Across all tutorial groups -<br>Format: `list`
 Delete A Question | Across all tutorial groups -<br>Format: `deleteQn INDEX`<br>Example: `deleteQn 1`
 Mark A Question As Answered | Across all tutorial groups -<br>Format: `ansQn INDEX`<br>Example: `ansQn 1`
-
