@@ -303,7 +303,7 @@ Use case ends.
 Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 ```
 
 ```
@@ -325,7 +325,7 @@ Use case ends.
 Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 ```
 
 ```
@@ -347,7 +347,7 @@ Use case ends.
 Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
 ```
 
@@ -371,7 +371,7 @@ Use case ends.
 Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 ```
 
 ```
@@ -393,7 +393,7 @@ Use case ends.
 Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 ```
 
 **Addressing Questions**
@@ -415,7 +415,7 @@ Use case ends.
 Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 ```
 
 ```
@@ -436,7 +436,7 @@ Use case ends.
 Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 ```
 
 *{More to be added}*
