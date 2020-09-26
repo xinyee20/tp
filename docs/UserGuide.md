@@ -318,7 +318,6 @@ Marks the specified question from the list of questions of a specified tutorial 
 
 Outcome:
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
