@@ -46,6 +46,20 @@ public class ModelManager implements Model {
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
     }
 
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        super();
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.serenity = new Serenity();
+        this.userPrefs = new UserPrefs(userPrefs);
+
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredGroups = new FilteredList<>(this.serenity.getGroupList());
+    }
+
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), new Serenity());
     }
