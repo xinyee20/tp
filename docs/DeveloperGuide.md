@@ -236,63 +236,234 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of students from various CS2101 classes
+* Has a need to keep track of the students' attendance throughout the semester
+* Has a need to keep track of the students' participation throughout the semester
+* Likes to keep track of the students' unanswered questions
+* Likes to handle most administrative work via one platform
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+* Serenity can help assist the management of a CS2101 class 
+faster than a typical mouse/GUI driven app through easy reference and editing of class data.
+* Serenity consolidates administrative information on a Graphical User Interface for convenient viewing. 
+* Serenity gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| -------- | ------------------------------------------ | -------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | Tutor | Set up classes that I am teaching at the start of every semester | Perform administrative functions more efficiently |
+| `* * *`  | Tutor | Mark attendance across every lesson | Grade effectively at the end of the term |
+| `*` | Tutor | Flag the attendance of a student | Be reminded to check up on this student after lesson |
+| `* * *` | Tutor | View the attendance sheet for each class | Identify the students who did not attend a lesson |
+| `*` | Tutor | Export monthly attendance of all my classes as a CSV file | Submit attendance as a softcopy to the school |
+| `* * *` | Tutor | Give a participation score to a student | Grade the student's participation |
+| `* *` | Tutor | Use a participation system to keep track of participation | Grade effectively at the end of the term |
+| `* *` | Tutor | Generate the average score for each student across each session | Have an additional set of data to cross reference to |
+| `*` | Tutor | Export participation scores of all my classes as a CSV file | Submit it as a softcopy for marks generation |
+| `* * *` | Tutor | Add a question to the question list | Be reminded to answer the question after the lesson ends |
+| `* *` | Tutor | Remove a question from the question list | Prevent the list from becoming too cluttered |
+| `* *` | Tutor | View the list of questions for each class | Identify the questions that I have not answered in class |
+| `* *` | Forgetful tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class |
+| `* *` | Tutor | Import data of my students | Avoid manually entering the data |
+| `* *` | Tutor | Access the list of commands easily on the software without referring to the user guide | Operate the software easily while teaching in class |
+| `* *` | Tutor who dislikes clutter | Use an app that does not take up too much screen space | Continue to teach the content effectively |
+| `* *` | Tutor who has other important things to remember | The list of commands to be as short as possible | Be productive trying to recall more important things for the lesson |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Serenity` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Setting Up**
+```
+UC01: Set up tutorial group
 
-**MSS**
+System: Serenity
+Actor: User
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+Guarantees:
+    - The tutorial group is added to the tutorial group list upon successful command.
+    - Students are added to the student list in the respective tutorial groups upon successful command.
 
-    Use case ends.
+MSS:
+    1. User chooses a csv file to upload.
+    2. User adds the csv file in the same folder as the JAR file.
+    3. Serenity reads the csv file.
+    4. Serenity adds the tutorial groups and students to the respective lists.
+Use case ends.
+```
 
-**Extensions**
+**Attendance Taking**
+```
+UC02: For a tutorial group, mark all students present for a lesson
 
-* 2a. The list is empty.
+System: Serenity
+Actor: User
 
-  Use case ends.
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - Each student is marked present for a lesson upon successful command.
 
-* 3a. The given index is invalid.
+MSS:
+    1. User requests to mark all students from a specific tutorial group present for a lesson.
+    2. User receives a confirmation message.
+    3. System shows the updated attendance list for the lesson.
+Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+```
 
-      Use case resumes at step 2.
+```
+UC03: Mark a student present or absent for a specific lesson
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - A specific student is marked present or absent for a lesson upon successful command.
+
+MSS:
+    1. User requests to mark a student from a specific tutorial group present or absent for a lesson.
+    2. User receives a confirmation message.
+    3. System shows the updated attendance list for the lesson.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+```
+
+```
+UC04: For a tutorial group, view attendance of each student for every lesson
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - User can view the attendance list of a lesson for a specific tutorial class upon successful command.
+
+MSS:
+    1. User requests to view the attendance list for a lesson of a specific tutorial class.
+    2. User receives a confirmation message.
+    3. System shows the attendance list for the lesson.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+
+```
+
+**Class Participation**
+```
+UC05: Add class participation marks to a student
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - For a lesson, class participation marks for a specific student is added upon successful command.
+
+MSS:
+    1. User requests to add class participation marks to a student.
+    2. User receives a confirmation message.
+    3. System shows the updated class participation marks of the student.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+```
+
+```
+UC06: View average class participation score of all students in a tutorial group
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - User can view the average class participation score of all students in a tutorial group upon successful command.
+
+MSS:
+    1. User requests to view the average class participation score of all students in a tutorial group.
+    2. User receives a confirmation message.
+    3. System shows the average class participation score of all students in the tutorial group
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+```
+
+**Addressing Questions**
+```
+UC07: Add a question to a tutorial group’s question list
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - Question will be added into a question list upon successful command.
+
+MSS:
+    1. User requests to create a new question for a tutorial group.
+    2. System shows an updated list of questions.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+```
+
+```
+UC08: View all questions of a tutorial group
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - User can view the list of questions upon successful command.
+
+MSS:
+    1. User requests to view the list of questions for a tutorial group.
+    2. System shows the attendance list for the lesson.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+```
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -300,7 +471,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
