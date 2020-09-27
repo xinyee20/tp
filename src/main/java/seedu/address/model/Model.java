@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.group.Group;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,36 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the user prefs' serenity file path.
+     */
+    Path getSerenityFilePath();
+
+    /**
+     * Sets the user prefs' serenity file path.
+     */
+    void setSerenityFilePath(Path serenityFilePath);
+
+    /**
+     * Replaces serenity data with the data in {@code serenity}.
+     */
+    void setSerenity(ReadOnlySerenity serenity);
+
+    /** Returns the Serenity */
+    ReadOnlySerenity getSerenity();
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in serenity.
+     */
+    boolean hasGroup(Group group);
+
+    /**
+     * Adds the given group.
+     * {@code group} must not already exist in serenity.
+     */
+    void addGroup(Group group);
+
+    /** Returns an unmodifiable view of the filtered group list */
+    ObservableList<Group> getFilteredGroupList();
 }

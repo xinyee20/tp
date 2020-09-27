@@ -6,11 +6,16 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.group.Class;
+import seedu.address.model.group.Group;
+import seedu.address.model.Serenity;
+import seedu.address.model.group.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -57,4 +62,37 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static Group[] getSampleGroups() {
+        return new Group[] {
+            new Group("G04",
+                getStudentSet(new Student("Abbie", "e0000000"),
+                    new Student("Baron", "e0111111"),
+                    new Student("Charlie", "e02222222")),
+                getClassSet(new Class("1.2"), new Class("2.1")))
+        };
+    }
+
+    public static ReadOnlySerenity getSampleSerenity() {
+        Serenity sampleS = new Serenity();
+        for (Group sampleGroup : getSampleGroups()) {
+            sampleS.addGroup(sampleGroup);
+        }
+        return  sampleS;
+    }
+
+    /**
+     * Returns a student set containing the list of strings given.
+     */
+    public static Set<Student> getStudentSet(Student... students) {
+        return Arrays.stream(students)
+            .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a class set containing the list of strings given.
+     */
+    public static Set<Class> getClassSet(Class... classes) {
+        return Arrays.stream(classes)
+            .collect(Collectors.toSet());
+    }
 }
