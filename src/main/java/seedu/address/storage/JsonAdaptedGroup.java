@@ -19,11 +19,9 @@ import seedu.address.model.serenity.Class;
 import seedu.address.model.serenity.ClassList;
 import seedu.address.model.serenity.Group;
 import seedu.address.model.serenity.Student;
-import seedu.address.model.serenity.StudentList;
-import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Group}.
  */
 class JsonAdaptedGroup {
 

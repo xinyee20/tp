@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 
-import java.nio.file.Path;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.serenity.Group;

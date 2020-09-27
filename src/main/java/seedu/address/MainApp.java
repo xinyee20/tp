@@ -61,7 +61,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        SerenityStorage serenityStorage = new JsonSerenityStorage(userPrefs.getSerenityStorageFilePath());
+        SerenityStorage serenityStorage = new JsonSerenityStorage(userPrefs.getSerenityFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, serenityStorage);
 
         initLogging(config);

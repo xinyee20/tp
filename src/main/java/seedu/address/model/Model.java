@@ -87,7 +87,18 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     // Serenity
+
+    Path getSerenityFilePath();
+
+    void setSerenityFilePath(Path serenityFilePath);
+
+    void setSerenity(ReadOnlySerenity serenity);
+
+    ReadOnlySerenity getSerenity();
+
     boolean hasGroup(Group group);
 
     void addGroup(Group group);
+
+    ObservableList<Group> getFilteredGroupList();
 }

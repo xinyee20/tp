@@ -8,7 +8,7 @@ import seedu.address.model.serenity.Student;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Student}.
  */
 class JsonAdaptedStudent {
 

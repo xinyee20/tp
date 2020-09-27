@@ -4,24 +4,25 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.ReadOnlySerenity;
 
 public class Serenity implements ReadOnlySerenity {
 
-    private GroupList groups;
+    private final UniqueGroupList groups;
 
     {
-        groups = new GroupList();
+        groups = new UniqueGroupList();
     }
 
-    public Serenity() {
-        groups = new GroupList();
-    }
+    public Serenity() {}
 
     public Serenity(ReadOnlySerenity toBeCopied) {
         this();
         resetData(toBeCopied);
     }
+
+    //// list overwrite operations
 
     public void setGroups(List<Group> groups) {
         this.groups.setGroups(groups);
@@ -33,26 +34,38 @@ public class Serenity implements ReadOnlySerenity {
         setGroups(newData.getGroupList());
     }
 
+    //// group-level operations
+
     public boolean hasGroup(Group group) {
         requireNonNull(group);
-        return groups.getGroups().contains(group);
+        return groups.contains(group);
     }
 
     public void addGroup(Group g) {
-        groups.getGroups().add(g);
+        groups.add(g);
+    }
+
+    public void setGroup(Group target, Group editedGroup) {
+        requireNonNull(editedGroup);
+
+        groups.setGroup(target, editedGroup);
+    }
+
+    public void removeGroup(Group key) {
+        groups.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return groups.getGroups().size() + " groups";
+        return groups.asUnmodifiableObservableList().size() + " groups";
         // TODO: refine later
     }
 
     @Override
-    public List<Group> getGroupList() {
-        return groups.getGroups();
+    public ObservableList<Group> getGroupList() {
+        return groups.asUnmodifiableObservableList();
     }
 
     @Override

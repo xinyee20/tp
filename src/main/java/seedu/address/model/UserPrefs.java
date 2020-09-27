@@ -15,7 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private Path serenityStorageFilePath = Paths.get("data", "serenity.json");
+    private Path serenityFilePath = Paths.get("data", "serenity.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -58,8 +58,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     // Serenity
-    public Path getSerenityStorageFilePath() {
-        return serenityStorageFilePath;
+    public Path getSerenityFilePath() {
+        return serenityFilePath;
+    }
+
+    public void setSerenityFilePath(Path serenityFilePath) {
+        requireNonNull(serenityFilePath);
+        this.serenityFilePath = serenityFilePath;
     }
 
     @Override

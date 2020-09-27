@@ -29,7 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
 
     private final FilteredList<Person> filteredPersons;
-    // private final FilteredList<Group> filteredGroups;
+    private final FilteredList<Group> filteredGroups;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -47,7 +47,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        // filteredGroups = new FilteredList<>(this.serenity.getGroupList());
+        filteredGroups = new FilteredList<>(this.serenity.getGroupList());
     }
 
     public ModelManager() {
@@ -78,6 +78,8 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
+    //=========== AddressBook ================================================================================
+
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
@@ -88,8 +90,6 @@ public class ModelManager implements Model {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
-
-    //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -128,6 +128,27 @@ public class ModelManager implements Model {
     //=========== Serenity ================================================================================
 
     @Override
+    public Path getSerenityFilePath() {
+        return userPrefs.getSerenityFilePath();
+    }
+
+    @Override
+    public void setSerenityFilePath(Path serenityFilePath) {
+        requireNonNull(serenityFilePath);
+        userPrefs.setSerenityFilePath(serenityFilePath);
+    }
+
+    @Override
+    public void setSerenity(ReadOnlySerenity serenity) {
+        this.serenity.resetData(serenity);
+    }
+
+    @Override
+    public ReadOnlySerenity getSerenity() {
+        return serenity;
+    }
+
+    @Override
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return serenity.hasGroup(group);
@@ -137,6 +158,11 @@ public class ModelManager implements Model {
     public void addGroup(Group group) {
         requireNonNull(group);
         serenity.addGroup(group);
+    }
+
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        return filteredGroups;
     }
 
     //=========== Filtered Person List Accessors =============================================================
