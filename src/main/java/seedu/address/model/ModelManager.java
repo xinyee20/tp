@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Group> filteredGroups;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
         ReadOnlySerenity serenity) {
@@ -46,6 +46,9 @@ public class ModelManager implements Model {
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
     }
 
+    /**
+     * Initializes a ModelManager with the given addressBook and userPrefs.
+     */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);

@@ -1,11 +1,18 @@
 package seedu.address.model.group;
 
-public class Class {
-
-    // it's a "box" that will contain attendance list, question list, etc. can refer to Tag.java.
+/**
+ * Represents a tutorial Class in serenity.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
+ public class Class {
 
     private String name;
 
+    /**
+     * Constructs a {@code Class}.
+     *
+     * @param name A valid name.
+     */
     public Class(String name) {
         this.name = name;
     }

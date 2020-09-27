@@ -17,12 +17,12 @@ public class AddGrpCommand extends Command {
         + PREFIX_PATH + "PATH ";
 
     public static final String MESSAGE_SUCCESS = "New tutorial group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This tutorial group already exists.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This tutorial group already exists.";
 
     private final Group toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddGrpCommand to add the specified {@code Group}
      */
     public AddGrpCommand(Group group) {
         requireNonNull(group);
@@ -34,7 +34,7 @@ public class AddGrpCommand extends Command {
         requireNonNull(model);
 
         if (model.hasGroup(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
         model.addGroup(toAdd);

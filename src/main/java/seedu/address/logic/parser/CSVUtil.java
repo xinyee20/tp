@@ -10,15 +10,27 @@ import java.util.Set;
 
 import seedu.address.model.group.Student;
 
+/**
+ * Reads CSV file that the tutor downloads from LUMINUS and writes JSON data to a new CSV file.
+ */
 public class CSVUtil {
 
-    // excel file from LUMINUS
+    /** The path of the CSV file that the tutor downloads from LUMINUS. */
     private Path filePath;
 
+    /**
+     * Creates a CSVUtil that manages CSV files.
+     * @param filePath The path of the CSV file that the tutor downloads from LUMINUS.
+     */
     public CSVUtil(Path filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads CSV file that the tutor downloads from LUMINUS.
+     * The CSV file stores a list of {@code Student} that are in a tutorial group.
+     * @return
+     */
     public Set<Student> readStudentsFromCsv() {
 
         Set<Student> students = new HashSet<>();

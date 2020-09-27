@@ -25,6 +25,9 @@ class JsonAdaptedGroup {
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedClass> classes = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedGroup} with the given group details.
+     */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("name") String name,
         @JsonProperty("students") List<JsonAdaptedStudent> students,
@@ -38,6 +41,9 @@ class JsonAdaptedGroup {
         }
     }
 
+    /**
+     * Converts a given {@code Group} into this class for Jackson use.
+     */
     public JsonAdaptedGroup(Group source) {
         name = source.getName();
         students.addAll(source.getStudents().stream()
@@ -48,6 +54,11 @@ class JsonAdaptedGroup {
             .collect(Collectors.toList()));
     }
 
+    /**
+     * Converts this Jackson-friendly adapted group object into the model's {@code Group} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted group.
+     */
     public Group toModelType() throws IllegalValueException {
 
         String modelName = name;
@@ -66,5 +77,4 @@ class JsonAdaptedGroup {
 
         return new Group(modelName, modelStudents, modelClasses);
     }
-
 }

@@ -36,6 +36,12 @@ public class JsonSerenityStorage implements SerenityStorage {
         return readSerenity(filePath);
     }
 
+    /**
+     * Similar to {@link #readSerenity()}.
+     *
+     * @param filePath location of the data. Cannot be null.
+     * @throws DataConversionException if the file is not in the correct format.
+     */
     public Optional<ReadOnlySerenity> readSerenity(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
@@ -58,6 +64,11 @@ public class JsonSerenityStorage implements SerenityStorage {
         saveSerenity(serenity, filePath);
     }
 
+    /**
+     * Similar to {@link #saveSerenity(ReadOnlySerenity)}.
+     *
+     * @param filePath location of the data. Cannot be null.
+     */
     public void saveSerenity(ReadOnlySerenity serenity, Path filePath) throws IOException {
         requireNonNull(serenity);
         requireNonNull(filePath);
@@ -65,5 +76,4 @@ public class JsonSerenityStorage implements SerenityStorage {
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableSerenity(serenity), filePath);
     }
-
 }

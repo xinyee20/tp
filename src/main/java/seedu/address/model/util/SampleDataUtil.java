@@ -62,8 +62,6 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
-    // Serenity
-
     public static Group[] getSampleGroups() {
         return new Group[] {
             new Group("G04",
@@ -82,11 +80,17 @@ public class SampleDataUtil {
         return  sampleS;
     }
 
+    /**
+     * Returns a student set containing the list of strings given.
+     */
     public static Set<Student> getStudentSet(Student... students) {
         return Arrays.stream(students)
             .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a class set containing the list of strings given.
+     */
     public static Set<Class> getClassSet(Class... classes) {
         return Arrays.stream(classes)
             .collect(Collectors.toSet());

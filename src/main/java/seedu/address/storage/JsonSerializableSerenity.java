@@ -23,15 +23,28 @@ class JsonSerializableSerenity {
 
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonSerializableSerenity} with the given groups.
+     */
     @JsonCreator
     public JsonSerializableSerenity(@JsonProperty("groups") List<JsonAdaptedGroup> groups) {
         this.groups.addAll(groups);
     }
 
+    /**
+     * Converts a given {@code ReadOnlySerenity} into this class for Jackson use.
+     *
+     * @param source future changes to this will not affect the created {@code JsonSerializableSerenity}.
+     */
     public JsonSerializableSerenity(ReadOnlySerenity source) {
         groups.addAll(source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
+    /**
+     * Converts this serenity object into the model's {@code Serenity} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
     public Serenity toModelType() throws IllegalValueException {
         Serenity serenity = new Serenity();
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
@@ -43,5 +56,4 @@ class JsonSerializableSerenity {
         }
         return serenity;
     }
-
 }

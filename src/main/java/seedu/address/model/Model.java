@@ -86,19 +86,35 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    // Serenity
-
+    /**
+     * Returns the user prefs' serenity file path.
+     */
     Path getSerenityFilePath();
 
+    /**
+     * Sets the user prefs' serenity file path.
+     */
     void setSerenityFilePath(Path serenityFilePath);
 
+    /**
+     * Replaces serenity data with the data in {@code serenity}.
+     */
     void setSerenity(ReadOnlySerenity serenity);
 
+    /** Returns the Serenity */
     ReadOnlySerenity getSerenity();
 
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in serenity.
+     */
     boolean hasGroup(Group group);
 
+    /**
+     * Adds the given group.
+     * {@code group} must not already exist in serenity.
+     */
     void addGroup(Group group);
 
+    /** Returns an unmodifiable view of the filtered group list */
     ObservableList<Group> getFilteredGroupList();
 }

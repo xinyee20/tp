@@ -7,13 +7,25 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Represents a tutorial Group in serenity.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Group {
 
+    // Identity field
     private String name;
 
+    // Data fields
     private Set<Student> students;
     private Set<Class> classes;
 
+    /**
+     * Constructs a {@code Group}.
+     *
+     * @param name A valid name.
+     * @param students A list of students.
+     */
     public Group(String name, Set<Student> students) {
         requireAllNonNull(name, students);
         this.name = name;
@@ -21,6 +33,13 @@ public class Group {
         this.classes = new HashSet<>();
     }
 
+    /**
+     * Constructs a {@code Group}.
+     *
+     * @param name A valid name.
+     * @param students A list of students.
+     * @param classes A list of tutorial classes.
+     */
     public Group(String name, Set<Student> students, Set<Class> classes) {
         requireAllNonNull(name, students, classes);
         this.name = name;
@@ -40,6 +59,10 @@ public class Group {
         return Collections.unmodifiableSet(classes);
     }
 
+    /**
+     * Returns true if both groups of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two groups.
+     */
     public boolean isSameGroup(Group otherGroup) {
         if (otherGroup == this) {
             return true;
@@ -51,6 +74,10 @@ public class Group {
             && otherGroup.getClasses().equals(getClasses());
     }
 
+    /**
+     * Returns true if both groups have the same identity and data fields.
+     * This defines a stronger notion of equality between two groups.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -73,6 +100,7 @@ public class Group {
         return Objects.hash(name, students, classes);
     }
 
+    @Override
     public String toString() {
         return name + "," + students.toString();
     }

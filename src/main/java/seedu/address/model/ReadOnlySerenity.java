@@ -5,13 +5,13 @@ import java.util.List;
 import seedu.address.model.group.Group;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a Serenity object.
  */
 public interface ReadOnlySerenity {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the group list.
+     * This list will not contain any duplicate groups.
      */
     List<Group> getGroupList();
 
