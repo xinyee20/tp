@@ -1,12 +1,9 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.serenity.Class;
-import seedu.address.model.serenity.Student;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Class;
 
 /**
  * Jackson-friendly version of {@link Class}.

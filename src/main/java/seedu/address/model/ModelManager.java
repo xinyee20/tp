@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,11 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.CSVUtil;
 import seedu.address.model.person.Person;
-import seedu.address.model.serenity.Group;
-import seedu.address.model.serenity.Serenity;
-import seedu.address.model.serenity.Student;
+import seedu.address.model.group.Group;
 
 /**
  * Represents the in-memory model of the address book data.

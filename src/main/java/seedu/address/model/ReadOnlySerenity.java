@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import java.util.List;
 
-import seedu.address.model.serenity.Group;
+import seedu.address.model.group.Group;
 
 /**
  * Unmodifiable view of an address book

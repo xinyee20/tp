@@ -1,6 +1,8 @@
-package seedu.address.model.serenity;
+package seedu.address.model.group;
 
 public class Student {
+
+    // it's an entity on its own. can refer to Name.java, Email.java, etc when coding.
 
     private String name;
     private String studentNumber;

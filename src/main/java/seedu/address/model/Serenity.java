@@ -1,11 +1,12 @@
-package seedu.address.model.serenity;
+package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.ReadOnlySerenity;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 
 public class Serenity implements ReadOnlySerenity {
 

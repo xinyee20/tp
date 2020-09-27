@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.person.Person;
-import seedu.address.model.serenity.Group;
+import seedu.address.model.group.Group;
 
 /**
  * API of the Logic component

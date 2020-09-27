@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.serenity.Student;
+import seedu.address.model.group.Student;
 
 public class CSVUtil {
 

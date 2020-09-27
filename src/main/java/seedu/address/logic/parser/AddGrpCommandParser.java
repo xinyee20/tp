@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGrpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.serenity.Group;
-import seedu.address.model.serenity.Student;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.Student;
 
 public class AddGrpCommandParser implements Parser<AddGrpCommand> {
 

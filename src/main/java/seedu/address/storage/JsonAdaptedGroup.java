@@ -10,15 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.serenity.Class;
-import seedu.address.model.serenity.ClassList;
-import seedu.address.model.serenity.Group;
-import seedu.address.model.serenity.Student;
+import seedu.address.model.group.Class;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.Student;
 
 /**
  * Jackson-friendly version of {@link Group}.

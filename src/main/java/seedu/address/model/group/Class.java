@@ -1,6 +1,8 @@
-package seedu.address.model.serenity;
+package seedu.address.model.group;
 
 public class Class {
+
+    // it's a "box" that will contain attendance list, question list, etc. can refer to Tag.java.
 
     private String name;
 
