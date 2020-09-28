@@ -1,10 +1,10 @@
 package seedu.address.model.group;
 
 /**
- * Represents a tutorial Class in serenity.
+ * Represents a tutorial class in serenity.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
- public class Class {
+public class Class {
 
     private String name;
 

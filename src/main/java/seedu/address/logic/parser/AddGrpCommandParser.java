@@ -25,11 +25,9 @@ public class AddGrpCommandParser implements Parser<AddGrpCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddGrpCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_PATH);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_PATH);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_PATH)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_PATH) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
         }
 
@@ -37,8 +35,8 @@ public class AddGrpCommandParser implements Parser<AddGrpCommand> {
 
         String filePath = argMultimap.getValue(PREFIX_PATH).get();
         Path path = Paths.get(filePath);
-        CSVUtil csvutil = new CSVUtil(path);
-        Set<Student> students = csvutil.readStudentsFromCsv();
+        CsvUtil csvUtil = new CsvUtil(path);
+        Set<Student> students = csvUtil.readStudentsFromCsv();
 
         Group group = new Group(name, students);
 

@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -35,8 +35,9 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(addressBook, userPrefs, serenity);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
-        + "and serenity " + serenity);
+        logger.fine("Initializing with address book: " + addressBook
+            + " and user prefs " + userPrefs
+            + " and serenity " + serenity);
 
         this.addressBook = new AddressBook(addressBook);
         this.serenity = new Serenity(serenity);

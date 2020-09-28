@@ -11,7 +11,8 @@ import seedu.address.model.group.Group;
 public class AddGrpCommand extends Command {
 
     public static final String COMMAND_WORD = "addgrp";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new tutorial group. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+        + ": Adds a new tutorial group. "
         + "Parameters: "
         + PREFIX_GRP + "GRP "
         + PREFIX_PATH + "PATH ";

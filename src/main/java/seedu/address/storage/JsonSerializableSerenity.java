@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlySerenity;
-import seedu.address.model.group.Group;
 import seedu.address.model.Serenity;
+import seedu.address.model.group.Group;
 
 /**
  * An Immutable Serenity that is serializable to JSON format.
@@ -19,7 +19,8 @@ import seedu.address.model.Serenity;
 @JsonRootName(value = "serenity")
 class JsonSerializableSerenity {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Group list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON =
+        "Group list contains duplicate person(s).";
 
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
