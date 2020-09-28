@@ -13,16 +13,16 @@ import seedu.address.model.group.Student;
 /**
  * Reads CSV file that the tutor downloads from LUMINUS and writes JSON data to a new CSV file.
  */
-public class CSVUtil {
+public class CsvUtil {
 
     /** The path of the CSV file that the tutor downloads from LUMINUS. */
     private Path filePath;
 
     /**
-     * Creates a CSVUtil that manages CSV files.
+     * Creates a CsvUtil object that manages CSV files.
      * @param filePath The path of the CSV file that the tutor downloads from LUMINUS.
      */
-    public CSVUtil(Path filePath) {
+    public CsvUtil(Path filePath) {
         this.filePath = filePath;
     }
 

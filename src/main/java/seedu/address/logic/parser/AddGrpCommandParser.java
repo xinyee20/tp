@@ -6,13 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGrpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.Student;
 
 /**
  * Parses input arguments and creates a new AddGrpCommand object
@@ -25,22 +23,16 @@ public class AddGrpCommandParser implements Parser<AddGrpCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddGrpCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_PATH);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_PATH);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_PATH)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_PATH) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
         }
 
         String name = argMultimap.getValue(PREFIX_GRP).get();
+        Path filePath = Paths.get(argMultimap.getValue(PREFIX_PATH).get());
 
-        String filePath = argMultimap.getValue(PREFIX_PATH).get();
-        Path path = Paths.get(filePath);
-        CSVUtil csvutil = new CSVUtil(path);
-        Set<Student> students = csvutil.readStudentsFromCsv();
-
-        Group group = new Group(name, students);
+        Group group = new Group(name, filePath);
 
         return new AddGrpCommand(group);
     }

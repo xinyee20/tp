@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.model.util.SampleDataUtil.getClassSet;
-import static seedu.address.model.util.SampleDataUtil.getStudentSet;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -21,19 +21,11 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.Serenity;
-import seedu.address.model.group.Class;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.Student;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.GroupBuilder;
 
 class AddGrpCommandTest {
-
-    Group validGroup = new Group("G04",
-        getStudentSet(new Student("Abbie", "e0000000"),
-            new Student("Baron", "e0111111"),
-            new Student("Charlie", "e02222222")),
-        getClassSet(new Class("1.2"), new Class("2.1")));
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
@@ -43,6 +35,7 @@ class AddGrpCommandTest {
     @Test
     public void execute_groupAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+        Group validGroup = new GroupBuilder().build();
 
         CommandResult commandResult = new AddGrpCommand(validGroup).execute(modelStub);
 
@@ -52,40 +45,36 @@ class AddGrpCommandTest {
 
     @Test
     public void execute_duplicateGroup_throwsCommandException() {
+        Group validGroup = new GroupBuilder().build();
         AddGrpCommand addGrpCommand = new AddGrpCommand(validGroup);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, AddGrpCommand.MESSAGE_DUPLICATE_PERSON, () -> addGrpCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+            AddGrpCommand.MESSAGE_DUPLICATE_GROUP, () -> addGrpCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Group G04 = new Group("G04",
-            getStudentSet(new Student("Abbie", "e0000000"),
-                new Student("Baron", "e0111111"),
-                new Student("Charlie", "e02222222")),
-            getClassSet(new Class("1.2"), new Class("2.1")));
-        Group G05 = new Group("G05",
-            getStudentSet(new Student("Alicia", "e0000000")),
-            getClassSet(new Class("2.2"), new Class("3.1")));
-        AddGrpCommand addG04Command = new AddGrpCommand(G04);
-        AddGrpCommand addG05Command = new AddGrpCommand(G05);
+        Group groupA = new GroupBuilder().withName("G04").build();
+        Group groupB = new GroupBuilder().withName("G05").build();
+        AddGrpCommand addGroupACommand = new AddGrpCommand(groupA);
+        AddGrpCommand addGroupBCommand = new AddGrpCommand(groupB);
 
         // same object -> returns true
-        assertTrue(addG04Command.equals(addG04Command));
+        assertTrue(addGroupACommand.equals(addGroupACommand));
 
         // same values -> returns true
-        AddGrpCommand addG04CommandCopy = new AddGrpCommand(G04);
-        assertTrue(addG04Command.equals(addG04CommandCopy));
+        AddGrpCommand addG04CommandCopy = new AddGrpCommand(groupA);
+        assertTrue(addGroupACommand.equals(addG04CommandCopy));
 
         // different types -> returns false
-        assertFalse(addG04Command.equals(1));
+        assertFalse(addGroupACommand.equals(1));
 
         // null -> returns false
-        assertFalse(addG04Command.equals(null));
+        assertFalse(addGroupACommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addG04Command.equals(addG05Command));
+        // different group -> returns false
+        assertFalse(addGroupACommand.equals(addGroupBCommand));
     }
 
     /**
@@ -199,7 +188,7 @@ class AddGrpCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single group.
      */
     private class ModelStubWithGroup extends AddGrpCommandTest.ModelStub {
         private final Group group;
@@ -217,7 +206,7 @@ class AddGrpCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the group being added.
      */
     private class ModelStubAcceptingGroupAdded extends AddGrpCommandTest.ModelStub {
         final ArrayList<Group> groupsAdded = new ArrayList<>();
