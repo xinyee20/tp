@@ -6,13 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGrpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.Student;
 
 /**
  * Parses input arguments and creates a new AddGrpCommand object
@@ -32,13 +30,9 @@ public class AddGrpCommandParser implements Parser<AddGrpCommand> {
         }
 
         String name = argMultimap.getValue(PREFIX_GRP).get();
+        Path filePath = Paths.get(argMultimap.getValue(PREFIX_PATH).get());
 
-        String filePath = argMultimap.getValue(PREFIX_PATH).get();
-        Path path = Paths.get(filePath);
-        CsvUtil csvUtil = new CsvUtil(path);
-        Set<Student> students = csvUtil.readStudentsFromCsv();
-
-        Group group = new Group(name, students);
+        Group group = new Group(name, filePath);
 
         return new AddGrpCommand(group);
     }

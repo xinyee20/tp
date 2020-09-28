@@ -41,6 +41,11 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addGrp() throws Exception {
+        // ToDo: test add grp parsing
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);

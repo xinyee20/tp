@@ -2,10 +2,13 @@ package seedu.address.model.group;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import seedu.address.logic.parser.CsvUtil;
 
 /**
  * Represents a tutorial Group in serenity.
@@ -19,6 +22,19 @@ public class Group {
     // Data fields
     private Set<Student> students;
     private Set<Class> classes;
+
+    /**
+     * Constructs a {@code Group}
+     *
+     * @param name A valid name.
+     * @param filePath A valid filePath.
+     */
+    public Group(String name, Path filePath) {
+        requireAllNonNull(name, filePath);
+        this.name = name;
+        students = new CsvUtil(filePath).readStudentsFromCsv();
+        classes = new HashSet<>();
+    }
 
     /**
      * Constructs a {@code Group}.

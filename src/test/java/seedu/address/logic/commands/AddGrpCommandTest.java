@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.util.SampleDataUtil.getClassSet;
-import static seedu.address.model.util.SampleDataUtil.getStudentSet;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -23,18 +21,11 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.Serenity;
-import seedu.address.model.group.Class;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.Student;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.GroupBuilder;
 
 class AddGrpCommandTest {
-
-    private Group validGroup = new Group("G04",
-        getStudentSet(new Student("Abbie", "e0000000"),
-            new Student("Baron", "e0111111"),
-            new Student("Charlie", "e02222222")),
-        getClassSet(new Class("1.2"), new Class("2.1")));
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
@@ -44,16 +35,17 @@ class AddGrpCommandTest {
     @Test
     public void execute_groupAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+        Group validGroup = new GroupBuilder().build();
 
         CommandResult commandResult = new AddGrpCommand(validGroup).execute(modelStub);
 
-        assertEquals(String.format(AddGrpCommand.MESSAGE_SUCCESS, validGroup),
-            commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddGrpCommand.MESSAGE_SUCCESS, validGroup), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
     @Test
     public void execute_duplicateGroup_throwsCommandException() {
+        Group validGroup = new GroupBuilder().build();
         AddGrpCommand addGrpCommand = new AddGrpCommand(validGroup);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
@@ -63,14 +55,8 @@ class AddGrpCommandTest {
 
     @Test
     public void equals() {
-        Group groupA = new Group("G04",
-            getStudentSet(new Student("Abbie", "e0000000"),
-                new Student("Baron", "e0111111"),
-                new Student("Charlie", "e02222222")),
-            getClassSet(new Class("1.2"), new Class("2.1")));
-        Group groupB = new Group("G05",
-            getStudentSet(new Student("Alicia", "e0000000")),
-            getClassSet(new Class("2.2"), new Class("3.1")));
+        Group groupA = new GroupBuilder().withName("G04").build();
+        Group groupB = new GroupBuilder().withName("G05").build();
         AddGrpCommand addGroupACommand = new AddGrpCommand(groupA);
         AddGrpCommand addGroupBCommand = new AddGrpCommand(groupB);
 
