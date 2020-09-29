@@ -23,8 +23,8 @@ public class StorageManager implements Storage {
     private SerenityStorage serenityStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage},
-     * {@code UserPrefStorage} and {@code SerenityStorage}.
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage} and {@code
+     * SerenityStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
         SerenityStorage serenityStorage) {
@@ -59,12 +59,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyAddressBook> readAddressBook()
+        throws DataConversionException, IOException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath)
+        throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
@@ -83,7 +85,7 @@ public class StorageManager implements Storage {
     // ================ Serenity methods ==============================
 
     @Override
-    public Path getSerenityFilePath () {
+    public Path getSerenityFilePath() {
         return serenityStorage.getSerenityFilePath();
     }
 
@@ -93,7 +95,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlySerenity> readSerenity(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlySerenity> readSerenity(Path filePath)
+        throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return serenityStorage.readSerenity(filePath);
     }

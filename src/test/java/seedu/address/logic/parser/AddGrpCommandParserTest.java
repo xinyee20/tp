@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddGrpCommand;
 
 public class AddGrpCommandParserTest {
+
     private AddGrpCommandParser parser = new AddGrpCommandParser();
 
     @Test

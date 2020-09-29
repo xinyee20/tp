@@ -5,9 +5,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.parser.CsvUtil;
-import seedu.address.model.group.Class;
+import seedu.address.commons.utils.CsvUtil;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -25,12 +26,12 @@ public class GroupBuilder {
         new Student("Eng Wee Kiat", "e0101010")
 
     ));
-    public static final Set<Class> DEFAULT_CLASSES = new HashSet<>(Arrays.asList(
+    public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>(Arrays.asList(
     ));
 
     private String name;
     private Set<Student> students;
-    private Set<Class> classes;
+    private Set<Lesson> classes;
 
     /**
      * Creates a {@code GroupBuilder} with the default details.
@@ -47,7 +48,7 @@ public class GroupBuilder {
     public GroupBuilder(Group groupToCopy) {
         name = groupToCopy.getName();
         students = new HashSet<>(groupToCopy.getStudents());
-        classes = new HashSet<>(groupToCopy.getClasses());
+        classes = new HashSet<>(groupToCopy.getLessons());
     }
 
     /**
@@ -70,7 +71,7 @@ public class GroupBuilder {
     /**
      * Parses the {@code students} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
-    public GroupBuilder withStudents(Student ... students) {
+    public GroupBuilder withStudents(Student... students) {
         this.students = SampleDataUtil.getStudentSet(students);
         return this;
     }
@@ -84,10 +85,17 @@ public class GroupBuilder {
     }
 
     /**
-     * Parses the {@code classes} into a {@code Set<Class>} and set it to the {@code Group} that we are building.
+     * Creates and parses the {@code classes} into a {@code Set<Class>} and set it to the {@code Group} that we are
+     * building.
      */
-    public GroupBuilder withClasses(Class ... classes) {
-        this.classes = SampleDataUtil.getClassSet(classes);
+    public GroupBuilder withClasses(String... classes) {
+        Set<Score> scores = new HashSet<>();
+        for (Student student : students) {
+            scores.add(new Score(student));
+        }
+        for (String className : classes) {
+            this.classes.add(new Lesson(className, scores));
+        }
         return this;
     }
 
