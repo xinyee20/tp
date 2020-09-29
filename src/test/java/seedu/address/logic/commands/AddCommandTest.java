@@ -19,7 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -78,6 +80,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -147,12 +150,48 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Path getSerenityFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSerenityFilePath(Path serenityFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSerenity(ReadOnlySerenity serenity) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlySerenity getSerenity() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
      * A Model stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
+
         private final Person person;
 
         ModelStubWithPerson(Person person) {
@@ -171,6 +210,7 @@ public class AddCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
+
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
