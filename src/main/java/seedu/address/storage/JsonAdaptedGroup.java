@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.Class;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
 
 /**
@@ -23,23 +21,8 @@ class JsonAdaptedGroup {
 
     private final String name;
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
-    private final List<JsonAdaptedClass> classes = new ArrayList<>();
+    private final List<JsonAdaptedClass> lessons = new ArrayList<>();
 
-    /**
-     * Constructs a {@code JsonAdaptedGroup} with the given group details.
-     */
-    @JsonCreator
-    public JsonAdaptedGroup(@JsonProperty("name") String name,
-        @JsonProperty("students") List<JsonAdaptedStudent> students,
-        @JsonProperty("classes") List<JsonAdaptedClass> classes) {
-        this.name = name;
-        if (students != null) {
-            this.students.addAll(students);
-        }
-        if (classes != null) {
-            this.classes.addAll(classes);
-        }
-    }
 
     /**
      * Converts a given {@code Group} into this class for Jackson use.
@@ -49,7 +32,7 @@ class JsonAdaptedGroup {
         students.addAll(source.getStudents().stream()
             .map(JsonAdaptedStudent::new)
             .collect(Collectors.toList()));
-        classes.addAll(source.getClasses().stream()
+        lessons.addAll(source.getSortedLessons().stream()
             .map(JsonAdaptedClass::new)
             .collect(Collectors.toList()));
     }
@@ -69,11 +52,14 @@ class JsonAdaptedGroup {
         }
         final Set<Student> modelStudents = new HashSet<>(groupStudents);
 
-        final List<Class> groupClasses = new ArrayList<>();
-        for (JsonAdaptedClass groupClass : classes) {
-            groupClasses.add(groupClass.toModelType());
+        final Set<Score> scores = new HashSet<>();
+
+        final List<Lesson> groupClasses = new ArrayList<>();
+        for (JsonAdaptedClass groupClass : lessons) {
+            Lesson classItem = new Lesson(groupClass.getName(), scores);
+            groupClasses.add(classItem);
         }
-        final Set<Class> modelClasses = new HashSet<>(groupClasses);
+        final Set<Lesson> modelClasses = new HashSet<>(groupClasses);
 
         return new Group(modelName, modelStudents, modelClasses);
     }

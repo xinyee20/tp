@@ -3,8 +3,7 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.Class;
+import seedu.address.model.group.Lesson;
 
 /**
  * Jackson-friendly version of {@link Class}.
@@ -24,7 +23,7 @@ class JsonAdaptedClass {
     /**
      * Converts a given {@code Class} into this class for Jackson use.
      */
-    public JsonAdaptedClass(Class source) {
+    public JsonAdaptedClass(Lesson source) {
         name = source.getName();
     }
 
@@ -32,15 +31,4 @@ class JsonAdaptedClass {
     public String getName() {
         return name;
     }
-
-    /**
-     * Converts this Jackson-friendly adapted class object into the model's {@code Class} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted class.
-     */
-    public Class toModelType() throws IllegalValueException {
-        // add some validation
-        return new Class(name);
-    }
-
 }

@@ -4,9 +4,8 @@ import seedu.address.model.Serenity;
 import seedu.address.model.group.Group;
 
 /**
- * A utility class to help with building Serenity objects.
- * Example usage: <br>
- *     {@code Serenity serenity = new SerenityBuilder().withGroup("John", "Doe").build();}
+ * A utility class to help with building Serenity objects. Example usage: <br> {@code Serenity serenity = new
+ * SerenityBuilder().withGroup("John", "Doe").build();}
  */
 public class SerenityBuilder {
 

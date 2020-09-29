@@ -9,25 +9,15 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 
 /**
- * Wraps all data at the serenity level
- * Duplicates are not allowed (by .isSameGroup comparison)
+ * Wraps all data at the serenity level Duplicates are not allowed (by .isSameGroup comparison)
  */
 public class Serenity implements ReadOnlySerenity {
 
     private final UniqueGroupList groups;
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
+    public Serenity() {
         groups = new UniqueGroupList();
     }
-
-    public Serenity() {}
 
     /**
      * Creates a Serenity object using the Groups in the {@code toBeCopied}
@@ -40,12 +30,12 @@ public class Serenity implements ReadOnlySerenity {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the group list with {@code groups}.
-     * {@code groups} must not contain duplicate groups.
+     * Replaces the contents of the group list with {@code groups}. {@code groups} must not contain duplicate groups.
      */
     public void setGroups(List<Group> groups) {
         this.groups.setGroups(groups);
     }
+
 
     /**
      * Resets the existing data of this {@code Serenity} with {@code newData}.
@@ -67,17 +57,16 @@ public class Serenity implements ReadOnlySerenity {
     }
 
     /**
-     * Adds a group to the serenity.
-     * The group must not already exist in the serenity.
+     * Adds a group to the serenity. The group must not already exist in the serenity.
      */
     public void addGroup(Group g) {
         groups.add(g);
     }
 
+
     /**
-     * Replaces the given group {@code group} in the list with {@code editedGroup}.
-     * {@code target} must exist in serenity.
-     * The group identity of {@code editedGroup} must not be the same as another existing group in serenity.
+     * Replaces the given group {@code group} in the list with {@code editedGroup}. {@code target} must exist in
+     * serenity. The group identity of {@code editedGroup} must not be the same as another existing group in serenity.
      */
     public void setGroup(Group target, Group editedGroup) {
         requireNonNull(editedGroup);
@@ -86,8 +75,7 @@ public class Serenity implements ReadOnlySerenity {
     }
 
     /**
-     * Removes {@code key} from this {@code Serenity}.
-     * {@code key} must exist in serenity.
+     * Removes {@code key} from this {@code Serenity}. {@code key} must exist in serenity.
      */
     public void removeGroup(Group key) {
         groups.remove(key);

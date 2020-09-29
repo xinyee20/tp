@@ -10,8 +10,7 @@ import seedu.address.model.group.Group;
 public interface ReadOnlySerenity {
 
     /**
-     * Returns an unmodifiable view of the group list.
-     * This list will not contain any duplicate groups.
+     * Returns an unmodifiable view of the group list. This list will not contain any duplicate groups.
      */
     List<Group> getGroupList();
 

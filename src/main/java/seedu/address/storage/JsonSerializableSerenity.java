@@ -38,7 +38,8 @@ class JsonSerializableSerenity {
      * @param source future changes to this will not affect the created {@code JsonSerializableSerenity}.
      */
     public JsonSerializableSerenity(ReadOnlySerenity source) {
-        groups.addAll(source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
+        groups.addAll(
+            source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
     /**
