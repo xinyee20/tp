@@ -5,6 +5,10 @@ package seedu.address.logic.parser;
  */
 public class CliSyntax {
 
+    // Prefix definitions for Serenity
+    public static final Prefix PREFIX_GRP = new Prefix("grp/");
+    public static final Prefix PREFIX_PATH = new Prefix("path/");
+
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_PHONE = new Prefix("p/");

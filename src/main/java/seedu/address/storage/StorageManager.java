@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -19,14 +20,18 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private SerenityStorage serenityStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage} and {@code
+     * SerenityStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+        SerenityStorage serenityStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.serenityStorage = serenityStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -46,7 +51,6 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
     // ================ AddressBook methods ==============================
 
     @Override
@@ -55,12 +59,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyAddressBook> readAddressBook()
+        throws DataConversionException, IOException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath)
+        throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
@@ -76,4 +82,33 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ Serenity methods ==============================
+
+    @Override
+    public Path getSerenityFilePath() {
+        return serenityStorage.getSerenityFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlySerenity> readSerenity() throws DataConversionException, IOException {
+        return readSerenity(serenityStorage.getSerenityFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlySerenity> readSerenity(Path filePath)
+        throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return serenityStorage.readSerenity(filePath);
+    }
+
+    @Override
+    public void saveSerenity(ReadOnlySerenity serenity) throws IOException {
+        saveSerenity(serenity, serenityStorage.getSerenityFilePath());
+    }
+
+    @Override
+    public void saveSerenity(ReadOnlySerenity serenity, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        serenityStorage.saveSerenity(serenity, filePath);
+    }
 }
