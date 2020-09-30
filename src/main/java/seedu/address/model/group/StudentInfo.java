@@ -6,7 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Represents a {@code Student} interaction with a Class Stores the {@code Student} {@code Participation} and {@code
  * Attendance}
  */
-public class Score {
+public class StudentInfo {
 
     private final Student student;
     private final Participation participation;
@@ -19,7 +19,7 @@ public class Score {
      * @param participation
      * @param attendance
      */
-    public Score(Student student, Participation participation, Attendance attendance) {
+    public StudentInfo(Student student, Participation participation, Attendance attendance) {
         requireAllNonNull(student, participation, attendance);
         this.student = student;
         this.participation = participation;
@@ -30,7 +30,7 @@ public class Score {
      * Creates an empty {@code Score} from a {@code Student}
      * @param student
      */
-    public Score(Student student) {
+    public StudentInfo(Student student) {
         this.student = student;
         this.participation = new Participation();
         this.attendance = new Attendance();
@@ -50,7 +50,7 @@ public class Score {
 
     @Override
     public boolean equals(Object obj) {
-        Score other = (Score) obj;
+        StudentInfo other = (StudentInfo) obj;
         return student.equals(other.getStudent()) && participation.equals(other.getParticipation())
             && attendance.equals(other.getAttendance());
     }
