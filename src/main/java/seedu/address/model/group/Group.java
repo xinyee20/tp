@@ -37,9 +37,9 @@ public class Group {
         this.name = name;
         CsvUtil util = new CsvUtil(filePath);
         students = util.readStudentsFromCsv();
-        //todo: implement scores data
-        Set<Score> scores = util.readScoresFromCsv(students);
-        lessons = util.readLessonsFromCsv(scores);
+        //todo: implement studentInfo data
+        Set<StudentInfo> studentsInfo = util.readStudentsInfoFromCsv(students);
+        lessons = util.readLessonsFromCsv(studentsInfo);
     }
 
     /**
