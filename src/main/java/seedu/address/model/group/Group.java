@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-import seedu.address.commons.utils.CsvUtil;
+import seedu.address.commons.util.CsvUtil;
 
 
 /**
