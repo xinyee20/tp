@@ -53,7 +53,7 @@ public class AddressBookParser {
             return new AddGrpCommandParser().parse(arguments);
 
         case ViewGrpCommand.COMMAND_WORD:
-            return new ViewGrpCommand();
+            return new ViewGrpCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
