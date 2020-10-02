@@ -1,6 +1,5 @@
 package seedu.address.model.group;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -15,7 +14,7 @@ public class GrpContainsKeywordPredicate implements Predicate<Group> {
 
     @Override
     public boolean test(Group group) {
-        return StringUtil.containsWordIgnoreCase(group.getName(),keyword);
+        return StringUtil.containsWordIgnoreCase(group.getName(), keyword);
     }
 
     @Override

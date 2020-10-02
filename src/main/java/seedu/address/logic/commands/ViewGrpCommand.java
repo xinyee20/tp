@@ -22,8 +22,8 @@ public class ViewGrpCommand extends Command {
     }
 
     private String getMessage(Model model) {
-        return model.getFilteredGroupList().isEmpty() ?
-                Messages.MESSAGE_GROUP_EMPTY
+        return model.getFilteredGroupList().isEmpty()
+                ? Messages.MESSAGE_GROUP_EMPTY
                 : String.format(Messages.MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getName());
     }
 
