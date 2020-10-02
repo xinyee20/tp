@@ -123,6 +123,14 @@ public interface Model {
     void addGroup(Group group);
 
     /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
+
+
+    /**
      * Returns an unmodifiable view of the filtered group list
      */
     ObservableList<Group> getFilteredGroupList();

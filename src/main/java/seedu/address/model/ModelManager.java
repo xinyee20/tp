@@ -176,6 +176,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireAllNonNull(predicate);
+        this.filteredGroups.setPredicate(predicate);
+    }
+
+    @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
     }
