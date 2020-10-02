@@ -1,4 +1,4 @@
-package seedu.address.commons.utils;
+package seedu.address.commons.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.StudentInfo;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
 
 /**
  * Reads CSV file that the tutor downloads from LUMINUS and writes JSON data to a new CSV file.
@@ -127,7 +127,7 @@ public class CsvUtil {
     }
 
     /**
-     * Creates a new set of Scores from CSV
+     * Creates a new set of StudentInfo from CSV
      *
      * @return Set of studentInfo
      */
