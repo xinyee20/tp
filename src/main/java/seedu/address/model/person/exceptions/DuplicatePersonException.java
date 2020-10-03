@@ -5,6 +5,7 @@ package seedu.address.model.person.exceptions;
  * identity).
  */
 public class DuplicatePersonException extends RuntimeException {
+
     public DuplicatePersonException() {
         super("Operation would result in duplicate persons");
     }

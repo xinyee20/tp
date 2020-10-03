@@ -69,6 +69,7 @@ public class CommandBox extends UiPart<Region> {
      */
     @FunctionalInterface
     public interface CommandExecutor {
+
         /**
          * Executes the command and returns the result.
          *

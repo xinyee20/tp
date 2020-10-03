@@ -45,7 +45,6 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
-
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 
     /*

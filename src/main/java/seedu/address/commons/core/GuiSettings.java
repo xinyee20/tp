@@ -5,8 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Serializable class that contains the GUI settings.
- * Guarantees: immutable.
+ * A Serializable class that contains the GUI settings. Guarantees: immutable.
  */
 public class GuiSettings implements Serializable {
 
@@ -59,8 +58,8 @@ public class GuiSettings implements Serializable {
         GuiSettings o = (GuiSettings) other;
 
         return windowWidth == o.windowWidth
-                && windowHeight == o.windowHeight
-                && Objects.equals(windowCoordinates, o.windowCoordinates);
+            && windowHeight == o.windowHeight
+            && Objects.equals(windowCoordinates, o.windowCoordinates);
     }
 
     @Override

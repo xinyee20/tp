@@ -6,13 +6,14 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, SerenityStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -28,5 +29,16 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+
+    // ---- Serenity ----//
+
+    @Override
+    Path getSerenityFilePath();
+
+    @Override
+    Optional<ReadOnlySerenity> readSerenity() throws DataConversionException, IOException;
+
+    @Override
+    void saveSerenity(ReadOnlySerenity serenity) throws IOException;
 
 }

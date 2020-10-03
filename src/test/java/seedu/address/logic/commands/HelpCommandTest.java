@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class HelpCommandTest {
+
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
