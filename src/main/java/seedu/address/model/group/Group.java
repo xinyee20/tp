@@ -60,13 +60,13 @@ public class Group {
      *
      * @param name     A valid name.
      * @param students A list of students.
-     * @param classes  A list of tutorial classes.
+     * @param lessons  A list of tutorial classes.
      */
-    public Group(String name, Set<Student> students, Set<Lesson> classes) {
-        requireAllNonNull(name, students, classes);
+    public Group(String name, Set<Student> students, Set<Lesson> lessons) {
+        requireAllNonNull(name, students, lessons);
         this.name = name;
         this.students = students;
-        this.lessons = classes;
+        this.lessons = lessons;
     }
 
     public String getName() {
