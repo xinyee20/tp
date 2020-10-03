@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRP;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.group.GrpContainsKeywordPredicate;
 
+/**
+ * Finds and lists all students and lessons in the group specifeied. Keyword matching is case insensitive.
+ */
 public class ViewGrpCommand extends Command {
 
     public static final String COMMAND_WORD = "viewgrp";
@@ -13,7 +17,7 @@ public class ViewGrpCommand extends Command {
             + ": Finds all students who are part of "
             + "the specified group and displays them as a list with index numbers.\n"
             + "Parameters: GROUP \n"
-            + "Example: " + COMMAND_WORD + " G04";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GRP +" G04";
 
     private final GrpContainsKeywordPredicate predicate;
 
