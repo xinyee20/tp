@@ -35,6 +35,9 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    // Ui parts relating to serentiy
+    private StudentListPanel studentListPanel;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -49,6 +52,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    //serenity FXML components
+
+    @FXML
+    private StackPane studentListPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -111,8 +119,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getStudentList());
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

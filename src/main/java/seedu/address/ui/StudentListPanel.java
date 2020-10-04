@@ -10,21 +10,21 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Student;
 
-public class StudentListPanel extends UiPart<Region>{
+public class StudentListPanel extends UiPart<Region> {
 
     private static final String FXML = "StudentListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Student> personListView;
+    private ListView<Student> studentListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public StudentListPanel(ObservableList<Student> StudentList) {
+    public StudentListPanel(ObservableList<Student> studentList) {
         super(FXML);
-        personListView.setItems(StudentList);
-        personListView.setCellFactory(listView -> new StudentListPanel.StudentListViewCell());
+        studentListView.setItems(studentList);
+        studentListView.setCellFactory(listView -> new StudentListViewCell());
     }
 
     /**
