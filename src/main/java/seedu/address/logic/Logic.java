@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
 import seedu.address.model.person.Person;
 
@@ -72,6 +73,10 @@ public interface Logic {
      */
     ObservableList<Student> getStudentList();
 
+    /**
+     * Returns an unmodifiable view of the list of lesson from a group.
+     */
+    ObservableList<Lesson> getLessonList();
 
     /**
      * Returns the user prefs' serenity file path.

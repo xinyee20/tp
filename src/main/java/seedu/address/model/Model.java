@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
 import seedu.address.model.person.Person;
 
@@ -149,4 +150,5 @@ public interface Model {
 
     ObservableList<Student> getStudentList();
 
+    ObservableList<Lesson> getLessonList();
 }

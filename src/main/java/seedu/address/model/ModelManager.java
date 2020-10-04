@@ -215,6 +215,11 @@ public class ModelManager implements Model {
         return students;
     }
 
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return lessons;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

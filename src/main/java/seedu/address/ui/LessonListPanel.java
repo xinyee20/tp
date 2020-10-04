@@ -12,19 +12,19 @@ import seedu.address.model.group.Lesson;
 
 public class LessonListPanel extends UiPart<Region> {
 
-    private static final String FXML = "StudentListPanel.fxml";
+    private static final String FXML = "LessonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Lesson> studentListView;
+    private ListView<Lesson> lessonListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
     public LessonListPanel(ObservableList<Lesson> studentList) {
         super(FXML);
-        studentListView.setItems(studentList);
-        studentListView.setCellFactory(listView -> new LessonListViewCell());
+        lessonListView.setItems(studentList);
+        lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
     /**

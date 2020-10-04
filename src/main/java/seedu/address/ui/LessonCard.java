@@ -12,7 +12,7 @@ import seedu.address.model.group.Lesson;
  */
 public class LessonCard extends UiPart<Region> {
 
-    private static final String FXML = "StudentListCard.fxml";
+    private static final String FXML = "LessonListCard.fxml";
 
     public final Lesson lesson;
 
@@ -30,7 +30,7 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
-        name.setText(lesson.getName());
+        name.setText("tutorial " + lesson.getName());
     }
 
     @Override
