@@ -1,10 +1,11 @@
 package seedu.address.model;
 
-import javafx.collections.ModifiableObservableListBase;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.collections.ModifiableObservableListBase;
+import javafx.collections.ObservableList;
 
 /**
  * A modifiable observable list to support rendering of different
@@ -14,6 +15,9 @@ public class ArrayObservableList<E> extends ModifiableObservableListBase<E> {
 
     private final List<E> delegate = new ArrayList<>();
 
+    /**
+     * Creates a generic ArrayObservableList
+     */
     public ArrayObservableList(ObservableList<E> list) {
         for (E e : list) {
             delegate.add(e);
