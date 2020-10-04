@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -10,8 +11,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.CsvUtil;
-
 
 /**
  * Represents a tutorial Group in serenity. Guarantees: details are present and not null, field values are validated,
@@ -23,7 +24,8 @@ public class Group {
     private String name;
 
     // Data fields
-    private Set<Student> students;
+    //private Set<Student> students;
+    private UniqueStudentList students;
     private Set<Lesson> lessons;
 
     /**
@@ -36,9 +38,10 @@ public class Group {
         requireAllNonNull(name, filePath);
         this.name = name;
         CsvUtil util = new CsvUtil(filePath);
-        students = util.readStudentsFromCsv();
+        students = new UniqueStudentList();
+        students.setStudents(new ArrayList<>(util.readStudentsFromCsv()));
         //todo: implement scores data
-        Set<Score> scores = util.readScoresFromCsv(students);
+        Set<Score> scores = util.readScoresFromCsv(new HashSet<>(students.asUnmodifiableObservableList()));
         lessons = util.readLessonsFromCsv(scores);
     }
 
@@ -48,7 +51,7 @@ public class Group {
      * @param name     A valid name.
      * @param students A list of students.
      */
-    public Group(String name, Set<Student> students) {
+    public Group(String name, UniqueStudentList students) {
         requireAllNonNull(name, students);
         this.name = name;
         this.students = students;
@@ -62,7 +65,7 @@ public class Group {
      * @param students A list of students.
      * @param classes  A list of tutorial classes.
      */
-    public Group(String name, Set<Student> students, Set<Lesson> classes) {
+    public Group(String name, UniqueStudentList students, Set<Lesson> classes) {
         requireAllNonNull(name, students, classes);
         this.name = name;
         this.students = students;
@@ -73,8 +76,12 @@ public class Group {
         return name;
     }
 
-    public Set<Student> getStudents() {
-        return Collections.unmodifiableSet(students);
+    public UniqueStudentList getStudents() {
+        return students;
+    }
+
+    public ObservableList<Student> getStudentsAsUnmodifiableObservableList() {
+        return students.asUnmodifiableObservableList();
     }
 
     public Set<Lesson> getLessons() {
