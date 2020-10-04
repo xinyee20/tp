@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Student;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -91,6 +92,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return model.getFilteredGroupList();
+    }
+
+    @Override
+    public ObservableList<Student> getStudentList() {
+        return model.getStudentList();
     }
 
     @Override

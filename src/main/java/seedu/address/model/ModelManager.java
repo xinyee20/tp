@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Student;
+import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,21 +26,21 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final Serenity serenity;
     private final UserPrefs userPrefs;
-
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
+    private final ArrayObservableList<Student> students;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-        ReadOnlySerenity serenity) {
+                        ReadOnlySerenity serenity) {
         super();
         requireAllNonNull(addressBook, userPrefs, serenity);
 
         logger.fine("Initializing with address book: " + addressBook
-            + " and user prefs " + userPrefs
-            + " and serenity " + serenity);
+                + " and user prefs " + userPrefs
+                + " and serenity " + serenity);
 
         this.addressBook = new AddressBook(addressBook);
         this.serenity = new Serenity(serenity);
@@ -46,7 +48,9 @@ public class ModelManager implements Model {
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
+        students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
     }
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -63,6 +67,7 @@ public class ModelManager implements Model {
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
+        students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
     }
 
     public ModelManager() {
@@ -136,7 +141,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -179,11 +183,24 @@ public class ModelManager implements Model {
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireAllNonNull(predicate);
         this.filteredGroups.setPredicate(predicate);
+        updateStudentList();
+    }
+
+    @Override
+    public void updateStudentList() {
+        if (!filteredGroups.isEmpty()) {
+            this.students.setAll(this.filteredGroups.get(0).getStudentsAsUnmodifiableObservableList());
+        }
     }
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
+    }
+
+    @Override
+    public ObservableList<Student> getStudentList() {
+        return students;
     }
 
     //=========== Filtered Person List Accessors =============================================================
