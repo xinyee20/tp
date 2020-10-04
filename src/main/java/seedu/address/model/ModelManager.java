@@ -51,7 +51,6 @@ public class ModelManager implements Model {
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
     }
 
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
