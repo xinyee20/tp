@@ -17,7 +17,7 @@ public class ViewGrpCommand extends Command {
             + ": Finds all students who are part of "
             + "the specified group and displays them as a list with index numbers.\n"
             + "Parameters: GROUP \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_GRP +" G04";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + " G04";
 
     private final GrpContainsKeywordPredicate predicate;
 
