@@ -12,8 +12,8 @@ import seedu.address.model.group.exceptions.DuplicateStudentException;
 import seedu.address.model.group.exceptions.StudentNotFoundException;
 
 /**
- * A list of Students that enforces uniqueness between its elements and does not allow nulls. A Student is considered unique
- * by comparing using {@code Student#equal(Object)}.
+ * A list of Students that enforces uniqueness between its elements and does not allow nulls.
+ * A Student is considered unique by comparing using {@code Student#equal(Object)}.
  */
 public class UniqueStudentList implements Iterable<Student> {
 
@@ -69,6 +69,9 @@ public class UniqueStudentList implements Iterable<Student> {
         }
     }
 
+    /**
+     * Replaces all the students from the list with a new list of students
+     */
     public void students(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
