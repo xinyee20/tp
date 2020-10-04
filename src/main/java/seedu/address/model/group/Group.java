@@ -4,12 +4,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CsvUtil;
@@ -26,7 +24,7 @@ public class Group {
     // Data fields
     //private Set<Student> students;
     private UniqueStudentList students;
-    private Set<Lesson> lessons;
+    private UniqueLessonList lessons;
 
     /**
      * Constructs a {@code Group}
@@ -42,7 +40,8 @@ public class Group {
         students.setStudents(new ArrayList<>(util.readStudentsFromCsv()));
         //todo: implement scores data
         Set<Score> scores = util.readScoresFromCsv(new HashSet<>(students.asUnmodifiableObservableList()));
-        lessons = util.readLessonsFromCsv(scores);
+        lessons = new UniqueLessonList();
+        lessons.setLessons(new ArrayList<>(util.readLessonsFromCsv(scores)));
     }
 
     /**
@@ -55,7 +54,7 @@ public class Group {
         requireAllNonNull(name, students);
         this.name = name;
         this.students = students;
-        this.lessons = new HashSet<>();
+        this.lessons = new UniqueLessonList();
     }
 
     /**
@@ -65,7 +64,7 @@ public class Group {
      * @param students A list of students.
      * @param classes  A list of tutorial classes.
      */
-    public Group(String name, UniqueStudentList students, Set<Lesson> classes) {
+    public Group(String name, UniqueStudentList students, UniqueLessonList classes) {
         requireAllNonNull(name, students, classes);
         this.name = name;
         this.students = students;
@@ -84,19 +83,22 @@ public class Group {
         return students.asUnmodifiableObservableList();
     }
 
-    public Set<Lesson> getLessons() {
-        return Collections.unmodifiableSet(lessons);
+    public ObservableList<Lesson> getLessonsAsUnmodifiableObservableList() {
+        return lessons.asUnmodifiableObservableList();
     }
 
-    public Set<Lesson> getSortedLessons() {
-        TreeSet<Lesson> sortedSet = new TreeSet<>(new Comparator<Lesson>() {
+    public UniqueLessonList getLessons() {
+        return lessons;
+    }
+
+    public UniqueLessonList getSortedLessons() {
+        lessons.sort(new Comparator<Lesson>() {
             @Override
             public int compare(Lesson o1, Lesson o2) {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        sortedSet.addAll(lessons);
-        return sortedSet;
+        return lessons;
     }
 
     /**

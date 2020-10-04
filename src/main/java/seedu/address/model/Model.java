@@ -132,11 +132,15 @@ public interface Model {
     void updateFilteredGroupList(Predicate<Group> predicate);
 
     /**
-     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
+     * Updates the student list when changing to another group of interest.
      */
     void updateStudentList();
+
+
+    /**
+     * Updates the lesson list to filter when changing to another group of interest.
+     */
+    public void updateLessonList();
 
     /**
      * Returns an unmodifiable view of the filtered group list
@@ -144,4 +148,5 @@ public interface Model {
     ObservableList<Group> getFilteredGroupList();
 
     ObservableList<Student> getStudentList();
+
 }

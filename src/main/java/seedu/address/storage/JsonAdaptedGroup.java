@@ -11,6 +11,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueStudentList;
 
 /**
@@ -33,7 +34,7 @@ class JsonAdaptedGroup {
         students.addAll(source.getStudents().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedStudent::new)
             .collect(Collectors.toList()));
-        lessons.addAll(source.getSortedLessons().stream()
+        lessons.addAll(source.getSortedLessons().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedClass::new)
             .collect(Collectors.toList()));
     }
@@ -61,7 +62,8 @@ class JsonAdaptedGroup {
             Lesson classItem = new Lesson(groupClass.getName(), scores);
             groupClasses.add(classItem);
         }
-        final Set<Lesson> modelClasses = new HashSet<>(groupClasses);
+        final UniqueLessonList modelClasses = new UniqueLessonList();
+        modelClasses.setLessons(new ArrayList<>(groupClasses));
 
         return new Group(modelName, modelStudents, modelClasses);
     }

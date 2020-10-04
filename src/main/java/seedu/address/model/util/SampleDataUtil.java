@@ -14,6 +14,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -77,9 +78,11 @@ public class SampleDataUtil {
             new Student("James", "E02030303"));
         UniqueStudentList studentList = new UniqueStudentList();
         studentList.setStudents(new ArrayList<>(students));
+        UniqueLessonList lessonList = new UniqueLessonList();
         Set<Lesson> lessons = new HashSet<>();
         lessons.add(new Lesson("1-1", scores));
-        return new Group[] {new Group("G04", studentList, lessons)};
+        lessonList.setLessons(new ArrayList<>(lessons));
+        return new Group[] {new Group("G04", studentList, lessonList)};
     }
 
     public static ReadOnlySerenity getSampleSerenity() {

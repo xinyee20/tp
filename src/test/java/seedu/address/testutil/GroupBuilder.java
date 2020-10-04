@@ -11,6 +11,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueStudentList;
 
 /**
@@ -32,7 +33,7 @@ public class GroupBuilder {
 
     private String name;
     private UniqueStudentList students = new UniqueStudentList();
-    private Set<Lesson> classes;
+    private UniqueLessonList classes = new UniqueLessonList();
 
     /**
      * Creates a {@code GroupBuilder} with the default details.
@@ -40,7 +41,7 @@ public class GroupBuilder {
     public GroupBuilder() {
         name = DEFAULT_NAME;
         students.setStudents(new ArrayList<>(DEFAULT_STUDENTS));
-        classes = DEFAULT_CLASSES;
+        classes.setLessons(new ArrayList<>(DEFAULT_CLASSES));
     }
 
     /**
@@ -49,7 +50,7 @@ public class GroupBuilder {
     public GroupBuilder(Group groupToCopy) {
         name = groupToCopy.getName();
         students = groupToCopy.getStudents();
-        classes = new HashSet<>(groupToCopy.getLessons());
+        classes = groupToCopy.getLessons();
     }
 
     /**
@@ -58,7 +59,7 @@ public class GroupBuilder {
     public GroupBuilder(String name, Path filePath) {
         this.name = name;
         students.setStudents(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
-        classes = new HashSet<>();
+        classes.setLessons(new ArrayList<>());
     }
 
     /**

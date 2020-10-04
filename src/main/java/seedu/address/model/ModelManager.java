@@ -12,7 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
 
@@ -29,6 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
     private final ArrayObservableList<Student> students;
+    private final ArrayObservableList<Lesson> lessons;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
@@ -49,6 +52,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
+        lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
     }
 
     /**
@@ -67,6 +71,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
+        lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
     }
 
     public ModelManager() {
@@ -183,12 +188,20 @@ public class ModelManager implements Model {
         requireAllNonNull(predicate);
         this.filteredGroups.setPredicate(predicate);
         updateStudentList();
+        updateLessonList();
     }
 
     @Override
     public void updateStudentList() {
         if (!filteredGroups.isEmpty()) {
             this.students.setAll(this.filteredGroups.get(0).getStudentsAsUnmodifiableObservableList());
+        }
+    }
+
+    @Override
+    public void updateLessonList() {
+        if (!filteredGroups.isEmpty()) {
+            this.lessons.setAll(this.filteredGroups.get(0).getLessonsAsUnmodifiableObservableList());
         }
     }
 
