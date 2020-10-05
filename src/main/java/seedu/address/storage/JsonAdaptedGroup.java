@@ -11,6 +11,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueLessonList;
+import seedu.address.model.group.UniqueStudentList;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -29,10 +31,10 @@ class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         name = source.getName();
-        students.addAll(source.getStudents().stream()
+        students.addAll(source.getStudents().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedStudent::new)
             .collect(Collectors.toList()));
-        lessons.addAll(source.getSortedLessons().stream()
+        lessons.addAll(source.getSortedLessons().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedClass::new)
             .collect(Collectors.toList()));
     }
@@ -50,7 +52,8 @@ class JsonAdaptedGroup {
         for (JsonAdaptedStudent groupStudent : students) {
             groupStudents.add(groupStudent.toModelType());
         }
-        final Set<Student> modelStudents = new HashSet<>(groupStudents);
+        final UniqueStudentList modelStudents = new UniqueStudentList();
+        modelStudents.setStudents(new ArrayList<>(groupStudents));
 
         final Set<StudentInfo> studentsInfo = new HashSet<>();
 
@@ -59,7 +62,8 @@ class JsonAdaptedGroup {
             Lesson classItem = new Lesson(groupClass.getName(), studentsInfo);
             groupClasses.add(classItem);
         }
-        final Set<Lesson> modelClasses = new HashSet<>(groupClasses);
+        final UniqueLessonList modelClasses = new UniqueLessonList();
+        modelClasses.setLessons(new ArrayList<>(groupClasses));
 
         return new Group(modelName, modelStudents, modelClasses);
     }

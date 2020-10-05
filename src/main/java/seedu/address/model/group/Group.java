@@ -3,13 +3,12 @@ package seedu.address.model.group;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.CsvUtil;
 
 /**
@@ -22,8 +21,9 @@ public class Group {
     private String name;
 
     // Data fields
-    private Set<Student> students;
-    private Set<Lesson> lessons;
+    //private Set<Student> students;
+    private UniqueStudentList students;
+    private UniqueLessonList lessons;
 
     /**
      * Constructs a {@code Group}
@@ -35,10 +35,12 @@ public class Group {
         requireAllNonNull(name, filePath);
         this.name = name;
         CsvUtil util = new CsvUtil(filePath);
-        students = util.readStudentsFromCsv();
-        //todo: implement studentInfo data
-        Set<StudentInfo> studentsInfo = util.readStudentsInfoFromCsv(students);
-        lessons = util.readLessonsFromCsv(studentsInfo);
+        students = new UniqueStudentList();
+        students.setStudents(new ArrayList<>(util.readStudentsFromCsv()));
+        //todo: implement scores data
+        Set<StudentInfo> studentsInfo = util.readStudentsInfoFromCsv(util.readStudentsFromCsv());
+        lessons = new UniqueLessonList();
+        lessons.setLessons(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
     }
 
     /**
@@ -47,11 +49,11 @@ public class Group {
      * @param name     A valid name.
      * @param students A list of students.
      */
-    public Group(String name, Set<Student> students) {
+    public Group(String name, UniqueStudentList students) {
         requireAllNonNull(name, students);
         this.name = name;
         this.students = students;
-        this.lessons = new HashSet<>();
+        this.lessons = new UniqueLessonList();
     }
 
     /**
@@ -61,7 +63,7 @@ public class Group {
      * @param students A list of students.
      * @param classes  A list of tutorial classes.
      */
-    public Group(String name, Set<Student> students, Set<Lesson> classes) {
+    public Group(String name, UniqueStudentList students, UniqueLessonList classes) {
         requireAllNonNull(name, students, classes);
         this.name = name;
         this.students = students;
@@ -72,23 +74,30 @@ public class Group {
         return name;
     }
 
-    public Set<Student> getStudents() {
-        return Collections.unmodifiableSet(students);
+    public UniqueStudentList getStudents() {
+        return students;
     }
 
-    public Set<Lesson> getLessons() {
-        return Collections.unmodifiableSet(lessons);
+    public ObservableList<Student> getStudentsAsUnmodifiableObservableList() {
+        return students.asUnmodifiableObservableList();
     }
 
-    public Set<Lesson> getSortedLessons() {
-        TreeSet<Lesson> sortedSet = new TreeSet<>(new Comparator<Lesson>() {
+    public ObservableList<Lesson> getLessonsAsUnmodifiableObservableList() {
+        return lessons.asUnmodifiableObservableList();
+    }
+
+    public UniqueLessonList getLessons() {
+        return lessons;
+    }
+
+    public UniqueLessonList getSortedLessons() {
+        lessons.sort(new Comparator<Lesson>() {
             @Override
             public int compare(Lesson o1, Lesson o2) {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        sortedSet.addAll(lessons);
-        return sortedSet;
+        return lessons;
     }
 
     /**
