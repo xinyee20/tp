@@ -4,6 +4,9 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 
+/**
+ * Tests that a {@code Lesson} matches the keyword given.
+ */
 public class LsnContainsKeywordPredicate implements Predicate<Lesson> {
 
     private final String keyword;
@@ -18,7 +21,9 @@ public class LsnContainsKeywordPredicate implements Predicate<Lesson> {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LsnContainsKeywordPredicate // instanceof handles nulls
+                && keyword.equals(((LsnContainsKeywordPredicate) other).keyword)); // state check
     }
 }
