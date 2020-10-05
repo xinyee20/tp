@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -52,11 +52,11 @@ class JsonAdaptedGroup {
         }
         final Set<Student> modelStudents = new HashSet<>(groupStudents);
 
-        final Set<Score> scores = new HashSet<>();
+        final Set<StudentInfo> studentsInfo = new HashSet<>();
 
         final List<Lesson> groupClasses = new ArrayList<>();
         for (JsonAdaptedClass groupClass : lessons) {
-            Lesson classItem = new Lesson(groupClass.getName(), scores);
+            Lesson classItem = new Lesson(groupClass.getName(), studentsInfo);
             groupClasses.add(classItem);
         }
         final Set<Lesson> modelClasses = new HashSet<>(groupClasses);

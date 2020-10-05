@@ -11,8 +11,8 @@ import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.Serenity;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -69,12 +69,12 @@ public class SampleDataUtil {
     }
 
     public static Group[] getSampleGroups() {
-        Set<Score> scores = getScoreSet(new Student("John", "E0123456"),
+        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "E0123456"),
             new Student("James", "E02030303"));
         Set<Student> students = getStudentSet(new Student("John", "E0123456"),
             new Student("James", "E02030303"));
         Set<Lesson> lessons = new HashSet<>();
-        lessons.add(new Lesson("1-1", scores));
+        lessons.add(new Lesson("1-1", studentsInfo));
         return new Group[] {new Group("G04", students, lessons)};
     }
 
@@ -86,12 +86,12 @@ public class SampleDataUtil {
         return sampleS;
     }
 
-    public static Set<Score> getScoreSet(Student... students) {
-        Set<Score> scores = new HashSet<>();
+    public static Set<StudentInfo> getStudentInfoSet(Student... students) {
+        Set<StudentInfo> studentsInfo = new HashSet<>();
         for (Student student : students) {
-            scores.add(new Score(student));
+            studentsInfo.add(new StudentInfo(student));
         }
-        return scores;
+        return studentsInfo;
     }
 
     /**
