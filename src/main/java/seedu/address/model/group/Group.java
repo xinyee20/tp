@@ -39,9 +39,9 @@ public class Group {
         students = new UniqueStudentList();
         students.setStudents(new ArrayList<>(util.readStudentsFromCsv()));
         //todo: implement scores data
-        Set<Score> scores = util.readScoresFromCsv(new HashSet<>(students.asUnmodifiableObservableList()));
+        Set<StudentInfo> studentsInfo = util.readStudentsInfoFromCsv(util.readStudentsFromCsv());
         lessons = new UniqueLessonList();
-        lessons.setLessons(new ArrayList<>(util.readLessonsFromCsv(scores)));
+        lessons.setLessons(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
     }
 
     /**

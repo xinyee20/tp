@@ -81,7 +81,7 @@ public class SampleDataUtil {
         UniqueLessonList lessonList = new UniqueLessonList();
         Set<Lesson> lessons = new HashSet<>();
         lessons.add(new Lesson("1-1", studentsInfo));
-        return new Group[] {new Group("G04", students, lessons)};
+        return new Group[] {new Group("G04", studentList, lessonList)};
     }
 
     public static ReadOnlySerenity getSampleSerenity() {
