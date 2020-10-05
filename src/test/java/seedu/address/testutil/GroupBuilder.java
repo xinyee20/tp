@@ -9,10 +9,11 @@ import java.util.Set;
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueStudentList;
+import seedu.address.model.group.StudentInfo;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Group objects.
@@ -91,12 +92,12 @@ public class GroupBuilder {
      * building.
      */
     public GroupBuilder withClasses(String... classes) {
-        Set<Score> scores = new HashSet<>();
+        Set<StudentInfo> studentsInfo = new HashSet<>();
         for (Student student : students) {
-            scores.add(new Score(student));
+            studentsInfo.add(new StudentInfo(student));
         }
         for (String className : classes) {
-            this.classes.add(new Lesson(className, scores));
+            this.classes.add(new Lesson(className, studentsInfo));
         }
         return this;
     }

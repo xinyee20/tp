@@ -13,33 +13,33 @@ import java.util.Set;
 public class Lesson {
 
     public static final String NAME_CONSTRAINT = "Class name cannot be empty";
-    public static final String SCORES_CONSTRAINT = "Scores cannot be empty";
+    public static final String STUDENTS_INFO_CONSTRAINT = "Students information cannot be empty";
     private final String name;
-    private final Set<Score> scores;
+    private final Set<StudentInfo> studentsInfo;
 
     /**
      * Constructs a {@code Class}.
      *
      * @param name A valid name.
      */
-    public Lesson(String name, Set<Score> scores) {
-        requireAllNonNull(name, scores);
+    public Lesson(String name, Set<StudentInfo> studentsInfo) {
+        requireAllNonNull(name, studentsInfo);
         checkArgument(isValidName(name), NAME_CONSTRAINT);
-        checkArgument(isValidScore(scores), SCORES_CONSTRAINT);
+        checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
         this.name = name;
-        this.scores = scores;
+        this.studentsInfo = studentsInfo;
     }
 
     boolean isValidName(String name) {
         return name.length() > 0;
     }
 
-    public Set<Score> getScores() {
-        return Collections.unmodifiableSet(scores);
+    public Set<StudentInfo> getStudentsInfo() {
+        return Collections.unmodifiableSet(studentsInfo);
     }
 
-    boolean isValidScore(Set<Score> scores) {
-        return scores.size() > 0;
+    boolean isValidStudentInfo(Set<StudentInfo> studentsInfo) {
+        return studentsInfo.size() > 0;
     }
 
 
@@ -58,8 +58,8 @@ public class Lesson {
         }
 
         Lesson otherClass = (Lesson) obj;
-        return otherClass.getName().equals(getName()) && otherClass.getScores()
-            .containsAll(getScores());
+        return otherClass.getName().equals(getName()) && otherClass.getStudentsInfo()
+            .containsAll(getStudentsInfo());
     }
 }
 
