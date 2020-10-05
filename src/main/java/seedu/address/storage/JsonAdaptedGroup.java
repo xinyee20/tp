@@ -10,9 +10,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
 import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueStudentList;
-import seedu.address.model.group.StudentInfo;
 
 /**
  * Jackson-friendly version of {@link Group}.
