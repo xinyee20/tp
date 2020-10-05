@@ -10,12 +10,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.Serenity;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.Lesson;
-import seedu.address.model.group.Student;
-import seedu.address.model.group.StudentInfo;
-import seedu.address.model.group.UniqueLessonList;
-import seedu.address.model.group.UniqueStudentList;
+import seedu.address.model.group.*;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -74,14 +69,18 @@ public class SampleDataUtil {
     public static Group[] getSampleGroups() {
         Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "E0123456"),
             new Student("James", "E02030303"));
+        UniqueStudentInfoList studentsInfoList = new UniqueStudentInfoList();
+        studentsInfoList.setStudentInfo(new ArrayList<>(studentsInfo));
+
         Set<Student> students = getStudentSet(new Student("John", "E0123456"),
             new Student("James", "E02030303"));
-        UniqueStudentList studentList = new UniqueStudentList();
-        studentList.setStudents(new ArrayList<>(students));
-        UniqueLessonList lessonList = new UniqueLessonList();
+        UniqueStudentList studentsList = new UniqueStudentList();
+        studentsList.setStudents(new ArrayList<>(students));
+
+        UniqueLessonList lessonsList = new UniqueLessonList();
         Set<Lesson> lessons = new HashSet<>();
-        lessons.add(new Lesson("1-1", studentsInfo));
-        return new Group[] {new Group("G04", studentList, lessonList)};
+        lessons.add(new Lesson("1-1", studentsInfoList));
+        return new Group[] {new Group("G04", studentsList, lessonsList)};
     }
 
     public static ReadOnlySerenity getSampleSerenity() {

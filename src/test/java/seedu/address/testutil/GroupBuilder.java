@@ -7,12 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.CsvUtil;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.Lesson;
-import seedu.address.model.group.Student;
-import seedu.address.model.group.StudentInfo;
-import seedu.address.model.group.UniqueLessonList;
-import seedu.address.model.group.UniqueStudentList;
+import seedu.address.model.group.*;
 
 /**
  * A utility class to help with building Group objects.
@@ -91,7 +86,7 @@ public class GroupBuilder {
      * building.
      */
     public GroupBuilder withClasses(String... classes) {
-        Set<StudentInfo> studentsInfo = new HashSet<>();
+        UniqueStudentInfoList studentsInfo = new UniqueStudentInfoList();
         for (Student student : students) {
             studentsInfo.add(new StudentInfo(student));
         }
