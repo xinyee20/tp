@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,8 +21,31 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final Serenity serenity;
     private final UserPrefs userPrefs;
+
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Group> filteredGroups;
+
+    /**
+     * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+        ReadOnlySerenity serenity) {
+        super();
+        requireAllNonNull(addressBook, userPrefs, serenity);
+
+        logger.fine("Initializing with address book: " + addressBook
+            + " and user prefs " + userPrefs
+            + " and serenity " + serenity);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.serenity = new Serenity(serenity);
+        this.userPrefs = new UserPrefs(userPrefs);
+
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredGroups = new FilteredList<>(this.serenity.getGroupList());
+    }
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,12 +57,15 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.serenity = new Serenity();
         this.userPrefs = new UserPrefs(userPrefs);
+
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredGroups = new FilteredList<>(this.serenity.getGroupList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new Serenity());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,6 +92,8 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
+    //=========== AddressBook ================================================================================
+
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
@@ -75,8 +104,6 @@ public class ModelManager implements Model {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
-
-    //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -110,6 +137,46 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Serenity ================================================================================
+
+    @Override
+    public Path getSerenityFilePath() {
+        return userPrefs.getSerenityFilePath();
+    }
+
+    @Override
+    public void setSerenityFilePath(Path serenityFilePath) {
+        requireNonNull(serenityFilePath);
+        userPrefs.setSerenityFilePath(serenityFilePath);
+    }
+
+    @Override
+    public void setSerenity(ReadOnlySerenity serenity) {
+        this.serenity.resetData(serenity);
+    }
+
+    @Override
+    public ReadOnlySerenity getSerenity() {
+        return serenity;
+    }
+
+    @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return serenity.hasGroup(group);
+    }
+
+    @Override
+    public void addGroup(Group group) {
+        requireNonNull(group);
+        serenity.addGroup(group);
+    }
+
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        return filteredGroups;
     }
 
     //=========== Filtered Person List Accessors =============================================================
