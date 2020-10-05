@@ -4,15 +4,18 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
-import seedu.address.logic.parser.CsvUtil;
+import seedu.address.commons.utils.CsvUtil;
+
 
 /**
- * Represents a tutorial Group in serenity.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a tutorial Group in serenity. Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Group {
 
@@ -21,46 +24,49 @@ public class Group {
 
     // Data fields
     private Set<Student> students;
-    private Set<Class> classes;
+    private Set<Lesson> lessons;
 
     /**
      * Constructs a {@code Group}
      *
-     * @param name A valid name.
+     * @param name     A valid name.
      * @param filePath A valid filePath.
      */
     public Group(String name, Path filePath) {
         requireAllNonNull(name, filePath);
         this.name = name;
-        students = new CsvUtil(filePath).readStudentsFromCsv();
-        classes = new HashSet<>();
+        CsvUtil util = new CsvUtil(filePath);
+        students = util.readStudentsFromCsv();
+        //todo: implement scores data
+        Set<Score> scores = util.readScoresFromCsv(students);
+        lessons = util.readLessonsFromCsv(scores);
     }
 
     /**
      * Constructs a {@code Group}.
      *
-     * @param name A valid name.
+     * @param name     A valid name.
      * @param students A list of students.
      */
     public Group(String name, Set<Student> students) {
         requireAllNonNull(name, students);
         this.name = name;
         this.students = students;
-        this.classes = new HashSet<>();
+        this.lessons = new HashSet<>();
     }
 
     /**
      * Constructs a {@code Group}.
      *
-     * @param name A valid name.
+     * @param name     A valid name.
      * @param students A list of students.
-     * @param classes A list of tutorial classes.
+     * @param classes  A list of tutorial classes.
      */
-    public Group(String name, Set<Student> students, Set<Class> classes) {
+    public Group(String name, Set<Student> students, Set<Lesson> classes) {
         requireAllNonNull(name, students, classes);
         this.name = name;
         this.students = students;
-        this.classes = classes;
+        this.lessons = classes;
     }
 
     public String getName() {
@@ -71,13 +77,24 @@ public class Group {
         return Collections.unmodifiableSet(students);
     }
 
-    public Set<Class> getClasses() {
-        return Collections.unmodifiableSet(classes);
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
+    }
+
+    public Set<Lesson> getSortedLessons() {
+        TreeSet<Lesson> sortedSet = new TreeSet<>(new Comparator<Lesson>() {
+            @Override
+            public int compare(Lesson o1, Lesson o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        sortedSet.addAll(lessons);
+        return sortedSet;
     }
 
     /**
-     * Returns true if both groups of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two groups.
+     * Returns true if both groups of the same name have at least one other identity field that is the same. This
+     * defines a weaker notion of equality between two groups.
      */
     public boolean isSameGroup(Group otherGroup) {
         if (otherGroup == this) {
@@ -87,12 +104,12 @@ public class Group {
         return otherGroup != null
             && otherGroup.getName().equals(getName())
             && otherGroup.getStudents().equals(getStudents())
-            && otherGroup.getClasses().equals(getClasses());
+            && otherGroup.getLessons().equals(getLessons());
     }
 
     /**
-     * Returns true if both groups have the same identity and data fields.
-     * This defines a stronger notion of equality between two groups.
+     * Returns true if both groups have the same identity and data fields. This defines a stronger notion of equality
+     * between two groups.
      */
     @Override
     public boolean equals(Object other) {
@@ -107,13 +124,13 @@ public class Group {
         Group otherGroup = (Group) other;
         return otherGroup.getName().equals(getName())
             && otherGroup.getStudents().equals(getStudents())
-            && otherGroup.getClasses().equals(getClasses());
+            && otherGroup.getLessons().equals(getLessons());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, students, classes);
+        return Objects.hash(name, students, lessons);
     }
 
     @Override

@@ -81,6 +81,7 @@ class AddGrpCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -191,6 +192,7 @@ class AddGrpCommandTest {
      * A Model stub that contains a single group.
      */
     private class ModelStubWithGroup extends AddGrpCommandTest.ModelStub {
+
         private final Group group;
 
         ModelStubWithGroup(Group group) {
@@ -209,6 +211,7 @@ class AddGrpCommandTest {
      * A Model stub that always accept the group being added.
      */
     private class ModelStubAcceptingGroupAdded extends AddGrpCommandTest.ModelStub {
+
         final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override

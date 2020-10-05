@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.Serenity;
-import seedu.address.model.group.Class;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Student;
 
@@ -25,8 +24,8 @@ public class TypicalGroups {
             new Student("Luna", "e0111111"),
             new Student("Queenie", "e02222222")
         ).withClasses(
-            new Class("4.2"),
-            new Class("5.1")
+            "4.2",
+            "5.1"
         ).build();
 
     public static final Group GROUP_D = new GroupBuilder().withName("G07")
@@ -34,10 +33,10 @@ public class TypicalGroups {
             new Student("Freddie", "e0000000"),
             new Student("June", "e0101010")
         ).withClasses(
-            new Class("4.2"),
-            new Class("5.1"),
-            new Class("5.2"),
-            new Class("6.1")
+            "4.2",
+            "5.1",
+            "5.2",
+            "6.1"
         ).build();
 
     // Manually added - Group's details found in {@code CommandTestUtil}
@@ -46,7 +45,8 @@ public class TypicalGroups {
     public static final Group GROUP_B = new GroupBuilder().withName(VALID_GRP_GROUP_B)
         .withFilePath(VALID_PATH_GROUP_B).build();
 
-    private TypicalGroups() {} // prevents instantiation
+    private TypicalGroups() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code Serenity} with all the typical groups.
