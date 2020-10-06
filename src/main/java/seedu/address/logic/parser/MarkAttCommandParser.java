@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
 import java.util.Optional;
@@ -22,8 +21,8 @@ import seedu.address.model.group.Student;
 public class MarkAttCommandParser implements Parser<MarkAttCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the MarkAttCommand and returns a MarkAttCommand object
-     * for execution.
+     * Parses the given {@code String} of arguments in the context of the MarkAttCommand and
+     * returns a MarkAttCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -33,7 +32,8 @@ public class MarkAttCommandParser implements Parser<MarkAttCommand> {
                 ArgumentTokenizer
                         .tokenize(args, PREFIX_STUDENT, PREFIX_ID);
 
-        String studentName, studentNumber;
+        String studentName;
+        String studentNumber;
         Optional<Student> student;
         Optional<String> keyToAll = Optional.ofNullable(argMultimap.getPreamble());
 

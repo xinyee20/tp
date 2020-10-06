@@ -48,11 +48,21 @@ public class StudentInfo {
         return attendance;
     }
 
+    /**
+     * Check whether the student in Student Info matches the specific student given in the input
+     * @param student Student to be checked
+     * @return Yes if student is correct, No if student is wrong
+     */
     public boolean containsStudent(Student student) {
         boolean isCorrectStudent = this.student.equals(student);
         return isCorrectStudent;
     }
 
+    /**
+     * Marks the student present or absent for the class
+     * @param updatedAttendance The attendance of the student for the lesson
+     * @return The updated Attendance
+     */
     public StudentInfo updateAttendance(Attendance updatedAttendance) {
         this.attendance = updatedAttendance;
         return this;

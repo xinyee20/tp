@@ -15,9 +15,11 @@ import seedu.address.model.group.StudentInfo;
 /**
  * Marks the attendance of a class or a student in the class.
  */
-public class MarkAttCommand extends Command{
+public class MarkAttCommand extends Command {
 
     public static final String COMMAND_WORD = "markatt";
+    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s";
+    public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of all students / a student in a class. \n"
@@ -31,8 +33,6 @@ public class MarkAttCommand extends Command{
     private Student toMarkAtt;
     private boolean isWholeClass;
 
-    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s";
-    public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked";
 
     /**
      * Creates an MarkAttCommand to mark all {@code Student} present

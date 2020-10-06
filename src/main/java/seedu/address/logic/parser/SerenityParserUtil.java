@@ -2,11 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Student;
-import seedu.address.model.person.Name;
 
 public class SerenityParserUtil {
 
@@ -18,7 +15,7 @@ public class SerenityParserUtil {
     public static String parseStudent(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (! Student.isValidString(trimmedName)) {
+        if (!Student.isValidString(trimmedName)) {
             throw new ParseException(Student.STUDENT_NAME_ERROR);
         }
         return trimmedName;
@@ -32,7 +29,7 @@ public class SerenityParserUtil {
     public static String parseStudentID(String id) throws ParseException {
         requireNonNull(id);
         String trimmedId = id.trim();
-        if (! Student.isValidStudentNumber(trimmedId)) {
+        if (!Student.isValidStudentNumber(trimmedId)) {
             throw new ParseException(Student.STUDENT_NUMBER_ERROR);
         }
         return trimmedId;

@@ -1,7 +1,5 @@
 package seedu.address.model.group;
 
-import javax.accessibility.AccessibleText;
-
 /**
  * Represents a {@code Student} attendance in a Class
  */
