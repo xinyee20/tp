@@ -36,13 +36,13 @@ public class ViewLsnCommand extends Command {
                 ? Messages.MESSAGE_LESSON_EMPTY
                 : String.format(Messages.MESSAGE_LESSON_LISTED_OVERVIEW,
                 model.getFilteredGroupList().get(0).getName(),
-                model.getLessonList());
+                model.getFilteredLessonList().get(0).getName());
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredGroupList(grpPredicate);
+        model.updateFilteredLessonList(lsnPredicate);
         return new CommandResult(this.getMessage(model));
     }
 

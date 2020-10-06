@@ -1,5 +1,7 @@
 package seedu.address.model.group;
 
+import javafx.collections.ObservableList;
+
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -14,6 +16,7 @@ public class Lesson {
 
     public static final String NAME_CONSTRAINT = "Class name cannot be empty";
     public static final String STUDENTS_INFO_CONSTRAINT = "Students information cannot be empty";
+
     private final String name;
     private final UniqueStudentInfoList studentsInfo;
 
@@ -34,17 +37,20 @@ public class Lesson {
         return name.length() > 0;
     }
 
-    public UniqueStudentInfoList getStudentsInfo() {
-        return studentsInfo;
+    public String getName() {
+        return name;
     }
 
     boolean isValidStudentInfo(UniqueStudentInfoList studentsInfo) {
         return studentsInfo.size() > 0;
     }
 
+    public UniqueStudentInfoList getStudentsInfo() {
+        return studentsInfo;
+    }
 
-    public String getName() {
-        return name;
+    public ObservableList<StudentInfo> getStudentsInfoAsUnmodifiableObservableList() {
+        return studentsInfo.asUnmodifiableObservableList();
     }
 
     @Override

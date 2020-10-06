@@ -3,18 +3,18 @@ package seedu.address.model.group;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
-import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.group.exceptions.DuplicateStudentInfoException;
+import seedu.address.model.group.exceptions.StudentInfoNotFoundException;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * A list of Lessons that enforces uniqueness between its elements and does not allow nulls.
- * A Lesson is considered unique by comparing using {@code Lesson#equal(Object)}.
+ * A list of Students Info that enforces uniqueness between its elements and does not allow nulls.
+ * A Student Info is considered unique by comparing using {@code StudentInfo#equal(Object)}.
  */
 public class UniqueStudentInfoList implements Iterable<StudentInfo> {
 
@@ -36,7 +36,7 @@ public class UniqueStudentInfoList implements Iterable<StudentInfo> {
     public void add(StudentInfo toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateGroupException();
+            throw new DuplicateStudentInfoException();
         }
         internalList.add(toAdd);
     }
@@ -55,11 +55,11 @@ public class UniqueStudentInfoList implements Iterable<StudentInfo> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new GroupNotFoundException();
+            throw new StudentInfoNotFoundException();
         }
 
         if (!target.equals(editedStudentInfo) && contains(editedStudentInfo)) {
-            throw new DuplicateGroupException();
+            throw new DuplicateStudentInfoException();
         }
 
         internalList.set(index, editedStudentInfo);
@@ -68,10 +68,10 @@ public class UniqueStudentInfoList implements Iterable<StudentInfo> {
     /**
      * Removes the equivalent student info from the list. The student info must exist in the list.
      */
-    public void remove(Group toRemove) {
+    public void remove(StudentInfo toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new GroupNotFoundException();
+            throw new StudentInfoNotFoundException();
         }
     }
 
@@ -81,16 +81,16 @@ public class UniqueStudentInfoList implements Iterable<StudentInfo> {
     }
 
     /**
-     * Replaces the contents of this list with {@code studentInfos}.
-     * {@code studentInfos} must not contain duplicate student infos.
+     * Replaces the contents of this list with {@code studentsInfo}.
+     * {@code studentsInfo} must not contain duplicate students info.
      */
-    public void setStudentInfo(List<StudentInfo> studentInfos) {
-        requireAllNonNull(studentInfos);
-        if (!studentInfosAreUnique(studentInfos)) {
+    public void setStudentInfo(List<StudentInfo> studentsInfo) {
+        requireAllNonNull(studentsInfo);
+        if (!studentsInfoAreUnique(studentsInfo)) {
             throw new DuplicateGroupException();
         }
 
-        internalList.setAll(studentInfos);
+        internalList.setAll(studentsInfo);
     }
 
     /**
@@ -108,7 +108,7 @@ public class UniqueStudentInfoList implements Iterable<StudentInfo> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueGroupList // instanceof handles nulls
+                || (other instanceof UniqueStudentInfoList // instanceof handles nulls
                 && internalList.equals(((UniqueStudentInfoList) other).internalList));
     }
 
@@ -118,12 +118,12 @@ public class UniqueStudentInfoList implements Iterable<StudentInfo> {
     }
 
     /**
-     * Returns true if {@code studentInfos} contains only unique student infos.
+     * Returns true if {@code studentsInfo} contains only unique students info.
      */
-    private boolean studentInfosAreUnique(List<StudentInfo> studentInfos) {
-        for (int i = 0; i < studentInfos.size() - 1; i++) {
-            for (int j = i + 1; j < studentInfos.size(); j++) {
-                if (studentInfos.get(i).equals(studentInfos.get(j))) {
+    private boolean studentsInfoAreUnique(List<StudentInfo> studentsInfo) {
+        for (int i = 0; i < studentsInfo.size() - 1; i++) {
+            for (int j = i + 1; j < studentsInfo.size(); j++) {
+                if (studentsInfo.get(i).equals(studentsInfo.get(j))) {
                     return false;
                 }
             }

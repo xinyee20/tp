@@ -18,6 +18,7 @@ import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -85,6 +86,8 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 
+    // ========== Serenity ==========
+
     @Override
     public ReadOnlySerenity getSerenity() {
         return model.getSerenity();
@@ -103,6 +106,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Lesson> getLessonList() {
         return model.getLessonList();
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getFilteredStudentInfoList() {
+        return model.getStudentInfoList();
     }
 
     @Override
