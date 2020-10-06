@@ -68,12 +68,9 @@ public class CsvUtil {
                 // if end of file reached, line would be null
                 line = br.readLine();
             }
-
-
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
         return students;
     }
 
@@ -101,7 +98,6 @@ public class CsvUtil {
                 String lessonName = computeClassName(i - 3); //start from 1
                 lessons.add(new Lesson(lessonName, studentsInfo));
             }
-
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -146,7 +142,6 @@ public class CsvUtil {
     private static Student createStudent(String[] metadata) {
         String name = metadata[1];
         String studentNumber = metadata[2];
-
         return new Student(name, studentNumber);
     }
 

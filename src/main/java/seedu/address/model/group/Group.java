@@ -12,7 +12,6 @@ import java.util.TreeSet;
 
 import seedu.address.commons.util.CsvUtil;
 
-
 /**
  * Represents a tutorial Group in serenity. Guarantees: details are present and not null, field values are validated,
  * immutable.
