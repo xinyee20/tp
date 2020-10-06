@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,9 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.group.UniqueLessonList;
+import seedu.address.model.group.UniqueStudentInfoList;
+import seedu.address.model.group.UniqueStudentList;
 
 /**
  * A utility class to help with building Group objects.
@@ -30,16 +33,16 @@ public class GroupBuilder {
     ));
 
     private String name;
-    private Set<Student> students;
-    private Set<Lesson> classes;
+    private UniqueStudentList students = new UniqueStudentList();
+    private UniqueLessonList classes = new UniqueLessonList();
 
     /**
      * Creates a {@code GroupBuilder} with the default details.
      */
     public GroupBuilder() {
         name = DEFAULT_NAME;
-        students = DEFAULT_STUDENTS;
-        classes = DEFAULT_CLASSES;
+        students.setStudents(new ArrayList<>(DEFAULT_STUDENTS));
+        classes.setLessons(new ArrayList<>(DEFAULT_CLASSES));
     }
 
     /**
@@ -47,8 +50,8 @@ public class GroupBuilder {
      */
     public GroupBuilder(Group groupToCopy) {
         name = groupToCopy.getName();
-        students = new HashSet<>(groupToCopy.getStudents());
-        classes = new HashSet<>(groupToCopy.getLessons());
+        students = groupToCopy.getStudents();
+        classes = groupToCopy.getLessons();
     }
 
     /**
@@ -56,8 +59,8 @@ public class GroupBuilder {
      */
     public GroupBuilder(String name, Path filePath) {
         this.name = name;
-        students = new CsvUtil(filePath).readStudentsFromCsv();
-        classes = new HashSet<>();
+        students.setStudents(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+        classes.setLessons(new ArrayList<>());
     }
 
     /**
@@ -72,7 +75,7 @@ public class GroupBuilder {
      * Parses the {@code students} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
     public GroupBuilder withStudents(Student... students) {
-        this.students = SampleDataUtil.getStudentSet(students);
+        this.students.setStudents(Arrays.asList(students));
         return this;
     }
 
@@ -80,7 +83,7 @@ public class GroupBuilder {
      * Parses the {@code filePath} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
     public GroupBuilder withFilePath(Path filePath) {
-        students = new CsvUtil(filePath).readStudentsFromCsv();
+        students.setStudents(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
         return this;
     }
 
@@ -89,7 +92,7 @@ public class GroupBuilder {
      * building.
      */
     public GroupBuilder withClasses(String... classes) {
-        Set<StudentInfo> studentsInfo = new HashSet<>();
+        UniqueStudentInfoList studentsInfo = new UniqueStudentInfoList();
         for (Student student : students) {
             studentsInfo.add(new StudentInfo(student));
         }
