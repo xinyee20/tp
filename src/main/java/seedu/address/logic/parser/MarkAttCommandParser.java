@@ -1,12 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.MarkAttCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Student;
 
 /**
  * Parses input arguments and creates a new MarkAttCommand object.
@@ -27,21 +31,31 @@ public class MarkAttCommandParser implements Parser<MarkAttCommand> {
     public MarkAttCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer
-                        .tokenize(args, PREFIX_NAME);
+                        .tokenize(args, PREFIX_STUDENT, PREFIX_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
-            // Check whether keyword 'all is given', if yes, get all students, else throw error
+        String studentName, studentNumber;
+        Optional<Student> student;
+        Optional<String> keyToAll = Optional.ofNullable(argMultimap.getPreamble());
+
+        if (argMultimap.getValue(PREFIX_STUDENT).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
+
+            // If single student specified, get student
+            studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_STUDENT).get());
+            studentNumber = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_ID).get());
+            student = Optional.ofNullable(new Student(studentName, studentNumber));
+
+            return new MarkAttCommand(student.get());
+
+        } else if (keyToAll.get() == "all") {
+
+            // mark attendance of all students
+            return new MarkAttCommand();
+
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttCommand.MESSAGE_USAGE));
         }
 
-        if () {// If single student specified, get student
-            String studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_NAME).get());
-            return new MarkAttCommand(studentName);
-        }
-        // else mark attendance of all students
-        return new MarkAttCommand();
     }
 
     /**

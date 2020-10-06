@@ -9,8 +9,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class StudentInfo {
 
     private final Student student;
-    private final Participation participation;
-    private final Attendance attendance;
+    private Participation participation;
+    private Attendance attendance;
 
     /**
      * Creates a {@code Score} from a {@code Student} {@code Participation} and {@code
@@ -27,7 +27,7 @@ public class StudentInfo {
     }
 
     /**
-     * Creates an empty {@code Score} from a {@code Student}
+     * Creates an empty {@code StudentInfo} from a {@code Student}
      * @param student
      */
     public StudentInfo(Student student) {
@@ -46,6 +46,16 @@ public class StudentInfo {
 
     public Attendance getAttendance() {
         return attendance;
+    }
+
+    public boolean containsStudent(Student student) {
+        boolean isCorrectStudent = this.student.equals(student);
+        return isCorrectStudent;
+    }
+
+    public StudentInfo updateAttendance(Attendance updatedAttendance) {
+        this.attendance = updatedAttendance;
+        return this;
     }
 
     @Override
