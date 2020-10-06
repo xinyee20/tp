@@ -12,6 +12,12 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueLessonList;
+import seedu.address.model.group.UniqueStudentInfoList;
+import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,30 +28,38 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final Serenity serenity;
     private final UserPrefs userPrefs;
-
     private final FilteredList<Person> filteredPersons;
+
+    private final Serenity serenity;
     private final FilteredList<Group> filteredGroups;
+    private final ArrayObservableList<Student> students;
+    private final ArrayObservableList<Lesson> lessons;
+    private final FilteredList<Lesson> filteredLessons;
+    private final ArrayObservableList<StudentInfo> studentsInfo;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-        ReadOnlySerenity serenity) {
+                        ReadOnlySerenity serenity) {
         super();
         requireAllNonNull(addressBook, userPrefs, serenity);
 
         logger.fine("Initializing with address book: " + addressBook
-            + " and user prefs " + userPrefs
-            + " and serenity " + serenity);
+                + " and user prefs " + userPrefs
+                + " and serenity " + serenity);
 
         this.addressBook = new AddressBook(addressBook);
-        this.serenity = new Serenity(serenity);
         this.userPrefs = new UserPrefs(userPrefs);
 
+        this.serenity = new Serenity(serenity);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
+        students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
+        lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
+        filteredLessons = new FilteredList<>(new UniqueLessonList().asUnmodifiableObservableList());
+        studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
     }
 
     /**
@@ -58,18 +72,22 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.serenity = new Serenity();
         this.userPrefs = new UserPrefs(userPrefs);
 
+        this.serenity = new Serenity();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
+        students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
+        lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
+        filteredLessons = new FilteredList<>(new UniqueLessonList().asUnmodifiableObservableList());
+        studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), new Serenity());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -93,7 +111,7 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook ================================================================================
 
     @Override
     public Path getAddressBookFilePath() {
@@ -136,11 +154,10 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Serenity ================================================================================
+    // =========== Serenity ================================================================================
 
     @Override
     public Path getSerenityFilePath() {
@@ -176,8 +193,64 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireAllNonNull(predicate);
+        this.filteredGroups.setPredicate(predicate);
+        updateStudentList();
+        updateLessonList();
+    }
+
+    @Override
+    public void updateStudentList() {
+        if (!filteredGroups.isEmpty()) {
+            this.students.setAll(this.filteredGroups.get(0).getStudentsAsUnmodifiableObservableList());
+        }
+    }
+
+    @Override
+    public void updateLessonList() {
+        if (!filteredGroups.isEmpty()) {
+            this.lessons.setAll(this.filteredGroups.get(0).getLessonsAsUnmodifiableObservableList());
+        }
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireAllNonNull(predicate);
+        this.filteredLessons.setPredicate(predicate);
+        updateStudentInfoList();
+    }
+
+    @Override
+    public void updateStudentInfoList() {
+        if (!filteredGroups.isEmpty() || !lessons.isEmpty()) {
+            this.studentsInfo.setAll(this.lessons.get(0).getStudentsInfoAsUnmodifiableObservableList());
+        }
+    }
+
+    @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
+    }
+
+    @Override
+    public ObservableList<Student> getStudentList() {
+        return students;
+    }
+
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return lessons;
+    }
+
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return lessons;
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getStudentInfoList() {
+        return studentsInfo;
     }
 
     //=========== Filtered Person List Accessors =============================================================

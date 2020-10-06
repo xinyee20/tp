@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,6 +20,7 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -92,6 +96,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    // ========== Serenity ==========
+
     /**
      * Returns the user prefs' serenity file path.
      */
@@ -123,7 +129,57 @@ public interface Model {
     void addGroup(Group group);
 
     /**
-     * Returns an unmodifiable view of the filtered group list
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Updates the student list when changing to another group of interest.
+     */
+    void updateStudentList();
+
+    /**
+     * Updates the lesson list to filter when changing to another group of interest.
+     */
+    void updateLessonList();
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
+
+    /**
+     * Updates the student info list to filter when changing to another lesson of interest.
+     */
+    void updateStudentInfoList();
+
+    /**
+     * Returns an unmodifiable view of the filtered group list.
      */
     ObservableList<Group> getFilteredGroupList();
+
+    /**
+     * Returns an unmodifiable view of the student list.
+     */
+    ObservableList<Student> getStudentList();
+
+    /**
+     * Returns an unmodifiable view of the lesson list.
+     */
+    ObservableList<Lesson> getLessonList();
+
+    /**
+     * Returns an unmodifiable view of the filtered lesson list.
+     */
+    ObservableList<Lesson> getFilteredLessonList();
+
+    /**
+     * Returns an unmodifiable view of the student info list
+     */
+    ObservableList<StudentInfo> getStudentInfoList();
+
 }
