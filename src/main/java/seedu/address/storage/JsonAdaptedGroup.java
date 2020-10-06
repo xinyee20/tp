@@ -1,16 +1,16 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.UniqueLessonList;
+import seedu.address.model.group.UniqueStudentInfoList;
+import seedu.address.model.group.UniqueStudentList;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -21,7 +21,7 @@ class JsonAdaptedGroup {
 
     private final String name;
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
-    private final List<JsonAdaptedClass> lessons = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
 
     /**
@@ -29,11 +29,11 @@ class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         name = source.getName();
-        students.addAll(source.getStudents().stream()
+        students.addAll(source.getStudents().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedStudent::new)
             .collect(Collectors.toList()));
-        lessons.addAll(source.getSortedLessons().stream()
-            .map(JsonAdaptedClass::new)
+        lessons.addAll(source.getSortedLessons().asUnmodifiableObservableList().stream()
+            .map(JsonAdaptedLesson::new)
             .collect(Collectors.toList()));
     }
 
@@ -50,17 +50,20 @@ class JsonAdaptedGroup {
         for (JsonAdaptedStudent groupStudent : students) {
             groupStudents.add(groupStudent.toModelType());
         }
-        final Set<Student> modelStudents = new HashSet<>(groupStudents);
+        final UniqueStudentList modelStudents = new UniqueStudentList();
+        modelStudents.setStudents(new ArrayList<>(groupStudents));
 
-        final Set<Score> scores = new HashSet<>();
+        final UniqueStudentInfoList studentsInfo = new UniqueStudentInfoList();
 
-        final List<Lesson> groupClasses = new ArrayList<>();
-        for (JsonAdaptedClass groupClass : lessons) {
-            Lesson classItem = new Lesson(groupClass.getName(), scores);
-            groupClasses.add(classItem);
+        final List<Lesson> groupLessons = new ArrayList<>();
+        for (JsonAdaptedLesson groupLesson : lessons) {
+            Lesson lessonItem = new Lesson(groupLesson.getName(), studentsInfo);
+            groupLessons.add(lessonItem);
         }
-        final Set<Lesson> modelClasses = new HashSet<>(groupClasses);
+        final UniqueLessonList modelLessons = new UniqueLessonList();
+        modelLessons.setLessons(new ArrayList<>(groupLessons));
 
-        return new Group(modelName, modelStudents, modelClasses);
+        return new Group(modelName, modelStudents, modelLessons);
     }
+
 }

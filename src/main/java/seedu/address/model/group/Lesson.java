@@ -3,8 +3,7 @@ package seedu.address.model.group;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.Set;
+import javafx.collections.ObservableList;
 
 /**
  * Represents a tutorial class in serenity. Guarantees: details are present and not null, field values are validated,
@@ -13,38 +12,42 @@ import java.util.Set;
 public class Lesson {
 
     public static final String NAME_CONSTRAINT = "Class name cannot be empty";
-    public static final String SCORES_CONSTRAINT = "Scores cannot be empty";
+    public static final String STUDENTS_INFO_CONSTRAINT = "Students information cannot be empty";
+
     private final String name;
-    private final Set<Score> scores;
+    private final UniqueStudentInfoList studentsInfo;
 
     /**
      * Constructs a {@code Class}.
      *
      * @param name A valid name.
      */
-    public Lesson(String name, Set<Score> scores) {
-        requireAllNonNull(name, scores);
+    public Lesson(String name, UniqueStudentInfoList studentsInfo) {
+        requireAllNonNull(name, studentsInfo);
         checkArgument(isValidName(name), NAME_CONSTRAINT);
-        checkArgument(isValidScore(scores), SCORES_CONSTRAINT);
+        checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
         this.name = name;
-        this.scores = scores;
+        this.studentsInfo = studentsInfo;
     }
 
     boolean isValidName(String name) {
         return name.length() > 0;
     }
 
-    public Set<Score> getScores() {
-        return Collections.unmodifiableSet(scores);
-    }
-
-    boolean isValidScore(Set<Score> scores) {
-        return scores.size() > 0;
-    }
-
-
     public String getName() {
         return name;
+    }
+
+    boolean isValidStudentInfo(UniqueStudentInfoList studentsInfo) {
+        return studentsInfo.size() > 0;
+    }
+
+    public UniqueStudentInfoList getStudentsInfo() {
+        return studentsInfo;
+    }
+
+    public ObservableList<StudentInfo> getStudentsInfoAsUnmodifiableObservableList() {
+        return studentsInfo.asUnmodifiableObservableList();
     }
 
     @Override
@@ -58,8 +61,8 @@ public class Lesson {
         }
 
         Lesson otherClass = (Lesson) obj;
-        return otherClass.getName().equals(getName()) && otherClass.getScores()
-            .containsAll(getScores());
+        return otherClass.getName().equals(getName())
+                && otherClass.getStudentsInfo().equals(getStudentsInfo());
     }
 }
 
