@@ -8,10 +8,12 @@ import java.util.stream.Collectors;
 class JsonAdaptedGroupTest {
 
     private static final String VALID_NAME = GROUP_A.getName();
-    private static final List<JsonAdaptedStudent> VALID_STUDENTS = GROUP_A.getStudents().stream()
+    private static final List<JsonAdaptedStudent> VALID_STUDENTS = GROUP_A.getStudents().asUnmodifiableObservableList()
+            .stream()
         .map(JsonAdaptedStudent::new)
         .collect(Collectors.toList());
-    private static final List<JsonAdaptedClass> VALID_CLASSES = GROUP_A.getLessons().stream()
+    private static final List<JsonAdaptedClass> VALID_CLASSES = GROUP_A.getLessons().asUnmodifiableObservableList()
+            .stream()
         .map(JsonAdaptedClass::new)
         .collect(Collectors.toList());
 

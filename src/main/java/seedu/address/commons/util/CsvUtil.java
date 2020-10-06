@@ -1,4 +1,4 @@
-package seedu.address.commons.utils;
+package seedu.address.commons.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.Score;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
 
 /**
  * Reads CSV file that the tutor downloads from LUMINUS and writes JSON data to a new CSV file.
@@ -68,21 +68,18 @@ public class CsvUtil {
                 // if end of file reached, line would be null
                 line = br.readLine();
             }
-
-
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
         return students;
     }
 
     /**
-     * Reads a set of Scores and creates the Lessons
-     * @param scores Set of Scores
+     * Reads a set of StudentInfo and creates the Lessons
+     * @param studentsInfo Set of StudentInfo
      * @return Set of Lessons
      */
-    public Set<Lesson> readLessonsFromCsv(Set<Score> scores) {
+    public Set<Lesson> readLessonsFromCsv(Set<StudentInfo> studentsInfo) {
         Set<Lesson> lessons = new HashSet<>();
         try (BufferedReader br = Files.newBufferedReader(filePath,
             StandardCharsets.US_ASCII)) {
@@ -99,9 +96,8 @@ public class CsvUtil {
             int len = row.length;
             for (int i = 4; i < len; i++) {
                 String lessonName = computeClassName(i - 3); //start from 1
-                lessons.add(new Lesson(lessonName, scores));
+                lessons.add(new Lesson(lessonName, studentsInfo));
             }
-
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -127,26 +123,25 @@ public class CsvUtil {
     }
 
     /**
-     * Creates a new set of Scores from CSV
+     * Creates a new set of StudentInfo from CSV
      *
-     * @return Set of scores
+     * @return Set of studentInfo
      */
-    public Set<Score> readScoresFromCsv(Set<Student> students) {
-        Set<Score> scores = new HashSet<>();
+    public Set<StudentInfo> readStudentsInfoFromCsv(Set<Student> students) {
+        Set<StudentInfo> studentsInfo = new HashSet<>();
         for (Student student : students) {
-            scores.add(new Score(student));
+            studentsInfo.add(new StudentInfo(student));
         }
-        return scores;
+        return studentsInfo;
     }
 
-    private Lesson createClass(String name, Set<Score> scores) {
-        return new Lesson(name, scores);
+    private Lesson createClass(String name, Set<StudentInfo> studentsInfo) {
+        return new Lesson(name, studentsInfo);
     }
 
     private static Student createStudent(String[] metadata) {
         String name = metadata[1];
         String studentNumber = metadata[2];
-
         return new Student(name, studentNumber);
     }
 
