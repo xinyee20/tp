@@ -17,12 +17,13 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewGrpCommand;
+import seedu.address.logic.commands.ViewLsnCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class SerenityParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -54,6 +55,9 @@ public class AddressBookParser {
 
         case ViewGrpCommand.COMMAND_WORD:
             return new ViewGrpCommandParser().parse(arguments);
+
+        case ViewLsnCommand.COMMAND_WORD:
+            return new ViewLsnCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
