@@ -20,12 +20,12 @@ public class MarkAttCommand extends Command{
     public static final String COMMAND_WORD = "markatt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendance of all students / a student in a class. "
+            + ": Marks the attendance of all students / a student in a class. \n"
             + "Parameters: "
             + "all or "
             + PREFIX_STUDENT + " NAME" + " " + PREFIX_ID + " STUDENT_NUMBER\n"
             + "Example: " + COMMAND_WORD + " " + "all\n"
-            + COMMAND_WORD + " "
+            + "or " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe" + " " + PREFIX_ID + " E0123456";
 
     private Student toMarkAtt;
