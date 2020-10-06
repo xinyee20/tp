@@ -11,7 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.group.*;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueLessonList;
+import seedu.address.model.group.UniqueStudentInfoList;
+import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,7 +57,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
-        lessons =  new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
+        lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
         filteredLessons = new FilteredList<>(new UniqueLessonList().asUnmodifiableObservableList());
         studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
     }
@@ -72,7 +78,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
-        lessons =  new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
+        lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
         filteredLessons = new FilteredList<>(new UniqueLessonList().asUnmodifiableObservableList());
         studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
     }

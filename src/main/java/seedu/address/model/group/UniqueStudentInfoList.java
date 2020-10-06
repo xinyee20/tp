@@ -1,16 +1,16 @@
 package seedu.address.model.group;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.DuplicateStudentInfoException;
 import seedu.address.model.group.exceptions.StudentInfoNotFoundException;
-
-import java.util.Iterator;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * A list of Students Info that enforces uniqueness between its elements and does not allow nulls.
@@ -41,6 +41,16 @@ public class UniqueStudentInfoList implements Iterable<StudentInfo> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Removes the equivalent student info from the list. The student info must exist in the list.
+     */
+    public void remove(StudentInfo toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new StudentInfoNotFoundException();
+        }
+    }
+
     public int size() {
         return internalList.size();
     }
@@ -63,16 +73,6 @@ public class UniqueStudentInfoList implements Iterable<StudentInfo> {
         }
 
         internalList.set(index, editedStudentInfo);
-    }
-
-    /**
-     * Removes the equivalent student info from the list. The student info must exist in the list.
-     */
-    public void remove(StudentInfo toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new StudentInfoNotFoundException();
-        }
     }
 
     public void setStudentInfo(UniqueStudentInfoList replacement) {

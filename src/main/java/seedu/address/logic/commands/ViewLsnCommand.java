@@ -26,7 +26,11 @@ public class ViewLsnCommand extends Command {
     private final GrpContainsKeywordPredicate grpPredicate;
     private final LsnContainsKeywordPredicate lsnPredicate;
 
-    public ViewLsnCommand(GrpContainsKeywordPredicate grpPredicate, LsnContainsKeywordPredicate lsnPredicate) {
+    /**
+     * Creates a ViewLsnCommand to view the specified {@code Lesson}
+     */
+    public ViewLsnCommand(GrpContainsKeywordPredicate grpPredicate,
+                          LsnContainsKeywordPredicate lsnPredicate) {
         this.grpPredicate = grpPredicate;
         this.lsnPredicate = lsnPredicate;
     }

@@ -1,12 +1,9 @@
 package seedu.address.model.group;
 
-import javafx.collections.ObservableList;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.Set;
+import javafx.collections.ObservableList;
 
 /**
  * Represents a tutorial class in serenity. Guarantees: details are present and not null, field values are validated,
