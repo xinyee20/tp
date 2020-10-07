@@ -53,7 +53,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return name + ": " + studentNumber;
+        return name + " " + studentNumber;
     }
 
     @Override

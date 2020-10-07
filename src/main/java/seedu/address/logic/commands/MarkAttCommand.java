@@ -18,8 +18,8 @@ import seedu.address.model.group.StudentInfo;
 public class MarkAttCommand extends Command {
 
     public static final String COMMAND_WORD = "markatt";
-    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s";
-    public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked";
+    public static final String MESSAGE_SUCCESS = "Attendance marked: \n%1$s - present";
+    public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of all students / a student in a class. \n"
@@ -28,7 +28,7 @@ public class MarkAttCommand extends Command {
             + PREFIX_STUDENT + " NAME" + " " + PREFIX_ID + " STUDENT_NUMBER\n"
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
-            + PREFIX_NAME + " John Doe" + " " + PREFIX_ID + " E0123456";
+            + PREFIX_STUDENT + " Aaron Tan" + " " + PREFIX_ID + " e0123456";
 
     private Student toMarkAtt;
     private boolean isWholeClass;

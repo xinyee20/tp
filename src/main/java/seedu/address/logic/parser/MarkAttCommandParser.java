@@ -46,7 +46,7 @@ public class MarkAttCommandParser implements Parser<MarkAttCommand> {
 
             return new MarkAttCommand(student.get());
 
-        } else if (keyToAll.get() == "all") {
+        } else if (keyToAll.get().equals("all")) {
 
             // mark attendance of all students
             return new MarkAttCommand();
