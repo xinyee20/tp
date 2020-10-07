@@ -14,8 +14,8 @@ import seedu.address.model.group.Student;
 /**
  * Parses input arguments and creates a new MarkAttCommand object.
  * Current support:
- * markatt Name grp/GROUP lsn/LESSON
- * markatt all grp/GROUP lsn/LESSON
+ * markatt name/NAME id/STUDENT_NUMBER
+ * markatt all
  *
  */
 public class MarkAttCommandParser implements Parser<MarkAttCommand> {
