@@ -41,7 +41,7 @@ public class MarkAttCommandParser implements Parser<MarkAttCommand> {
 
             // If single student specified, get student
             studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_STUDENT).get());
-            studentNumber = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_ID).get());
+            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
 
             return new MarkAttCommand(student.get());
