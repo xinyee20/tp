@@ -5,6 +5,13 @@ import org.junit.jupiter.api.Test;
 class MarkAttCommandTest {
 
     @Test
-    void execute() {
+    public void execute_markStudent_success() {
+
     }
+
+    @Test
+    public void execute_markAllStudent_success() {
+
+    }
+
 }
