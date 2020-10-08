@@ -143,6 +143,7 @@ public class Group {
 
     @Override
     public String toString() {
-        return name + "," + students.toString();
+        return String.format("Group %s", name);
     }
+
 }
