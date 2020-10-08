@@ -64,5 +64,10 @@ public class Lesson {
         return otherClass.getName().equals(getName())
                 && otherClass.getStudentsInfo().equals(getStudentsInfo());
     }
+
+    @Override
+    public String toString() {
+        return String.format("Lesson %s", name);
+    }
 }
 
