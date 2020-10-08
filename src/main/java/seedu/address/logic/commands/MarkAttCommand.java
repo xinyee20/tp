@@ -61,11 +61,11 @@ public class MarkAttCommand extends Command {
 
             // Mark single student attendance
             for (int i = 0; i < studentsInfo.size(); i++) {
-                StudentInfo student = studentsInfo.get(i);
-                boolean isCorrectStudent = studentsInfo.get(i).containsStudent(toMarkAtt);
+                StudentInfo studentInfo = studentsInfo.get(i);
+                boolean isCorrectStudent = studentInfo.containsStudent(toMarkAtt);
                 if (isCorrectStudent) {
-                    Attendance update = student.getAttendance().setAttendance(true);
-                    student.updateAttendance(update);
+                    Attendance update = studentInfo.getAttendance().setAttendance(true);
+                    studentInfo.updateAttendance(update);
                 }
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkAtt));
