@@ -58,7 +58,7 @@ public class ModelManager implements Model {
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
-        filteredLessons = new FilteredList<>(new UniqueLessonList().asUnmodifiableObservableList());
+        filteredLessons = new FilteredList<>(lessons);
         studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
     }
 
@@ -79,7 +79,7 @@ public class ModelManager implements Model {
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
-        filteredLessons = new FilteredList<>(new UniqueLessonList().asUnmodifiableObservableList());
+        filteredLessons = new FilteredList<>(lessons);
         studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
     }
 
@@ -223,8 +223,8 @@ public class ModelManager implements Model {
 
     @Override
     public void updateStudentInfoList() {
-        if (!filteredGroups.isEmpty() || !lessons.isEmpty()) {
-            this.studentsInfo.setAll(this.lessons.get(0).getStudentsInfoAsUnmodifiableObservableList());
+        if (!filteredGroups.isEmpty() || !filteredLessons.isEmpty()) {
+            this.studentsInfo.setAll(this.filteredLessons.get(0).getStudentsInfoAsUnmodifiableObservableList());
         }
     }
 
@@ -245,7 +245,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
-        return lessons;
+        return filteredLessons;
     }
 
     @Override

@@ -42,11 +42,11 @@ public class UnmarkAttCommand extends Command {
 
         // Mark single student attendance
         for (int i = 0; i < studentsInfo.size(); i++) {
-            StudentInfo student = studentsInfo.get(i);
-            boolean isCorrectStudent = studentsInfo.get(i).containsStudent(toUnmarkAtt);
+            StudentInfo studentInfo = studentsInfo.get(i);
+            boolean isCorrectStudent = studentInfo.containsStudent(toUnmarkAtt);
             if (isCorrectStudent) {
-                Attendance update = student.getAttendance().setAttendance(false);
-                student.updateAttendance(update);
+                Attendance update = studentInfo.getAttendance().setAttendance(false);
+                studentInfo.updateAttendance(update);
             }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toUnmarkAtt));
