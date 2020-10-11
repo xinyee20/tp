@@ -69,6 +69,5 @@ public class Lesson {
     public String toString() {
         return String.format("Lesson %s", name);
     }
-
 }
 
