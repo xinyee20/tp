@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <VBox fx:id="studentList" alignment="CENTER" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+        </VBox>
+        <VBox fx:id="lessonList" alignment="CENTER" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+        </VBox>
+    </children>
+</HBox>

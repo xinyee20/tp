@@ -82,7 +82,7 @@ public interface Logic {
     /**
      * Returns an unmodifiable view of the filtered list of students info from a group-lesson.
      */
-    ObservableList<StudentInfo> getFilteredStudentInfoList();
+    ObservableList<StudentInfo> getStudentInfoList();
 
     /**
      * Returns the user prefs' serenity file path.
