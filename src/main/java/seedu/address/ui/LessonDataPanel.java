@@ -13,6 +13,9 @@ public class LessonDataPanel extends UiPart<Region> {
     @FXML
     private StackPane studentInfoListPanelPlaceholder;
 
+    /**
+     * Constructor for panel to display Lesson data
+     */
     public LessonDataPanel(ObservableList<StudentInfo> studentInfoList) {
         super(FXML);
         studentInfoListPanel = new StudentInfoListPanel(studentInfoList);

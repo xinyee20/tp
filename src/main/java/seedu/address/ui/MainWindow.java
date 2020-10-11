@@ -175,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void toggleLsnView() {
-        dataDisplayWindow.ToggleLsnView();
+        dataDisplayWindow.toggleLsnView();
     }
 
     /**
@@ -183,7 +183,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void toggleGrpView() {
-        dataDisplayWindow.ToggleGrpView();
+        dataDisplayWindow.toggleGrpView();
     }
 
     /**

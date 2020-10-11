@@ -18,6 +18,9 @@ public class GroupDataPanel extends UiPart<Region> {
     @FXML
     private StackPane lessonListPanelPlaceholder;
 
+    /**
+     * Constructor for panel to display tutorial group datea
+     */
     public GroupDataPanel(ObservableList<Lesson> lessonList, ObservableList<Student> studentList) {
         super(FXML);
         studentListPanel = new StudentListPanel(studentList);
