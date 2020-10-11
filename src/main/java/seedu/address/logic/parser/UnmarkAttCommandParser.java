@@ -41,7 +41,7 @@ public class UnmarkAttCommandParser implements Parser<UnmarkAttCommand> {
         }
 
         studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_STUDENT).get());
-        studentNumber = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_ID).get());
+        studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
         student = Optional.ofNullable(new Student(studentName, studentNumber));
 
         return new UnmarkAttCommand(student.get());

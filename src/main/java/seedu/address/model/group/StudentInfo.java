@@ -9,8 +9,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class StudentInfo {
 
     private final Student student;
-    private Participation participation;
-    private Attendance attendance;
+    private final Participation participation;
+    private final Attendance attendance;
 
     /**
      * Creates a {@code Score} from a {@code Student} {@code Participation} and {@code
@@ -64,8 +64,8 @@ public class StudentInfo {
      * @return The updated Attendance
      */
     public StudentInfo updateAttendance(Attendance updatedAttendance) {
-        this.attendance = updatedAttendance;
-        return this;
+        StudentInfo updatedStudentInfo = new StudentInfo(this.student, this.participation, updatedAttendance);
+        return updatedStudentInfo;
     }
 
     @Override

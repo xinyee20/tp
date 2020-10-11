@@ -8,8 +8,10 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Attendance;
+import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueStudentInfoList;
 
 /**
  * Marks the attendance of a class or a student in the class.
@@ -55,17 +57,20 @@ public class MarkAttCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<StudentInfo> studentsInfo = model.getStudentInfoList();
+        Lesson uniqueLesson = model.getFilteredLessonList().get(0);
+        UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         if (!isWholeClass) {
 
             // Mark single student attendance
             for (int i = 0; i < studentsInfo.size(); i++) {
-                StudentInfo student = studentsInfo.get(i);
-                boolean isCorrectStudent = studentsInfo.get(i).containsStudent(toMarkAtt);
+                StudentInfo studentInfo = studentsInfo.get(i);
+                boolean isCorrectStudent = studentInfo.containsStudent(toMarkAtt);
                 if (isCorrectStudent) {
-                    Attendance update = student.getAttendance().setAttendance(true);
-                    student.updateAttendance(update);
+                    Attendance update = studentInfo.getAttendance().setAttendance(true);
+                    StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
+                    uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
                 }
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkAtt));
@@ -74,7 +79,8 @@ public class MarkAttCommand extends Command {
         // Mark whole class attendance
         for (StudentInfo each: studentsInfo) {
             Attendance update = each.getAttendance().setAttendance(true);
-            each.updateAttendance(update);
+            StudentInfo updatedStudentInfo = each.updateAttendance(update);
+            uniqueStudentInfoList.setStudentInfo(each, updatedStudentInfo);
         }
 
         return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
