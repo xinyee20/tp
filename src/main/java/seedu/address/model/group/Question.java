@@ -43,7 +43,7 @@ public class Question {
 
     @Override
     public String toString() {
-        return String.format("Question %s", value);
+        return value;
     }
 
     @Override
