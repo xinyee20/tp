@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QN;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,8 +23,6 @@ public class AddQnCommand extends Command {
             + PREFIX_QN + "QUESTION";
 
     public static final String MESSAGE_SUCCESS = "New question added: %1$s";
-    public static final String MESSAGE_NOT_VIEWING_A_GROUP = "Group not specified.";
-    public static final String MESSAGE_NOT_VIEWING_A_LESSON = "Lesson not specified.";
     public static final String MESSAGE_DUPLICATE_QUESTION = "This question already exists.";
 
     private final Question toAdd;
@@ -39,11 +39,11 @@ public class AddQnCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.getFilteredGroupList().size() > 1) {
+        if (model.getFilteredGroupList().size() != 1) {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_GROUP);
         }
 
-        if (model.getFilteredLessonList().size() > 1) {
+        if (model.getFilteredLessonList().size() != 1) {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
         }
 
