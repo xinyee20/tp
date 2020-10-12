@@ -58,7 +58,7 @@ public class SerenityParser {
 
         case DelGrpCommand.COMMAND_WORD:
             return new DelGrpCommandParser().parse(arguments);
-            
+
         case ViewGrpCommand.COMMAND_WORD:
             return new ViewGrpCommandParser().parse(arguments);
 

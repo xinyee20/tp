@@ -21,7 +21,7 @@ public class DelGrpCommand extends Command {
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Tutorial group deleted: %1$s";
 
     private final GrpContainsKeywordPredicate grpPredicate;
-    
+
     /**
      * Creates a DelGrpCommand to add the specified {@code Group}
      */
@@ -32,11 +32,11 @@ public class DelGrpCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        
+
         Group toDel = new Group();
-        
+
         boolean hasGroup = false;
-        
+
         if (!model.getSerenity().getGroupList().isEmpty()) {
             for (Group group : model.getSerenity().getGroupList()) {
                 if (group.getName().equals(grpPredicate.getKeyword())) {
@@ -46,11 +46,11 @@ public class DelGrpCommand extends Command {
                 }
             }
         }
-        
+
         if (!hasGroup) {
             throw new CommandException(Messages.MESSAGE_GROUP_EMPTY);
         }
-        
+
         model.deleteGroup(toDel);
         model.updateFilteredGroupList(grpPredicate);
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, toDel));

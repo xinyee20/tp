@@ -27,7 +27,7 @@ public class Group {
 
     // Empty constructor
     public Group() {}
-    
+
     /**
      * Constructs a {@code Group}
      *

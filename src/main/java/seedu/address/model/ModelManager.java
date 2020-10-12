@@ -195,7 +195,7 @@ public class ModelManager implements Model {
         filteredLessons.clear();
         studentsInfo.clear();
     }
-    
+
     @Override
     public void addGroup(Group group) {
         requireNonNull(group);
