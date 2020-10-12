@@ -12,8 +12,9 @@ public class Messages {
 
     // Serenity messages
     public static final String MESSAGE_GROUP_LISTED_OVERVIEW = "You are in tutorial group %1$s.";
-    public static final String MESSAGE_GROUP_EMPTY = "no such group!";
+    public static final String MESSAGE_GROUP_EMPTY = "No such group!";
     public static final String MESSAGE_LESSON_LISTED_OVERVIEW = "You are in tutorial group %1$s, lesson %2$s.";
-    public static final String MESSAGE_LESSON_EMPTY = "no such lesson!";
+    public static final String MESSAGE_LESSON_EMPTY = "No such lesson!";
+    public static final String MESSAGE_STUDENT_EMPTY = "No such student!";
 
 }

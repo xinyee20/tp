@@ -170,6 +170,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addStudentToGroup(Student student, Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeStudentFromGroup(Student student, Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlySerenity getSerenity() {
             throw new AssertionError("This method should not be called.");
         }
