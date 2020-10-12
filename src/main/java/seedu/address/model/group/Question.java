@@ -17,7 +17,7 @@ public class Question {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs an {@code Question}.
@@ -37,6 +37,10 @@ public class Question {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getQuestion() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return String.format("Question %s", value);
@@ -46,7 +50,7 @@ public class Question {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Question // instanceof handles nulls
-                && value.equals(((Question) other).value)); // state check
+                && value.equals(((Question) other).getQuestion())); // state check
     }
 
     @Override

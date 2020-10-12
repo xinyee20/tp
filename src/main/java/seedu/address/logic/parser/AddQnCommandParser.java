@@ -10,7 +10,6 @@ import seedu.address.logic.commands.AddQnCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Question;
 
-
 /**
  * Parses input arguments and creates a new AddQnCommand object
  */

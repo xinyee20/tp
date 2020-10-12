@@ -72,7 +72,7 @@ public class UniqueQuestionList implements Iterable<Question> {
     /**
      * Replaces all the questions from the list with a new list of questions
      */
-    public void questions(UniqueQuestionList replacement) {
+    public void setQuestions(UniqueQuestionList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
