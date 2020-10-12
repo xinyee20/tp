@@ -21,7 +21,6 @@ public class Group {
     private final String name;
 
     // Data fields
-
     private final UniqueStudentList students;
     private final UniqueLessonList lessons;
 
