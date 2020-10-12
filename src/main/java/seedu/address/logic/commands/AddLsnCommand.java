@@ -15,7 +15,7 @@ public class AddLsnCommand extends Command {
 
     public static final String COMMAND_WORD = "addlsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a new tutorial group. "
+            + ": Adds a new lesson to a specified tutorial group. "
             + "Parameters: "
             + PREFIX_GRP + "GRP "
             + PREFIX_PATH + "PATH ";
