@@ -39,7 +39,7 @@ public class DelQnCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NOT_VIEWING_A_GROUP);
         }
 
-        if (model.getFilteredLessonList().size() != 1 ) {
+        if (model.getFilteredLessonList().size() != 1) {
             throw new CommandException(Messages.MESSAGE_NOT_VIEWING_A_LESSON);
         }
 
