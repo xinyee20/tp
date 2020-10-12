@@ -192,6 +192,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteGroup(Group target) {
+        serenity.removeGroup(target);
+        filteredGroups.clear();
+        students.clear();
+        lessons.clear();
+        filteredLessons.clear();
+        studentsInfo.clear();
+    }
+
+    @Override
     public void addGroup(Group group) {
         requireNonNull(group);
         serenity.addGroup(group);

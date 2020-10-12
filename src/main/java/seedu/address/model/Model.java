@@ -125,6 +125,11 @@ public interface Model {
     boolean hasGroup(Group group);
 
     /**
+     * Deletes the given group. The group must exist in serenity.
+     */
+    void deleteGroup(Group target);
+
+    /**
      * Adds the given group. {@code group} must not already exist in serenity.
      */
     void addGroup(Group group);
