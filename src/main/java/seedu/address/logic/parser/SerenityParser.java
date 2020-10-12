@@ -10,8 +10,8 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGrpCommand;
 import seedu.address.logic.commands.AddLsnCommand;
 import seedu.address.logic.commands.AddQnCommand;
-import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddScoreCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DelGrpCommand;
@@ -63,21 +63,17 @@ public class SerenityParser {
         case AddGrpCommand.COMMAND_WORD:
             return new AddGrpCommandParser().parse(arguments);
 
-<<<<<<< HEAD
-
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
         case DeleteStudentCommand.COMMAND_WORD:
             return new DeleteStudentCommandParser().parse(arguments);
-=======
+
         case AddLsnCommand.COMMAND_WORD:
             return new AddLsnCommandParser().parse(arguments);
->>>>>>> upstream/master
 
         case DelGrpCommand.COMMAND_WORD:
             return new DelGrpCommandParser().parse(arguments);
-
 
         case ViewGrpCommand.COMMAND_WORD:
             return new ViewGrpCommandParser().parse(arguments);

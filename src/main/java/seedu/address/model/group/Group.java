@@ -21,10 +21,7 @@ public class Group {
     private final String name;
 
     // Data fields
-<<<<<<< HEAD
-=======
-    //private Set<Student> students;
->>>>>>> upstream/master
+
     private final UniqueStudentList students;
     private final UniqueLessonList lessons;
 
