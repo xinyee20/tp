@@ -67,7 +67,7 @@ public class Group {
         requireAllNonNull(name, students, lessons);
         this.name = name;
         this.students = students;
-        this.lessons = this.lessons;
+        this.lessons = lessons;
     }
 
     public String getName() {
