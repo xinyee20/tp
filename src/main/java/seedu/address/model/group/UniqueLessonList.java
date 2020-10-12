@@ -65,9 +65,13 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public void remove(Lesson toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new LessonNotFoundException();
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).isSame(toRemove)) {
+                internalList.remove(i);
+                return;
+            }
         }
+        throw new LessonNotFoundException();
     }
 
     /**
