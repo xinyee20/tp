@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGrpCommand;
 import seedu.address.logic.commands.AddQnCommand;
+import seedu.address.logic.commands.AddScoreCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DelGrpCommand;
@@ -69,6 +70,9 @@ public class SerenityParser {
 
         case MarkAttCommand.COMMAND_WORD:
             return new MarkAttCommandParser().parse(arguments);
+
+        case AddScoreCommand.COMMAND_WORD:
+            return new AddScoreCommandParser().parse(arguments);
 
         case UnmarkAttCommand.COMMAND_WORD:
             return new UnmarkAttCommandParser().parse(arguments);
