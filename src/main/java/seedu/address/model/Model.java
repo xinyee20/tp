@@ -21,7 +21,6 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -135,6 +134,16 @@ public interface Model {
     void addGroup(Group group);
 
     /**
+     * Adds a Student to a Group
+     */
+    void addStudentToGroup(Student student, Predicate<Group> predicate);
+
+    /**
+     * Removes a Student from a Group.
+     */
+    void removeStudentFromGroup(Student student, Predicate<Group> predicate);
+
+    /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
@@ -192,10 +201,8 @@ public interface Model {
      * Returns an unmodifiable view of the student info list
      */
     ObservableList<StudentInfo> getStudentInfoList();
-
     /**
      * Returns an unmodifiable view of the question list.
      */
     ObservableList<Question> getQuestionList();
-
 }

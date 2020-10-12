@@ -45,13 +45,13 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        ReadOnlySerenity serenity) {
+        ReadOnlySerenity serenity) {
         super();
         requireAllNonNull(addressBook, userPrefs, serenity);
 
         logger.fine("Initializing with address book: " + addressBook
-                + " and user prefs " + userPrefs
-                + " and serenity " + serenity);
+            + " and user prefs " + userPrefs
+            + " and serenity " + serenity);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -205,6 +205,29 @@ public class ModelManager implements Model {
     public void addGroup(Group group) {
         requireNonNull(group);
         serenity.addGroup(group);
+    }
+
+    @Override
+    public void addStudentToGroup(Student student, Predicate<Group> predicate) {
+        requireAllNonNull(student, predicate);
+        updateFilteredGroupList(predicate);
+        if (!filteredGroups.isEmpty()) {
+            students.add(student);
+            Group currentGroup = filteredGroups.get(0);
+            currentGroup.addStudentToGroup(student);
+        }
+    }
+
+    @Override
+    public void removeStudentFromGroup(Student student, Predicate<Group> predicate) {
+        requireAllNonNull(student, predicate);
+        updateFilteredGroupList(predicate);
+        UniqueStudentList students = filteredGroups.get(0).getStudents();
+        if (!filteredGroups.isEmpty() && students.contains(student)) {
+            students.remove(student);
+            Group currentGroup = filteredGroups.get(0);
+            currentGroup.removeStudentFromGroup(student);
+        }
     }
 
     @Override
