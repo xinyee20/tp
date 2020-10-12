@@ -14,7 +14,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GrpContainsKeywordPredicate;
 import seedu.address.model.group.Student;
 
-public class DeleteStudentCommand extends Command {
+public class DelStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "delstudent";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -33,12 +33,12 @@ public class DeleteStudentCommand extends Command {
     private final GrpContainsKeywordPredicate predicate;
 
     /**
-     * Creates a DeleteStudentCommand to remove the specified {@code Student}
+     * Creates a DelStudentCommand to remove the specified {@code Student}
      * @param studentName Name of Student
      * @param studentId Id of Student
      * @param predicate Group predicate
      */
-    public DeleteStudentCommand(String studentName, String studentId, GrpContainsKeywordPredicate predicate) {
+    public DelStudentCommand(String studentName, String studentId, GrpContainsKeywordPredicate predicate) {
         requireAllNonNull(studentName, studentId, predicate);
         this.studentName = studentName;
         this.studentId = studentId;
