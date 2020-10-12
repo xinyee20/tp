@@ -9,4 +9,5 @@ class DeleteLsnCommandParserTest {
     @Test
     void parse() {
     }
+
 }
