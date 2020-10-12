@@ -42,7 +42,6 @@ public class Serenity implements ReadOnlySerenity {
      */
     public void resetData(ReadOnlySerenity newData) {
         requireNonNull(newData);
-
         setGroups(newData.getGroupList());
     }
 
@@ -70,7 +69,6 @@ public class Serenity implements ReadOnlySerenity {
      */
     public void setGroup(Group target, Group editedGroup) {
         requireNonNull(editedGroup);
-
         groups.setGroup(target, editedGroup);
     }
 

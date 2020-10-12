@@ -18,12 +18,12 @@ import seedu.address.commons.util.CsvUtil;
 public class Group {
 
     // Identity field
-    private String name;
+    private final String name;
 
     // Data fields
     //private Set<Student> students;
-    private UniqueStudentList students;
-    private UniqueLessonList lessons;
+    private final UniqueStudentList students;
+    private final UniqueLessonList lessons;
 
     /**
      * Constructs a {@code Group}
@@ -67,7 +67,7 @@ public class Group {
         requireAllNonNull(name, students, lessons);
         this.name = name;
         this.students = students;
-        this.lessons = this.lessons;
+        this.lessons = lessons;
     }
 
     public String getName() {
@@ -91,12 +91,7 @@ public class Group {
     }
 
     public UniqueLessonList getSortedLessons() {
-        lessons.sort(new Comparator<Lesson>() {
-            @Override
-            public int compare(Lesson o1, Lesson o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        lessons.sort(Comparator.comparing(Lesson::getName));
         return lessons;
     }
 
