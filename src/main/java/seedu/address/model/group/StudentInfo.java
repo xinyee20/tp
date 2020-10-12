@@ -68,6 +68,16 @@ public class StudentInfo {
         return updatedStudentInfo;
     }
 
+    /**
+     * Updates the student participation score for the class
+     * @param updatedScore The participation score of the student for the lesson
+     * @return The updated Participation object
+     */
+    public StudentInfo updateParticipation(Participation updatedScore) {
+        StudentInfo updatedStudentInfo = new StudentInfo(this.student, updatedScore, this.attendance);
+        return updatedStudentInfo;
+    }
+
     @Override
     public boolean equals(Object obj) {
         StudentInfo other = (StudentInfo) obj;

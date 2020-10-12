@@ -62,7 +62,6 @@ public class Group {
      * @param students A list of students.
      * @param lessons  A list of tutorial lessons.
      */
-
     public Group(String name, UniqueStudentList students, UniqueLessonList lessons) {
         requireAllNonNull(name, students, lessons);
         this.name = name;
