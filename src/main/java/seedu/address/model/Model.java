@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Person;
@@ -158,6 +159,11 @@ public interface Model {
     void updateStudentInfoList();
 
     /**
+     * Updates the question list to filter when changing to another lesson of interest.
+     */
+    void updateQuestionList();
+
+    /**
      * Returns an unmodifiable view of the filtered group list.
      */
     ObservableList<Group> getFilteredGroupList();
@@ -181,5 +187,10 @@ public interface Model {
      * Returns an unmodifiable view of the student info list
      */
     ObservableList<StudentInfo> getStudentInfoList();
+
+    /**
+     * Returns an unmodifiable view of the question list.
+     */
+    ObservableList<Question> getQuestionList();
 
 }
