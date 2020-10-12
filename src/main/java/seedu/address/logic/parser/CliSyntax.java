@@ -11,6 +11,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_LSN = new Prefix("lsn/");
     public static final Prefix PREFIX_STUDENT = new Prefix("name/");
     public static final Prefix PREFIX_ID = new Prefix("id/");
+    public static final Prefix PREFIX_QN = new Prefix("qn/");
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
