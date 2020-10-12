@@ -27,7 +27,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public boolean contains(Lesson toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSame);
     }
 
     /**
@@ -86,7 +86,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
         if (!lessonsAreUnique(lessons)) {
             throw new DuplicateLessonException();
         }
-
         internalList.setAll(lessons);
     }
 

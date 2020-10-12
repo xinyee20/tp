@@ -1,13 +1,10 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
-
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
 
 /**
  * A ui for the status bar that is displayed at the header of the application.
@@ -23,6 +20,9 @@ public class DataDisplayWindow extends UiPart<Region> {
     @FXML
     private StackPane dataPanelPlaceholder;
 
+    /**
+     * Area where data is being displayed and managed depending on the commands of the user
+     */
     public DataDisplayWindow(Logic logic) {
         super(FXML);
         groupDataPanel = new GroupDataPanel(logic.getLessonList(), logic.getStudentList());
@@ -31,7 +31,10 @@ public class DataDisplayWindow extends UiPart<Region> {
         dataPanelPlaceholder.getChildren().add(groupDataPanel.getRoot());
     }
 
-    public boolean ToggleLsnView() {
+    /**
+     * Toggle to lesson data view
+     */
+    public boolean toggleLsnView() {
         if (isDisplayGroupData) {
             dataPanelPlaceholder.getChildren().clear();
             dataPanelPlaceholder.getChildren().add(lessonDataPanel.getRoot());
@@ -41,7 +44,10 @@ public class DataDisplayWindow extends UiPart<Region> {
         return false;
     }
 
-    public boolean ToggleGrpView() {
+    /**
+     * Toggle to tutorial group data view
+     */
+    public boolean toggleGrpView() {
         if (!isDisplayGroupData) {
             dataPanelPlaceholder.getChildren().clear();
             dataPanelPlaceholder.getChildren().add(groupDataPanel.getRoot());
