@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Participation;
 import seedu.address.model.group.Student;
 
 public class SerenityParserUtil {
@@ -34,4 +35,22 @@ public class SerenityParserUtil {
         }
         return trimmedId;
     }
+
+    /**
+     * Parses {@code String} into an {@code int} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     *
+     * @throws ParseException if the specified score is invalid.
+     */
+    public static int parseScore(String inputScore) throws ParseException {
+        String trimmedScore = inputScore.trim();
+        int score;
+        try {
+            score = Integer.parseInt(trimmedScore);
+            return score;
+        } catch (Exception e) {
+            throw new ParseException(Participation.SCORE_ERROR);
+        }
+    }
+
 }
