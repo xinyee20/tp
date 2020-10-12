@@ -32,6 +32,9 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
         if (argMultimap.getValue(PREFIX_STUDENT).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
 
             score = SerenityParserUtil.parseScore(argMultimap.getPreamble());
+            if (score < 0 || score > 5) {
+                throw new ParseException("Score should be between 0 to 5");
+            }
             studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_STUDENT).get());
             studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
