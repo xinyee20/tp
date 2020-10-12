@@ -49,6 +49,27 @@ public class Lesson {
         this.questionList = questionList;
     }
 
+    /**
+     * Constructs a {@code Lesson}.
+     * @param name
+     * @param students
+     */
+    public Lesson(String name, UniqueStudentList students) {
+        requireAllNonNull(name, students);
+        checkArgument(isValidName(name), NAME_CONSTRAINT);
+        this.name = name;
+        this.studentsInfo = this.generateStudentInfo(students.asUnmodifiableObservableList());
+        this.questionList = new UniqueQuestionList();
+    }
+
+    private UniqueStudentInfoList generateStudentInfo(ObservableList<Student> students) {
+        UniqueStudentInfoList studentInfo = new UniqueStudentInfoList();
+        for (Student s : students) {
+            studentInfo.add(new StudentInfo(s, new Participation(), new Attendance()));
+        }
+        return studentInfo;
+    }
+
     boolean isValidName(String name) {
         return name.length() > 0;
     }
@@ -71,6 +92,10 @@ public class Lesson {
 
     public ObservableList<StudentInfo> getStudentsInfoAsUnmodifiableObservableList() {
         return studentsInfo.asUnmodifiableObservableList();
+    }
+
+    public boolean isSame(Lesson otherLsn) {
+        return otherLsn.getName().equals(getName());
     }
 
     public ObservableList<Question> getQuestionListAsUnmodifiableObservableList() {

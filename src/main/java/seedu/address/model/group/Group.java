@@ -18,9 +18,13 @@ import seedu.address.commons.util.CsvUtil;
 public class Group {
 
     // Identity field
-    private String name;
+    private final String name;
 
     // Data fields
+<<<<<<< HEAD
+=======
+    //private Set<Student> students;
+>>>>>>> upstream/master
     private final UniqueStudentList students;
     private final UniqueLessonList lessons;
 
@@ -62,7 +66,6 @@ public class Group {
      * @param students A list of students.
      * @param lessons  A list of tutorial lessons.
      */
-
     public Group(String name, UniqueStudentList students, UniqueLessonList lessons) {
         requireAllNonNull(name, students, lessons);
         this.name = name;
@@ -91,12 +94,7 @@ public class Group {
     }
 
     public UniqueLessonList getSortedLessons() {
-        lessons.sort(new Comparator<Lesson>() {
-            @Override
-            public int compare(Lesson o1, Lesson o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        lessons.sort(Comparator.comparing(Lesson::getName));
         return lessons;
     }
 
