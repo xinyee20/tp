@@ -19,8 +19,8 @@ import seedu.address.model.group.UniqueStudentInfoList;
 public class MarkAttCommand extends Command {
 
     public static final String COMMAND_WORD = "markatt";
-    public static final String MESSAGE_SUCCESS = "Attendance marked: \n%1$s - present";
-    public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked!";
+    public static final String MESSAGE_SUCCESS = "%s: \nAttendance - present";
+    public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked present!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of all students / a student in a class. \n"

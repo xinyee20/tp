@@ -14,7 +14,7 @@ import seedu.address.model.group.StudentInfo;
 public class UnmarkAttCommand extends Command {
 
     public static final String COMMAND_WORD = "unmarkatt";
-    public static final String MESSAGE_SUCCESS = "Attendance unmarked: \n%1$s - absent";
+    public static final String MESSAGE_SUCCESS = "%s: \nAttendance - absent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the attendance of a student in a class. \n"
