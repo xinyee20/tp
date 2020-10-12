@@ -16,9 +16,9 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DelGrpCommand;
 import seedu.address.logic.commands.DelQnCommand;
+import seedu.address.logic.commands.DelStudentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteLsnCommand;
-import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -66,8 +66,8 @@ public class SerenityParser {
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
-        case DeleteStudentCommand.COMMAND_WORD:
-            return new DeleteStudentCommandParser().parse(arguments);
+        case DelStudentCommand.COMMAND_WORD:
+            return new DelStudentCommandParser().parse(arguments);
 
         case AddLsnCommand.COMMAND_WORD:
             return new AddLsnCommandParser().parse(arguments);

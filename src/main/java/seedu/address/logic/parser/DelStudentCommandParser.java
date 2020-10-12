@@ -7,17 +7,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.DelStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GrpContainsKeywordPredicate;
 
-public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> {
+public class DelStudentCommandParser implements Parser<DelStudentCommand> {
 
     private final ParseException deleteStudentCommandParserException = new ParseException(
-        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
+        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelStudentCommand.MESSAGE_USAGE));
 
     @Override
-    public DeleteStudentCommand parse(String args) throws ParseException {
+    public DelStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_STUDENT, PREFIX_ID);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_STUDENT, PREFIX_ID) || !argMultimap.getPreamble()
@@ -41,7 +41,7 @@ public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> 
         String studentId = studentIdArray[0];
         String grpName = grpKeywordArray[0];
 
-        return new DeleteStudentCommand(studentName, studentId, new GrpContainsKeywordPredicate(grpName));
+        return new DelStudentCommand(studentName, studentId, new GrpContainsKeywordPredicate(grpName));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
