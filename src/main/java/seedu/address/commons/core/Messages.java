@@ -15,5 +15,8 @@ public class Messages {
     public static final String MESSAGE_GROUP_EMPTY = "no such group!";
     public static final String MESSAGE_LESSON_LISTED_OVERVIEW = "You are in tutorial group %1$s, lesson %2$s.";
     public static final String MESSAGE_LESSON_EMPTY = "no such lesson!";
+    public static final String MESSAGE_NOT_VIEWING_A_GROUP = "Group not specified.";
+    public static final String MESSAGE_NOT_VIEWING_A_LESSON = "Lesson not specified.";
+    public static final String MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX = "The question index provided is invalid";
 
 }

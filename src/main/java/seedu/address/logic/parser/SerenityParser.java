@@ -8,9 +8,15 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGrpCommand;
+import seedu.address.logic.commands.AddLsnCommand;
+import seedu.address.logic.commands.AddQnCommand;
+import seedu.address.logic.commands.AddScoreCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DelGrpCommand;
+import seedu.address.logic.commands.DelQnCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLsnCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -55,6 +61,12 @@ public class SerenityParser {
         case AddGrpCommand.COMMAND_WORD:
             return new AddGrpCommandParser().parse(arguments);
 
+        case AddLsnCommand.COMMAND_WORD:
+            return new AddLsnCommandParser().parse(arguments);
+
+        case DelGrpCommand.COMMAND_WORD:
+            return new DelGrpCommandParser().parse(arguments);
+
         case ViewGrpCommand.COMMAND_WORD:
             return new ViewGrpCommandParser().parse(arguments);
 
@@ -64,9 +76,19 @@ public class SerenityParser {
         case MarkAttCommand.COMMAND_WORD:
             return new MarkAttCommandParser().parse(arguments);
 
+        case AddScoreCommand.COMMAND_WORD:
+            return new AddScoreCommandParser().parse(arguments);
+
         case UnmarkAttCommand.COMMAND_WORD:
             return new UnmarkAttCommandParser().parse(arguments);
 
+        case AddQnCommand.COMMAND_WORD:
+            return new AddQnCommandParser().parse(arguments);
+
+        case DelQnCommand.COMMAND_WORD:
+            return new DelQnCommandParser().parse(arguments);
+
+        // AB3
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -75,6 +97,9 @@ public class SerenityParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteLsnCommand.COMMAND_WORD:
+            return new DeleteLsnCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
