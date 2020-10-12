@@ -12,7 +12,7 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_addScoreOutOfRange_Failure() {
+    public void execute_addScoreOutOfRange_failure() {
 
     }
 
