@@ -25,9 +25,6 @@ public class Group {
     private final UniqueStudentList students;
     private final UniqueLessonList lessons;
 
-    // Empty constructor
-    public Group() {}
-
     /**
      * Constructs a {@code Group}
      *
