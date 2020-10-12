@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Participation;
+import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 
 public class SerenityParserUtil {
@@ -37,7 +38,7 @@ public class SerenityParserUtil {
     }
 
     /**
-     * Parses {@code String} into an {@code int} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code String inputScore} into an {@code int} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      *
      * @throws ParseException if the specified score is invalid.
@@ -53,4 +54,17 @@ public class SerenityParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String question} into a {@code String}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code question} is invalid.
+     */
+    public static String parseQuestion(String question) throws ParseException {
+        requireNonNull(question);
+        String trimmedQuestion = question.trim();
+        if (!Question.isValidQuestion(trimmedQuestion)) {
+            throw new ParseException(Question.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedQuestion;
+    }
 }

@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Person;
@@ -180,6 +181,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteGroup(Group target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addGroup(Group group) {
             throw new AssertionError("This method should not be called.");
         }
@@ -210,6 +216,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateQuestionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Group> getFilteredGroupList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -231,6 +242,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<StudentInfo> getStudentInfoList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Question> getQuestionList() {
             throw new AssertionError("This method should not be called.");
         }
     }
