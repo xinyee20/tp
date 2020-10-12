@@ -73,6 +73,10 @@ public class Lesson {
         return studentsInfo.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Question> getQuestionListAsUnmodifiableObservableList() {
+        return questionList.asUnmodifiableObservableList();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
