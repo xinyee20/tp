@@ -90,7 +90,6 @@ public interface Logic {
      */
     ObservableList<Question> getQuestionList();
 
-
     /**
      * Returns the user prefs' serenity file path.
      */
