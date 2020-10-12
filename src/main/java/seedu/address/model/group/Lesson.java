@@ -16,11 +16,13 @@ public class Lesson {
 
     private final String name;
     private final UniqueStudentInfoList studentsInfo;
+    private final UniqueQuestionList questionList;
 
     /**
-     * Constructs a {@code Class}.
+     * Constructs a {@code Lesson}.
      *
      * @param name A valid name.
+     * @param studentsInfo A valid list of studentInfo.
      */
     public Lesson(String name, UniqueStudentInfoList studentsInfo) {
         requireAllNonNull(name, studentsInfo);
@@ -28,6 +30,23 @@ public class Lesson {
         checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
         this.name = name;
         this.studentsInfo = studentsInfo;
+        this.questionList = new UniqueQuestionList();
+    }
+
+    /**
+     * Constructs a {@code Lesson}.
+     *
+     * @param name A valid name.
+     * @param studentsInfo A valid list of studentInfo.
+     * @param questionList A list of questions.
+     */
+    public Lesson(String name, UniqueStudentInfoList studentsInfo, UniqueQuestionList questionList) {
+        requireAllNonNull(name, studentsInfo);
+        checkArgument(isValidName(name), NAME_CONSTRAINT);
+        checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
+        this.name = name;
+        this.studentsInfo = studentsInfo;
+        this.questionList = questionList;
     }
 
     /**
@@ -66,14 +85,22 @@ public class Lesson {
         return studentsInfo;
     }
 
+    public UniqueQuestionList getQuestionList() {
+        return questionList;
+    }
+
     public ObservableList<StudentInfo> getStudentsInfoAsUnmodifiableObservableList() {
         return studentsInfo.asUnmodifiableObservableList();
     }
-
+  
+    public ObservableList<Question> getQuestionListAsUnmodifiableObservableList() {
+        return questionList.asUnmodifiableObservableList();
+    }
+  
     public boolean isSame(Lesson otherLsn) {
         return otherLsn.getName().equals(getName());
     }
-
+  
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -86,7 +113,8 @@ public class Lesson {
 
         Lesson otherClass = (Lesson) obj;
         return otherClass.getName().equals(getName())
-                && otherClass.getStudentsInfo().equals(getStudentsInfo());
+                && otherClass.getStudentsInfo().equals(getStudentsInfo())
+                && otherClass.getQuestionList().equals(getQuestionList());
     }
 
     @Override
