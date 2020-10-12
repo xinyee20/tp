@@ -18,7 +18,7 @@ import seedu.address.commons.util.CsvUtil;
 public class Group {
 
     // Identity field
-    private String name;
+    private final String name;
 
     // Data fields
     private final UniqueStudentList students;
@@ -90,12 +90,7 @@ public class Group {
     }
 
     public UniqueLessonList getSortedLessons() {
-        lessons.sort(new Comparator<Lesson>() {
-            @Override
-            public int compare(Lesson o1, Lesson o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        lessons.sort(Comparator.comparing(Lesson::getName));
         return lessons;
     }
 
