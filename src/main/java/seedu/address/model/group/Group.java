@@ -24,9 +24,6 @@ public class Group {
     private final UniqueStudentList students;
     private final UniqueLessonList lessons;
 
-    // Empty constructor
-    public Group() {}
-
     /**
      * Constructs a {@code Group}
      *
@@ -70,7 +67,7 @@ public class Group {
         requireAllNonNull(name, students, lessons);
         this.name = name;
         this.students = students;
-        this.lessons = this.lessons;
+        this.lessons = lessons;
     }
 
     public String getName() {

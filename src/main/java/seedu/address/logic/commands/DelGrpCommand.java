@@ -33,21 +33,18 @@ public class DelGrpCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Group toDel = new Group();
-
-        boolean hasGroup = false;
+        Group toDel = null;
 
         if (!model.getSerenity().getGroupList().isEmpty()) {
             for (Group group : model.getSerenity().getGroupList()) {
                 if (group.getName().equals(grpPredicate.getKeyword())) {
                     toDel = group;
-                    hasGroup = true;
                     break;
                 }
             }
         }
 
-        if (!hasGroup) {
+        if (toDel == null) {
             throw new CommandException(Messages.MESSAGE_GROUP_EMPTY);
         }
 
