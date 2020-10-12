@@ -92,15 +92,15 @@ public class Lesson {
     public ObservableList<StudentInfo> getStudentsInfoAsUnmodifiableObservableList() {
         return studentsInfo.asUnmodifiableObservableList();
     }
-  
+
     public ObservableList<Question> getQuestionListAsUnmodifiableObservableList() {
         return questionList.asUnmodifiableObservableList();
     }
-  
+
     public boolean isSame(Lesson otherLsn) {
         return otherLsn.getName().equals(getName());
     }
-  
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
