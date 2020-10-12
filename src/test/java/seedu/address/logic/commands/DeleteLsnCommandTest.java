@@ -13,4 +13,5 @@ class DeleteLsnCommandTest {
     @Test
     void testEquals() {
     }
+
 }

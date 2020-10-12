@@ -11,7 +11,7 @@ import seedu.address.logic.commands.DeleteLsnCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GrpContainsKeywordPredicate;
 
-public class DeleteLsnCommandParser implements Parser<DeleteLsnCommand>  {
+public class DeleteLsnCommandParser implements Parser<DeleteLsnCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddGrpCommand and returns an AddGrpCommand
      * object for execution.

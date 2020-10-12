@@ -9,9 +9,8 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GrpContainsKeywordPredicate;
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.LsnContainsKeywordPredicate;
 
-public class DeleteLsnCommand extends Command{
+public class DeleteLsnCommand extends Command {
     public static final String COMMAND_WORD = "dellsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": deletes a specified lesson from a specified tutorial group. "
