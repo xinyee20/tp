@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Question;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -34,6 +35,11 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+
+    // Serenity
+    private static final String INVALID_QUESTION = " ";
+
+    private static final String VALID_QUESTION = "What is the deadline for the report?";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -194,4 +200,30 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    // For Serenity
+
+    @Test
+    public void parseQuestion_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> SerenityParserUtil.parseQuestion((String) null));
+    }
+
+    @Test
+    public void parseQuestion_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> SerenityParserUtil.parseQuestion(INVALID_QUESTION));
+    }
+
+    @Test
+    public void parseQuestion_validValueWithoutWhitespace_returnsQuestion() throws Exception {
+        String expectedQuestion = new Question(VALID_QUESTION).getQuestion();
+        assertEquals(expectedQuestion, SerenityParserUtil.parseQuestion(VALID_QUESTION));
+    }
+
+    @Test
+    public void parseQuestion_validValueWithWhitespace_returnsTrimmedQuestion() throws Exception {
+        String questionWithWhitespace = WHITESPACE + VALID_QUESTION + WHITESPACE;
+        String expectedQuestion = new Question(VALID_QUESTION).getQuestion();
+        assertEquals(expectedQuestion, SerenityParserUtil.parseQuestion(questionWithWhitespace));
+    }
+
 }
