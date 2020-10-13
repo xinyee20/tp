@@ -54,6 +54,8 @@ public class AddScoreCommand extends Command {
                 Participation update = studentInfo.getParticipation().setScore(score);
                 StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
                 uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
+                model.updateLessonList();
+                model.updateStudentInfoList();
             }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAddScore, score));

@@ -8,8 +8,10 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Attendance;
+import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueStudentInfoList;
 
 public class UnmarkAttCommand extends Command {
 
@@ -38,7 +40,9 @@ public class UnmarkAttCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<StudentInfo> studentsInfo = model.getStudentInfoList();
+        Lesson uniqueLesson = model.getFilteredLessonList().get(0);
+        UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         // Mark single student attendance
         for (int i = 0; i < studentsInfo.size(); i++) {
@@ -46,7 +50,10 @@ public class UnmarkAttCommand extends Command {
             boolean isCorrectStudent = studentInfo.containsStudent(toUnmarkAtt);
             if (isCorrectStudent) {
                 Attendance update = studentInfo.getAttendance().setAttendance(false);
-                studentInfo.updateAttendance(update);
+                StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
+                uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
+                model.updateLessonList();
+                model.updateStudentInfoList();
             }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toUnmarkAtt));
