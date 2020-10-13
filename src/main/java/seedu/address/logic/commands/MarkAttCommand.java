@@ -71,6 +71,8 @@ public class MarkAttCommand extends Command {
                     Attendance update = studentInfo.getAttendance().setAttendance(true);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
+                    model.updateLessonList();
+                    model.updateStudentInfoList();
                 }
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkAtt));
@@ -81,6 +83,8 @@ public class MarkAttCommand extends Command {
             Attendance update = each.getAttendance().setAttendance(true);
             StudentInfo updatedStudentInfo = each.updateAttendance(update);
             uniqueStudentInfoList.setStudentInfo(each, updatedStudentInfo);
+            model.updateLessonList();
+            model.updateStudentInfoList();
         }
 
         return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
