@@ -21,7 +21,6 @@ public class Group {
     private final String name;
 
     // Data fields
-    //private Set<Student> students;
     private final UniqueStudentList students;
     private final UniqueLessonList lessons;
 
@@ -96,6 +95,51 @@ public class Group {
     }
 
     /**
+     * Adds a Student to a Group
+     *
+     * @param student Student to be added
+     */
+    public void addStudentToGroup(Student student) {
+        addToStudentList(student);
+        addToStudentListInLessons(student);
+    }
+
+    /**
+     * Removes a Student from the Group.
+     *
+     * @param student Student to be added
+     */
+    public void removeStudentFromGroup(Student student) {
+        removeStudentFromStudentListInLessons(student);
+    }
+
+
+    private void addToStudentList(Student student) {
+        students.add(student);
+    }
+
+
+    private void addToStudentListInLessons(Student student) {
+        for (Lesson lesson : lessons) {
+            StudentInfo newStudent = new StudentInfo(student);
+            UniqueStudentInfoList studentInfos = lesson.getStudentsInfo();
+            studentInfos.add(newStudent);
+            Lesson updatedLesson = new Lesson(lesson.getName(), studentInfos);
+            lessons.setLesson(lesson, updatedLesson);
+        }
+    }
+
+    private void removeStudentFromStudentListInLessons(Student student) {
+        for (Lesson lesson : lessons) {
+            StudentInfo newStudent = new StudentInfo(student);
+            UniqueStudentInfoList studentInfos = lesson.getStudentsInfo();
+            studentInfos.remove(newStudent);
+            Lesson updatedLesson = new Lesson(lesson.getName(), studentInfos);
+            lessons.setLesson(lesson, updatedLesson);
+        }
+    }
+
+    /**
      * Returns true if both groups of the same name have at least one other identity field that is the same. This
      * defines a weaker notion of equality between two groups.
      */
@@ -140,5 +184,6 @@ public class Group {
     public String toString() {
         return String.format("Group %s", name);
     }
+
 
 }
