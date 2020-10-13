@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.Serenity;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Person;
@@ -181,6 +182,11 @@ class AddGrpCommandTest {
         }
 
         @Override
+        public void deleteGroup(Group target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addGroup(Group group) {
             throw new AssertionError("This method should not be called.");
         }
@@ -211,9 +217,25 @@ class AddGrpCommandTest {
         }
 
         @Override
+        public void updateQuestionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Group> getFilteredGroupList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addStudentToGroup(Student student, Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeStudentFromGroup(Student student, Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public ObservableList<Student> getStudentList() {
@@ -234,6 +256,12 @@ class AddGrpCommandTest {
         public ObservableList<StudentInfo> getStudentInfoList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Question> getQuestionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
