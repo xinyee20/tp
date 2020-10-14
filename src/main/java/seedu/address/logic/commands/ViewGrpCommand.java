@@ -35,6 +35,6 @@ public class ViewGrpCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(predicate);
-        return new CommandResult(this.getMessage(model));
+        return new CommandResult(this.getMessage(model), false, false, false, true);
     }
 }

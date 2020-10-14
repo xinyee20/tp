@@ -7,33 +7,35 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Attendance;
 import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Participation;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
 import seedu.address.model.group.UniqueStudentInfoList;
 
-public class UnmarkAttCommand extends Command {
+public class AddScoreCommand extends Command {
 
-    public static final String COMMAND_WORD = "unmarkatt";
-    public static final String MESSAGE_SUCCESS = "%s: \nAttendance - absent";
+    public static final String COMMAND_WORD = "addscore";
+    public static final String MESSAGE_SUCCESS = "%s: \nParticipation Score - %d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unmarks the attendance of a student in a class. \n"
-            + "Parameters: "
+            + ": Gives a student in the class a participation score. \n"
+            + "Parameters: " + " " + "SCORE "
             + PREFIX_STUDENT + " NAME" + " " + PREFIX_ID + " STUDENT_NUMBER\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " " + "2" + " "
             + PREFIX_STUDENT + " Aaron Tan" + " " + PREFIX_ID + " e0123456";
 
-    private Student toUnmarkAtt;
+    private Student toAddScore;
+    private int score;
 
     /**
-     * Creates an UnmarkAttCommand to mark the specified {@code Student} absent
+     * Creates an AddScoreCommand to award the specified {@code Student} a participation score
      */
-    public UnmarkAttCommand(Student student) {
+    public AddScoreCommand(Student student, int score) {
         requireNonNull(student);
-        // Specified student to mark present
-        toUnmarkAtt = student;
+        // Specified student to add participation score
+        toAddScore = student;
+        this.score = score;
     }
 
     @Override
@@ -44,18 +46,19 @@ public class UnmarkAttCommand extends Command {
         UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
-        // Mark single student attendance
+        // Update single student participation score
         for (int i = 0; i < studentsInfo.size(); i++) {
             StudentInfo studentInfo = studentsInfo.get(i);
-            boolean isCorrectStudent = studentInfo.containsStudent(toUnmarkAtt);
+            boolean isCorrectStudent = studentInfo.containsStudent(toAddScore);
             if (isCorrectStudent) {
-                Attendance update = studentInfo.getAttendance().setAttendance(false);
-                StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
+                Participation update = studentInfo.getParticipation().setScore(score);
+                StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
                 uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
                 model.updateLessonList();
                 model.updateStudentInfoList();
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toUnmarkAtt));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddScore, score));
+
     }
 }

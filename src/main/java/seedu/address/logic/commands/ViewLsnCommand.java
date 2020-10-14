@@ -48,7 +48,7 @@ public class ViewLsnCommand extends Command {
         requireNonNull(model);
         model.updateFilteredGroupList(grpPredicate);
         model.updateFilteredLessonList(lsnPredicate);
-        return new CommandResult(this.getMessage(model));
+        return new CommandResult(this.getMessage(model), false, false, true, false);
     }
 
     @Override
