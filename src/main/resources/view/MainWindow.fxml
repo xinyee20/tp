@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Serenity" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
