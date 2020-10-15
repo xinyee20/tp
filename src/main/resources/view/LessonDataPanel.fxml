@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+
+<VBox fx:id="lessonList" xmlns:fx="http://javafx.com/fxml/1" styleClass="pane-with-border">
+    <padding>
+        <Insets bottom="5" left="10" right="10" top="5" />
+    </padding>
+    <StackPane fx:id="studentInfoListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+</VBox>

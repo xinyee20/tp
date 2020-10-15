@@ -36,9 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     // Ui parts relating to serentiy
-    private StudentListPanel studentListPanel;
-
-    private LessonListPanel lessonListPanel;
+    private DataDisplayWindow dataDisplayWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -55,13 +53,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    //serenity FXML components
-
     @FXML
-    private StackPane studentListPanelPlaceholder;
-
-    @FXML
-    private StackPane lessonListPanelPlaceholder;
+    private StackPane dataDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -124,11 +117,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getStudentList());
-        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
-
-        lessonListPanel = new LessonListPanel(logic.getLessonList());
-        lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
+        dataDisplayWindow = new DataDisplayWindow(logic);
+        dataDisplayPlaceholder.getChildren().add(dataDisplayWindow.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -180,8 +170,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Switch to group data view if in lesson data view
+     */
+    @FXML
+    private void toggleLsnView() {
+        dataDisplayWindow.toggleLsnView();
+    }
+
+    /**
+     * Switch to lesson data view if in group data view
+     */
+    @FXML
+    private void toggleGrpView() {
+        dataDisplayWindow.toggleGrpView();
     }
 
     /**
@@ -201,6 +203,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isToggleGrpView()) {
+                toggleGrpView();
+            }
+
+            if (commandResult.isToggleLsnView()) {
+                toggleLsnView();
             }
 
             return commandResult;

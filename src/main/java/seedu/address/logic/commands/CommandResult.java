@@ -22,12 +22,24 @@ public class CommandResult {
     private final boolean exit;
 
     /**
+     * The application should toggle to lesson data screen
+     */
+    private final boolean isViewLsn;
+
+    /**
+     * The application should toggle to group data screen
+     */
+    private final boolean isViewGrp;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewLsn, boolean viewGrp) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.isViewLsn = viewLsn;
+        this.isViewGrp = viewGrp;
     }
 
     /**
@@ -35,7 +47,7 @@ public class CommandResult {
      * default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -48,6 +60,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isToggleLsnView() {
+        return isViewLsn;
+    }
+
+    public boolean isToggleGrpView() {
+        return isViewGrp;
     }
 
     @Override
@@ -71,5 +91,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(feedbackToUser, showHelp, exit);
     }
-
 }
