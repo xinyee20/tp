@@ -70,14 +70,6 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
-     * Replaces all the students from the list with a new list of students
-     */
-    public void students(UniqueStudentList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    /**
      * Replaces the contents of this list with {@code students}. {@code students} must not contain duplicate students.
      */
     public void setStudents(List<Student> students) {
@@ -85,7 +77,6 @@ public class UniqueStudentList implements Iterable<Student> {
         if (!studentsAreUnique(students)) {
             throw new DuplicateStudentException();
         }
-
         internalList.setAll(students);
     }
 
