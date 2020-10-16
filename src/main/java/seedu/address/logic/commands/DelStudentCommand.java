@@ -7,11 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
 import seedu.address.model.group.Student;
 
 public class DelStudentCommand extends Command {
@@ -30,7 +31,7 @@ public class DelStudentCommand extends Command {
 
     private final String studentName;
     private final String studentId;
-    private final GrpContainsKeywordPredicate predicate;
+    private final Predicate<Group> predicate;
 
     /**
      * Creates a DelStudentCommand to remove the specified {@code Student}
@@ -38,7 +39,7 @@ public class DelStudentCommand extends Command {
      * @param studentId Id of Student
      * @param predicate Group predicate
      */
-    public DelStudentCommand(String studentName, String studentId, GrpContainsKeywordPredicate predicate) {
+    public DelStudentCommand(String studentName, String studentId, Predicate<Group> predicate) {
         requireAllNonNull(studentName, studentId, predicate);
         this.studentName = studentName;
         this.studentId = studentId;
@@ -53,11 +54,11 @@ public class DelStudentCommand extends Command {
         ObservableList<Group> groups = model.getFilteredGroupList();
         if (groups.isEmpty()) {
             //no such group
-            return new CommandResult(MESSAGE_GROUP_EMPTY);
+            throw new CommandException(MESSAGE_GROUP_EMPTY);
         }
         if (!groups.get(0).getStudents().contains(student)) {
             //student does not exist
-            return new CommandResult(MESSAGE_STUDENT_EMPTY);
+            throw new CommandException(MESSAGE_STUDENT_EMPTY);
         } else {
             model.removeStudentFromGroup(student, predicate);
             model.updateFilteredGroupList(predicate);
@@ -66,4 +67,16 @@ public class DelStudentCommand extends Command {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof DelStudentCommand) {
+            DelStudentCommand other = (DelStudentCommand) obj;
+            return studentName.equals(other.studentName) && studentId.equals(other.studentId)
+                && predicate.equals(other.predicate);
+        } else {
+            return false;
+        }
+    }
 }

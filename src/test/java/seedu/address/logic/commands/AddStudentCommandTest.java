@@ -1,32 +1,34 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.commons.core.Messages.MESSAGE_GROUP_EMPTY;
 import static seedu.address.testutil.Assert.assertThrows;
+
 import java.util.function.Predicate;
-import java.util.logging.Filter;
+
 import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GrpContainsKeywordPredicate;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.testutil.GroupBuilder;
+import seedu.address.testutil.GroupPredicateStub;
 import seedu.address.testutil.ModelStub;
-import seedu.address.testutil.TypicalGroups;
 
 public class AddStudentCommandTest {
+
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand("","",null));
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null,"",new GroupPredicateStub()));
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand("",null, new GroupPredicateStub()));
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null,null,null));
+        assertThrows(NullPointerException.class, () -> new AddStudentCommand("", "", null));
+        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null, "", new GroupPredicateStub()));
+        assertThrows(NullPointerException.class, () -> new AddStudentCommand("", null, new GroupPredicateStub()));
+        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null, null, null));
     }
 
     @Test
@@ -60,11 +62,45 @@ public class AddStudentCommandTest {
         assertThrows(CommandException.class,
             MESSAGE_DUPLICATE_STUDENT, () -> command.execute(modelStub));
     }
+
+    @Test
+    public void equals() {
+        String studentName = "John";
+        String studentId = "e1234567";
+        Predicate<Group> pred = new GroupPredicateStubWithGroupName("G04");
+        AddStudentCommand first = new AddStudentCommand(studentName, studentId, pred);
+        AddStudentCommand second = new AddStudentCommand(studentName,
+            studentId, pred);
+        AddStudentCommand differentStudentName = new AddStudentCommand("J", studentId, pred);
+        AddStudentCommand differentStudentId = new AddStudentCommand(studentName, "e111", pred);
+        AddStudentCommand differentPredicate = new AddStudentCommand(studentName, studentId,
+            new GroupPredicateStubWithGroupName("G05"));
+        // same object -> returns true
+        assertTrue(first.equals(first));
+
+        //same values -> return true
+        assertTrue(first.equals(second));
+
+        //different values -> return false
+        assertFalse(first.equals(differentStudentName));
+        assertFalse(first.equals(differentStudentId));
+        assertFalse(first.equals(differentPredicate));
+
+        // different types -> returns false
+        assertFalse(first.equals(1));
+
+        // null -> returns false
+        assertFalse(first.equals(null));
+    }
 }
 
-
+/**
+ * A Model stub with a group
+ */
 class ModelStubWithGroup extends ModelStub {
+
     private final FilteredList<Group> filteredGroups;
+
     ModelStubWithGroup(FilteredList<Group> filteredList) {
         this.filteredGroups = filteredList;
     }
@@ -82,7 +118,7 @@ class ModelStubWithGroup extends ModelStub {
 
 
 /**
- * A Model stub that contains a single group.
+ * A Model stub that does not contain any group
  */
 class ModelStubWithoutGroup extends ModelStub {
 
@@ -98,9 +134,26 @@ class ModelStubWithoutGroup extends ModelStub {
 }
 
 
-class GroupPredicateStub implements Predicate<Group> {
+/**
+ * A GrpContainsKeywordPredicate stub
+ */
+class GroupPredicateStubWithGroupName implements Predicate<Group> {
+
+    private final String keyword;
+
+    GroupPredicateStubWithGroupName(String keyword) {
+        this.keyword = keyword;
+    }
+
     @Override
     public boolean test(Group group) {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this // short circuit if same object
+            || (obj instanceof GrpContainsKeywordPredicate // instanceof handles nulls
+            && keyword.equals(((GroupPredicateStubWithGroupName) obj).keyword)); // state check
     }
 }

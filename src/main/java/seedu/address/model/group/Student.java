@@ -9,7 +9,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class Student {
     public static final String STUDENT_NAME_ERROR = "Name cannot be empty";
-    public static final String STUDENT_NUMBER_ERROR = "Student number cannot be empty and must follow the format 'eXXXXXXX' where X is a digit from 0 to 9";
+    public static final String STUDENT_NUMBER_ERROR = "Student number cannot be empty "
+        + "and must follow the format 'eXXXXXXX' "
+        + "where X is a digit from 0 to 9";
     private String name;
     private String studentNumber;
 
@@ -63,7 +65,13 @@ public class Student {
 
     @Override
     public boolean equals(Object obj) {
-        Student other = (Student) obj;
-        return other.getName().equals(getName()) && other.getStudentNumber().equals(getStudentNumber());
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof  Student) {
+            Student other = (Student) obj;
+            return other.getName().equals(getName()) && other.getStudentNumber().equals(getStudentNumber());
+        } else {
+            return false;
+        }
     }
 }

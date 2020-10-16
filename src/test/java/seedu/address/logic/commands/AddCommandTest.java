@@ -6,26 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySerenity;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.Lesson;
-import seedu.address.model.group.Question;
-import seedu.address.model.group.Student;
-import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.PersonBuilder;
@@ -79,126 +67,50 @@ public class AddCommandTest {
         // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
-
-
-        @Override
-        public boolean hasGroup(Group group) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteGroup(Group target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addGroup(Group group) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateStudentList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateLessonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredLessonList(Predicate<Lesson> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateStudentInfoList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateQuestionList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Group> getFilteredGroupList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Student> getStudentList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Lesson> getLessonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Lesson> getFilteredLessonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<StudentInfo> getStudentInfoList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Question> getQuestionList() {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }
+
+/**
+ * A Model stub that contains a single person.
+ */
+class ModelStubWithPerson extends ModelStub {
+
+    private final Person person;
+
+    ModelStubWithPerson(Person person) {
+        requireNonNull(person);
+        this.person = person;
+    }
+
+    @Override
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return this.person.isSamePerson(person);
+    }
+}
+
+/**
+ * A Model stub that always accept the person being added.
+ */
+class ModelStubAcceptingPersonAdded extends ModelStub {
+
+    final ArrayList<Person> personsAdded = new ArrayList<>();
+
+    @Override
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return personsAdded.stream().anyMatch(person::isSamePerson);
+    }
+
+    @Override
+    public void addPerson(Person person) {
+        requireNonNull(person);
+        personsAdded.add(person);
+    }
+
+    @Override
+    public ReadOnlyAddressBook getAddressBook() {
+        return new AddressBook();
+    }
+}
+
+
