@@ -265,7 +265,7 @@ You can use this command to add a question that was asked in a lesson, so that y
 When teaching group `G04` lesson `1-2`, a student ask a question, and you want to note it down.
 
 To add a question to group `G04` lesson `1-2`:
-1. Navigate to view group `G04` lesson `1-2` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `addqn qn/What is the deadline for the report?` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -282,7 +282,7 @@ You can use this command to add a question that was asked in a tutorial lesson, 
 When teaching group `G04` lesson `1-2`, you answered one of the questions and wants to delete it from the list of questions.
 
 To delete a question from group `G04` lesson `1-2`:
-1. Navigate to view group `G04` lesson `1-2` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `delqn 1` into the *Command Box*.
 3. Press `Enter` to execute.
 
