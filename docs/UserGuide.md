@@ -36,11 +36,11 @@ By: `Team Serenity` Since: `Aug 2020`
 
      * [Exporting of class participation grades to CSV: `exportCp`](#exporting-of-class-participation-grades-to-csv-exportcp)
 
-   4.4 [Question Addressing](#ins44-question-addressingins)
+   4.4. [Question Addressing](#ins44-question-addressingins)
+       
+      4.4.1. [Adding a question: `addQn`](#441-add-a-new-question-addqn)
 
-      4.4.1 [Adding a question: `addQn`](#441-add-a-new-question-addqn)
-
-      4.4.2 [Deleting a question: `deleteQn`](#442-delete-an-existing-question-delqn)
+      4.4.2. [Deleting a question: `deleteQn`](#442-delete-an-existing-question-delqn)
 
    4.5. [Utility](#ins45-utilityins)
    
