@@ -101,6 +101,45 @@ You can set up classes automatically by importing CSV data.
 
 ---
 
+#### 4.1.5. Add a new student: `addstudent`
+You can use this command to add a new student to a tutorial group.
+
+**Format:**
+`addstudent grp/GROUP name/NAME id/STUDENT_ID`
+
+**Example:**
+A new student named `Aaron Tan` with student ID `e0123456` entered your tutorial group, and you would like to add him to tutorial group `G04`.
+
+To add him to the tutorial group:
+
+1. Type `addstudent grp/G04 name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message.
+2. You will now see `Aaron Tan` in the list of students shown on the screen.
+
+#### 4.1.6. Delete an existing student: `delstudent`
+You can use this command to delete an existing student from a tutorial group.
+
+**Format:**
+`delstudent grp/GROUP name/NAME id/STUDENT_ID`
+
+**Example:**
+A student named `Aaron Tan` with student ID `e0123456` has left your tutorial group, and you would like to remove him from the tutorial group `G04`.
+
+To remove him from the tutorial group:
+
+1. Type `delstudent grp/G04 name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message.
+2. `Aaron Tan` will no longer be in the list of students shown on the screen.
+
+
 ### <ins>Attendance Taking</ins>
 
 #### Mark attendance for every student: `markAll`
