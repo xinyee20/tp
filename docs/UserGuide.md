@@ -45,6 +45,10 @@ By: `Team Serenity` Since: `Aug 2020`
      * [Deleting a question: `deleteQn`](#deleting-a-question-deleteqn)
 
      * [Marking a question as answered: `ansQn`](#marking-a-question-as-answered-ansqn)
+   
+   4.5. [Utility](#ins45-utilityins)
+   
+      4.5.2. [View an existing tutorial lesson: `viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn)
 
 5. [FAQ](#faq)
 
@@ -317,6 +321,29 @@ Marks the specified question from the list of questions of a specified tutorial 
 * `ansQn G10 5-2 3`
 
 Outcome:
+
+---
+
+### <ins>4.5 Utility</ins>
+
+#### 4.5.2. View an existing tutorial lesson: `viewlsn`
+You can use this command to view the attendance, participation scores and questions of an existing tutorial group. You will also be able to execute tutorial lesson-related commands.
+
+**Format:**
+`viewlsn grp/GROUP lsn/LESSON`
+
+**Example:**
+Suppose you would like to view the details for tutorial group G04's  **lesson 1-2**. You can perform the following steps.
+
+To view tutorial group G04's **lesson 1-2**:
+1. Type `viewlsn grp/G04 lsn/1-2` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. The *Data Display* will update and display the students' information for tutorial group G04's **lesson 1-2**.
+
+![Figure X. Outcome of a successful view lesson command](reference)
 
 --------------------------------------------------------------------------------------------------------------------
 
