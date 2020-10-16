@@ -67,7 +67,7 @@ public class Student {
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
-        } else if (obj instanceof  Student) {
+        } else if (obj instanceof Student) {
             Student other = (Student) obj;
             return other.getName().equals(getName()) && other.getStudentNumber().equals(getStudentNumber());
         } else {
