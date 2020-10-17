@@ -103,6 +103,8 @@ You can set up classes automatically by importing CSV data.
 
 ### <ins>4.2. Attendance Taking</ins>
 
+Just before you start the lesson, it will be nice to be able to quickly take the attendance of every student in the class so that you won't have to worry about it afterwards. This feature allows you to mark the attendance of all students at once upon checking that all students are present, so the class can start without much hassle.
+
 #### 4.2.1. Mark attendance for a single student as present: `markpresent`
 You can use this command to mark attendance for a specific student in a tutorial lesson.
 
