@@ -123,6 +123,7 @@ Outcome:
 2. You can now see that his attendance has been updated on the *Student Information Panel*.
 
 ![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
+_Figure X. Outcome of a successful mark a student present command_
 
 #### 4.2.2. Mark attendance for a single student as absent: `markabsent`
 You can use this command to mark a specific student absent for a tutorial lesson.
@@ -144,6 +145,7 @@ Outcome:
 2. You can now see that his attendance has been updated on the *Student Information Panel*.
 
 ![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png)
+_Figure X. Outcome of a successful mark a student absent command_
 
 #### 4.2.3. Mark attendance for all students: `markpresent all`
 You can use this command to mark attendance for all students in a tutorial lesson.
@@ -165,6 +167,7 @@ Outcome:
 2. You can now see that all the students' attendance have been updated on the *Student Information Panel*.
 
 ![Figure X. Outcome of a successful mark attendance for all students command](images/ui/markpresent_all.png)
+_Figure X. Outcome of a successful mark attendance for all students command_
 
 #### Flag attendance for a single student: `flag`
 
@@ -242,6 +245,7 @@ Outcome:
 2. You can now see that his score has been updated on the *Student Information Panel*.
 
 ![Figure X. Outcome of a successful add score for 1 student command](images/ui/addscore_student.png)
+_Figure X. Outcome of a successful add score for a student command_
 
 #### Viewing statistics of class participation: `stats`
 
