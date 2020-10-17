@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
-class DeleteLsnCommandParserTest {
+class DelLsnCommandParserTest {
 
     @Test
     void parse() {
