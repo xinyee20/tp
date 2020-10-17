@@ -52,7 +52,7 @@ public class LogicManagerTest {
         /*
         FOR REFERENCE (AB3):
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX);
          */
     }
 

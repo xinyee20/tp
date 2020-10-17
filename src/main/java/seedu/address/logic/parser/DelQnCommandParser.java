@@ -19,7 +19,7 @@ public class DelQnCommandParser implements Parser<DelQnCommand> {
      */
     public DelQnCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
+            Index index = SerenityParserUtil.parseIndex(args);
             return new DelQnCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(

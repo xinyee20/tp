@@ -30,7 +30,7 @@ public class AddQnCommandParser implements Parser<AddQnCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
         }
 
-        Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QN).get());
+        Question question = SerenityParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QN).get());
 
         return new AddQnCommand(question);
     }
