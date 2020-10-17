@@ -16,9 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonSerenityStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -35,12 +33,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-            new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonSerenityStorage serenityStorage =
             new JsonSerenityStorage(temporaryFolder.resolve("serenity.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, serenityStorage);
+        StorageManager storage = new StorageManager(serenityStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -95,8 +91,9 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredGroupList_modifyList_throwsUnsupportedOperationException() {
+        // TODO: FOR REFERENCE (AB3)
+        // assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
     /**
@@ -137,7 +134,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
         String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getSerenity());
+        Model expectedModel = new ModelManager(model.getSerenity(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -154,18 +151,4 @@ public class LogicManagerTest {
         assertEquals(expectedModel, model);
     }
 
-    /**
-     * A stub class to throw an {@code IOException} when the save method is called.
-     */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
-            super(filePath);
-        }
-
-        @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-            throw DUMMY_IO_EXCEPTION;
-        }
-    }
 }

@@ -20,7 +20,6 @@ import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueQuestionList;
 import seedu.address.model.group.UniqueStudentInfoList;
 import seedu.address.model.group.UniqueStudentList;
-import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,10 +28,7 @@ public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-
     private final Serenity serenity;
     private final FilteredList<Group> filteredGroups;
     private final ArrayObservableList<Student> students;
@@ -44,20 +40,15 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-        ReadOnlySerenity serenity) {
+    public ModelManager(ReadOnlySerenity serenity, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs, serenity);
+        requireAllNonNull(userPrefs, serenity);
 
-        logger.fine("Initializing with address book: " + addressBook
-            + " and user prefs " + userPrefs
+        logger.fine("Initializing with user prefs " + userPrefs
             + " and serenity " + serenity);
 
-        this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-
         this.serenity = new Serenity(serenity);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
@@ -69,17 +60,14 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-
         this.serenity = new Serenity();
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
@@ -89,7 +77,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new Serenity());
+        this(new Serenity(), new UserPrefs());
     }
 
     // =========== UserPrefs ==================================================================================
@@ -114,52 +102,6 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
-    }
-
-    // =========== AddressBook ================================================================================
-
-    @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
-    }
-
-    @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
-    }
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
-
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-        addressBook.setPerson(target, editedPerson);
     }
 
     // =========== Serenity ================================================================================
@@ -274,6 +216,10 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of {@code
+     * versionedSerenity}
+     */
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
@@ -304,23 +250,6 @@ public class ModelManager implements Model {
         return questions;
     }
 
-    //=========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of {@code
-     * versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -335,9 +264,13 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-            && userPrefs.equals(other.userPrefs)
-            && filteredPersons.equals(other.filteredPersons);
+        return userPrefs.equals(other.userPrefs)
+            && filteredGroups.equals(other.filteredGroups)
+            && students.equals(other.students)
+            && lessons.equals(other.lessons)
+            && filteredLessons.equals(other.filteredLessons)
+            && studentsInfo.equals(other.studentsInfo)
+            && questions.equals(other.questions);
     }
 
 }

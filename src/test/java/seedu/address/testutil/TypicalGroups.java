@@ -23,21 +23,15 @@ public class TypicalGroups {
             new Student("Jeffery", "e0000000"),
             new Student("Luna", "e0111111"),
             new Student("Queenie", "e0222222")
-        ).withClasses(
-            "4.2",
-            "5.1"
-        ).build();
+        ).withClasses("4-2", "5-1")
+        .build();
 
     public static final Group GROUP_D = new GroupBuilder().withName("G07")
         .withStudents(
             new Student("Freddie", "e0000000"),
             new Student("June", "e0101011")
-        ).withClasses(
-            "4.2",
-            "5.1",
-            "5.2",
-            "6.1"
-        ).build();
+        ).withClasses("4-2", "5-1", "5-2", "6-1")
+        .build();
 
     // Manually added - Group's details found in {@code CommandTestUtil}
     public static final Group GROUP_A = new GroupBuilder().withName(VALID_GRP_GROUP_A)

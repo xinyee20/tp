@@ -53,7 +53,6 @@ public class SerenityParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        // Serenity
         case AddGrpCommand.COMMAND_WORD:
             return new AddGrpCommandParser().parse(arguments);
 

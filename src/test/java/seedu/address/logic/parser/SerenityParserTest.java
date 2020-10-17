@@ -11,7 +11,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class AddressBookParserTest {
+public class SerenityParserTest {
 
     private final SerenityParser parser = new SerenityParser();
 

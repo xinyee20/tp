@@ -3,20 +3,15 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +21,6 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
     }
 
     @Test
@@ -61,47 +55,44 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setSerenityFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setSerenityFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+    public void setSerenityFilePath_validPath_setsSerenityFilePath() {
+        Path path = Paths.get("serenity/file/path");
+        modelManager.setSerenityFilePath(path);
+        assertEquals(path, modelManager.getSerenityFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasGroup_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasGroup(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasGroup_groupNotInSerenity_returnsFalse() {
+        // TODO
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasGroup_groupInSerenity_returnsTrue() {
+        // TODO
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredGroupList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredGroupList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,20 +104,22 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // TODO: different serenity -> returns false
 
-        // different filteredList -> returns false
+        // TODO: different filteredGroupList -> returns false
+        /*
+        FOR REFERENCE (AB3)
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(userPrefs)));
+         */
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentUserPrefs)));
     }
 }
