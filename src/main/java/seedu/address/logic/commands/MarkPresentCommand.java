@@ -16,11 +16,12 @@ import seedu.address.model.group.UniqueStudentInfoList;
 /**
  * Marks the attendance of a class or a student in the class.
  */
-public class MarkAttCommand extends Command {
+public class MarkPresentCommand extends Command {
 
-    public static final String COMMAND_WORD = "markatt";
-    public static final String MESSAGE_SUCCESS = "%s: \nAttendance - present";
+    public static final String COMMAND_WORD = "markpresent";
+    public static final String MESSAGE_SUCCESS = "%s: \nAttendance: present";
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked present!";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "%s is not found, please ensure the name & student id is correct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of all students / a student in a class. \n"
@@ -31,26 +32,27 @@ public class MarkAttCommand extends Command {
             + "or " + COMMAND_WORD + " "
             + PREFIX_STUDENT + " Aaron Tan" + " " + PREFIX_ID + " e0123456";
 
-    private Student toMarkAtt;
+    private Student toMarkPresent;
     private boolean isWholeClass;
+    private boolean isCorrectStudent;
 
 
     /**
-     * Creates an MarkAttCommand to mark all {@code Student} present
+     * Creates an MarkPresentCommand to mark all {@code Student} present
      */
-    public MarkAttCommand() {
+    public MarkPresentCommand() {
         // Mark all students present
         isWholeClass = true;
     }
 
     /**
-     * Creates an MarkAttCommand to mark the specified {@code Student} present
+     * Creates an MarkPresentCommand to mark the specified {@code Student} present
      */
-    public MarkAttCommand(Student student) {
+    public MarkPresentCommand(Student student) {
         requireNonNull(student);
         isWholeClass = false;
         // Specified student to mark present
-        toMarkAtt = student;
+        toMarkPresent = student;
     }
 
     @Override
@@ -66,21 +68,25 @@ public class MarkAttCommand extends Command {
             // Mark single student attendance
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
-                boolean isCorrectStudent = studentInfo.containsStudent(toMarkAtt);
+                isCorrectStudent = studentInfo.containsStudent(toMarkPresent);
                 if (isCorrectStudent) {
-                    Attendance update = studentInfo.getAttendance().setAttendance(true);
+                    Attendance update = studentInfo.getAttendance().setNewAttendance(true);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
                     model.updateStudentInfoList();
+                    break;
                 }
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkAtt));
+            if (!isCorrectStudent) {
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, toMarkPresent));
+            }
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkPresent));
         }
 
         // Mark whole class attendance
         for (StudentInfo each: studentsInfo) {
-            Attendance update = each.getAttendance().setAttendance(true);
+            Attendance update = each.getAttendance().setNewAttendance(true);
             StudentInfo updatedStudentInfo = each.updateAttendance(update);
             uniqueStudentInfoList.setStudentInfo(each, updatedStudentInfo);
             model.updateLessonList();

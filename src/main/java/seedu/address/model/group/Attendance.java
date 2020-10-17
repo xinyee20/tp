@@ -25,6 +25,15 @@ public class Attendance {
         this.isFlagged = false;
     }
 
+    public Attendance(boolean isPresent, boolean isFlagged) throws IllegalArgumentException {
+        if (isPresent) {
+            this.isPresent = isPresent;
+            this.isFlagged = isFlagged;
+        } else {
+            throw new IllegalArgumentException("Student should be present to be flagged");
+        }
+    }
+
     @Override
     public String toString() {
         return Boolean.toString(isPresent);
@@ -34,7 +43,7 @@ public class Attendance {
         return isPresent;
     }
 
-    public Attendance setAttendance(boolean isPresent) {
+    public Attendance setNewAttendance(boolean isPresent) {
         Attendance updatedAttendance = new Attendance(isPresent);
         return updatedAttendance;
     }

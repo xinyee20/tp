@@ -12,6 +12,9 @@ import seedu.address.model.group.Student;
 
 public class AddScoreCommandParser implements Parser<AddScoreCommand> {
 
+    public static final String MESSAGE_STUDENT_NOT_GIVEN = "Please ensure student name / id is given";
+    public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Score should be within range of 0 to 5";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddScoreCommand and
      * returns a AddScoreCommand object for execution.
@@ -33,7 +36,7 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
 
             score = SerenityParserUtil.parseScore(argMultimap.getPreamble());
             if (score < 0 || score > 5) {
-                throw new ParseException("Score should be between 0 to 5");
+                throw new ParseException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
             }
             studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_STUDENT).get());
             studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());

@@ -13,10 +13,11 @@ import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
 import seedu.address.model.group.UniqueStudentInfoList;
 
-public class UnmarkAttCommand extends Command {
+public class MarkAbsentCommand extends Command {
 
-    public static final String COMMAND_WORD = "unmarkatt";
-    public static final String MESSAGE_SUCCESS = "%s: \nAttendance - absent";
+    public static final String COMMAND_WORD = "markabsent";
+    public static final String MESSAGE_SUCCESS = "%s: \nAttendance:  absent";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "%s is not found, please ensure the name & student id is correct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the attendance of a student in a class. \n"
@@ -25,15 +26,16 @@ public class UnmarkAttCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT + " Aaron Tan" + " " + PREFIX_ID + " e0123456";
 
-    private Student toUnmarkAtt;
+    private Student markAbsent;
+    private boolean isCorrectStudent;
 
     /**
-     * Creates an UnmarkAttCommand to mark the specified {@code Student} absent
+     * Creates an MarkAbsentCommand to mark the specified {@code Student} absent
      */
-    public UnmarkAttCommand(Student student) {
+    public MarkAbsentCommand(Student student) {
         requireNonNull(student);
         // Specified student to mark present
-        toUnmarkAtt = student;
+        markAbsent = student;
     }
 
     @Override
@@ -47,15 +49,20 @@ public class UnmarkAttCommand extends Command {
         // Mark single student attendance
         for (int i = 0; i < studentsInfo.size(); i++) {
             StudentInfo studentInfo = studentsInfo.get(i);
-            boolean isCorrectStudent = studentInfo.containsStudent(toUnmarkAtt);
+            isCorrectStudent = studentInfo.containsStudent(markAbsent);
             if (isCorrectStudent) {
-                Attendance update = studentInfo.getAttendance().setAttendance(false);
+                Attendance update = studentInfo.getAttendance().setNewAttendance(false);
                 StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                 uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
                 model.updateLessonList();
                 model.updateStudentInfoList();
+                break;
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toUnmarkAtt));
+
+        if (!isCorrectStudent) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, markAbsent));
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, markAbsent));
     }
 }

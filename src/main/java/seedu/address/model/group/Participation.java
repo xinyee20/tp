@@ -1,5 +1,7 @@
 package seedu.address.model.group;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 public class Participation {
 
     public static final String SCORE_ERROR = "Score must be a number";
@@ -13,8 +15,12 @@ public class Participation {
      * Creates a Participation object containing the score of a student
      * @param score Score of Student
      */
-    public Participation(int score) {
-        this.score = score;
+    public Participation(int score) throws IllegalArgumentException {
+        if (score >= 0 && score <= 5) {
+            this.score = score;
+        } else {
+            throw new IllegalArgumentException("Score must be within the range of 0 to 5");
+        }
     }
 
     @Override
@@ -26,7 +32,7 @@ public class Participation {
         return score;
     }
 
-    public Participation setScore(int score) {
+    public Participation setNewScore(int score) {
         Participation updatedScore = new Participation(score);
         return updatedScore;
     }

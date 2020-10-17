@@ -16,7 +16,8 @@ import seedu.address.model.group.UniqueStudentInfoList;
 public class AddScoreCommand extends Command {
 
     public static final String COMMAND_WORD = "addscore";
-    public static final String MESSAGE_SUCCESS = "%s: \nParticipation Score - %d";
+    public static final String MESSAGE_SUCCESS = "%s: \nParticipation Score: %d";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "%s is not found, please ensure the name & student id is correct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Gives a student in the class a participation score. \n"
@@ -27,6 +28,7 @@ public class AddScoreCommand extends Command {
 
     private Student toAddScore;
     private int score;
+    private boolean isCorrectStudent;
 
     /**
      * Creates an AddScoreCommand to award the specified {@code Student} a participation score
@@ -49,14 +51,18 @@ public class AddScoreCommand extends Command {
         // Update single student participation score
         for (int i = 0; i < studentsInfo.size(); i++) {
             StudentInfo studentInfo = studentsInfo.get(i);
-            boolean isCorrectStudent = studentInfo.containsStudent(toAddScore);
+            isCorrectStudent = studentInfo.containsStudent(toAddScore);
             if (isCorrectStudent) {
-                Participation update = studentInfo.getParticipation().setScore(score);
+                Participation update = studentInfo.getParticipation().setNewScore(score);
                 StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
                 uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
                 model.updateLessonList();
                 model.updateStudentInfoList();
+                break;
             }
+        }
+        if (!isCorrectStudent) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, toAddScore));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAddScore, score));
 
