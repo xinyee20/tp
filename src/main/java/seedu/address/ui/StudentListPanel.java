@@ -13,7 +13,7 @@ import seedu.address.model.group.Student;
 public class StudentListPanel extends UiPart<Region> {
 
     private static final String FXML = "StudentListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
 
     @FXML
     private ListView<Student> studentListView;

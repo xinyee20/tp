@@ -15,21 +15,11 @@ import seedu.address.model.group.StudentInfo;
 import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueStudentInfoList;
 import seedu.address.model.group.UniqueStudentList;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-            .map(Tag::new)
-            .collect(Collectors.toSet());
-    }
 
     public static Group[] getSampleGroups() {
         Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "E0123456"),

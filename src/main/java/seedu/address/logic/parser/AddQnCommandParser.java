@@ -30,11 +30,9 @@ public class AddQnCommandParser implements Parser<AddQnCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
         }
 
-        String question = argMultimap.getValue(PREFIX_QN).get();
+        Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QN).get());
 
-        Question newQuestion = new Question(question);
-
-        return new AddQnCommand(newQuestion);
+        return new AddQnCommand(question);
     }
 
     /**
