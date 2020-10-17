@@ -300,15 +300,15 @@ You can use this command to view the attendance, participation scores and questi
 `viewlsn grp/GROUP lsn/LESSON`
 
 **Example:**
-Suppose you would like to view the details for tutorial group G04's  **lesson 1-2**. You can perform the following steps.
+Suppose you would like to view the details for tutorial group `G04`'s  lesson `1-2`. You can perform the following steps.
 
-To view tutorial group G04's **lesson 1-2**:
+To view tutorial group `G04`'s lesson `1-2`:
 1. Type `viewlsn grp/G04 lsn/1-2` into the *Command Box*.
 2. Press `Enter` to execute.
 
 Outcome:
 1. The *Result Display* will show a success message.
-2. The *Data Display* will update and display the students' information for tutorial group G04's **lesson 1-2**.
+2. The *Data Display* will update and display the students' information for tutorial group `G04`'s lesson `1-2`.
 
 ![Figure X. Outcome of a successful `viewlsn` command](#)
 
