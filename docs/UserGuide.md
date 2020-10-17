@@ -101,35 +101,70 @@ You can set up classes automatically by importing CSV data.
 
 ---
 
-### <ins>Attendance Taking</ins>
+### <ins>4.2. Attendance Taking</ins>
 
-#### Mark attendance for every student: `markAll`
-Marks all students of a particular class for a single tutorial 
-session as present.
+#### 4.2.1. Mark attendance for a single student as present: `markpresent`
+You can use this command to mark attendance for a specific student in a tutorial lesson.
 
-Format:  `markAll TUTORIAL_GROUP LESSON_NUMBER`
+**Format:**
+`markpresent name/NAME id/STUDENT_ID`
 
-Examples:
-* `markAll G04 1-1`
-* `markAll G09 7-2`
+**Example:**
 
-#### Mark attendance for a single student as absent: `mark`
+There is a student named `Aaron Tan` with Student ID of `e0123456` who is present for the tutorial lesson `1-2` of group `G04`. 
 
-Marks a student of a particular class for a 
-single tutorial session as absent.
-
-Format: `mark TUTORIAL_GROUP LESSON_NUMBER NAME`
-
-*TIP*: Use `markAll` to mark all students as present first, then use
-`mark` to mark just the students who are absent for a quick
-and easy way to record attendance.
-
-Examples:
-* `mark G04 1-1 john`
-* `mark G09 7-2 ryan`
+To mark him present:
+1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
+2. Type `markpresent name/Aaron Tan id/e0123456` into the *Command Box*.
+3. Press `Enter` to execute.
 
 Outcome:
+1. The *Result Display* will show a success message.
+2. You can now see that his attendance has been updated on the *Student Information Panel*.
 
+![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
+
+#### 4.2.2. Mark attendance for a single student as absent: `markabsent`
+You can use this command to mark a specific student absent for a tutorial lesson.
+
+**Format:**
+`markabsent name/NAME id/STUDENT_ID`
+
+**Example:**
+
+There is a student `Aaron Tan` with Student ID `e0123456` from group `G04` who is absent for your tutorial lesson `1-2`. 
+
+To mark him absent:
+1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
+2. Type `markabsent name/Aaron Tan id/e0123456` into the *Command Box*.
+3. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. You can now see that his attendance has been updated on the *Student Information Panel*.
+
+![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png)
+
+#### 4.2.3. Mark attendance for all students: `markpresent all`
+You can use this command to mark attendance for all students in a tutorial lesson.
+
+**Format:**
+`markpresent all`
+
+**Example:**
+
+All students in group `G04` are present for the tutorial lesson `1-2`. 
+
+To mark all of them present at once:
+1. Navigate to view group `G04` lesson `1-2` via ![`viewlsn`](link to viewlsn command) command.
+2. Type `markpresent all` into the *Command Box*.
+3. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. You can now see that all the students' attendance have been updated on the *Student Information Panel*.
+
+![Figure X. Outcome of a successful mark attendance for all students command](images/ui/markpresent_all.png)
 
 #### Flag attendance for a single student: `flag`
 
@@ -178,32 +213,35 @@ Outcome:
 
 ---
 
-### <ins>Class Participation</ins>
+### <ins>4.3. Participation Marking</ins>
 
-This feature allows you to manage the class participation grades for each student in your classes.
+Need to keep track of all your students' participation during lessons quickly? This feature allow you to key in a student's participation score easily with a scale for reference.
 
-#### Awarding class participation marks: `award`
+#### 4.3.1. Award participation score for a student: `addscore`
+You can use this command to add the participation score for a specific student in a tutorial lesson.
 
-you can use this command to award class participation marks to a student from a specified tutorial group and tutorial 
-you wish to grade.
+With a scale from 1 to 5:
+Score | 1 | 2 | 3 | 4 | 5 | 
+------|---|---|---|---|---
+**Remark** |Very Poor| Poor| Sufficient|Good|Commendable
 
-##### Format:
+**Format:**
+`addscore MARK name/NAME id/STUDENT_ID`
 
-`award NAME TUTORIAL_GROUP TUTORIAL_NUMBER MARKS`
+**Example:**
 
-##### Example:
+After **lesson 1-2**, you felt that your student `Aaron Tan` with Student ID `e0123456`  from **group G04** participated sufficiently in class but could be more active, you would like to give him a `3` for his participation.
 
-If you wish to award a student participation marks, follow the steps below to learn how. In this example you will learn
-how to award a student ,`Ryan`, from tutorial group `G04`, a class participation score of `4` for tutorial `3-1`.
-
-Awarding class participation:
-
-1. Type `award Ryan G04 3-1 4`
-
-2. Press `enter` to execute the command 
+To give him a score:
+1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
+2. Type `addscore 3 name/Aaron Tan id/e0123456` into the *Command Box*.
+3. Press `Enter` to execute.
 
 Outcome:
+1. The *Result Display* will show a success message.
+2. You can now see that his score has been updated on the *Student Information Panel*.
 
+![Figure X. Outcome of a successful add score for 1 student command](images/ui/addscore_student.png)
 
 #### Viewing statistics of class participation: `stats`
 
