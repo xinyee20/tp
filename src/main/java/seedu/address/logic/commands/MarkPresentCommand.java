@@ -21,7 +21,8 @@ public class MarkPresentCommand extends Command {
     public static final String COMMAND_WORD = "markpresent";
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance: present";
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked present!";
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "%s is not found, please ensure the name & student id is correct";
+    public static final String MESSAGE_STUDENT_NOT_FOUND =
+            "%s is not found, please ensure the name & student id is correct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of all students / a student in a class. \n"

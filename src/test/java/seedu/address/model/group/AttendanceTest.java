@@ -41,8 +41,8 @@ public class AttendanceTest {
     }
 
     @Test
-    public void constructor_flagAttendanceWithStudentPresent_Success() {
-        Attendance test = new Attendance(true,  true);
+    public void constructor_flagAttendanceWithStudentPresent_success() {
+        Attendance test = new Attendance(true, true);
         assertTrue(test.getFlagged());
     }
 

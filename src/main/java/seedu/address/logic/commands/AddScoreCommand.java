@@ -17,7 +17,8 @@ public class AddScoreCommand extends Command {
 
     public static final String COMMAND_WORD = "addscore";
     public static final String MESSAGE_SUCCESS = "%s: \nParticipation Score: %d";
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "%s is not found, please ensure the name & student id is correct";
+    public static final String MESSAGE_STUDENT_NOT_FOUND =
+            "%s is not found, please ensure the name & student id is correct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Gives a student in the class a participation score. \n"

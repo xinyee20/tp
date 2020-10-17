@@ -1,7 +1,5 @@
 package seedu.address.model.group;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
 public class Participation {
 
     public static final String SCORE_ERROR = "Score must be a number";

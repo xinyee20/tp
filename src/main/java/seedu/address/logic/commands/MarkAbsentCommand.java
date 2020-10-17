@@ -17,7 +17,8 @@ public class MarkAbsentCommand extends Command {
 
     public static final String COMMAND_WORD = "markabsent";
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance:  absent";
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "%s is not found, please ensure the name & student id is correct";
+    public static final String MESSAGE_STUDENT_NOT_FOUND =
+            "%s is not found, please ensure the name & student id is correct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the attendance of a student in a class. \n"

@@ -25,6 +25,11 @@ public class Attendance {
         this.isFlagged = false;
     }
 
+    /**
+     * Creates an Attendance object that isPresent and with flag marked accordingly
+     * @param isPresent True if student is present and false if student is absent
+     * @param isFlagged True to flag student and false to unflag student
+     */
     public Attendance(boolean isPresent, boolean isFlagged) throws IllegalArgumentException {
         if (isPresent) {
             this.isPresent = isPresent;
