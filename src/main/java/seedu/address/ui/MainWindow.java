@@ -16,6 +16,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.groupdata.GroupDataPanel;
+import seedu.address.ui.lessondata.LessonDataPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -36,7 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     // Ui parts relating to serentiy
-    private DataDisplayWindow dataDisplayWindow;
+    private DataPanel groupDataPanel;
+    private DataPanel lessonDataPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -117,9 +120,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        dataDisplayWindow = new DataDisplayWindow(logic);
-        dataDisplayPlaceholder.getChildren().add(dataDisplayWindow.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -175,7 +175,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void toggleLsnView() {
-        dataDisplayWindow.toggleLsnView();
+        lessonDataPanel = new LessonDataPanel(logic.getStudentInfoList());
+        dataDisplayPlaceholder.getChildren().add(lessonDataPanel.getRoot());
     }
 
     /**
@@ -183,7 +184,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void toggleGrpView() {
-        dataDisplayWindow.toggleGrpView();
+        groupDataPanel = new GroupDataPanel(logic.getLessonList(), logic.getStudentList());
+        dataDisplayPlaceholder.getChildren().add(groupDataPanel.getRoot());
     }
 
     /**

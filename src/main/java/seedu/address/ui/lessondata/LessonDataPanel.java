@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.lessondata;
 
 import java.util.logging.Logger;
 
@@ -6,33 +6,28 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.ui.DataPanel;
+import seedu.address.ui.groupdata.GroupDataPanel;
 
-/**
- * Panel containing the list of student information.
- */
-public class StudentInfoListPanel extends UiPart<Region> {
 
-    private static final String FXML = "StudentInfoListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(StudentInfoListPanel.class);
+public class LessonDataPanel extends DataPanel {
+    private static final String FXML = "LessonDataPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(GroupDataPanel.class);
 
     @FXML
     private ListView<StudentInfo> studentInfoListView;
 
     /**
-     * Creates a {@code StudentInfoListPanel} with the given {@code ObservableList}.
+     * Constructor for panel to display Lesson data
      */
-    public StudentInfoListPanel(ObservableList<StudentInfo> studentInfoList) {
+    public LessonDataPanel(ObservableList<StudentInfo> studentInfoList) {
         super(FXML);
         studentInfoListView.setItems(studentInfoList);
-        studentInfoListView.setCellFactory(listView -> new StudentInfoListPanel.StudentInfoListViewCell());
+        studentInfoListView.setCellFactory(listView -> new StudentInfoListViewCell());
     }
 
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code StudentInfo} using a {@code StudentInfoCard}.
-     */
     class StudentInfoListViewCell extends ListCell<StudentInfo> {
 
         @Override
@@ -47,5 +42,5 @@ public class StudentInfoListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
+
