@@ -103,20 +103,7 @@ public interface Model {
      */
     Path getSerenityFilePath();
 
-    /**
-     * Sets the user prefs' serenity file path.
-     */
-    void setSerenityFilePath(Path serenityFilePath);
-
-    /**
-     * Replaces serenity data with the data in {@code serenity}.
-     */
-    void setSerenity(ReadOnlySerenity serenity);
-
-    /**
-     * Returns the Serenity
-     */
-    ReadOnlySerenity getSerenity();
+    ObservableList<Group> getGroupList();
 
     /**
      * Returns true if a group with the same identity as {@code group} exists in serenity.

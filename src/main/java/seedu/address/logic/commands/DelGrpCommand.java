@@ -35,8 +35,8 @@ public class DelGrpCommand extends Command {
 
         Group toDel = null;
 
-        if (!model.getSerenity().getGroupList().isEmpty()) {
-            for (Group group : model.getSerenity().getGroupList()) {
+        if (!model.getGroupList().isEmpty()) {
+            for (Group group : model.getGroupList()) {
                 if (group.getName().equals(grpPredicate.getKeyword())) {
                     toDel = group;
                     break;

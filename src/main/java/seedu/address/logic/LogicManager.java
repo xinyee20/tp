@@ -14,7 +14,6 @@ import seedu.address.logic.parser.SerenityParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
@@ -54,7 +53,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
-            storage.saveSerenity(model.getSerenity());
+            //storage.saveSerenity(model.getSerenity());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -88,11 +87,6 @@ public class LogicManager implements Logic {
     }
 
     // ========== Serenity ==========
-
-    @Override
-    public ReadOnlySerenity getSerenity() {
-        return model.getSerenity();
-    }
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
