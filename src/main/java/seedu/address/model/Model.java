@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
 
 /**
@@ -119,6 +121,16 @@ public interface Model {
      * Adds the given group. {@code group} must not already exist in serenity.
      */
     void addGroup(Group group);
+
+    /**
+     * Checks if Student exists.
+     * @param group
+     * @param student
+     * @return Whether student exists.
+     */
+    boolean checkIfStudentExistsInGroup(Group group, Student student);
+
+    Optional<UniqueStudentList> getStudents(Group group);
 
     /**
      * Adds a Student to a Group

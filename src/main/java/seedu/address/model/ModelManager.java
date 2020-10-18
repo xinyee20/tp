@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ import seedu.address.model.group.UniqueQuestionList;
 import seedu.address.model.group.UniqueStudentInfoList;
 import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.managers.GroupManager;
+import seedu.address.model.managers.StudentManager;
 import seedu.address.model.person.Person;
 
 /**
@@ -42,6 +44,7 @@ public class ModelManager implements Model {
     private final ArrayObservableList<Question> questions;
 
     private final GroupManager groupManager;
+    private final StudentManager studentManager;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
@@ -59,6 +62,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         groupManager = new GroupManager(new UniqueGroupList());
+        studentManager = new StudentManager();
         filteredGroups = new FilteredList<>(groupManager.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
@@ -82,6 +86,7 @@ public class ModelManager implements Model {
         filteredGroups = new FilteredList<>(groupManager.getGroupList());
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
+        studentManager = new StudentManager();
         lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
         filteredLessons = new FilteredList<>(lessons);
         studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
@@ -177,7 +182,18 @@ public class ModelManager implements Model {
         return userPrefs.getSerenityFilePath();
     }
 
+    //==== StudentManager ====
 
+
+    @Override
+    public boolean checkIfStudentExistsInGroup(Group group, Student student) {
+        return studentManager.checkIfStudentExists(group, student);
+    }
+
+    @Override
+    public Optional<UniqueStudentList> getStudents(Group group) {
+        return studentManager.getStudents(group);
+    }
 
     @Override
     public boolean hasGroup(Group group) {
@@ -206,7 +222,7 @@ public class ModelManager implements Model {
     public void addStudentToGroup(Student student, Predicate<Group> predicate) {
         requireAllNonNull(student, predicate);
         updateFilteredGroupList(predicate);
-        if (!filteredGroups.isEmpty()) {
+        if (!filteredGroups.isEmpty() && !students.contains(student)) {
             students.add(student);
             Group currentGroup = filteredGroups.get(0);
             currentGroup.addStudentToGroup(student);

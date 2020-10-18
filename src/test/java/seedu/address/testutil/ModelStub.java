@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -13,6 +14,7 @@ import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
 
 /**
@@ -57,6 +59,16 @@ public class ModelStub implements Model {
 
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean checkIfStudentExistsInGroup(Group group, Student student) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Optional<UniqueStudentList> getStudents(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 
