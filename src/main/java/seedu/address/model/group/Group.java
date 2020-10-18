@@ -169,9 +169,7 @@ public class Group {
         }
 
         Group otherGroup = (Group) other;
-        return otherGroup.getName().equals(getName())
-            && otherGroup.getStudents().equals(getStudents())
-            && otherGroup.getLessons().equals(getLessons());
+        return otherGroup.getName().equals(getName());
     }
 
     @Override

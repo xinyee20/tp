@@ -22,7 +22,7 @@ public class TypicalGroups {
         .withStudents(
             new Student("Jeffery", "e0000000"),
             new Student("Luna", "e0111111"),
-            new Student("Queenie", "e02222222")
+            new Student("Queenie", "e0222222")
         ).withClasses(
             "4.2",
             "5.1"
@@ -31,7 +31,7 @@ public class TypicalGroups {
     public static final Group GROUP_D = new GroupBuilder().withName("G07")
         .withStudents(
             new Student("Freddie", "e0000000"),
-            new Student("June", "e0101010")
+            new Student("June", "e0101011")
         ).withClasses(
             "4.2",
             "5.1",

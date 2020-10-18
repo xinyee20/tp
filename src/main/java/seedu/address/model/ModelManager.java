@@ -182,7 +182,8 @@ public class ModelManager implements Model {
     @Override
     public boolean hasGroup(Group group) {
         requireNonNull(group);
-        return groupManager.hasGroup(group);
+        boolean hasgrp = groupManager.hasGroup(group);
+        return hasgrp;
     }
 
     @Override
