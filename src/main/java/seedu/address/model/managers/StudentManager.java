@@ -23,11 +23,15 @@ public class StudentManager {
      */
     public void addStudent(Group group, Student student) {
         requireAllNonNull(group, student);
-        Optional<UniqueStudentList> studentsOptional = Optional.of(studentLists.get(group));
+        Optional<UniqueStudentList> studentsOptional = Optional.ofNullable(studentLists.get(group));
         if (studentsOptional.isPresent()) {
             UniqueStudentList students = studentsOptional.get();
             students.add(student);
         }
+    }
+
+    public void addGroup(Group group, UniqueStudentList students) {
+        studentLists.put(group, students);
     }
 
     /**
@@ -38,7 +42,7 @@ public class StudentManager {
      */
     public boolean checkIfStudentExists(Group group, Student student) {
         requireAllNonNull(group, student);
-        Optional<UniqueStudentList> studentsOptional = Optional.of(studentLists.get(group));
+        Optional<UniqueStudentList> studentsOptional = Optional.ofNullable(studentLists.get(group));
         if (studentsOptional.isEmpty()) {
             return false;
         } else {
@@ -53,7 +57,7 @@ public class StudentManager {
      */
     public Optional<UniqueStudentList> getStudents(Group group) {
         requireNonNull(group);
-        return Optional.of(studentLists.get(group));
+        return Optional.ofNullable(studentLists.get(group));
     }
 
 

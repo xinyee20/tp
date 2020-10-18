@@ -215,7 +215,9 @@ public class ModelManager implements Model {
     @Override
     public void addGroup(Group group) {
         requireNonNull(group);
+        UniqueStudentList studentList = group.getStudents();
         groupManager.addGroup(group);
+        studentManager.addGroup(group, studentList);
     }
 
     @Override
@@ -226,6 +228,7 @@ public class ModelManager implements Model {
             students.add(student);
             Group currentGroup = filteredGroups.get(0);
             currentGroup.addStudentToGroup(student);
+            studentManager.addStudent(currentGroup, student);
         }
     }
 
