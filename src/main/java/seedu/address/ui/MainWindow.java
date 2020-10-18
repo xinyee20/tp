@@ -175,7 +175,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void toggleLsnView() {
-        lessonDataPanel = new LessonDataPanel(logic.getStudentInfoList());
+        lessonDataPanel = new LessonDataPanel(logic.getStudentInfoList(), logic.getQuestionList());
+        dataDisplayPlaceholder.getChildren().clear();
         dataDisplayPlaceholder.getChildren().add(lessonDataPanel.getRoot());
     }
 
@@ -185,6 +186,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void toggleGrpView() {
         groupDataPanel = new GroupDataPanel(logic.getLessonList(), logic.getStudentList());
+        dataDisplayPlaceholder.getChildren().clear();
         dataDisplayPlaceholder.getChildren().add(groupDataPanel.getRoot());
     }
 
