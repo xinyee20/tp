@@ -13,12 +13,12 @@
 
 <fx:root minHeight="600" minWidth="700" onCloseRequest="#handleExit" title="Serenity" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/serenity_logo.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@SerenityTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
@@ -31,19 +31,18 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-            <StackPane fx:id="dataDisplayPlaceholder" minWidth="680.0" prefHeight="150.0" prefWidth="200.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-            </StackPane>
-            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
-              <padding>
-                  <Insets bottom="5" left="10" right="10" top="5" />
-              </padding>
-            </StackPane>
-            <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-              <padding>
-                  <Insets bottom="5" left="10" right="10" top="5" />
-              </padding>
-            </StackPane>
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+          <StackPane fx:id="dataDisplayPlaceholder" minWidth="680.0" prefHeight="150.0" prefWidth="200.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+          </StackPane>
+          <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+            <padding>
+              <Insets bottom="5" left="10" right="10" top="5" />
+            </padding>
+          </StackPane>
+          <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+            <padding>
+              <Insets bottom="5" left="10" right="10" top="5" />
+            </padding>
+          </StackPane>
       </VBox>
     </Scene>
   </scene>
