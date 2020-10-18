@@ -18,9 +18,9 @@ By: `Team Serenity` Since: `Aug 2020`
 
    4.2. [Attendance Taking](#attendance-taking)
 
-     * [Mark attendance for a every student: `markAll`](#mark-attendance-for-every-student-markall)
+     * [Mark attendance for every student: `markpresent all`](#mark-attendance-for-every-student-markpresent-all)
 
-     * [Mark attendance for a single student: `mark`](#mark-attendance-for-a-single-student-mark)
+     * [Mark attendance for a single student: `markpresent`](#mark-attendance-for-a-single-student-mark)
 
      * [Flag attendance for a single student: `flag`](#flag-attendance-for-a-single-student-flag)
 
@@ -103,10 +103,12 @@ You can set up classes automatically by importing CSV data.
 
 ### <ins>4.2. Attendance Taking</ins>
 
-Just before you start the lesson, it will be nice to be able to quickly take the attendance of every student in the class so that you won't have to worry about it afterwards. This feature allows you to mark the attendance of all students at once upon checking that all students are present, so the class can start without much hassle.
+Just before you start the lesson, it will be nice to be able to quickly take the attendance of every student in the 
+class so that you won't have to worry about it afterwards. This feature allows you to mark the attendance of all 
+students at once upon checking that all students are present, so the class can start without much hassle.
 
-#### 4.2.1. Mark attendance for a single student as present: `markpresent`
-You can use this command to mark attendance for a specific student in a tutorial lesson.
+#### 4.2.1. Mark a single student as present: `markpresent`
+You can use this command to mark a specific student present for a tutorial lesson.
 
 **Format:**
 `markpresent name/NAME id/STUDENT_ID`
@@ -127,7 +129,7 @@ Outcome:
 ![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
 _Figure X. Outcome of a successful mark a student present command_
 
-#### 4.2.2. Mark attendance for a single student as absent: `markabsent`
+#### 4.2.2. Mark a single student as absent: `markabsent`
 You can use this command to mark a specific student absent for a tutorial lesson.
 
 **Format:**
@@ -150,7 +152,7 @@ Outcome:
 _Figure X. Outcome of a successful mark a student absent command_
 
 #### 4.2.3. Mark attendance for all students: `markpresent all`
-You can use this command to mark attendance for all students in a tutorial lesson.
+You can use this command to mark all students present for a tutorial lesson.
 
 **Format:**
 `markpresent all`
@@ -220,7 +222,8 @@ Outcome:
 
 ### <ins>4.3. Participation Marking</ins>
 
-Need to keep track of all your students' participation during lessons quickly? This feature allow you to key in a student's participation score easily with a scale for reference.
+Need to keep track of all your students' participation during lessons quickly? This feature allows you to key in a 
+student's participation score easily with a scale for reference.
 
 #### 4.3.1. Award participation score for a student: `addscore`
 You can use this command to add the participation score for a specific student in a tutorial lesson.
