@@ -1,10 +1,11 @@
-package seedu.address.ui;
+package seedu.address.ui.groupdata;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.group.Student;
+import seedu.address.ui.UiPart;
 
 
 /**
