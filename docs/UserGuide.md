@@ -101,6 +101,44 @@ You can set up classes automatically by importing CSV data.
 
 ---
 
+#### 4.1.3. Add a new tutorial lesson: `addlsn`
+You can use this command to add a new tutorial lesson for a specified tutorial group.
+
+**Format:**
+`addlsn grp/GROUP lsn/LESSON`
+
+**Example:**
+If you want to create a new lesson 2-2 for tutorial group G04, you can perform the steps below.
+
+Adding a lesson to a specified tutorial group:
+1. Type `addlsn grp/G04 lsn/2-2` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message.
+2. Serenity will display the **2-2** lesson page.
+3. You can now see that lesson **2-2** has been added.
+
+#### 4.1.4. Delete an existing tutorial lesson: `dellsn`
+You can use this command to delete an existing lesson from a specified tutorial group.
+
+**Format:**
+`dellsn grp/GROUP lsn/LESSON`
+
+**Example:**
+If you accidentally added a lesson **2-3** for tutorial group **G04** and decided to remove it, you can perform the steps below.
+
+Deleting an existing lesson from a specified tutorial group:
+1. Type `dellsn grp/G04 lsn/2-3` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message. 
+2. serenity will exit the lesson **2-3** page and enter the tutorial group **G04** page.
+3. you can now see that lesson **2-3** no longer exist.
+
 #### 4.1.5. Add a new student: `addstudent`
 You can use this command to add a new student to a tutorial group.
 
@@ -377,6 +415,25 @@ Outcome:
 ---
 
 ### <ins>4.5 Utility</ins>
+
+#### 4.5.1. View an existing tutorial group: `viewgrp`
+You can use this command to view the list of students and tutorial lessons of an existing tutorial group. You will also be able to execute tutorial group-related commands.
+
+**Format:**
+`viewgrp grp/GROUP`
+
+**Example:**
+Suppose you would like to view the details for tutorial group `G04`. You can perform the following steps.
+
+To view tutorial group `G04`:
+1. Type `viewgrp grp/G04` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. The *Data Display* will update and display the information for tutorial group `G04`.
+
+![Figure X. Outcome of a successful view group command](reference)
 
 #### 4.5.2. View an existing tutorial lesson: `viewlsn`
 You can use this command to view the attendance, participation scores and questions of an existing tutorial group. You will also be able to execute tutorial lesson-related commands.
