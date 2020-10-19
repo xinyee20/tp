@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
