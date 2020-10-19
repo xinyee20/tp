@@ -103,12 +103,11 @@ public class UniqueStudentList implements UniqueList<Student> {
      * Replaces the contents of this list with {@code students}. {@code students} must not contain duplicate students.
      */
     @Override
-    public void setElements(List<Student> students) {
-        requireAllNonNull(students);
+    public void setElementsWithList(List<Student> students) {
+        requireNonNull(students);
         if (!elementsAreUnique(students)) {
             throw new DuplicateStudentException();
         }
-
         internalList.setAll(students);
     }
 

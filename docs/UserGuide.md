@@ -18,9 +18,9 @@ By: `Team Serenity` Since: `Aug 2020`
 
    4.2. [Attendance Taking](#attendance-taking)
 
-     * [Mark attendance for a every student: `markAll`](#mark-attendance-for-every-student-markall)
+     * [Mark attendance for every student: `markpresent all`](#mark-attendance-for-every-student-markpresent-all)
 
-     * [Mark attendance for a single student: `mark`](#mark-attendance-for-a-single-student-mark)
+     * [Mark attendance for a single student: `markpresent`](#mark-attendance-for-a-single-student-mark)
 
      * [Flag attendance for a single student: `flag`](#flag-attendance-for-a-single-student-flag)
 
@@ -36,15 +36,15 @@ By: `Team Serenity` Since: `Aug 2020`
 
      * [Exporting of class participation grades to CSV: `exportCp`](#exporting-of-class-participation-grades-to-csv-exportcp)
 
-   4.4 [Addressing Questions](#addressing-questions)
+   4.4. [Question Addressing](#ins44-question-addressingins)
+       
+      4.4.1. [Adding a question: `addQn`](#441-add-a-new-question-addqn)
 
-     * [Adding a question: `addQn`](#adding-a-question-addqn)
+      4.4.2. [Deleting a question: `deleteQn`](#442-delete-an-existing-question-delqn)
 
-     * [Viewing all questions: `questions`](#viewing-all-questions-list)
-
-     * [Deleting a question: `deleteQn`](#deleting-a-question-deleteqn)
-
-     * [Marking a question as answered: `ansQn`](#marking-a-question-as-answered-ansqn)
+   4.5. [Utility](#ins45-utilityins)
+   
+      4.5.2. [View an existing tutorial lesson: `viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn)
 
 5. [FAQ](#faq)
 
@@ -101,35 +101,153 @@ You can set up classes automatically by importing CSV data.
 
 ---
 
-### <ins>Attendance Taking</ins>
+#### 4.1.3. Add a new tutorial lesson: `addlsn`
+You can use this command to add a new tutorial lesson for a specified tutorial group.
 
-#### Mark attendance for every student: `markAll`
-Marks all students of a particular class for a single tutorial 
-session as present.
+**Format:**
+`addlsn grp/GROUP lsn/LESSON`
 
-Format:  `markAll TUTORIAL_GROUP LESSON_NUMBER`
+**Example:**
+If you want to create a new lesson 2-2 for tutorial group G04, you can perform the steps below.
 
-Examples:
-* `markAll G04 1-1`
-* `markAll G09 7-2`
-
-#### Mark attendance for a single student as absent: `mark`
-
-Marks a student of a particular class for a 
-single tutorial session as absent.
-
-Format: `mark TUTORIAL_GROUP LESSON_NUMBER NAME`
-
-*TIP*: Use `markAll` to mark all students as present first, then use
-`mark` to mark just the students who are absent for a quick
-and easy way to record attendance.
-
-Examples:
-* `mark G04 1-1 john`
-* `mark G09 7-2 ryan`
+Adding a lesson to a specified tutorial group:
+1. Type `addlsn grp/G04 lsn/2-2` into the *Command Box*.
+2. Press `Enter` to execute.
 
 Outcome:
 
+1. The *Result Display* will show a success message.
+2. Serenity will display the **2-2** lesson page.
+3. You can now see that lesson **2-2** has been added.
+
+#### 4.1.4. Delete an existing tutorial lesson: `dellsn`
+You can use this command to delete an existing lesson from a specified tutorial group.
+
+**Format:**
+`dellsn grp/GROUP lsn/LESSON`
+
+**Example:**
+If you accidentally added a lesson **2-3** for tutorial group **G04** and decided to remove it, you can perform the steps below.
+
+Deleting an existing lesson from a specified tutorial group:
+1. Type `dellsn grp/G04 lsn/2-3` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message. 
+2. serenity will exit the lesson **2-3** page and enter the tutorial group **G04** page.
+3. you can now see that lesson **2-3** no longer exist.
+
+#### 4.1.5. Add a new student: `addstudent`
+You can use this command to add a new student to a tutorial group.
+
+**Format:**
+`addstudent grp/GROUP name/NAME id/STUDENT_ID`
+
+**Example:**
+A new student named `Aaron Tan` with student ID `e0123456` entered your tutorial group, and you would like to add him to tutorial group `G04`.
+
+To add him to the tutorial group:
+
+1. Type `addstudent grp/G04 name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message.
+2. You will now see `Aaron Tan` in the list of students shown on the screen.
+
+#### 4.1.6. Delete an existing student: `delstudent`
+You can use this command to delete an existing student from a tutorial group.
+
+**Format:**
+`delstudent grp/GROUP name/NAME id/STUDENT_ID`
+
+**Example:**
+A student named `Aaron Tan` with student ID `e0123456` has left your tutorial group, and you would like to remove him from the tutorial group `G04`.
+
+To remove him from the tutorial group:
+
+1. Type `delstudent grp/G04 name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message.
+2. `Aaron Tan` will no longer be in the list of students shown on the screen.
+
+### <ins>4.2. Attendance Taking</ins>
+
+Just before you start the lesson, it will be nice to be able to quickly take the attendance of every student in the 
+class so that you won't have to worry about it afterwards. This feature allows you to mark the attendance of all 
+students at once upon checking that all students are present, so the class can start without much hassle.
+
+#### 4.2.1. Mark a single student as present: `markpresent`
+You can use this command to mark a specific student present for a tutorial lesson.
+
+**Format:**
+`markpresent name/NAME id/STUDENT_ID`
+
+**Example:**
+
+There is a student named `Aaron Tan` with Student ID of `e0123456` who is present for the tutorial lesson `1-2` of group `G04`. 
+
+To mark him present:
+1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
+2. Type `markpresent name/Aaron Tan id/e0123456` into the *Command Box*.
+3. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. You can now see that his attendance has been updated on the *Student Information Panel*.
+
+![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
+_Figure X. Outcome of a successful mark a student present command_
+
+#### 4.2.2. Mark a single student as absent: `markabsent`
+You can use this command to mark a specific student absent for a tutorial lesson.
+
+**Format:**
+`markabsent name/NAME id/STUDENT_ID`
+
+**Example:**
+
+There is a student `Aaron Tan` with Student ID `e0123456` from group `G04` who is absent for your tutorial lesson `1-2`. 
+
+To mark him absent:
+1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
+2. Type `markabsent name/Aaron Tan id/e0123456` into the *Command Box*.
+3. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. You can now see that his attendance has been updated on the *Student Information Panel*.
+
+![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png)
+_Figure X. Outcome of a successful mark a student absent command_
+
+#### 4.2.3. Mark attendance for all students: `markpresent all`
+You can use this command to mark all students present for a tutorial lesson.
+
+**Format:**
+`markpresent all`
+
+**Example:**
+
+All students in group `G04` are present for the tutorial lesson `1-2`. 
+
+To mark all of them present at once:
+1. Navigate to view group `G04` lesson `1-2` via ![`viewlsn`](link to viewlsn command) command.
+2. Type `markpresent all` into the *Command Box*.
+3. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. You can now see that all the students' attendance have been updated on the *Student Information Panel*.
+
+![Figure X. Outcome of a successful mark attendance for all students command](images/ui/markpresent_all.png)
+_Figure X. Outcome of a successful mark attendance for all students command_
 
 #### Flag attendance for a single student: `flag`
 
@@ -178,32 +296,37 @@ Outcome:
 
 ---
 
-### <ins>Class Participation</ins>
+### <ins>4.3. Participation Marking</ins>
 
-This feature allows you to manage the class participation grades for each student in your classes.
+Need to keep track of all your students' participation during lessons quickly? This feature allows you to key in a 
+student's participation score easily with a scale for reference.
 
-#### Awarding class participation marks: `award`
+#### 4.3.1. Award participation score for a student: `addscore`
+You can use this command to add the participation score for a specific student in a tutorial lesson.
 
-you can use this command to award class participation marks to a student from a specified tutorial group and tutorial 
-you wish to grade.
+With a scale from 1 to 5:
+Score | 1 | 2 | 3 | 4 | 5 | 
+------|---|---|---|---|---
+**Remark** |Very Poor| Poor| Sufficient|Good|Commendable
 
-##### Format:
+**Format:**
+`addscore MARK name/NAME id/STUDENT_ID`
 
-`award NAME TUTORIAL_GROUP TUTORIAL_NUMBER MARKS`
+**Example:**
 
-##### Example:
+After **lesson 1-2**, you felt that your student `Aaron Tan` with Student ID `e0123456`  from **group G04** participated sufficiently in class but could be more active, you would like to give him a `3` for his participation.
 
-If you wish to award a student participation marks, follow the steps below to learn how. In this example you will learn
-how to award a student ,`Ryan`, from tutorial group `G04`, a class participation score of `4` for tutorial `3-1`.
-
-Awarding class participation:
-
-1. Type `award Ryan G04 3-1 4`
-
-2. Press `enter` to execute the command 
+To give him a score:
+1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
+2. Type `addscore 3 name/Aaron Tan id/e0123456` into the *Command Box*.
+3. Press `Enter` to execute.
 
 Outcome:
+1. The *Result Display* will show a success message.
+2. You can now see that his score has been updated on the *Student Information Panel*.
 
+![Figure X. Outcome of a successful add score for 1 student command](images/ui/addscore_student.png)
+_Figure X. Outcome of a successful add score for a student command_
 
 #### Viewing statistics of class participation: `stats`
 
@@ -251,72 +374,85 @@ Outcome:
 
 ---
 
-### <ins>Addressing Questions</ins>
+### <ins>4.4. Question Addressing</ins>
 
-#### Adding a question: `addQn`
+Need to keep track of all your students' questions during lessons quickly? This feature allows you to key in questions easily for future references.
 
-Adds a question to the list of questions of a specified tutorial group.
+#### 4.4.1. Add a new question: `addqn`
+You can use this command to add a question that was asked in a lesson, so that you can address the question at the end of the lesson.
 
-##### Format:
+**Format:**
+`addqn qn/QUESTION`
 
-`addQn TUTORIAL_GROUP LESSON_NUMBER QUESTION_DESCRIPTION`
+**Example:**
+When teaching group `G04` lesson `1-2`, a student ask a question, and you want to note it down.
 
-##### Examples:
-* `addQn G07 7-1 Could you elaborate on the marking scheme for OP1?`
-* `addQn G07 7-1 What are the deadlines that students should take note of?`
-
-Outcome:
-
-
-#### Viewing all questions: `questions`
-
-View a list of all the questions from a specified tutorial group.
-
-##### Format:
-
-`questions TUTORIAL_GROUP LESSON_NUMBER`
-
-##### Examples:
-* `questions G07 7-1`
-* `questions G10 5-2`
+To add a question to group `G04` lesson `1-2`:
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `addqn qn/What is the deadline for the report?` into the *Command Box*.
+3. Press `Enter` to execute.
 
 Outcome:
+1. The *Result Display* will show a success message.
 
+#### 4.4.2. Delete an existing question: `delqn`
+You can use this command to add a question that was asked in a tutorial lesson, so that you can address the question at the end of the lesson.
 
-#### Deleting a question: `deleteQn`
+**Format:**
+`delqn INDEX`
 
-Deletes the specific question from the list of questions of a specified tutorial group.
+**Example:**
+When teaching group `G04` lesson `1-2`, you answered one of the questions and wants to delete it from the list of questions.
 
-##### Format:
-
-`deleteQn TUTORIAL_GROUP LESSON_NUMBER INDEX`
-* Deletes the question at the specified `INDEX`.
-* The index refers to the index number shown in the displayed question list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-##### Examples:
-* `deleteQn G07 7-1 1`
-* `deleteQn G10 5-2 3`
-
-Outcome:
-
-
-#### Marking a question as answered: `ansQn` 
-
-Marks the specified question from the list of questions of a specified tutorial group as answered.
-
-##### Format:
-
-`ansQn TUTORIAL_GROUP LESSON_NUMBER INDEX`
-* Marks the question at the specified `INDEX` as answered.
-* The index refers to the index number shown in the displayed question list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-##### Examples:
-* `ansQn G07 7-1 1`
-* `ansQn G10 5-2 3`
+To delete a question from group `G04` lesson `1-2`:
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `delqn 1` into the *Command Box*.
+3. Press `Enter` to execute.
 
 Outcome:
+1. The *Result Display* will show a success message.
+
+---
+
+### <ins>4.5 Utility</ins>
+
+#### 4.5.1. View an existing tutorial group: `viewgrp`
+You can use this command to view the list of students and tutorial lessons of an existing tutorial group. You will also be able to execute tutorial group-related commands.
+
+**Format:**
+`viewgrp grp/GROUP`
+
+**Example:**
+Suppose you would like to view the details for tutorial group `G04`. You can perform the following steps.
+
+To view tutorial group `G04`:
+1. Type `viewgrp grp/G04` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. The *Data Display* will update and display the information for tutorial group `G04`.
+
+![Figure X. Outcome of a successful view group command](reference)
+
+#### 4.5.2. View an existing tutorial lesson: `viewlsn`
+You can use this command to view the attendance, participation scores and questions of an existing tutorial group. You will also be able to execute tutorial lesson-related commands.
+
+**Format:**
+`viewlsn grp/GROUP lsn/LESSON`
+
+**Example:**
+Suppose you would like to view the details for tutorial group `G04`'s  lesson `1-2`. You can perform the following steps.
+
+To view tutorial group `G04`'s lesson `1-2`:
+1. Type `viewlsn grp/G04 lsn/1-2` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+1. The *Result Display* will show a success message.
+2. The *Data Display* will update and display the students' information for tutorial group `G04`'s lesson `1-2`.
+
+![Figure X. Outcome of a successful `viewlsn` command](#)
 
 --------------------------------------------------------------------------------------------------------------------
 

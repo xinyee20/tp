@@ -47,7 +47,7 @@ public interface UniqueList<T> extends Iterable<T> {
      * Replaces the contents of this list with {@code elements}.
      * {@code elements} must not contain duplicate elements.
      */
-    public void setElements(List<T> elements);
+    public void setElementsWithList(List<T> elements);
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.

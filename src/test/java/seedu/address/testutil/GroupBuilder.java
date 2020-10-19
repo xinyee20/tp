@@ -42,8 +42,8 @@ public class GroupBuilder {
      */
     public GroupBuilder() {
         name = DEFAULT_NAME;
-        students.setElements(new ArrayList<>(DEFAULT_STUDENTS));
-        lessons.setElements(new ArrayList<>(DEFAULT_CLASSES));
+        students.setElementsWithList(new ArrayList<>(DEFAULT_STUDENTS));
+        lessons.setElementsWithList(new ArrayList<>(DEFAULT_CLASSES));
     }
 
     /**
@@ -60,8 +60,8 @@ public class GroupBuilder {
      */
     public GroupBuilder(String name, Path filePath) {
         this.name = name;
-        students.setElements(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
-        lessons.setElements(new ArrayList<>());
+        students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+        lessons.setElementsWithList(new ArrayList<>());
     }
 
     /**
@@ -76,7 +76,7 @@ public class GroupBuilder {
      * Parses the {@code students} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
     public GroupBuilder withStudents(Student... students) {
-        this.students.setElements(Arrays.asList(students));
+        this.students.setElementsWithList(Arrays.asList(students));
         return this;
     }
 
@@ -84,7 +84,7 @@ public class GroupBuilder {
      * Parses the {@code filePath} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
     public GroupBuilder withFilePath(Path filePath) {
-        students.setElements(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+        students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
         return this;
     }
 

@@ -55,6 +55,7 @@ public class AddQnCommand extends Command {
         }
 
         uniqueQuestionList.add(toAdd);
+        model.updateQuestionList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

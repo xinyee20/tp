@@ -49,7 +49,7 @@ public class UnmarkAttCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(i);
             boolean isCorrectStudent = studentInfo.containsStudent(toUnmarkAtt);
             if (isCorrectStudent) {
-                Attendance update = studentInfo.getAttendance().setAttendance(false);
+                Attendance update = studentInfo.getAttendance().setNewAttendance(false);
                 StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                 uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                 model.updateLessonList();

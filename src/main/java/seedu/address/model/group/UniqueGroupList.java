@@ -109,7 +109,7 @@ public class UniqueGroupList implements UniqueList<Group> {
      * Replaces the contents of this list with {@code groups}. {@code groups} must not contain duplicate groups.
      */
     @Override
-    public void setElements(List<Group> groups) {
+    public void setElementsWithList(List<Group> groups) {
         requireAllNonNull(groups);
         if (!elementsAreUnique(groups)) {
             throw new DuplicateGroupException();

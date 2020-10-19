@@ -35,11 +35,11 @@ public class Group {
         this.name = name;
         CsvUtil util = new CsvUtil(filePath);
         students = new UniqueStudentList();
-        students.setElements(new ArrayList<>(util.readStudentsFromCsv()));
+        students.setElementsWithList(new ArrayList<>(util.readStudentsFromCsv()));
         //todo: implement scores data
         Set<StudentInfo> studentsInfo = util.readStudentsInfoFromCsv(util.readStudentsFromCsv());
         lessons = new UniqueLessonList();
-        lessons.setElements(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
+        lessons.setElementsWithList(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
     }
 
     /**

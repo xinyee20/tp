@@ -113,14 +113,15 @@ class UniqueQuestionListTest {
 
     @Test
     public void setQuestions_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> this.uniqueQuestionList.setElements((List<Question>) null));
+        assertThrows(NullPointerException.class, () -> this.uniqueQuestionList
+            .setElementsWithList((List<Question>) null));
     }
 
     @Test
     public void setQuestions_list_replacesOwnListWithProvidedList() {
         this.uniqueQuestionList.add(QUESTION_1);
         List<Question> questionList = Collections.singletonList(QUESTION_2);
-        this.uniqueQuestionList.setElements(questionList);
+        this.uniqueQuestionList.setElementsWithList(questionList);
         UniqueList<Question> expectedUniqueQuestionList = new UniqueQuestionList();
         expectedUniqueQuestionList.add(QUESTION_2);
         assertEquals(expectedUniqueQuestionList, uniqueQuestionList);
@@ -130,7 +131,7 @@ class UniqueQuestionListTest {
     public void setQuestions_listWithDuplicateQuestions_throwsDuplicateQuestionException() {
         List<Question> listWithDuplicateQuestions = Arrays.asList(QUESTION_1, QUESTION_1);
         assertThrows(DuplicateQuestionException.class, () ->
-            this.uniqueQuestionList.setElements(listWithDuplicateQuestions));
+            this.uniqueQuestionList.setElementsWithList(listWithDuplicateQuestions));
     }
 
     @Test

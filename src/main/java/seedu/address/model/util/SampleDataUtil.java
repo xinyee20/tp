@@ -76,12 +76,12 @@ public class SampleDataUtil {
         Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "E0123456"),
             new Student("James", "E02030303"));
         UniqueList<StudentInfo> studentsInfoList = new UniqueStudentInfoList();
-        studentsInfoList.setElements(new ArrayList<>(studentsInfo));
+        studentsInfoList.setElementsWithList(new ArrayList<>(studentsInfo));
 
         Set<Student> students = getStudentSet(new Student("John", "E0123456"),
             new Student("James", "E02030303"));
         UniqueList<Student> studentsList = new UniqueStudentList();
-        studentsList.setElements(new ArrayList<>(students));
+        studentsList.setElementsWithList(new ArrayList<>(students));
 
         UniqueList<Lesson> lessonsList = new UniqueLessonList();
         Set<Lesson> lessons = new HashSet<>();

@@ -53,7 +53,7 @@ class JsonAdaptedGroup {
             groupStudents.add(groupStudent.toModelType());
         }
         final UniqueList<Student> modelStudents = new UniqueStudentList();
-        modelStudents.setElements(new ArrayList<>(groupStudents));
+        modelStudents.setElementsWithList(new ArrayList<>(groupStudents));
 
         final UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
 
@@ -63,7 +63,7 @@ class JsonAdaptedGroup {
             groupLessons.add(lessonItem);
         }
         final UniqueList<Lesson> modelLessons = new UniqueLessonList();
-        modelLessons.setElements(new ArrayList<>(groupLessons));
+        modelLessons.setElementsWithList(new ArrayList<>(groupLessons));
 
         return new Group(modelName, modelStudents, modelLessons);
     }

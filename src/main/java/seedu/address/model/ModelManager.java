@@ -328,7 +328,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateQuestionList() {
-        if (!filteredGroups.isEmpty() || !filteredLessons.isEmpty()) {
+        if (!filteredLessons.isEmpty()) {
             this.questions.setAll(this.filteredLessons.get(0).getQuestionListAsUnmodifiableObservableList());
         }
     }

@@ -68,7 +68,7 @@ public class MarkAttCommand extends Command {
                 StudentInfo studentInfo = studentsInfo.get(i);
                 boolean isCorrectStudent = studentInfo.containsStudent(toMarkAtt);
                 if (isCorrectStudent) {
-                    Attendance update = studentInfo.getAttendance().setAttendance(true);
+                    Attendance update = studentInfo.getAttendance().setNewAttendance(true);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
@@ -80,7 +80,7 @@ public class MarkAttCommand extends Command {
 
         // Mark whole class attendance
         for (StudentInfo each: studentsInfo) {
-            Attendance update = each.getAttendance().setAttendance(true);
+            Attendance update = each.getAttendance().setNewAttendance(true);
             StudentInfo updatedStudentInfo = each.updateAttendance(update);
             uniqueStudentInfoList.setElement(each, updatedStudentInfo);
             model.updateLessonList();

@@ -34,7 +34,7 @@ public class Serenity implements ReadOnlySerenity {
      * Replaces the contents of the group list with {@code groups}. {@code groups} must not contain duplicate groups.
      */
     public void setGroups(List<Group> groups) {
-        this.groups.setElements(groups);
+        this.groups.setElementsWithList(groups);
     }
 
 

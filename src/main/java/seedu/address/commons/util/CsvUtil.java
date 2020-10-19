@@ -100,7 +100,7 @@ public class CsvUtil {
             for (int i = 4; i < len; i++) {
                 String lessonName = computeClassName(i - 3); //start from 1
                 UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
-                newStudentsInfo.setElements(new ArrayList<>(studentsInfo));
+                newStudentsInfo.setElementsWithList(new ArrayList<>(studentsInfo));
                 lessons.add(new Lesson(lessonName, newStudentsInfo));
             }
         } catch (IOException ioe) {

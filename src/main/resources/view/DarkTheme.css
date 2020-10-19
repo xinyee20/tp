@@ -31,12 +31,29 @@
 
 .tab-pane {
     -fx-padding: 0 0 0 1;
+    -fx-tab-min-width:90px;
 }
 
-.tab-pane .tab-header-area {
-    -fx-padding: 0 0 0 0;
-    -fx-min-height: 0;
-    -fx-max-height: 0;
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #828282;
+}
+
+.tab {
+    -fx-background-insets: 0 2 0 2,0,0;
+    -fx-background-color: #585858;
+    -fx-focus-color: black;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 .table-view {

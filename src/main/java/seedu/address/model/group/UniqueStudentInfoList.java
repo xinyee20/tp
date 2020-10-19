@@ -100,7 +100,7 @@ public class UniqueStudentInfoList implements UniqueList<StudentInfo> {
      * Replaces the contents of this list with {@code studentsInfo}.
      * {@code studentsInfo} must not contain duplicate students info.
      */
-    public void setElements(List<StudentInfo> studentsInfo) {
+    public void setElementsWithList(List<StudentInfo> studentsInfo) {
         requireAllNonNull(studentsInfo);
         if (!elementsAreUnique(studentsInfo)) {
             throw new DuplicateStudentInfoException();

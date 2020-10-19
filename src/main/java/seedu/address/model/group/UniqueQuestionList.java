@@ -105,7 +105,7 @@ public class UniqueQuestionList implements UniqueList<Question> {
      * {@code questionList} must not contain duplicate questions.
      */
     @Override
-    public void setElements(List<Question> questionList) {
+    public void setElementsWithList(List<Question> questionList) {
         requireAllNonNull(questionList);
         if (!elementsAreUnique(questionList)) {
             throw new DuplicateQuestionException();

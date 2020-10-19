@@ -102,7 +102,7 @@ public class UniqueLessonList implements UniqueList<Lesson> {
      * Replaces the contents of this list with {@code lessons}. {@code lessons} must not contain duplicate lessons.
      */
     @Override
-    public void setElements(List<Lesson> lessons) {
+    public void setElementsWithList(List<Lesson> lessons) {
         requireAllNonNull(lessons);
         if (!elementsAreUnique(lessons)) {
             throw new DuplicateLessonException();
