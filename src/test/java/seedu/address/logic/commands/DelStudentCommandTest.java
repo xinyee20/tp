@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.util.UniqueList;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.GroupPredicateStub;
 import seedu.address.testutil.ModelStub;
@@ -51,7 +52,7 @@ public class DelStudentCommandTest {
                 "5.2",
                 "6.1"
             ).build();
-        UniqueGroupList groupList = new UniqueGroupList();
+        UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubGroup modelStub = new ModelStubGroup(filteredList);

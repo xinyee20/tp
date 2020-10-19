@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
-import seedu.address.model.group.UniqueQuestionList;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Deletes a question identified using it's displayed index from the specified group's lesson in Serenity.
@@ -44,7 +44,7 @@ public class DelQnCommand extends Command {
         }
 
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueQuestionList uniqueQuestionList = uniqueLesson.getQuestionList();
+        UniqueList<Question> uniqueQuestionList = uniqueLesson.getQuestionList();
         ObservableList<Question> lastViewedQuestionList = uniqueQuestionList.asUnmodifiableObservableList();
 
         if (targetIndex.getZeroBased() >= lastViewedQuestionList.size()) {

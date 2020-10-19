@@ -14,10 +14,8 @@ import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
-import seedu.address.model.group.UniqueLessonList;
-import seedu.address.model.group.UniqueStudentInfoList;
-import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.UniqueList;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -28,6 +26,10 @@ public class ModelStub implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         throw new AssertionError("This method should not be called.");
     }
+
+
+
+
 
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
@@ -45,12 +47,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Optional<UniqueStudentInfoList> getStudentInfos(Group group, Lesson lesson) {
+    public Optional<UniqueList<StudentInfo>> getStudentInfos(Group group, Lesson lesson) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public Optional<UniqueLessonList> getLessons(Group group) {
+    public Optional<UniqueList<Lesson>> getLessons(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -80,7 +82,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Optional<UniqueStudentList> getStudents(Group group) {
+    public Optional<UniqueList<Student>> getStudents(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 

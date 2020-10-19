@@ -4,21 +4,21 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Manages tutorial groups
  */
 public class GroupManager {
 
-    private final UniqueGroupList groups;
+    private final UniqueList<Group> groups;
 
     /**
      * Instantiates a GroupManager
      *
      * @param groups List of tutorial groups
      */
-    public GroupManager(UniqueGroupList groups) {
+    public GroupManager(UniqueList<Group> groups) {
         requireNonNull(groups);
         this.groups = groups;
     }

@@ -8,10 +8,10 @@ import java.util.Optional;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.UniqueLessonList;
+import seedu.address.model.util.UniqueList;
 
 public class LessonManager {
-    private final HashMap<Group, UniqueLessonList> lessonLists;
+    private final HashMap<Group, UniqueList<Lesson>> lessonLists;
     public LessonManager() {
         lessonLists = new HashMap<>();
     }
@@ -24,7 +24,7 @@ public class LessonManager {
      */
     public void addLesson(Group group, Lesson lesson) {
         requireAllNonNull(group, lesson);
-        UniqueLessonList lessonList = lessonLists.get(group);
+        UniqueList<Lesson> lessonList = lessonLists.get(group);
         if (lessonList != null) {
             lessonList.add(lesson);
         }
@@ -35,12 +35,12 @@ public class LessonManager {
      * @param group
      * @param lessons
      */
-    public void setLessonLists(Group group, UniqueLessonList lessons) {
+    public void setLessonLists(Group group, UniqueList<Lesson> lessons) {
         requireAllNonNull(group, lessons);
         lessonLists.put(group, lessons);
     }
 
-    public Optional<UniqueLessonList> getLessons(Group group) {
+    public Optional<UniqueList<Lesson>> getLessons(Group group) {
         return Optional.ofNullable(lessonLists.get(group));
     }
 

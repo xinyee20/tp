@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,20 +11,32 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateQuestionException;
 import seedu.address.model.group.exceptions.QuestionNotFoundException;
+import seedu.address.model.util.UniqueList;
 
 /**
  * A list of Questions that enforces uniqueness between its elements and does not allow nulls.
  * A Question is considered unique by comparing using {@code Question#equal(Object)}.
  */
-public class UniqueQuestionList implements Iterable<Question> {
+public class UniqueQuestionList implements UniqueList<Question> {
 
     private final ObservableList<Question> internalList = FXCollections.observableArrayList();
     private final ObservableList<Question> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    @Override
+    public int size() {
+        return internalList.size();
+    }
+
+    @Override
+    public void sort(Comparator<Question> comparator) {
+        internalList.sort(comparator);
+    }
+
     /**
      * Returns true if the list contains an equivalent question as the given argument.
      */
+    @Override
     public boolean contains(Question toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
@@ -32,6 +45,7 @@ public class UniqueQuestionList implements Iterable<Question> {
     /**
      * Adds a question to the list. The question must not already exist in the list.
      */
+    @Override
     public void add(Question toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -44,7 +58,8 @@ public class UniqueQuestionList implements Iterable<Question> {
      * Replaces the question {@code target} in the list with {@code question}. {@code target} must exist in the list.
      * The question identity of {@code question} must not be the same as another existing question in the list.
      */
-    public void setQuestion(Question target, Question editedQuestion) {
+    @Override
+    public void setElement(Question target, Question editedQuestion) {
         requireAllNonNull(target, editedQuestion);
 
         int index = internalList.indexOf(target);
@@ -62,6 +77,7 @@ public class UniqueQuestionList implements Iterable<Question> {
     /**
      * Removes the equivalent question from the list. The question must exist in the list.
      */
+    @Override
     public void remove(Question toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -69,21 +85,29 @@ public class UniqueQuestionList implements Iterable<Question> {
         }
     }
 
+    @Override
+    public ObservableList<Question> getList() {
+        return internalList;
+    }
+
     /**
-     * Replaces all the questions from the list with a new list of questions
+     * Replaces all the lessons from the list with a new list of lessons
+     * @param replacement
      */
-    public void setQuestions(UniqueQuestionList replacement) {
+    @Override
+    public void setElements(UniqueList<Question> replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        internalList.setAll(replacement.getList());
     }
 
     /**
      * Replaces the contents of this list with {@code questionList}.
      * {@code questionList} must not contain duplicate questions.
      */
-    public void setQuestions(List<Question> questionList) {
+    @Override
+    public void setElements(List<Question> questionList) {
         requireAllNonNull(questionList);
-        if (!questionsAreUnique(questionList)) {
+        if (!elementsAreUnique(questionList)) {
             throw new DuplicateQuestionException();
         }
         internalList.setAll(questionList);
@@ -92,6 +116,7 @@ public class UniqueQuestionList implements Iterable<Question> {
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
+    @Override
     public ObservableList<Question> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
@@ -116,7 +141,8 @@ public class UniqueQuestionList implements Iterable<Question> {
     /**
      * Returns true if {@code questionList} contains only unique questions.
      */
-    private boolean questionsAreUnique(List<Question> questionList) {
+    @Override
+    public boolean elementsAreUnique(List<Question> questionList) {
         for (int i = 0; i < questionList.size() - 1; i++) {
             for (int j = i + 1; j < questionList.size(); j++) {
                 if (questionList.get(i).equals(questionList.get(j))) {

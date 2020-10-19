@@ -11,7 +11,7 @@ import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Participation;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
-import seedu.address.model.group.UniqueStudentInfoList;
+import seedu.address.model.util.UniqueList;
 
 public class AddScoreCommand extends Command {
 
@@ -43,7 +43,7 @@ public class AddScoreCommand extends Command {
         requireNonNull(model);
 
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         // Update single student participation score
@@ -53,7 +53,7 @@ public class AddScoreCommand extends Command {
             if (isCorrectStudent) {
                 Participation update = studentInfo.getParticipation().setScore(score);
                 StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-                uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
+                uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                 model.updateLessonList();
                 model.updateStudentInfoList();
             }

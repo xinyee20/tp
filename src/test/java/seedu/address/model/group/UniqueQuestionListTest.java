@@ -15,10 +15,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.group.exceptions.DuplicateQuestionException;
 import seedu.address.model.group.exceptions.QuestionNotFoundException;
+import seedu.address.model.util.UniqueList;
 
 class UniqueQuestionListTest {
 
-    private final UniqueQuestionList uniqueQuestionList = new UniqueQuestionList();
+    private final UniqueList<Question> uniqueQuestionList = new UniqueQuestionList();
 
     @Test
     public void contains_nullQuestion_throwsNullPointerException() {
@@ -49,33 +50,33 @@ class UniqueQuestionListTest {
 
     @Test
     public void setQuestion_nullTargetQuestion_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueQuestionList.setQuestion(null, QUESTION_1));
+        assertThrows(NullPointerException.class, () -> uniqueQuestionList.setElement(null, QUESTION_1));
     }
 
     @Test
     public void setQuestion_nullEditedQuestion_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueQuestionList.setQuestion(QUESTION_1, null));
+        assertThrows(NullPointerException.class, () -> uniqueQuestionList.setElement(QUESTION_1, null));
     }
 
     @Test
     public void setQuestion_targetQuestionNotInList_throwsQuestionNotFoundException() {
-        assertThrows(QuestionNotFoundException.class, () -> uniqueQuestionList.setQuestion(QUESTION_1, QUESTION_1));
+        assertThrows(QuestionNotFoundException.class, () -> uniqueQuestionList.setElement(QUESTION_1, QUESTION_1));
     }
 
     @Test
     public void setQuestion_editedQuestionIsSameQuestion_success() {
-        uniqueQuestionList.add(QUESTION_1);
-        uniqueQuestionList.setQuestion(QUESTION_1, QUESTION_1);
-        UniqueQuestionList expectedUniqueQuestionList = new UniqueQuestionList();
+        this.uniqueQuestionList.add(QUESTION_1);
+        this.uniqueQuestionList.setElement(QUESTION_1, QUESTION_1);
+        UniqueList<Question> expectedUniqueQuestionList = new UniqueQuestionList();
         expectedUniqueQuestionList.add(QUESTION_1);
         assertEquals(expectedUniqueQuestionList, uniqueQuestionList);
     }
 
     @Test
     public void setQuestion_editedQuestionHasNonUniqueIdentity_throwsDuplicateQuestionException() {
-        uniqueQuestionList.add(QUESTION_1);
-        uniqueQuestionList.add(QUESTION_2);
-        assertThrows(DuplicateQuestionException.class, () -> uniqueQuestionList.setQuestion(QUESTION_1, QUESTION_2));
+        this.uniqueQuestionList.add(QUESTION_1);
+        this.uniqueQuestionList.add(QUESTION_2);
+        assertThrows(DuplicateQuestionException.class, () -> uniqueQuestionList.setElement(QUESTION_1, QUESTION_2));
     }
 
     @Test
@@ -90,37 +91,37 @@ class UniqueQuestionListTest {
 
     @Test
     public void remove_existingQuestion_removesQuestion() {
-        uniqueQuestionList.add(QUESTION_1);
-        uniqueQuestionList.remove(QUESTION_1);
-        UniqueQuestionList expectedUniqueQuestionList = new UniqueQuestionList();
+        this.uniqueQuestionList.add(QUESTION_1);
+        this.uniqueQuestionList.remove(QUESTION_1);
+        UniqueList<Question> expectedUniqueQuestionList = new UniqueQuestionList();
         assertEquals(expectedUniqueQuestionList, uniqueQuestionList);
     }
 
     @Test
     public void setQuestions_nullUniqueQuestionList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueQuestionList.setQuestions((UniqueQuestionList) null));
+        assertThrows(NullPointerException.class, () -> uniqueQuestionList.setElements((UniqueQuestionList) null));
     }
 
     @Test
     public void setQuestions_uniqueQuestionList_replacesOwnListWithProvidedUniqueQuestionList() {
-        uniqueQuestionList.add(QUESTION_1);
-        UniqueQuestionList expectedUniqueQuestionList = new UniqueQuestionList();
+        this.uniqueQuestionList.add(QUESTION_1);
+        UniqueList<Question> expectedUniqueQuestionList = new UniqueQuestionList();
         expectedUniqueQuestionList.add(QUESTION_2);
-        uniqueQuestionList.setQuestions(expectedUniqueQuestionList);
-        assertEquals(expectedUniqueQuestionList, uniqueQuestionList);
+        this.uniqueQuestionList.setElements(expectedUniqueQuestionList);
+        assertEquals(expectedUniqueQuestionList, this.uniqueQuestionList);
     }
 
     @Test
     public void setQuestions_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueQuestionList.setQuestions((List<Question>) null));
+        assertThrows(NullPointerException.class, () -> this.uniqueQuestionList.setElements((List<Question>) null));
     }
 
     @Test
     public void setQuestions_list_replacesOwnListWithProvidedList() {
-        uniqueQuestionList.add(QUESTION_1);
+        this.uniqueQuestionList.add(QUESTION_1);
         List<Question> questionList = Collections.singletonList(QUESTION_2);
-        uniqueQuestionList.setQuestions(questionList);
-        UniqueQuestionList expectedUniqueQuestionList = new UniqueQuestionList();
+        this.uniqueQuestionList.setElements(questionList);
+        UniqueList<Question> expectedUniqueQuestionList = new UniqueQuestionList();
         expectedUniqueQuestionList.add(QUESTION_2);
         assertEquals(expectedUniqueQuestionList, uniqueQuestionList);
     }
@@ -129,13 +130,13 @@ class UniqueQuestionListTest {
     public void setQuestions_listWithDuplicateQuestions_throwsDuplicateQuestionException() {
         List<Question> listWithDuplicateQuestions = Arrays.asList(QUESTION_1, QUESTION_1);
         assertThrows(DuplicateQuestionException.class, () ->
-            uniqueQuestionList.setQuestions(listWithDuplicateQuestions));
+            this.uniqueQuestionList.setElements(listWithDuplicateQuestions));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () ->
-            uniqueQuestionList.asUnmodifiableObservableList().remove(0));
+            this.uniqueQuestionList.asUnmodifiableObservableList().remove(0));
     }
 
 }

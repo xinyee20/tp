@@ -28,6 +28,7 @@ import seedu.address.model.managers.LessonManager;
 import seedu.address.model.managers.StudentInfoManager;
 import seedu.address.model.managers.StudentManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -208,7 +209,7 @@ public class ModelManager implements Model {
     //===== LessonManager ====
 
     @Override
-    public Optional<UniqueLessonList> getLessons(Group group) {
+    public Optional<UniqueList<Lesson>> getLessons(Group group) {
         return lessonManager.getLessons(group);
     }
 
@@ -220,14 +221,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueStudentList> getStudents(Group group) {
+    public Optional<UniqueList<Student>> getStudents(Group group) {
         return studentManager.getStudents(group);
     }
 
     // ==== StudentInfoManager ====
 
     @Override
-    public Optional<UniqueStudentInfoList> getStudentInfos(Group group, Lesson lesson) {
+    public Optional<UniqueList<StudentInfo>> getStudentInfos(Group group, Lesson lesson) {
         GroupLessonKey key = new GroupLessonKey(group, lesson);
         return studentInfoManager.getStudentInfos(key);
     }
@@ -247,7 +248,7 @@ public class ModelManager implements Model {
     @Override
     public void addGroup(Group group) {
         requireNonNull(group);
-        UniqueStudentList studentList = group.getStudents();
+        UniqueList<Student> studentList = group.getStudents();
         groupManager.addGroup(group);
         studentManager.addGroup(group, studentList);
     }
@@ -268,7 +269,7 @@ public class ModelManager implements Model {
     public void removeStudentFromGroup(Student student, Predicate<Group> predicate) {
         requireAllNonNull(student, predicate);
         updateFilteredGroupList(predicate);
-        UniqueStudentList students = filteredGroups.get(0).getStudents();
+        UniqueList<Student> students = filteredGroups.get(0).getStudents();
         if (!filteredGroups.isEmpty() && students.contains(student)) {
             students.remove(student);
             Group currentGroup = filteredGroups.get(0);
@@ -298,7 +299,7 @@ public class ModelManager implements Model {
         if (filteredGroups.size() == 1) {
             Group currentGroup = filteredGroups.get(0);
             ObservableList<Lesson> lessons = currentGroup.getLessonsAsUnmodifiableObservableList();
-            UniqueLessonList lessonList = currentGroup.getLessons();
+            UniqueList<Lesson> lessonList = currentGroup.getLessons();
             this.lessons.setAll(lessons);
             lessonManager.setLessonLists(currentGroup, lessonList);
         }
@@ -319,7 +320,7 @@ public class ModelManager implements Model {
             Lesson currentLesson = filteredLessons.get(0);
             GroupLessonKey key = new GroupLessonKey(currentGroup, currentLesson);
             ObservableList<StudentInfo> studentInfos = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
-            UniqueStudentInfoList uniqueStudentInfoList = currentLesson.getStudentsInfo();
+            UniqueList<StudentInfo> uniqueStudentInfoList = currentLesson.getStudentsInfo();
             this.studentsInfo.setAll(studentInfos);
             this.studentInfoManager.setStudentInfos(key, uniqueStudentInfoList);
         }

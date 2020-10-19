@@ -11,7 +11,7 @@ import seedu.address.model.group.Attendance;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
-import seedu.address.model.group.UniqueStudentInfoList;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Marks the attendance of a class or a student in the class.
@@ -58,7 +58,7 @@ public class MarkAttCommand extends Command {
         requireNonNull(model);
 
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         if (!isWholeClass) {
@@ -70,7 +70,7 @@ public class MarkAttCommand extends Command {
                 if (isCorrectStudent) {
                     Attendance update = studentInfo.getAttendance().setAttendance(true);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                    uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
+                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
                     model.updateStudentInfoList();
                 }
@@ -82,7 +82,7 @@ public class MarkAttCommand extends Command {
         for (StudentInfo each: studentsInfo) {
             Attendance update = each.getAttendance().setAttendance(true);
             StudentInfo updatedStudentInfo = each.updateAttendance(update);
-            uniqueStudentInfoList.setStudentInfo(each, updatedStudentInfo);
+            uniqueStudentInfoList.setElement(each, updatedStudentInfo);
             model.updateLessonList();
             model.updateStudentInfoList();
         }

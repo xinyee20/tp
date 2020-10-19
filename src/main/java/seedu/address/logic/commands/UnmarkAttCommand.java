@@ -11,7 +11,7 @@ import seedu.address.model.group.Attendance;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
-import seedu.address.model.group.UniqueStudentInfoList;
+import seedu.address.model.util.UniqueList;
 
 public class UnmarkAttCommand extends Command {
 
@@ -41,7 +41,7 @@ public class UnmarkAttCommand extends Command {
         requireNonNull(model);
 
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         // Mark single student attendance
@@ -51,7 +51,7 @@ public class UnmarkAttCommand extends Command {
             if (isCorrectStudent) {
                 Attendance update = studentInfo.getAttendance().setAttendance(false);
                 StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
+                uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                 model.updateLessonList();
                 model.updateStudentInfoList();
             }

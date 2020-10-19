@@ -11,10 +11,8 @@ import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
-import seedu.address.model.group.UniqueLessonList;
-import seedu.address.model.group.UniqueStudentInfoList;
-import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.UniqueList;
 
 /**
  * The API of the Model component.
@@ -132,11 +130,11 @@ public interface Model {
      */
     boolean checkIfStudentExistsInGroup(Group group, Student student);
 
-    Optional<UniqueStudentInfoList> getStudentInfos(Group group, Lesson lesson);
+    Optional<UniqueList<StudentInfo>> getStudentInfos(Group group, Lesson lesson);
 
-    Optional<UniqueLessonList> getLessons(Group group);
+    Optional<UniqueList<Lesson>> getLessons(Group group);
 
-    Optional<UniqueStudentList> getStudents(Group group);
+    Optional<UniqueList<Student>> getStudents(Group group);
 
     /**
      * Adds a Student to a Group

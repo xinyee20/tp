@@ -8,9 +8,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
 import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueStudentInfoList;
 import seedu.address.model.group.UniqueStudentList;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -50,18 +52,18 @@ class JsonAdaptedGroup {
         for (JsonAdaptedStudent groupStudent : students) {
             groupStudents.add(groupStudent.toModelType());
         }
-        final UniqueStudentList modelStudents = new UniqueStudentList();
-        modelStudents.setStudents(new ArrayList<>(groupStudents));
+        final UniqueList<Student> modelStudents = new UniqueStudentList();
+        modelStudents.setElements(new ArrayList<>(groupStudents));
 
-        final UniqueStudentInfoList studentsInfo = new UniqueStudentInfoList();
+        final UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
 
         final List<Lesson> groupLessons = new ArrayList<>();
         for (JsonAdaptedLesson groupLesson : lessons) {
             Lesson lessonItem = new Lesson(groupLesson.getName(), studentsInfo);
             groupLessons.add(lessonItem);
         }
-        final UniqueLessonList modelLessons = new UniqueLessonList();
-        modelLessons.setLessons(new ArrayList<>(groupLessons));
+        final UniqueList<Lesson> modelLessons = new UniqueLessonList();
+        modelLessons.setElements(new ArrayList<>(groupLessons));
 
         return new Group(modelName, modelStudents, modelLessons);
     }

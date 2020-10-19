@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,20 +11,37 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateStudentException;
 import seedu.address.model.group.exceptions.StudentNotFoundException;
+import seedu.address.model.util.UniqueList;
 
 /**
  * A list of Students that enforces uniqueness between its elements and does not allow nulls.
  * A Student is considered unique by comparing using {@code Student#equal(Object)}.
  */
-public class UniqueStudentList implements Iterable<Student> {
+public class UniqueStudentList implements UniqueList<Student> {
 
     private final ObservableList<Student> internalList = FXCollections.observableArrayList();
     private final ObservableList<Student> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    @Override
+    public ObservableList<Student> getList() {
+        return internalList;
+    }
+
+    @Override
+    public int size() {
+        return internalList.size();
+    }
+
+    @Override
+    public void sort(Comparator<Student> comparator) {
+        internalList.sort(comparator);
+    }
+
     /**
      * Returns true if the list contains an equivalent student as the given argument.
      */
+    @Override
     public boolean contains(Student toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
@@ -32,6 +50,7 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Adds a student to the list. The student must not already exist in the list.
      */
+    @Override
     public void add(Student toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -44,7 +63,8 @@ public class UniqueStudentList implements Iterable<Student> {
      * Replaces the student {@code target} in the list with {@code student}. {@code target} must exist in the list.
      * The student identity of {@code student} must not be the same as another existing student in the list.
      */
-    public void setStudent(Student target, Student editedStudent) {
+    @Override
+    public void setElement(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
         int index = internalList.indexOf(target);
@@ -62,6 +82,7 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Removes the equivalent student from the list. The student must exist in the list.
      */
+    @Override
     public void remove(Student toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -72,17 +93,19 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Replaces all the students from the list with a new list of students
      */
-    public void students(UniqueStudentList replacement) {
+    @Override
+    public void setElements(UniqueList<Student> replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        internalList.setAll(replacement.getList());
     }
 
     /**
      * Replaces the contents of this list with {@code students}. {@code students} must not contain duplicate students.
      */
-    public void setStudents(List<Student> students) {
+    @Override
+    public void setElements(List<Student> students) {
         requireAllNonNull(students);
-        if (!studentsAreUnique(students)) {
+        if (!elementsAreUnique(students)) {
             throw new DuplicateStudentException();
         }
 
@@ -92,6 +115,7 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
+    @Override
     public ObservableList<Student> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
@@ -116,7 +140,7 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Returns true if {@code students} contains only unique students.
      */
-    private boolean studentsAreUnique(List<Student> students) {
+    public boolean elementsAreUnique(List<Student> students) {
         for (int i = 0; i < students.size() - 1; i++) {
             for (int j = i + 1; j < students.size(); j++) {
                 if (students.get(i).equals(students.get(j))) {

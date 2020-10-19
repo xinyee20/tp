@@ -8,10 +8,10 @@ import java.util.Optional;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Student;
-import seedu.address.model.group.UniqueStudentList;
+import seedu.address.model.util.UniqueList;
 
 public class StudentManager {
-    private final HashMap<Group, UniqueStudentList> studentLists;
+    private final HashMap<Group, UniqueList<Student>> studentLists;
     public StudentManager() {
         studentLists = new HashMap<>();
     }
@@ -23,14 +23,14 @@ public class StudentManager {
      */
     public void addStudent(Group group, Student student) {
         requireAllNonNull(group, student);
-        Optional<UniqueStudentList> studentsOptional = Optional.ofNullable(studentLists.get(group));
+        Optional<UniqueList<Student>> studentsOptional = Optional.ofNullable(studentLists.get(group));
         if (studentsOptional.isPresent()) {
-            UniqueStudentList students = studentsOptional.get();
+            UniqueList<Student> students = studentsOptional.get();
             students.add(student);
         }
     }
 
-    public void addGroup(Group group, UniqueStudentList students) {
+    public void addGroup(Group group, UniqueList<Student> students) {
         studentLists.put(group, students);
     }
 
@@ -42,7 +42,7 @@ public class StudentManager {
      */
     public boolean checkIfStudentExists(Group group, Student student) {
         requireAllNonNull(group, student);
-        Optional<UniqueStudentList> studentsOptional = Optional.ofNullable(studentLists.get(group));
+        Optional<UniqueList<Student>> studentsOptional = Optional.ofNullable(studentLists.get(group));
         if (studentsOptional.isEmpty()) {
             return false;
         } else {
@@ -55,7 +55,7 @@ public class StudentManager {
      * @param group Group to check for
      * @return All students from a particular group
      */
-    public Optional<UniqueStudentList> getStudents(Group group) {
+    public Optional<UniqueList<Student>> getStudents(Group group) {
         requireNonNull(group);
         return Optional.ofNullable(studentLists.get(group));
     }
@@ -65,7 +65,7 @@ public class StudentManager {
      * @param group
      * @param students
      */
-    public void setGroup(Group group, UniqueStudentList students) {
+    public void setGroup(Group group, UniqueList<Student> students) {
         requireAllNonNull(group, students);
         studentLists.put(group, students);
     }

@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CsvUtil;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Represents a tutorial Group in serenity. Guarantees: details are present and not null, field values are validated,
@@ -20,8 +21,8 @@ public class Group {
     private final String name;
 
     // Data fields
-    private final UniqueStudentList students;
-    private final UniqueLessonList lessons;
+    private final UniqueList<Student> students;
+    private final UniqueList<Lesson> lessons;
 
     /**
      * Constructs a {@code Group}
@@ -34,11 +35,11 @@ public class Group {
         this.name = name;
         CsvUtil util = new CsvUtil(filePath);
         students = new UniqueStudentList();
-        students.setStudents(new ArrayList<>(util.readStudentsFromCsv()));
+        students.setElements(new ArrayList<>(util.readStudentsFromCsv()));
         //todo: implement scores data
         Set<StudentInfo> studentsInfo = util.readStudentsInfoFromCsv(util.readStudentsFromCsv());
         lessons = new UniqueLessonList();
-        lessons.setLessons(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
+        lessons.setElements(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
     }
 
     /**
@@ -47,7 +48,7 @@ public class Group {
      * @param name     A valid name.
      * @param students A list of students.
      */
-    public Group(String name, UniqueStudentList students) {
+    public Group(String name, UniqueList<Student> students) {
         requireAllNonNull(name, students);
         this.name = name;
         this.students = students;
@@ -61,7 +62,7 @@ public class Group {
      * @param students A list of students.
      * @param lessons  A list of tutorial lessons.
      */
-    public Group(String name, UniqueStudentList students, UniqueLessonList lessons) {
+    public Group(String name, UniqueList<Student> students, UniqueList<Lesson> lessons) {
         requireAllNonNull(name, students, lessons);
         this.name = name;
         this.students = students;
@@ -72,7 +73,7 @@ public class Group {
         return name;
     }
 
-    public UniqueStudentList getStudents() {
+    public UniqueList<Student> getStudents() {
         return students;
     }
 
@@ -84,11 +85,11 @@ public class Group {
         return lessons.asUnmodifiableObservableList();
     }
 
-    public UniqueLessonList getLessons() {
+    public UniqueList<Lesson> getLessons() {
         return lessons;
     }
 
-    public UniqueLessonList getSortedLessons() {
+    public UniqueList<Lesson> getSortedLessons() {
         lessons.sort(Comparator.comparing(Lesson::getName));
         return lessons;
     }
@@ -121,20 +122,20 @@ public class Group {
     private void addToStudentListInLessons(Student student) {
         for (Lesson lesson : lessons) {
             StudentInfo newStudent = new StudentInfo(student);
-            UniqueStudentInfoList studentInfos = lesson.getStudentsInfo();
+            UniqueList<StudentInfo> studentInfos = lesson.getStudentsInfo();
             studentInfos.add(newStudent);
             Lesson updatedLesson = new Lesson(lesson.getName(), studentInfos);
-            lessons.setLesson(lesson, updatedLesson);
+            lessons.setElement(lesson, updatedLesson);
         }
     }
 
     private void removeStudentFromStudentListInLessons(Student student) {
         for (Lesson lesson : lessons) {
             StudentInfo newStudent = new StudentInfo(student);
-            UniqueStudentInfoList studentInfos = lesson.getStudentsInfo();
+            UniqueList<StudentInfo> studentInfos = lesson.getStudentsInfo();
             studentInfos.remove(newStudent);
             Lesson updatedLesson = new Lesson(lesson.getName(), studentInfos);
-            lessons.setLesson(lesson, updatedLesson);
+            lessons.setElement(lesson, updatedLesson);
         }
     }
 

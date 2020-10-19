@@ -4,6 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Represents a tutorial class in serenity. Guarantees: details are present and not null, field values are validated,
@@ -15,16 +16,15 @@ public class Lesson {
     public static final String STUDENTS_INFO_CONSTRAINT = "Students information cannot be empty";
 
     private final String name;
-    private final UniqueStudentInfoList studentsInfo;
-    private final UniqueQuestionList questionList;
+    private final UniqueList<StudentInfo> studentsInfo;
+    private final UniqueList<Question> questionList;
 
     /**
      * Constructs a {@code Lesson}.
-     *
      * @param name A valid name.
      * @param studentsInfo A valid list of studentInfo.
      */
-    public Lesson(String name, UniqueStudentInfoList studentsInfo) {
+    public Lesson(String name, UniqueList<StudentInfo> studentsInfo) {
         requireAllNonNull(name, studentsInfo);
         checkArgument(isValidName(name), NAME_CONSTRAINT);
         checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
@@ -35,12 +35,11 @@ public class Lesson {
 
     /**
      * Constructs a {@code Lesson}.
-     *
      * @param name A valid name.
      * @param studentsInfo A valid list of studentInfo.
      * @param questionList A list of questions.
      */
-    public Lesson(String name, UniqueStudentInfoList studentsInfo, UniqueQuestionList questionList) {
+    public Lesson(String name, UniqueList<StudentInfo> studentsInfo, UniqueList<Question> questionList) {
         requireAllNonNull(name, studentsInfo);
         checkArgument(isValidName(name), NAME_CONSTRAINT);
         checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
@@ -49,21 +48,10 @@ public class Lesson {
         this.questionList = questionList;
     }
 
-    /**
-     * Constructs a {@code Lesson}.
-     * @param name
-     * @param students
-     */
-    public Lesson(String name, UniqueStudentList students) {
-        requireAllNonNull(name, students);
-        checkArgument(isValidName(name), NAME_CONSTRAINT);
-        this.name = name;
-        this.studentsInfo = this.generateStudentInfo(students.asUnmodifiableObservableList());
-        this.questionList = new UniqueQuestionList();
-    }
 
-    private UniqueStudentInfoList generateStudentInfo(ObservableList<Student> students) {
-        UniqueStudentInfoList studentInfo = new UniqueStudentInfoList();
+
+    private UniqueList<StudentInfo> generateStudentInfo(ObservableList<Student> students) {
+        UniqueList<StudentInfo> studentInfo = new UniqueStudentInfoList();
         for (Student s : students) {
             studentInfo.add(new StudentInfo(s, new Participation(), new Attendance()));
         }
@@ -78,15 +66,15 @@ public class Lesson {
         return name;
     }
 
-    boolean isValidStudentInfo(UniqueStudentInfoList studentsInfo) {
+    boolean isValidStudentInfo(UniqueList<StudentInfo> studentsInfo) {
         return studentsInfo.size() > 0;
     }
 
-    public UniqueStudentInfoList getStudentsInfo() {
+    public UniqueList<StudentInfo> getStudentsInfo() {
         return studentsInfo;
     }
 
-    public UniqueQuestionList getQuestionList() {
+    public UniqueList<Question> getQuestionList() {
         return questionList;
     }
 

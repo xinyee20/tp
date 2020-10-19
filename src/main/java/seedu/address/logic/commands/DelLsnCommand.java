@@ -9,6 +9,10 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordPredicate;
 import seedu.address.model.group.Lesson;
+import seedu.address.model.group.Student;
+import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueStudentInfoList;
+import seedu.address.model.util.UniqueList;
 
 public class DelLsnCommand extends Command {
     public static final String COMMAND_WORD = "dellsn";
@@ -43,7 +47,12 @@ public class DelLsnCommand extends Command {
         }
 
         Group trgtGrp = model.getFilteredGroupList().get(0);
-        Lesson toDel = new Lesson(this.toDel, trgtGrp.getStudents());
+        UniqueList<Student> students = trgtGrp.getStudents();
+        UniqueList<StudentInfo> studentInfos = new UniqueStudentInfoList();
+        for (Student student : students) {
+            studentInfos.add(new StudentInfo(student));
+        }
+        Lesson toDel = new Lesson(this.toDel, studentInfos);
 
         if (!trgtGrp.getLessons().contains(toDel)) {
             throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, toDel, trgtGrp));

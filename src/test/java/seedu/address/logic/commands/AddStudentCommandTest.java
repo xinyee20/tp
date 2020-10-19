@@ -17,6 +17,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordPredicate;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.util.UniqueList;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.GroupPredicateStub;
 import seedu.address.testutil.ModelStub;
@@ -53,7 +54,7 @@ public class AddStudentCommandTest {
                 "5.2",
                 "6.1"
             ).build();
-        UniqueGroupList groupList = new UniqueGroupList();
+        UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
