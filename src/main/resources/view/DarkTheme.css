@@ -39,12 +39,12 @@
 }
 
 .tab-pane .tab:selected {
-    -fx-background-color: #585858;
+    -fx-background-color: #828282;
 }
 
 .tab {
     -fx-background-insets: 0 2 0 2,0,0;
-    -fx-background-color: #828282;
+    -fx-background-color: #585858;
     -fx-focus-color: black;
     -fx-faint-focus-color: transparent;
 }
