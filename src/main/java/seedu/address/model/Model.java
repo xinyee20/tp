@@ -11,6 +11,8 @@ import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueLessonList;
+import seedu.address.model.group.UniqueStudentInfoList;
 import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
 
@@ -129,6 +131,10 @@ public interface Model {
      * @return Whether student exists.
      */
     boolean checkIfStudentExistsInGroup(Group group, Student student);
+
+    Optional<UniqueStudentInfoList> getStudentInfos(Group group, Lesson lesson);
+
+    Optional<UniqueLessonList> getLessons(Group group);
 
     Optional<UniqueStudentList> getStudents(Group group);
 

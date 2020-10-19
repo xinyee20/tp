@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -176,8 +175,7 @@ public class Group {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, students, lessons);
+        return this.name.hashCode();
     }
 
     @Override

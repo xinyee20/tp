@@ -14,6 +14,8 @@ import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueLessonList;
+import seedu.address.model.group.UniqueStudentInfoList;
 import seedu.address.model.group.UniqueStudentList;
 import seedu.address.model.person.Person;
 
@@ -39,6 +41,16 @@ public class ModelStub implements Model {
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Optional<UniqueStudentInfoList> getStudentInfos(Group group, Lesson lesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Optional<UniqueLessonList> getLessons(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 

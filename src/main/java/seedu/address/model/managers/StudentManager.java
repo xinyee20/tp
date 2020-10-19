@@ -60,5 +60,13 @@ public class StudentManager {
         return Optional.ofNullable(studentLists.get(group));
     }
 
-
+    /**
+     * Replaces Group's students with a new set of students
+     * @param group
+     * @param students
+     */
+    public void setGroup(Group group, UniqueStudentList students) {
+        requireAllNonNull(group, students);
+        studentLists.put(group, students);
+    }
 }
