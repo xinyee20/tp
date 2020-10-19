@@ -66,7 +66,7 @@ public class MarkPresentCommand extends Command {
             UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
             ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
-            if (! isWholeClass) {
+            if (!isWholeClass) {
 
                 // Mark single student attendance
                 for (int i = 0; i < studentsInfo.size(); i++) {
@@ -82,7 +82,7 @@ public class MarkPresentCommand extends Command {
                     }
                 }
 
-                if (! isCorrectStudent) {
+                if (!isCorrectStudent) {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, toMarkPresent));
                 }
                 return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkPresent));
@@ -101,7 +101,7 @@ public class MarkPresentCommand extends Command {
 
         } catch (Exception e) {
             if (e instanceof CommandException) {
-                throw  e;
+                throw e;
             } else {
                 throw new CommandException(MESSAGE_NOT_IN_LESSON);
             }

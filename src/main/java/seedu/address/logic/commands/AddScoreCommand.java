@@ -66,14 +66,14 @@ public class AddScoreCommand extends Command {
                 }
             }
 
-            if (! isCorrectStudent) {
+            if (!isCorrectStudent) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, toAddScore));
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAddScore, score));
 
         } catch (Exception e) {
             if (e instanceof CommandException) {
-                throw  e;
+                throw e;
             } else {
                 throw new CommandException(MESSAGE_NOT_IN_LESSON);
             }

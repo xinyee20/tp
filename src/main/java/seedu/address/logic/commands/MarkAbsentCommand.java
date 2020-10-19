@@ -63,14 +63,14 @@ public class MarkAbsentCommand extends Command {
                 }
             }
 
-            if (! isCorrectStudent) {
+            if (!isCorrectStudent) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, markAbsent));
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS, markAbsent));
 
         } catch (Exception e) {
             if (e instanceof CommandException) {
-                throw  e;
+                throw e;
             } else {
                 throw new CommandException(MESSAGE_NOT_IN_LESSON);
             }
