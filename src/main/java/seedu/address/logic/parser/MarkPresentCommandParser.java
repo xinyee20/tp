@@ -7,27 +7,29 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.MarkAttCommand;
+import seedu.address.logic.commands.MarkPresentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Student;
 
 /**
- * Parses input arguments and creates a new MarkAttCommand object.
+ * Parses input arguments and creates a new MarkPresentCommand object.
  * Current support:
- * markatt name/NAME id/STUDENT_NUMBER
- * markatt all
+ * markpresent name/NAME id/STUDENT_NUMBER
+ * markpresent all
  *
  */
-public class MarkAttCommandParser implements Parser<MarkAttCommand> {
+public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
+
+    public static final String MESSAGE_STUDENT_NOT_GIVEN = "Please ensure student name / id is given";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the MarkAttCommand and
-     * returns a MarkAttCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the MarkPresentCommand and
+     * returns a MarkPresentCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public MarkAttCommand parse(String args) throws ParseException {
+    public MarkPresentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer
                         .tokenize(args, PREFIX_STUDENT, PREFIX_ID);
@@ -44,16 +46,16 @@ public class MarkAttCommandParser implements Parser<MarkAttCommand> {
             studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
 
-            return new MarkAttCommand(student.get());
+            return new MarkPresentCommand(student.get());
 
         } else if (keyToAll.get().equals("all")) {
 
             // mark attendance of all students
-            return new MarkAttCommand();
+            return new MarkPresentCommand();
 
         } else {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
         }
 
     }
