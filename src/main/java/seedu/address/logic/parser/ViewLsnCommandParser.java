@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewLsnCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
-import seedu.address.model.group.LsnContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
+import seedu.address.model.group.LessonContainsKeywordPredicate;
 
 public class ViewLsnCommandParser implements Parser<ViewLsnCommand> {
 
@@ -32,8 +32,8 @@ public class ViewLsnCommandParser implements Parser<ViewLsnCommand> {
             throw viewLsnCommandParserException;
         }
 
-        return new ViewLsnCommand(new GrpContainsKeywordPredicate(grpKeyword[0]),
-                new LsnContainsKeywordPredicate(lsnKeyword[0]));
+        return new ViewLsnCommand(new GroupContainsKeywordPredicate(grpKeyword[0]),
+                new LessonContainsKeywordPredicate(lsnKeyword[0]));
     }
 
     /**

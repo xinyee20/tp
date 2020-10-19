@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,15 +13,22 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupLessonKey;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.group.UniqueLessonList;
 import seedu.address.model.group.UniqueQuestionList;
 import seedu.address.model.group.UniqueStudentInfoList;
 import seedu.address.model.group.UniqueStudentList;
+import seedu.address.model.managers.GroupManager;
+import seedu.address.model.managers.LessonManager;
+import seedu.address.model.managers.StudentInfoManager;
+import seedu.address.model.managers.StudentManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -32,14 +40,17 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
-    private final Serenity serenity;
     private final FilteredList<Group> filteredGroups;
     private final ArrayObservableList<Student> students;
     private final ArrayObservableList<Lesson> lessons;
     private final FilteredList<Lesson> filteredLessons;
     private final ArrayObservableList<StudentInfo> studentsInfo;
     private final ArrayObservableList<Question> questions;
+
+    private final GroupManager groupManager;
+    private final StudentManager studentManager;
+    private final StudentInfoManager studentInfoManager;
+    private final LessonManager lessonManager;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
@@ -53,12 +64,17 @@ public class ModelManager implements Model {
             + " and user prefs " + userPrefs
             + " and serenity " + serenity);
 
+        //instantiate individual managers
+        groupManager = new GroupManager(new UniqueGroupList());
+        studentManager = new StudentManager();
+        studentInfoManager = new StudentInfoManager();
+        lessonManager = new LessonManager();
+
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-
-        this.serenity = new Serenity(serenity);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredGroups = new FilteredList<>(this.serenity.getGroupList());
+
+        filteredGroups = new FilteredList<>(groupManager.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
         filteredLessons = new FilteredList<>(lessons);
@@ -75,13 +91,20 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
+        //instantiate managers
+        groupManager = new GroupManager(new UniqueGroupList());
+        studentInfoManager = new StudentInfoManager();
+        studentManager = new StudentManager();
+        lessonManager = new LessonManager();
+
+
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
 
-        this.serenity = new Serenity();
+        filteredGroups = new FilteredList<>(groupManager.getGroupList());
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredGroups = new FilteredList<>(this.serenity.getGroupList());
         students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
+
         lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
         filteredLessons = new FilteredList<>(lessons);
         studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
@@ -164,36 +187,57 @@ public class ModelManager implements Model {
 
     // =========== Serenity ================================================================================
 
+    //==== GroupManager ====
+
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        return groupManager.getGroupList();
+    }
+
     @Override
     public Path getSerenityFilePath() {
         return userPrefs.getSerenityFilePath();
     }
 
     @Override
-    public void setSerenityFilePath(Path serenityFilePath) {
-        requireNonNull(serenityFilePath);
-        userPrefs.setSerenityFilePath(serenityFilePath);
-    }
-
-    @Override
-    public void setSerenity(ReadOnlySerenity serenity) {
-        this.serenity.resetData(serenity);
-    }
-
-    @Override
-    public ReadOnlySerenity getSerenity() {
-        return serenity;
-    }
-
-    @Override
     public boolean hasGroup(Group group) {
         requireNonNull(group);
-        return serenity.hasGroup(group);
+        return groupManager.hasGroup(group);
+    }
+
+    //===== LessonManager ====
+
+    @Override
+    public Optional<UniqueList<Lesson>> getLessons(Group group) {
+        return lessonManager.getLessons(group);
+    }
+
+    //==== StudentManager ====
+
+    @Override
+    public boolean checkIfStudentExistsInGroup(Group group, Student student) {
+        return studentManager.checkIfStudentExists(group, student);
     }
 
     @Override
-    public void deleteGroup(Group target) {
-        serenity.removeGroup(target);
+    public Optional<UniqueList<Student>> getStudents(Group group) {
+        return studentManager.getStudents(group);
+    }
+
+    // ==== StudentInfoManager ====
+
+    @Override
+    public Optional<UniqueList<StudentInfo>> getStudentInfos(Group group, Lesson lesson) {
+        GroupLessonKey key = new GroupLessonKey(group, lesson);
+        return studentInfoManager.getStudentInfos(key);
+    }
+
+    // =====
+
+    @Override
+    public void deleteGroup(Group group) {
+        groupManager.deleteGroup(group);
         filteredGroups.clear();
         students.clear();
         lessons.clear();
@@ -204,17 +248,20 @@ public class ModelManager implements Model {
     @Override
     public void addGroup(Group group) {
         requireNonNull(group);
-        serenity.addGroup(group);
+        UniqueList<Student> studentList = group.getStudents();
+        groupManager.addGroup(group);
+        studentManager.addGroup(group, studentList);
     }
 
     @Override
     public void addStudentToGroup(Student student, Predicate<Group> predicate) {
         requireAllNonNull(student, predicate);
         updateFilteredGroupList(predicate);
-        if (!filteredGroups.isEmpty()) {
+        if (!filteredGroups.isEmpty() && !students.contains(student)) {
             students.add(student);
             Group currentGroup = filteredGroups.get(0);
             currentGroup.addStudentToGroup(student);
+            studentManager.addStudent(currentGroup, student);
         }
     }
 
@@ -222,7 +269,7 @@ public class ModelManager implements Model {
     public void removeStudentFromGroup(Student student, Predicate<Group> predicate) {
         requireAllNonNull(student, predicate);
         updateFilteredGroupList(predicate);
-        UniqueStudentList students = filteredGroups.get(0).getStudents();
+        UniqueList<Student> students = filteredGroups.get(0).getStudents();
         if (!filteredGroups.isEmpty() && students.contains(student)) {
             students.remove(student);
             Group currentGroup = filteredGroups.get(0);
@@ -240,15 +287,21 @@ public class ModelManager implements Model {
 
     @Override
     public void updateStudentList() {
-        if (!filteredGroups.isEmpty()) {
-            this.students.setAll(this.filteredGroups.get(0).getStudentsAsUnmodifiableObservableList());
+        if (filteredGroups.size() == 1) {
+            ObservableList<Student> studentList = this.filteredGroups.get(0).getStudentsAsUnmodifiableObservableList();
+            this.students.setAll(studentList);
+            studentManager.setGroup(filteredGroups.get(0), filteredGroups.get(0).getStudents());
         }
     }
 
     @Override
     public void updateLessonList() {
-        if (!filteredGroups.isEmpty()) {
-            this.lessons.setAll(this.filteredGroups.get(0).getLessonsAsUnmodifiableObservableList());
+        if (filteredGroups.size() == 1) {
+            Group currentGroup = filteredGroups.get(0);
+            ObservableList<Lesson> lessons = currentGroup.getLessonsAsUnmodifiableObservableList();
+            UniqueList<Lesson> lessonList = currentGroup.getLessons();
+            this.lessons.setAll(lessons);
+            lessonManager.setLessonLists(currentGroup, lessonList);
         }
     }
 
@@ -262,8 +315,14 @@ public class ModelManager implements Model {
 
     @Override
     public void updateStudentInfoList() {
-        if (!filteredLessons.isEmpty()) {
-            this.studentsInfo.setAll(this.filteredLessons.get(0).getStudentsInfoAsUnmodifiableObservableList());
+        if (!filteredGroups.isEmpty() || !filteredLessons.isEmpty()) {
+            Group currentGroup = filteredGroups.get(0);
+            Lesson currentLesson = filteredLessons.get(0);
+            GroupLessonKey key = new GroupLessonKey(currentGroup, currentLesson);
+            ObservableList<StudentInfo> studentInfos = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
+            UniqueList<StudentInfo> uniqueStudentInfoList = currentLesson.getStudentsInfo();
+            this.studentsInfo.setAll(studentInfos);
+            this.studentInfoManager.setStudentInfos(key, uniqueStudentInfoList);
         }
     }
 

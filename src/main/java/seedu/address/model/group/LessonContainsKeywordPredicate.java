@@ -7,11 +7,11 @@ import seedu.address.commons.util.StringUtil;
 /**
  * Tests that a {@code Lesson} matches the keyword given.
  */
-public class LsnContainsKeywordPredicate implements Predicate<Lesson> {
+public class LessonContainsKeywordPredicate implements Predicate<Lesson> {
 
     private final String keyword;
 
-    public LsnContainsKeywordPredicate(String string) {
+    public LessonContainsKeywordPredicate(String string) {
         this.keyword = string;
     }
 
@@ -23,7 +23,7 @@ public class LsnContainsKeywordPredicate implements Predicate<Lesson> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LsnContainsKeywordPredicate // instanceof handles nulls
-                && keyword.equals(((LsnContainsKeywordPredicate) other).keyword)); // state check
+                || (other instanceof LessonContainsKeywordPredicate // instanceof handles nulls
+                && keyword.equals(((LessonContainsKeywordPredicate) other).keyword)); // state check
     }
 }

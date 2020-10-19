@@ -78,18 +78,18 @@ class UniqueStudentListTest {
 
     @Test
     public void setStudent_nullEditedQuestion_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(JAMES, null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setElement(JAMES, null));
     }
 
     @Test
     public void setStudent_targetStudentNotInList_throwsStudentNotFound() {
-        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setStudent(JAMES, JAMES));
+        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setElement(JAMES, JAMES));
     }
 
     @Test
     public void setStudent_editedStudentIsSameStudent_success() {
         uniqueStudentList.add(JOHN);
-        uniqueStudentList.setStudent(JOHN, JOHN);
+        uniqueStudentList.setElement(JOHN, JOHN);
         UniqueStudentList expected = new UniqueStudentList();
         expected.add(JOHN);
         assertEquals(expected, uniqueStudentList);
@@ -99,7 +99,7 @@ class UniqueStudentListTest {
     public void setStudent_editedStudentHasNonUniqueIdentity_throwsDuplicateStudentException() {
         uniqueStudentList.add(JOHN);
         uniqueStudentList.add(JAMES);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudent(JAMES, JOHN));
+        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setElement(JAMES, JOHN));
     }
 
     @Test
@@ -117,13 +117,13 @@ class UniqueStudentListTest {
 
     @Test
     void setStudents_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents(null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setElements(null));
     }
 
     @Test
     void setStudents_testCorrectness() {
         List<Student> listOfStudents = Arrays.asList(JOHN, JAMES);
-        uniqueStudentList.setStudents(listOfStudents);
+        uniqueStudentList.setElementsWithList(listOfStudents);
         UniqueStudentList expected = new UniqueStudentList();
         expected.add(JOHN);
         expected.add(JAMES);
@@ -134,6 +134,7 @@ class UniqueStudentListTest {
     @Test
     void setStudents_listWithDuplicateStudents_throwsDuplicateStudentException() {
         List<Student> listWithDuplicateStudents = Arrays.asList(JOHN, JOHN);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudents(listWithDuplicateStudents));
+        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList
+            .setElementsWithList(listWithDuplicateStudents));
     }
 }
