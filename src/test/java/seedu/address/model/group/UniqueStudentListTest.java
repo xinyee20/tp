@@ -17,7 +17,7 @@ import seedu.address.model.group.exceptions.StudentNotFoundException;
 
 class UniqueStudentListTest {
 
-    UniqueStudentList uniqueStudentList = new UniqueStudentList();
+    private UniqueStudentList uniqueStudentList = new UniqueStudentList();
 
     @Test
     public void contains_nullSudent_throwsNullPointerException() {
@@ -78,12 +78,12 @@ class UniqueStudentListTest {
 
     @Test
     public void setStudent_nullEditedQuestion_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(JAMES,null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(JAMES, null));
     }
 
     @Test
     public void setStudent_targetStudentNotInList_throwsStudentNotFound() {
-        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setStudent(JAMES,JAMES));
+        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setStudent(JAMES, JAMES));
     }
 
     @Test
@@ -96,7 +96,7 @@ class UniqueStudentListTest {
     }
 
     @Test
-    public void setStudent_editedStudentHasNonUniqueIdentity_ThrowsDuplicateStudentException() {
+    public void setStudent_editedStudentHasNonUniqueIdentity_throwsDuplicateStudentException() {
         uniqueStudentList.add(JOHN);
         uniqueStudentList.add(JAMES);
         assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudent(JAMES, JOHN));
@@ -121,8 +121,8 @@ class UniqueStudentListTest {
     }
 
     @Test
-    void SetStudents_testCorrectness() {
-        List<Student> listOfStudents = Arrays.asList(JOHN,JAMES);
+    void setStudents_testCorrectness() {
+        List<Student> listOfStudents = Arrays.asList(JOHN, JAMES);
         uniqueStudentList.setStudents(listOfStudents);
         UniqueStudentList expected = new UniqueStudentList();
         expected.add(JOHN);
@@ -133,7 +133,7 @@ class UniqueStudentListTest {
 
     @Test
     void setStudents_listWithDuplicateStudents_throwsDuplicateStudentException() {
-        List<Student> listWithDuplicateStudents = Arrays.asList(JOHN,JOHN);
+        List<Student> listWithDuplicateStudents = Arrays.asList(JOHN, JOHN);
         assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudents(listWithDuplicateStudents));
     }
 }
