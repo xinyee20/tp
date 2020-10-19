@@ -24,11 +24,11 @@ class JsonAdaptedLesson {
      * Converts a given {@code Lesson} into this Lesson for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
-        name = source.getName();
+        this.name = source.getName();
     }
 
     @JsonValue
     public String getName() {
-        return name;
+        return this.name;
     }
 }

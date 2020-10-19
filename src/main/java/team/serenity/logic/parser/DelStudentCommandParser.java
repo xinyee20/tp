@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import team.serenity.logic.commands.DelStudentCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 public class DelStudentCommandParser implements Parser<DelStudentCommand> {
 
@@ -16,15 +16,15 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
     @Override
     public DelStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_GRP,
-            CliSyntax.PREFIX_STUDENT, CliSyntax.PREFIX_ID);
+            CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ID);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GRP, CliSyntax.PREFIX_STUDENT, CliSyntax.PREFIX_ID)
+        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GRP, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ID)
             || !argMultimap.getPreamble().isEmpty()) {
             throw deleteStudentCommandParserException;
         }
 
         String[] grpKeywordArray = argMultimap.getValue(CliSyntax.PREFIX_GRP).get().split("\\s+");
-        String[] studentNameArray = argMultimap.getValue(CliSyntax.PREFIX_STUDENT).get().split("\\s+");
+        String[] studentNameArray = argMultimap.getValue(CliSyntax.PREFIX_NAME).get().split("\\s+");
         String[] studentIdArray = argMultimap.getValue(CliSyntax.PREFIX_ID).get().split("\\s+");
 
         //if id or group keyword is more than 1, or if student name has more than 10 letters, throw exception
@@ -39,7 +39,7 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
         String studentId = studentIdArray[0];
         String grpName = grpKeywordArray[0];
 
-        return new DelStudentCommand(studentName, studentId, new GrpContainsKeywordPredicate(grpName));
+        return new DelStudentCommand(studentName, studentId, new GroupContainsKeywordPredicate(grpName));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

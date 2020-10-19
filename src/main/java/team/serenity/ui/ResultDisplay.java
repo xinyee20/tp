@@ -22,7 +22,7 @@ public class ResultDisplay extends UiPart<Region> {
 
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
-        resultDisplay.setText(feedbackToUser);
+        this.resultDisplay.setText(feedbackToUser);
     }
 
 }

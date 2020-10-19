@@ -21,4 +21,14 @@ class AddScoreCommandTest {
 
     }
 
+    @Test
+    public void execute_wrongName_throwsCommandException() {
+
+    }
+
+    @Test
+    public void execute_wrongStudentId_throwsCommandException() {
+
+    }
+
 }

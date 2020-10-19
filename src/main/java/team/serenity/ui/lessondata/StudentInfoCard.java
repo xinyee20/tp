@@ -1,10 +1,11 @@
-package team.serenity.ui;
+package team.serenity.ui.lessondata;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import team.serenity.model.group.StudentInfo;
+import team.serenity.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code StudentInfo}.
@@ -34,11 +35,11 @@ public class StudentInfoCard extends UiPart<Region> {
     public StudentInfoCard(StudentInfo studentInfo, int displayedIndex) {
         super(FXML);
         this.studentInfo = studentInfo;
-        id.setText(displayedIndex + ". ");
-        name.setText(studentInfo.getStudent().getName());
-        studentNumber.setText(studentInfo.getStudent().getStudentNumber());
-        attendance.setText(studentInfo.getAttendance().getAttendance() ? "Present" : "Absent");
-        participation.setText(String.valueOf(studentInfo.getParticipation().getScore()));
+        this.id.setText(displayedIndex + ". ");
+        this.name.setText(studentInfo.getStudent().getName());
+        this.studentNumber.setText(studentInfo.getStudent().getStudentNumber());
+        this.attendance.setText(studentInfo.getAttendance().getAttendance() ? "Present" : "Absent");
+        this.participation.setText(String.valueOf(studentInfo.getParticipation().getScore()));
     }
 
     @Override
@@ -55,8 +56,8 @@ public class StudentInfoCard extends UiPart<Region> {
 
         // state check
         StudentInfoCard card = (StudentInfoCard) other;
-        return id.getText().equals(card.id.getText())
-                && studentInfo.equals(card.studentInfo);
+        return this.id.getText().equals(card.id.getText())
+            && this.studentInfo.equals(card.studentInfo);
     }
 
 }

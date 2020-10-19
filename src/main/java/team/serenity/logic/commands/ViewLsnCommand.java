@@ -5,9 +5,10 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
 
 import team.serenity.commons.core.Messages;
+import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
-import team.serenity.model.group.LsnContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.LessonContainsKeywordPredicate;
 
 /**
  * Finds and lists the attendance and class participation of all the students from
@@ -23,14 +24,17 @@ public class ViewLsnCommand extends Command {
             + "Parameters: GROUP LESSON\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + " G04 " + PREFIX_LSN + " 2-2";
 
-    private final GrpContainsKeywordPredicate grpPredicate;
-    private final LsnContainsKeywordPredicate lsnPredicate;
+    public static final String LESSON_DOES_NOT_EXIST_MESSAGE = "The specified lesson does not exist!";
+    public static final String GROUP_DOES_NOT_EXIST_MESSAGE = "The specified group does not exist!";
+
+    private final GroupContainsKeywordPredicate grpPredicate;
+    private final LessonContainsKeywordPredicate lsnPredicate;
 
     /**
      * Creates a ViewLsnCommand to view the specified {@code Lesson}
      */
-    public ViewLsnCommand(GrpContainsKeywordPredicate grpPredicate,
-                          LsnContainsKeywordPredicate lsnPredicate) {
+    public ViewLsnCommand(GroupContainsKeywordPredicate grpPredicate,
+                          LessonContainsKeywordPredicate lsnPredicate) {
         this.grpPredicate = grpPredicate;
         this.lsnPredicate = lsnPredicate;
     }
@@ -44,10 +48,20 @@ public class ViewLsnCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredGroupList(grpPredicate);
-        model.updateFilteredLessonList(lsnPredicate);
+        model.updateFilteredGroupList(this.grpPredicate);
+
+        if (model.getFilteredGroupList().isEmpty()) {
+            throw new CommandException(GROUP_DOES_NOT_EXIST_MESSAGE);
+        }
+
+        model.updateFilteredLessonList(this.lsnPredicate);
+
+        if (model.getFilteredLessonList().isEmpty()) {
+            throw new CommandException(LESSON_DOES_NOT_EXIST_MESSAGE);
+        }
+
         return new CommandResult(this.getMessage(model), false, false, true, false);
     }
 
@@ -55,8 +69,8 @@ public class ViewLsnCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewLsnCommand // instanceof handles nulls
-                && grpPredicate.equals(((ViewLsnCommand) other).grpPredicate)) // state check
-                && lsnPredicate.equals(((ViewLsnCommand) other).lsnPredicate);
+                && this.grpPredicate.equals(((ViewLsnCommand) other).grpPredicate)) // state check
+                && this.lsnPredicate.equals(((ViewLsnCommand) other).lsnPredicate);
     }
 
 }

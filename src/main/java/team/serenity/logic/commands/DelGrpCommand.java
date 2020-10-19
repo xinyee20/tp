@@ -7,7 +7,7 @@ import team.serenity.commons.core.Messages;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 public class DelGrpCommand extends Command {
 
@@ -20,12 +20,12 @@ public class DelGrpCommand extends Command {
 
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Tutorial group deleted: %1$s";
 
-    private final GrpContainsKeywordPredicate grpPredicate;
+    private final GroupContainsKeywordPredicate grpPredicate;
 
     /**
      * Creates a DelGrpCommand to add the specified {@code Group}
      */
-    public DelGrpCommand(GrpContainsKeywordPredicate grpPredicate) {
+    public DelGrpCommand(GroupContainsKeywordPredicate grpPredicate) {
         this.grpPredicate = grpPredicate;
     }
 
@@ -35,9 +35,9 @@ public class DelGrpCommand extends Command {
 
         Group toDel = null;
 
-        if (!model.getSerenity().getGroupList().isEmpty()) {
-            for (Group group : model.getSerenity().getGroupList()) {
-                if (group.getName().equals(grpPredicate.getKeyword())) {
+        if (!model.getListOfGroups().isEmpty()) {
+            for (Group group : model.getListOfGroups()) {
+                if (group.getName().equals(this.grpPredicate.getKeyword())) {
                     toDel = group;
                     break;
                 }
@@ -49,7 +49,14 @@ public class DelGrpCommand extends Command {
         }
 
         model.deleteGroup(toDel);
-        model.updateFilteredGroupList(grpPredicate);
+        model.updateFilteredGroupList(this.grpPredicate);
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, toDel));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DelGrpCommand // instanceof handles nulls
+                && this.grpPredicate.equals(((DelGrpCommand) other).grpPredicate));
     }
 }

@@ -20,7 +20,7 @@ public class AppParameters {
     private Path configPath;
 
     public Path getConfigPath() {
-        return configPath;
+        return this.configPath;
     }
 
     public void setConfigPath(Path configPath) {
@@ -39,8 +39,7 @@ public class AppParameters {
             logger.warning("Invalid config path " + configPathParameter + ". Using default config path.");
             configPathParameter = null;
         }
-        appParameters
-            .setConfigPath(configPathParameter != null ? Paths.get(configPathParameter) : null);
+        appParameters.setConfigPath(configPathParameter != null ? Paths.get(configPathParameter) : null);
 
         return appParameters;
     }
@@ -61,6 +60,6 @@ public class AppParameters {
 
     @Override
     public int hashCode() {
-        return configPath.hashCode();
+        return this.configPath.hashCode();
     }
 }

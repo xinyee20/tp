@@ -1,6 +1,7 @@
 package team.serenity.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
+import team.serenity.model.util.UniqueList;
 
 /**
  * The API of the Model component.
@@ -20,6 +22,8 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
+    // ========== UserPrefs ==========
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -43,25 +47,19 @@ public interface Model {
 
     // ========== Serenity ==========
 
+    // ========== GroupManager ==========
+
     /**
      * Returns the user prefs' serenity file path.
      */
     Path getSerenityFilePath();
 
     /**
-     * Sets the user prefs' serenity file path.
+     * Returns an unmodifiable view of the filtered group list.
      */
-    void setSerenityFilePath(Path serenityFilePath);
+    ObservableList<Group> getFilteredGroupList();
 
-    /**
-     * Replaces serenity data with the data in {@code serenity}.
-     */
-    void setSerenity(ReadOnlySerenity serenity);
-
-    /**
-     * Returns the Serenity
-     */
-    ReadOnlySerenity getSerenity();
+    ObservableList<Group> getListOfGroups();
 
     /**
      * Returns true if a group with the same identity as {@code group} exists in serenity.
@@ -79,26 +77,25 @@ public interface Model {
     void addGroup(Group group);
 
     /**
-     * Adds a Student to a Group
-     */
-    void addStudentToGroup(Student student, Predicate<Group> predicate);
-
-    /**
-     * Removes a Student from a Group.
-     */
-    void removeStudentFromGroup(Student student, Predicate<Group> predicate);
-
-    /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
 
+    // ========== LessonManager ==========
+
     /**
-     * Updates the student list when changing to another group of interest.
+     * Returns an unmodifiable view of the lesson list.
      */
-    void updateStudentList();
+    ObservableList<Lesson> getLessonList();
+
+    /**
+     * Returns an unmodifiable view of the filtered lesson list.
+     */
+    ObservableList<Lesson> getFilteredLessonList();
+
+    Optional<UniqueList<Lesson>> getListOfLessonsFromGroup(Group group);
 
     /**
      * Updates the lesson list to filter when changing to another group of interest.
@@ -112,42 +109,62 @@ public interface Model {
      */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
 
-    /**
-     * Updates the student info list to filter when changing to another lesson of interest.
-     */
-    void updateStudentInfoList();
-
-    /**
-     * Updates the question list to filter when changing to another lesson of interest.
-     */
-    void updateQuestionList();
-
-    /**
-     * Returns an unmodifiable view of the filtered group list.
-     */
-    ObservableList<Group> getFilteredGroupList();
+    // ========== StudentManager ==========
 
     /**
      * Returns an unmodifiable view of the student list.
      */
     ObservableList<Student> getStudentList();
 
-    /**
-     * Returns an unmodifiable view of the lesson list.
-     */
-    ObservableList<Lesson> getLessonList();
+    Optional<UniqueList<Student>> getListOfStudentsFromGroup(Group group);
 
     /**
-     * Returns an unmodifiable view of the filtered lesson list.
+     * Removes a Student from a Group.
      */
-    ObservableList<Lesson> getFilteredLessonList();
+    void deleteStudentFromGroup(Student student, Predicate<Group> predicate);
+
+    /**
+     * Adds a Student to a Group
+     */
+    void addStudentToGroup(Student student, Predicate<Group> predicate);
+
+    /**
+     * Updates the student list when changing to another group of interest.
+     */
+    void updateStudentsList();
+
+    /**
+     * Checks if Student exists.
+     * @param group
+     * @param student
+     * @return Whether student exists.
+     */
+    boolean checkIfStudentExistsInGroup(Group group, Student student);
+
+    // ========== StudentInfoManager ==========
 
     /**
      * Returns an unmodifiable view of the student info list
      */
-    ObservableList<StudentInfo> getStudentInfoList();
+    ObservableList<StudentInfo> getStudentsInfoList();
+
+    Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
+
+    /**
+     * Updates the student info list to filter when changing to another lesson of interest.
+     */
+    void updateStudentsInfoList();
+
+    // ========== QuestionManager ==========
+
     /**
      * Returns an unmodifiable view of the question list.
      */
     ObservableList<Question> getQuestionList();
+
+    /**
+     * Updates the question list to filter when changing to another lesson of interest.
+     */
+    void updateQuestionList();
+
 }

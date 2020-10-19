@@ -7,13 +7,14 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.util.UniqueList;
 
 /**
  * Wraps all data at the serenity level Duplicates are not allowed (by .isSameGroup comparison)
  */
 public class Serenity implements ReadOnlySerenity {
 
-    private final UniqueGroupList groups;
+    private final UniqueList<Group> groups;
 
     public Serenity() {
         groups = new UniqueGroupList();
@@ -33,7 +34,7 @@ public class Serenity implements ReadOnlySerenity {
      * Replaces the contents of the group list with {@code groups}. {@code groups} must not contain duplicate groups.
      */
     public void setGroups(List<Group> groups) {
-        this.groups.setGroups(groups);
+        this.groups.setElementsWithList(groups);
     }
 
 
@@ -52,14 +53,14 @@ public class Serenity implements ReadOnlySerenity {
      */
     public boolean hasGroup(Group group) {
         requireNonNull(group);
-        return groups.contains(group);
+        return this.groups.contains(group);
     }
 
     /**
      * Adds a group to the serenity. The group must not already exist in the serenity.
      */
     public void addGroup(Group g) {
-        groups.add(g);
+        this.groups.add(g);
     }
 
 
@@ -69,38 +70,38 @@ public class Serenity implements ReadOnlySerenity {
      */
     public void setGroup(Group target, Group editedGroup) {
         requireNonNull(editedGroup);
-        groups.setGroup(target, editedGroup);
+        this.groups.setElement(target, editedGroup);
     }
 
     /**
      * Removes {@code key} from this {@code Serenity}. {@code key} must exist in serenity.
      */
-    public void removeGroup(Group key) {
-        groups.remove(key);
+    public void deleteGroup(Group key) {
+        this.groups.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return groups.asUnmodifiableObservableList().size() + " groups";
+        return this.groups.asUnmodifiableObservableList().size() + " groups";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Group> getGroupList() {
-        return groups.asUnmodifiableObservableList();
+        return this.groups.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof Serenity // instanceof handles nulls
-            && groups.equals(((Serenity) other).groups));
+            && this.groups.equals(((Serenity) other).groups));
     }
 
     @Override
     public int hashCode() {
-        return groups.hashCode();
+        return this.groups.hashCode();
     }
 }

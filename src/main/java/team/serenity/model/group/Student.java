@@ -51,16 +51,16 @@ public class Student {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getStudentNumber() {
-        return studentNumber;
+        return this.studentNumber;
     }
 
     @Override
     public String toString() {
-        return name + " " + studentNumber;
+        return this.name + " " + this.studentNumber;
     }
 
     @Override

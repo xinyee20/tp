@@ -5,7 +5,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_STUDENT;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
 
@@ -21,10 +21,12 @@ public class AddStudentCommand extends Command {
         + ": Adds a new Student to a specified tutorial group. \n"
         + "Parameters: "
         + PREFIX_GRP + "GRP "
-        + PREFIX_STUDENT + "NAME "
+        + PREFIX_NAME + "NAME "
         + PREFIX_ID + "Student ID \n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + "G04"
-        + " " + PREFIX_STUDENT + "Ryan" + " " + PREFIX_ID + "e1234567";
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GRP + "G04 "
+        + PREFIX_NAME + "Ryan "
+        + PREFIX_ID + "e1234567";
 
     public static final String MESSAGE_SUCCESS = "You added %s (%s) to tutorial group %s";
 
@@ -50,14 +52,17 @@ public class AddStudentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Student student = new Student(studentName, studentId);
         model.updateFilteredGroupList(predicate);
+
         if (model.getFilteredGroupList().isEmpty()) {
             //no such group exists
             throw new CommandException(MESSAGE_GROUP_EMPTY);
         }
+
         Group targetGroup = model.getFilteredGroupList().get(0);
         if (targetGroup.getStudents().contains(student)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
+
         model.addStudentToGroup(student, predicate);
         return new CommandResult(
             String.format(MESSAGE_SUCCESS, studentName, studentId, model.getFilteredGroupList().get(0).getName()));
@@ -67,12 +72,16 @@ public class AddStudentCommand extends Command {
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
-        } else if (obj instanceof AddStudentCommand) {
-            AddStudentCommand other = (AddStudentCommand) obj;
-            return studentName.equals(other.studentName) && studentId.equals(other.studentId)
-                && predicate.equals(other.predicate);
-        } else {
+        }
+
+        if (!(obj instanceof AddStudentCommand)) {
             return false;
         }
+
+        AddStudentCommand other = (AddStudentCommand) obj;
+        return this.studentName.equals(other.studentName)
+            && this.studentId.equals(other.studentId)
+            && this.predicate.equals(other.predicate);
     }
+
 }

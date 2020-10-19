@@ -3,6 +3,7 @@ package team.serenity.model.group;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,44 +11,58 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import team.serenity.model.group.exceptions.DuplicateQuestionException;
 import team.serenity.model.group.exceptions.QuestionNotFoundException;
+import team.serenity.model.util.UniqueList;
 
 /**
  * A list of Questions that enforces uniqueness between its elements and does not allow nulls.
  * A Question is considered unique by comparing using {@code Question#equal(Object)}.
  */
-public class UniqueQuestionList implements Iterable<Question> {
+public class UniqueQuestionList implements UniqueList<Question> {
 
     private final ObservableList<Question> internalList = FXCollections.observableArrayList();
     private final ObservableList<Question> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    @Override
+    public int size() {
+        return this.internalList.size();
+    }
+
+    @Override
+    public void sort(Comparator<Question> comparator) {
+        this.internalList.sort(comparator);
+    }
+
     /**
      * Returns true if the list contains an equivalent question as the given argument.
      */
+    @Override
     public boolean contains(Question toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return this.internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
      * Adds a question to the list. The question must not already exist in the list.
      */
+    @Override
     public void add(Question toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateQuestionException();
         }
-        internalList.add(toAdd);
+        this.internalList.add(toAdd);
     }
 
     /**
      * Replaces the question {@code target} in the list with {@code question}. {@code target} must exist in the list.
      * The question identity of {@code question} must not be the same as another existing question in the list.
      */
-    public void setQuestion(Question target, Question editedQuestion) {
+    @Override
+    public void setElement(Question target, Question editedQuestion) {
         requireAllNonNull(target, editedQuestion);
 
-        int index = internalList.indexOf(target);
+        int index = this.internalList.indexOf(target);
         if (index == -1) {
             throw new QuestionNotFoundException();
         }
@@ -56,67 +71,78 @@ public class UniqueQuestionList implements Iterable<Question> {
             throw new DuplicateQuestionException();
         }
 
-        internalList.set(index, editedQuestion);
+        this.internalList.set(index, editedQuestion);
     }
 
     /**
      * Removes the equivalent question from the list. The question must exist in the list.
      */
+    @Override
     public void remove(Question toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!this.internalList.remove(toRemove)) {
             throw new QuestionNotFoundException();
         }
     }
 
+    @Override
+    public ObservableList<Question> getList() {
+        return this.internalList;
+    }
+
     /**
-     * Replaces all the questions from the list with a new list of questions
+     * Replaces all the lessons from the list with a new list of lessons
+     * @param replacement
      */
-    public void setQuestions(UniqueQuestionList replacement) {
+    @Override
+    public void setElements(UniqueList<Question> replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        this.internalList.setAll(replacement.getList());
     }
 
     /**
      * Replaces the contents of this list with {@code questionList}.
      * {@code questionList} must not contain duplicate questions.
      */
-    public void setQuestions(List<Question> questionList) {
+    @Override
+    public void setElementsWithList(List<Question> questionList) {
         requireAllNonNull(questionList);
-        if (!questionsAreUnique(questionList)) {
+        if (!elementsAreUnique(questionList)) {
             throw new DuplicateQuestionException();
         }
-        internalList.setAll(questionList);
+        this.internalList.setAll(questionList);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
+    @Override
     public ObservableList<Question> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
+        return this.internalUnmodifiableList;
     }
 
     @Override
     public Iterator<Question> iterator() {
-        return internalList.iterator();
+        return this.internalList.iterator();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueQuestionList // instanceof handles nulls
-                && internalList.equals(((UniqueQuestionList) other).internalList));
+                && this.internalList.equals(((UniqueQuestionList) other).internalList));
     }
 
     @Override
     public int hashCode() {
-        return internalList.hashCode();
+        return this.internalList.hashCode();
     }
 
     /**
      * Returns true if {@code questionList} contains only unique questions.
      */
-    private boolean questionsAreUnique(List<Question> questionList) {
+    @Override
+    public boolean elementsAreUnique(List<Question> questionList) {
         for (int i = 0; i < questionList.size() - 1; i++) {
             for (int j = i + 1; j < questionList.size(); j++) {
                 if (questionList.get(i).equals(questionList.get(j))) {

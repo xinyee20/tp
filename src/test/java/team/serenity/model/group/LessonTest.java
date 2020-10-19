@@ -11,6 +11,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import team.serenity.model.util.UniqueList;
+
 public class LessonTest {
 
     @Test
@@ -21,7 +23,7 @@ public class LessonTest {
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
-        UniqueStudentInfoList studentsInfo = new UniqueStudentInfoList();
+        UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
         StudentInfo studentInfo = new StudentInfo(JOHN, new Participation(), new Attendance());
         studentsInfo.add(studentInfo);
         assertThrows(IllegalArgumentException.class, () -> new Lesson(invalidName, studentsInfo));
@@ -36,13 +38,13 @@ public class LessonTest {
 
     @Test
     public void equals() {
-        UniqueStudentInfoList studentsInfo = new UniqueStudentInfoList();
+        UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
         StudentInfo studentInfo = new StudentInfo(JOHN);
         studentsInfo.add(studentInfo);
         Lesson oneOne = new Lesson("1-1", studentsInfo);
         Lesson oneOneClone = new Lesson("1-1", studentsInfo);
         Lesson classTwoOne = new Lesson("2-1", studentsInfo); //same students, different name
-        UniqueStudentInfoList newStudentsInfo = new UniqueStudentInfoList();
+        UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
         newStudentsInfo.add(new StudentInfo(JOHN));
         newStudentsInfo.add(new StudentInfo(JAMES));
         Lesson oneOneWithTwoStudents = new Lesson("1-1", newStudentsInfo);

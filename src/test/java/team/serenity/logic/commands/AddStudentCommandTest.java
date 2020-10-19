@@ -14,9 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
 import team.serenity.testutil.GroupPredicateStub;
 import team.serenity.testutil.ModelStub;
@@ -47,13 +48,9 @@ public class AddStudentCommandTest {
             .withStudents(
                 new Student("Freddie", "e0000000"),
                 new Student("June", "e0101011")
-            ).withClasses(
-                "4.2",
-                "5.1",
-                "5.2",
-                "6.1"
-            ).build();
-        UniqueGroupList groupList = new UniqueGroupList();
+            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            .build();
+        UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
@@ -116,7 +113,6 @@ class ModelStubWithGroup extends ModelStub {
     }
 }
 
-
 /**
  * A Model stub that does not contain any group
  */
@@ -133,9 +129,8 @@ class ModelStubWithoutGroup extends ModelStub {
     }
 }
 
-
 /**
- * A GrpContainsKeywordPredicate stub
+ * A GroupContainsKeywordPredicate stub
  */
 class GroupPredicateStubWithGroupName implements Predicate<Group> {
 
@@ -153,7 +148,7 @@ class GroupPredicateStubWithGroupName implements Predicate<Group> {
     @Override
     public boolean equals(Object obj) {
         return obj == this // short circuit if same object
-            || (obj instanceof GrpContainsKeywordPredicate // instanceof handles nulls
+            || (obj instanceof GroupContainsKeywordPredicate // instanceof handles nulls
             && keyword.equals(((GroupPredicateStubWithGroupName) obj).keyword)); // state check
     }
 }

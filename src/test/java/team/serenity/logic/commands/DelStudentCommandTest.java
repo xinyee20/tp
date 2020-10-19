@@ -16,6 +16,7 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
 import team.serenity.testutil.GroupPredicateStub;
 import team.serenity.testutil.ModelStub;
@@ -45,13 +46,9 @@ public class DelStudentCommandTest {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "e0000000")
-                ).withClasses(
-                "4.2",
-                "5.1",
-                "5.2",
-                "6.1"
-            ).build();
-        UniqueGroupList groupList = new UniqueGroupList();
+            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            .build();
+        UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubGroup modelStub = new ModelStubGroup(filteredList);

@@ -27,13 +27,13 @@ class JsonAdaptedStudent {
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
-        name = source.getName();
-        studentNumber = source.getStudentNumber();
+        this.name = source.getName();
+        this.studentNumber = source.getStudentNumber();
     }
 
     @JsonValue
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         // add some validation
-        return new Student(name, studentNumber);
+        return new Student(this.name, this.studentNumber);
     }
 
 }

@@ -13,6 +13,7 @@ import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.UniqueStudentInfoList;
+import team.serenity.model.util.UniqueList;
 
 /**
  * Reads CSV file that the tutor downloads from LUMINUS and writes JSON data to a new CSV file.
@@ -98,8 +99,8 @@ public class CsvUtil {
             int len = row.length;
             for (int i = 4; i < len; i++) {
                 String lessonName = computeClassName(i - 3); //start from 1
-                UniqueStudentInfoList newStudentsInfo = new UniqueStudentInfoList();
-                newStudentsInfo.setStudentInfo(new ArrayList<>(studentsInfo));
+                UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
+                newStudentsInfo.setElementsWithList(new ArrayList<>(studentsInfo));
                 lessons.add(new Lesson(lessonName, newStudentsInfo));
             }
         } catch (IOException ioe) {
@@ -139,7 +140,7 @@ public class CsvUtil {
         return studentsInfo;
     }
 
-    private Lesson createClass(String name, UniqueStudentInfoList studentsInfo) {
+    private Lesson createClass(String name, UniqueList<StudentInfo> studentsInfo) {
         return new Lesson(name, studentsInfo);
     }
 

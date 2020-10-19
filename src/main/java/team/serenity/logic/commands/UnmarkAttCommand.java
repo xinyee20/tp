@@ -2,7 +2,7 @@ package team.serenity.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_STUDENT;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import javafx.collections.ObservableList;
 import team.serenity.logic.commands.exceptions.CommandException;
@@ -11,19 +11,19 @@ import team.serenity.model.group.Attendance;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueStudentInfoList;
+import team.serenity.model.util.UniqueList;
 
 public class UnmarkAttCommand extends Command {
 
     public static final String COMMAND_WORD = "unmarkatt";
-    public static final String MESSAGE_SUCCESS = "%s: \nAttendance - absent";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the attendance of a student in a class. \n"
             + "Parameters: "
-            + PREFIX_STUDENT + " NAME" + " " + PREFIX_ID + " STUDENT_NUMBER\n"
+            + PREFIX_NAME + " NAME" + " " + PREFIX_ID + " STUDENT_NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT + " Aaron Tan" + " " + PREFIX_ID + " e0123456";
+            + PREFIX_NAME + " Aaron Tan" + " " + PREFIX_ID + " e0123456";
+
+    public static final String MESSAGE_SUCCESS = "%s: \nAttendance - absent";
 
     private Student toUnmarkAtt;
 
@@ -33,7 +33,7 @@ public class UnmarkAttCommand extends Command {
     public UnmarkAttCommand(Student student) {
         requireNonNull(student);
         // Specified student to mark present
-        toUnmarkAtt = student;
+        this.toUnmarkAtt = student;
     }
 
     @Override
@@ -41,21 +41,29 @@ public class UnmarkAttCommand extends Command {
         requireNonNull(model);
 
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         // Mark single student attendance
         for (int i = 0; i < studentsInfo.size(); i++) {
             StudentInfo studentInfo = studentsInfo.get(i);
-            boolean isCorrectStudent = studentInfo.containsStudent(toUnmarkAtt);
+            boolean isCorrectStudent = studentInfo.containsStudent(this.toUnmarkAtt);
             if (isCorrectStudent) {
-                Attendance update = studentInfo.getAttendance().setAttendance(false);
+                Attendance update = studentInfo.getAttendance().setNewAttendance(false);
                 StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
+                uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                 model.updateLessonList();
-                model.updateStudentInfoList();
+                model.updateStudentsInfoList();
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toUnmarkAtt));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toUnmarkAtt));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UnmarkAttCommand // instanceof handles nulls
+                && this.toUnmarkAtt.equals(((UnmarkAttCommand) other).toUnmarkAtt));
+    }
+
 }

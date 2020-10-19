@@ -14,6 +14,7 @@ import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.UniqueLessonList;
 import team.serenity.model.group.UniqueStudentInfoList;
 import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.util.UniqueList;
 
 /**
  * A utility class to help with building Group objects.
@@ -33,16 +34,16 @@ public class GroupBuilder {
     ));
 
     private String name;
-    private UniqueStudentList students = new UniqueStudentList();
-    private UniqueLessonList classes = new UniqueLessonList();
+    private UniqueList<Student> students = new UniqueStudentList();
+    private UniqueList<Lesson> lessons = new UniqueLessonList();
 
     /**
      * Creates a {@code GroupBuilder} with the default details.
      */
     public GroupBuilder() {
         name = DEFAULT_NAME;
-        students.setStudents(new ArrayList<>(DEFAULT_STUDENTS));
-        classes.setLessons(new ArrayList<>(DEFAULT_CLASSES));
+        students.setElementsWithList(new ArrayList<>(DEFAULT_STUDENTS));
+        lessons.setElementsWithList(new ArrayList<>(DEFAULT_CLASSES));
     }
 
     /**
@@ -51,7 +52,7 @@ public class GroupBuilder {
     public GroupBuilder(Group groupToCopy) {
         name = groupToCopy.getName();
         students = groupToCopy.getStudents();
-        classes = groupToCopy.getLessons();
+        lessons = groupToCopy.getLessons();
     }
 
     /**
@@ -59,8 +60,8 @@ public class GroupBuilder {
      */
     public GroupBuilder(String name, Path filePath) {
         this.name = name;
-        students.setStudents(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
-        classes.setLessons(new ArrayList<>());
+        students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+        lessons.setElementsWithList(new ArrayList<>());
     }
 
     /**
@@ -75,7 +76,7 @@ public class GroupBuilder {
      * Parses the {@code students} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
     public GroupBuilder withStudents(Student... students) {
-        this.students.setStudents(Arrays.asList(students));
+        this.students.setElementsWithList(Arrays.asList(students));
         return this;
     }
 
@@ -83,7 +84,7 @@ public class GroupBuilder {
      * Parses the {@code filePath} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
     public GroupBuilder withFilePath(Path filePath) {
-        students.setStudents(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+        students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
         return this;
     }
 
@@ -92,18 +93,18 @@ public class GroupBuilder {
      * building.
      */
     public GroupBuilder withClasses(String... classes) {
-        UniqueStudentInfoList studentsInfo = new UniqueStudentInfoList();
+        UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
         for (Student student : students) {
             studentsInfo.add(new StudentInfo(student));
         }
         for (String className : classes) {
-            this.classes.add(new Lesson(className, studentsInfo));
+            this.lessons.add(new Lesson(className, studentsInfo));
         }
         return this;
     }
 
     public Group build() {
-        return new Group(name, students, classes);
+        return new Group(this.name, this.students, this.lessons);
     }
 
 }

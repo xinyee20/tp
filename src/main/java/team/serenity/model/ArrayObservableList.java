@@ -20,27 +20,27 @@ public class ArrayObservableList<E> extends ModifiableObservableListBase<E> {
      */
     public ArrayObservableList(ObservableList<E> list) {
         for (E e : list) {
-            delegate.add(e);
+            this.delegate.add(e);
         }
     }
 
     public E get(int index) {
-        return delegate.get(index);
+        return this.delegate.get(index);
     }
 
     public int size() {
-        return delegate.size();
+        return this.delegate.size();
     }
 
     protected void doAdd(int index, E element) {
-        delegate.add(index, element);
+        this.delegate.add(index, element);
     }
 
     protected E doSet(int index, E element) {
-        return delegate.set(index, element);
+        return this.delegate.set(index, element);
     }
 
     protected E doRemove(int index) {
-        return delegate.remove(index);
+        return this.delegate.remove(index);
     }
 }

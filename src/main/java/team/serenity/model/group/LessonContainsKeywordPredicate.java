@@ -7,23 +7,23 @@ import team.serenity.commons.util.StringUtil;
 /**
  * Tests that a {@code Lesson} matches the keyword given.
  */
-public class LsnContainsKeywordPredicate implements Predicate<Lesson> {
+public class LessonContainsKeywordPredicate implements Predicate<Lesson> {
 
     private final String keyword;
 
-    public LsnContainsKeywordPredicate(String string) {
+    public LessonContainsKeywordPredicate(String string) {
         this.keyword = string;
     }
 
     @Override
     public boolean test(Lesson lesson) {
-        return StringUtil.containsWordIgnoreCase(lesson.getName(), keyword);
+        return StringUtil.containsWordIgnoreCase(lesson.getName(), this.keyword);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LsnContainsKeywordPredicate // instanceof handles nulls
-                && keyword.equals(((LsnContainsKeywordPredicate) other).keyword)); // state check
+                || (other instanceof LessonContainsKeywordPredicate // instanceof handles nulls
+                && this.keyword.equals(((LessonContainsKeywordPredicate) other).keyword)); // state check
     }
 }

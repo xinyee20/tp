@@ -5,7 +5,7 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
 import team.serenity.commons.core.Messages;
 import team.serenity.model.Model;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
  * Finds and lists all students and lessons in the group specifeied. Keyword matching is case insensitive.
@@ -19,9 +19,9 @@ public class ViewGrpCommand extends Command {
             + "Parameters: GROUP \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + " G04";
 
-    private final GrpContainsKeywordPredicate predicate;
+    private final GroupContainsKeywordPredicate predicate;
 
-    public ViewGrpCommand(GrpContainsKeywordPredicate predicate) {
+    public ViewGrpCommand(GroupContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -34,7 +34,15 @@ public class ViewGrpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredGroupList(predicate);
+        model.updateFilteredGroupList(this.predicate);
         return new CommandResult(this.getMessage(model), false, false, false, true);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewGrpCommand // instanceof handles nulls
+                && this.predicate.equals(((ViewGrpCommand) other).predicate)); // state check
+    }
+
 }

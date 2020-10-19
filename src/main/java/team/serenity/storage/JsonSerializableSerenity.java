@@ -38,7 +38,7 @@ class JsonSerializableSerenity {
      * @param source future changes to this will not affect the created {@code JsonSerializableSerenity}.
      */
     public JsonSerializableSerenity(ReadOnlySerenity source) {
-        groups.addAll(
+        this.groups.addAll(
             source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
@@ -49,7 +49,7 @@ class JsonSerializableSerenity {
      */
     public Serenity toModelType() throws IllegalValueException {
         Serenity serenity = new Serenity();
-        for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
+        for (JsonAdaptedGroup jsonAdaptedGroup : this.groups) {
             Group group = jsonAdaptedGroup.toModelType();
             if (serenity.hasGroup(group)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);

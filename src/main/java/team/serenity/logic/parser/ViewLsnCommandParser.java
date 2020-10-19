@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 import team.serenity.logic.commands.ViewLsnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
-import team.serenity.model.group.LsnContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.LessonContainsKeywordPredicate;
 
 public class ViewLsnCommandParser implements Parser<ViewLsnCommand> {
 
@@ -32,8 +32,8 @@ public class ViewLsnCommandParser implements Parser<ViewLsnCommand> {
             throw viewLsnCommandParserException;
         }
 
-        return new ViewLsnCommand(new GrpContainsKeywordPredicate(grpKeyword[0]),
-                new LsnContainsKeywordPredicate(lsnKeyword[0]));
+        return new ViewLsnCommand(new GroupContainsKeywordPredicate(grpKeyword[0]),
+                new LessonContainsKeywordPredicate(lsnKeyword[0]));
     }
 
     /**

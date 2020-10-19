@@ -17,12 +17,11 @@ import team.serenity.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private UserPrefsStorage userPrefsStorage;
     private SerenityStorage serenityStorage;
+    private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage} and {@code
-     * SerenityStorage}.
+     * Creates a {@code StorageManager} with the given {@code SerenityStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(SerenityStorage serenityStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -34,46 +33,46 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getUserPrefsFilePath() {
-        return userPrefsStorage.getUserPrefsFilePath();
+        return this.userPrefsStorage.getUserPrefsFilePath();
     }
 
     @Override
     public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
-        return userPrefsStorage.readUserPrefs();
+        return this.userPrefsStorage.readUserPrefs();
     }
 
     @Override
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
-        userPrefsStorage.saveUserPrefs(userPrefs);
+        this.userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
     // ================ Serenity methods ==============================
 
     @Override
     public Path getSerenityFilePath() {
-        return serenityStorage.getSerenityFilePath();
+        return this.serenityStorage.getSerenityFilePath();
     }
 
     @Override
     public Optional<ReadOnlySerenity> readSerenity() throws DataConversionException, IOException {
-        return readSerenity(serenityStorage.getSerenityFilePath());
+        return readSerenity(this.serenityStorage.getSerenityFilePath());
     }
 
     @Override
     public Optional<ReadOnlySerenity> readSerenity(Path filePath)
         throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return serenityStorage.readSerenity(filePath);
+        this.logger.fine("Attempting to read data from file: " + filePath);
+        return this.serenityStorage.readSerenity(filePath);
     }
 
     @Override
     public void saveSerenity(ReadOnlySerenity serenity) throws IOException {
-        saveSerenity(serenity, serenityStorage.getSerenityFilePath());
+        saveSerenity(serenity, this.serenityStorage.getSerenityFilePath());
     }
 
     @Override
     public void saveSerenity(ReadOnlySerenity serenity, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        serenityStorage.saveSerenity(serenity, filePath);
+        this.logger.fine("Attempting to write to data file: " + filePath);
+        this.serenityStorage.saveSerenity(serenity, filePath);
     }
 }

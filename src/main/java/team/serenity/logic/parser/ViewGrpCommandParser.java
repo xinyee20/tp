@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 public class ViewGrpCommandParser implements Parser<ViewGrpCommand> {
 
@@ -28,7 +28,7 @@ public class ViewGrpCommandParser implements Parser<ViewGrpCommand> {
             throw viewGrpCommandParserException;
         }
 
-        return new ViewGrpCommand(new GrpContainsKeywordPredicate(grpKeyword[0]));
+        return new ViewGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));
     }
 
     /**

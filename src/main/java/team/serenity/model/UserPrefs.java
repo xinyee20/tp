@@ -41,7 +41,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public GuiSettings getGuiSettings() {
-        return guiSettings;
+        return this.guiSettings;
     }
 
     public void setGuiSettings(GuiSettings guiSettings) {
@@ -50,7 +50,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+        return this.addressBookFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
@@ -60,7 +60,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     // Serenity
     public Path getSerenityFilePath() {
-        return serenityFilePath;
+        return this.serenityFilePath;
     }
 
     public void setSerenityFilePath(Path serenityFilePath) {
@@ -79,20 +79,20 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs o = (UserPrefs) other;
 
-        return guiSettings.equals(o.guiSettings)
-            && addressBookFilePath.equals(o.addressBookFilePath);
+        return this.guiSettings.equals(o.guiSettings)
+            && this.addressBookFilePath.equals(o.addressBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(this.guiSettings, this.addressBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("Gui Settings : " + this.guiSettings);
+        sb.append("\nLocal data file location : " + this.addressBookFilePath);
         return sb.toString();
     }
 

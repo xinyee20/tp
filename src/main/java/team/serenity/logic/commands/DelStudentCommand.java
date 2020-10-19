@@ -5,7 +5,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_EMPTY;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_STUDENT;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
 
@@ -22,10 +22,12 @@ public class DelStudentCommand extends Command {
         + ": Removes a new Student from a specified tutorial group. \n"
         + "Parameters: "
         + PREFIX_GRP + "GRP "
-        + PREFIX_STUDENT + "NAME "
+        + PREFIX_NAME + "NAME "
         + PREFIX_ID + "Student ID \n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + "G04" + " " + PREFIX_STUDENT + "Ryan" + " " + PREFIX_ID
-        + "e1234567";
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GRP + "G04 "
+        + PREFIX_NAME + "Ryan "
+        + PREFIX_ID + "e1234567";
 
     public static final String MESSAGE_SUCCESS = "You removed %s (%s) from tutorial group %s";
 
@@ -46,37 +48,43 @@ public class DelStudentCommand extends Command {
         this.predicate = predicate;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Student student = new Student(studentName, studentId);
-        model.updateFilteredGroupList(predicate);
+        Student student = new Student(this.studentName, this.studentId);
+        model.updateFilteredGroupList(this.predicate);
         ObservableList<Group> groups = model.getFilteredGroupList();
+
         if (groups.isEmpty()) {
             //no such group
             throw new CommandException(MESSAGE_GROUP_EMPTY);
         }
+
         if (!groups.get(0).getStudents().contains(student)) {
             //student does not exist
             throw new CommandException(MESSAGE_STUDENT_EMPTY);
-        } else {
-            model.removeStudentFromGroup(student, predicate);
-            model.updateFilteredGroupList(predicate);
-            return new CommandResult(
-                String.format(MESSAGE_SUCCESS, studentName, studentId, model.getFilteredGroupList().get(0).getName()));
         }
+
+        model.deleteStudentFromGroup(student, this.predicate);
+        model.updateFilteredGroupList(this.predicate);
+        return new CommandResult(
+            String.format(MESSAGE_SUCCESS, this.studentName, this.studentId,
+            model.getFilteredGroupList().get(0).getName()));
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
-        } else if (obj instanceof DelStudentCommand) {
-            DelStudentCommand other = (DelStudentCommand) obj;
-            return studentName.equals(other.studentName) && studentId.equals(other.studentId)
-                && predicate.equals(other.predicate);
-        } else {
+        }
+
+        if (!(obj instanceof DelStudentCommand)) {
             return false;
         }
+
+        DelStudentCommand other = (DelStudentCommand) obj;
+        return this.studentName.equals(other.studentName)
+                && this.studentId.equals(other.studentId)
+                && this.predicate.equals(other.predicate);
     }
+
 }

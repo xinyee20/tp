@@ -27,26 +27,27 @@ public class AddGrpCommand extends Command {
      */
     public AddGrpCommand(Group group) {
         requireNonNull(group);
-        toAdd = group;
+        this.toAdd = group;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasGroup(toAdd)) {
+        if (model.hasGroup(this.toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
-        model.addGroup(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), false, false, false, true);
+        model.addGroup(this.toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd),
+        false, false, false, true);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof AddGrpCommand // instanceof handles nulls
-            && toAdd.equals(((AddGrpCommand) other).toAdd));
+            && this.toAdd.equals(((AddGrpCommand) other).toAdd));
     }
 
 }

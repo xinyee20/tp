@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static team.serenity.testutil.Assert.assertThrows;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
@@ -52,18 +51,6 @@ public class ModelManagerTest {
         GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
-    }
-
-    @Test
-    public void setSerenityFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setSerenityFilePath(null));
-    }
-
-    @Test
-    public void setSerenityFilePath_validPath_setsSerenityFilePath() {
-        Path path = Paths.get("serenity/file/path");
-        modelManager.setSerenityFilePath(path);
-        assertEquals(path, modelManager.getSerenityFilePath());
     }
 
     @Test

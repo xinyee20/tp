@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import team.serenity.logic.commands.AddLsnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new AddGrpCommand object
@@ -31,7 +31,7 @@ public class AddLsnCommandParser implements Parser<AddLsnCommand> {
         String grpName = argMultimap.getValue(CliSyntax.PREFIX_GRP).get();
         String lsnName = argMultimap.getValue(CliSyntax.PREFIX_LSN).get();
 
-        return new AddLsnCommand(lsnName, new GrpContainsKeywordPredicate(grpName));
+        return new AddLsnCommand(lsnName, new GroupContainsKeywordPredicate(grpName));
     }
 
     /**

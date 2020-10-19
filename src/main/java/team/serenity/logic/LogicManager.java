@@ -1,6 +1,5 @@
 package team.serenity.logic;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
@@ -13,7 +12,6 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.SerenityParser;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.Model;
-import team.serenity.model.ReadOnlySerenity;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
@@ -50,11 +48,14 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        /*
+        TODO: To write the data to the external file after each command is executed.
         try {
-            storage.saveSerenity(model.getSerenity());
+            // storage.saveSerenity(model.getSerenity());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
+         */
 
         return commandResult;
     }
@@ -70,11 +71,6 @@ public class LogicManager implements Logic {
     }
 
     // ========== Serenity ==========
-
-    @Override
-    public ReadOnlySerenity getSerenity() {
-        return model.getSerenity();
-    }
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
@@ -93,7 +89,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<StudentInfo> getStudentInfoList() {
-        return model.getStudentInfoList();
+        return model.getStudentsInfoList();
     }
 
     @Override

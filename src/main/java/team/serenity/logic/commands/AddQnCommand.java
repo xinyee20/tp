@@ -9,7 +9,7 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
-import team.serenity.model.group.UniqueQuestionList;
+import team.serenity.model.util.UniqueList;
 
 /**
  * Adds a question to the question list of a specific tutorial group's lesson in Serenity.
@@ -32,7 +32,7 @@ public class AddQnCommand extends Command {
      */
     public AddQnCommand(Question question) {
         requireNonNull(question);
-        toAdd = question;
+        this.toAdd = question;
     }
 
     @Override
@@ -48,21 +48,22 @@ public class AddQnCommand extends Command {
         }
 
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueQuestionList uniqueQuestionList = uniqueLesson.getQuestionList();
+        UniqueList<Question> uniqueQuestionList = uniqueLesson.getQuestionList();
 
-        if (uniqueQuestionList.contains(toAdd)) {
+        if (uniqueQuestionList.contains(this.toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_QUESTION);
         }
 
-        uniqueQuestionList.add(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        uniqueQuestionList.add(this.toAdd);
+        model.updateQuestionList();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddQnCommand // instanceof handles nulls
-                && toAdd.equals(((AddQnCommand) other).toAdd));
+                && this.toAdd.equals(((AddQnCommand) other).toAdd));
     }
 
 }

@@ -41,9 +41,9 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
+            this.mainWindow = new MainWindow(primaryStage, this.logic);
+            this.mainWindow.show(); //This should be called before creating other UI parts
+            this.mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -57,7 +57,7 @@ public class UiManager implements Ui {
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText,
         String contentText) {
-        showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
+        showAlertDialogAndWait(this.mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }
 
     /**

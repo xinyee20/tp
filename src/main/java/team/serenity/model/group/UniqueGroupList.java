@@ -3,6 +3,7 @@ package team.serenity.model.group;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import team.serenity.model.group.exceptions.DuplicateGroupException;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
+import team.serenity.model.util.UniqueList;
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls. A group is considered unique
@@ -22,7 +24,7 @@ import team.serenity.model.group.exceptions.GroupNotFoundException;
  *
  * @see Group#isSameGroup(Group)
  */
-public class UniqueGroupList implements Iterable<Group> {
+public class UniqueGroupList implements UniqueList<Group> {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
     private final ObservableList<Group> internalUnmodifiableList =
@@ -31,30 +33,46 @@ public class UniqueGroupList implements Iterable<Group> {
     /**
      * Returns true if the list contains an equivalent group as the given argument.
      */
+    @Override
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameGroup);
+        return this.internalList.stream().anyMatch(toCheck::isSameGroup);
     }
+
+    @Override
+    public int size() {
+        return this.internalList.size();
+    }
+
+
+
+    @Override
+    public ObservableList<Group> getList() {
+        return this.internalList;
+    }
+
 
     /**
      * Adds a group to the list. The group must not already exist in the list.
      */
+    @Override
     public void add(Group toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateGroupException();
         }
-        internalList.add(toAdd);
+        this.internalList.add(toAdd);
     }
 
     /**
      * Replaces the group {@code target} in the list with {@code editedGroup}. {@code target} must exist in the list.
      * The group identity of {@code editedGroup} must not be the same as another existing group in the list.
      */
-    public void setGroup(Group target, Group editedGroup) {
+    @Override
+    public void setElement(Group target, Group editedGroup) {
         requireAllNonNull(target, editedGroup);
 
-        int index = internalList.indexOf(target);
+        int index = this.internalList.indexOf(target);
         if (index == -1) {
             throw new GroupNotFoundException();
         }
@@ -63,64 +81,72 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new DuplicateGroupException();
         }
 
-        internalList.set(index, editedGroup);
+        this.internalList.set(index, editedGroup);
     }
 
     /**
      * Removes the equivalent group from the list. The group must exist in the list.
      */
+    @Override
     public void remove(Group toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!this.internalList.remove(toRemove)) {
             throw new GroupNotFoundException();
         }
     }
 
-    public void setGroups(UniqueGroupList replacement) {
+    public void sort(Comparator<Group> comparator) {
+        this.internalList.sort(comparator);
+    }
+
+    @Override
+    public void setElements(UniqueList<Group> replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        this.internalList.setAll(replacement.getList());
     }
 
     /**
      * Replaces the contents of this list with {@code groups}. {@code groups} must not contain duplicate groups.
      */
-    public void setGroups(List<Group> groups) {
+    @Override
+    public void setElementsWithList(List<Group> groups) {
         requireAllNonNull(groups);
-        if (!groupsAreUnique(groups)) {
+        if (!elementsAreUnique(groups)) {
             throw new DuplicateGroupException();
         }
-
-        internalList.setAll(groups);
+        this.internalList.setAll(groups);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
+    @Override
     public ObservableList<Group> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
+        return this.internalUnmodifiableList;
     }
 
     @Override
     public Iterator<Group> iterator() {
-        return internalList.iterator();
+        return this.internalList.iterator();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof UniqueGroupList // instanceof handles nulls
-            && internalList.equals(((UniqueGroupList) other).internalList));
+            && this.internalList.equals(((UniqueGroupList) other).internalList));
     }
 
     @Override
     public int hashCode() {
-        return internalList.hashCode();
+        return this.internalList.hashCode();
     }
 
     /**
      * Returns true if {@code groups} contains only unique groups.
      */
-    private boolean groupsAreUnique(List<Group> groups) {
+    @Override
+    public boolean elementsAreUnique(List<Group> groups) {
         for (int i = 0; i < groups.size() - 1; i++) {
             for (int j = i + 1; j < groups.size(); j++) {
                 if (groups.get(i).isSameGroup(groups.get(j))) {
@@ -130,4 +156,5 @@ public class UniqueGroupList implements Iterable<Group> {
         }
         return true;
     }
+
 }

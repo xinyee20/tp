@@ -5,11 +5,11 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.util.CsvUtil;
+import team.serenity.model.util.UniqueList;
 
 /**
  * Represents a tutorial Group in serenity. Guarantees: details are present and not null, field values are validated,
@@ -21,8 +21,8 @@ public class Group {
     private final String name;
 
     // Data fields
-    private final UniqueStudentList students;
-    private final UniqueLessonList lessons;
+    private final UniqueList<Student> students;
+    private final UniqueList<Lesson> lessons;
 
     /**
      * Constructs a {@code Group}
@@ -34,12 +34,12 @@ public class Group {
         requireAllNonNull(name, filePath);
         this.name = name;
         CsvUtil util = new CsvUtil(filePath);
-        students = new UniqueStudentList();
-        students.setStudents(new ArrayList<>(util.readStudentsFromCsv()));
-        //todo: implement scores data
+        this.students = new UniqueStudentList();
+        this.students.setElementsWithList(new ArrayList<>(util.readStudentsFromCsv()));
+        // TODO: implement scores data
         Set<StudentInfo> studentsInfo = util.readStudentsInfoFromCsv(util.readStudentsFromCsv());
-        lessons = new UniqueLessonList();
-        lessons.setLessons(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
+        this.lessons = new UniqueLessonList();
+        this.lessons.setElementsWithList(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
     }
 
     /**
@@ -48,7 +48,7 @@ public class Group {
      * @param name     A valid name.
      * @param students A list of students.
      */
-    public Group(String name, UniqueStudentList students) {
+    public Group(String name, UniqueList<Student> students) {
         requireAllNonNull(name, students);
         this.name = name;
         this.students = students;
@@ -62,7 +62,7 @@ public class Group {
      * @param students A list of students.
      * @param lessons  A list of tutorial lessons.
      */
-    public Group(String name, UniqueStudentList students, UniqueLessonList lessons) {
+    public Group(String name, UniqueList<Student> students, UniqueList<Lesson> lessons) {
         requireAllNonNull(name, students, lessons);
         this.name = name;
         this.students = students;
@@ -70,28 +70,28 @@ public class Group {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public UniqueStudentList getStudents() {
-        return students;
+    public UniqueList<Student> getStudents() {
+        return this.students;
     }
 
     public ObservableList<Student> getStudentsAsUnmodifiableObservableList() {
-        return students.asUnmodifiableObservableList();
+        return this.students.asUnmodifiableObservableList();
     }
 
     public ObservableList<Lesson> getLessonsAsUnmodifiableObservableList() {
-        return lessons.asUnmodifiableObservableList();
+        return this.lessons.asUnmodifiableObservableList();
     }
 
-    public UniqueLessonList getLessons() {
-        return lessons;
+    public UniqueList<Lesson> getLessons() {
+        return this.lessons;
     }
 
-    public UniqueLessonList getSortedLessons() {
-        lessons.sort(Comparator.comparing(Lesson::getName));
-        return lessons;
+    public UniqueList<Lesson> getSortedLessons() {
+        this.lessons.sort(Comparator.comparing(Lesson::getName));
+        return this.lessons;
     }
 
     /**
@@ -109,33 +109,33 @@ public class Group {
      *
      * @param student Student to be added
      */
-    public void removeStudentFromGroup(Student student) {
-        removeStudentFromStudentListInLessons(student);
+    public void deleteStudentFromGroup(Student student) {
+        deleteStudentFromStudentListInLessons(student);
     }
 
 
     private void addToStudentList(Student student) {
-        students.add(student);
+        this.students.add(student);
     }
 
 
     private void addToStudentListInLessons(Student student) {
-        for (Lesson lesson : lessons) {
+        for (Lesson lesson : this.lessons) {
             StudentInfo newStudent = new StudentInfo(student);
-            UniqueStudentInfoList studentInfos = lesson.getStudentsInfo();
+            UniqueList<StudentInfo> studentInfos = lesson.getStudentsInfo();
             studentInfos.add(newStudent);
             Lesson updatedLesson = new Lesson(lesson.getName(), studentInfos);
-            lessons.setLesson(lesson, updatedLesson);
+            this.lessons.setElement(lesson, updatedLesson);
         }
     }
 
-    private void removeStudentFromStudentListInLessons(Student student) {
-        for (Lesson lesson : lessons) {
+    private void deleteStudentFromStudentListInLessons(Student student) {
+        for (Lesson lesson : this.lessons) {
             StudentInfo newStudent = new StudentInfo(student);
-            UniqueStudentInfoList studentInfos = lesson.getStudentsInfo();
+            UniqueList<StudentInfo> studentInfos = lesson.getStudentsInfo();
             studentInfos.remove(newStudent);
             Lesson updatedLesson = new Lesson(lesson.getName(), studentInfos);
-            lessons.setLesson(lesson, updatedLesson);
+            this.lessons.setElement(lesson, updatedLesson);
         }
     }
 
@@ -176,13 +176,12 @@ public class Group {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, students, lessons);
+        return this.name.hashCode();
     }
 
     @Override
     public String toString() {
-        return String.format("Group %s", name);
+        return String.format("Group %s", this.name);
     }
 
 

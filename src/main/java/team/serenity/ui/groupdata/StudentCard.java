@@ -1,20 +1,20 @@
-package team.serenity.ui;
+package team.serenity.ui.groupdata;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import team.serenity.model.group.Lesson;
-
+import team.serenity.model.group.Student;
+import team.serenity.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Student}.
  */
-public class LessonCard extends UiPart<Region> {
+public class StudentCard extends UiPart<Region> {
 
-    private static final String FXML = "LessonListCard.fxml";
+    private static final String FXML = "StudentListCard.fxml";
 
-    public final Lesson lesson;
+    public final Student student;
 
     @FXML
     private HBox cardPane;
@@ -22,15 +22,18 @@ public class LessonCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label studentNumber;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
      */
-    public LessonCard(Lesson lesson, int displayedIndex) {
+    public StudentCard(Student student, int displayedIndex) {
         super(FXML);
-        this.lesson = lesson;
-        id.setText(displayedIndex + ". ");
-        name.setText("tutorial " + lesson.getName());
+        this.student = student;
+        this.id.setText(displayedIndex + ". ");
+        this.name.setText(student.getName());
+        this.studentNumber.setText(student.getStudentNumber());
     }
 
     @Override
@@ -46,8 +49,9 @@ public class LessonCard extends UiPart<Region> {
         }
 
         // state check
-        LessonCard card = (LessonCard) other;
-        return id.getText().equals(card.id.getText())
-                && lesson.equals(card.lesson);
+        StudentCard card = (StudentCard) other;
+        return this.id.getText().equals(card.id.getText())
+            && this.student.equals(card.student);
     }
+
 }

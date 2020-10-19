@@ -24,8 +24,7 @@ public class AddQnCommandParser implements Parser<AddQnCommand> {
     public AddQnCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QN);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_QN) || !argMultimap.getPreamble()
-                .isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_QN) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
         }

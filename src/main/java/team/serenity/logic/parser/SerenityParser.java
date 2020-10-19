@@ -18,8 +18,8 @@ import team.serenity.logic.commands.DelQnCommand;
 import team.serenity.logic.commands.DelStudentCommand;
 import team.serenity.logic.commands.ExitCommand;
 import team.serenity.logic.commands.HelpCommand;
-import team.serenity.logic.commands.MarkAttCommand;
-import team.serenity.logic.commands.UnmarkAttCommand;
+import team.serenity.logic.commands.MarkAbsentCommand;
+import team.serenity.logic.commands.MarkPresentCommand;
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.ViewLsnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
@@ -56,41 +56,41 @@ public class SerenityParser {
         case AddGrpCommand.COMMAND_WORD:
             return new AddGrpCommandParser().parse(arguments);
 
+        case AddLsnCommand.COMMAND_WORD:
+            return new AddLsnCommandParser().parse(arguments);
+
+        case AddQnCommand.COMMAND_WORD:
+            return new AddQnCommandParser().parse(arguments);
+
+        case AddScoreCommand.COMMAND_WORD:
+            return new AddScoreCommandParser().parse(arguments);
+
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
+
+        case DelGrpCommand.COMMAND_WORD:
+            return new DelGrpCommandParser().parse(arguments);
+
+        case DelLsnCommand.COMMAND_WORD:
+            return new DelLsnCommandParser().parse(arguments);
+
+        case DelQnCommand.COMMAND_WORD:
+            return new DelQnCommandParser().parse(arguments);
 
         case DelStudentCommand.COMMAND_WORD:
             return new DelStudentCommandParser().parse(arguments);
 
-        case AddLsnCommand.COMMAND_WORD:
-            return new AddLsnCommandParser().parse(arguments);
+        case MarkAbsentCommand.COMMAND_WORD:
+            return new MarkAbsentCommandParser().parse(arguments);
 
-        case DelGrpCommand.COMMAND_WORD:
-            return new DelGrpCommandParser().parse(arguments);
+        case MarkPresentCommand.COMMAND_WORD:
+            return new MarkPresentCommandParser().parse(arguments);
 
         case ViewGrpCommand.COMMAND_WORD:
             return new ViewGrpCommandParser().parse(arguments);
 
         case ViewLsnCommand.COMMAND_WORD:
             return new ViewLsnCommandParser().parse(arguments);
-
-        case MarkAttCommand.COMMAND_WORD:
-            return new MarkAttCommandParser().parse(arguments);
-
-        case AddScoreCommand.COMMAND_WORD:
-            return new AddScoreCommandParser().parse(arguments);
-
-        case UnmarkAttCommand.COMMAND_WORD:
-            return new UnmarkAttCommandParser().parse(arguments);
-
-        case AddQnCommand.COMMAND_WORD:
-            return new AddQnCommandParser().parse(arguments);
-
-        case DelQnCommand.COMMAND_WORD:
-            return new DelQnCommandParser().parse(arguments);
-
-        case DelLsnCommand.COMMAND_WORD:
-            return new DelLsnCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

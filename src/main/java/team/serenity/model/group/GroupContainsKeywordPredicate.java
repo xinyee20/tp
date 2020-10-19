@@ -7,27 +7,27 @@ import team.serenity.commons.util.StringUtil;
 /**
  * Tests that a {@code Group} matches the keyword given.
  */
-public class GrpContainsKeywordPredicate implements Predicate<Group> {
+public class GroupContainsKeywordPredicate implements Predicate<Group> {
 
     private final String keyword;
 
-    public GrpContainsKeywordPredicate(String string) {
+    public GroupContainsKeywordPredicate(String string) {
         this.keyword = string;
     }
 
     public String getKeyword() {
-        return keyword;
+        return this.keyword;
     }
 
     @Override
     public boolean test(Group group) {
-        return StringUtil.containsWordIgnoreCase(group.getName(), keyword);
+        return StringUtil.containsWordIgnoreCase(group.getName(), this.keyword);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof GrpContainsKeywordPredicate // instanceof handles nulls
-                && keyword.equals(((GrpContainsKeywordPredicate) other).keyword)); // state check
+                || (other instanceof GroupContainsKeywordPredicate // instanceof handles nulls
+                && this.keyword.equals(((GroupContainsKeywordPredicate) other).keyword)); // state check
     }
 }

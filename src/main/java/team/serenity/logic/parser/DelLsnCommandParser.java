@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import team.serenity.logic.commands.AddLsnCommand;
 import team.serenity.logic.commands.DelLsnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 public class DelLsnCommandParser implements Parser<DelLsnCommand> {
     /**
@@ -30,7 +30,7 @@ public class DelLsnCommandParser implements Parser<DelLsnCommand> {
         String grpName = argMultimap.getValue(PREFIX_GRP).get();
         String lsnName = argMultimap.getValue(PREFIX_LSN).get();
 
-        return new DelLsnCommand(lsnName, new GrpContainsKeywordPredicate(grpName));
+        return new DelLsnCommand(lsnName, new GroupContainsKeywordPredicate(grpName));
     }
 
     /**

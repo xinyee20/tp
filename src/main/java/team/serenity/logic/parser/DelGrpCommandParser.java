@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import team.serenity.logic.commands.DelGrpCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.GrpContainsKeywordPredicate;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new AddGrpCommand object
@@ -32,7 +32,7 @@ public class DelGrpCommandParser implements Parser<DelGrpCommand> {
             throw delGrpCommandParserException;
         }
 
-        return new DelGrpCommand(new GrpContainsKeywordPredicate(grpKeyword[0]));
+        return new DelGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));
     }
 
     /**

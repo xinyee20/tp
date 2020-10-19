@@ -28,12 +28,12 @@ public class JsonSerenityStorage implements SerenityStorage {
     }
 
     public Path getSerenityFilePath() {
-        return filePath;
+        return this.filePath;
     }
 
     @Override
     public Optional<ReadOnlySerenity> readSerenity() throws DataConversionException {
-        return readSerenity(filePath);
+        return readSerenity(this.filePath);
     }
 
     /**
@@ -61,7 +61,7 @@ public class JsonSerenityStorage implements SerenityStorage {
 
     @Override
     public void saveSerenity(ReadOnlySerenity serenity) throws IOException {
-        saveSerenity(serenity, filePath);
+        saveSerenity(serenity, this.filePath);
     }
 
     /**

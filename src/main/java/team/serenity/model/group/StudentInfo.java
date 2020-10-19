@@ -37,15 +37,15 @@ public class StudentInfo {
     }
 
     public Student getStudent() {
-        return student;
+        return this.student;
     }
 
     public Participation getParticipation() {
-        return participation;
+        return this.participation;
     }
 
     public Attendance getAttendance() {
-        return attendance;
+        return this.attendance;
     }
 
     /**
@@ -81,13 +81,14 @@ public class StudentInfo {
     @Override
     public boolean equals(Object obj) {
         StudentInfo other = (StudentInfo) obj;
-        return student.equals(other.getStudent()) && participation.equals(other.getParticipation())
-            && attendance.equals(other.getAttendance());
+        return this.student.equals(other.getStudent())
+            && this.participation.equals(other.getParticipation())
+            && this.attendance.equals(other.getAttendance());
     }
 
     @Override
     public String toString() {
         return String
-            .format("Name: %s, participation: %s, attendance: %s", student, participation, attendance);
+            .format("Name: %s, participation: %s, attendance: %s", this.student, this.participation, this.attendance);
     }
 }

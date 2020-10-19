@@ -7,8 +7,6 @@ import team.serenity.commons.core.GuiSettings;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.Model;
-import team.serenity.model.ReadOnlySerenity;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
@@ -39,13 +37,6 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
-
-    /**
-     * Returns the Serenity object.
-     *
-     * @see Model#getSerenity()
-     */
-    ReadOnlySerenity getSerenity();
 
     /**
      * Returns an unmodifiable view of the filtered list of groups.

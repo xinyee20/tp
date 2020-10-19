@@ -9,7 +9,7 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
-import team.serenity.model.group.UniqueQuestionList;
+import team.serenity.model.util.UniqueList;
 
 /**
  * Deletes a question identified using it's displayed index from the specified group's lesson in Serenity.
@@ -44,14 +44,14 @@ public class DelQnCommand extends Command {
         }
 
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueQuestionList uniqueQuestionList = uniqueLesson.getQuestionList();
+        UniqueList<Question> uniqueQuestionList = uniqueLesson.getQuestionList();
         ObservableList<Question> lastViewedQuestionList = uniqueQuestionList.asUnmodifiableObservableList();
 
-        if (targetIndex.getZeroBased() >= lastViewedQuestionList.size()) {
+        if (this.targetIndex.getZeroBased() >= lastViewedQuestionList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX);
         }
 
-        Question questionToDelete = lastViewedQuestionList.get(targetIndex.getZeroBased());
+        Question questionToDelete = lastViewedQuestionList.get(this.targetIndex.getZeroBased());
         uniqueQuestionList.remove(questionToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_QUESTION_SUCCESS,
                 model.getFilteredGroupList().get(0),
@@ -62,7 +62,7 @@ public class DelQnCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DelQnCommand // instanceof handles nulls
-                && targetIndex.equals(((DelQnCommand) other).targetIndex)); // state check
+                && this.targetIndex.equals(((DelQnCommand) other).targetIndex)); // state check
     }
 
 }

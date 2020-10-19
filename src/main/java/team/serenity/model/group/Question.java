@@ -28,7 +28,7 @@ public class Question {
     public Question(String question) {
         requireNonNull(question);
         checkArgument(isValidQuestion(question), MESSAGE_CONSTRAINTS);
-        value = question;
+        this.value = question;
     }
 
     /**
@@ -39,24 +39,24 @@ public class Question {
     }
 
     public String getQuestion() {
-        return value;
+        return this.value;
     }
 
     @Override
     public String toString() {
-        return value;
+        return this.value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Question // instanceof handles nulls
-                && value.equals(((Question) other).getQuestion())); // state check
+                && this.value.equals(((Question) other).getQuestion())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.value.hashCode();
     }
 
 }
