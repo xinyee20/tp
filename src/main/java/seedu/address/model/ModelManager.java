@@ -262,7 +262,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateStudentInfoList() {
-        if (!filteredGroups.isEmpty() || !filteredLessons.isEmpty()) {
+        if (!filteredGroups.isEmpty() && !filteredLessons.isEmpty()) {
             this.studentsInfo.setAll(this.filteredLessons.get(0).getStudentsInfoAsUnmodifiableObservableList());
         }
     }

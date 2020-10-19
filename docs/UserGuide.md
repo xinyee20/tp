@@ -234,15 +234,17 @@ Score | 1 | 2 | 3 | 4 | 5 |
 **Remark** |Very Poor| Poor| Sufficient|Good|Commendable
 
 **Format:**
-`addscore MARK name/NAME id/STUDENT_ID`
+`addscore name/NAME id/STUDENT_ID score/SCORE`
 
 **Example:**
 
-After **lesson 1-2**, you felt that your student `Aaron Tan` with Student ID `e0123456`  from **group G04** participated sufficiently in class but could be more active, you would like to give him a `3` for his participation.
+After **lesson 1-2**, you felt that your student `Aaron Tan` with Student ID `e0123456`  from **group G04** somewhat participated
+ in class but could be much more active, 
+you would like to give him a `2` for his participation.
 
 To give him a score:
 1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
-2. Type `addscore 3 name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Type `addscore name/Aaron Tan id/e0123456 score/2` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
