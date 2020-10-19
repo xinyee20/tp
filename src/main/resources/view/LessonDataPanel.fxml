@@ -2,11 +2,11 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-
+<?import javafx.scene.control.ListView?>
 
 <VBox fx:id="lessonList" xmlns:fx="http://javafx.com/fxml/1" styleClass="pane-with-border">
     <padding>
         <Insets bottom="5" left="10" right="10" top="5" />
     </padding>
-    <StackPane fx:id="studentInfoListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+    <ListView fx:id="studentInfoListView" VBox.vgrow="ALWAYS" />
 </VBox>
