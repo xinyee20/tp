@@ -7,7 +7,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 
 public class DelGrpCommand extends Command {
 
@@ -20,12 +20,12 @@ public class DelGrpCommand extends Command {
 
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Tutorial group deleted: %1$s";
 
-    private final GrpContainsKeywordPredicate grpPredicate;
+    private final GroupContainsKeywordPredicate grpPredicate;
 
     /**
      * Creates a DelGrpCommand to add the specified {@code Group}
      */
-    public DelGrpCommand(GrpContainsKeywordPredicate grpPredicate) {
+    public DelGrpCommand(GroupContainsKeywordPredicate grpPredicate) {
         this.grpPredicate = grpPredicate;
     }
 

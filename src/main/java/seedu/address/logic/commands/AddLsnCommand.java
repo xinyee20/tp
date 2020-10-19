@@ -7,9 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 import seedu.address.model.group.Lesson;
-import seedu.address.model.group.LsnContainsKeywordPredicate;
+import seedu.address.model.group.LessonContainsKeywordPredicate;
 
 public class AddLsnCommand extends Command {
 
@@ -23,13 +23,13 @@ public class AddLsnCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New lesson for tutorial group %2$s added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson for tutorial group %1$s already exists.";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "Specified Tutorial Group does not exist!";
-    private final GrpContainsKeywordPredicate trgtGrp;
+    private final GroupContainsKeywordPredicate trgtGrp;
     private final String toAdd;
 
     /**
      * Creates an AddGrpCommand to add the specified {@code Group}
      */
-    public AddLsnCommand(String lesson, GrpContainsKeywordPredicate target) {
+    public AddLsnCommand(String lesson, GroupContainsKeywordPredicate target) {
         requireNonNull(lesson);
         trgtGrp = target;
         toAdd = lesson;
@@ -54,7 +54,7 @@ public class AddLsnCommand extends Command {
         trgtGrp.getLessons().add(toAdd);
 
         model.updateLessonList();
-        model.updateFilteredLessonList(new LsnContainsKeywordPredicate(this.toAdd));
+        model.updateFilteredLessonList(new LessonContainsKeywordPredicate(this.toAdd));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, trgtGrp), false, false, true, false);
     }

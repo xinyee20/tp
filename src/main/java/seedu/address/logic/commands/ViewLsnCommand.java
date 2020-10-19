@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LSN;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
-import seedu.address.model.group.LsnContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
+import seedu.address.model.group.LessonContainsKeywordPredicate;
 
 /**
  * Finds and lists the attendance and class participation of all the students from
@@ -23,14 +23,14 @@ public class ViewLsnCommand extends Command {
             + "Parameters: GROUP LESSON\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + " G04 " + PREFIX_LSN + " 2-2";
 
-    private final GrpContainsKeywordPredicate grpPredicate;
-    private final LsnContainsKeywordPredicate lsnPredicate;
+    private final GroupContainsKeywordPredicate grpPredicate;
+    private final LessonContainsKeywordPredicate lsnPredicate;
 
     /**
      * Creates a ViewLsnCommand to view the specified {@code Lesson}
      */
-    public ViewLsnCommand(GrpContainsKeywordPredicate grpPredicate,
-                          LsnContainsKeywordPredicate lsnPredicate) {
+    public ViewLsnCommand(GroupContainsKeywordPredicate grpPredicate,
+                          LessonContainsKeywordPredicate lsnPredicate) {
         this.grpPredicate = grpPredicate;
         this.lsnPredicate = lsnPredicate;
     }

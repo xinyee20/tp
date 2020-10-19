@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 
 public class AddStudentCommandParser implements Parser<AddStudentCommand> {
 
@@ -41,7 +41,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         String studentId = studentIdArray[0];
         String grpName = grpKeywordArray[0];
 
-        return new AddStudentCommand(studentName, studentId, new GrpContainsKeywordPredicate(grpName));
+        return new AddStudentCommand(studentName, studentId, new GroupContainsKeywordPredicate(grpName));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DelStudentCommand;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 
 public class DelStudentCommandParserTest {
     private DelStudentCommandParser parser = new DelStudentCommandParser();
@@ -38,7 +38,7 @@ public class DelStudentCommandParserTest {
         String args = " " + PREFIX_GRP + groupName + " " + PREFIX_STUDENT
             + studentName + " " + PREFIX_ID + studentId;
         DelStudentCommand result = new DelStudentCommand(studentName, studentId,
-            new GrpContainsKeywordPredicate(groupName));
+            new GroupContainsKeywordPredicate(groupName));
         assertParseSuccess(parser, args, result);
     }
 }

@@ -7,10 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LSN;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 import seedu.address.model.group.Lesson;
 
-public class DeleteLsnCommand extends Command {
+public class DelLsnCommand extends Command {
     public static final String COMMAND_WORD = "dellsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": deletes a specified lesson from a specified tutorial group. "
@@ -21,13 +21,13 @@ public class DeleteLsnCommand extends Command {
     public static final String MESSAGE_SUCCESS = "lesson for tutorial group %2$s deleted: %1$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "This lesson for tutorial group %1$s does not exists.";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "Specified Tutorial Group does not exist!";
-    private final GrpContainsKeywordPredicate trgtGrp;
+    private final GroupContainsKeywordPredicate trgtGrp;
     private final String toDel;
 
     /**
      * Creates an AddGrpCommand to add the specified {@code Group}
      */
-    public DeleteLsnCommand(String lesson, GrpContainsKeywordPredicate target) {
+    public DelLsnCommand(String lesson, GroupContainsKeywordPredicate target) {
         requireNonNull(lesson);
         trgtGrp = target;
         toDel = lesson;
@@ -60,6 +60,6 @@ public class DeleteLsnCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddLsnCommand // instanceof handles nulls
-                && toDel.equals(((DeleteLsnCommand) other).toDel));
+                && toDel.equals(((DelLsnCommand) other).toDel));
     }
 }

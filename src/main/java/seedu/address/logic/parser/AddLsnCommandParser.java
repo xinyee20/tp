@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddLsnCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new AddGrpCommand object
@@ -33,7 +33,7 @@ public class AddLsnCommandParser implements Parser<AddLsnCommand> {
         String grpName = argMultimap.getValue(PREFIX_GRP).get();
         String lsnName = argMultimap.getValue(PREFIX_LSN).get();
 
-        return new AddLsnCommand(lsnName, new GrpContainsKeywordPredicate(grpName));
+        return new AddLsnCommand(lsnName, new GroupContainsKeywordPredicate(grpName));
     }
 
     /**
