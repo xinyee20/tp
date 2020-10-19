@@ -36,16 +36,12 @@ By: `Team Serenity` Since: `Aug 2020`
 
      * [Exporting of class participation grades to CSV: `exportCp`](#exporting-of-class-participation-grades-to-csv-exportcp)
 
-   4.4 [Addressing Questions](#addressing-questions)
+   4.4. [Question Addressing](#ins44-question-addressingins)
+       
+      4.4.1. [Adding a question: `addQn`](#441-add-a-new-question-addqn)
 
-     * [Adding a question: `addQn`](#adding-a-question-addqn)
+      4.4.2. [Deleting a question: `deleteQn`](#442-delete-an-existing-question-delqn)
 
-     * [Viewing all questions: `questions`](#viewing-all-questions-list)
-
-     * [Deleting a question: `deleteQn`](#deleting-a-question-deleteqn)
-
-     * [Marking a question as answered: `ansQn`](#marking-a-question-as-answered-ansqn)
-   
    4.5. [Utility](#ins45-utilityins)
    
       4.5.2. [View an existing tutorial lesson: `viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn)
@@ -104,6 +100,45 @@ You can set up classes automatically by importing CSV data.
 4. The program is now ready to assist you in managing your CS2101 class.
 
 ---
+
+#### 4.1.5. Add a new student: `addstudent`
+You can use this command to add a new student to a tutorial group.
+
+**Format:**
+`addstudent grp/GROUP name/NAME id/STUDENT_ID`
+
+**Example:**
+A new student named `Aaron Tan` with student ID `e0123456` entered your tutorial group, and you would like to add him to tutorial group `G04`.
+
+To add him to the tutorial group:
+
+1. Type `addstudent grp/G04 name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message.
+2. You will now see `Aaron Tan` in the list of students shown on the screen.
+
+#### 4.1.6. Delete an existing student: `delstudent`
+You can use this command to delete an existing student from a tutorial group.
+
+**Format:**
+`delstudent grp/GROUP name/NAME id/STUDENT_ID`
+
+**Example:**
+A student named `Aaron Tan` with student ID `e0123456` has left your tutorial group, and you would like to remove him from the tutorial group `G04`.
+
+To remove him from the tutorial group:
+
+1. Type `delstudent grp/G04 name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The *Result Display* will show a success message.
+2. `Aaron Tan` will no longer be in the list of students shown on the screen.
+
 
 ### <ins>Attendance Taking</ins>
 
@@ -255,72 +290,43 @@ Outcome:
 
 ---
 
-### <ins>Addressing Questions</ins>
+### <ins>4.4. Question Addressing</ins>
 
-#### Adding a question: `addQn`
+Need to keep track of all your students' questions during lessons quickly? This feature allows you to key in questions easily for future references.
 
-Adds a question to the list of questions of a specified tutorial group.
+#### 4.4.1. Add a new question: `addqn`
+You can use this command to add a question that was asked in a lesson, so that you can address the question at the end of the lesson.
 
-##### Format:
+**Format:**
+`addqn qn/QUESTION`
 
-`addQn TUTORIAL_GROUP LESSON_NUMBER QUESTION_DESCRIPTION`
+**Example:**
+When teaching group `G04` lesson `1-2`, a student ask a question, and you want to note it down.
 
-##### Examples:
-* `addQn G07 7-1 Could you elaborate on the marking scheme for OP1?`
-* `addQn G07 7-1 What are the deadlines that students should take note of?`
-
-Outcome:
-
-
-#### Viewing all questions: `questions`
-
-View a list of all the questions from a specified tutorial group.
-
-##### Format:
-
-`questions TUTORIAL_GROUP LESSON_NUMBER`
-
-##### Examples:
-* `questions G07 7-1`
-* `questions G10 5-2`
+To add a question to group `G04` lesson `1-2`:
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `addqn qn/What is the deadline for the report?` into the *Command Box*.
+3. Press `Enter` to execute.
 
 Outcome:
+1. The *Result Display* will show a success message.
 
+#### 4.4.2. Delete an existing question: `delqn`
+You can use this command to add a question that was asked in a tutorial lesson, so that you can address the question at the end of the lesson.
 
-#### Deleting a question: `deleteQn`
+**Format:**
+`delqn INDEX`
 
-Deletes the specific question from the list of questions of a specified tutorial group.
+**Example:**
+When teaching group `G04` lesson `1-2`, you answered one of the questions and wants to delete it from the list of questions.
 
-##### Format:
-
-`deleteQn TUTORIAL_GROUP LESSON_NUMBER INDEX`
-* Deletes the question at the specified `INDEX`.
-* The index refers to the index number shown in the displayed question list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-##### Examples:
-* `deleteQn G07 7-1 1`
-* `deleteQn G10 5-2 3`
-
-Outcome:
-
-
-#### Marking a question as answered: `ansQn` 
-
-Marks the specified question from the list of questions of a specified tutorial group as answered.
-
-##### Format:
-
-`ansQn TUTORIAL_GROUP LESSON_NUMBER INDEX`
-* Marks the question at the specified `INDEX` as answered.
-* The index refers to the index number shown in the displayed question list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-##### Examples:
-* `ansQn G07 7-1 1`
-* `ansQn G10 5-2 3`
+To delete a question from group `G04` lesson `1-2`:
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `delqn 1` into the *Command Box*.
+3. Press `Enter` to execute.
 
 Outcome:
+1. The *Result Display* will show a success message.
 
 ---
 
@@ -343,7 +349,7 @@ Outcome:
 1. The *Result Display* will show a success message.
 2. The *Data Display* will update and display the students' information for tutorial group `G04`'s lesson `1-2`.
 
-[Figure X. Outcome of a successful view lesson command](reference)
+![Figure X. Outcome of a successful `viewlsn` command](#)
 
 --------------------------------------------------------------------------------------------------------------------
 
