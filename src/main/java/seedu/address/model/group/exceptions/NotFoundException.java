@@ -1,0 +1,8 @@
+package seedu.address.model.group.exceptions;
+
+public class NotFoundException extends RuntimeException {
+    public NotFoundException() {
+        super("Item not found");
+    }
+
+}

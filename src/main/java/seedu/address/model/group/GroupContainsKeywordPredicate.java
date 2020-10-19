@@ -7,11 +7,11 @@ import seedu.address.commons.util.StringUtil;
 /**
  * Tests that a {@code Group} matches the keyword given.
  */
-public class GrpContainsKeywordPredicate implements Predicate<Group> {
+public class GroupContainsKeywordPredicate implements Predicate<Group> {
 
     private final String keyword;
 
-    public GrpContainsKeywordPredicate(String string) {
+    public GroupContainsKeywordPredicate(String string) {
         this.keyword = string;
     }
 
@@ -27,7 +27,7 @@ public class GrpContainsKeywordPredicate implements Predicate<Group> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof GrpContainsKeywordPredicate // instanceof handles nulls
-                && keyword.equals(((GrpContainsKeywordPredicate) other).keyword)); // state check
+                || (other instanceof GroupContainsKeywordPredicate // instanceof handles nulls
+                && keyword.equals(((GroupContainsKeywordPredicate) other).keyword)); // state check
     }
 }

@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Lesson;
 import seedu.address.model.group.Question;
-import seedu.address.model.group.UniqueQuestionList;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Adds a question to the question list of a specific tutorial group's lesson in Serenity.
@@ -48,13 +48,14 @@ public class AddQnCommand extends Command {
         }
 
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueQuestionList uniqueQuestionList = uniqueLesson.getQuestionList();
+        UniqueList<Question> uniqueQuestionList = uniqueLesson.getQuestionList();
 
         if (uniqueQuestionList.contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_QUESTION);
         }
 
         uniqueQuestionList.add(toAdd);
+        model.updateQuestionList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

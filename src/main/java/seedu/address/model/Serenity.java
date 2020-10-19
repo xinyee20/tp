@@ -7,13 +7,14 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.util.UniqueList;
 
 /**
  * Wraps all data at the serenity level Duplicates are not allowed (by .isSameGroup comparison)
  */
 public class Serenity implements ReadOnlySerenity {
 
-    private final UniqueGroupList groups;
+    private final UniqueList<Group> groups;
 
     public Serenity() {
         groups = new UniqueGroupList();
@@ -33,7 +34,7 @@ public class Serenity implements ReadOnlySerenity {
      * Replaces the contents of the group list with {@code groups}. {@code groups} must not contain duplicate groups.
      */
     public void setGroups(List<Group> groups) {
-        this.groups.setGroups(groups);
+        this.groups.setElementsWithList(groups);
     }
 
 
@@ -69,7 +70,7 @@ public class Serenity implements ReadOnlySerenity {
      */
     public void setGroup(Group target, Group editedGroup) {
         requireNonNull(editedGroup);
-        groups.setGroup(target, editedGroup);
+        groups.setElement(target, editedGroup);
     }
 
     /**

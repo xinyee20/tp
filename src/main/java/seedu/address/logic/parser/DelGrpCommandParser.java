@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.DelGrpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new AddGrpCommand object
@@ -32,7 +32,7 @@ public class DelGrpCommandParser implements Parser<DelGrpCommand> {
             throw delGrpCommandParserException;
         }
 
-        return new DelGrpCommand(new GrpContainsKeywordPredicate(grpKeyword[0]));
+        return new DelGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));
     }
 
     /**

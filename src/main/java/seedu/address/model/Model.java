@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.UniqueList;
 
 /**
  * The API of the Model component.
@@ -103,20 +105,7 @@ public interface Model {
      */
     Path getSerenityFilePath();
 
-    /**
-     * Sets the user prefs' serenity file path.
-     */
-    void setSerenityFilePath(Path serenityFilePath);
-
-    /**
-     * Replaces serenity data with the data in {@code serenity}.
-     */
-    void setSerenity(ReadOnlySerenity serenity);
-
-    /**
-     * Returns the Serenity
-     */
-    ReadOnlySerenity getSerenity();
+    ObservableList<Group> getGroupList();
 
     /**
      * Returns true if a group with the same identity as {@code group} exists in serenity.
@@ -132,6 +121,20 @@ public interface Model {
      * Adds the given group. {@code group} must not already exist in serenity.
      */
     void addGroup(Group group);
+
+    /**
+     * Checks if Student exists.
+     * @param group
+     * @param student
+     * @return Whether student exists.
+     */
+    boolean checkIfStudentExistsInGroup(Group group, Student student);
+
+    Optional<UniqueList<StudentInfo>> getStudentInfos(Group group, Lesson lesson);
+
+    Optional<UniqueList<Lesson>> getLessons(Group group);
+
+    Optional<UniqueList<Student>> getStudents(Group group);
 
     /**
      * Adds a Student to a Group

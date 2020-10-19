@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRP;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 
 /**
  * Finds and lists all students and lessons in the group specifeied. Keyword matching is case insensitive.
@@ -19,9 +19,9 @@ public class ViewGrpCommand extends Command {
             + "Parameters: GROUP \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + " G04";
 
-    private final GrpContainsKeywordPredicate predicate;
+    private final GroupContainsKeywordPredicate predicate;
 
-    public ViewGrpCommand(GrpContainsKeywordPredicate predicate) {
+    public ViewGrpCommand(GroupContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 

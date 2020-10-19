@@ -5,9 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LSN;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
-import seedu.address.model.group.LsnContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
+import seedu.address.model.group.LessonContainsKeywordPredicate;
 
 /**
  * Finds and lists the attendance and class participation of all the students from
@@ -22,15 +23,17 @@ public class ViewLsnCommand extends Command {
             + "displays them as a list with index numbers.\n"
             + "Parameters: GROUP LESSON\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + " G04 " + PREFIX_LSN + " 2-2";
+    public static final String LESSON_DOES_NOT_EXIST_MESSAGE = "The specified lesson does not exist!";
+    public static final String GROUP_DOES_NOT_EXIST_MESSAGE = "The specified group does not exist!";
 
-    private final GrpContainsKeywordPredicate grpPredicate;
-    private final LsnContainsKeywordPredicate lsnPredicate;
+    private final GroupContainsKeywordPredicate grpPredicate;
+    private final LessonContainsKeywordPredicate lsnPredicate;
 
     /**
      * Creates a ViewLsnCommand to view the specified {@code Lesson}
      */
-    public ViewLsnCommand(GrpContainsKeywordPredicate grpPredicate,
-                          LsnContainsKeywordPredicate lsnPredicate) {
+    public ViewLsnCommand(GroupContainsKeywordPredicate grpPredicate,
+                          LessonContainsKeywordPredicate lsnPredicate) {
         this.grpPredicate = grpPredicate;
         this.lsnPredicate = lsnPredicate;
     }
@@ -44,10 +47,20 @@ public class ViewLsnCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredGroupList(grpPredicate);
+
+        if (model.getFilteredGroupList().isEmpty()) {
+            throw new CommandException(GROUP_DOES_NOT_EXIST_MESSAGE);
+        }
+
         model.updateFilteredLessonList(lsnPredicate);
+
+        if (model.getFilteredLessonList().isEmpty()) {
+            throw new CommandException(LESSON_DOES_NOT_EXIST_MESSAGE);
+        }
+
         return new CommandResult(this.getMessage(model), false, false, true, false);
     }
 
