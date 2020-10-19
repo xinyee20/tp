@@ -23,6 +23,7 @@ public class MarkPresentCommand extends Command {
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked present!";
     public static final String MESSAGE_STUDENT_NOT_FOUND =
             "%s is not found, please ensure the name & student id is correct";
+    public static final String MESSAGE_NOT_IN_LESSON = "Currently not in any lesson. Please enter a lesson.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of all students / a student in a class. \n"
@@ -60,40 +61,50 @@ public class MarkPresentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
-        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
+        try {
+            Lesson uniqueLesson = model.getFilteredLessonList().get(0);
+            UniqueStudentInfoList uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+            ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
-        if (!isWholeClass) {
+            if (! isWholeClass) {
 
-            // Mark single student attendance
-            for (int i = 0; i < studentsInfo.size(); i++) {
-                StudentInfo studentInfo = studentsInfo.get(i);
-                isCorrectStudent = studentInfo.containsStudent(toMarkPresent);
-                if (isCorrectStudent) {
-                    Attendance update = studentInfo.getAttendance().setNewAttendance(true);
-                    StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                    uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
-                    model.updateLessonList();
-                    model.updateStudentInfoList();
-                    break;
+                // Mark single student attendance
+                for (int i = 0; i < studentsInfo.size(); i++) {
+                    StudentInfo studentInfo = studentsInfo.get(i);
+                    isCorrectStudent = studentInfo.containsStudent(toMarkPresent);
+                    if (isCorrectStudent) {
+                        Attendance update = studentInfo.getAttendance().setNewAttendance(true);
+                        StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
+                        uniqueStudentInfoList.setStudentInfo(studentInfo, updatedStudentInfo);
+                        model.updateLessonList();
+                        model.updateStudentInfoList();
+                        break;
+                    }
                 }
-            }
-            if (!isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, toMarkPresent));
-            }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkPresent));
-        }
 
-        // Mark whole class attendance
-        for (StudentInfo each: studentsInfo) {
-            Attendance update = each.getAttendance().setNewAttendance(true);
-            StudentInfo updatedStudentInfo = each.updateAttendance(update);
-            uniqueStudentInfoList.setStudentInfo(each, updatedStudentInfo);
-            model.updateLessonList();
-            model.updateStudentInfoList();
-        }
+                if (! isCorrectStudent) {
+                    throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, toMarkPresent));
+                }
+                return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkPresent));
+            }
 
-        return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
+            // Mark whole class attendance
+            for (StudentInfo each : studentsInfo) {
+                Attendance update = each.getAttendance().setNewAttendance(true);
+                StudentInfo updatedStudentInfo = each.updateAttendance(update);
+                uniqueStudentInfoList.setStudentInfo(each, updatedStudentInfo);
+                model.updateLessonList();
+                model.updateStudentInfoList();
+            }
+
+            return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
+
+        } catch (Exception e) {
+            if (e instanceof CommandException) {
+                throw  e;
+            } else {
+                throw new CommandException(MESSAGE_NOT_IN_LESSON);
+            }
+        }
     }
 }
