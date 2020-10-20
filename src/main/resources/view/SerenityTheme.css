@@ -1,16 +1,19 @@
 .root {
     -fx-font-family: "Roboto Light";
-    -color-lightpurple: #B1AECC;
-    -color-purple: #9F9CB7;
-    -color-blue: #6A99B3;
-    -color-white: #F8F8F8;
-    -color-medium2: #DB5A6B;
-    -fx-text-fill: #707070;
+    -color-blue1: #1E3F66;
+    -color-blue2: #2E5984;
+    -color-blue3: #477B9F;
+    -color-blue4: #73A5C6;
+    -color-white: #f8f8ff;
+    -color-black: #000000;
+    -color-pink: #c6738c;
+    -color-red: #B41900;
+    -fx-text-fill: -color-white;
 }
 
 .background {
-    -fx-background-color: -color-lightpurple;
-    background-color: -color-purple; /* Used in the default.html file */
+    -fx-background-color: -color-blue1;
+    background-color: -color-blue2; /* Used in the default.html file */
 }
 
 .label {
@@ -49,8 +52,8 @@
 
 .table-view {
     -fx-base: #1d1d1d;
-    -fx-control-inner-background: -color-purple;
-    -fx-background-color: -color-purple;
+    -fx-control-inner-background: -color-blue2;
+    -fx-background-color: -color-blue2;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -85,20 +88,20 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: -color-lightpurple;
+    -fx-background-color: -color-blue1;
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: -color-lightpurple;
+    -fx-background-color: -color-blue1;
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: -color-lightpurple;
+    -fx-background-color: -color-blue1;
 }
 
 .list-cell {
@@ -108,11 +111,11 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: -color-purple;
+    -fx-background-color: -color-blue2;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: -color-lightpurple;
+    -fx-background-color: -color-blue1;
 }
 
 .list-cell:filled:selected {
@@ -141,35 +144,14 @@
 }
 
 .stack-pane {
-     -fx-background-color: -color-lightpurple;
+     -fx-background-color: -color-blue1;
 }
 
 .pane-with-border {
-     -fx-background-color: -color-lightpurple;
-     -fx-border-color: derive(-color-purple, 10%);
-     -fx-border-top-width: 1px;
+     -fx-background-color: -color-blue1;
+     -fx-border-width: 0px;
 }
 
-.status-bar {
-    -fx-background-color: #161925;
-}
-
-
-.status-bar .label {
-    -fx-text-fill: -color-white;
-    -fx-padding: 2px;
-    -fx-pref-height: 0px;
-}
-
-.status-bar-with-border {
-    -fx-background-color: derive(-color-purple, 30%);
-    -fx-border-color: derive(-color-purple, 25%);
-    -fx-border-width: 1px;
-}
-
-.status-bar-with-border .label {
-    -fx-text-fill: -color-white;
-}
 
 .result-display {
     -fx-background-color: transparent;
@@ -181,48 +163,41 @@
     -fx-text-fill: black !important;
 }
 
-
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
-.grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
-
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {
-    -fx-border-radius: 30%;
+    -fx-border-radius: 2;
     -fx-padding: 5 0 5 0;
     -fx-border-color: transparent;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: -color-white;
+    -fx-background-color: -color-blue4;
     -fx-font-size: 11pt;
     -fx-text-fill: -color-white;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: derive(-color-medium2, 20%);
+    -fx-background-color: derive(-color-blue2, 70%);
 }
 
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
+.button-selected {
+    -fx-background-color: -color-pink;
+}
+
 .dialog-pane {
-    -fx-background-color: -color-purple;
+    -fx-background-color: -color-blue2;
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: -color-purple;
+    -fx-background-color: -color-blue2;
 }
 
 .dialog-pane > *.label.content {
@@ -232,7 +207,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(-color-purple, 25%);
+    -fx-background-color: derive(-color-blue2, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -242,12 +217,18 @@
     -fx-text-fill: -color-white;
 }
 
+.scroll-pane {
+    -fx-background: -color-blue2;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
 .scroll-bar {
-    -fx-background-color: -color-lightpurple;
+    -fx-background-color: -color-blue1;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(-color-purple, 50%);
+    -fx-background-color: derive(-color-blue2, 50%);
     -fx-background-insets: 3;
 }
 
@@ -274,9 +255,9 @@
 }
 
 #commandTextField {
-    -fx-background-color: -color-blue -color-blue -color-blue -color-blue;
+    -fx-background-color: -color-blue3 -color-blue3 -color-blue3 -color-blue3;
     -fx-background-insets: 0;
-    -fx-border-color: -color-blue -color-blue -color-blue -color-blue;
+    -fx-border-color: -color-blue3 -color-blue3 -color-blue3 -color-blue3;
     -fx-border-insets: 0;
     -fx-border-width: 0;
     -fx-font-size: 10pt;
@@ -288,9 +269,8 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, -color-purple, transparent, -color-purple;
+    -fx-background-color: transparent, -color-blue2, transparent, -color-blue2;
     -fx-background-radius: 0;
-    -fx-text-fill: #000000;
 }
 
 #tags {
@@ -305,8 +285,4 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
-}
-
-.button-selected {
-    -fx-background-color: derive(-color-medium2, 50%);
 }
