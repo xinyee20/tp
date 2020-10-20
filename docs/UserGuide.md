@@ -530,7 +530,7 @@ Score | 1 | 2 | 3 | 4 | 5 |
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student ID `e0123456` participated sufficiently in class.
+you noticed that your student named `Aaron Tan` with student ID `e0123456` often participated in class discussions.
 You decided to add `3` marks to his participation score for this tutorial lesson.
 
 Adding participation score of a student in a tutorial lesson:
@@ -562,7 +562,7 @@ You can use this command to decrease the participation score of a specific stude
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student ID `e0123456` did not provide insightful responses to questions.
+you felt that your student named `Aaron Tan` with student ID `e0123456` did not provide insightful responses to some questions.
 You decided to subtract `1` mark from his participation score for this tutorial lesson.
 
 Subtracting participation score of a student in a tutorial lesson:
