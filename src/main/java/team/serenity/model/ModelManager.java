@@ -56,16 +56,15 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(userPrefs, serenity);
 
-        logger.fine("Initializing with user prefs " + userPrefs
-            + " and serenity " + serenity);
+        logger.fine("Initializing with serenity " + serenity + " and user prefs " + userPrefs);
 
         //instantiate individual managers
         this.groupManager = new GroupManager(new UniqueGroupList());
         this.studentManager = new StudentManager();
         this.studentInfoManager = new StudentInfoManager();
         this.lessonManager = new LessonManager();
-
         this.userPrefs = new UserPrefs(userPrefs);
+
         this.filteredGroups = new FilteredList<>(this.groupManager.getListOfGroups());
         this.students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         this.lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
@@ -284,7 +283,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateStudentsInfoList() {
-        if (!this.filteredGroups.isEmpty() || !this.filteredLessons.isEmpty()) {
+        if (!this.filteredGroups.isEmpty() && !this.filteredLessons.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
             Lesson currentLesson = this.filteredLessons.get(0);
             GroupLessonKey key = new GroupLessonKey(currentGroup, currentLesson);
