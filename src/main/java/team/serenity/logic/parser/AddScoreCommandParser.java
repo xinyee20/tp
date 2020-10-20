@@ -12,6 +12,9 @@ import team.serenity.logic.commands.AddScoreCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Student;
 
+/**
+ * Parses input arguments and creates a new AddScoreCommand object.
+ */
 public class AddScoreCommandParser implements Parser<AddScoreCommand> {
 
     public static final String MESSAGE_STUDENT_NOT_GIVEN = "Please ensure student name / id is given";

@@ -41,7 +41,7 @@ public class MarkPresentCommand extends Command {
     private boolean isCorrectStudent;
 
     /**
-     * Creates an MarkPresentCommand to mark all {@code Student} present
+     * Creates an MarkPresentCommand to mark all {@code Student} present.
      */
     public MarkPresentCommand() {
         // Mark all students present
@@ -49,7 +49,7 @@ public class MarkPresentCommand extends Command {
     }
 
     /**
-     * Creates an MarkPresentCommand to mark the specified {@code Student} present
+     * Creates an MarkPresentCommand to mark the specified {@code Student} present.
      */
     public MarkPresentCommand(Student student) {
         requireNonNull(student);

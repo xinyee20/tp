@@ -4,8 +4,8 @@ import static team.serenity.commons.util.AppUtil.checkArgument;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * Represents a tutorial Group in serenity. Guarantees: details are present and not null, field values are validated,
- * immutable.
+ * Represents a tutorial Group in Serenity.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
     public static final String STUDENT_NAME_ERROR = "Name cannot be empty";
@@ -34,7 +34,7 @@ public class Student {
     }
 
     /**
-     * Checks whether String s is a valid Student ID
+     * Checks whether String s is a valid Student ID.
      * @param s Student ID
      * @return Whether String is valid
      */

@@ -26,7 +26,7 @@ public class GroupDataPanel extends DataPanel {
     private SplitPane splitPane;
 
     /**
-     * Constructor for panel to display tutorial group datea
+     * Constructor for panel to display tutorial group data.
      */
     public GroupDataPanel(ObservableList<Lesson> lessonList, ObservableList<Student> studentList) {
         super(FXML);

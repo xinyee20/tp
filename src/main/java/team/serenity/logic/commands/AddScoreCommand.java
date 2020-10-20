@@ -38,7 +38,7 @@ public class AddScoreCommand extends Command {
     private boolean isCorrectStudent;
 
     /**
-     * Creates an AddScoreCommand to award the specified {@code Student} a participation score
+     * Creates an AddScoreCommand to award the specified {@code Student} a participation score.
      */
     public AddScoreCommand(Student student, int score) {
         requireNonNull(student);

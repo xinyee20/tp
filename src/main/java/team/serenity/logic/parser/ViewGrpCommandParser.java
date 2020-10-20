@@ -8,6 +8,9 @@ import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
+/**
+ * Parses input arguments and creates a new ViewGrpCommand object.
+ */
 public class ViewGrpCommandParser implements Parser<ViewGrpCommand> {
 
     private final ParseException viewGrpCommandParserException = new ParseException(

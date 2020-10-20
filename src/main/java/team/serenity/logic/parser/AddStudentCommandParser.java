@@ -11,6 +11,9 @@ import team.serenity.logic.commands.AddStudentCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
+/**
+ * Parses input arguments and creates a new AddStudentCommand object.
+ */
 public class AddStudentCommandParser implements Parser<AddStudentCommand> {
 
     private final ParseException addStudentCommandParserException = new ParseException(

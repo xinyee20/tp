@@ -19,7 +19,7 @@ import team.serenity.model.util.UniqueList;
 public interface Model {
 
     /**
-     * {@code Predicate} that always evaluate to true
+     * {@code Predicate} that always evaluate to true.
      */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 

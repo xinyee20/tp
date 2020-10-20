@@ -50,7 +50,7 @@ public class ModelManager implements Model {
     private final LessonManager lessonManager;
 
     /**
-     * Initializes a ModelManager with the given addressBook, userPrefs and serenity.
+     * Initializes a ModelManager with the given serenity and userPrefs.
      */
     public ModelManager(ReadOnlySerenity serenity, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -75,7 +75,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given userPrefs.
      */
     public ModelManager(ReadOnlyUserPrefs userPrefs) {
         super();
@@ -137,8 +137,8 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of {@code
-     * versionedSerenity}
+     * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
+     * {@code versionedSerenity}
      */
     @Override
     public ObservableList<Group> getFilteredGroupList() {

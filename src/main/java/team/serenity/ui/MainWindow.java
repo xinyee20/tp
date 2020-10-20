@@ -170,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Switch to group data view if in lesson data view
+     * Switch to group data view if in lesson data view.
      */
     @FXML
     private void toggleLsnView() {
@@ -180,7 +180,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Switch to lesson data view if in group data view
+     * Switch to lesson data view if in group data view.
      */
     @FXML
     private void toggleGrpView() {

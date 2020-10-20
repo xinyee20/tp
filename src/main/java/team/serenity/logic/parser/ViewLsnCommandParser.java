@@ -11,6 +11,9 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.LessonContainsKeywordPredicate;
 
+/**
+ * Parses input arguments and creates a new ViewLsnCommand object.
+ */
 public class ViewLsnCommandParser implements Parser<ViewLsnCommand> {
 
     private final ParseException viewLsnCommandParserException = new ParseException(

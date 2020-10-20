@@ -30,7 +30,7 @@ public class DelLsnCommand extends Command {
     private final String toDel;
 
     /**
-     * Creates a DelLsnCommand to add the specified lesson
+     * Creates a DelLsnCommand to delete the specified lesson.
      */
     public DelLsnCommand(String lesson, GroupContainsKeywordPredicate target) {
         requireNonNull(lesson);

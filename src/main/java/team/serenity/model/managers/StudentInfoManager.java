@@ -19,11 +19,12 @@ public class StudentInfoManager {
     }
 
     /**
-     * Replaces studentInfoList stored at {@code key} with {@code newStudentInfoList}
+     * Replaces listOfStudentsInfo stored at {@code key} with {@code newListOfStudentsInfo}.
      * @param key
-     * @param newStudentInfoList
+     * @param newListOfStudentsInfo
      */
-    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key, UniqueList<StudentInfo> newStudentInfoList) {
-        this.mapToListOfStudentsInfo.put(key, newStudentInfoList);
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                      UniqueList<StudentInfo> newListOfStudentsInfo) {
+        this.mapToListOfStudentsInfo.put(key, newListOfStudentsInfo);
     }
 }

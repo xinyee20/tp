@@ -12,8 +12,8 @@ import team.serenity.commons.util.CsvUtil;
 import team.serenity.model.util.UniqueList;
 
 /**
- * Represents a tutorial Group in serenity. Guarantees: details are present and not null, field values are validated,
- * immutable.
+ * Represents a tutorial Group in Serenity.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Group {
 

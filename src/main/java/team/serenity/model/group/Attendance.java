@@ -1,7 +1,7 @@
 package team.serenity.model.group;
 
 /**
- * Represents a {@code Student} attendance in a Class
+ * Represents a {@code Student} attendance in a Lesson.
  */
 public class Attendance {
 
@@ -9,7 +9,7 @@ public class Attendance {
     private final boolean isFlagged;
 
     /**
-     * Creates a default Attendance object that is not flagged and not present
+     * Creates a default Attendance object that is not flagged and not present.
      */
     public Attendance() {
         this.isFlagged = false;
@@ -17,7 +17,7 @@ public class Attendance {
     }
 
     /**
-     * Creates an Attendance object that is not flagged and with presence marked accordingly
+     * Creates an Attendance object that is not flagged and with presence marked accordingly.
      * @param isPresent True if student is present and false if student is absent
      */
     public Attendance(boolean isPresent) {
@@ -26,7 +26,7 @@ public class Attendance {
     }
 
     /**
-     * Creates an Attendance object that isPresent and with flag marked accordingly
+     * Creates an Attendance object that isPresent and with flag marked accordingly.
      * @param isPresent True if student is present and false if student is absent
      * @param isFlagged True to flag student and false to unflag student
      */

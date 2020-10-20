@@ -11,7 +11,7 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Question;
 
 /**
- * Parses input arguments and creates a new AddQnCommand object
+ * Parses input arguments and creates a new AddQnCommand object.
  */
 public class AddQnCommandParser implements Parser<AddQnCommand> {
 

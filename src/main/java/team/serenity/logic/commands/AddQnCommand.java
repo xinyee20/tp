@@ -12,7 +12,7 @@ import team.serenity.model.group.Question;
 import team.serenity.model.util.UniqueList;
 
 /**
- * Adds a question to the question list of a specific tutorial group's lesson in Serenity.
+ * Adds a question to the question list of a specific tutorial group's lesson in serenity.
  */
 public class AddQnCommand extends Command {
 
@@ -30,7 +30,7 @@ public class AddQnCommand extends Command {
     private final Question toAdd;
 
     /**
-     * Creates an AddQnCommand to add the specified {@code Lesson}
+     * Creates an AddQnCommand to add the specified {@code Question}.
      */
     public AddQnCommand(Question question) {
         requireNonNull(question);

@@ -14,7 +14,6 @@ import team.serenity.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data", "addressbook.json");
     private Path serenityFilePath = Paths.get("data", "serenity.json");
 
     /**
@@ -37,7 +36,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,15 +45,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
-    }
-
-    public Path getAddressBookFilePath() {
-        return this.addressBookFilePath;
-    }
-
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
     }
 
     // Serenity
@@ -78,21 +67,20 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
 
         UserPrefs o = (UserPrefs) other;
-
         return this.guiSettings.equals(o.guiSettings)
-            && this.addressBookFilePath.equals(o.addressBookFilePath);
+            && this.serenityFilePath.equals(o.serenityFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.guiSettings, this.addressBookFilePath);
+        return Objects.hash(this.guiSettings, this.serenityFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + this.guiSettings);
-        sb.append("\nLocal data file location : " + this.addressBookFilePath);
+        sb.append("\nLocal data file location : " + this.serenityFilePath);
         return sb.toString();
     }
 

@@ -19,7 +19,7 @@ public class StudentManager {
     }
 
     /**
-     * Adds the Student to the specified Group
+     * Adds the specified {@code Student} to the specified {@code Group}.
      * @param group
      * @param student
      */
@@ -37,7 +37,7 @@ public class StudentManager {
     }
 
     /**
-     * Checks if the specified Student exists in the Group
+     * Checks if the specified {@code Student} exists in the {@code Group}.
      * @param group
      * @param student
      * @return whether Student exists in the Group
@@ -53,7 +53,7 @@ public class StudentManager {
     }
 
     /**
-     * Gets all Students from a particular Group
+     * Gets listOfStudents from a particular {@code Group}.
      * @param group Group to check for
      * @return All students from a particular group
      */
@@ -63,12 +63,12 @@ public class StudentManager {
     }
 
     /**
-     * Replaces Group's students with a new set of students
+     * Replaces listOfStudents stored in {@code Group} with {@code newListOfStudents}.
      * @param group
-     * @param listOfStudents
+     * @param newListOfStudents
      */
-    public void setListOfStudentsToGroup(Group group, UniqueList<Student> listOfStudents) {
-        requireAllNonNull(group, listOfStudents);
-        this.mapToListOfStudents.put(group, listOfStudents);
+    public void setListOfStudentsToGroup(Group group, UniqueList<Student> newListOfStudents) {
+        requireAllNonNull(group, newListOfStudents);
+        this.mapToListOfStudents.put(group, newListOfStudents);
     }
 }

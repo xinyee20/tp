@@ -35,7 +35,7 @@ public class AddStudentCommand extends Command {
     private final Predicate<Group> predicate;
 
     /**
-     * Creates an AddStudentCommand to add the specified {@code Student}
+     * Creates an AddStudentCommand to add the specified {@code Student}.
      *
      * @param studentName
      * @param studentId

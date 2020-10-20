@@ -24,7 +24,7 @@ public class DelGrpCommand extends Command {
     private final GroupContainsKeywordPredicate grpPredicate;
 
     /**
-     * Creates a DelGrpCommand to add the specified {@code Group}
+     * Creates a DelGrpCommand to delete the specified {@code Group} in the predicate.
      */
     public DelGrpCommand(GroupContainsKeywordPredicate grpPredicate) {
         this.grpPredicate = grpPredicate;

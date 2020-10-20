@@ -26,7 +26,7 @@ public class AddGrpCommand extends Command {
     private final Group toAdd;
 
     /**
-     * Creates an AddGrpCommand to add the specified {@code Group}
+     * Creates an AddGrpCommand to add the specified {@code Group}.
      */
     public AddGrpCommand(Group group) {
         requireNonNull(group);
@@ -42,8 +42,7 @@ public class AddGrpCommand extends Command {
         }
 
         model.addGroup(this.toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd),
-        false, false, false, true);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd), false, false, false, true);
     }
 
     @Override

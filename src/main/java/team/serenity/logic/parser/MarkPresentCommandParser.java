@@ -16,7 +16,6 @@ import team.serenity.model.group.Student;
  * Current support:
  * markpresent name/NAME id/STUDENT_NUMBER
  * markpresent all
- *
  */
 public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
 

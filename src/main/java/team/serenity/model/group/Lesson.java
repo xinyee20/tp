@@ -7,8 +7,8 @@ import javafx.collections.ObservableList;
 import team.serenity.model.util.UniqueList;
 
 /**
- * Represents a tutorial class in serenity. Guarantees: details are present and not null, field values are validated,
- * immutable.
+ * Represents a tutorial class in Serenity.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Lesson {
 

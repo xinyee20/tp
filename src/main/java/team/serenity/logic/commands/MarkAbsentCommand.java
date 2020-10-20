@@ -34,7 +34,7 @@ public class MarkAbsentCommand extends Command {
     private boolean isCorrectStudent;
 
     /**
-     * Creates an MarkAbsentCommand to mark the specified {@code Student} absent
+     * Creates an MarkAbsentCommand to mark the specified {@code Student} absent.
      */
     public MarkAbsentCommand(Student student) {
         requireNonNull(student);

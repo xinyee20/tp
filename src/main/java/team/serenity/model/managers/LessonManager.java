@@ -17,7 +17,7 @@ public class LessonManager {
     }
 
     /**
-     * Adds a given Lesson to a Group
+     * Adds a specified {@code Lesson} to a {@code Group}.
      * @param group
      * @param lesson
      */
@@ -30,13 +30,13 @@ public class LessonManager {
     }
 
     /**
-     * Replaces the lessons of {@code group} with {@code lessons}
+     * Replaces listOfLessons stored in {@code Group} with {@code newListOfLessons}
      * @param group
-     * @param listOfLessons
+     * @param newListOfLessons
      */
-    public void setListOfLessonsToGroup(Group group, UniqueList<Lesson> listOfLessons) {
-        requireAllNonNull(group, listOfLessons);
-        this.mapToListOfLessons.put(group, listOfLessons);
+    public void setListOfLessonsToGroup(Group group, UniqueList<Lesson> newListOfLessons) {
+        requireAllNonNull(group, newListOfLessons);
+        this.mapToListOfLessons.put(group, newListOfLessons);
     }
 
     public Optional<UniqueList<Lesson>> getListOfLessonsFromGroup(Group group) {

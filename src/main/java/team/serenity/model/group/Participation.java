@@ -10,7 +10,7 @@ public class Participation {
     }
 
     /**
-     * Creates a Participation object containing the score of a student
+     * Creates a Participation object containing the score of a student.
      * @param score Score of Student
      */
     public Participation(int score) throws IllegalArgumentException {

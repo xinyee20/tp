@@ -5,8 +5,8 @@ import static team.serenity.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a Lesson's question in Serenity. Guarantees: immutable; is valid as declared in {@link
- * #isValidQuestion(String)}
+ * Represents a Lesson's question in Serenity.
+ * Guarantees: immutable; is valid as declared in {@link #isValidQuestion(String)}
  */
 public class Question {
 

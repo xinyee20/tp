@@ -10,7 +10,7 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
- * Parses input arguments and creates a new AddGrpCommand object
+ * Parses input arguments and creates a new DelGrpCommand object.
  */
 public class DelGrpCommandParser implements Parser<DelGrpCommand> {
 

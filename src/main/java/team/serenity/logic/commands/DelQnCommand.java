@@ -14,7 +14,7 @@ import team.serenity.model.group.Question;
 import team.serenity.model.util.UniqueList;
 
 /**
- * Deletes a question identified using it's displayed index from the specified group's lesson in Serenity.
+ * Deletes a question identified using it's displayed index from the specified group's lesson in serenity.
  */
 public class DelQnCommand extends Command {
 
@@ -29,6 +29,9 @@ public class DelQnCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DelQnCommand to delete the specified question.
+     */
     public DelQnCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

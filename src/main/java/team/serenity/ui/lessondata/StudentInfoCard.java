@@ -30,7 +30,7 @@ public class StudentInfoCard extends UiPart<Region> {
     private Label participation;
 
     /**
-     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
+     * Creates a {@code StudentInfoCard} with the given {@code StudentInfo} and index to display.
      */
     public StudentInfoCard(StudentInfo studentInfo, int displayedIndex) {
         super(FXML);

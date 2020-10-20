@@ -1,14 +1,14 @@
 package team.serenity.model.group;
 
 /**
- * Wraps a Group and a Lesson to form a key for a Hashmap
+ * Wraps a Group and a Lesson to form a key for a Hashmap.
  */
 public class GroupLessonKey {
     private final Group group;
     private final Lesson lesson;
 
     /**
-     * Instantiates a GroupLessonKey object
+     * Instantiates a GroupLessonKey object.
      * @param group
      * @param lesson
      */

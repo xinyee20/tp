@@ -8,7 +8,7 @@ import team.serenity.model.group.Lesson;
 import team.serenity.ui.UiPart;
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * An UI component that displays information of a {@code Lesson}.
  */
 public class LessonCard extends UiPart<Region> {
 
@@ -24,7 +24,7 @@ public class LessonCard extends UiPart<Region> {
     private Label id;
 
     /**
-     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
+     * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
      */
     public LessonCard(Lesson lesson, int displayedIndex) {
         super(FXML);
@@ -41,7 +41,7 @@ public class LessonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StudentCard)) {
+        if (!(other instanceof LessonCard)) {
             return false;
         }
 

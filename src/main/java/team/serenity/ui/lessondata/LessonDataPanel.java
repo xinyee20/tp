@@ -27,7 +27,7 @@ public class LessonDataPanel extends DataPanel {
     private TabPane tabPane;
 
     /**
-     * Constructor for panel to display Lesson data
+     * Constructor for panel to display tutorial lesson data.
      */
     public LessonDataPanel(ObservableList<StudentInfo> studentInfoList, ObservableList<Question> questionList) {
         super(FXML);

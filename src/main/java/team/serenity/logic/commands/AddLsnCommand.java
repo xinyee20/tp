@@ -32,7 +32,7 @@ public class AddLsnCommand extends Command {
     private final String toAdd;
 
     /**
-     * Creates an AddLsnCommand to add the specified {@String Lesson}
+     * Creates an AddLsnCommand to add the specified lesson.
      */
     public AddLsnCommand(String lesson, GroupContainsKeywordPredicate target) {
         requireNonNull(lesson);
@@ -51,11 +51,11 @@ public class AddLsnCommand extends Command {
 
         Group targetGrp = model.getFilteredGroupList().get(0);
         UniqueList<Student> students = targetGrp.getStudents();
-        UniqueList<StudentInfo> studentInfos = new UniqueStudentInfoList();
+        UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
         for (Student student : students) {
-            studentInfos.add(new StudentInfo(student));
+            studentsInfo.add(new StudentInfo(student));
         }
-        Lesson toAdd = new Lesson(this.toAdd, studentInfos);
+        Lesson toAdd = new Lesson(this.toAdd, studentsInfo);
 
         if (targetGrp.getLessons().contains(toAdd)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_LESSON, toAdd, targetGrp));
@@ -66,8 +66,7 @@ public class AddLsnCommand extends Command {
         model.updateLessonList();
         model.updateFilteredLessonList(new LessonContainsKeywordPredicate(this.toAdd));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, targetGrp),
-    false, false, true, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, targetGrp), false, false, true, false);
     }
 
     @Override

@@ -7,14 +7,14 @@ import team.serenity.model.group.Group;
 import team.serenity.model.util.UniqueList;
 
 /**
- * Manages tutorial groups
+ * Manages tutorial groups.
  */
 public class GroupManager {
 
     private final UniqueList<Group> listOfGroups;
 
     /**
-     * Instantiates a GroupManager
+     * Instantiates a GroupManager.
      *
      * @param listOfGroups List of tutorial groups
      */
@@ -24,7 +24,7 @@ public class GroupManager {
     }
 
     /**
-     * Checks whether group exists
+     * Checks whether group exists.
      *
      * @param group Group to check for
      * @return Whether given group exists
@@ -35,7 +35,7 @@ public class GroupManager {
     }
 
     /**
-     * Adds given group to the list, if it doesn't exist yet
+     * Adds given group to the list, if it doesn't exist yet.
      *
      * @param group Group to be added
      */
@@ -47,7 +47,8 @@ public class GroupManager {
     }
 
     /**
-     * Removes given group from the list
+     * Deletes a specified {@code Group} from the list.
+     *
      * @param group
      */
     public void deleteGroup(Group group) {

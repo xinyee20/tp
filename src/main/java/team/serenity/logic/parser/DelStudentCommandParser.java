@@ -11,6 +11,9 @@ import team.serenity.logic.commands.DelStudentCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
+/**
+ * Parses input arguments and creates a new DelStudentCommand object.
+ */
 public class DelStudentCommandParser implements Parser<DelStudentCommand> {
 
     private final ParseException deleteStudentCommandParserException = new ParseException(

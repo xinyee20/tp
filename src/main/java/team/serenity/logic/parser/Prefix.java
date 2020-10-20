@@ -1,7 +1,7 @@
 package team.serenity.logic.parser;
 
 /**
- * A prefix that marks the beginning of an argument in an arguments string. E.g. 't/' in 'add James t/ friend'.
+ * A prefix that marks the beginning of an argument in an arguments string. E.g. 'grp/' in 'viewgrp grp/G04'.
  */
 public class Prefix {
 

@@ -9,14 +9,14 @@ import javafx.collections.ObservableList;
 
 /**
  * A modifiable observable list to support rendering of different
- * set of information when navigating to different groups
+ * set of information when navigating to different groups.
  */
 public class ArrayObservableList<E> extends ModifiableObservableListBase<E> {
 
     private final List<E> delegate = new ArrayList<>();
 
     /**
-     * Creates a generic ArrayObservableList
+     * Creates a generic ArrayObservableList.
      */
     public ArrayObservableList(ObservableList<E> list) {
         for (E e : list) {

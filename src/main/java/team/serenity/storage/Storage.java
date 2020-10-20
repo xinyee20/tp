@@ -10,7 +10,7 @@ import team.serenity.model.ReadOnlyUserPrefs;
 import team.serenity.model.UserPrefs;
 
 /**
- * API of the Storage component
+ * API of the Storage component.
  */
 public interface Storage extends UserPrefsStorage, SerenityStorage {
 

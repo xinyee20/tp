@@ -7,7 +7,7 @@ import team.serenity.logic.commands.DelQnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DelQnCommand object
+ * Parses input arguments and creates a new DelQnCommand object.
  */
 public class DelQnCommandParser implements Parser<DelQnCommand> {
 

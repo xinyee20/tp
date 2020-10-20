@@ -3,8 +3,8 @@ package team.serenity.model.group;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * Represents a {@code Student} interaction with a Class Stores the {@code Student} {@code Participation} and {@code
- * Attendance}
+ * Represents a {@code Student} interaction with a Lesson.
+ * Stores {@code Student}, {@code Participation} and {@code Attendance}.
  */
 public class StudentInfo {
 
@@ -13,8 +13,8 @@ public class StudentInfo {
     private final Attendance attendance;
 
     /**
-     * Creates a {@code Score} from a {@code Student} {@code Participation} and {@code
-     *  * Attendance}
+     * Creates a {@code StudentInfo} from a {@code Student}, {@code Participation} and {@code Attendance}.
+     *
      * @param student
      * @param participation
      * @param attendance
@@ -27,7 +27,7 @@ public class StudentInfo {
     }
 
     /**
-     * Creates an empty {@code StudentInfo} from a {@code Student}
+     * Creates an empty {@code StudentInfo} from a {@code Student}.
      * @param student
      */
     public StudentInfo(Student student) {
@@ -49,7 +49,7 @@ public class StudentInfo {
     }
 
     /**
-     * Check whether the student in Student Info matches the specific student given in the input
+     * Check whether the student in Student Info matches the specific student given in the input.
      * @param student Student to be checked
      * @return Yes if student is correct, No if student is wrong
      */
@@ -59,7 +59,7 @@ public class StudentInfo {
     }
 
     /**
-     * Marks the student present or absent for the class
+     * Marks the student present or absent for the class.
      * @param updatedAttendance The attendance of the student for the lesson
      * @return The updated Attendance
      */
@@ -69,7 +69,7 @@ public class StudentInfo {
     }
 
     /**
-     * Updates the student participation score for the class
+     * Updates the student participation score for the class.
      * @param updatedScore The participation score of the student for the lesson
      * @return The updated Participation object
      */

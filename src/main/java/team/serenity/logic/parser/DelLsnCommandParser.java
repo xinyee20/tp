@@ -11,6 +11,9 @@ import team.serenity.logic.commands.DelLsnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
+/**
+ * Parses input arguments and creates a new DelLsnCommand object.
+ */
 public class DelLsnCommandParser implements Parser<DelLsnCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddGrpCommand and returns an AddGrpCommand

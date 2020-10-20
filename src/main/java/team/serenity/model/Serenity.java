@@ -10,18 +10,18 @@ import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.util.UniqueList;
 
 /**
- * Wraps all data at the serenity level Duplicates are not allowed (by .isSameGroup comparison)
+ * Wraps all data at the serenity level Duplicates are not allowed (by .isSameGroup comparison).
  */
 public class Serenity implements ReadOnlySerenity {
 
     private final UniqueList<Group> groups;
 
     public Serenity() {
-        groups = new UniqueGroupList();
+        this.groups = new UniqueGroupList();
     }
 
     /**
-     * Creates a Serenity object using the Groups in the {@code toBeCopied}
+     * Creates a Serenity object using the Groups in the {@code toBeCopied}.
      */
     public Serenity(ReadOnlySerenity toBeCopied) {
         this();

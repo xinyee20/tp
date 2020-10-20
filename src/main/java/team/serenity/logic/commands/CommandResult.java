@@ -22,12 +22,12 @@ public class CommandResult {
     private final boolean exit;
 
     /**
-     * The application should toggle to lesson data screen
+     * The application should toggle to lesson data screen.
      */
     private final boolean isViewLsn;
 
     /**
-     * The application should toggle to group data screen
+     * The application should toggle to group data screen.
      */
     private final boolean isViewGrp;
 

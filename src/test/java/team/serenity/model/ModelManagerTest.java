@@ -30,14 +30,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setSerenityFilePath(Paths.get("data/serenity.json"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setSerenityFilePath(Paths.get("new/serenity/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -104,10 +104,13 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
 
-        // different userPrefs -> returns false
+        // TODO: different userPrefs -> returns false
+        /*
+        FOR REFERENCE (AB3)
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setAddressbookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(differentUserPrefs)));
+         */
     }
 
 }

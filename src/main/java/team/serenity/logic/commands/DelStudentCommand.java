@@ -36,7 +36,7 @@ public class DelStudentCommand extends Command {
     private final Predicate<Group> predicate;
 
     /**
-     * Creates a DelStudentCommand to remove the specified {@code Student}
+     * Creates a DelStudentCommand to remove the specified {@code Student}.
      * @param studentName Name of Student
      * @param studentId Id of Student
      * @param predicate Group predicate
