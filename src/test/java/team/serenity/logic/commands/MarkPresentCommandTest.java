@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
 
-class MarkAttCommandTest {
+class MarkPresentCommandTest {
 
     private Model model = new ModelManager();
 

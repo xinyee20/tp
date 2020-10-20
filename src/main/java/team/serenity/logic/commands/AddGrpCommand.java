@@ -14,8 +14,11 @@ public class AddGrpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Adds a new tutorial group. "
         + "Parameters: "
-        + PREFIX_GRP + "GRP "
-        + PREFIX_PATH + "PATH ";
+        + PREFIX_GRP + "GROUP "
+        + PREFIX_PATH + "PATH\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GRP + "G04 "
+        + PREFIX_PATH + "LUMINUS_GROUP_A.csv\n";
 
     public static final String MESSAGE_SUCCESS = "New tutorial group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "This tutorial group already exists.";

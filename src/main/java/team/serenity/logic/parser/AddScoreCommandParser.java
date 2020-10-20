@@ -25,9 +25,7 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
      */
     @Override
     public AddScoreCommand parse(String userInput) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer
-                        .tokenize(userInput, PREFIX_NAME, PREFIX_ID, PREFIX_SCORE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_ID, PREFIX_SCORE);
 
         String studentName;
         String studentNumber;
@@ -35,12 +33,11 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
         int score;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_SCORE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+            || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
         }
 
-        studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_NAME).get());
+        studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
         studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
         student = Optional.ofNullable(new Student(studentName, studentNumber));
         score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get());

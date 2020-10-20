@@ -23,13 +23,13 @@ public class DelGrpCommandParser implements Parser<DelGrpCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GRP) || !argMultimap.getPreamble().isEmpty()) {
-            throw delGrpCommandParserException;
+            throw this.delGrpCommandParserException;
         }
 
         String[] grpKeyword = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
 
         if (grpKeyword.length > 1) {
-            throw delGrpCommandParserException;
+            throw this.delGrpCommandParserException;
         }
 
         return new DelGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));

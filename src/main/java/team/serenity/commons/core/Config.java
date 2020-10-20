@@ -17,7 +17,7 @@ public class Config {
     private Path userPrefsFilePath = Paths.get("preferences.json");
 
     public Level getLogLevel() {
-        return logLevel;
+        return this.logLevel;
     }
 
     public void setLogLevel(Level logLevel) {
@@ -25,7 +25,7 @@ public class Config {
     }
 
     public Path getUserPrefsFilePath() {
-        return userPrefsFilePath;
+        return this.userPrefsFilePath;
     }
 
     public void setUserPrefsFilePath(Path userPrefsFilePath) {
@@ -43,20 +43,20 @@ public class Config {
 
         Config o = (Config) other;
 
-        return Objects.equals(logLevel, o.logLevel)
-            && Objects.equals(userPrefsFilePath, o.userPrefsFilePath);
+        return Objects.equals(this.logLevel, o.logLevel)
+            && Objects.equals(this.userPrefsFilePath, o.userPrefsFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(logLevel, userPrefsFilePath);
+        return Objects.hash(this.logLevel, this.userPrefsFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Current log level : " + logLevel);
-        sb.append("\nPreference file Location : " + userPrefsFilePath);
+        sb.append("Current log level : " + this.logLevel);
+        sb.append("\nPreference file Location : " + this.userPrefsFilePath);
         return sb.toString();
     }
 

@@ -17,28 +17,28 @@ public class SerenityParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses a {@code String student} into a {@code String}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String studentName} into a {@code String}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code student} is invalid.
      */
-    public static String parseStudent(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Student.isValidString(trimmedName)) {
+    public static String parseStudentName(String studentName) throws ParseException {
+        requireNonNull(studentName);
+        String trimmedName = studentName.trim();
+        if (!Student.isValidName(trimmedName)) {
             throw new ParseException(Student.STUDENT_NAME_ERROR);
         }
         return trimmedName;
     }
 
     /**
-     * Parses a {@code String id} into a {@code String}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String studentId} into a {@code String}. Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code id} is invalid.
+     * @throws ParseException if the given {@code studentId} is invalid.
      */
-    public static String parseStudentID(String id) throws ParseException {
-        requireNonNull(id);
-        String trimmedId = id.trim();
-        if (!Student.isValidStudentNumber(trimmedId)) {
+    public static String parseStudentID(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedId = studentId.trim();
+        if (!Student.isValidStudentId(trimmedId)) {
             throw new ParseException(Student.STUDENT_NUMBER_ERROR);
         }
         return trimmedId;

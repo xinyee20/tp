@@ -31,7 +31,7 @@ class StudentTest {
 
     @Test
     public void test_getStudentNumber() {
-        assertTrue(new Student("John", "E1234567").getStudentNumber().equals("E1234567"));
+        assertTrue(new Student("John", "E1234567").getStudentId().equals("E1234567"));
     }
 
     @Test

@@ -17,13 +17,13 @@ public class MarkAbsentCommand extends Command {
 
     public static final String COMMAND_WORD = "markabsent";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unmarks the attendance of a student in a class.\n"
-            + "Parameters: "
-            + PREFIX_NAME + " NAME "
-            + PREFIX_ID + " STUDENT_NUMBER\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456";
+        + ": Marks a specific student absent from a lesson.\n"
+        + "Parameters: "
+        + PREFIX_NAME + " STUDENT_NAME "
+        + PREFIX_ID + " STUDENT_NUMBER\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + " Aaron Tan "
+        + PREFIX_ID + " e0123456\n";
 
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance:  absent";
     public static final String MESSAGE_STUDENT_NOT_FOUND =
@@ -84,7 +84,8 @@ public class MarkAbsentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MarkAbsentCommand // instanceof handles nulls
-                && this.markAbsent.equals(((MarkAbsentCommand) other).markAbsent));
+                && this.markAbsent.equals(((MarkAbsentCommand) other).markAbsent)
+                && this.isCorrectStudent == ((MarkAbsentCommand) other).isCorrectStudent);
     }
 
 }

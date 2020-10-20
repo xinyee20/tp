@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
 
-class UnmarkAttCommandTest {
+class MarkAbsentCommandTest {
 
     private Model model = new ModelManager();
 

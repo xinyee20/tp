@@ -43,31 +43,31 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, and other fields set to their
-     * default value.
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
-        return feedbackToUser;
+        return this.feedbackToUser;
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return this.showHelp;
     }
 
     public boolean isExit() {
-        return exit;
+        return this.exit;
     }
 
     public boolean isToggleLsnView() {
-        return isViewLsn;
+        return this.isViewLsn;
     }
 
     public boolean isToggleGrpView() {
-        return isViewGrp;
+        return this.isViewGrp;
     }
 
     @Override
@@ -82,13 +82,15 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-            && showHelp == otherCommandResult.showHelp
-            && exit == otherCommandResult.exit;
+        return this.feedbackToUser.equals(otherCommandResult.feedbackToUser)
+            && this.showHelp == otherCommandResult.showHelp
+            && this.exit == otherCommandResult.exit
+            && this.isViewGrp == otherCommandResult.isViewGrp
+            && this.isViewLsn == otherCommandResult.isViewLsn;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(this.feedbackToUser, this.showHelp, this.exit, this.isViewGrp, this.isViewLsn);
     }
 }

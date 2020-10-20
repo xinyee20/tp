@@ -21,10 +21,8 @@ public class DelLsnCommandParser implements Parser<DelLsnCommand> {
     public DelLsnCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_LSN);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_LSN) || !argMultimap.getPreamble()
-                .isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLsnCommand.MESSAGE_USAGE));
+        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_LSN) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLsnCommand.MESSAGE_USAGE));
         }
 
         String grpName = argMultimap.getValue(PREFIX_GRP).get();

@@ -19,10 +19,10 @@ public class AddLsnCommand extends Command {
 
     public static final String COMMAND_WORD = "addlsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a new lesson to a specified tutorial group. "
-            + "Parameters: "
-            + PREFIX_GRP + "GRP "
-            + PREFIX_PATH + "PATH ";
+        + ": Adds a new lesson to a specified tutorial group. "
+        + "Parameters: "
+        + PREFIX_GRP + "GROUP "
+        + PREFIX_PATH + "PATH ";
 
     public static final String MESSAGE_SUCCESS = "New lesson for tutorial group %2$s added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson for tutorial group %1$s already exists.";

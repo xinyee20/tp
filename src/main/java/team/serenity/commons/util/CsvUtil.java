@@ -46,7 +46,7 @@ public class CsvUtil {
 
         // create an instance of BufferedReader
         // using try with resource, Java 7 feature to close resources
-        try (BufferedReader br = Files.newBufferedReader(filePath,
+        try (BufferedReader br = Files.newBufferedReader(this.filePath,
             StandardCharsets.US_ASCII)) {
 
             String line = "";
@@ -84,7 +84,7 @@ public class CsvUtil {
      */
     public Set<Lesson> readLessonsFromCsv(Set<StudentInfo> studentsInfo) {
         Set<Lesson> lessons = new HashSet<>();
-        try (BufferedReader br = Files.newBufferedReader(filePath,
+        try (BufferedReader br = Files.newBufferedReader(this.filePath,
             StandardCharsets.US_ASCII)) {
 
             String categories = "";
@@ -98,7 +98,7 @@ public class CsvUtil {
             String[] row = categories.split(","); //photos, name, userid, email, ....
             int len = row.length;
             for (int i = 4; i < len; i++) {
-                String lessonName = computeClassName(i - 3); //start from 1
+                String lessonName = computeLessonName(i - 3); //start from 1
                 UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
                 newStudentsInfo.setElementsWithList(new ArrayList<>(studentsInfo));
                 lessons.add(new Lesson(lessonName, newStudentsInfo));
@@ -112,9 +112,9 @@ public class CsvUtil {
     /**
      * Given a number, find out the class name E.g. 1 will return "1-1", 3 will return "2-1", 4 will return "2-2"
      * @param number Number of class, e.g. lesson 1,2,3
-     * @return Class name
+     * @return Lesson name
      */
-    public static String computeClassName(int number) {
+    public static String computeLessonName(int number) {
         int weekNumber = number / 2;
         double remainder = number % 2;
         if (remainder != 0) {
@@ -140,7 +140,7 @@ public class CsvUtil {
         return studentsInfo;
     }
 
-    private Lesson createClass(String name, UniqueList<StudentInfo> studentsInfo) {
+    private Lesson createLesson(String name, UniqueList<StudentInfo> studentsInfo) {
         return new Lesson(name, studentsInfo);
     }
 

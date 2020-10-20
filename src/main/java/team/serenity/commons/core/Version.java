@@ -33,19 +33,19 @@ public class Version implements Comparable<Version> {
     }
 
     public int getMajor() {
-        return major;
+        return this.major;
     }
 
     public int getMinor() {
-        return minor;
+        return this.minor;
     }
 
     public int getPatch() {
-        return patch;
+        return this.patch;
     }
 
     public boolean isEarlyAccess() {
-        return isEarlyAccess;
+        return this.isEarlyAccess;
     }
 
     /**
@@ -71,24 +71,24 @@ public class Version implements Comparable<Version> {
 
     @JsonValue
     public String toString() {
-        return String.format("V%d.%d.%d%s", major, minor, patch, isEarlyAccess ? "ea" : "");
+        return String.format("V%d.%d.%d%s", this.major, this.minor, this.patch, this.isEarlyAccess ? "ea" : "");
     }
 
     @Override
     public int compareTo(Version other) {
-        if (major != other.major) {
-            return major - other.major;
+        if (this.major != other.major) {
+            return this.major - other.major;
         }
-        if (minor != other.minor) {
-            return minor - other.minor;
+        if (this.minor != other.minor) {
+            return this.minor - other.minor;
         }
-        if (patch != other.patch) {
-            return patch - other.patch;
+        if (this.patch != other.patch) {
+            return this.patch - other.patch;
         }
-        if (isEarlyAccess == other.isEarlyAccess()) {
+        if (this.isEarlyAccess == other.isEarlyAccess()) {
             return 0;
         }
-        if (isEarlyAccess) {
+        if (this.isEarlyAccess) {
             return -1;
         }
         return 1;
@@ -109,8 +109,8 @@ public class Version implements Comparable<Version> {
 
     @Override
     public int hashCode() {
-        String hash = String.format("%03d%03d%03d", major, minor, patch);
-        if (!isEarlyAccess) {
+        String hash = String.format("%03d%03d%03d", this.major, this.minor, this.patch);
+        if (!this.isEarlyAccess) {
             hash = "1" + hash;
         }
         return Integer.parseInt(hash);

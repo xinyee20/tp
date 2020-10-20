@@ -13,29 +13,27 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
 
 /**
- * Parses input arguments and creates a new AddGrpCommand object
+ * Parses input arguments and creates a new AddGrpCommand object.
  */
 public class AddGrpCommandParser implements Parser<AddGrpCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddGrpCommand and returns an AddGrpCommand
-     * object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddGrpCommand and
+     * returns an AddGrpCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddGrpCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_PATH);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_PATH) || !argMultimap.getPreamble()
-            .isEmpty()) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
+        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_PATH) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
         }
 
-        String name = argMultimap.getValue(PREFIX_GRP).get();
+        String grpName = argMultimap.getValue(PREFIX_GRP).get();
         Path filePath = Paths.get(argMultimap.getValue(PREFIX_PATH).get());
 
-        Group group = new Group(name, filePath);
+        Group group = new Group(grpName, filePath);
 
         return new AddGrpCommand(group);
     }

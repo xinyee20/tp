@@ -1,9 +1,9 @@
 package team.serenity.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
-import team.serenity.commons.core.Messages;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
@@ -15,8 +15,9 @@ public class DelGrpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Deletes an existing tutorial group. "
         + "Parameter: "
-        + PREFIX_GRP + "GRP \n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_GRP + "G04";
+        + PREFIX_GRP + "GROUP\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GRP + "G04\n";
 
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Tutorial group deleted: %1$s";
 
@@ -45,7 +46,7 @@ public class DelGrpCommand extends Command {
         }
 
         if (toDel == null) {
-            throw new CommandException(Messages.MESSAGE_GROUP_EMPTY);
+            throw new CommandException(MESSAGE_GROUP_EMPTY);
         }
 
         model.deleteGroup(toDel);

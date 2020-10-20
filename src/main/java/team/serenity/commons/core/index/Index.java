@@ -24,11 +24,11 @@ public class Index {
     }
 
     public int getZeroBased() {
-        return zeroBasedIndex;
+        return this.zeroBasedIndex;
     }
 
     public int getOneBased() {
-        return zeroBasedIndex + 1;
+        return this.zeroBasedIndex + 1;
     }
 
     /**
@@ -49,6 +49,6 @@ public class Index {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof Index // instanceof handles nulls
-            && zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
+            && this.zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
     }
 }

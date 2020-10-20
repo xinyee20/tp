@@ -39,6 +39,11 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
+     * Returns the user prefs' serenity file path.
+     */
+    Path getSerenityFilePath();
+
+    /**
      * Returns an unmodifiable view of the filtered list of groups.
      */
     ObservableList<Group> getFilteredGroupList();
@@ -63,8 +68,4 @@ public interface Logic {
      */
     ObservableList<Question> getQuestionList();
 
-    /**
-     * Returns the user prefs' serenity file path.
-     */
-    Path getSerenityFilePath();
 }

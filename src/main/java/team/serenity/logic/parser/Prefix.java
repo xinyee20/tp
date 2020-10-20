@@ -12,7 +12,7 @@ public class Prefix {
     }
 
     public String getPrefix() {
-        return prefix;
+        return this.prefix;
     }
 
     public String toString() {
@@ -21,7 +21,7 @@ public class Prefix {
 
     @Override
     public int hashCode() {
-        return prefix == null ? 0 : prefix.hashCode();
+        return this.prefix == null ? 0 : this.prefix.hashCode();
     }
 
     @Override

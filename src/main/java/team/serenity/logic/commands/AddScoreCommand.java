@@ -23,15 +23,15 @@ public class AddScoreCommand extends Command {
     public static final String MESSAGE_NOT_IN_LESSON = "Currently not in any lesson. Please enter a lesson.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Gives a student in the class a participation score. \n"
-            + "Parameters: "
-            + PREFIX_NAME + " NAME "
-            + PREFIX_ID + " STUDENT_NUMBER "
-            + PREFIX_SCORE + " SCORE\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456 "
-            + PREFIX_SCORE + " 2";
+        + ": Gives a student in the class a participation score. \n"
+        + "Parameters: "
+        + PREFIX_NAME + " STUDENT_NAME "
+        + PREFIX_ID + " STUDENT_ID "
+        + PREFIX_SCORE + " SCORE\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + " Aaron Tan "
+        + PREFIX_ID + " e0123456 "
+        + PREFIX_SCORE + " 2\n";
 
     private Student toAddScore;
     private int score;
@@ -88,8 +88,9 @@ public class AddScoreCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddScoreCommand // instanceof handles nulls
-                && this.toAddScore.equals(((AddScoreCommand) other).toAddScore))
-                && this.score == ((AddScoreCommand) other).score;
+                && this.toAddScore.equals(((AddScoreCommand) other).toAddScore)
+                && this.score == ((AddScoreCommand) other).score
+                && this.isCorrectStudent == (((AddScoreCommand) other).isCorrectStudent));
     }
 
 }

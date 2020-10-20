@@ -40,7 +40,7 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
 
             // If single student specified, get student
-            studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_NAME).get());
+            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
             studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
 
@@ -52,8 +52,7 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
             return new MarkPresentCommand();
 
         } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
         }
 
     }

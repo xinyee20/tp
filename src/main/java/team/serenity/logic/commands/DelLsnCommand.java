@@ -17,10 +17,10 @@ import team.serenity.model.util.UniqueList;
 public class DelLsnCommand extends Command {
     public static final String COMMAND_WORD = "dellsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": deletes a specified lesson from a specified tutorial group. "
-            + "Parameters: "
-            + PREFIX_GRP + "GRP "
-            + PREFIX_LSN + "PATH ";
+        + ": Deletes a specified lesson from a specified tutorial group. "
+        + "Parameters: "
+        + PREFIX_GRP + "GROUP "
+        + PREFIX_LSN + "PATH\n";
 
     public static final String MESSAGE_SUCCESS = "lesson for tutorial group %2$s deleted: %1$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "This lesson for tutorial group %1$s does not exists.";

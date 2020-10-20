@@ -20,15 +20,15 @@ public class MarkPresentCommand extends Command {
 
     public static final String COMMAND_WORD = "markpresent";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendance of all students / a student in a class. \n"
-            + "Parameters: "
-            + "all or "
-            + PREFIX_NAME + " NAME "
-            + PREFIX_ID + " STUDENT_NUMBER\n"
-            + "Example: " + COMMAND_WORD + " " + "all\n"
-            + "or " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456";
+        + ": Marks a specific student or all students present from a lesson. \n"
+        + "Parameters: "
+        + "all or "
+        + PREFIX_NAME + " NAME "
+        + PREFIX_ID + " STUDENT_NUMBER\n"
+        + "Example: " + COMMAND_WORD + " " + "all\n"
+        + "or " + COMMAND_WORD + " "
+        + PREFIX_NAME + " Aaron Tan "
+        + PREFIX_ID + " e0123456";
 
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance: present";
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked present!";
@@ -113,7 +113,9 @@ public class MarkPresentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MarkPresentCommand // instanceof handles nulls
-                && this.toMarkPresent.equals(((MarkPresentCommand) other).toMarkPresent));
+                && this.toMarkPresent.equals(((MarkPresentCommand) other).toMarkPresent)
+                && this.isCorrectStudent == ((MarkPresentCommand) other).isCorrectStudent
+                && this.isWholeClass == ((MarkPresentCommand) other).isWholeClass);
     }
 
 }

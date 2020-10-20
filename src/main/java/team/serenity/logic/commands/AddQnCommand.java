@@ -18,9 +18,11 @@ public class AddQnCommand extends Command {
 
     public static final String COMMAND_WORD = "addqn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a new question to the specific lesson. "
-            + "Parameters: "
-            + PREFIX_QN + "QUESTION";
+        + ": Adds a new question to the specific lesson. "
+        + "Parameters: "
+        + PREFIX_QN + "QUESTION"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_QN + "What is the deadline for the report?\n";
 
     public static final String MESSAGE_SUCCESS = "New question added: %1$s";
     public static final String MESSAGE_DUPLICATE_QUESTION = "This question already exists.";

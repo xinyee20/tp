@@ -13,33 +13,32 @@ public class Student {
         + "and must follow the format 'eXXXXXXX' "
         + "where X is a digit from 0 to 9";
     private String name;
-    private String studentNumber;
-
+    private String studentId;
 
     /**
      * Constructs a {@code Student}.
      *
      * @param name          A valid name.
-     * @param studentNumber A valid student number.
+     * @param studentId A valid student number.
      */
-    public Student(String name, String studentNumber) {
-        requireAllNonNull(name, studentNumber);
-        checkArgument(isValidString(name), STUDENT_NAME_ERROR);
-        checkArgument(isValidStudentNumber(studentNumber), STUDENT_NUMBER_ERROR);
+    public Student(String name, String studentId) {
+        requireAllNonNull(name, studentId);
+        checkArgument(isValidName(name), STUDENT_NAME_ERROR);
+        checkArgument(isValidStudentId(studentId), STUDENT_NUMBER_ERROR);
         this.name = name;
-        this.studentNumber = studentNumber;
+        this.studentId = studentId;
     }
 
-    public static boolean isValidString(String s) {
+    public static boolean isValidName(String s) {
         return s.length() > 0;
     }
 
     /**
-     * Checks whether String s is a valid Student number
-     * @param s Student number
+     * Checks whether String s is a valid Student ID
+     * @param s Student ID
      * @return Whether String is valid
      */
-    public static boolean isValidStudentNumber(String s) {
+    public static boolean isValidStudentId(String s) {
         //8 digits long
         s = s.toLowerCase();
         boolean matchesLength = s.length() == 8;
@@ -54,13 +53,13 @@ public class Student {
         return this.name;
     }
 
-    public String getStudentNumber() {
-        return this.studentNumber;
+    public String getStudentId() {
+        return this.studentId;
     }
 
     @Override
     public String toString() {
-        return this.name + " " + this.studentNumber;
+        return this.name + " " + this.studentId;
     }
 
     @Override
@@ -69,7 +68,7 @@ public class Student {
             return true;
         } else if (obj instanceof Student) {
             Student other = (Student) obj;
-            return other.getName().equals(getName()) && other.getStudentNumber().equals(getStudentNumber());
+            return other.getName().equals(getName()) && other.getStudentId().equals(getStudentId());
         } else {
             return false;
         }

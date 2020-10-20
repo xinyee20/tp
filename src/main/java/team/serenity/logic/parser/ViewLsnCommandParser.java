@@ -22,14 +22,14 @@ public class ViewLsnCommandParser implements Parser<ViewLsnCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_LSN);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_LSN) || !argMultimap.getPreamble().isEmpty()) {
-            throw viewLsnCommandParserException;
+            throw this.viewLsnCommandParserException;
         }
 
         String[] grpKeyword = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
         String[] lsnKeyword = argMultimap.getValue(PREFIX_LSN).get().split("\\s+");
 
         if (grpKeyword.length > 1 || lsnKeyword.length > 1) {
-            throw viewLsnCommandParserException;
+            throw this.viewLsnCommandParserException;
         }
 
         return new ViewLsnCommand(new GroupContainsKeywordPredicate(grpKeyword[0]),

@@ -1,6 +1,9 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
@@ -15,24 +18,23 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
 
     @Override
     public DelStudentCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_GRP,
-            CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_NAME, PREFIX_ID);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GRP, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ID)
+        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_NAME, PREFIX_ID)
             || !argMultimap.getPreamble().isEmpty()) {
-            throw deleteStudentCommandParserException;
+            throw this.deleteStudentCommandParserException;
         }
 
-        String[] grpKeywordArray = argMultimap.getValue(CliSyntax.PREFIX_GRP).get().split("\\s+");
-        String[] studentNameArray = argMultimap.getValue(CliSyntax.PREFIX_NAME).get().split("\\s+");
-        String[] studentIdArray = argMultimap.getValue(CliSyntax.PREFIX_ID).get().split("\\s+");
+        String[] grpKeywordArray = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
+        String[] studentNameArray = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
+        String[] studentIdArray = argMultimap.getValue(PREFIX_ID).get().split("\\s+");
 
         //if id or group keyword is more than 1, or if student name has more than 10 letters, throw exception
         boolean matchesGrp = grpKeywordArray.length == 1;
         boolean matchesId = studentIdArray.length == 1 && studentIdArray[0].length() == 8;
         boolean matchesStudentName = studentNameArray.length <= 10;
         if (!matchesGrp || !matchesId || !matchesStudentName) {
-            throw deleteStudentCommandParserException;
+            throw this.deleteStudentCommandParserException;
         }
 
         String studentName = String.join(" ", studentNameArray);

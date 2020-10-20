@@ -19,13 +19,13 @@ public class ViewGrpCommandParser implements Parser<ViewGrpCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_GRP);
 
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_GRP) || !argMultimap.getPreamble().isEmpty()) {
-            throw viewGrpCommandParserException;
+            throw this.viewGrpCommandParserException;
         }
 
         String[] grpKeyword = argMultimap.getValue(CliSyntax.PREFIX_GRP).get().split("\\s+");
 
         if (grpKeyword.length > 1) {
-            throw viewGrpCommandParserException;
+            throw this.viewGrpCommandParserException;
         }
 
         return new ViewGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));

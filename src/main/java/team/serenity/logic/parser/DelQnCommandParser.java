@@ -22,8 +22,7 @@ public class DelQnCommandParser implements Parser<DelQnCommand> {
             Index index = SerenityParserUtil.parseIndex(args);
             return new DelQnCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelQnCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelQnCommand.MESSAGE_USAGE), pe);
         }
     }
 

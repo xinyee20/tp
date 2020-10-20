@@ -29,7 +29,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final SerenityParser addressBookParser;
+    private final SerenityParser serenityParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -37,7 +37,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new SerenityParser();
+        this.serenityParser = new SerenityParser();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = this.serenityParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         /*
@@ -62,43 +62,44 @@ public class LogicManager implements Logic {
 
     @Override
     public GuiSettings getGuiSettings() {
-        return model.getGuiSettings();
+        return this.model.getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
-        model.setGuiSettings(guiSettings);
+        this.model.setGuiSettings(guiSettings);
     }
 
     // ========== Serenity ==========
 
     @Override
+    public Path getSerenityFilePath() {
+        return this.model.getSerenityFilePath();
+    }
+
+    @Override
     public ObservableList<Group> getFilteredGroupList() {
-        return model.getFilteredGroupList();
+        return this.model.getFilteredGroupList();
     }
 
     @Override
     public ObservableList<Student> getStudentList() {
-        return model.getStudentList();
+        return this.model.getStudentList();
     }
 
     @Override
     public ObservableList<Lesson> getLessonList() {
-        return model.getLessonList();
+        return this.model.getLessonList();
     }
 
     @Override
     public ObservableList<StudentInfo> getStudentInfoList() {
-        return model.getStudentsInfoList();
+        return this.model.getStudentsInfoList();
     }
 
     @Override
     public ObservableList<Question> getQuestionList() {
-        return model.getQuestionList();
+        return this.model.getQuestionList();
     }
 
-    @Override
-    public Path getSerenityFilePath() {
-        return model.getSerenityFilePath();
-    }
 }

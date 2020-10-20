@@ -30,13 +30,11 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
     public MarkAbsentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
         }
 
-        String studentName = SerenityParserUtil.parseStudent(argMultimap.getValue(PREFIX_NAME).get());
+        String studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
         String studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
         Optional<Student> student = Optional.ofNullable(new Student(studentName, studentNumber));
 

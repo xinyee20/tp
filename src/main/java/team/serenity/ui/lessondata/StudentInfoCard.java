@@ -37,7 +37,7 @@ public class StudentInfoCard extends UiPart<Region> {
         this.studentInfo = studentInfo;
         this.id.setText(displayedIndex + ". ");
         this.name.setText(studentInfo.getStudent().getName());
-        this.studentNumber.setText(studentInfo.getStudent().getStudentNumber());
+        this.studentNumber.setText(studentInfo.getStudent().getStudentId());
         this.attendance.setText(studentInfo.getAttendance().getAttendance() ? "Present" : "Absent");
         this.participation.setText(String.valueOf(studentInfo.getParticipation().getScore()));
     }

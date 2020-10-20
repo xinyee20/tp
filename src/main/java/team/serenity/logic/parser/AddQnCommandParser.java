@@ -25,8 +25,7 @@ public class AddQnCommandParser implements Parser<AddQnCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QN);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_QN) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
         }
 
         Question question = SerenityParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QN).get());
