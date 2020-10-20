@@ -315,7 +315,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateStudentInfoList() {
-        if (!filteredGroups.isEmpty() || !filteredLessons.isEmpty()) {
+        if (!filteredGroups.isEmpty() && !filteredLessons.isEmpty()) {
             Group currentGroup = filteredGroups.get(0);
             Lesson currentLesson = filteredLessons.get(0);
             GroupLessonKey key = new GroupLessonKey(currentGroup, currentLesson);
