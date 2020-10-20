@@ -33,6 +33,13 @@ public class AddGrpCommand extends Command {
         this.toAdd = group;
     }
 
+    /**
+     * Retrieves the name of the group to be added.
+     */
+    public String getGroupName() {
+        return toAdd.getName();
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -42,7 +49,7 @@ public class AddGrpCommand extends Command {
         }
 
         model.addGroup(this.toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd), false, false, false, true);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd), false, false, false, true, true);
     }
 
     @Override

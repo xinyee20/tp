@@ -3,19 +3,31 @@ package team.serenity.ui;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.logic.Logic;
+import team.serenity.logic.commands.AddGrpCommand;
+import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.CommandResult;
+import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.exceptions.CommandException;
+import team.serenity.logic.parser.SerenityParser;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.ui.groupdata.GroupDataPanel;
 import team.serenity.ui.lessondata.LessonDataPanel;
 
@@ -35,6 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ButtonBar buttonBar;
 
     // Ui parts relating to serenity
     private DataPanel groupDataPanel;
@@ -54,6 +67,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane dataDisplayPlaceholder;
+
+    @FXML
+    private VBox buttonPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +137,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         this.commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        this.buttonBar = new ButtonBar();
+        this.buttonPanelPlaceholder.getChildren().add(this.buttonBar);
     }
 
     /**
@@ -184,6 +203,31 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Adds a new group button.
+     */
+    @FXML
+    private void handleAddGrp(String groupName) {
+        Button groupButton = new Button(groupName);
+        groupButton.setAlignment(Pos.CENTER);
+        groupButton.setContentDisplay(ContentDisplay.CENTER);
+        groupButton.setMnemonicParsing(false);
+        groupButton.setPrefWidth(50);
+        groupButton.setTextAlignment(TextAlignment.CENTER);
+        groupButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String commandText = "viewgrp grp/" + groupButton.getText();
+                try {
+                    executeCommand(commandText);
+                } catch (CommandException | ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        this.buttonBar.getChildren().add(groupButton);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see Logic#execute(String)
@@ -208,6 +252,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isToggleLsnView()) {
                 toggleLsnView();
+            }
+
+            if (commandResult.isAddGrp()) {
+                Command command = new SerenityParser().parseCommand(commandText);
+                AddGrpCommand addGrpCommand = (AddGrpCommand) command;
+                handleAddGrp(addGrpCommand.getGroupName());
             }
 
             return commandResult;

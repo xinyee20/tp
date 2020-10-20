@@ -32,14 +32,21 @@ public class CommandResult {
     private final boolean isViewGrp;
 
     /**
+     * The application should add group buttons to the button bar.
+     */
+    private final boolean isAddGrp;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewLsn, boolean viewGrp) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewLsn, boolean viewGrp,
+        boolean addGrp) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.isViewLsn = viewLsn;
         this.isViewGrp = viewGrp;
+        this.isAddGrp = addGrp;
     }
 
     /**
@@ -47,7 +54,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -70,6 +77,10 @@ public class CommandResult {
         return this.isViewGrp;
     }
 
+    public boolean isAddGrp() {
+        return this.isAddGrp;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -86,11 +97,13 @@ public class CommandResult {
             && this.showHelp == otherCommandResult.showHelp
             && this.exit == otherCommandResult.exit
             && this.isViewGrp == otherCommandResult.isViewGrp
-            && this.isViewLsn == otherCommandResult.isViewLsn;
+            && this.isViewLsn == otherCommandResult.isViewLsn
+            && this.isAddGrp == otherCommandResult.isAddGrp;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.feedbackToUser, this.showHelp, this.exit, this.isViewGrp, this.isViewLsn);
+        return Objects.hash(this.feedbackToUser, this.showHelp, this.exit, this.isViewGrp, this.isViewLsn,
+            this.isAddGrp);
     }
 }

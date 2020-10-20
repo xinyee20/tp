@@ -26,7 +26,7 @@
       </stylesheets>
          <BorderPane>
             <center>
-      
+
             <VBox>
                 <StackPane fx:id="dataDisplayPlaceholder" minWidth="680.0" prefHeight="150.0" prefWidth="200.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           </StackPane>
@@ -61,7 +61,7 @@
             <left>
                <ScrollPane prefWidth="80.0" BorderPane.alignment="CENTER">
                  <content>
-                     <VBox alignment="CENTER" prefWidth="80.0">
+                     <VBox fx:id="buttonPanelPlaceholder" alignment="CENTER" prefWidth="80.0">
                         <children>
                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="50.0" text="G04" textAlignment="CENTER">
                               <VBox.margin>
