@@ -13,7 +13,7 @@
 
 <fx:root minHeight="600" minWidth="700" onCloseRequest="#handleExit" title="Serenity" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/serenity_logo.png" />
   </icons>
   <scene>
     <Scene>
