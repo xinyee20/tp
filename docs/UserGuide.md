@@ -44,7 +44,7 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.2. Mark a student as absent: `markabsent`](#422-mark-a-student-as-absent-markabsent)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.3 Mark attendance for all students: `markpresent all`](#423-mark-attendance-for-all-students-markpresent-all)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.3 Mark all students as present: `markpresent all`](#423-mark-all-students-as-present-markpresent-all)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.4. Flag attendance of a student: `flagatt`](#424-flag-attendance-of-a-student-flagatt)
 
@@ -115,7 +115,7 @@ To get started with using **Serenity**, you can follow these steps:
 
 3. Copy the file to the folder you want to use as the home folder for your **Serenity** application.
 
-4. Double-click the file to start the app. The _GUI_ similar to the below should appear in a few seconds.
+4. Double-click the file to start the app. The _GUI_ similar to the image below should appear in a few seconds.
 
    ![Ui](images/Ui.png)
 
@@ -131,10 +131,10 @@ To get started with using **Serenity**, you can follow these steps:
 
 This User Guide have been structured such that you can easily find what you need.
 
-In the next subsection [3.2. Reading this document](#32-reading-this-document),
+In the next subsection [Reading this document](#32-reading-this-document),
 you can find useful tips on reading this document.
 
-It is then followed by section [4. Features](#4-features),
+It is then followed by section [Features](#4-features),
 where you can find details of the three main features of **Serenity**:
 
 * Attendance taking
@@ -159,7 +159,7 @@ The table below explains the general symbols and syntax used throughout the docu
 
 Symbol/syntax | Meaning
 --------|------------------
-`command` | This indicates a technical term, which you can find out more in the next subsection [3.2.3. Command syntax and usage](#323-command-syntax-and-usage).
+`command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#323-command-syntax-and-usage).
 _GUI_ | This indicates a graphical component, such as a button, layout format and text input box.
 ℹ | This indicates a note.
 💡 | This indicates a tip.
@@ -184,7 +184,7 @@ You can use commands to tell **Serenity** to perform a specific task.
 
 `COMMAND_WORD prefix/PARAMETER`
 
-> ℹ **Notes about the command format:**
+> ℹ **Notes regarding the command format:**
 >* Words in upper case are the parameters to be supplied by you.<br>e.g. in `viewgrp grp/GROUP`, `GROUP` is a parameter which can be used as `viewgrp grp/G04`
 >* Parameters have to be in the specified order.<br>e.g. if the command specifies `grp/GROUP lsn/LESSON`, `lsn/LESSON grp/GROUP` is not acceptable.
 
@@ -220,7 +220,7 @@ Follow the instructions below to set up your new classes, and watch **Serenity**
 
 You can use this command to add a new tutorial group automatically from CSV data.
 
-> ℹ **Notes about the `addgrp` command:**
+> ℹ **Notes regarding the `addgrp` command:**
 > * The CSV file should store a list of students.
 > * The format of the CSV file is the same as the CSV file that you may download from LUMINUS.
 > * To obtain PATH_TO_CSV, either:<br>
@@ -282,18 +282,18 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 
 **Example:**
 
-You want to create a new tutorial lesson `2-2` for tutorial group `G04`.
+You want to create a new tutorial lesson `1-2` for tutorial group `G04`.
 
 Adding a tutorial lesson to a tutorial group:
 
-1. Type `addlsn grp/G04 lsn/2-2` into the _Command Box_.
+1. Type `addlsn grp/G04 lsn/1-2` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. **Serenity** will display tutorial lesson `2-2` page.
-3. You can now see that tutorial lesson `2-2` has been added to tutorial group `G04`.
+2. **Serenity** will display tutorial lesson `1-2` page.
+3. You can now see that tutorial lesson `1-2` has been added to tutorial group `G04`.
 
 #### 4.1.4. Delete an existing tutorial lesson: `dellsn`
 
@@ -305,18 +305,18 @@ You can use this command to delete an existing lesson from a specified tutorial 
 
 **Example:**
 
-You accidentally added the wrong tutorial lesson `2-3` for tutorial group `G04` and you decided to remove it.
+You accidentally added the wrong tutorial lesson `1-3` for tutorial group `G04` and you decided to remove it.
 
 Deleting an existing lesson from a tutorial group:
 
-1. Type `dellsn grp/G04 lsn/2-3` into the _Command Box_.
+1. Type `dellsn grp/G04 lsn/1-3` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message. 
-2. **Serenity** will exit tutorial lesson `2-3` page and enter tutorial group `G04` page.
-3. You can now see that tutorial lesson `2-3` no longer exists.
+2. **Serenity** will exit tutorial lesson `1-3` page and enter tutorial group `G04` page.
+3. You can now see that tutorial lesson `1-3` no longer exists.
 
 #### 4.1.5. Add a new student: `addstudent`
 
@@ -421,7 +421,7 @@ Outcome:
 ![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png)
 _Figure X. Outcome of a successful mark a student absent command_
 
-#### 4.2.3. Mark attendance for all students: `markpresent all`
+#### 4.2.3. Mark all students as present: `markpresent all`
 
 You can use this command to mark all students in a tutorial group as present for a tutorial lesson.
 
@@ -484,7 +484,7 @@ You can use this command to export the attendance sheet of a specific tutorial g
 > You can conveniently obtain the soft copy version of the attendance sheet for
 > attendance list submission as part of NUS Centre for English Language Communication requirements.
 
-> ℹ **Notes about the `exportatt` command:**
+> ℹ **Note regarding the `exportatt` command:**
 > The attendance sheet will be saved as a CSV file named after the tutorial group.
 > The file will be saved at the same folder as your **Serenity** application.
 
@@ -580,7 +580,7 @@ Outcome:
 
 You can use this command to export the participation score sheet of a specific tutorial group as a CSV file.
 
-> ℹ **Notes about the `exportscore` command:**
+> ℹ **Note regarding the `exportscore` command:**
 > The participation score sheet will be saved as a CSV file named after the tutorial group.
 > The file will be saved at the same folder as your **Serenity** application.
 
@@ -683,9 +683,6 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the information for tutorial group `G04`.
 
-![Figure X. Outcome of a successful view group command](reference)
-_Figure X. Outcome of a successful view group command_
-
 #### 4.5.2. View an existing tutorial lesson: `viewlsn`
 
 You can use this command to view the attendance and participation scores of an existing
@@ -709,9 +706,6 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the students' information for tutorial lesson `1-2` of tutorial group `G04`.
 
-![Figure X. Outcome of a successful `viewlsn` command](#)
-_Figure X. Outcome of a successful view lesson command_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. FAQ
@@ -734,37 +728,41 @@ your **Serenity** application on your other computer. **Serenity** will automati
 
 Command | Example
 ------------ | -------------
-**Add tutorial group** <br>`addgrp GROUP PATH_TO_CSV`| addgrp grp/G04 path/C:\Users\serene\CS2101_G04.csv
-**Delete tutorial group** <br> `delgrp GROUP`| delgrp grp/G04
-**Add tutorial lesson** <br> `addlsn GROUP LESSON` | addlsn grp/G04 lsn/2-1
-**Delete tutorial lesson** <br> `dellsn GROUP LESSON` | dellsn grp/G04 lsn/2-1
-**Add student** <br> `addstudent GROUP NAME STUDENT_NUMBER` | addstudent grp/G04 name/Ryan id/e1234567
-**Delete student** <br> `delstudent GROUP NAME STUDENT_NUMBER` | delstudent grp/G04 name/Ryan id/e1234567
+**Add tutorial group** <br>`addgrp grp/GROUP path/PATH_TO_CSV`| `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.csv`
+**Delete tutorial group** <br> `delgrp grp/GROUP`| `delgrp grp/G04`
+**Add tutorial lesson** <br> `addlsn grp/GROUP lsn/LESSON` | `addlsn grp/G04 lsn/1-2`
+**Delete tutorial lesson** <br> `dellsn grp/GROUP lsn/LESSON` | `dellsn grp/G04 lsn/1-3`
+**Add student** <br> `addstudent grp/GROUP name/NAME id/STUDENT_ID` | `addstudent grp/G04 name/Aaron Tan id/e0123456`
+**Delete student** <br> `delstudent grp/GROUP name/NAME id/STUDENT_ID` | `delstudent grp/G04 name/Aaron Tan id/e0123456`
 
 ### 6.2. Attendance taking commands
 
 Command | Example
 ------------ | -------------
-**Mark attendance for 1 student** <br> `markatt NAME ID` | markatt name/Ryan id/e0123456
-**Unmark attendance for 1 student** <br> `unmarkatt NAME ID` | unmarkatt name/Ryan id/e0123456
-**Mark attendance for all students** <br> `markatt all` | markatt all
+**Mark a student as present** <br> `markpresent name/NAME id/STUDENT_ID` | `markpresent name/Aaron Tan id/e0123456`
+**Mark a student as absent** <br> `markabsent name/NAME id/STUDENT_ID` | `markabsent name/Aaron Tan id/e0123456`
+**Mark all students as present** <br> `markpresent all` | `markpresent all`
+**Flag attendance** <br> `flagatt grp/GROUP lsn/LESSON name/NAME id/STUDENT_ID` | `flagatt grp/G04 lsn/1-2 name/Aaron Tan id/e0123456`
+**Export attendance** <br> `exportatt grp/GROUP` | `exportatt grp/G04`
 
 ### 6.3. Participation marking commands
 
 Command | Example
 ------------ | -------------
-**Add participation score for 1 student** <br> `addscore MARK NAME ID` | addscore 2 name/Ryan id/e0123456
+**Add participation score** <br> `addscore name/NAME id/STUDENT_ID score/SCORE` | `addscore name/Aaron Tan id/e0123456 score/3`
+**Subtract participation score** <br> `subscore name/NAME id/STUDENT_ID score/SCORE` | `subscore name/Aaron Tan id/e0123456 score/1`
+**Export participation scores** <br> `exportscore grp/GROUP` | `exportscore grp/G07`
 
 ### 6.4. Question addressing commands
 
 Command | Example
 ------------ | -------------
-**Add question** <br> `addqn QUESTION` | addqn qn/What is the deadline for the report?
-**Delete question** <br> `delqn INDEX` | delqn 5
+**Add question** <br> `addqn qn/QUESTION` | `addqn qn/What is the deadline for the report?`
+**Delete question** <br> `delqn INDEX` | `delqn 5`
 
 ### 6.5. Utility viewing commands
 
 Command | Example
 ------------ | -------------
-**View tutorial group** <br> `viewgrp GROUP` | viewgrp grp/G04
-**View tutorial lesson** <br> `viewlsn GROUP LESSON` | viewlsn grp/G04 lsn/2-1
+**View tutorial group** <br> `viewgrp grp/GROUP` | `viewgrp grp/G04`
+**View tutorial lesson** <br> `viewlsn grp/GROUP lsn/LESSON` | `viewlsn grp/G04 lsn/1-2`
