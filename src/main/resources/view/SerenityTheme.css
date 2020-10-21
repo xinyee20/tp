@@ -41,13 +41,22 @@
 }
 
 .tab-pane {
-    -fx-padding: 0 0 0 1;
+    -fx-padding: 0;
 }
 
-.tab-pane .tab-header-area {
-    -fx-padding: 0 0 0 0;
-    -fx-min-height: 0;
-    -fx-max-height: 0;
+.tab-pane .tab {
+    -fx-background-color: -color-blue3;
+    -fx-border-insets: 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: -color-blue2;
+    -fx-border-insets: 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:hover {
+    -fx-background-color: -color-blue4;
+    -fx-border-insets: 0;
 }
 
 .table-view {
@@ -106,7 +115,7 @@
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
+    -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
 }
 
@@ -174,18 +183,18 @@
     -fx-border-color: transparent;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: -color-blue4;
+    -fx-background-color: -color-blue3;
     -fx-font-size: 11pt;
     -fx-text-fill: -color-white;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: derive(-color-blue2, 70%);
+    -fx-background-color: -color-blue4;
 }
 
 .button:default:hover {
-    -fx-background-color: derive(-fx-focus-color, 30%);
+    -fx-background-color: -color-blue3;
 }
 
 .button-selected {
