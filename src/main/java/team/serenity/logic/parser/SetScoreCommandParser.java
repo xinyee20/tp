@@ -8,26 +8,26 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_SCORE;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import team.serenity.logic.commands.AddScoreCommand;
+import team.serenity.logic.commands.SetScoreCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Student;
 
 /**
- * Parses input arguments and creates a new AddScoreCommand object.
+ * Parses input arguments and creates a new SetScoreCommand object.
  */
-public class AddScoreCommandParser implements Parser<AddScoreCommand> {
+public class SetScoreCommandParser implements Parser<SetScoreCommand> {
 
     public static final String MESSAGE_STUDENT_NOT_GIVEN = "Please ensure student name / id is given";
     public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Score should be within range of 0 to 5";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddScoreCommand and
-     * returns a AddScoreCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SetScoreCommand and
+     * returns a SetScoreCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public AddScoreCommand parse(String userInput) throws ParseException {
+    public SetScoreCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_ID, PREFIX_SCORE);
 
         String studentName;
@@ -37,7 +37,7 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_SCORE)
             || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
         }
 
         studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
@@ -48,7 +48,7 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
             throw new ParseException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
         }
 
-        return new AddScoreCommand(student.get(), score);
+        return new SetScoreCommand(student.get(), score);
     }
 
     /**

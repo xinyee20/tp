@@ -4,11 +4,11 @@ import static team.serenity.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-class AddScoreCommandTest {
+class SetScoreCommandTest {
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddScoreCommand(null, 2));
+        assertThrows(NullPointerException.class, () -> new SetScoreCommand(null, 2));
     }
 
     @Test

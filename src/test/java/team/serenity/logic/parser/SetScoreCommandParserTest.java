@@ -2,7 +2,7 @@ package team.serenity.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
-class AddScoreCommandParserTest {
+class SetScoreCommandParserTest {
 
     @Test
     public void execute_missingStudentName_throwsCommandException() {
