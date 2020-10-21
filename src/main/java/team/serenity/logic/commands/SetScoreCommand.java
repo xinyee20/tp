@@ -1,9 +1,10 @@
 package team.serenity.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_SCORE;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
 import javafx.collections.ObservableList;
 import team.serenity.logic.commands.exceptions.CommandException;
@@ -24,30 +25,47 @@ public class SetScoreCommand extends Command {
     public static final String MESSAGE_STUDENT_NOT_PRESENT =
             "%s is not present, please ensure student is present before giving a score";
     public static final String MESSAGE_NOT_IN_LESSON = "Currently not in any lesson. Please enter a lesson.";
+    public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Score should be within range of 0 to 5";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Gives a student in the class a participation score. \n"
         + "Parameters: "
         + PREFIX_NAME + " STUDENT_NAME "
         + PREFIX_ID + " STUDENT_ID "
-        + PREFIX_SCORE + " SCORE\n"
+        + PREFIX_ADD_SCORE + " SCORE " + "or"
+        + PREFIX_SUBTRACT_SCORE + " SCORE\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + " Aaron Tan "
         + PREFIX_ID + " e0123456 "
-        + PREFIX_SCORE + " 2\n";
+        + PREFIX_ADD_SCORE + " 2\n"
+        + "or " + COMMAND_WORD + " "
+        + PREFIX_NAME + " Aaron Tan "
+        + PREFIX_ID + " e0123456 "
+        + PREFIX_SUBTRACT_SCORE + " 2\n";
 
     private Student toSetScore;
     private int score;
+    private int scoreToAdd;
+    private int scoreToSubtract;
+    private boolean isAddScore;
     private boolean isCorrectStudent;
 
     /**
-     * Creates an SetScoreCommand to award the specified {@code Student} a participation score.
+     * Creates an SetScoreCommand to adjust the specified {@code Student}'s participation score.
      */
-    public SetScoreCommand(Student student, int score) {
+    public SetScoreCommand(Student student, int score, boolean isAddScore) {
         requireNonNull(student);
+        requireNonNull(score);
+        requireNonNull(isAddScore);
         // Specified student to add participation score
         this.toSetScore = student;
-        this.score = score;
+        if (isAddScore) {
+            this.isAddScore = true;
+            this.scoreToAdd = score;
+        } else {
+            this.isAddScore = false;
+            this.scoreToSubtract = score;
+        }
     }
 
     @Override
@@ -58,29 +76,43 @@ public class SetScoreCommand extends Command {
             Lesson uniqueLesson = model.getFilteredLessonList().get(0);
             UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
             ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
+            int newScore = 0;
 
             // Update single student participation score
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
+                this.score = studentInfo.getParticipation().getScore();
                 this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore);
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
                     if (!currentAttendance.getAttendance()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore));
                     }
-                        Participation update = studentInfo.getParticipation().setNewScore(this.score);
-                        StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-                        uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-                        model.updateLessonList();
-                        model.updateStudentsInfoList();
-                        break;
+                    Participation update;
+                    if (isAddScore) {
+                        newScore = score + scoreToAdd;
+                        if (newScore > 5 || newScore < 0) {
+                            throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+                        }
+                    } else {
+                        newScore = score - scoreToSubtract;
+                        if (newScore > 5 || newScore < 0) {
+                            throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+                        }
+                    }
+                    update = studentInfo.getParticipation().setNewScore(newScore);
+                    StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
+                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
+                    model.updateLessonList();
+                    model.updateStudentsInfoList();
+                    break;
                 }
             }
 
             if (!this.isCorrectStudent) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore));
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSetScore, this.score));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSetScore, newScore));
 
         } catch (Exception e) {
             if (e instanceof CommandException) {

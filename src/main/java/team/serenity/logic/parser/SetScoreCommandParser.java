@@ -1,9 +1,10 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_SCORE;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -28,27 +29,34 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
      */
     @Override
     public SetScoreCommand parse(String userInput) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_ID, PREFIX_SCORE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_ID, PREFIX_ADD_SCORE, PREFIX_SUBTRACT_SCORE);
 
         String studentName;
         String studentNumber;
         Optional<Student> student;
         int score;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_SCORE)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID) &&
+                (!arePrefixesPresent(argMultimap, PREFIX_ADD_SCORE) &&
+                        !arePrefixesPresent(argMultimap, PREFIX_SUBTRACT_SCORE)))
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
         }
 
         studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
         studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
         student = Optional.ofNullable(new Student(studentName, studentNumber));
-        score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get());
-        if (score < 0 || score > 5) {
-            throw new ParseException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+        if (argMultimap.getValue(PREFIX_ADD_SCORE).isPresent() &&
+                argMultimap.getValue(PREFIX_SUBTRACT_SCORE).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
         }
+        if (argMultimap.getValue(PREFIX_ADD_SCORE).isPresent()) {
+            score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
+            return new SetScoreCommand(student.get(),score, true);
+        }
+        score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
+        return new SetScoreCommand(student.get(), score, false);
 
-        return new SetScoreCommand(student.get(), score);
     }
 
     /**
