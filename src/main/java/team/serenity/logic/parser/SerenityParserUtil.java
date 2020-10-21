@@ -39,7 +39,7 @@ public class SerenityParserUtil {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
         if (!Student.isValidStudentId(trimmedId)) {
-            throw new ParseException(Student.STUDENT_NUMBER_ERROR);
+            throw new ParseException(Student.STUDENT_ID_ERROR);
         }
         return trimmedId;
     }

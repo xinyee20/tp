@@ -9,8 +9,8 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class Student {
     public static final String STUDENT_NAME_ERROR = "Name cannot be empty";
-    public static final String STUDENT_NUMBER_ERROR = "Student number cannot be empty "
-        + "and must follow the format 'eXXXXXXX' "
+    public static final String STUDENT_ID_ERROR = "Student ID cannot be empty "
+        + "and must follow the format 'AXXXXXXXU' "
         + "where X is a digit from 0 to 9";
     private String name;
     private String studentId;
@@ -19,12 +19,12 @@ public class Student {
      * Constructs a {@code Student}.
      *
      * @param name          A valid name.
-     * @param studentId A valid student number.
+     * @param studentId A valid student ID.
      */
     public Student(String name, String studentId) {
         requireAllNonNull(name, studentId);
         checkArgument(isValidName(name), STUDENT_NAME_ERROR);
-        checkArgument(isValidStudentId(studentId), STUDENT_NUMBER_ERROR);
+        checkArgument(isValidStudentId(studentId), STUDENT_ID_ERROR);
         this.name = name;
         this.studentId = studentId;
     }
@@ -39,14 +39,14 @@ public class Student {
      * @return Whether String is valid
      */
     public static boolean isValidStudentId(String s) {
-        //8 digits long
-        s = s.toLowerCase();
-        boolean matchesLength = s.length() == 8;
-        boolean matchesChar = s.charAt(0) == 'e';
+        //9 digits long
+        s = s.toUpperCase();
+        boolean matchesLength = s.length() == 9;
+        boolean matchesChar = s.charAt(0) == 'A';
         if (!matchesChar || !matchesLength) {
             System.out.println(s);
         }
-        return s.length() == 8 && s.charAt(0) == 'e';
+        return s.length() == 9 && s.charAt(0) == 'A';
     }
 
     public String getName() {
