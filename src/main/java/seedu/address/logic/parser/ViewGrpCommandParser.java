@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ViewGrpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 
 public class ViewGrpCommandParser implements Parser<ViewGrpCommand> {
 
@@ -29,7 +29,7 @@ public class ViewGrpCommandParser implements Parser<ViewGrpCommand> {
             throw viewGrpCommandParserException;
         }
 
-        return new ViewGrpCommand(new GrpContainsKeywordPredicate(grpKeyword[0]));
+        return new ViewGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));
     }
 
     /**

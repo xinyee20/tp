@@ -14,9 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.util.UniqueList;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.GroupPredicateStub;
 import seedu.address.testutil.ModelStub;
@@ -53,7 +54,7 @@ public class AddStudentCommandTest {
                 "5.2",
                 "6.1"
             ).build();
-        UniqueGroupList groupList = new UniqueGroupList();
+        UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
@@ -135,7 +136,7 @@ class ModelStubWithoutGroup extends ModelStub {
 
 
 /**
- * A GrpContainsKeywordPredicate stub
+ * A GroupContainsKeywordPredicate stub
  */
 class GroupPredicateStubWithGroupName implements Predicate<Group> {
 
@@ -153,7 +154,7 @@ class GroupPredicateStubWithGroupName implements Predicate<Group> {
     @Override
     public boolean equals(Object obj) {
         return obj == this // short circuit if same object
-            || (obj instanceof GrpContainsKeywordPredicate // instanceof handles nulls
+            || (obj instanceof GroupContainsKeywordPredicate // instanceof handles nulls
             && keyword.equals(((GroupPredicateStubWithGroupName) obj).keyword)); // state check
     }
 }

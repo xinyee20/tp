@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySerenity;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.Lesson;
@@ -15,6 +15,7 @@ import seedu.address.model.group.Question;
 import seedu.address.model.group.Student;
 import seedu.address.model.group.StudentInfo;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.UniqueList;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -25,6 +26,10 @@ public class ModelStub implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         throw new AssertionError("This method should not be called.");
     }
+
+
+
+
 
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
@@ -42,12 +47,42 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public Optional<UniqueList<StudentInfo>> getStudentInfos(Group group, Lesson lesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Optional<UniqueList<Lesson>> getLessons(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getSerenityFilePath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean checkIfStudentExistsInGroup(Group group, Student student) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Optional<UniqueList<Student>> getStudents(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -91,20 +126,6 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
-    @Override
-    public Path getSerenityFilePath() {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public void setSerenityFilePath(Path serenityFilePath) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public void setSerenity(ReadOnlySerenity serenity) {
-        throw new AssertionError("This method should not be called.");
-    }
 
     @Override
     public void addStudentToGroup(Student student, Predicate<Group> predicate) {
@@ -113,11 +134,6 @@ public class ModelStub implements Model {
 
     @Override
     public void removeStudentFromGroup(Student student, Predicate<Group> predicate) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public ReadOnlySerenity getSerenity() {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import org.junit.jupiter.api.Test;
 
-class DeleteLsnCommandTest {
+class AddLsnCommandTest {
 
     @Test
     void execute() {
@@ -11,5 +11,4 @@ class DeleteLsnCommandTest {
     @Test
     void testEquals() {
     }
-
 }

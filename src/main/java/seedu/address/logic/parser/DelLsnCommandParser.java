@@ -7,18 +7,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LSN;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddLsnCommand;
-import seedu.address.logic.commands.DeleteLsnCommand;
+import seedu.address.logic.commands.DelLsnCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GrpContainsKeywordPredicate;
+import seedu.address.model.group.GroupContainsKeywordPredicate;
 
-public class DeleteLsnCommandParser implements Parser<DeleteLsnCommand> {
+public class DelLsnCommandParser implements Parser<DelLsnCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddGrpCommand and returns an AddGrpCommand
      * object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteLsnCommand parse(String args) throws ParseException {
+    public DelLsnCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_LSN);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_LSN) || !argMultimap.getPreamble()
@@ -30,7 +30,7 @@ public class DeleteLsnCommandParser implements Parser<DeleteLsnCommand> {
         String grpName = argMultimap.getValue(PREFIX_GRP).get();
         String lsnName = argMultimap.getValue(PREFIX_LSN).get();
 
-        return new DeleteLsnCommand(lsnName, new GrpContainsKeywordPredicate(grpName));
+        return new DelLsnCommand(lsnName, new GroupContainsKeywordPredicate(grpName));
     }
 
     /**
