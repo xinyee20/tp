@@ -45,12 +45,12 @@
 }
 
 .tab-pane .tab {
-    -fx-background-color: -color-blue3;
+    -fx-background-color: -color-blue2;
     -fx-border-insets: 0;
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab:selected {
-    -fx-background-color: -color-blue2;
+    -fx-background-color: -color-blue3;
     -fx-border-insets: 0;
 }
 
