@@ -15,7 +15,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -30,10 +30,10 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, true, false, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, true, false, false, false)));
     }
 
     @Test
@@ -47,10 +47,12 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(),
+            new CommandResult("feedback", true, false, true, false, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(),
+            new CommandResult("feedback", false, true, true, false, false, false).hashCode());
     }
 
 }
