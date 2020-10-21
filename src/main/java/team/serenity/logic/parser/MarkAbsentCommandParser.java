@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import team.serenity.logic.commands.MarkAbsentCommand;
+import team.serenity.logic.commands.MarkPresentCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Student;
 
@@ -15,6 +16,7 @@ import team.serenity.model.group.Student;
  * Parses input arguments and creates a new MarkAbsentCommand object.
  * Current support:
  * markabsent name/NAME id/STUDENT_NUMBER
+ * markabsent all
  */
 public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
 
@@ -30,15 +32,28 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
     public MarkAbsentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID) || !argMultimap.getPreamble().isEmpty()) {
+        String studentName;
+        String studentNumber;
+        Optional<Student> student;
+        Optional<String> keyToAll = Optional.ofNullable(argMultimap.getPreamble());
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
+
+            // If single student specified, get student
+            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
+            student = Optional.ofNullable(new Student(studentName, studentNumber));
+
+            return new MarkAbsentCommand(student.get());
+
+        } else if (keyToAll.get().equals("all")) {
+
+            // mark attendance of all students
+            return new MarkAbsentCommand();
+
+        } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
         }
-
-        String studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-        String studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
-        Optional<Student> student = Optional.ofNullable(new Student(studentName, studentNumber));
-
-        return new MarkAbsentCommand(student.get());
     }
 
     /**

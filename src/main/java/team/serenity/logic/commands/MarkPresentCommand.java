@@ -23,7 +23,7 @@ public class MarkPresentCommand extends Command {
         + ": Marks a specific student or all students present from a lesson. \n"
         + "Parameters: "
         + "all or "
-        + PREFIX_NAME + " NAME "
+        + PREFIX_NAME + " STUDENT_NAME "
         + PREFIX_ID + " STUDENT_NUMBER\n"
         + "Example: " + COMMAND_WORD + " " + "all\n"
         + "or " + COMMAND_WORD + " "
@@ -69,7 +69,7 @@ public class MarkPresentCommand extends Command {
 
             if (!this.isWholeClass) {
 
-                // Mark single student attendance
+                // Mark single student present
                 for (int i = 0; i < studentsInfo.size(); i++) {
                     StudentInfo studentInfo = studentsInfo.get(i);
                     this.isCorrectStudent = studentInfo.containsStudent(this.toMarkPresent);
@@ -89,7 +89,7 @@ public class MarkPresentCommand extends Command {
                 return new CommandResult(String.format(MESSAGE_SUCCESS, this.toMarkPresent));
             }
 
-            // Mark whole class attendance
+            // Mark whole class present
             for (StudentInfo each : studentsInfo) {
                 Attendance update = each.getAttendance().setNewAttendance(true);
                 StudentInfo updatedStudentInfo = each.updateAttendance(update);
