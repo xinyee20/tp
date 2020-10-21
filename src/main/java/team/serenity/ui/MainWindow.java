@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuItem;
@@ -208,23 +209,41 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleAddGrp(String groupName) {
         Button groupButton = new Button(groupName);
+        setUpButton(groupButton);
+        buttonBar.addGroupButton(groupButton);
+    }
+
+    /**
+     * Sets up the newly created group button.
+     */
+    public void setUpButton(Button groupButton) {
+        groupButton.setId(groupButton.getText());
         groupButton.setAlignment(Pos.CENTER);
         groupButton.setContentDisplay(ContentDisplay.CENTER);
         groupButton.setMnemonicParsing(false);
         groupButton.setPrefWidth(50);
         groupButton.setTextAlignment(TextAlignment.CENTER);
-        groupButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String commandText = "viewgrp grp/" + groupButton.getText();
-                try {
-                    executeCommand(commandText);
-                } catch (CommandException | ParseException e) {
-                    e.printStackTrace();
-                }
+        groupButton.setOnAction(event -> {
+            String commandText = "viewgrp grp/" + groupButton.getText();
+            try {
+                executeCommand(commandText);
+            } catch (CommandException | ParseException e) {
+                e.printStackTrace();
             }
         });
-        this.buttonBar.getChildren().add(groupButton);
+    }
+
+    /**
+     * Deletes an existing group button.
+     */
+    @FXML
+    private void handleDelGrp(String groupName) {
+        for (Node groupButton : buttonBar.getChildren()) {
+            if (groupButton.getId().equals(groupName)) {
+                buttonBar.deleteGroupButton(groupButton);
+                break;
+            }
+        }
     }
 
     /**
@@ -255,9 +274,15 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isAddGrp()) {
-                Command command = new SerenityParser().parseCommand(commandText);
-                AddGrpCommand addGrpCommand = (AddGrpCommand) command;
-                handleAddGrp(addGrpCommand.getGroupName());
+                // commandText would be in AddGrpCommand format correctly by the time it reaches here
+                String groupName = commandText.split(" ")[1].split("/")[1];
+                handleAddGrp(groupName);
+            }
+
+            if (commandResult.isDelGrp()) {
+                // commandText would be in DelGrpCommand format correctly by the time it reaches here
+                String groupName = commandText.split(" ")[1].split("/")[1];
+                handleDelGrp(groupName);
             }
 
             return commandResult;

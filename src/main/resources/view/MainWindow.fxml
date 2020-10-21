@@ -3,7 +3,6 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -61,13 +60,10 @@
             <left>
                <ScrollPane prefWidth="80.0" BorderPane.alignment="CENTER">
                  <content>
-                     <VBox fx:id="buttonPanelPlaceholder" alignment="CENTER" prefWidth="80.0">
-                        <children>
-                           <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="50.0" text="G04" textAlignment="CENTER">
-                              <VBox.margin>
-                                 <Insets top="10.0" />
-                              </VBox.margin></Button>
-                        </children>
+                     <VBox fx:id="buttonPanelPlaceholder" alignment="CENTER" fillWidth="false" prefWidth="80.0">
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
                      </VBox>
                  </content>
                </ScrollPane>
