@@ -1,17 +1,12 @@
 package team.serenity.commons.util;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -45,15 +40,18 @@ public class XlsxUtil {
      *
      * @return
      */
-    public Set<Student> readStudentsFromXLSX() {
-
+    public Set<Student> readStudentsFromXlsx() {
         Set<Student> students = new HashSet<>();
-
         Iterator<Row> rowIterator = sheet.iterator();
+        skipRowsToHeaderRow(rowIterator);
+        readDetailsOfStudents(rowIterator, students);
+        return students;
+    }
 
-        // Skip lines until the line containing the headers is reached
+    private Row skipRowsToHeaderRow(Iterator<Row> rowIterator) {
+        Row row = null;
         while (rowIterator.hasNext()) {
-            Row row = rowIterator.next();
+            row = rowIterator.next();
 
             if (formatter.formatCellValue(row.getCell(0)).equals("Photo")
                 && formatter.formatCellValue(row.getCell(1)).equals("Name")
@@ -61,8 +59,10 @@ public class XlsxUtil {
                 break;
             }
         }
+        return row;
+    }
 
-        // Read details of each student
+    private void readDetailsOfStudents(Iterator<Row> rowIterator, Set<Student> students) {
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
             Iterator<Cell> cellIterator = row.cellIterator();
@@ -79,8 +79,6 @@ public class XlsxUtil {
             Student student = new Student(name, studentId);
             students.add(student);
         }
-
-        return students;
     }
 
     /**
@@ -90,51 +88,34 @@ public class XlsxUtil {
      */
     public Set<Lesson> readLessonsFromXlsx(Set<StudentInfo> studentsInfo) {
         Set<Lesson> lessons = new HashSet<>();
-
-        /*
-        try (BufferedReader br = Files.newBufferedReader(this.filePath,
-            StandardCharsets.US_ASCII)) {
-
-            String categories = "";
-
-            // skip the first 3 lines
-            for (int i = 1; i <= 3; i++) {
-                categories = br.readLine();
-            }
-
-            //create classes
-            String[] row = categories.split(","); //photos, name, userid, email, ....
-            int len = row.length;
-            for (int i = 4; i < len; i++) {
-                String lessonName = computeLessonName(i - 3); //start from 1
-                UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
-                newStudentsInfo.setElementsWithList(new ArrayList<>(studentsInfo));
-                lessons.add(new Lesson(lessonName, newStudentsInfo));
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-         */
-
+        Iterator<Row> rowIterator = sheet.iterator();
+        Row headerRow = skipRowsToHeaderRow(rowIterator);
+        readDetailsOfLessons(headerRow, lessons, studentsInfo);
         return lessons;
     }
 
-    /**
-     * Given a number, find out the tutorial lesson name.
-     * E.g. 1 will return "1-1", 3 will return "2-1", 4 will return "2-2".
-     * @param number The week of the tutorial lesson, e.g. Tutorial lesson 1, 2, 3.
-     * @return The number of the tutorial Lesson.
-     */
-    public static String computeLessonName(int number) {
-        int weekNumber = number / 2;
-        double remainder = number % 2;
-        if (remainder != 0) {
-            //e.g. if number = 3, expected weekNumber is 2.
-            // 3/2 gives 1, which we add 1 to get us our desired result
-            weekNumber++;
+    private void readDetailsOfLessons(Row headerRow, Set<Lesson> lessons, Set<StudentInfo> studentsInfo) {
+        Iterator<Cell> cellIterator = headerRow.iterator();
+        while (cellIterator.hasNext()) {
+            Cell cell = cellIterator.next();
+            System.out.println("LALA: " + formatter.formatCellValue(cell));
+
+            if (formatter.formatCellValue(cell).startsWith("T")) {
+                String lessonName = formatter.formatCellValue(cell);
+                String formattedLessonName = formatLessonName(lessonName);
+                UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
+                newStudentsInfo.setElementsWithList(new ArrayList<>(studentsInfo));
+                lessons.add(new Lesson(formattedLessonName, newStudentsInfo));
+            }
         }
-        int lessonNumber =
-            remainder == 0 ? 2 : 1; //e.g. if number = 3, expected output is 2-1 i.e. lessonNumber = 1
+    }
+
+    private String formatLessonName(String lessonName) {
+        String trimmedLessonName = lessonName.substring(1); // remove the first character "T" from the lessonName
+        int lessonNumbering = Integer.parseInt(trimmedLessonName);
+        boolean isEvenWeek = lessonNumbering % 2 == 0;
+        int weekNumber = isEvenWeek ? lessonNumbering / 2 : lessonNumbering / 2 + 1;
+        int lessonNumber = isEvenWeek ? 2 : 1;
         return String.format("%d-%d", weekNumber, lessonNumber);
     }
 
@@ -153,6 +134,6 @@ public class XlsxUtil {
 
     public static void main(String[] args) {
         XlsxUtil util = new XlsxUtil("CS2101_G04.xlsx");
-        util.readStudentsFromXLSX();
+        util.readStudentsFromXlsx();
     }
 }

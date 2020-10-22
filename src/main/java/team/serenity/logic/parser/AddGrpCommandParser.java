@@ -31,7 +31,7 @@ public class AddGrpCommandParser implements Parser<AddGrpCommand> {
         }
 
         String grpName = argMultimap.getValue(PREFIX_GRP).get();
-        Path filePath = Paths.get(argMultimap.getValue(PREFIX_PATH).get());
+        String filePath = argMultimap.getValue(PREFIX_PATH).get();
 
         Group group = new Group(grpName, filePath);
 
