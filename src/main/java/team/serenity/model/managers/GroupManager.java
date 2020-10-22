@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.Student;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -26,12 +27,30 @@ public class GroupManager {
     /**
      * Checks whether group exists.
      *
-     * @param group Group to check for
+     * @param target Group to check for
      * @return Whether given group exists
      */
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return this.listOfGroups.contains(group);
+    public boolean hasGroup(Group target) {
+        requireNonNull(target);
+        for (Group group : listOfGroups) {
+            if (group.getName().equals(target.getName()) || hasAtLeast1SameStudent(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasAtLeast1SameStudent(Group target) {
+        for (Student targetStudent : target.getStudents()) {
+            for (Group group : listOfGroups) {
+                for (Student groupStudent : group.getStudents()) {
+                    if (groupStudent.getName().equals(targetStudent.getName())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**

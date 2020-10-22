@@ -1,16 +1,16 @@
 package team.serenity.commons.util;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Student;
@@ -18,6 +18,9 @@ import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
+/**
+ * Reads XLSX file that the tutor downloads from LUMINUS and writes JSON data to a new XLSX file.
+ */
 public class XlsxUtil {
 
     private XSSFWorkbook workbook;
@@ -25,6 +28,11 @@ public class XlsxUtil {
 
     private DataFormatter formatter = new DataFormatter();
 
+    /**
+     * Creates a XlsxUtil object that manages XLSX files.
+     *
+     * @param filePath The path of the XLSX file that the tutor downloads from LUMINUS.
+     */
     public XlsxUtil(String filePath) {
         try {
             workbook = new XSSFWorkbook(filePath);
