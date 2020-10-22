@@ -40,6 +40,7 @@ public class GroupManager {
         return false;
     }
 
+    // TODO: improve this method's efficiency
     private boolean hasAtLeast1SameStudent(Group target) {
         for (Student targetStudent : target.getStudents()) {
             for (Group group : listOfGroups) {
