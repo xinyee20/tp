@@ -98,7 +98,6 @@ public class XlsxUtil {
         Iterator<Cell> cellIterator = headerRow.iterator();
         while (cellIterator.hasNext()) {
             Cell cell = cellIterator.next();
-            System.out.println("LALA: " + formatter.formatCellValue(cell));
 
             if (formatter.formatCellValue(cell).startsWith("T")) {
                 String lessonName = formatter.formatCellValue(cell);
