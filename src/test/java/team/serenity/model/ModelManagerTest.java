@@ -5,12 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static team.serenity.testutil.Assert.assertThrows;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
 
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
 import team.serenity.commons.core.GuiSettings;
+import team.serenity.model.group.Question;
+import team.serenity.model.group.exceptions.QuestionNotFoundException;
 
 public class ModelManagerTest {
 
@@ -72,6 +76,55 @@ public class ModelManagerTest {
     public void getFilteredGroupList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredGroupList().remove(0));
     }
+
+    // ========== QuestionManager ==========
+
+    @Test
+    public void hasQuestionManagerModelManager() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasQuestion(null));
+        assertFalse(modelManager.hasQuestion(QUESTION_A));
+    }
+
+    @Test
+    public void deleteQuestionManagerModelManager() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteQuestion(null));
+        Question newQuestion = QUESTION_A;
+        assertThrows(QuestionNotFoundException.class, () -> modelManager.deleteQuestion(newQuestion));
+        modelManager.addQuestion(newQuestion);
+        modelManager.deleteQuestion(newQuestion);
+        assertFalse(modelManager.getFilteredQuestionList().contains(newQuestion));
+        assertFalse(modelManager.getFilteredQuestionList()
+                .contains(newQuestion));
+    }
+
+    @Test
+    public void addQuestionManagerModelManager() {
+        assertThrows(NullPointerException.class, () -> modelManager.addQuestion(null));
+        Question newQuestion = QUESTION_A;
+        modelManager.addQuestion(newQuestion);
+        assertTrue(modelManager.getFilteredQuestionList().contains(newQuestion));
+        assertFalse(modelManager.getFilteredQuestionList().contains(QUESTION_B));
+    }
+
+    @Test
+    public void setQuestionManagerModelManager() {
+        assertThrows(NullPointerException.class, () -> modelManager.setQuestion(null, null));
+        Question newQuestionA = QUESTION_A;
+        Question newQuestionB = QUESTION_B;
+        assertThrows(QuestionNotFoundException.class, () -> modelManager
+                .setQuestion(newQuestionA, newQuestionB)); // Event where tries to set non-existent activity.
+
+        modelManager.addQuestion(newQuestionA);
+        modelManager.setQuestion(newQuestionA, newQuestionB);
+        assertTrue(modelManager.getFilteredQuestionList().contains(newQuestionB));
+        assertFalse(modelManager.getFilteredQuestionList().contains(newQuestionA));
+    }
+
+    @Test
+    public void updateFilteredQuestionManagerModelManager() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredQuestionList(null));
+    }
+
 
     @Test
     public void equals() {

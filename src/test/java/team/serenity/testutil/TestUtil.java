@@ -37,7 +37,7 @@ public class TestUtil {
      */
     public static Index getMidIndex(Model model) {
         // TODO: Wen Jin to complete when implementing view/find question
-        return Index.fromOneBased(model.getQuestionList().size() / 2);
+        return Index.fromOneBased(model.getFilteredQuestionList().size() / 2);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TestUtil {
      */
     public static Index getLastIndex(Model model) {
         // TODO: Wen Jin to complete when implementing view/find question
-        return Index.fromOneBased(model.getQuestionList().size());
+        return Index.fromOneBased(model.getFilteredQuestionList().size());
     }
 
     /**
@@ -53,6 +53,6 @@ public class TestUtil {
      */
     public static Question geQuestion(Model model, Index index) {
         // TODO: Wen Jin to complete when implementing view/find question
-        return model.getQuestionList().get(index.getZeroBased());
+        return model.getFilteredQuestionList().get(index.getZeroBased());
     }
 }

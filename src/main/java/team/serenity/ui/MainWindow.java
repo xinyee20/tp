@@ -174,7 +174,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void toggleLsnView() {
-        this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(), this.logic.getQuestionList());
+        this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(),
+                this.logic.getFilteredQuestionList());
         this.dataDisplayPlaceholder.getChildren().clear();
         this.dataDisplayPlaceholder.getChildren().add(this.lessonDataPanel.getRoot());
     }

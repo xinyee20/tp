@@ -98,8 +98,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Question> getQuestionList() {
-        return this.model.getQuestionList();
+    public ObservableList<Question> getFilteredQuestionList() {
+        return this.model.getFilteredQuestionList();
     }
 
 }
