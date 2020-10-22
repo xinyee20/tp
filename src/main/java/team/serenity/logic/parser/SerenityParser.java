@@ -21,6 +21,7 @@ import team.serenity.logic.commands.ExitCommand;
 import team.serenity.logic.commands.HelpCommand;
 import team.serenity.logic.commands.MarkAbsentCommand;
 import team.serenity.logic.commands.MarkPresentCommand;
+import team.serenity.logic.commands.UnflagAttCommand;
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.ViewLsnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
@@ -86,6 +87,9 @@ public class SerenityParser {
 
         case FlagAttCommand.COMMAND_WORD:
             return new FlagAttCommandParser().parse(arguments);
+
+        case UnflagAttCommand.COMMAND_WORD:
+            return new UnflagAttCommandParser().parse(arguments);
 
         case SetScoreCommand.COMMAND_WORD:
             return new SetScoreCommandParser().parse(arguments);

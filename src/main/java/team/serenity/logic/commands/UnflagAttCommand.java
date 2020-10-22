@@ -14,13 +14,12 @@ import team.serenity.model.group.StudentInfo;
 import team.serenity.model.util.UniqueList;
 
 /**
- * Flags the attendance of a student in the class.
+ * Unflags the attendance of a student in the class.
  */
-public class FlagAttCommand extends Command{
-
-    public static final String COMMAND_WORD = "flagatt";
+public class UnflagAttCommand extends Command{
+    public static final String COMMAND_WORD = "unflagatt";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Flags the attendance of a specific student for a lesson. \n"
+            + ": Unflags the attendance of a specific student for a lesson. \n"
             + "Parameters: "
             + PREFIX_NAME + " STUDENT_NAME "
             + PREFIX_ID + " STUDENT_NUMBER\n"
@@ -28,22 +27,22 @@ public class FlagAttCommand extends Command{
             + PREFIX_NAME + " Aaron Tan "
             + PREFIX_ID + " e0123456";
 
-    public static final String MESSAGE_SUCCESS = "%s: \nAttendance is flagged!";
+    public static final String MESSAGE_SUCCESS = "%s: \nAttendance is unflagged!";
     public static final String MESSAGE_STUDENT_NOT_FOUND =
             "%s is not found, please ensure the name & student id is correct";
     public static final String MESSAGE_NOT_IN_LESSON = "Currently not in any lesson. Please enter a lesson.";
-    public static final String MESSAGE_FAILURE = "Flagging attendance is for absent students.";
+    public static final String MESSAGE_FAILURE = "Student has not been flagged.";
 
-    private Student toFlagAtt;
+    private Student toUnflagAtt;
     private boolean isCorrectStudent;
 
     /**
-     * Creates an FlagAttCommand to flag a specified {@code Student}'s attendance.
+     * Creates an UnflagAttCommand to unflag a specified {@code Student}'s attendance.
      */
-    public FlagAttCommand(Student student) {
+    public UnflagAttCommand(Student student) {
         requireNonNull(student);
         // Specified student to flag attendance
-        this.toFlagAtt = student;
+        this.toUnflagAtt = student;
     }
 
     @Override
@@ -59,9 +58,12 @@ public class FlagAttCommand extends Command{
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
                 Attendance current = studentInfo.getAttendance();
-                this.isCorrectStudent = studentInfo.containsStudent(this.toFlagAtt);
+                this.isCorrectStudent = studentInfo.containsStudent(this.toUnflagAtt);
                 if (this.isCorrectStudent) {
-                    Attendance update = new Attendance(current.getAttendance(), true);
+                    if (!current.getFlagged()) {
+                        throw new CommandException(MESSAGE_FAILURE);
+                    }
+                    Attendance update = new Attendance(current.getAttendance(), false);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
@@ -71,9 +73,9 @@ public class FlagAttCommand extends Command{
             }
 
             if (!this.isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toFlagAtt));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toUnflagAtt));
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, this.toFlagAtt));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, this.toUnflagAtt));
 
         } catch (Exception e) {
             if (e instanceof CommandException) {
