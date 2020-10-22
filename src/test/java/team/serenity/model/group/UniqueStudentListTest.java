@@ -118,7 +118,7 @@ class UniqueStudentListTest {
 
     @Test
     void setStudents_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setElements(null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setElementsWithList(null));
     }
 
     @Test

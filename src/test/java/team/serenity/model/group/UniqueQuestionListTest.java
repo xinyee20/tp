@@ -99,7 +99,8 @@ class UniqueQuestionListTest {
 
     @Test
     public void setQuestions_nullUniqueQuestionList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueQuestionList.setElements((UniqueQuestionList) null));
+        assertThrows(NullPointerException.class, () -> uniqueQuestionList
+                .setElementsWithUniqueList((UniqueQuestionList) null));
     }
 
     @Test
@@ -107,7 +108,7 @@ class UniqueQuestionListTest {
         this.uniqueQuestionList.add(QUESTION_1);
         UniqueList<Question> expectedUniqueQuestionList = new UniqueQuestionList();
         expectedUniqueQuestionList.add(QUESTION_2);
-        this.uniqueQuestionList.setElements(expectedUniqueQuestionList);
+        this.uniqueQuestionList.setElementsWithUniqueList(expectedUniqueQuestionList);
         assertEquals(expectedUniqueQuestionList, this.uniqueQuestionList);
     }
 

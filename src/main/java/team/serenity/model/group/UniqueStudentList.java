@@ -9,7 +9,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.group.exceptions.DuplicateStudentException;
+import team.serenity.model.group.exceptions.NotFoundException;
 import team.serenity.model.group.exceptions.StudentNotFoundException;
 import team.serenity.model.util.UniqueList;
 
@@ -51,7 +53,7 @@ public class UniqueStudentList implements UniqueList<Student> {
      * Adds a student to the list. The student must not already exist in the list.
      */
     @Override
-    public void add(Student toAdd) {
+    public void add(Student toAdd) throws DuplicateException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateStudentException();
@@ -64,7 +66,7 @@ public class UniqueStudentList implements UniqueList<Student> {
      * The student identity of {@code student} must not be the same as another existing student in the list.
      */
     @Override
-    public void setElement(Student target, Student editedStudent) {
+    public void setElement(Student target, Student editedStudent) throws NotFoundException, DuplicateException {
         requireAllNonNull(target, editedStudent);
 
         int index = this.internalList.indexOf(target);
@@ -94,7 +96,7 @@ public class UniqueStudentList implements UniqueList<Student> {
      * Replaces all the students from the list with a new list of students
      */
     @Override
-    public void setElements(UniqueList<Student> replacement) {
+    public void setElementsWithUniqueList(UniqueList<Student> replacement) {
         requireNonNull(replacement);
         this.internalList.setAll(replacement.getList());
     }
@@ -103,7 +105,7 @@ public class UniqueStudentList implements UniqueList<Student> {
      * Replaces the contents of this list with {@code students}. {@code students} must not contain duplicate students.
      */
     @Override
-    public void setElementsWithList(List<Student> students) {
+    public void setElementsWithList(List<Student> students) throws DuplicateException {
         requireNonNull(students);
         if (!elementsAreUnique(students)) {
             throw new DuplicateStudentException();
