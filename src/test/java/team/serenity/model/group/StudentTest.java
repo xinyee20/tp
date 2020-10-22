@@ -26,27 +26,27 @@ class StudentTest {
 
     @Test
     public void test_getStudentName() {
-        assertTrue(new Student("John", "E1234567").getName().equals("John"));
+        assertTrue(new Student("John", "A1234567U").getName().equals("John"));
     }
 
     @Test
     public void test_getStudentNumber() {
-        assertTrue(new Student("John", "E1234567").getStudentId().equals("E1234567"));
+        assertTrue(new Student("John", "A1234567U").getStudentId().equals("A1234567U"));
     }
 
     @Test
     public void test_toString() {
-        assertTrue(new Student("John", "E1234567").toString().equals("John E1234567"));
+        assertTrue(new Student("John", "A1234567U").toString().equals("John A1234567U"));
     }
 
     @Test
     public void test_equals() {
         String studentName = "John";
-        String studentId = "E1234567";
+        String studentId = "A1234567U";
         Student first = new Student(studentName, studentId);
         Student second = new Student(studentName, studentId);
         Student differentName = new Student("James", studentId);
-        Student differentId = new Student(studentName, "E7654321");
+        Student differentId = new Student(studentName, "A7654321U");
 
         //same object
         assertTrue(first.equals(first));

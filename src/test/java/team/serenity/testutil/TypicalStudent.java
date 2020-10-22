@@ -4,6 +4,6 @@ import team.serenity.model.group.Student;
 
 public class TypicalStudent {
 
-    public static final Student JOHN = new Student("John", "E1234567");
-    public static final Student JAMES = new Student("James", "E7654321");
+    public static final Student JOHN = new Student("John", "A1234567U");
+    public static final Student JAMES = new Student("James", "A7654321U");
 }
