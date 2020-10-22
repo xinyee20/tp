@@ -132,8 +132,4 @@ public class XlsxUtil {
         return studentsInfo;
     }
 
-    public static void main(String[] args) {
-        XlsxUtil util = new XlsxUtil("CS2101_G04.xlsx");
-        util.readStudentsFromXlsx();
-    }
 }
