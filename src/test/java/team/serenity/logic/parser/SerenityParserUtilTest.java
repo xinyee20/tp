@@ -42,26 +42,26 @@ public class SerenityParserUtilTest {
     // For Serenity
 
     @Test
-    public void parseQuestion_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> SerenityParserUtil.parseQuestion((String) null));
+    public void parseDescription_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> SerenityParserUtil.parseDescription((String) null));
     }
 
     @Test
-    public void parseQuestion_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> SerenityParserUtil.parseQuestion(INVALID_QUESTION));
+    public void parseDescription_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> SerenityParserUtil.parseDescription(INVALID_QUESTION));
     }
 
     @Test
-    public void parseQuestion_validValueWithoutWhitespace_returnsQuestion() throws Exception {
-        Question expectedQuestion = new Question(VALID_QUESTION);
-        assertEquals(expectedQuestion, SerenityParserUtil.parseQuestion(VALID_QUESTION));
+    public void parseDescription_validValueWithoutWhitespace_returnsQuestion() throws Exception {
+        String expectedQuestion = new Question(VALID_QUESTION).getDescription();
+        assertEquals(expectedQuestion, SerenityParserUtil.parseDescription(VALID_QUESTION));
     }
 
     @Test
-    public void parseQuestion_validValueWithWhitespace_returnsTrimmedQuestion() throws Exception {
+    public void parseDescription_validValueWithWhitespace_returnsTrimmedQuestion() throws Exception {
         String questionWithWhitespace = WHITESPACE + VALID_QUESTION + WHITESPACE;
-        Question expectedQuestion = new Question(VALID_QUESTION);
-        assertEquals(expectedQuestion, SerenityParserUtil.parseQuestion(questionWithWhitespace));
+        String expectedQuestion = new Question(VALID_QUESTION).getDescription();
+        assertEquals(expectedQuestion, SerenityParserUtil.parseDescription(questionWithWhitespace));
     }
 
 }

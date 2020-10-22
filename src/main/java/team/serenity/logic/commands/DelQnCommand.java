@@ -25,7 +25,7 @@ public class DelQnCommand extends Command {
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1\n";
 
-    public static final String MESSAGE_DELETE_QUESTION_SUCCESS = "[%1$s %2$s] Deleted Question: %3$s";
+    public static final String MESSAGE_DELETE_QUESTION_SUCCESS = "Deleted Question: %3$s";
 
     private final Index targetIndex;
 
@@ -58,9 +58,7 @@ public class DelQnCommand extends Command {
 
         Question questionToDelete = lastViewedQuestionList.get(this.targetIndex.getZeroBased());
         uniqueQuestionList.remove(questionToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_QUESTION_SUCCESS,
-                model.getFilteredGroupList().get(0),
-                uniqueLesson, questionToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_QUESTION_SUCCESS, questionToDelete));
     }
 
     @Override

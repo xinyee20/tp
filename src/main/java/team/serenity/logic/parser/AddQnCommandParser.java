@@ -5,7 +5,6 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 
 import java.util.stream.Stream;
 
-import team.serenity.logic.commands.AddGrpCommand;
 import team.serenity.logic.commands.AddQnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Question;
@@ -25,12 +24,12 @@ public class AddQnCommandParser implements Parser<AddQnCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QN);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_QN) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddQnCommand.MESSAGE_USAGE));
         }
 
-        Question question = SerenityParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QN).get());
+        String questionDescription = SerenityParserUtil.parseDescription(argMultimap.getValue(PREFIX_QN).get());
 
-        return new AddQnCommand(question);
+        return new AddQnCommand(new Question(questionDescription));
     }
 
     /**
