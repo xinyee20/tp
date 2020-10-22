@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import team.serenity.logic.commands.AddGrpCommand;
 import team.serenity.logic.commands.AddLsnCommand;
 import team.serenity.logic.commands.AddQnCommand;
+import team.serenity.logic.commands.FlagAttCommand;
 import team.serenity.logic.commands.SetScoreCommand;
 import team.serenity.logic.commands.AddStudentCommand;
 import team.serenity.logic.commands.Command;
@@ -62,9 +63,6 @@ public class SerenityParser {
         case AddQnCommand.COMMAND_WORD:
             return new AddQnCommandParser().parse(arguments);
 
-        case SetScoreCommand.COMMAND_WORD:
-            return new SetScoreCommandParser().parse(arguments);
-
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
@@ -85,6 +83,12 @@ public class SerenityParser {
 
         case MarkPresentCommand.COMMAND_WORD:
             return new MarkPresentCommandParser().parse(arguments);
+
+        case FlagAttCommand.COMMAND_WORD:
+            return new FlagAttCommandParser().parse(arguments);
+
+        case SetScoreCommand.COMMAND_WORD:
+            return new SetScoreCommandParser().parse(arguments);
 
         case ViewGrpCommand.COMMAND_WORD:
             return new ViewGrpCommandParser().parse(arguments);
