@@ -3,6 +3,7 @@ package team.serenity.model.util;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 
@@ -16,6 +17,8 @@ public interface UniqueList<T> extends Iterable<T> {
     ObservableList<T> getList();
 
     void sort(Comparator<T> comparator);
+
+    Stream<T> stream();
 
     /**
      * Returns the size of the list.

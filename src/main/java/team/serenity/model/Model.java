@@ -3,6 +3,7 @@ package team.serenity.model;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
@@ -65,6 +66,18 @@ public interface Model {
      * Returns true if a group with the same identity as {@code group} exists in serenity.
      */
     boolean hasGroup(Group group);
+
+    /**
+     * Returns true if at least one group exists
+     * @return whether any group exists
+     */
+    boolean hasGroup();
+
+    /**
+     * Get stream of groups
+     * @return Stream of groups
+     */
+    Stream<Group> getGroupStream();
 
     /**
      * Deletes the given group. The group must exist in serenity.

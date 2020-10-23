@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.exceptions.DataConversionException;
 import team.serenity.model.ReadOnlySerenity;
 import team.serenity.model.ReadOnlyUserPrefs;
 import team.serenity.model.UserPrefs;
+import team.serenity.model.group.Group;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -68,6 +70,10 @@ public class StorageManager implements Storage {
     @Override
     public void saveSerenity(ReadOnlySerenity serenity) throws IOException {
         saveSerenity(serenity, this.serenityStorage.getSerenityFilePath());
+    }
+
+    public void saveSerenity(Stream<Group> groups) throws IOException {
+        this.serenityStorage.saveSerenity(groups);
     }
 
     @Override

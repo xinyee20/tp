@@ -3,6 +3,7 @@ package team.serenity.testutil;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
@@ -20,6 +21,20 @@ import team.serenity.model.util.UniqueList;
  */
 public class ModelStub implements Model {
 
+    @Override
+    public boolean hasGroup() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasGroup(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Stream<Group> getGroupStream() {
+        throw new AssertionError("This method should not be called.");
+    }
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -56,10 +71,7 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
-    @Override
-    public boolean hasGroup(Group group) {
-        throw new AssertionError("This method should not be called.");
-    }
+
 
     @Override
     public void deleteGroup(Group target) {

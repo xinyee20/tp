@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -153,6 +154,16 @@ public class ModelManager implements Model {
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return this.groupManager.hasGroup(group);
+    }
+
+    @Override
+    public boolean hasGroup() {
+        return groupManager.hasGroup();
+    }
+
+    @Override
+    public Stream<Group> getGroupStream() {
+        return this.groupManager.getStream();
     }
 
     @Override

@@ -1,7 +1,9 @@
 package team.serenity.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
@@ -48,15 +50,16 @@ public class LogicManager implements Logic {
         Command command = this.serenityParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        /*
-        TODO: To write the data to the external file after each command is executed.
-        try {
-            // storage.saveSerenity(model.getSerenity());
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        //Write to storage, if group exists
+        boolean dataExists = model.hasGroup();
+        if (dataExists) {
+            Stream<Group> groups = model.getGroupStream();
+            try {
+                storage.saveSerenity(groups);
+            } catch (IOException e) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + e, e);
+            }
         }
-         */
-
         return commandResult;
     }
 
