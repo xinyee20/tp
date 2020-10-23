@@ -1,4 +1,4 @@
-package team.serenity.storage;
+package team.serenity.storage.userprefs;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import team.serenity.commons.exceptions.DataConversionException;
 import team.serenity.commons.util.JsonUtil;
-import team.serenity.model.ReadOnlyUserPrefs;
-import team.serenity.model.UserPrefs;
+import team.serenity.model.userprefs.ReadOnlyUserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file.

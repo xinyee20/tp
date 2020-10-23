@@ -10,7 +10,9 @@ import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.group.exceptions.DuplicateQuestionException;
+import team.serenity.model.group.exceptions.NotFoundException;
 import team.serenity.model.group.exceptions.QuestionNotFoundException;
 import team.serenity.model.util.UniqueList;
 
@@ -52,7 +54,7 @@ public class UniqueQuestionList implements UniqueList<Question> {
      * Adds a question to the list. The question must not already exist in the list.
      */
     @Override
-    public void add(Question toAdd) {
+    public void add(Question toAdd) throws DuplicateException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateQuestionException();
@@ -65,7 +67,7 @@ public class UniqueQuestionList implements UniqueList<Question> {
      * The question identity of {@code question} must not be the same as another existing question in the list.
      */
     @Override
-    public void setElement(Question target, Question editedQuestion) {
+    public void setElement(Question target, Question editedQuestion) throws NotFoundException, DuplicateException {
         requireAllNonNull(target, editedQuestion);
 
         int index = this.internalList.indexOf(target);
@@ -101,7 +103,7 @@ public class UniqueQuestionList implements UniqueList<Question> {
      * @param replacement
      */
     @Override
-    public void setElements(UniqueList<Question> replacement) {
+    public void setElementsWithUniqueList(UniqueList<Question> replacement) {
         requireNonNull(replacement);
         this.internalList.setAll(replacement.getList());
     }
@@ -111,7 +113,7 @@ public class UniqueQuestionList implements UniqueList<Question> {
      * {@code questionList} must not contain duplicate questions.
      */
     @Override
-    public void setElementsWithList(List<Question> questionList) {
+    public void setElementsWithList(List<Question> questionList) throws DuplicateException {
         requireAllNonNull(questionList);
         if (!elementsAreUnique(questionList)) {
             throw new DuplicateQuestionException();

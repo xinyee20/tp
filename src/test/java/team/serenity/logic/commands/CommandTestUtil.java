@@ -22,15 +22,17 @@ public class CommandTestUtil {
     public static final String VALID_GRP_GROUP_B = "G05";
     public static final Path VALID_PATH_GROUP_A = Paths.get("LUMINUS_GROUP_A.csv");
     public static final Path VALID_PATH_GROUP_B = Paths.get("LUMINUS_GROUP_B.csv");
-    public static final String VALID_QN_A = "What is the deadline for the report?";
-    public static final String VALID_QN_B = "When is the consultation held?";
+    public static final String VALID_LSN_A = "2-2";
+    public static final String VALID_LSN_B = "3-1";
+    public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
+    public static final String VALID_QN_DESC_B = "When is the consultation held?";
 
     public static final String GRP_DESC_GROUP_A = " " + PREFIX_GRP + VALID_GRP_GROUP_A;
     public static final String GRP_DESC_GROUP_B = " " + PREFIX_GRP + VALID_GRP_GROUP_B;
     public static final String PATH_DESC_GROUP_A = " " + PREFIX_PATH + VALID_PATH_GROUP_A;
     public static final String PATH_DESC_GROUP_B = " " + PREFIX_PATH + VALID_PATH_GROUP_B;
-    public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_A;
-    public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_B;
+    public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;
+    public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_DESC_B;
 
     // Invalid descriptions for Serenity
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions

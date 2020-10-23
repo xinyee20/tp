@@ -7,12 +7,12 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
+import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
-import team.serenity.model.util.UniqueList;
 
 /**
- * Adds a question to the question list of a specific tutorial group's lesson in serenity.
+ * Adds a question to the Question manager.
  */
 public class AddQnCommand extends Command {
 
@@ -20,7 +20,7 @@ public class AddQnCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Adds a new question to the specific lesson. "
         + "Parameters: "
-        + PREFIX_QN + "QUESTION"
+        + PREFIX_QN + "QUESTION\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_QN + "What is the deadline for the report?\n";
 
@@ -49,16 +49,17 @@ public class AddQnCommand extends Command {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
         }
 
+        Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<Question> uniqueQuestionList = uniqueLesson.getQuestionList();
+        this.toAdd.setGroupAndLesson(uniqueGroup.getName(), uniqueLesson.getName());
 
-        if (uniqueQuestionList.contains(this.toAdd)) {
+        if (model.hasQuestion(this.toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_QUESTION);
         }
 
-        uniqueQuestionList.add(this.toAdd);
-        model.updateQuestionList();
+        model.addQuestion(this.toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd));
+
     }
 
     @Override
@@ -68,4 +69,8 @@ public class AddQnCommand extends Command {
                 && this.toAdd.equals(((AddQnCommand) other).toAdd));
     }
 
+    @Override
+    public int hashCode() {
+        return this.toAdd.hashCode();
+    }
 }

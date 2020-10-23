@@ -21,13 +21,16 @@ import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.UniqueLessonList;
-import team.serenity.model.group.UniqueQuestionList;
 import team.serenity.model.group.UniqueStudentInfoList;
 import team.serenity.model.group.UniqueStudentList;
 import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.LessonManager;
+import team.serenity.model.managers.QuestionManager;
+import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.StudentInfoManager;
 import team.serenity.model.managers.StudentManager;
+import team.serenity.model.userprefs.ReadOnlyUserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -38,40 +41,44 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final UserPrefs userPrefs;
+    private final GroupManager groupManager;
+    private final StudentManager studentManager;
+    private final StudentInfoManager studentInfoManager;
+    private final LessonManager lessonManager;
+    private final QuestionManager questionManager;
+
     private final FilteredList<Group> filteredGroups;
     private final ArrayObservableList<Student> students;
     private final ArrayObservableList<Lesson> lessons;
     private final FilteredList<Lesson> filteredLessons;
     private final ArrayObservableList<StudentInfo> studentsInfo;
-    private final ArrayObservableList<Question> questions;
-
-    private final GroupManager groupManager;
-    private final StudentManager studentManager;
-    private final StudentInfoManager studentInfoManager;
-    private final LessonManager lessonManager;
+    private final FilteredList<Question> filteredQuestions;
 
     /**
      * Initializes a ModelManager with the given serenity and userPrefs.
      */
-    public ModelManager(ReadOnlySerenity serenity, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlySerenity serenity,
+                        ReadOnlyQuestionManager questionManager,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(userPrefs, serenity);
+        requireAllNonNull(serenity, questionManager, userPrefs);
 
         logger.fine("Initializing with serenity " + serenity + " and user prefs " + userPrefs);
 
         //instantiate individual managers
+        this.userPrefs = new UserPrefs(userPrefs);
         this.groupManager = new GroupManager(new UniqueGroupList());
         this.studentManager = new StudentManager();
         this.studentInfoManager = new StudentInfoManager();
         this.lessonManager = new LessonManager();
-        this.userPrefs = new UserPrefs(userPrefs);
+        this.questionManager = new QuestionManager(questionManager);
 
         this.filteredGroups = new FilteredList<>(this.groupManager.getListOfGroups());
         this.students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         this.lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
         this.filteredLessons = new FilteredList<>(this.lessons);
         this.studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
-        this.questions = new ArrayObservableList<>(new UniqueQuestionList().asUnmodifiableObservableList());
+        this.filteredQuestions = new FilteredList<>(this.questionManager.getListOfQuestions());
     }
 
     /**
@@ -83,24 +90,24 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with user prefs " + userPrefs);
 
-        //instantiate managers
+        //instantiate individual managers
+        this.userPrefs = new UserPrefs(userPrefs);
         this.groupManager = new GroupManager(new UniqueGroupList());
         this.studentInfoManager = new StudentInfoManager();
         this.studentManager = new StudentManager();
         this.lessonManager = new LessonManager();
-
-        this.userPrefs = new UserPrefs(userPrefs);
+        this.questionManager = new QuestionManager();
 
         this.filteredGroups = new FilteredList<>(this.groupManager.getListOfGroups());
         this.students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
         this.lessons = new ArrayObservableList<>(new UniqueLessonList().asUnmodifiableObservableList());
         this.filteredLessons = new FilteredList<>(this.lessons);
         this.studentsInfo = new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
-        this.questions = new ArrayObservableList<>(new UniqueQuestionList().asUnmodifiableObservableList());
+        this.filteredQuestions = new FilteredList<>(this.questionManager.getListOfQuestions());
     }
 
     public ModelManager() {
-        this(new Serenity(), new UserPrefs());
+        this(new Serenity(), new QuestionManager(), new UserPrefs());
     }
 
     // =========== UserPrefs ==================================================================================
@@ -225,7 +232,7 @@ public class ModelManager implements Model {
         requireAllNonNull(predicate);
         this.filteredLessons.setPredicate(predicate);
         updateStudentsInfoList();
-        updateQuestionList();
+        updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
     }
 
     // ========== StudentManager ==========
@@ -260,7 +267,6 @@ public class ModelManager implements Model {
             this.students.add(student);
             Group currentGroup = this.filteredGroups.get(0);
             currentGroup.addStudentToGroup(student);
-            this.studentManager.addStudentToGroup(currentGroup, student);
         }
     }
 
@@ -308,15 +314,50 @@ public class ModelManager implements Model {
     // ========== QuestionManager ==========
 
     @Override
-    public ObservableList<Question> getQuestionList() {
-        return this.questions;
+    public ReadOnlyQuestionManager getQuestionManager() {
+        return this.questionManager;
     }
 
     @Override
-    public void updateQuestionList() {
-        if (!this.filteredLessons.isEmpty()) {
-            this.questions.setAll(this.filteredLessons.get(0).getQuestionListAsUnmodifiableObservableList());
-        }
+    public void setQuestionManager(ReadOnlyQuestionManager questionManager) {
+        requireNonNull(questionManager);
+        this.questionManager.resetData(questionManager);
+    }
+
+    @Override
+    public boolean hasQuestion(Question toCheck) {
+        requireNonNull(toCheck);
+        return this.questionManager.hasQuestion(toCheck);
+    }
+
+    @Override
+    public void deleteQuestion(Question toDelete) {
+        requireNonNull(toDelete);
+        this.questionManager.deleteQuestion(toDelete);
+    }
+
+    @Override
+    public void addQuestion(Question toAdd) {
+        requireNonNull(toAdd);
+        this.questionManager.addQuestion(toAdd);
+        updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
+    }
+
+    @Override
+    public void setQuestion(Question target, Question edited) {
+        requireAllNonNull(target, edited);
+        this.questionManager.setQuestion(target, edited);
+    }
+
+    @Override
+    public ObservableList<Question> getFilteredQuestionList() {
+        return this.filteredQuestions;
+    }
+
+    @Override
+    public void updateFilteredQuestionList(Predicate<Question> predicate) {
+        requireNonNull(predicate);
+        this.filteredQuestions.setPredicate(predicate);
     }
 
     // ========== Utils ==========
@@ -336,12 +377,13 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return this.userPrefs.equals(other.userPrefs)
+            && this.questionManager.equals(other.questionManager)
             && this.filteredGroups.equals(other.filteredGroups)
             && this.students.equals(other.students)
             && this.lessons.equals(other.lessons)
             && this.filteredLessons.equals(other.filteredLessons)
             && this.studentsInfo.equals(other.studentsInfo)
-            && this.questions.equals(other.questions);
+            && this.filteredQuestions.equals(other.filteredQuestions);
     }
 
 }

@@ -18,15 +18,20 @@ import team.serenity.logic.LogicManager;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
 import team.serenity.model.ReadOnlySerenity;
-import team.serenity.model.ReadOnlyUserPrefs;
 import team.serenity.model.Serenity;
-import team.serenity.model.UserPrefs;
+import team.serenity.model.managers.QuestionManager;
+import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.userprefs.ReadOnlyUserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
+import team.serenity.model.util.SampleDataUtil;
 import team.serenity.storage.JsonSerenityStorage;
-import team.serenity.storage.JsonUserPrefsStorage;
 import team.serenity.storage.SerenityStorage;
 import team.serenity.storage.Storage;
 import team.serenity.storage.StorageManager;
-import team.serenity.storage.UserPrefsStorage;
+import team.serenity.storage.question.JsonQuestionStorage;
+import team.serenity.storage.question.QuestionStorage;
+import team.serenity.storage.userprefs.JsonUserPrefsStorage;
+import team.serenity.storage.userprefs.UserPrefsStorage;
 import team.serenity.ui.Ui;
 import team.serenity.ui.UiManager;
 
@@ -57,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         SerenityStorage serenityStorage = new JsonSerenityStorage(userPrefs.getSerenityFilePath());
-        storage = new StorageManager(serenityStorage, userPrefsStorage);
+        QuestionStorage questionStorage = new JsonQuestionStorage(userPrefs.getQuestionStorageFilePath());
+        storage = new StorageManager(serenityStorage, questionStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -75,7 +81,8 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         ReadOnlySerenity serenity = initSerenity(storage);
-        return new ModelManager(serenity, userPrefs);
+        ReadOnlyQuestionManager questionManager = initQuestionManager(storage);
+        return new ModelManager(serenity, questionManager, userPrefs);
     }
 
     private ReadOnlySerenity initSerenity(Storage storage) {
@@ -109,6 +116,41 @@ public class MainApp extends Application {
          */
 
         return serenity;
+    }
+
+    /**
+     * Returns a {@code ReadOnlyQuestionManager} with the data from {@code storage}'s questions.
+     * The data from the sample questions will be used instead if {@code storage}'s questions manager is not found,
+     * or an empty question manager will be used instead if errors occur when reading {@code storage}'s
+     * question manager.
+     */
+    private ReadOnlyQuestionManager initQuestionManager(Storage storage) {
+        ReadOnlyQuestionManager questionManager;
+        try {
+            Optional<ReadOnlyQuestionManager> questionManagerOptional = storage.readQuestionManager();
+            if (questionManagerOptional.isEmpty()) {
+                logger.info("Data file not found. Will be starting with a sample QuestionManager.");
+            }
+            questionManager =
+                    questionManagerOptional.orElseGet(SampleDataUtil::getSampleQuestionManager);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty"
+                    + "QuestionManager.");
+            questionManager = new QuestionManager();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty "
+                    + "QuestionManager.");
+            questionManager = new QuestionManager();
+        }
+
+        try {
+            storage.saveQuestionManager(questionManager);
+            logger.info("Saving initial data of QuestionManager.");
+        } catch (IOException e) {
+            logger.warning("Problem while saving to the file.");
+        }
+
+        return questionManager;
     }
 
     private void initLogging(Config config) {
@@ -185,7 +227,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting Serenity " + MainApp.VERSION);
-        ui.start(primaryStage);
+        this.ui.start(primaryStage);
     }
 
     @Override
@@ -193,7 +235,8 @@ public class MainApp extends Application {
         logger.info(
             "============================ [ Stopping Serenity ] =============================");
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            this.storage.saveUserPrefs(model.getUserPrefs());
+            this.storage.saveQuestionManager(model.getQuestionManager());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

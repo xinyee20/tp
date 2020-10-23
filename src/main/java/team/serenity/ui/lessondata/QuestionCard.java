@@ -38,7 +38,7 @@ public class QuestionCard extends UiPart<Region> {
         super(FXML);
         this.question = question;
         this.id.setText(displayedIndex + ". ");
-        this.questionDescription.setText(question.getQuestion());
+        this.questionDescription.setText(question.getDescription());
     }
 
     @Override

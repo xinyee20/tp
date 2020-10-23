@@ -1,4 +1,4 @@
-package team.serenity.model;
+package team.serenity.model.userprefs;
 
 import java.nio.file.Path;
 
@@ -12,4 +12,6 @@ public interface ReadOnlyUserPrefs {
     GuiSettings getGuiSettings();
 
     Path getSerenityFilePath();
+
+    Path getQuestionStorageFilePath();
 }

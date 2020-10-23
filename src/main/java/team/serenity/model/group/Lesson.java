@@ -17,7 +17,6 @@ public class Lesson {
 
     private final String name;
     private final UniqueList<StudentInfo> studentsInfo;
-    private final UniqueList<Question> questionList;
 
     /**
      * Constructs a {@code Lesson}.
@@ -30,7 +29,6 @@ public class Lesson {
         checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
         this.name = name;
         this.studentsInfo = studentsInfo;
-        this.questionList = new UniqueQuestionList();
     }
 
     /**
@@ -45,7 +43,6 @@ public class Lesson {
         checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
         this.name = name;
         this.studentsInfo = studentsInfo;
-        this.questionList = questionList;
     }
 
     private UniqueList<StudentInfo> generateStudentInfo(ObservableList<Student> students) {
@@ -72,20 +69,12 @@ public class Lesson {
         return this.studentsInfo;
     }
 
-    public UniqueList<Question> getQuestionList() {
-        return this.questionList;
-    }
-
     public ObservableList<StudentInfo> getStudentsInfoAsUnmodifiableObservableList() {
         return this.studentsInfo.asUnmodifiableObservableList();
     }
 
     public boolean isSame(Lesson otherLsn) {
         return otherLsn.getName().equals(getName());
-    }
-
-    public ObservableList<Question> getQuestionListAsUnmodifiableObservableList() {
-        return this.questionList.asUnmodifiableObservableList();
     }
 
     @Override
@@ -100,8 +89,7 @@ public class Lesson {
 
         Lesson otherClass = (Lesson) obj;
         return otherClass.getName().equals(getName())
-                && otherClass.getStudentsInfo().equals(getStudentsInfo())
-                && otherClass.getQuestionList().equals(getQuestionList());
+                && otherClass.getStudentsInfo().equals(getStudentsInfo());
     }
 
     @Override
