@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
 
 public class TypicalQuestion {

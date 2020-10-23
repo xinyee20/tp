@@ -8,13 +8,11 @@ import java.util.regex.Pattern;
 
 import team.serenity.logic.commands.AddGrpCommand;
 import team.serenity.logic.commands.AddLsnCommand;
-import team.serenity.logic.commands.AddQnCommand;
 import team.serenity.logic.commands.AddScoreCommand;
 import team.serenity.logic.commands.AddStudentCommand;
 import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.DelGrpCommand;
 import team.serenity.logic.commands.DelLsnCommand;
-import team.serenity.logic.commands.DelQnCommand;
 import team.serenity.logic.commands.DelStudentCommand;
 import team.serenity.logic.commands.ExitCommand;
 import team.serenity.logic.commands.HelpCommand;
@@ -22,7 +20,11 @@ import team.serenity.logic.commands.MarkAbsentCommand;
 import team.serenity.logic.commands.MarkPresentCommand;
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.ViewLsnCommand;
+import team.serenity.logic.commands.question.AddQnCommand;
+import team.serenity.logic.commands.question.DelQnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.logic.parser.question.AddQnCommandParser;
+import team.serenity.logic.parser.question.DelQnCommandParser;
 
 /**
  * Parses user input.

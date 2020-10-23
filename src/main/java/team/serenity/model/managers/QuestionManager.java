@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import team.serenity.model.group.Question;
-import team.serenity.model.group.UniqueQuestionList;
 import team.serenity.model.group.exceptions.DuplicateException;
+import team.serenity.model.group.question.Question;
+import team.serenity.model.group.question.UniqueQuestionList;
 import team.serenity.model.util.UniqueList;
 
 /**

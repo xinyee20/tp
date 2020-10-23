@@ -1,9 +1,11 @@
-package team.serenity.logic.parser;
+package team.serenity.logic.parser.question;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.logic.commands.DelQnCommand;
+import team.serenity.logic.commands.question.DelQnCommand;
+import team.serenity.logic.parser.Parser;
+import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 
 /**

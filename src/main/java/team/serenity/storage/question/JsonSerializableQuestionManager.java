@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 
