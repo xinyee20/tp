@@ -72,6 +72,7 @@ public class AddLsnCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        assert other != null;
         return other == this // short circuit if same object
                 || (other instanceof AddLsnCommand // instanceof handles nulls
                 && this.toAdd.equals(((AddLsnCommand) other).toAdd));
