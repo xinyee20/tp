@@ -7,6 +7,7 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.MarkAbsentCommand;
 import team.serenity.logic.commands.MarkPresentCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
@@ -17,6 +18,7 @@ import team.serenity.model.group.Student;
  * Current support:
  * markabsent name/NAME id/STUDENT_NUMBER
  * markabsent all
+ * markabsent INDEX
  */
 public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
 
@@ -32,11 +34,13 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
     public MarkAbsentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID);
 
+        Index index;
         String studentName;
         String studentNumber;
         Optional<Student> student;
         Optional<String> keyToAll = Optional.ofNullable(argMultimap.getPreamble());
 
+        try {
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
 
             // If single student specified, get student
@@ -52,6 +56,11 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
             return new MarkAbsentCommand();
 
         } else {
+            index = SerenityParserUtil.parseIndex(keyToAll.get());
+            return new MarkAbsentCommand(index);
+        }
+
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
         }
     }

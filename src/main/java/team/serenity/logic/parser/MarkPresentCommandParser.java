@@ -34,7 +34,6 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID);
 
         Index index;
-
         String studentName;
         String studentNumber;
         Optional<Student> student;

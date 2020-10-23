@@ -5,6 +5,7 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import javafx.collections.ObservableList;
+import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Attendance;
@@ -21,19 +22,24 @@ public class MarkAbsentCommand extends Command {
         + "Parameters: "
         + "all or "
         + PREFIX_NAME + " STUDENT_NAME "
-        + PREFIX_ID + " STUDENT_NUMBER\n"
+        + PREFIX_ID + " STUDENT_NUMBER " + "or INDEX\n"
         + "Example: " + COMMAND_WORD + " " + "all\n"
         + "or " + COMMAND_WORD + " "
         + PREFIX_NAME + " Aaron Tan "
-        + PREFIX_ID + " e0123456\n";
+        + PREFIX_ID + " e0123456\n"
+        + "or " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance:  absent";
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked absent!";
     public static final String MESSAGE_STUDENT_NOT_FOUND =
             "%s is not found, please ensure the name & student id is correct";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
+            "Index %d is not found, please ensure that it exists";
     public static final String MESSAGE_NOT_IN_LESSON = "Currently not in any lesson. Please enter a lesson.";
 
     private Student toMarkAbsent;
+    private Index index;
+    private boolean isByIndex;
     private boolean isWholeClass;
     private boolean isCorrectStudent;
 
@@ -53,6 +59,15 @@ public class MarkAbsentCommand extends Command {
         this.isWholeClass = false;
         // Specified student to mark present
         this.toMarkAbsent = student;
+        this.isByIndex = false;
+    }
+
+    public MarkAbsentCommand(Index index) {
+        requireNonNull(index);
+        this.isWholeClass = false;
+        // Specified index of student to mark present
+        this.index = index;
+        this.isByIndex = true;
     }
 
     @Override
@@ -65,6 +80,8 @@ public class MarkAbsentCommand extends Command {
             ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
             if (!this.isWholeClass) {
+
+                if (!isByIndex) {
 
                 // Mark single student attendance
                 for (int i = 0; i < studentsInfo.size(); i++) {
@@ -84,19 +101,33 @@ public class MarkAbsentCommand extends Command {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toMarkAbsent));
                 }
 
+                } else {
+                    if (index.getZeroBased() > studentsInfo.size()) {
+                        throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased()));
+                    }
+
+                    StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
+                    toMarkAbsent = studentInfo.getStudent();
+                    Attendance update = studentInfo.getAttendance().setNewAttendance(false);
+                    StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
+                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
+                    model.updateLessonList();
+                    model.updateStudentsInfoList();
+                }
                 return new CommandResult(String.format(MESSAGE_SUCCESS, this.toMarkAbsent));
-            }
+            } else {
 
-            // Mark whole class absent
-            for (StudentInfo each : studentsInfo) {
-                Attendance update = each.getAttendance().setNewAttendance(false);
-                StudentInfo updatedStudentInfo = each.updateAttendance(update);
-                uniqueStudentInfoList.setElement(each, updatedStudentInfo);
-                model.updateLessonList();
-                model.updateStudentsInfoList();
-            }
+                // Mark whole class absent
+                for (StudentInfo each : studentsInfo) {
+                    Attendance update = each.getAttendance().setNewAttendance(false);
+                    StudentInfo updatedStudentInfo = each.updateAttendance(update);
+                    uniqueStudentInfoList.setElement(each, updatedStudentInfo);
+                    model.updateLessonList();
+                    model.updateStudentsInfoList();
+                }
 
-            return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
+                return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
+            }
 
         } catch (Exception e) {
             if (e instanceof CommandException) {
