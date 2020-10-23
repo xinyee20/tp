@@ -13,20 +13,20 @@ public class Student {
         + "and must follow the format 'AXXXXXXXU' "
         + "where X is a digit from 0 to 9";
     private String name;
-    private String studentId;
+    private String studentNo;
 
     /**
      * Constructs a {@code Student}.
      *
      * @param name          A valid name.
-     * @param studentId A valid student ID.
+     * @param studentNo A valid student ID.
      */
-    public Student(String name, String studentId) {
-        requireAllNonNull(name, studentId);
+    public Student(String name, String studentNo) {
+        requireAllNonNull(name, studentNo);
         checkArgument(isValidName(name), STUDENT_NAME_ERROR);
-        checkArgument(isValidStudentId(studentId), STUDENT_ID_ERROR);
+        checkArgument(isValidStudentId(studentNo), STUDENT_ID_ERROR);
         this.name = name;
-        this.studentId = studentId;
+        this.studentNo = studentNo;
     }
 
     public static boolean isValidName(String s) {
@@ -53,13 +53,13 @@ public class Student {
         return this.name;
     }
 
-    public String getStudentId() {
-        return this.studentId;
+    public String getStudentNo() {
+        return this.studentNo;
     }
 
     @Override
     public String toString() {
-        return this.name + " " + this.studentId;
+        return this.name + " " + this.studentNo;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Student {
             return true;
         } else if (obj instanceof Student) {
             Student other = (Student) obj;
-            return other.getName().equals(getName()) && other.getStudentId().equals(getStudentId());
+            return other.getName().equals(getName()) && other.getStudentNo().equals(getStudentNo());
         } else {
             return false;
         }

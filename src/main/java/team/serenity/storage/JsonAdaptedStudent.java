@@ -28,7 +28,7 @@ class JsonAdaptedStudent {
      */
     public JsonAdaptedStudent(Student source) {
         this.name = source.getName();
-        this.studentNumber = source.getStudentId();
+        this.studentNumber = source.getStudentNo();
     }
 
     @JsonValue
