@@ -7,12 +7,13 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.Model;
-import team.serenity.model.ReadOnlyUserPrefs;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
+import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -147,12 +148,43 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Question> getQuestionList() {
+    public ReadOnlyQuestionManager getQuestionManager() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void updateQuestionList() {
+    public void setQuestionManager(ReadOnlyQuestionManager questionManager) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public boolean hasQuestion(Question toCheck) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteQuestion(Question toDelete) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addQuestion(Question toAdd) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setQuestion(Question target, Question edited) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Question> getFilteredQuestionList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredQuestionList(Predicate<Question> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
 }

@@ -14,7 +14,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.model.UserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
+import team.serenity.storage.userprefs.JsonUserPrefsStorage;
 
 public class JsonUserPrefsStorageTest {
 

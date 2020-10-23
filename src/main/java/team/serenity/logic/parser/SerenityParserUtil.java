@@ -62,17 +62,18 @@ public class SerenityParserUtil {
     }
 
     /**
-     * Parses a {@code String question} into a {@code Question}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String questionDescription} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code question} is invalid.
      */
-    public static Question parseQuestion(String question) throws ParseException {
-        requireNonNull(question);
-        String trimmedQuestion = question.trim();
-        if (!Question.isValidQuestion(trimmedQuestion)) {
+    public static String parseDescription(String questionDescription) throws ParseException {
+        requireNonNull(questionDescription);
+        String trimmedQuestionDescription = questionDescription.trim();
+        if (!Question.isValidDescription(trimmedQuestionDescription)) {
             throw new ParseException(Question.MESSAGE_CONSTRAINTS);
         }
-        return new Question(trimmedQuestion);
+        return trimmedQuestionDescription;
     }
 
     /**

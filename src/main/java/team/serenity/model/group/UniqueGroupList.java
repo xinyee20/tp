@@ -9,8 +9,10 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.group.exceptions.DuplicateGroupException;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
+import team.serenity.model.group.exceptions.NotFoundException;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -56,7 +58,7 @@ public class UniqueGroupList implements UniqueList<Group> {
      * Adds a group to the list. The group must not already exist in the list.
      */
     @Override
-    public void add(Group toAdd) {
+    public void add(Group toAdd) throws DuplicateException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateGroupException();
@@ -69,7 +71,7 @@ public class UniqueGroupList implements UniqueList<Group> {
      * The group identity of {@code editedGroup} must not be the same as another existing group in the list.
      */
     @Override
-    public void setElement(Group target, Group editedGroup) {
+    public void setElement(Group target, Group editedGroup) throws NotFoundException, DuplicateException {
         requireAllNonNull(target, editedGroup);
 
         int index = this.internalList.indexOf(target);
@@ -100,7 +102,7 @@ public class UniqueGroupList implements UniqueList<Group> {
     }
 
     @Override
-    public void setElements(UniqueList<Group> replacement) {
+    public void setElementsWithUniqueList(UniqueList<Group> replacement) {
         requireNonNull(replacement);
         this.internalList.setAll(replacement.getList());
     }
@@ -109,7 +111,7 @@ public class UniqueGroupList implements UniqueList<Group> {
      * Replaces the contents of this list with {@code groups}. {@code groups} must not contain duplicate groups.
      */
     @Override
-    public void setElementsWithList(List<Group> groups) {
+    public void setElementsWithList(List<Group> groups) throws DuplicateException {
         requireAllNonNull(groups);
         if (!elementsAreUnique(groups)) {
             throw new DuplicateGroupException();

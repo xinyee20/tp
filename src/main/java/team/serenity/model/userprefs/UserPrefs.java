@@ -1,9 +1,8 @@
-package team.serenity.model;
+package team.serenity.model.userprefs;
 
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 import team.serenity.commons.core.GuiSettings;
@@ -13,8 +12,11 @@ import team.serenity.commons.core.GuiSettings;
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final Path DEFAULT_FOLDER_PATH = Path.of("data");
+
     private GuiSettings guiSettings = new GuiSettings();
-    private Path serenityFilePath = Paths.get("data", "serenity.json");
+    private Path serenityFilePath = DEFAULT_FOLDER_PATH.resolve("serenity.json");
+    private Path questionStorageFilePath = DEFAULT_FOLDER_PATH.resolve("question.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -57,6 +59,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.serenityFilePath = serenityFilePath;
     }
 
+    // Question Manager
+
+    @Override
+    public Path getQuestionStorageFilePath() {
+        return this.questionStorageFilePath;
+    }
+
+    public void setQuestionStorageFilePath(Path questionStorageFilePath) {
+        requireNonNull(questionStorageFilePath);
+        this.questionStorageFilePath = questionStorageFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -68,12 +82,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs o = (UserPrefs) other;
         return this.guiSettings.equals(o.guiSettings)
-            && this.serenityFilePath.equals(o.serenityFilePath);
+            && this.serenityFilePath.equals(o.serenityFilePath)
+            && this.questionStorageFilePath.equals(o.questionStorageFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.guiSettings, this.serenityFilePath);
+        return Objects.hash(this.guiSettings, this.serenityFilePath, this.questionStorageFilePath);
     }
 
     @Override
@@ -81,6 +96,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + this.guiSettings);
         sb.append("\nLocal data file location : " + this.serenityFilePath);
+        sb.append("\nLocal question data file location : " + this.questionStorageFilePath);
         return sb.toString();
     }
 

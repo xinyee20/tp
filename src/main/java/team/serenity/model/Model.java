@@ -11,6 +11,8 @@ import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
+import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -22,6 +24,11 @@ public interface Model {
      * {@code Predicate} that always evaluate to true.
      */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Question> PREDICATE_SHOW_ALL_QUESTIONS = unused -> true;
 
     // ========== UserPrefs ==========
 
@@ -158,13 +165,62 @@ public interface Model {
     // ========== QuestionManager ==========
 
     /**
-     * Returns an unmodifiable view of the question list.
+     * Returns the questionManager
      */
-    ObservableList<Question> getQuestionList();
+    ReadOnlyQuestionManager getQuestionManager();
 
     /**
-     * Updates the question list to filter when changing to another lesson of interest.
+     * Replaces questionManager data with the data in {@code questionManager}.
      */
-    void updateQuestionList();
+    void setQuestionManager(ReadOnlyQuestionManager questionManager);
+
+    /**
+     * Returns true if a question that is the same as {@code target} exists in the
+     * QuestionManager.
+     *
+     * @param toCheck the given question.
+     * @return true if the given question already exist in the QuestionManager.
+     */
+    boolean hasQuestion(Question toCheck);
+
+    /**
+     * Deletes the given question.
+     * The question must exist in the QuestionManager.
+     *
+     * @param toDelete the given question.
+     */
+    void deleteQuestion(Question toDelete);
+
+    /**
+     * Adds the given question.
+     * {@code toAdd} must not already exist in the QuestionManager.
+     *
+     * @param toAdd the given question.
+     */
+    void addQuestion(Question toAdd);
+
+    /**
+     * Replaces the given question {@code target} with {@code edited}.
+     * {@code target} must exist in the QuestionManager.
+     * {@code edited} must not be the same as another existing question in the QuestionManager.
+     *
+     * @param target the given target question.
+     * @param edited the given edited question.
+     */
+    void setQuestion(Question target, Question edited);
+
+    /**
+     * Returns an unmodifiable view of the filtered question list
+     */
+    ObservableList<Question> getFilteredQuestionList();
+
+    /**
+     * Updates the filter of the filtered question list to filter by the given {@code predicate}.
+     *
+     * @param predicate the given predicate.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+
+    void updateFilteredQuestionList(Predicate<Question> predicate);
 
 }
