@@ -114,9 +114,9 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveQuestionManager(
-            ReadOnlyQuestionManager activityManager, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        this.questionStorage.saveQuestionManager(activityManager, filePath);
+            ReadOnlyQuestionManager questionManager, Path filePath) throws IOException {
+        logger.fine("Attempting to write to question data file: " + filePath);
+        this.questionStorage.saveQuestionManager(questionManager, filePath);
     }
 
 }

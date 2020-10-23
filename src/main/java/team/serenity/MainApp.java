@@ -227,7 +227,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting Serenity " + MainApp.VERSION);
-        ui.start(primaryStage);
+        this.ui.start(primaryStage);
     }
 
     @Override
@@ -235,7 +235,8 @@ public class MainApp extends Application {
         logger.info(
             "============================ [ Stopping Serenity ] =============================");
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            this.storage.saveUserPrefs(model.getUserPrefs());
+            this.storage.saveQuestionManager(model.getQuestionManager());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

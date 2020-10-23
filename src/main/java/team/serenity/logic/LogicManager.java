@@ -1,5 +1,6 @@
 package team.serenity.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
@@ -48,14 +49,13 @@ public class LogicManager implements Logic {
         Command command = this.serenityParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        /*
-        TODO: To write the data to the external file after each command is executed.
+        // TODO: To write serenity data to the external file after each command is executed.
         try {
             // storage.saveSerenity(model.getSerenity());
+            storage.saveQuestionManager(model.getQuestionManager());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-         */
 
         return commandResult;
     }

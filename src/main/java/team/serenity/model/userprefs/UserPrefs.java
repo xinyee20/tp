@@ -68,7 +68,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setQuestionStorageFilePath(Path questionStorageFilePath) {
         requireNonNull(questionStorageFilePath);
-        this.questionStorageFilePath = this.questionStorageFilePath;
+        this.questionStorageFilePath = questionStorageFilePath;
     }
 
     @Override
@@ -82,12 +82,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs o = (UserPrefs) other;
         return this.guiSettings.equals(o.guiSettings)
-            && this.serenityFilePath.equals(o.serenityFilePath);
+            && this.serenityFilePath.equals(o.serenityFilePath)
+            && this.questionStorageFilePath.equals(o.questionStorageFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.guiSettings, this.serenityFilePath);
+        return Objects.hash(this.guiSettings, this.serenityFilePath, this.questionStorageFilePath);
     }
 
     @Override
@@ -95,6 +96,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + this.guiSettings);
         sb.append("\nLocal data file location : " + this.serenityFilePath);
+        sb.append("\nLocal question data file location : " + this.questionStorageFilePath);
         return sb.toString();
     }
 
