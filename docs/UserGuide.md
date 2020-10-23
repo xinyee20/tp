@@ -1,11 +1,3 @@
----
-layout: page
-title: User Guide
----
-
-* Table of Contents
-{:toc}
-
 ![Serenity Logo](images/logo.png)
 
 By: `Team Serenity` Since: `Aug 2020`
