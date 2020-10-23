@@ -249,7 +249,6 @@ public class ModelManager implements Model {
             this.students.add(student);
             Group currentGroup = this.filteredGroups.get(0);
             currentGroup.addStudentToGroup(student);
-            this.studentManager.addStudentToGroup(currentGroup, student);
         }
     }
 
