@@ -1,9 +1,8 @@
-package team.serenity.model;
+package team.serenity.model.userprefs;
 
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 import team.serenity.commons.core.GuiSettings;
@@ -13,8 +12,11 @@ import team.serenity.commons.core.GuiSettings;
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final Path DEFAULT_FOLDER_PATH = Path.of("data");
+
     private GuiSettings guiSettings = new GuiSettings();
-    private Path serenityFilePath = Paths.get("data", "serenity.json");
+    private Path serenityFilePath = DEFAULT_FOLDER_PATH.resolve("serenity.json");
+    private Path questionStorageFilePath = DEFAULT_FOLDER_PATH.resolve("question.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -55,6 +57,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setSerenityFilePath(Path serenityFilePath) {
         requireNonNull(serenityFilePath);
         this.serenityFilePath = serenityFilePath;
+    }
+
+    // Question Manager
+
+    @Override
+    public Path getQuestionStorageFilePath() {
+        return this.questionStorageFilePath;
+    }
+
+    public void setQuestionStorageFilePath(Path questionStorageFilePath) {
+        requireNonNull(questionStorageFilePath);
+        this.questionStorageFilePath = this.questionStorageFilePath;
     }
 
     @Override

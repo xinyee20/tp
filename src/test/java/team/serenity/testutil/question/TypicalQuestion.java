@@ -9,11 +9,12 @@ import team.serenity.model.managers.QuestionManager;
 
 public class TypicalQuestion {
 
-    public static final Question QUESTION_A = new Question("What is the deadline for the report?");
+    public static final Question QUESTION_A = new Question("G04", "2-2", "What is the deadline for the report?");
 
-    public static final Question QUESTION_B = new Question("What do we need to prepare for tomorrow's lesson?");
+    public static final Question QUESTION_B = new Question("G04", "3-1",
+        "What do we need to prepare for tomorrow's lesson?");
 
-    public static final Question QUESTION_C = new Question("How is the grading criteria like?");
+    public static final Question QUESTION_C = new Question( "G05", "1-2", "How is the grading criteria like?");
 
     private TypicalQuestion() {
     } // prevents instantiation

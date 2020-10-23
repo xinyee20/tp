@@ -28,6 +28,8 @@ import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.StudentInfoManager;
 import team.serenity.model.managers.StudentManager;
+import team.serenity.model.userprefs.ReadOnlyUserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -54,9 +56,11 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given serenity and userPrefs.
      */
-    public ModelManager(ReadOnlySerenity serenity, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlySerenity serenity,
+                        ReadOnlyQuestionManager questionManager,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(userPrefs, serenity);
+        requireAllNonNull(serenity, questionManager, userPrefs);
 
         logger.fine("Initializing with serenity " + serenity + " and user prefs " + userPrefs);
 
@@ -66,7 +70,7 @@ public class ModelManager implements Model {
         this.studentManager = new StudentManager();
         this.studentInfoManager = new StudentInfoManager();
         this.lessonManager = new LessonManager();
-        this.questionManager = new QuestionManager();
+        this.questionManager = new QuestionManager(questionManager);
 
         this.filteredGroups = new FilteredList<>(this.groupManager.getListOfGroups());
         this.students = new ArrayObservableList<>(new UniqueStudentList().asUnmodifiableObservableList());
@@ -102,7 +106,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new Serenity(), new UserPrefs());
+        this(new Serenity(), new QuestionManager(), new UserPrefs());
     }
 
     // =========== UserPrefs ==================================================================================

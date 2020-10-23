@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.group.Question;
 import team.serenity.model.group.exceptions.QuestionNotFoundException;
+import team.serenity.model.userprefs.UserPrefs;
 
 public class ModelManagerTest {
 

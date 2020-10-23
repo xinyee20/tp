@@ -7,13 +7,13 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.Model;
-import team.serenity.model.ReadOnlyUserPrefs;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.util.UniqueList;
 
 /**

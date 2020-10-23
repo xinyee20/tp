@@ -1,4 +1,4 @@
-package team.serenity.model;
+package team.serenity.model.userprefs;
 
 import static team.serenity.testutil.Assert.assertThrows;
 
