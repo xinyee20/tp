@@ -1,4 +1,7 @@
-# Serenity - User Guide
+---
+layout: page
+title: Serenity - User Guide
+---
 
 ![Serenity Logo](images/logo.png)
 
