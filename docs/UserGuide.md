@@ -1,4 +1,10 @@
-# Serenity - User Guide
+---
+layout: page
+title: User Guide
+---
+
+* Table of Contents
+{:toc}
 
 ![Serenity Logo](images/logo.png)
 
@@ -519,6 +525,7 @@ With a scale from 1 to 5:
  | Score   | 1 | 2 | 3 | 4 | 5 |
  |---------|---|---|---|---|---|
  | **Remarks** |Very Poor|Poor|Sufficient|Good|Commendable|
+
 
 > ⚠ **Warning regarding the `addscore` command:**
 > You cannot increase the participation score of a student such that the final score is more than 5.
