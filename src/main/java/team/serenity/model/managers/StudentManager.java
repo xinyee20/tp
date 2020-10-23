@@ -28,7 +28,9 @@ public class StudentManager {
         Optional<UniqueList<Student>> studentsOptional = Optional.ofNullable(this.mapToListOfStudents.get(group));
         if (studentsOptional.isPresent()) {
             UniqueList<Student> students = studentsOptional.get();
-            students.add(student);
+            if (!students.contains(student)) {
+                students.add(student);
+            }
         }
     }
 
