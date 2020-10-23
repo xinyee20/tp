@@ -1,7 +1,10 @@
 ---
 layout: page
-title: Serenity - User Guide
+title: User Guide
 ---
+
+* Table of Contents
+{:toc}
 
 ![Serenity Logo](images/logo.png)
 
