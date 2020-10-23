@@ -518,8 +518,9 @@ student's participation score easily with a scale for reference.
 You can use this command to increase the participation score of a specific student for a tutorial lesson.
 
 With a scale from 1 to 5:
+
 Score | 1 | 2 | 3 | 4 | 5 | 
-------|---|---|---|---|---
+------|---|---|---|---|---|
 **Remark** |Very Poor| Poor| Sufficient|Good|Commendable
 
 > ⚠ **Warning regarding the `addscore` command:**
