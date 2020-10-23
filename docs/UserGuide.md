@@ -389,8 +389,9 @@ A student named `Aaron Tan` with student ID `e0123456` is present for your tutor
 
 Marking a student as present for a tutorial lesson:
 
-1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markpresent name/Aaron Tan id/e0123456` into the _Command Box_.
+To mark him present:
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `markpresent name/Aaron Tan id/e0123456` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -413,10 +414,9 @@ You can use this command to mark a specific student as absent for a tutorial les
 
 A student named `Aaron Tan` with student ID `e0123456` is absent for your tutorial lesson `1-2` of tutorial group `G04`. 
 
-Marking a student as absent for a tutorial lesson:
-
-1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markabsent name/Aaron Tan id/e0123456` into the _Command Box_.
+To mark him absent:
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `markabsent name/Aaron Tan id/e0123456` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -445,8 +445,9 @@ All students in group `G04` are present for your tutorial lesson `1-2` of tutori
 
 Marking all students in a tutorial group as present for a tutorial lesson:
 
-1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markpresent all` into the _Command Box_.
+To mark all of them present at once:
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `markpresent all` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -516,23 +517,23 @@ You can find the CSV file at the location where your **Serenity** application is
 Need to keep track of all your students' participation during lessons quickly? This feature allows you to key in a 
 student's participation score easily with a scale for reference.
 
-#### 4.3.1. Add participation score of a student: `addscore`
-
-You can use this command to increase the participation score of a specific student for a tutorial lesson.
+#### 4.3.1. Award participation score for a student: `setscore`
+You can use this command to add the participation score for a specific student in a tutorial lesson.
 
 With a scale from 1 to 5:
 
-Score | 1 | 2 | 3 | 4 | 5 | 
-------|---|---|---|---|---|
-**Remark** |Very Poor| Poor| Sufficient|Good|Commendable
+ | Score   | 1 | 2 | 3 | 4 | 5 |
+ |---------|---|---|---|---|---|
+ | **Remarks** |Very Poor|Poor|Sufficient|Good|Commendable|
+
 
 > ⚠ **Warning regarding the `addscore` command:**
 > You cannot increase the participation score of a student such that the final score is more than 5.
 > The maximum score you can add is 5.
 
 **Format:**
+`setscore name/NAME id/STUDENT_ID add/SCORE`
 
-`addscore name/NAME id/STUDENT_ID score/SCORE`
 
 **Example:**
 
@@ -541,9 +542,8 @@ you noticed that your student named `Aaron Tan` with student ID `e0123456` often
 You decided to add `3` marks to his participation score for this tutorial lesson.
 
 Adding participation score of a student in a tutorial lesson:
-
-1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `addscore name/Aaron Tan id/e0123456 score/3` into the _Command Box_.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `setscore name/Aaron Tan id/e0123456 add/3` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -551,8 +551,9 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful add score for 1 student command](images/ui/addscore_student.png)
-_Figure X. Outcome of a successful add score for a student command_
+
+#### Viewing statistics of class participation: `stats`
+
 
 #### 4.3.2. Subtract participation score of a student: `subscore`
 
@@ -564,7 +565,7 @@ You can use this command to decrease the participation score of a specific stude
 
 **Format:**
 
-`subscore name/NAME id/STUDENT_ID score/SCORE`
+`setscore name/NAME id/STUDENT_ID subtract/SCORE`
 
 **Example:**
 
