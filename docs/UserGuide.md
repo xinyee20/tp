@@ -194,7 +194,7 @@ You can use this command to mark a specific student present for a tutorial lesso
 There is a student named `Aaron Tan` with Student ID of `e0123456` who is present for the tutorial lesson `1-2` of group `G04`. 
 
 To mark him present:
-1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `markpresent name/Aaron Tan id/e0123456` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -216,7 +216,7 @@ You can use this command to mark a specific student absent for a tutorial lesson
 There is a student `Aaron Tan` with Student ID `e0123456` from group `G04` who is absent for your tutorial lesson `1-2`. 
 
 To mark him absent:
-1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `markabsent name/Aaron Tan id/e0123456` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -238,7 +238,7 @@ You can use this command to mark all students present for a tutorial lesson.
 All students in group `G04` are present for the tutorial lesson `1-2`. 
 
 To mark all of them present at once:
-1. Navigate to view group `G04` lesson `1-2` via ![`viewlsn`](link to viewlsn command) command.
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `markpresent all` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -301,16 +301,16 @@ Outcome:
 Need to keep track of all your students' participation during lessons quickly? This feature allows you to key in a 
 student's participation score easily with a scale for reference.
 
-#### 4.3.1. Award participation score for a student: `addscore`
+#### 4.3.1. Award participation score for a student: `setscore`
 You can use this command to add the participation score for a specific student in a tutorial lesson.
 
 With a scale from 1 to 5:
-Score | 1 | 2 | 3 | 4 | 5 | 
-------|---|---|---|---|---
-**Remark** |Very Poor| Poor| Sufficient|Good|Commendable
+ | Score | 1 | 2 | 3 | 4 | 5 | 
+ | ----- |---|---|---|---|---|
+ | **Remark** |Very Poor| Poor| Sufficient|Good|Commendable|
 
 **Format:**
-`addscore name/NAME id/STUDENT_ID score/SCORE`
+`setscore name/NAME id/STUDENT_ID add/SCORE`
 
 **Example:**
 
@@ -319,16 +319,13 @@ After **lesson 1-2**, you felt that your student `Aaron Tan` with Student ID `e0
 you would like to give him a `2` for his participation.
 
 To give him a score:
-1. Navigate to view group G04 lesson 1-2 via ![`viewlsn`](link to viewlsn command) command.
-2. Type `addscore name/Aaron Tan id/e0123456 score/2` into the *Command Box*.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `setscore name/Aaron Tan id/e0123456 add/2` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
 1. The *Result Display* will show a success message.
 2. You can now see that his score has been updated on the *Student Information Panel*.
-
-![Figure X. Outcome of a successful add score for 1 student command](images/ui/addscore_student.png)
-_Figure X. Outcome of a successful add score for a student command_
 
 #### Viewing statistics of class participation: `stats`
 
