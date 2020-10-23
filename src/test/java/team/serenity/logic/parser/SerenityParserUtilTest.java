@@ -3,7 +3,7 @@ package team.serenity.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static team.serenity.logic.parser.SerenityParserUtil.MESSAGE_INVALID_INDEX;
 import static team.serenity.testutil.Assert.assertThrows;
-import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,10 +33,10 @@ public class SerenityParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, SerenityParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, SerenityParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, SerenityParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, SerenityParserUtil.parseIndex("  1  "));
     }
 
     // For Serenity

@@ -5,7 +5,6 @@ import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 
-import javafx.collections.ObservableList;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
@@ -13,7 +12,7 @@ import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Question;
 
 /**
- * Adds a question to the question list of a specific tutorial group's lesson in serenity.
+ * Adds a question to the Question manager.
  */
 public class AddQnCommand extends Command {
 
