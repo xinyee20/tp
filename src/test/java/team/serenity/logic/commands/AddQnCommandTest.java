@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
-import static team.serenity.testutil.TypicalQuestions.QUESTION_1;
-import static team.serenity.testutil.TypicalQuestions.QUESTION_2;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,14 +59,14 @@ class AddQnCommandTest {
 
     @Test
     public void equals() {
-        AddQnCommand addQnACommand = new AddQnCommand(QUESTION_1);
-        AddQnCommand addQnBCommand = new AddQnCommand(QUESTION_2);
+        AddQnCommand addQnACommand = new AddQnCommand(QUESTION_A);
+        AddQnCommand addQnBCommand = new AddQnCommand(QUESTION_B);
 
         // same object -> returns true
         assertTrue(addQnACommand.equals(addQnACommand));
 
         // same values -> returns true
-        AddQnCommand addQnACommandCopy = new AddQnCommand(QUESTION_1);
+        AddQnCommand addQnACommandCopy = new AddQnCommand(QUESTION_A);
         assertTrue(addQnACommandCopy.equals(addQnACommand));
 
         // different types -> returns false

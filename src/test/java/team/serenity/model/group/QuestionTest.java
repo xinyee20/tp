@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
-import static team.serenity.testutil.TypicalQuestions.QUESTION_1;
-import static team.serenity.testutil.TypicalQuestions.QUESTION_2;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,58 +44,58 @@ class QuestionTest {
 
     @Test
     public void test_setGroupAndLesson() {
-        Question toSet = new QuestionBuilder(QUESTION_1).build();
+        Question toSet = new QuestionBuilder(QUESTION_A).build();
         toSet.setGroupAndLesson("G10", "3-2");
-        Question expectedQuestion = new QuestionBuilder().withDescription(QUESTION_1.getDescription())
+        Question expectedQuestion = new QuestionBuilder().withDescription(QUESTION_A.getDescription())
                 .withGroup("G10").withLesson("3-2").build();
         assertEquals(expectedQuestion, toSet);
     }
 
     @Test
     public void test_getGroup() {
-        assertEquals(QUESTION_1.getGroup(), "G04");
-        assertEquals(QUESTION_2.getGroup(), "G05");
+        assertEquals(QUESTION_A.getGroup(), "G04");
+        assertEquals(QUESTION_B.getGroup(), "G05");
     }
     @Test
     public void test_getLesson() {
-        assertEquals(QUESTION_1.getLesson(), "2-2");
-        assertEquals(QUESTION_2.getLesson(), "3-1");
+        assertEquals(QUESTION_A.getLesson(), "2-2");
+        assertEquals(QUESTION_B.getLesson(), "3-1");
     }
 
     @Test
     public void test_getDescription() {
-        assertEquals(QUESTION_1.getDescription(), "What is the deadline for the report?");
-        assertEquals(QUESTION_2.getDescription(), "When is the consultation held?");
+        assertEquals(QUESTION_A.getDescription(), "What is the deadline for the report?");
+        assertEquals(QUESTION_B.getDescription(), "What do we need to prepare for tomorrow's lesson?");
     }
 
     @Test
     public void testEquals() {
         // Same case
         Question editedQuestion = new Question("G04", "2-2", "What is the deadline for the report?");
-        assertEquals(QUESTION_1, editedQuestion);
+        assertEquals(QUESTION_A, editedQuestion);
 
         // Different case
-        assertNotEquals(QUESTION_1, QUESTION_2);
+        assertNotEquals(QUESTION_A, QUESTION_B);
     }
 
     @Test
     public void test_hashCode() {
         // Same case
         Question editedQuestion = new Question("G04", "2-2", "What is the deadline for the report?");
-        assertEquals(QUESTION_1.hashCode(), editedQuestion.hashCode());
+        assertEquals(QUESTION_A.hashCode(), editedQuestion.hashCode());
 
         // Different case
-        assertNotEquals(QUESTION_1.hashCode(), QUESTION_2.hashCode());
+        assertNotEquals(QUESTION_A.hashCode(), QUESTION_B.hashCode());
     }
 
     @Test
     public void testToString() {
         // Same case
         Question editedQuestion = new Question("G04", "2-2", "What is the deadline for the report?");
-        assertEquals(QUESTION_1.toString(), editedQuestion.toString());
+        assertEquals(QUESTION_A.toString(), editedQuestion.toString());
 
         // Different case
-        assertNotEquals(QUESTION_1.toString(), QUESTION_2.toString());
+        assertNotEquals(QUESTION_A.toString(), QUESTION_B.toString());
 
     }
 
