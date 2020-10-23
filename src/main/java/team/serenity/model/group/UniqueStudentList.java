@@ -6,6 +6,7 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -131,6 +132,11 @@ public class UniqueStudentList implements UniqueList<Student> {
         return other == this // short circuit if same object
                 || (other instanceof UniqueStudentList // instanceof handles nulls
                 && this.internalList.equals(((UniqueStudentList) other).internalList));
+    }
+
+    @Override
+    public Stream<Student> stream() {
+        return this.internalList.stream();
     }
 
     @Override

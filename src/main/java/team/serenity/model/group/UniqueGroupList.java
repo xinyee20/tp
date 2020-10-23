@@ -6,6 +6,7 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,6 +40,15 @@ public class UniqueGroupList implements UniqueList<Group> {
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
         return this.internalList.stream().anyMatch(toCheck::isSameGroup);
+    }
+
+    /**
+     * Converts to stream
+     * @return
+     */
+    @Override
+    public Stream<Group> stream() {
+        return internalList.stream();
     }
 
     @Override

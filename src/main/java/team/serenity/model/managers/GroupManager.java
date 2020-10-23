@@ -2,6 +2,8 @@ package team.serenity.model.managers;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Stream;
+
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
 import team.serenity.model.util.UniqueList;
@@ -34,6 +36,14 @@ public class GroupManager {
         return this.listOfGroups.contains(group);
     }
 
+    public boolean hasGroup() {
+        return this.listOfGroups.size() > 0;
+    }
+
+    public Stream<Group> getStream() {
+        return this.listOfGroups.stream();
+    }
+
     /**
      * Adds given group to the list, if it doesn't exist yet.
      *
@@ -45,6 +55,7 @@ public class GroupManager {
             this.listOfGroups.add(group);
         }
     }
+
 
     /**
      * Deletes a specified {@code Group} from the list.

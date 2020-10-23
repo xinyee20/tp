@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.exceptions.DataConversionException;
 import team.serenity.model.ReadOnlySerenity;
+import team.serenity.model.group.Group;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.userprefs.UserPrefs;
@@ -79,6 +81,10 @@ public class StorageManager implements Storage {
     @Override
     public void saveSerenity(ReadOnlySerenity serenity) throws IOException {
         saveSerenity(serenity, this.serenityStorage.getSerenityFilePath());
+    }
+
+    public void saveSerenity(Stream<Group> groups) throws IOException {
+        this.serenityStorage.saveSerenity(groups);
     }
 
     @Override

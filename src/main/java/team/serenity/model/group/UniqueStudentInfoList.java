@@ -6,6 +6,7 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +29,11 @@ public class UniqueStudentInfoList implements UniqueList<StudentInfo> {
     @Override
     public ObservableList<StudentInfo> getList() {
         return this.internalList;
+    }
+
+    @Override
+    public Stream<StudentInfo> stream() {
+        return this.internalList.stream();
     }
 
     @Override

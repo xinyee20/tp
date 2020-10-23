@@ -6,6 +6,7 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,11 @@ public class UniqueLessonList implements UniqueList<Lesson> {
     @Override
     public ObservableList<Lesson> getList() {
         return this.internalList;
+    }
+
+    @Override
+    public Stream<Lesson> stream() {
+        return this.internalList.stream();
     }
 
     /**
