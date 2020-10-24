@@ -8,12 +8,10 @@ import java.util.regex.Pattern;
 
 import team.serenity.logic.commands.AddGrpCommand;
 import team.serenity.logic.commands.AddLsnCommand;
-import team.serenity.logic.commands.AddQnCommand;
 import team.serenity.logic.commands.AddStudentCommand;
 import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.DelGrpCommand;
 import team.serenity.logic.commands.DelLsnCommand;
-import team.serenity.logic.commands.DelQnCommand;
 import team.serenity.logic.commands.DelStudentCommand;
 import team.serenity.logic.commands.ExitCommand;
 import team.serenity.logic.commands.FlagAttCommand;
@@ -24,7 +22,12 @@ import team.serenity.logic.commands.SetScoreCommand;
 import team.serenity.logic.commands.UnflagAttCommand;
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.ViewLsnCommand;
+import team.serenity.logic.commands.question.AddQnCommand;
+import team.serenity.logic.commands.question.DelQnCommand;
+import team.serenity.logic.commands.question.ViewQnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.logic.parser.question.AddQnCommandParser;
+import team.serenity.logic.parser.question.DelQnCommandParser;
 
 /**
  * Parses user input.
@@ -61,9 +64,6 @@ public class SerenityParser {
         case AddLsnCommand.COMMAND_WORD:
             return new AddLsnCommandParser().parse(arguments);
 
-        case AddQnCommand.COMMAND_WORD:
-            return new AddQnCommandParser().parse(arguments);
-
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
@@ -72,9 +72,6 @@ public class SerenityParser {
 
         case DelLsnCommand.COMMAND_WORD:
             return new DelLsnCommandParser().parse(arguments);
-
-        case DelQnCommand.COMMAND_WORD:
-            return new DelQnCommandParser().parse(arguments);
 
         case DelStudentCommand.COMMAND_WORD:
             return new DelStudentCommandParser().parse(arguments);
@@ -99,6 +96,19 @@ public class SerenityParser {
 
         case ViewLsnCommand.COMMAND_WORD:
             return new ViewLsnCommandParser().parse(arguments);
+
+        // ========================== Question Commands =========================
+
+        case AddQnCommand.COMMAND_WORD:
+            return new AddQnCommandParser().parse(arguments);
+
+        case DelQnCommand.COMMAND_WORD:
+            return new DelQnCommandParser().parse(arguments);
+
+        case ViewQnCommand.COMMAND_WORD:
+            return new ViewQnCommand();
+
+        // ========================== Util Commands =========================
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

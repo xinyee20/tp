@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 import team.serenity.ui.UiPart;
 
 /**
@@ -38,7 +38,7 @@ public class QuestionCard extends UiPart<Region> {
         super(FXML);
         this.question = question;
         this.id.setText(displayedIndex + ". ");
-        this.questionDescription.setText(question.getQuestion());
+        this.questionDescription.setText(question.getDescription());
     }
 
     @Override

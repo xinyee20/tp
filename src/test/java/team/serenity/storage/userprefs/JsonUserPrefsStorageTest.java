@@ -1,4 +1,4 @@
-package team.serenity.storage;
+package team.serenity.storage.userprefs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.model.UserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 

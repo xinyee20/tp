@@ -15,6 +15,9 @@ import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.UniqueLessonList;
 import team.serenity.model.group.UniqueStudentInfoList;
 import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.group.question.Question;
+import team.serenity.model.managers.QuestionManager;
+import team.serenity.model.managers.ReadOnlyQuestionManager;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -69,4 +72,20 @@ public class SampleDataUtil {
         return Arrays.stream(lessons)
             .collect(Collectors.toSet());
     }
+
+    public static Question[] getSampleQuestion() {
+        return new Question[]{
+            new Question("G04", "2-2", "What is the deadline for the report?"),
+            new Question("G05", "3-1", "When is the consultation held?")
+        };
+    }
+
+    public static ReadOnlyQuestionManager getSampleQuestionManager() {
+        QuestionManager sampleQuestionManager = new QuestionManager();
+        for (Question sampleQuestion : getSampleQuestion()) {
+            sampleQuestionManager.addQuestion(sampleQuestion);
+        }
+        return sampleQuestionManager;
+    }
+
 }

@@ -4,11 +4,17 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.core.LogsCenter;
@@ -35,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ButtonBar buttonBar;
 
     // Ui parts relating to serenity
     private DataPanel groupDataPanel;
@@ -53,10 +60,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane dataDisplayPlaceholder;
 
     @FXML
-    private StackPane dataDisplayPlaceholder;
+    private VBox buttonPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -122,11 +129,11 @@ public class MainWindow extends UiPart<Stage> {
         this.resultDisplay = new ResultDisplay();
         this.resultDisplayPlaceholder.getChildren().add(this.resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(this.logic.getSerenityFilePath());
-        this.statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
         CommandBox commandBox = new CommandBox(this::executeCommand);
         this.commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        this.buttonBar = new ButtonBar();
+        this.buttonPanelPlaceholder.getChildren().add(this.buttonBar);
     }
 
     /**
@@ -174,7 +181,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void toggleLsnView() {
-        this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(), this.logic.getQuestionList());
+        this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(),
+                this.logic.getFilteredQuestionList());
         this.dataDisplayPlaceholder.getChildren().clear();
         this.dataDisplayPlaceholder.getChildren().add(this.lessonDataPanel.getRoot());
     }
@@ -187,6 +195,49 @@ public class MainWindow extends UiPart<Stage> {
         this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
         this.dataDisplayPlaceholder.getChildren().clear();
         this.dataDisplayPlaceholder.getChildren().add(this.groupDataPanel.getRoot());
+    }
+
+    /**
+     * Adds a new group button.
+     */
+    @FXML
+    private void handleAddGrp(String groupName) {
+        Button groupButton = new Button(groupName);
+        setUpButton(groupButton);
+        buttonBar.addGroupButton(groupButton);
+    }
+
+    /**
+     * Sets up the newly created group button.
+     */
+    public void setUpButton(Button groupButton) {
+        groupButton.setId(groupButton.getText());
+        groupButton.setAlignment(Pos.CENTER);
+        groupButton.setContentDisplay(ContentDisplay.CENTER);
+        groupButton.setMnemonicParsing(false);
+        groupButton.setPrefWidth(50);
+        groupButton.setTextAlignment(TextAlignment.CENTER);
+        groupButton.setOnAction(event -> {
+            String commandText = "viewgrp grp/" + groupButton.getText();
+            try {
+                executeCommand(commandText);
+            } catch (CommandException | ParseException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * Deletes an existing group button.
+     */
+    @FXML
+    private void handleDelGrp(String groupName) {
+        for (Node groupButton : buttonBar.getChildren()) {
+            if (groupButton.getId().equals(groupName)) {
+                buttonBar.deleteGroupButton(groupButton);
+                break;
+            }
+        }
     }
 
     /**
@@ -214,6 +265,18 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isToggleLsnView()) {
                 toggleLsnView();
+            }
+
+            if (commandResult.isAddGrp()) {
+                // commandText would be in AddGrpCommand format correctly by the time it reaches here
+                String groupName = commandText.split(" ")[1].split("/")[1];
+                handleAddGrp(groupName);
+            }
+
+            if (commandResult.isDelGrp()) {
+                // commandText would be in DelGrpCommand format correctly by the time it reaches here
+                String groupName = commandText.split(" ")[1].split("/")[1];
+                handleDelGrp(groupName);
             }
 
             return commandResult;

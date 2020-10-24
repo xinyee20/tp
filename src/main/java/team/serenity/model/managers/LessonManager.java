@@ -25,7 +25,9 @@ public class LessonManager {
         requireAllNonNull(group, lesson);
         UniqueList<Lesson> lessonList = this.mapToListOfLessons.get(group);
         if (lessonList != null) {
-            lessonList.add(lesson);
+            if (!lessonList.contains(lesson)) {
+                lessonList.add(lesson);
+            }
         }
     }
 

@@ -1,12 +1,12 @@
-package team.serenity.storage;
+package team.serenity.storage.userprefs;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.model.ReadOnlyUserPrefs;
-import team.serenity.model.UserPrefs;
+import team.serenity.model.userprefs.ReadOnlyUserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
 
 /**
  * Represents a storage for {@link UserPrefs}.
