@@ -11,13 +11,13 @@ public class AttendanceTest {
 
     @Test
     public void testGetAttendance() {
-        Attendance test = new Attendance(true, true);
-        assertTrue(test.getAttendance());
+        Attendance test = new Attendance(false, true);
+        assertFalse(test.getAttendance());
     }
 
     @Test
     public void testGetFlagged() {
-        Attendance test = new Attendance(true, true);
+        Attendance test = new Attendance(false, true);
         assertTrue(test.getFlagged());
     }
 
@@ -41,14 +41,14 @@ public class AttendanceTest {
     }
 
     @Test
-    public void constructor_flagAttendanceWithStudentPresent_success() {
-        Attendance test = new Attendance(true, true);
+    public void constructor_flagAttendanceWithStudentAbsent_success() {
+        Attendance test = new Attendance(false, true);
         assertTrue(test.getFlagged());
     }
 
     @Test
-    public void constructor_flagAttendanceWithStudentAbsent_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Attendance(false, true));
+    public void constructor_flagAttendanceWithStudentPresent_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Attendance(true, true));
     }
 
 

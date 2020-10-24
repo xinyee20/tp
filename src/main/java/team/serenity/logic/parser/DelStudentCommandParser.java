@@ -39,7 +39,7 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
             boolean matchesGrp = grpKeywordArray.length == 1;
             boolean matchesId = studentIdArray.length == 1 && studentIdArray[0].length() == 8;
             boolean matchesStudentName = studentNameArray.length <= 10;
-            if (! matchesGrp || ! matchesId || ! matchesStudentName) {
+            if (!matchesGrp || !matchesId || !matchesStudentName) {
                 throw this.deleteStudentCommandParserException;
             }
 

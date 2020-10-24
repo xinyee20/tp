@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.MarkAbsentCommand;
-import team.serenity.logic.commands.MarkPresentCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Student;
 
@@ -41,24 +40,24 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
         Optional<String> keyToAll = Optional.ofNullable(argMultimap.getPreamble());
 
         try {
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
 
-            // If single student specified, get student
-            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
-            student = Optional.ofNullable(new Student(studentName, studentNumber));
+                // If single student specified, get student
+                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
+                student = Optional.ofNullable(new Student(studentName, studentNumber));
 
-            return new MarkAbsentCommand(student.get());
+                return new MarkAbsentCommand(student.get());
 
-        } else if (keyToAll.get().equals("all")) {
+            } else if (keyToAll.get().equals("all")) {
 
-            // mark attendance of all students
-            return new MarkAbsentCommand();
+                // mark attendance of all students
+                return new MarkAbsentCommand();
 
-        } else {
-            index = SerenityParserUtil.parseIndex(keyToAll.get());
-            return new MarkAbsentCommand(index);
-        }
+            } else {
+                index = SerenityParserUtil.parseIndex(keyToAll.get());
+                return new MarkAbsentCommand(index);
+            }
 
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));

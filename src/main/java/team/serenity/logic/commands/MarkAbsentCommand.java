@@ -62,6 +62,9 @@ public class MarkAbsentCommand extends Command {
         this.isByIndex = false;
     }
 
+    /**
+     * Creates an MarkAbsentCommand to mark the specified {@code Student} absent by index.
+     */
     public MarkAbsentCommand(Index index) {
         requireNonNull(index);
         this.isWholeClass = false;
@@ -83,27 +86,29 @@ public class MarkAbsentCommand extends Command {
 
                 if (!isByIndex) {
 
-                // Mark single student attendance
-                for (int i = 0; i < studentsInfo.size(); i++) {
-                    StudentInfo studentInfo = studentsInfo.get(i);
-                    this.isCorrectStudent = studentInfo.containsStudent(this.toMarkAbsent);
-                    if (this.isCorrectStudent) {
-                        Attendance update = studentInfo.getAttendance().setNewAttendance(false);
-                        StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                        uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-                        model.updateLessonList();
-                        model.updateStudentsInfoList();
-                        break;
+                    // Mark single student attendance
+                    for (int i = 0; i < studentsInfo.size(); i++) {
+                        StudentInfo studentInfo = studentsInfo.get(i);
+                        this.isCorrectStudent = studentInfo.containsStudent(this.toMarkAbsent);
+                        if (this.isCorrectStudent) {
+                            Attendance update = studentInfo.getAttendance().setNewAttendance(false);
+                            StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
+                            uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
+                            model.updateLessonList();
+                            model.updateStudentsInfoList();
+                            break;
+                        }
                     }
-                }
 
-                if (! this.isCorrectStudent) {
-                    throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toMarkAbsent));
-                }
+                    if (!this.isCorrectStudent) {
+                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND,
+                                this.toMarkAbsent));
+                    }
 
                 } else {
                     if (index.getZeroBased() > studentsInfo.size()) {
-                        throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased()));
+                        throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                                index.getOneBased()));
                     }
 
                     StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());

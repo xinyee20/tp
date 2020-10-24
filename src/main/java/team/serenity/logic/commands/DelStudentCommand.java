@@ -15,7 +15,6 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Student;
-import team.serenity.model.group.UniqueStudentList;
 import team.serenity.model.util.UniqueList;
 
 public class DelStudentCommand extends Command {
@@ -84,7 +83,7 @@ public class DelStudentCommand extends Command {
 
         if (!isByIndex) {
             toDelete = new Student(this.studentName, this.studentId);
-            if (! uniqueStudentList.contains(toDelete)) {
+            if (!uniqueStudentList.contains(toDelete)) {
                 //student does not exist
                 throw new CommandException(MESSAGE_STUDENT_EMPTY);
             }

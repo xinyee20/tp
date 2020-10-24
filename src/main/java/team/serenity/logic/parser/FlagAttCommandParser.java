@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.FlagAttCommand;
-import team.serenity.logic.commands.MarkPresentCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Student;
 

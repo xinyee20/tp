@@ -7,7 +7,6 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.exceptions.CommandException;
-import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Attendance;
 import team.serenity.model.group.Lesson;
@@ -66,6 +65,9 @@ public class MarkPresentCommand extends Command {
         this.isByIndex = false;
     }
 
+    /**
+     * Creates an MarkPresentCommand to mark the specified {@code Student} present by index.
+     */
     public MarkPresentCommand(Index index) {
         requireNonNull(index);
         this.isWholeClass = false;
@@ -101,12 +103,13 @@ public class MarkPresentCommand extends Command {
                         }
                     }
 
-                    if (! this.isCorrectStudent) {
+                    if (!this.isCorrectStudent) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toMarkPresent));
                     }
                 } else {
                     if (index.getZeroBased() > studentsInfo.size()) {
-                        throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased()));
+                        throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                                index.getOneBased()));
                     }
 
                     StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());

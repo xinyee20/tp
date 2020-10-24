@@ -17,7 +17,7 @@ import team.serenity.model.util.UniqueList;
 /**
  * Flags the attendance of a student in the class.
  */
-public class FlagAttCommand extends Command{
+public class FlagAttCommand extends Command {
 
     public static final String COMMAND_WORD = "flagatt";
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance is flagged!";
@@ -55,6 +55,9 @@ public class FlagAttCommand extends Command{
         this.isByIndex = false;
     }
 
+    /**
+     * Creates an FlagAttCommand to flag a specified {@code Student}'s attendance by index.
+     */
     public FlagAttCommand(Index index) {
         requireNonNull(index);
         // Specified index of student to flag attendance
@@ -88,12 +91,13 @@ public class FlagAttCommand extends Command{
                     }
                 }
 
-                if (! this.isCorrectStudent) {
+                if (!this.isCorrectStudent) {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toFlagAtt));
                 }
             } else {
                 if (index.getZeroBased() > studentsInfo.size()) {
-                    throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased()));
+                    throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                            index.getOneBased()));
                 }
 
                 StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());

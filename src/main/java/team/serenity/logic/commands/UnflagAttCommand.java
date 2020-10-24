@@ -52,6 +52,9 @@ public class UnflagAttCommand extends Command {
         this.isByIndex = false;
     }
 
+    /**
+     * Creates an UnflagAttCommand to unflag a specified {@code Student}'s attendance by index.
+     */
     public UnflagAttCommand(Index index) {
         requireNonNull(index);
         // Specified index of student to unflag attendance
@@ -68,7 +71,7 @@ public class UnflagAttCommand extends Command {
             UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
             ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
-            if (! isByIndex) {
+            if (!isByIndex) {
 
                 // Unflag a student's attendance
                 for (int i = 0; i < studentsInfo.size(); i++) {
