@@ -1,11 +1,10 @@
-package team.serenity.model.group;
+package team.serenity.model.group.question;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.AppUtil.checkArgument;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-
 
 /**
  * Represents a Lesson's question in Serenity.
