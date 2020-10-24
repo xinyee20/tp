@@ -48,7 +48,7 @@ class QuestionManagerTest {
     }
 
     @Test
-    public void hasQuestionNullQuestion_throwsNullPointerException() {
+    public void hasQuestionNullQuestionThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> this.questionManager.hasQuestion(null));
     }
 
