@@ -66,6 +66,6 @@ public interface Logic {
     /**
      * Returns an unmodifiable view of the list of questions from a group-lesson.
      */
-    ObservableList<Question> getQuestionList();
+    ObservableList<Question> getFilteredQuestionList();
 
 }

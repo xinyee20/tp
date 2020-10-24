@@ -10,7 +10,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import team.serenity.commons.core.GuiSettings;
-import team.serenity.model.UserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
+import team.serenity.storage.question.JsonQuestionStorage;
+import team.serenity.storage.userprefs.JsonUserPrefsStorage;
 
 public class StorageManagerTest {
 
@@ -21,9 +23,10 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         JsonSerenityStorage serenityStorage = new JsonSerenityStorage(getTempFilePath("serenity"));
-        storageManager = new StorageManager(serenityStorage, userPrefsStorage);
+        JsonQuestionStorage questionStorage = new JsonQuestionStorage(getTempFilePath("question"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
+        storageManager = new StorageManager(serenityStorage, questionStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {

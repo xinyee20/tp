@@ -3,6 +3,7 @@ package team.serenity.storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -40,6 +41,10 @@ class JsonSerializableSerenity {
     public JsonSerializableSerenity(ReadOnlySerenity source) {
         this.groups.addAll(
             source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
+    }
+
+    public JsonSerializableSerenity(Stream<Group> groups) {
+        this.groups.addAll(groups.map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
     /**
