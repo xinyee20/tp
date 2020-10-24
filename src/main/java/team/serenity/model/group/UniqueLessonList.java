@@ -6,11 +6,14 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.group.exceptions.DuplicateLessonException;
 import team.serenity.model.group.exceptions.LessonNotFoundException;
+import team.serenity.model.group.exceptions.NotFoundException;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -34,6 +37,11 @@ public class UniqueLessonList implements UniqueList<Lesson> {
         return this.internalList;
     }
 
+    @Override
+    public Stream<Lesson> stream() {
+        return this.internalList.stream();
+    }
+
     /**
      * Returns true if the list contains an equivalent lesson as the given argument.
      */
@@ -47,7 +55,7 @@ public class UniqueLessonList implements UniqueList<Lesson> {
      * Adds a lesson to the list. The lesson must not already exist in the list.
      */
     @Override
-    public void add(Lesson toAdd) {
+    public void add(Lesson toAdd) throws DuplicateException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateLessonException();
@@ -59,7 +67,7 @@ public class UniqueLessonList implements UniqueList<Lesson> {
      * Replaces the lesson {@code target} in the list with {@code lesson}. {@code target} must exist in the list.
      * The lesson identity of {@code lesson} must not be the same as another existing lesson in the list.
      */
-    public void setElement(Lesson target, Lesson editedLesson) {
+    public void setElement(Lesson target, Lesson editedLesson) throws NotFoundException, DuplicateException {
         requireAllNonNull(target, editedLesson);
 
         int index = this.internalList.indexOf(target);
@@ -93,7 +101,7 @@ public class UniqueLessonList implements UniqueList<Lesson> {
      * Replaces all the lessons from the list with a new list of lessons
      */
     @Override
-    public void setElements(UniqueList<Lesson> replacement) {
+    public void setElementsWithUniqueList(UniqueList<Lesson> replacement) {
         requireNonNull(replacement);
         this.internalList.setAll(replacement.getList());
     }
@@ -102,7 +110,7 @@ public class UniqueLessonList implements UniqueList<Lesson> {
      * Replaces the contents of this list with {@code lessons}. {@code lessons} must not contain duplicate lessons.
      */
     @Override
-    public void setElementsWithList(List<Lesson> lessons) {
+    public void setElementsWithList(List<Lesson> lessons) throws DuplicateException {
         requireAllNonNull(lessons);
         if (!elementsAreUnique(lessons)) {
             throw new DuplicateLessonException();

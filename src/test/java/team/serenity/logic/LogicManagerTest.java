@@ -16,10 +16,11 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
-import team.serenity.model.UserPrefs;
+import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.storage.JsonSerenityStorage;
-import team.serenity.storage.JsonUserPrefsStorage;
 import team.serenity.storage.StorageManager;
+import team.serenity.storage.question.JsonQuestionStorage;
+import team.serenity.storage.userprefs.JsonUserPrefsStorage;
 
 public class LogicManagerTest {
 
@@ -33,10 +34,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
+        JsonSerenityStorage serenityStorage = new JsonSerenityStorage(temporaryFolder.resolve("serenity.json"));
+        JsonQuestionStorage questionStorage = new JsonQuestionStorage(temporaryFolder.resolve("question.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        JsonSerenityStorage serenityStorage =
-            new JsonSerenityStorage(temporaryFolder.resolve("serenity.json"));
-        StorageManager storage = new StorageManager(serenityStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(serenityStorage, questionStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 

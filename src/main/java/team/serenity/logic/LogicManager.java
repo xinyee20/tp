@@ -1,7 +1,9 @@
 package team.serenity.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
@@ -14,9 +16,9 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Question;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
+import team.serenity.model.group.question.Question;
 import team.serenity.storage.Storage;
 
 /**
@@ -46,17 +48,19 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = this.serenityParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        commandResult = command.execute(this.model);
 
-        /*
-        TODO: To write the data to the external file after each command is executed.
-        try {
-            // storage.saveSerenity(model.getSerenity());
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        //Write to storage, if group exists
+        boolean dataExists = this.model.hasGroup();
+        if (dataExists) {
+            Stream<Group> groups = this.model.getGroupStream();
+            try {
+                this.storage.saveSerenity(groups);
+                this.storage.saveQuestionManager(this.model.getQuestionManager());
+            } catch (IOException e) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + e, e);
+            }
         }
-         */
-
         return commandResult;
     }
 
@@ -98,8 +102,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Question> getQuestionList() {
-        return this.model.getQuestionList();
+    public ObservableList<Question> getFilteredQuestionList() {
+        return this.model.getFilteredQuestionList();
     }
 
 }

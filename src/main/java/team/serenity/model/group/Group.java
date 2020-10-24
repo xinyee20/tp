@@ -2,13 +2,12 @@ package team.serenity.model.group;
 
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
-import team.serenity.commons.util.CsvUtil;
+import team.serenity.commons.util.XlsxUtil;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -30,16 +29,16 @@ public class Group {
      * @param name     A valid name.
      * @param filePath A valid filePath.
      */
-    public Group(String name, Path filePath) {
+    public Group(String name, String filePath) {
         requireAllNonNull(name, filePath);
         this.name = name;
-        CsvUtil util = new CsvUtil(filePath);
+        XlsxUtil util = new XlsxUtil(filePath);
         this.students = new UniqueStudentList();
-        this.students.setElementsWithList(new ArrayList<>(util.readStudentsFromCsv()));
+        this.students.setElementsWithList(new ArrayList<>(util.readStudentsFromXlsx()));
         // TODO: implement scores data
-        Set<StudentInfo> studentsInfo = util.readStudentsInfoFromCsv(util.readStudentsFromCsv());
+        Set<StudentInfo> studentsInfo = util.readStudentsInfoFromXlsx(util.readStudentsFromXlsx());
         this.lessons = new UniqueLessonList();
-        this.lessons.setElementsWithList(new ArrayList<>(util.readLessonsFromCsv(studentsInfo)));
+        this.lessons.setElementsWithList(new ArrayList<>(util.readLessonsFromXlsx(studentsInfo)));
     }
 
     /**
