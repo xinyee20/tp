@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.Student;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.util.UniqueList;
 
