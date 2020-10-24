@@ -35,14 +35,14 @@ public interface QuestionStorage {
     /**
      * Saves the given {@link ReadOnlyQuestionManager} to the storage.
      *
-     * @param activityManager cannot be null.
+     * @param questionManager cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveQuestionManager(ReadOnlyQuestionManager activityManager) throws IOException;
+    void saveQuestionManager(ReadOnlyQuestionManager questionManager) throws IOException;
 
     /**
      * @see #saveQuestionManager(ReadOnlyQuestionManager)
      */
-    void saveQuestionManager(ReadOnlyQuestionManager activityManager, Path filePath) throws IOException;
+    void saveQuestionManager(ReadOnlyQuestionManager questionManager, Path filePath) throws IOException;
 
 }
