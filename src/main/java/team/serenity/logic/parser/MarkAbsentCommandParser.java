@@ -31,8 +31,8 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public MarkAbsentCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID);
+    public MarkAbsentCommand parse(String userInput) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_ID);
 
         Index index;
         String studentName;

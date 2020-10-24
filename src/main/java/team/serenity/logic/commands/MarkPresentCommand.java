@@ -21,25 +21,25 @@ import team.serenity.model.util.UniqueList;
 public class MarkPresentCommand extends Command {
 
     public static final String COMMAND_WORD = "markpresent";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Marks a specific student or all students present from a lesson. \n"
-        + "Parameters: "
-        + "all or "
-        + PREFIX_NAME + " STUDENT_NAME "
-        + PREFIX_ID + " STUDENT_NUMBER " + "or INDEX\n"
-        + "Example: " + COMMAND_WORD + " " + "all\n"
-        + "or " + COMMAND_WORD + " "
-        + PREFIX_NAME + " Aaron Tan "
-        + PREFIX_ID + " e0123456\n"
-        + "or " + COMMAND_WORD + " 2";
-
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance: present";
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked present!";
     public static final String MESSAGE_STUDENT_NOT_FOUND =
             "%s is not found, please ensure the name & student id is correct";
+    public static final String MESSAGE_NOT_IN_LESSON = "Currently not in any lesson. Please enter a lesson.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
             "Index %d is not found, please ensure that it exists";
-    public static final String MESSAGE_NOT_IN_LESSON = "Currently not in any lesson. Please enter a lesson.";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Marks a specific student or all students present from a lesson. \n"
+            + "Parameters: "
+            + "all or "
+            + PREFIX_NAME + " STUDENT_NAME "
+            + PREFIX_ID + " STUDENT_NUMBER " + "or INDEX\n"
+            + "Example: " + COMMAND_WORD + " " + "all\n"
+            + "or " + COMMAND_WORD + " "
+            + PREFIX_NAME + " Aaron Tan "
+            + PREFIX_ID + " e0123456\n"
+            + "or " + COMMAND_WORD + " 2";
 
     private Student toMarkPresent;
     private Index index;

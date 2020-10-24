@@ -7,7 +7,9 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.FlagAttCommand;
+import team.serenity.logic.commands.MarkPresentCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Student;
 
@@ -30,19 +32,26 @@ public class FlagAttCommandParser implements Parser<FlagAttCommand> {
     public FlagAttCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_ID);
 
+        Index index;
         String studentName;
         String studentNumber;
         Optional<Student> student;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID) || !argMultimap.getPreamble().isEmpty()) {
+        try {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
+                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
+                student = Optional.ofNullable(new Student(studentName, studentNumber));
+
+                return new FlagAttCommand(student.get());
+
+            } else {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                return new FlagAttCommand(index);
+            }
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
         }
-
-        studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-        studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
-        student = Optional.ofNullable(new Student(studentName, studentNumber));
-
-        return new FlagAttCommand(student.get());
     }
 
     /**
