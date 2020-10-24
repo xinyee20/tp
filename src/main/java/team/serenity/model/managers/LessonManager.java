@@ -44,5 +44,4 @@ public class LessonManager {
     public Optional<UniqueList<Lesson>> getListOfLessonsFromGroup(Group group) {
         return Optional.ofNullable(this.mapToListOfLessons.get(group));
     }
-
 }

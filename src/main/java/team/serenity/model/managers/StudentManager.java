@@ -3,7 +3,6 @@ package team.serenity.model.managers;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -12,7 +11,7 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.Student;
 import team.serenity.model.util.UniqueList;
 
-public class StudentManager implements ReadOnlyStudentManager{
+public class StudentManager implements ReadOnlyStudentManager {
 
     private final Map<Group, UniqueList<Student>> mapToListOfStudents;
 
@@ -37,7 +36,7 @@ public class StudentManager implements ReadOnlyStudentManager{
     }
 
     @Override
-    public Map<Group, UniqueList<Student>> getMapOfStudent() {
+    public Map<Group, UniqueList<Student>> getStudentMap() {
         return null;
     }
 
