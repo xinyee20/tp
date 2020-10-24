@@ -74,16 +74,17 @@ public class DelStudentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         model.updateFilteredGroupList(this.predicate);
         ObservableList<Group> groups = model.getFilteredGroupList();
-        UniqueList<Student> uniqueStudentList = groups.get(0).getStudents();
 
         if (groups.isEmpty()) {
             //no such group
             throw new CommandException(MESSAGE_GROUP_EMPTY);
         }
 
+        UniqueList<Student> uniqueStudentList = groups.get(0).getStudents();
+
         if (!isByIndex) {
             toDelete = new Student(this.studentName, this.studentId);
-            if (!uniqueStudentList.contains(toDelete)) {
+            if (!groups.get(0).getStudents().contains(toDelete)) {
                 //student does not exist
                 throw new CommandException(MESSAGE_STUDENT_EMPTY);
             }
@@ -93,6 +94,10 @@ public class DelStudentCommand extends Command {
             }
 
             toDelete = uniqueStudentList.getList().get(index.getZeroBased());
+            if (!uniqueStudentList.contains(toDelete)) {
+                //student does not exist
+                throw new CommandException(MESSAGE_STUDENT_EMPTY);
+            }
         }
 
         model.deleteStudentFromGroup(toDelete, this.predicate);
