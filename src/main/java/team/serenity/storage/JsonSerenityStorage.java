@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.exceptions.DataConversionException;
@@ -13,6 +14,7 @@ import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.commons.util.FileUtil;
 import team.serenity.commons.util.JsonUtil;
 import team.serenity.model.ReadOnlySerenity;
+import team.serenity.model.group.Group;
 
 /**
  * A class to access Serenity data stored as a json file on the hard disk.
@@ -64,6 +66,13 @@ public class JsonSerenityStorage implements SerenityStorage {
         saveSerenity(serenity, this.filePath);
     }
 
+    @Override
+    public void saveSerenity(Stream<Group> groups) throws IOException {
+        this.saveSerenity(groups, this.filePath);
+    }
+
+
+
     /**
      * Similar to {@link #saveSerenity(ReadOnlySerenity)}.
      *
@@ -75,5 +84,19 @@ public class JsonSerenityStorage implements SerenityStorage {
 
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableSerenity(serenity), filePath);
+    }
+
+    /**
+     * Saves group to storage
+     * @param groups
+     * @param filePath
+     * @throws IOException
+     */
+    public void saveSerenity(Stream<Group> groups, Path filePath) throws IOException {
+        requireNonNull(groups);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableSerenity(groups), filePath);
     }
 }

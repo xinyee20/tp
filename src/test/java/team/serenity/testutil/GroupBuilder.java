@@ -23,11 +23,11 @@ public class GroupBuilder {
 
     public static final String DEFAULT_NAME = "G04";
     public static final Set<Student> DEFAULT_STUDENTS = new HashSet<>(Arrays.asList(
-        new Student("Aaron Tan", "e0123456"),
-        new Student("Baron Wong", "e0654321"),
-        new Student("Cherry Lee", "e0135791"),
-        new Student("Dickson Low", "e0246810"),
-        new Student("Eng Wee Kiat", "e0101010")
+        new Student("Aaron Tan", "A0123456U"),
+        new Student("Baron Wong", "A0654321C"),
+        new Student("Cherry Lee", "A0135791B"),
+        new Student("Dickson Low", "A0246810D"),
+        new Student("Eng Wee Kiat", "A0101010E")
 
     ));
     public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>(Arrays.asList(

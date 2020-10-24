@@ -3,10 +3,12 @@ package team.serenity.storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import team.serenity.commons.exceptions.DataConversionException;
 import team.serenity.model.ReadOnlySerenity;
 import team.serenity.model.Serenity;
+import team.serenity.model.group.Group;
 
 /**
  * Represents a storage for {@link Serenity}.
@@ -40,6 +42,8 @@ public interface SerenityStorage {
      * @throws IOException if there was any problem writing to the file.
      */
     void saveSerenity(ReadOnlySerenity serenity) throws IOException;
+
+    void saveSerenity(Stream<Group> groups) throws IOException;
 
     /**
      * @see #saveSerenity(ReadOnlySerenity)

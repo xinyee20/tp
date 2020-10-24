@@ -9,24 +9,28 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class Student {
     public static final String STUDENT_NAME_ERROR = "Name cannot be empty";
-    public static final String STUDENT_NUMBER_ERROR = "Student number cannot be empty "
-        + "and must follow the format 'eXXXXXXX' "
+    public static final String STUDENT_ID_ERROR = "Student no cannot be empty "
+        + "and must follow the format 'AXXXXXXXU' "
         + "where X is a digit from 0 to 9";
     private String name;
-    private String studentId;
+    private String studentNo;
 
     /**
      * Constructs a {@code Student}.
      *
      * @param name          A valid name.
-     * @param studentId A valid student number.
+<<<<<<< HEAD
+     * @param studentNo A valid student ID.
+=======
+     * @param studentNo A valid student no.
+>>>>>>> f29741bb... Edit Student files
      */
-    public Student(String name, String studentId) {
-        requireAllNonNull(name, studentId);
+    public Student(String name, String studentNo) {
+        requireAllNonNull(name, studentNo);
         checkArgument(isValidName(name), STUDENT_NAME_ERROR);
-        checkArgument(isValidStudentId(studentId), STUDENT_NUMBER_ERROR);
+        checkArgument(isValidStudentId(studentNo), STUDENT_ID_ERROR);
         this.name = name;
-        this.studentId = studentId;
+        this.studentNo = studentNo;
     }
 
     public static boolean isValidName(String s) {
@@ -34,32 +38,32 @@ public class Student {
     }
 
     /**
-     * Checks whether String s is a valid Student ID.
-     * @param s Student ID
-     * @return Whether String is valid
+     * Checks whether String s is a valid student no.
+     * @param s Student no.
+     * @return Whether String is valid.
      */
     public static boolean isValidStudentId(String s) {
-        //8 digits long
-        s = s.toLowerCase();
-        boolean matchesLength = s.length() == 8;
-        boolean matchesChar = s.charAt(0) == 'e';
+        //9 digits long
+        s = s.toUpperCase();
+        boolean matchesLength = s.length() == 9;
+        boolean matchesChar = s.charAt(0) == 'A';
         if (!matchesChar || !matchesLength) {
             System.out.println(s);
         }
-        return s.length() == 8 && s.charAt(0) == 'e';
+        return s.length() == 9 && s.charAt(0) == 'A';
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String getStudentId() {
-        return this.studentId;
+    public String getStudentNo() {
+        return this.studentNo;
     }
 
     @Override
     public String toString() {
-        return this.name + " " + this.studentId;
+        return this.name + " " + this.studentNo;
     }
 
     @Override
@@ -68,7 +72,7 @@ public class Student {
             return true;
         } else if (obj instanceof Student) {
             Student other = (Student) obj;
-            return other.getName().equals(getName()) && other.getStudentId().equals(getStudentId());
+            return other.getName().equals(getName()) && other.getStudentNo().equals(getStudentNo());
         } else {
             return false;
         }

@@ -6,10 +6,13 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.group.exceptions.DuplicateStudentInfoException;
+import team.serenity.model.group.exceptions.NotFoundException;
 import team.serenity.model.group.exceptions.StudentInfoNotFoundException;
 import team.serenity.model.util.UniqueList;
 
@@ -26,6 +29,11 @@ public class UniqueStudentInfoList implements UniqueList<StudentInfo> {
     @Override
     public ObservableList<StudentInfo> getList() {
         return this.internalList;
+    }
+
+    @Override
+    public Stream<StudentInfo> stream() {
+        return this.internalList.stream();
     }
 
     @Override
@@ -46,7 +54,7 @@ public class UniqueStudentInfoList implements UniqueList<StudentInfo> {
      * Adds a student info to the list. The student info must not already exist in the list.
      */
     @Override
-    public void add(StudentInfo toAdd) {
+    public void add(StudentInfo toAdd) throws DuplicateException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateStudentInfoException();
@@ -76,7 +84,9 @@ public class UniqueStudentInfoList implements UniqueList<StudentInfo> {
      * The identity of {@code editedStudentInfo} must not be the same as another existing student info in the list.
      */
     @Override
-    public void setElement(StudentInfo target, StudentInfo editedStudentInfo) {
+    public void setElement(StudentInfo target, StudentInfo editedStudentInfo)
+        throws NotFoundException, DuplicateException {
+
         requireAllNonNull(target, editedStudentInfo);
 
         int index = this.internalList.indexOf(target);
@@ -91,7 +101,7 @@ public class UniqueStudentInfoList implements UniqueList<StudentInfo> {
         this.internalList.set(index, editedStudentInfo);
     }
 
-    public void setElements(UniqueList<StudentInfo> replacement) {
+    public void setElementsWithUniqueList(UniqueList<StudentInfo> replacement) {
         requireNonNull(replacement);
         this.internalList.setAll(replacement.getList());
     }
@@ -100,7 +110,7 @@ public class UniqueStudentInfoList implements UniqueList<StudentInfo> {
      * Replaces the contents of this list with {@code studentsInfo}.
      * {@code studentsInfo} must not contain duplicate students info.
      */
-    public void setElementsWithList(List<StudentInfo> studentsInfo) {
+    public void setElementsWithList(List<StudentInfo> studentsInfo) throws DuplicateException {
         requireAllNonNull(studentsInfo);
         if (!elementsAreUnique(studentsInfo)) {
             throw new DuplicateStudentInfoException();
