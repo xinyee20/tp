@@ -39,6 +39,34 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code charSequence}.
+     * Ignores case and not necessary for a full word match.
+     * <br>examples:<pre>
+     *       containsCharSequenceIgnoreCase("ABc def", "abc") == true
+     *       containsCharSequenceIgnoreCase("ABc def", "DEF") == true
+     *       containsCharSequenceIgnoreCase("ABc def", "AB") == true // not a full word match
+     *       </pre>
+     *
+     * @param sentence      cannot be null
+     * @param charSequence  cannot be null, cannot be empty, must be a single word without blank spaces
+     */
+    public static boolean containsCharSequenceIgnoreCase(String sentence, String charSequence) {
+        requireNonNull(sentence);
+        requireNonNull(charSequence);
+
+        String preppedCharSequence = charSequence.trim().toLowerCase();
+        checkArgument(!preppedCharSequence.isEmpty(), "CharSequence parameter cannot be empty");
+        checkArgument(preppedCharSequence.split("\\s+").length == 1,
+                "CharSequence parameter should be a single word without blank spaces");
+
+        String preppedSentence = sentence.toLowerCase();
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch(word -> word.toLowerCase().contains(preppedCharSequence));
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
