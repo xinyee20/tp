@@ -3,6 +3,7 @@ package team.serenity.model.managers;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
@@ -98,9 +99,27 @@ public class GroupManager implements ReadOnlyGroupManager {
      */
     public void deleteGroup(Group group) {
         requireNonNull(group);
-        if (hasGroup(group)) {
-            this.listOfGroups.remove(group);
-        }
+        this.listOfGroups.remove(group);
     }
 
+    //util Methods
+
+    @Override
+    public int hashCode() {
+        return this.listOfGroups.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this //short circuit if same Object
+                || (obj instanceof GroupManager
+                && this.listOfGroups.equals(((GroupManager) obj).listOfGroups));
+    }
+
+    @Override
+    public String toString() {
+        return "GroupManager : \n"
+                + this.listOfGroups.getList().stream().map(Group::toString).collect(Collectors.joining("\n"))
+                + "\n Total number of groups: " + this.listOfGroups.size();
+    }
 }
