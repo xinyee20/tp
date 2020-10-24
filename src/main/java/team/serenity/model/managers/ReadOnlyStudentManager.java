@@ -14,6 +14,6 @@ public interface ReadOnlyStudentManager {
      * Returns an Unmodifiable view of the Student HashMap
      * this Hashmap will not contain any duplicate Students
      */
-    public Map<Group, UniqueList<Student>> getMapOfStudent();
+    public Map<Group, UniqueList<Student>> getStudentMap();
 
 }
