@@ -42,6 +42,10 @@ public class GroupManager {
         return false;
     }
 
+    public boolean hasGroup() {
+        return this.listOfGroups.size() > 0;
+    }
+
     // TODO: improve this method's efficiency
     private boolean hasAtLeast1SameStudent(Group target) {
         for (Student targetStudent : target.getStudents()) {
@@ -54,10 +58,6 @@ public class GroupManager {
             }
         }
         return false;
-    }
-
-    public boolean hasGroup() {
-        return this.listOfGroups.size() > 0;
     }
 
     public Stream<Group> getStream() {
