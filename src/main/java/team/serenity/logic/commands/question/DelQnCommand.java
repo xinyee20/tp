@@ -1,20 +1,18 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.question;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
-import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
-import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
+import team.serenity.logic.commands.Command;
+import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Question;
-import team.serenity.model.util.UniqueList;
+import team.serenity.model.group.question.Question;
 
 /**
- * Deletes a question identified using it's displayed index from the specified group's lesson in serenity.
+ * Deletes a question identified using it's displayed index from viewing the question list.
  */
 public class DelQnCommand extends Command {
 
@@ -25,7 +23,7 @@ public class DelQnCommand extends Command {
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1\n";
 
-    public static final String MESSAGE_DELETE_QUESTION_SUCCESS = "[%1$s %2$s] Deleted Question: %3$s";
+    public static final String MESSAGE_DELETE_QUESTION_SUCCESS = "Deleted Question: %s";
 
     private final Index targetIndex;
 
@@ -40,27 +38,15 @@ public class DelQnCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.getFilteredGroupList().size() != 1) {
-            throw new CommandException(MESSAGE_NOT_VIEWING_A_GROUP);
-        }
-
-        if (model.getFilteredLessonList().size() != 1) {
-            throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
-        }
-
-        Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<Question> uniqueQuestionList = uniqueLesson.getQuestionList();
-        ObservableList<Question> lastViewedQuestionList = uniqueQuestionList.asUnmodifiableObservableList();
+        ObservableList<Question> lastViewedQuestionList = model.getFilteredQuestionList();
 
         if (this.targetIndex.getZeroBased() >= lastViewedQuestionList.size()) {
             throw new CommandException(MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX);
         }
 
         Question questionToDelete = lastViewedQuestionList.get(this.targetIndex.getZeroBased());
-        uniqueQuestionList.remove(questionToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_QUESTION_SUCCESS,
-                model.getFilteredGroupList().get(0),
-                uniqueLesson, questionToDelete));
+        model.deleteQuestion(questionToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_QUESTION_SUCCESS, questionToDelete));
     }
 
     @Override

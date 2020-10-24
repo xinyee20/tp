@@ -41,7 +41,6 @@
 }
 
 .tab-pane {
-<<<<<<< HEAD
     -fx-padding: 0;
 }
 
@@ -58,26 +57,12 @@
 .tab-pane > .tab-header-area > .headers-region > .tab:hover {
     -fx-background-color: -color-blue4;
     -fx-border-insets: 0;
-=======
-    -fx-padding: 0 0 0 1;
-}
-
-.tab-pane .tab-header-area {
-    -fx-padding: 0 0 0 0;
-    -fx-min-height: 0;
-    -fx-max-height: 0;
->>>>>>> 2aa367b4... Add colors to UI
 }
 
 .table-view {
     -fx-base: #1d1d1d;
-<<<<<<< HEAD
     -fx-control-inner-background: -color-blue2;
     -fx-background-color: -color-blue2;
-=======
-    -fx-control-inner-background: -color-purple;
-    -fx-background-color: -color-purple;
->>>>>>> 2aa367b4... Add colors to UI
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -112,58 +97,34 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-<<<<<<< HEAD
     -fx-background-color: -color-blue1;
-=======
-    -fx-background-color: -color-lightpurple;
->>>>>>> 2aa367b4... Add colors to UI
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-<<<<<<< HEAD
     -fx-background-color: -color-blue1;
-=======
-    -fx-background-color: -color-lightpurple;
->>>>>>> 2aa367b4... Add colors to UI
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-<<<<<<< HEAD
     -fx-background-color: -color-blue1;
-=======
-    -fx-background-color: -color-lightpurple;
->>>>>>> 2aa367b4... Add colors to UI
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-<<<<<<< HEAD
     -fx-graphic-text-gap: 0;
-=======
-    -fx-graphic-text-gap : 0;
->>>>>>> 2aa367b4... Add colors to UI
     -fx-padding: 0 0 0 0;
 }
 
 .list-cell:filled:even {
-<<<<<<< HEAD
     -fx-background-color: -color-blue2;
 }
 
 .list-cell:filled:odd {
     -fx-background-color: -color-blue1;
-=======
-    -fx-background-color: -color-purple;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: -color-lightpurple;
->>>>>>> 2aa367b4... Add colors to UI
 }
 
 .list-cell:filled:selected {
@@ -192,7 +153,6 @@
 }
 
 .stack-pane {
-<<<<<<< HEAD
      -fx-background-color: -color-blue1;
 }
 
@@ -200,38 +160,6 @@
      -fx-background-color: -color-blue1;
      -fx-border-width: 0px;
 }
-
-=======
-     -fx-background-color: -color-lightpurple;
-}
-
-.pane-with-border {
-     -fx-background-color: -color-lightpurple;
-     -fx-border-color: derive(-color-purple, 10%);
-     -fx-border-top-width: 1px;
-}
-
-.status-bar {
-    -fx-background-color: #161925;
-}
-
-
-.status-bar .label {
-    -fx-text-fill: -color-white;
-    -fx-padding: 2px;
-    -fx-pref-height: 0px;
-}
-
-.status-bar-with-border {
-    -fx-background-color: derive(-color-purple, 30%);
-    -fx-border-color: derive(-color-purple, 25%);
-    -fx-border-width: 1px;
-}
-
-.status-bar-with-border .label {
-    -fx-text-fill: -color-white;
-}
->>>>>>> 2aa367b4... Add colors to UI
 
 .result-display {
     -fx-background-color: transparent;
@@ -243,47 +171,19 @@
     -fx-text-fill: black !important;
 }
 
-<<<<<<< HEAD
-=======
-
-.grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
-}
-
-.grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
-
->>>>>>> 2aa367b4... Add colors to UI
-/*
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
 .button {
-<<<<<<< HEAD
     -fx-border-radius: 2;
-=======
-    -fx-border-radius: 30%;
->>>>>>> 2aa367b4... Add colors to UI
     -fx-padding: 5 0 5 0;
     -fx-border-color: transparent;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-<<<<<<< HEAD
-    -fx-background-color: -color-blue3;
-=======
-    -fx-background-color: -color-white;
->>>>>>> 2aa367b4... Add colors to UI
+    -fx-background-color: -color-blue;
     -fx-font-size: 11pt;
     -fx-text-fill: -color-white;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-<<<<<<< HEAD
     -fx-background-color: -color-blue4;
 }
 
@@ -301,21 +201,6 @@
 
 .dialog-pane > *.button-bar > *.container {
     -fx-background-color: -color-blue2;
-=======
-    -fx-background-color: derive(-color-medium2, 20%);
-}
-
-.button:default:hover {
-    -fx-background-color: derive(-fx-focus-color, 30%);
-}
-
-.dialog-pane {
-    -fx-background-color: -color-purple;
-}
-
-.dialog-pane > *.button-bar > *.container {
-    -fx-background-color: -color-purple;
->>>>>>> 2aa367b4... Add colors to UI
 }
 
 .dialog-pane > *.label.content {
@@ -325,11 +210,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-<<<<<<< HEAD
     -fx-background-color: derive(-color-blue2, 25%);
-=======
-    -fx-background-color: derive(-color-purple, 25%);
->>>>>>> 2aa367b4... Add colors to UI
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -339,7 +220,6 @@
     -fx-text-fill: -color-white;
 }
 
-<<<<<<< HEAD
 .scroll-pane {
     -fx-background: -color-blue2;
     -fx-background-insets: 0;
@@ -352,14 +232,6 @@
 
 .scroll-bar .thumb {
     -fx-background-color: derive(-color-blue2, 50%);
-=======
-.scroll-bar {
-    -fx-background-color: -color-lightpurple;
-}
-
-.scroll-bar .thumb {
-    -fx-background-color: derive(-color-purple, 50%);
->>>>>>> 2aa367b4... Add colors to UI
     -fx-background-insets: 3;
 }
 
@@ -386,15 +258,9 @@
 }
 
 #commandTextField {
-<<<<<<< HEAD
     -fx-background-color: -color-blue3 -color-blue3 -color-blue3 -color-blue3;
     -fx-background-insets: 0;
     -fx-border-color: -color-blue3 -color-blue3 -color-blue3 -color-blue3;
-=======
-    -fx-background-color: -color-blue -color-blue -color-blue -color-blue;
-    -fx-background-insets: 0;
-    -fx-border-color: -color-blue -color-blue -color-blue -color-blue;
->>>>>>> 2aa367b4... Add colors to UI
     -fx-border-insets: 0;
     -fx-border-width: 0;
     -fx-font-size: 10pt;
@@ -406,14 +272,8 @@
 }
 
 #resultDisplay .content {
-<<<<<<< HEAD
     -fx-background-color: transparent, -color-blue2, transparent, -color-blue2;
     -fx-background-radius: 0;
-=======
-    -fx-background-color: transparent, -color-purple, transparent, -color-purple;
-    -fx-background-radius: 0;
-    -fx-text-fill: #000000;
->>>>>>> 2aa367b4... Add colors to UI
 }
 
 #tags {
@@ -429,10 +289,3 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
-<<<<<<< HEAD
-=======
-
-.button-selected {
-    -fx-background-color: derive(-color-medium2, 50%);
-}
->>>>>>> 2aa367b4... Add colors to UI
