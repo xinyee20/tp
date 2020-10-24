@@ -122,6 +122,90 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //---------------- Tests for containsCharSequenceIgnoreCase --------------------------------------
+
+    /*
+     * Invalid equivalence partitions for word: null, empty, multiple words
+     * Invalid equivalence partitions for sentence: null
+     * The four test cases below test one invalid input at a time.
+     */
+
+    @Test
+    public void containsCharSequenceIgnoreCase_nullWord_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                StringUtil.containsCharSequenceIgnoreCase("typical sentence", null));
+    }
+
+    @Test
+    public void containsCharSequenceIgnoreCase_emptyCharSequence_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "CharSequence parameter cannot be empty", () ->
+                StringUtil.containsCharSequenceIgnoreCase("typical sentence", "  "));
+    }
+
+    @Test
+    public void containsCharSequenceIgnoreCase_multipleCharSequences_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                "CharSequence parameter should be a single word without blank spaces", () ->
+                        StringUtil.containsCharSequenceIgnoreCase("typical sentence", "aaa BBB"));
+    }
+
+    @Test
+    public void containsCharSequenceIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                StringUtil.containsCharSequenceIgnoreCase(null, "abc"));
+    }
+
+    /*
+     * Valid equivalence partitions for charSequence:
+     *   - any word
+     *   - word containing symbols/numbers
+     *   - word with leading/trailing spaces
+     *   - part of a full word
+     *
+     * Valid equivalence partitions for sentence:
+     *   - empty string
+     *   - one word
+     *   - multiple words
+     *   - sentence with extra spaces
+     *
+     * Possible scenarios returning true:
+     *   - charSequence matches first word in sentence
+     *   - charSequence matches last word in sentence
+     *   - charSequence matches middle word in sentence
+     *   - charSequence matches multiple words
+     *   - charSequence matches part of a word in sentence
+     *
+     * Possible scenarios returning false:
+     *   - query charSequence does not match any part of a sentence word
+     *   - sentence word matches part of the query charSequence
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+
+    @Test
+    public void containsCharSequenceIgnoreCase_validInputs_correctResult() {
+
+        // Empty sentence
+        assertFalse(StringUtil.containsCharSequenceIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsCharSequenceIgnoreCase("    ", "123"));
+
+        // Matches a partial word only
+        // Sentence word bigger than query charSequence
+        assertTrue(StringUtil.containsCharSequenceIgnoreCase("aaa bbb ccc", "bb"));
+        // Query charSequence bigger than sentence word
+        assertFalse(StringUtil.containsCharSequenceIgnoreCase("aaa bbb ccc", "bbbb"));
+
+        // Matches word in the sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsCharSequenceIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
+        assertTrue(StringUtil.containsCharSequenceIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsCharSequenceIgnoreCase("  AAA bBb ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(StringUtil.containsCharSequenceIgnoreCase("Aaa", "aaa")); // One word in sentence (boundary case)
+        assertTrue(StringUtil.containsCharSequenceIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+
+        // Matches multiple words in sentence
+        assertTrue(StringUtil.containsCharSequenceIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+    }
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*
