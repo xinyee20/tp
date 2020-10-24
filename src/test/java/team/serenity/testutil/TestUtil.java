@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.model.Model;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 /**
  * A utility class for test cases.

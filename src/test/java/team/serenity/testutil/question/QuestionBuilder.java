@@ -1,6 +1,6 @@
 package team.serenity.testutil.question;
 
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 /**
  * A utility class to help with building Question objects.

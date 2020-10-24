@@ -1,4 +1,4 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.question;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Question;
 import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.util.UniqueList;

@@ -1,4 +1,4 @@
-package team.serenity.model.group;
+package team.serenity.model.group.question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

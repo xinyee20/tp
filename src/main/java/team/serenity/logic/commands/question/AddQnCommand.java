@@ -1,15 +1,17 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.question;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 
+import team.serenity.logic.commands.Command;
+import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 /**
  * Adds a question to the Question manager.

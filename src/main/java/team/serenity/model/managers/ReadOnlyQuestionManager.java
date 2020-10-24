@@ -1,7 +1,7 @@
 package team.serenity.model.managers;
 
 import javafx.collections.ObservableList;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 /**
  * Unmodifiable view of a QuestionManager.
