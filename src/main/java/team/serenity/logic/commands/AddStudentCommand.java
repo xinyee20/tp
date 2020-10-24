@@ -22,7 +22,7 @@ public class AddStudentCommand extends Command {
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
         + PREFIX_NAME + "STUDENT_NAME "
-        + PREFIX_ID + "STUDENT_ID\n"
+        + PREFIX_ID + "STUDENT_NUMBER\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G04 "
         + PREFIX_NAME + "Ryan "
