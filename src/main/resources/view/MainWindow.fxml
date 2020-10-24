@@ -25,7 +25,6 @@
       </stylesheets>
          <BorderPane>
             <center>
-
             <VBox>
                 <StackPane fx:id="dataDisplayPlaceholder" minWidth="680.0" prefHeight="150.0" prefWidth="200.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           </StackPane>

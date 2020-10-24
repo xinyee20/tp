@@ -12,15 +12,15 @@ import team.serenity.model.group.Student;
 class JsonAdaptedStudent {
 
     private final String name;
-    private final String studentNumber;
+    private final String studentNo;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given {@code name} and {@ocde studentNumber}.
      */
     @JsonCreator
-    public JsonAdaptedStudent(String name, String studentNumber) {
+    public JsonAdaptedStudent(String name, String studentNo) {
         this.name = name;
-        this.studentNumber = studentNumber;
+        this.studentNo = studentNo;
     }
 
     /**
@@ -28,7 +28,7 @@ class JsonAdaptedStudent {
      */
     public JsonAdaptedStudent(Student source) {
         this.name = source.getName();
-        this.studentNumber = source.getStudentId();
+        this.studentNo = source.getStudentNo();
     }
 
     @JsonValue
@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         // add some validation
-        return new Student(this.name, this.studentNumber);
+        return new Student(this.name, this.studentNo);
     }
 
 }

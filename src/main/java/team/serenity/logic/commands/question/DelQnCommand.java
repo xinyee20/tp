@@ -1,13 +1,15 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.question;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
+import team.serenity.logic.commands.Command;
+import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 /**
  * Deletes a question identified using it's displayed index from viewing the question list.

@@ -1,4 +1,4 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -15,7 +15,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
 import team.serenity.model.Serenity;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.testutil.question.QuestionBuilder;

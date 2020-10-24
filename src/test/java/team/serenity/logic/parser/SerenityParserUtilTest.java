@@ -8,7 +8,7 @@ import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 public class SerenityParserUtilTest {
 

@@ -31,20 +31,6 @@ public class Lesson {
         this.studentsInfo = studentsInfo;
     }
 
-    /**
-     * Constructs a {@code Lesson}.
-     * @param name A valid name.
-     * @param studentsInfo A valid list of studentInfo.
-     * @param questionList A list of questions.
-     */
-    public Lesson(String name, UniqueList<StudentInfo> studentsInfo, UniqueList<Question> questionList) {
-        requireAllNonNull(name, studentsInfo);
-        checkArgument(isValidName(name), NAME_CONSTRAINT);
-        checkArgument(isValidStudentInfo(studentsInfo), STUDENTS_INFO_CONSTRAINT);
-        this.name = name;
-        this.studentsInfo = studentsInfo;
-    }
-
     private UniqueList<StudentInfo> generateStudentInfo(ObservableList<Student> students) {
         UniqueList<StudentInfo> studentInfo = new UniqueStudentInfoList();
         for (Student s : students) {

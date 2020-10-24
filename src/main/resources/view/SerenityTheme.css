@@ -161,7 +161,6 @@
      -fx-border-width: 0px;
 }
 
-
 .result-display {
     -fx-background-color: transparent;
     -fx-font-size: 11pt;
@@ -178,7 +177,7 @@
     -fx-border-color: transparent;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: -color-blue3;
+    -fx-background-color: -color-blue;
     -fx-font-size: 11pt;
     -fx-text-fill: -color-white;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;

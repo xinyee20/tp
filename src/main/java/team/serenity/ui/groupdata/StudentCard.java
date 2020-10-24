@@ -33,7 +33,7 @@ public class StudentCard extends UiPart<Region> {
         this.student = student;
         this.id.setText(displayedIndex + ". ");
         this.name.setText(student.getName());
-        this.studentNumber.setText(student.getStudentId());
+        this.studentNumber.setText(student.getStudentNo());
     }
 
     @Override

@@ -8,7 +8,7 @@ import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import org.junit.jupiter.api.Test;
 
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 class JsonAdaptedQuestionTest {
 

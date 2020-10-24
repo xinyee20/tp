@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 /**
  * Jackson-friendly version of {@link Question}.

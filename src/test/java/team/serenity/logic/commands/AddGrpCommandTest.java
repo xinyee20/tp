@@ -8,6 +8,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -104,6 +105,11 @@ class AddGrpCommandTest {
         public void addGroup(Group group) {
             requireNonNull(group);
             groupsAdded.add(group);
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            // update filtered group list
         }
     }
 }
