@@ -4,8 +4,6 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import team.serenity.logic.commands.AddGrpCommand;
@@ -31,7 +29,7 @@ public class AddGrpCommandParser implements Parser<AddGrpCommand> {
         }
 
         String grpName = argMultimap.getValue(PREFIX_GRP).get();
-        Path filePath = Paths.get(argMultimap.getValue(PREFIX_PATH).get());
+        String filePath = argMultimap.getValue(PREFIX_PATH).get();
 
         Group group = new Group(grpName, filePath);
 
