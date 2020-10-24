@@ -27,7 +27,7 @@ public class QuestionManager implements ReadOnlyQuestionManager {
     }
 
     /**
-     * Creates a QuestionManager using the Questions in the {@code} toBeCopied}
+     * Creates a QuestionManager using the Questions in the {@code toBeCopied}
      */
     public QuestionManager(ReadOnlyQuestionManager toBeCopied) {
         this.listOfQuestions = new UniqueQuestionList();
@@ -52,6 +52,10 @@ public class QuestionManager implements ReadOnlyQuestionManager {
         setQuestions(newData.getListOfQuestions());
     }
 
+    /**
+     * Returns the list of questions as an unmodifiable list
+     */
+    @Override
     public ObservableList<Question> getListOfQuestions() {
         return this.listOfQuestions.asUnmodifiableObservableList();
     }

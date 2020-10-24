@@ -3,16 +3,18 @@ package team.serenity.model.managers;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Student;
 import team.serenity.model.util.UniqueList;
 
-public class StudentManager {
+public class StudentManager implements ReadOnlyStudentManager{
 
-    private final HashMap<Group, UniqueList<Student>> mapToListOfStudents;
+    private final Map<Group, UniqueList<Student>> mapToListOfStudents;
 
     public StudentManager() {
         this.mapToListOfStudents = new HashMap<>();
@@ -34,6 +36,18 @@ public class StudentManager {
         }
     }
 
+    @Override
+    public Map<Group, UniqueList<Student>> getMapOfStudent() {
+        return null;
+    }
+
+    // Student-level methods
+
+    /**
+     * Replaces listOfStudents from a particular {@code Group}
+     * @param group Group of interest
+     * @param students new list of students to replace with
+     */
     public void addListOfStudentsToGroup(Group group, UniqueList<Student> students) {
         this.mapToListOfStudents.put(group, students);
     }
