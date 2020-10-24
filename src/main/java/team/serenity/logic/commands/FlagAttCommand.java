@@ -104,8 +104,6 @@ public class FlagAttCommand extends Command{
                 uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                 model.updateLessonList();
                 model.updateStudentsInfoList();
-
-
             }
             return new CommandResult(String.format(MESSAGE_SUCCESS, this.toFlagAtt));
 

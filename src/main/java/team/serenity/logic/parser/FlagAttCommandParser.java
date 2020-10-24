@@ -17,6 +17,7 @@ import team.serenity.model.group.Student;
  * Parses input arguments and creates a new FlagAttCommand object.
  * Current support:
  * flagatt name/NAME id/STUDENT_NUMBER
+ * flagatt INDEX
  */
 public class FlagAttCommandParser implements Parser<FlagAttCommand> {
 

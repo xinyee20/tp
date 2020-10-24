@@ -7,6 +7,7 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.FlagAttCommand;
 import team.serenity.logic.commands.UnflagAttCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
@@ -16,6 +17,7 @@ import team.serenity.model.group.Student;
  * Parses input arguments and creates a new UnflagAttCommand object.
  * Current support:
  * unflagatt name/NAME id/STUDENT_NUMBER
+ * unflagatt INDEX
  */
 public class UnflagAttCommandParser implements Parser<UnflagAttCommand> {
 
@@ -29,19 +31,25 @@ public class UnflagAttCommandParser implements Parser<UnflagAttCommand> {
     public UnflagAttCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_ID);
 
+        Index index;
         String studentName;
         String studentNumber;
         Optional<Student> student;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
+        try {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
+                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
+                student = Optional.ofNullable(new Student(studentName, studentNumber));
+
+                return new UnflagAttCommand(student.get());
+            } else {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                return new UnflagAttCommand(index);
+            }
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnflagAttCommand.MESSAGE_USAGE));
         }
-
-        studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-        studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
-        student = Optional.ofNullable(new Student(studentName, studentNumber));
-
-        return new UnflagAttCommand(student.get());
     }
 
     /**
