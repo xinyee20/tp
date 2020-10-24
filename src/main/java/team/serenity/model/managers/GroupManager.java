@@ -27,7 +27,7 @@ public class GroupManager implements ReadOnlyGroupManager {
     }
 
     /**
-     * Creates a GroupManager using the Questions in the {@code toBeCopied}
+     * Creates a GroupManager using the Group in the {@code toBeCopied}
      * @param toBeCopied
      */
     public GroupManager(ReadOnlyGroupManager toBeCopied) {

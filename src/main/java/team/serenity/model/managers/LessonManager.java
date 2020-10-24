@@ -12,14 +12,21 @@ import team.serenity.model.group.Lesson;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
 import team.serenity.model.util.UniqueList;
 
-public class LessonManager implements ReadOnlyLessonManager{
+public class LessonManager implements ReadOnlyLessonManager {
 
     private final Map<Group, UniqueList<Lesson>> mapToListOfLessons;
 
+    /**
+     * Instantiates a new LessonManager.
+     */
     public LessonManager() {
         this.mapToListOfLessons = new HashMap<>();
     }
 
+    /**
+     * Creates a LessonManager using the Lesson in the {@code toBeCopied}
+     * @param toBeCopied
+     */
     public LessonManager(ReadOnlyLessonManager toBeCopied) {
         this.mapToListOfLessons = new HashMap<>();
         resetData(toBeCopied);
@@ -61,7 +68,7 @@ public class LessonManager implements ReadOnlyLessonManager{
      * @param targetLesson Lesson to check for
      * @return whether the given lesson for the specified group exist.
      */
-    public boolean TargetGroupHasLesson(Group targetGroup, Lesson targetLesson) {
+    public boolean targetGroupHasLesson(Group targetGroup, Lesson targetLesson) {
         requireAllNonNull(targetGroup, targetLesson);
         Optional<UniqueList<Lesson>> uniqueList = Optional.ofNullable(this.mapToListOfLessons.get(targetGroup));
         if (uniqueList.isEmpty()) {
@@ -111,7 +118,7 @@ public class LessonManager implements ReadOnlyLessonManager{
         this.mapToListOfLessons.put(group, newListOfLessons);
     }
 
-    public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) throws GroupNotFoundException{
+    public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) throws GroupNotFoundException {
         Optional<UniqueList<Lesson>> lessonList = Optional.ofNullable(this.mapToListOfLessons.get(group));
         if (lessonList.isPresent()) {
             return lessonList.get();
