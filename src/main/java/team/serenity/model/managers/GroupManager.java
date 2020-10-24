@@ -38,7 +38,7 @@ public class GroupManager implements ReadOnlyGroupManager {
     // Methods that overrides the whole group list
 
     /**
-     * Replaces the contents of the question list with {@code newListOfGroups}.
+     * Replaces the contents of the Group list with {@code newListOfGroups}.
      * {@code newListOfGroups} must not contain duplicate groups.
      */
     public void setGroups(List<Group> newListOfGroups) {
@@ -54,7 +54,7 @@ public class GroupManager implements ReadOnlyGroupManager {
     }
 
     /**
-     * Returns the list of groups as an unmodifiable list
+     * Returns the list of groups as an unmodifiable list.
      */
     public ObservableList<Group> getListOfGroups() {
         return this.listOfGroups.asUnmodifiableObservableList();
