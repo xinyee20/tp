@@ -9,7 +9,7 @@ import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class Student {
     public static final String STUDENT_NAME_ERROR = "Name cannot be empty";
-    public static final String STUDENT_ID_ERROR = "Student ID cannot be empty "
+    public static final String STUDENT_ID_ERROR = "Student no cannot be empty "
         + "and must follow the format 'AXXXXXXXU' "
         + "where X is a digit from 0 to 9";
     private String name;
@@ -19,7 +19,11 @@ public class Student {
      * Constructs a {@code Student}.
      *
      * @param name          A valid name.
+<<<<<<< HEAD
      * @param studentNo A valid student ID.
+=======
+     * @param studentNo A valid student no.
+>>>>>>> f29741bb... Edit Student files
      */
     public Student(String name, String studentNo) {
         requireAllNonNull(name, studentNo);
@@ -34,9 +38,9 @@ public class Student {
     }
 
     /**
-     * Checks whether String s is a valid Student ID.
-     * @param s Student ID
-     * @return Whether String is valid
+     * Checks whether String s is a valid student no.
+     * @param s Student no.
+     * @return Whether String is valid.
      */
     public static boolean isValidStudentId(String s) {
         //9 digits long
