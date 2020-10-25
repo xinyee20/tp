@@ -187,8 +187,23 @@ public class ModelManager implements Model {
     public void addGroup(Group group) {
         requireNonNull(group);
         UniqueList<Student> studentList = group.getStudents();
+        UniqueList<Lesson> lessonList = group.getLessons();
         this.groupManager.addGroup(group);
         this.studentManager.addListOfStudentsToGroup(group, studentList);
+        this.lessonManager.addListOfLessonsToGroup(group, lessonList);
+        UniqueList<StudentInfo> studentInfoList = new UniqueStudentInfoList();
+        ObservableList<Student> uniqueStudentList = studentList.getList();
+        for (int s = 0; s < studentList.size(); s++) {
+            Student uniqueStudent = uniqueStudentList.get(s);
+            StudentInfo uniqueStudentInfo = new StudentInfo(uniqueStudent);
+            studentInfoList.add(uniqueStudentInfo);
+        }
+        for (int i = 0; i < lessonList.size(); i++) {
+            ObservableList<Lesson> uniqueLessonList = lessonList.getList();
+            Lesson uniqueLesson = uniqueLessonList.get(i);
+            GroupLessonKey groupLessonKey = new GroupLessonKey(group, uniqueLesson);
+            this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(groupLessonKey, studentInfoList);
+        }
     }
 
     @Override

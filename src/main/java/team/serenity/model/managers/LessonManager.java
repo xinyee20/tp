@@ -32,6 +32,15 @@ public class LessonManager {
     }
 
     /**
+     * Adds a specified {@code UniqueList<Lesson>} to a {@code Group}.
+     * @param group
+     * @param lessons
+     */
+    public void addListOfLessonsToGroup(Group group, UniqueList<Lesson> lessons) {
+        this.mapToListOfLessons.put(group, lessons);
+    }
+
+    /**
      * Replaces listOfLessons stored in {@code Group} with {@code newListOfLessons}
      * @param group
      * @param newListOfLessons

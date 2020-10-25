@@ -15,7 +15,12 @@ public class Messages {
     public static final String MESSAGE_LESSON_EMPTY = "no such lesson!";
 
     public static final String MESSAGE_STUDENT_EMPTY = "No such student!";
+    public static final String MESSAGE_STUDENT_NOT_FOUND =
+            "%s is not found, please ensure the name & student id is correct";
     public static final String MESSAGE_DUPLICATE_STUDENT = "Student already exists!";
+
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
+            "Index %d is not found, please ensure that it exists";
 
     public static final String MESSAGE_NOT_VIEWING_A_GROUP = "Group not specified.";
     public static final String MESSAGE_NOT_VIEWING_A_LESSON = "Lesson not specified.";

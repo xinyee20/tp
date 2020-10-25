@@ -1,6 +1,10 @@
 package team.serenity.logic.commands.attendance;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
+import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
+import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -21,11 +25,6 @@ public class MarkAbsentCommand extends Command {
     public static final String COMMAND_WORD = "markabsent";
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance:  absent";
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked absent!";
-    public static final String MESSAGE_STUDENT_NOT_FOUND =
-            "%s is not found, please ensure the name & student id is correct";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
-            "Index %d is not found, please ensure that it exists";
-    public static final String MESSAGE_NOT_IN_LESSON = "Currently not in any lesson. Please enter a lesson.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks a specific student or all students absent from a lesson.\n"
@@ -79,70 +78,71 @@ public class MarkAbsentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        try {
-            Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-            UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
-            ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
-
-            if (!this.isWholeClass) {
-
-                if (!isByIndex) {
-
-                    // Mark single student attendance
-                    for (int i = 0; i < studentsInfo.size(); i++) {
-                        StudentInfo studentInfo = studentsInfo.get(i);
-                        this.isCorrectStudent = studentInfo.containsStudent(this.toMarkAbsent);
-                        if (this.isCorrectStudent) {
-                            Attendance update = studentInfo.getAttendance().setNewAttendance(false);
-                            StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                            uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-                            model.updateLessonList();
-                            model.updateStudentsInfoList();
-                            break;
-                        }
-                    }
-
-                    if (!this.isCorrectStudent) {
-                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND,
-                                this.toMarkAbsent));
-                    }
-
-                } else {
-                    if (index.getZeroBased() > studentsInfo.size()) {
-                        throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                                index.getOneBased()));
-                    }
-
-                    StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
-                    toMarkAbsent = studentInfo.getStudent();
-                    Attendance update = studentInfo.getAttendance().setNewAttendance(false);
-                    StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-                    model.updateLessonList();
-                    model.updateStudentsInfoList();
-                }
-                return new CommandResult(String.format(MESSAGE_SUCCESS, this.toMarkAbsent));
-            } else {
-
-                // Mark whole class absent
-                for (StudentInfo each : studentsInfo) {
-                    Attendance update = each.getAttendance().setNewAttendance(false);
-                    StudentInfo updatedStudentInfo = each.updateAttendance(update);
-                    uniqueStudentInfoList.setElement(each, updatedStudentInfo);
-                    model.updateLessonList();
-                    model.updateStudentsInfoList();
-                }
-
-                return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
-            }
-
-        } catch (Exception e) {
-            if (e instanceof CommandException) {
-                throw e;
-            } else {
-                throw new CommandException(MESSAGE_NOT_IN_LESSON);
-            }
+        if (model.getFilteredGroupList().size() != 1) {
+            throw new CommandException(MESSAGE_NOT_VIEWING_A_GROUP);
         }
+
+        if (model.getFilteredLessonList().size() != 1) {
+            throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
+        }
+
+        Lesson uniqueLesson = model.getFilteredLessonList().get(0);
+        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
+
+        if (! this.isWholeClass) {
+
+            if (! isByIndex) {
+
+                // Mark single student attendance
+                for (int i = 0; i < studentsInfo.size(); i++) {
+                    StudentInfo studentInfo = studentsInfo.get(i);
+                    this.isCorrectStudent = studentInfo.containsStudent(this.toMarkAbsent);
+                    if (this.isCorrectStudent) {
+                        Attendance update = studentInfo.getAttendance().setNewAttendance(false);
+                        StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
+                        uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
+                        model.updateLessonList();
+                        model.updateStudentsInfoList();
+                        break;
+                    }
+                }
+
+                if (! this.isCorrectStudent) {
+                    throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND,
+                            this.toMarkAbsent));
+                }
+
+            } else {
+                if (index.getZeroBased() > studentsInfo.size()) {
+                    throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                            index.getOneBased()));
+                }
+
+                StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
+                toMarkAbsent = studentInfo.getStudent();
+                Attendance update = studentInfo.getAttendance().setNewAttendance(false);
+                StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
+                uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
+                model.updateLessonList();
+                model.updateStudentsInfoList();
+            }
+            return new CommandResult(String.format(MESSAGE_SUCCESS, this.toMarkAbsent));
+        } else {
+
+            // Mark whole class absent
+            for (StudentInfo each : studentsInfo) {
+                Attendance update = each.getAttendance().setNewAttendance(false);
+                StudentInfo updatedStudentInfo = each.updateAttendance(update);
+                uniqueStudentInfoList.setElement(each, updatedStudentInfo);
+                model.updateLessonList();
+                model.updateStudentsInfoList();
+            }
+
+            return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
+        }
+
+
     }
 
     @Override
