@@ -85,13 +85,13 @@ public class StudentInfoManagerTest {
     }
 
     @Test
-    public void addStudentInfoToKey_groupLessonKeyDoesNotExist_ThrowDuplicateStudentInfoException() {
+    public void addStudentInfoToKey_groupLessonKeyDoesNotExist_throwDuplicateStudentInfoException() {
         assertThrows(GroupLessonPairNotFoundException.class, () ->
                 this.studentInfoManager.addStudentInfoToKey(new GroupLessonKeyBuilder().build(), JOHN_INFO));
     }
 
     @Test
-    public void addStudentInfoToKey_duplicateStudentInfo_ThrowDuplicateStudentInfoException() {
+    public void addStudentInfoToKey_duplicateStudentInfo_throwDuplicateStudentInfoException() {
         this.studentInfoManager.resetData(getTypicalStudentInfoManager());
         assertThrows(DuplicateStudentInfoException.class, () ->
                 this.studentInfoManager.addStudentInfoToKey(new GroupLessonKeyBuilder().build(), JOHN_INFO));
@@ -100,9 +100,9 @@ public class StudentInfoManagerTest {
     @Test
     public void addStudentInfoToKey_validStudentInfo() {
         this.studentInfoManager.resetData(getTypicalStudentInfoManager());
-        assertFalse(this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(),JUNE_INFO));
+        assertFalse(this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), JUNE_INFO));
         this.studentInfoManager.addStudentInfoToKey(new GroupLessonKeyBuilder().build(), JUNE_INFO);
-        assertTrue(this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(),JUNE_INFO));
+        assertTrue(this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), JUNE_INFO));
     }
 
     @Test
@@ -135,24 +135,24 @@ public class StudentInfoManagerTest {
     }
 
     @Test
-    public void deleteStudentInfoFromGroupLessonKey_groupLessonKeyDoesNotExist_ThrowDuplicateStudentInfoException() {
+    public void deleteStudentInfoFromGroupLessonKey_groupLessonKeyDoesNotExist_throwDuplicateStudentInfoException() {
         assertThrows(GroupLessonPairNotFoundException.class, () ->
-                this.studentInfoManager.
-                        deleteStudentInfoFromGroupLessonKey(new GroupLessonKeyBuilder().build(), JOHN_INFO));
+                this.studentInfoManager
+                        .deleteStudentInfoFromGroupLessonKey(new GroupLessonKeyBuilder().build(), JOHN_INFO));
     }
 
     @Test
-    public void deleteStudentInfoFromGroupLessonKey_studentInfoDoesNotExist_ThrowStudentInfoNotFoundException() {
+    public void deleteStudentInfoFromGroupLessonKey_studentInfoDoesNotExist_throwStudentInfoNotFoundException() {
         this.studentInfoManager.resetData(getTypicalStudentInfoManager());
-        assertThrows(StudentInfoNotFoundException.class, () -> this.studentInfoManager.
-                deleteStudentInfoFromGroupLessonKey(new GroupLessonKeyBuilder().build(), JUNE_INFO));
+        assertThrows(StudentInfoNotFoundException.class, () -> this.studentInfoManager
+                .deleteStudentInfoFromGroupLessonKey(new GroupLessonKeyBuilder().build(), JUNE_INFO));
     }
 
     @Test
     public void deleteStudentInfoFromGroupLessonKey_validStudentInfo() {
         this.studentInfoManager.resetData(getTypicalStudentInfoManager());
-        assertTrue(this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(),JAMES_INFO));
+        assertTrue(this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), JAMES_INFO));
         this.studentInfoManager.deleteStudentInfoFromGroupLessonKey(new GroupLessonKeyBuilder().build(), JAMES_INFO);
-        assertFalse(this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(),JAMES_INFO));
+        assertFalse(this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), JAMES_INFO));
     }
 }

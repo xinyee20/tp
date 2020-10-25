@@ -1,6 +1,5 @@
 package team.serenity.testutil;
 
-import static team.serenity.testutil.TypicalGroups.GROUP_D;
 import static team.serenity.testutil.TypicalStudent.JAMES;
 import static team.serenity.testutil.TypicalStudent.JANE;
 import static team.serenity.testutil.TypicalStudent.JOHN;
@@ -9,10 +8,8 @@ import static team.serenity.testutil.TypicalStudent.JUNE;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.UniqueStudentInfoList;
-import team.serenity.model.managers.LessonManager;
 import team.serenity.model.managers.StudentInfoManager;
 import team.serenity.model.util.UniqueList;
 

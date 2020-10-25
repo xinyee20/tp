@@ -5,7 +5,6 @@ import static team.serenity.testutil.TypicalGroups.GROUP_D;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
 
 public class GroupLessonKeyBuilder {
 
@@ -15,6 +14,9 @@ public class GroupLessonKeyBuilder {
     private Group group;
     private Lesson lesson;
 
+    /**
+     * initializes a GroupLessonKeyBuilder
+     */
     public GroupLessonKeyBuilder() {
         this.group = DEFAULT_GROUP;
         this.lesson = DEFAULT_LESSON;
