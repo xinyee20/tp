@@ -10,12 +10,12 @@ import team.serenity.model.ReadOnlySerenity;
 import team.serenity.model.Serenity;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Question;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.UniqueLessonList;
 import team.serenity.model.group.UniqueStudentInfoList;
 import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 

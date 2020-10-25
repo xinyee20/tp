@@ -1,4 +1,4 @@
-package team.serenity.logic.parser;
+package team.serenity.logic.parser.question;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_QN_DESC;
@@ -10,8 +10,8 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import team.serenity.logic.commands.AddQnCommand;
-import team.serenity.model.group.Question;
+import team.serenity.logic.commands.question.AddQnCommand;
+import team.serenity.model.group.question.Question;
 import team.serenity.testutil.question.QuestionBuilder;
 
 class AddQnCommandParserTest {

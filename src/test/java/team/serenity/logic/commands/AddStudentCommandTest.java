@@ -36,7 +36,7 @@ public class AddStudentCommandTest {
     public void execute_missingGroup() throws Exception {
         ModelStubWithoutGroup modelStub = new ModelStubWithoutGroup();
         Predicate<Group> pred = new GroupPredicateStub();
-        AddStudentCommand command = new AddStudentCommand("Jon", "e1234567", pred);
+        AddStudentCommand command = new AddStudentCommand("Jon", "A1234567U", pred);
 
         assertThrows(CommandException.class,
             MESSAGE_GROUP_EMPTY, () -> command.execute(modelStub));
@@ -46,8 +46,8 @@ public class AddStudentCommandTest {
     public void execute_duplicateStudent() throws Exception {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
-                new Student("Freddie", "e0000000"),
-                new Student("June", "e0101011")
+                new Student("Freddie", "A0000000U"),
+                new Student("June", "A0101011U")
             ).withClasses("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
@@ -55,7 +55,7 @@ public class AddStudentCommandTest {
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
         Predicate<Group> pred = new GroupPredicateStub();
-        AddStudentCommand command = new AddStudentCommand("Freddie", "e0000000", pred);
+        AddStudentCommand command = new AddStudentCommand("Freddie", "A0000000U", pred);
         assertThrows(CommandException.class,
             MESSAGE_DUPLICATE_STUDENT, () -> command.execute(modelStub));
     }

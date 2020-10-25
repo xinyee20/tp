@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.testutil.question.QuestionBuilder;

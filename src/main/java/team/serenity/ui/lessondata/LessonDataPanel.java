@@ -8,8 +8,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import team.serenity.commons.core.LogsCenter;
-import team.serenity.model.group.Question;
 import team.serenity.model.group.StudentInfo;
+import team.serenity.model.group.question.Question;
 import team.serenity.ui.DataPanel;
 import team.serenity.ui.groupdata.GroupDataPanel;
 

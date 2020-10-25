@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 /**
  * Jackson-friendly version of {@link Question}.
@@ -18,7 +18,7 @@ public class JsonAdaptedQuestion {
     private final String description;
 
     /**
-     * Constructs a {@code JsonAdaptedQuestion} with the given trip details.
+     * Constructs a {@code JsonAdaptedQuestion} with the given question details.
      */
     @JsonCreator
     public JsonAdaptedQuestion(@JsonProperty("group") String group,
@@ -39,9 +39,9 @@ public class JsonAdaptedQuestion {
     }
 
     /**
-     * Converts this Jackson-friendly adapted trip object into the model's {@code Question} object.
+     * Converts this Jackson-friendly adapted question object into the model's {@code Question} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted trip.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted question.
      */
     public Question toModelType() throws IllegalValueException {
         if (this.group == null) {

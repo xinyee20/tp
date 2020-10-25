@@ -1,4 +1,4 @@
-package team.serenity.logic.parser;
+package team.serenity.logic.parser.question;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -7,7 +7,7 @@ import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
-import team.serenity.logic.commands.DelQnCommand;
+import team.serenity.logic.commands.question.DelQnCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

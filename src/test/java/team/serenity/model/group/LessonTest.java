@@ -30,7 +30,7 @@ public class LessonTest {
     }
 
     @Test
-    public void constructor_emptyClass_throwsIllegalArgumentException() {
+    public void constructor_emptyTutorial_throwsIllegalArgumentException() {
         String name = "1-1";
         Set<Student> students = new HashSet<>();
         assertThrows(IllegalArgumentException.class, () -> new Lesson(name, new UniqueStudentInfoList()));
