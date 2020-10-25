@@ -44,11 +44,13 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.3 Mark all students as present: `markpresent all`](#423-mark-all-students-as-present-markpresent-all)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.4. Flag attendance of a student: `flagatt`](#424-flag-attendance-of-a-student-flagatt)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.4 Mark all students as absent: `markabsent all`](#424-mark-all-students-as-absent-markabsent-all)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.5. Unflag attendance of a student: `unflagatt`](#425-unflag-attendance-of-a-student-unflagatt)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.5. Flag attendance of a student: `flagatt`](#425-flag-attendance-of-a-student-flagatt)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.6. Export attendance as CSV file: `exportatt`](#426-export-attendance-as-csv-file-exportatt)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.6. Unflag attendance of a student: `unflagatt`](#426-unflag-attendance-of-a-student-unflagatt)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.7. Export attendance as CSV file: `exportatt`](#427-export-attendance-as-csv-file-exportatt)
 
 &nbsp;&nbsp;&nbsp;[4.3. Participation marking](#43-participation-marking)
 
@@ -360,11 +362,12 @@ so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
 Deleting an existing student from a tutorial group by `name` and `student number`:
+
 1. Type `delstudent grp/G04 name/Aaron Tan matric/A0123456B` into the _Command Box_.
 2. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
-Deleting an existing student from a tutorial group by index:
+Deleting an existing student from a tutorial group by `index` number:
 
 1. Type `delstudent 1 grp/G04` into the _Command Box_.
 2. Press `Enter` to execute.
@@ -384,7 +387,6 @@ This feature allows you to mark attendance of students easily.
 You can use this command to mark a specific student as present for a tutorial lesson.
 
 **Format:**
-
 <br>`markpresent name/NAME matric/STUDENT_NUMBER`
 <br>`markpresent INDEX`
 
@@ -393,11 +395,20 @@ You can use this command to mark a specific student as present for a tutorial le
 A student named `Aaron Tan` with student number `A0123456B` is present for your tutorial lesson 
 `1-2` of tutorial group `G04`. `Aaron Tan` is the first person on the student list so his `index` number is 1.
 
-Marking a student as present for a tutorial lesson:
+<ins>Method 1</ins> <br>
+Marking a student as present for a tutorial lesson by `name` and `student number`:
 
 To mark him present:
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `markpresent name/Aaron Tan matric/A0123456B` into the *Command Box*.
+3. Press `Enter` to execute.
+
+<ins>Method 2</ins> <br>
+Marking a student as present for a tutorial lesson by `index` number:
+
+To mark him present:
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `markpresent 1` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -413,17 +424,26 @@ Outcome:
 You can use this command to mark a specific student as absent for a tutorial lesson.
 
 **Format:**
-
-`markabsent name/NAME matric/STUDENT_NUMBER`
+<br>`markabsent name/NAME matric/STUDENT_NUMBER`
+<br>`markabsent INDEX`
 
 **Example:**
 
 A student named `Aaron Tan` with student number `A0123456B` is absent for your tutorial lesson `1-2` of tutorial group `G04`.
 `Aaron Tan` is the first person on the student list so his `index` number is 1. 
 
-To mark him absent:
+<ins>Method 1</ins> <br>
+Marking a student as absent for a tutorial lesson by `name` and `student number`:
+
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `markabsent name/Aaron Tan matric/A0123456B` into the *Command Box*.
+3. Press `Enter` to execute.
+
+<ins>Method 2</ins> <br>
+Marking a student as absent for a tutorial lesson by `index` number:
+
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `markabsent 1` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -451,9 +471,32 @@ All students in group `G04` are present for your tutorial lesson `1-2` of tutori
 
 Marking all students in a tutorial group as present for a tutorial lesson:
 
-To mark all of them present at once:
 1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `markpresent all` into the *Command Box*.
+3. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
+
+![Figure X. Outcome of a successful mark attendance for all students command]()
+
+#### 4.2.3. Mark all students as absent: `markabsent all`
+
+Accidentally marked all the students as present and want to make them back absent? You can use this command to mark 
+all students in a tutorial group back as absent for a tutorial lesson.
+
+**Format:** `markabsent all`
+
+**Example:**
+
+All students in group `G04` are present for your tutorial lesson `1-2` of tutorial group `G04`. 
+
+Marking all students in a tutorial group as absent for a tutorial lesson:
+
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `markabsent all` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -592,12 +635,14 @@ the student list so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
 Set participation score of a student in a tutorial lesson by `name` and `student number`:
+
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `setscore name/Aaron Tan matric/A0123456B score/3` into the *Command Box*.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Set participation score of a student in a tutorial lesson by `index` number:
+
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `setscore 1 score/3` into the *Command Box*.
 3. Press `Enter` to execute.
@@ -629,12 +674,14 @@ is the first person on the student list so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
 Adding participation score of a student in a tutorial lesson by `name` and `student number`:
+
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `addscore name/Aaron Tan matric/A0123456B add/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Adding participation score of a student in a tutorial lesson by `index`number:
+
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `addscore 1 add/1` into the _Command Box_.
 3. Press `Enter` to execute.
@@ -666,12 +713,14 @@ is the first person on the student list so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
 Subtracting participation score of a student in a tutorial lesson by `name` and `student number`:
+
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `subscore name/Aaron Tan matric/A0123456B sub/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Subtracting participation score of a student in a tutorial lesson:
+
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
 2. Type `subscore 1 sub/1` into the _Command Box_.
 3. Press `Enter` to execute.
