@@ -211,7 +211,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<Lesson>> getListOfLessonsFromGroup(Group group) {
+    public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) {
         return this.lessonManager.getListOfLessonsFromGroup(group);
     }
 
