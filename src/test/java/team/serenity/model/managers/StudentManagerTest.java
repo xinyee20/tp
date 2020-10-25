@@ -164,5 +164,4 @@ class StudentManagerTest {
         this.studentManager.deleteStudentFromGroup(GROUP_D, JUNE);
         assertFalse(this.studentManager.checkIfStudentExistsInGroup(GROUP_D, JUNE));
     }
-
 }

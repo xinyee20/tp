@@ -8,6 +8,7 @@ import team.serenity.logic.commands.CommandTestUtil;
 import team.serenity.model.Serenity;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Student;
+import team.serenity.model.managers.GroupManager;
 
 /**
  * A utility class containing a list of {@code Group} objects to be used in tests.
@@ -51,5 +52,12 @@ public class TypicalGroups {
 
     public static List<Group> getTypicalGroups() {
         return new ArrayList<>(Arrays.asList(GROUP_A, GROUP_C, GROUP_D));
+    }
+
+    public static GroupManager getTypicalGroupManager() {
+        GroupManager groupManager = new GroupManager();
+        groupManager.addGroup(GROUP_C);
+        groupManager.addGroup(GROUP_D);
+        return groupManager;
     }
 }
