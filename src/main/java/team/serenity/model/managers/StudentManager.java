@@ -72,6 +72,8 @@ public class StudentManager implements ReadOnlyStudentManager {
         }
     }
 
+    // Student-level methods
+
     /**
      * Replaces listOfStudents from a particular {@code Group}
      * @param group Group of interest

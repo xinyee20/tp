@@ -16,6 +16,4 @@ public interface ReadOnlyLessonManager {
      * @return
      */
     public Map<Group, UniqueList<Lesson>> getLessonMap();
-
-
 }

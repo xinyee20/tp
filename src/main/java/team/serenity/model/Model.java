@@ -1,7 +1,6 @@
 package team.serenity.model;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -168,7 +167,7 @@ public interface Model {
      */
     ObservableList<StudentInfo> getStudentsInfoList();
 
-    Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
+    UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
 
     /**
      * Updates the student info list to filter when changing to another lesson of interest.
