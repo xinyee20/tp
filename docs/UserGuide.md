@@ -46,15 +46,19 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.4. Flag attendance of a student: `flagatt`](#424-flag-attendance-of-a-student-flagatt)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.5. Export attendance as CSV file: `exportatt`](#425-export-attendance-as-csv-file-exportatt)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.5. Unflag attendance of a student: `unflagatt`](#425-unflag-attendance-of-a-student-unflagatt)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.6. Export attendance as CSV file: `exportatt`](#426-export-attendance-as-csv-file-exportatt)
 
 &nbsp;&nbsp;&nbsp;[4.3. Participation marking](#43-participation-marking)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Add participation score of a student: `addscore`](#431-add-participation-score-of-a-student-addscore)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Set participation score of a student: `setscore`](#431-set-participation-score-of-a-student-setscore)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.2. Subtract participation score of a student: `subscore`](#432-subtract-participation-score-of-a-student-subscore)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.2. Add participation score of a student: `addscore`](#431-add-participation-score-of-a-student-addscore)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.3. Export participation scores as CSV file: `exportscore`](#433-export-participation-scores-as-csv-file-exportscore)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.3. Subtract participation score of a student: `subscore`](#432-subtract-participation-score-of-a-student-subscore)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.4. Export participation scores as CSV file: `exportscore`](#433-export-participation-scores-as-csv-file-exportscore)
 
 &nbsp;&nbsp;&nbsp;[4.4. Question addressing](#44-question-addressing)
 
@@ -401,8 +405,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
-_Figure X. Outcome of a successful mark a student present command_
+![Figure X. Outcome of a successful mark a student present command]()
+
 
 #### 4.2.2. Mark a student as absent: `markabsent`
 
@@ -427,8 +431,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png)
-_Figure X. Outcome of a successful mark a student absent command_
+![Figure X. Outcome of a successful mark a student absent command]()
 
 #### 4.2.3. Mark all students as present: `markpresent all`
 
@@ -458,8 +461,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark attendance for all students command](images/ui/markpresent_all.png)
-_Figure X. Outcome of a successful mark attendance for all students command_
+![Figure X. Outcome of a successful mark attendance for all students command]()
 
 #### 4.2.4. Flag attendance of a student: `flagatt`
 
@@ -480,14 +482,16 @@ other tutor later on. `Aaron Tan` is the first person on the student list so his
 <ins>Method 1</ins> <br>
 Flagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
-1. Type `flagatt name/Aaron Tan matric/A0123456B` into the _Command Box_.
-2. Press `Enter` to execute.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `flagatt name/Aaron Tan matric/A0123456B` into the _Command Box_.
+3. Press `Enter` to execute.
 
 <ins>Method 2</ins><br>
 Flagging a student's attendance for a tutorial lesson by his `index` number:
 
-1. Type `flagatt 1` into the _Command Box_.
-2. Press `Enter` to execute.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `flagatt 1` into the _Command Box_.
+3. Press `Enter` to execute.
 
 Outcome:
 
@@ -515,14 +519,16 @@ A student named `Aaron Tan` with student number `A0123456B` from your tutorial g
 <ins>Method 1</ins> <br>
 Unflagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
-1. Type `unflagatt name/Aaron Tan matric/A0123456B` into the _Command Box_.
-2. Press `Enter` to execute.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `unflagatt name/Aaron Tan matric/A0123456B` into the _Command Box_.
+3. Press `Enter` to execute.
 
 <ins>Method 2</ins><br>
 Unflagging a student's attendance for a tutorial lesson by his `index` number:
 
-1. Type `unflagatt 1` into the _Command Box_.
-2. Press `Enter` to execute.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `unflagatt 1` into the _Command Box_.
+3. Press `Enter` to execute.
 
 Outcome:
 
@@ -573,27 +579,33 @@ With a scale from 1 to 5:
  | **Remarks** |Very Poor|Poor|Sufficient|Good|Commendable|
 
 **Format:**
-`setscore name/NAME matric/STUDENT_NUMBER add/SCORE`
+<br>`setscore name/NAME matric/STUDENT_NUMBER score/SCORE`
+<br>`setscore INDEX score/SCORE`
 
 
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
 you noticed that your student named `Aaron Tan` with student number `A0123456B` often participated in class discussions.
-You decided to add `3` marks to his participation score for this tutorial lesson.
+You decided to give him `3` marks for his participation score for this tutorial lesson. `Aaron Tan` is the first person on 
+the student list so his `index` number is 1.
 
-Adding participation score of a student in a tutorial lesson:
+<ins>Method 1</ins> <br>
+Set participation score of a student in a tutorial lesson by `name` and `student number`:
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `setscore name/Aaron Tan matric/A0123456B add/3` into the *Command Box*.
+2. Type `setscore name/Aaron Tan matric/A0123456B score/3` into the *Command Box*.
+3. Press `Enter` to execute.
+
+<ins>Method 2</ins> <br>
+Set participation score of a student in a tutorial lesson by `index` number:
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `setscore 1 score/3` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
-
-
-#### Viewing statistics of class participation: `stats`
 
 #### 4.3.2. Add participation score of a student: `addscore`
 
@@ -605,18 +617,26 @@ You can use this command to increase the participation score of a specific stude
 
 **Format:**
 
-`addscore name/NAME matric/STUDENT_NUMBER add/SCORE`
+<br>`addscore name/NAME matric/STUDENT_NUMBER add/SCORE_TO_ADD`
+<br>`addscore INDEX add/SCORE_TO_ADD`
 
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student number `A0123456B` did not provide insightful responses to some questions.
-You decided to subtract `1` mark from his participation score for this tutorial lesson.
+you felt that your student named `Aaron Tan` with student number `A0123456B` provided some good insights during lessons. 
+You decided to add `1` mark to his participation score for this tutorial lesson. `Aaron Tan` 
+is the first person on the student list so his `index` number is 1.
 
-Subtracting participation score of a student in a tutorial lesson:
-
+<ins>Method 1</ins> <br>
+Adding participation score of a student in a tutorial lesson by `name` and `student number`:
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `subscore name/Aaron Tan matric/A0123456B score/1` into the _Command Box_.
+2. Type `addscore name/Aaron Tan matric/A0123456B add/1` into the _Command Box_.
+3. Press `Enter` to execute.
+
+<ins>Method 2</ins> <br>
+Adding participation score of a student in a tutorial lesson by `index`number:
+1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `addscore 1 add/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -634,24 +654,34 @@ You can use this command to decrease the participation score of a specific stude
 
 **Format:**
 
-`subscore name/NAME matric/STUDENT_NUMBER sub/SCORE`
+<br>`subscore name/NAME matric/STUDENT_NUMBER sub/SCORE`
+<br>`subscore INDEX sub/SCORE`
 
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student number `A0123456B` did not provide insightful responses to some questions.
-You decided to subtract `1` mark from his participation score for this tutorial lesson.
+you felt that your student named `Aaron Tan` with student number `A0123456B` did not provide insightful responses 
+to some questions. You decided to subtract `1` mark from his participation score for this tutorial lesson. `Aaron Tan` 
+is the first person on the student list so his `index` number is 1.
 
-Subtracting participation score of a student in a tutorial lesson:
-
+<ins>Method 1</ins> <br>
+Subtracting participation score of a student in a tutorial lesson by `name` and `student number`:
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `subscore name/Aaron Tan matric/A0123456B score/1` into the _Command Box_.
+2. Type `subscore name/Aaron Tan matric/A0123456B sub/1` into the _Command Box_.
+3. Press `Enter` to execute.
+
+<ins>Method 2</ins> <br>
+Subtracting participation score of a student in a tutorial lesson:
+1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `subscore 1 sub/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
+
+#### Viewing statistics of class participation: `stats`
 
 #### 4.3.3. Export participation scores as CSV file: `exportscore`
 
@@ -810,24 +840,27 @@ Command | Example
 **Add tutorial lesson** <br> `addlsn grp/GROUP lsn/LESSON` | `addlsn grp/G04 lsn/1-2`
 **Delete tutorial lesson** <br> `dellsn grp/GROUP lsn/LESSON` | `dellsn grp/G04 lsn/1-3`
 **Add student** <br> `addstudent grp/GROUP name/NAME matric/STUDENT_NUMBER` | `addstudent grp/G04 name/Aaron Tan matric/A0123456B`
-**Delete student** <br> `delstudent grp/GROUP name/NAME matric/STUDENT_NUMBER` | `delstudent grp/G04 name/Aaron Tan matric/A0123456B`
+**Delete student** <br> - `delstudent grp/GROUP name/NAME matric/STUDENT_NUMBER`<br> - `delstudent INDEX grp/GROUP` | - `delstudent grp/G04 name/Aaron Tan matric/A0123456B` <br> - `delstudent 1 grp/G04`
 
 ### 6.2. Attendance taking commands
 
 Command | Example
 ------------ | -------------
-**Mark a student as present** <br> `markpresent name/NAME matric/STUDENT_NUMBER` | `markpresent name/Aaron Tan matric/A0123456B`
-**Mark a student as absent** <br> `markabsent name/NAME matric/STUDENT_NUMBER` | `markabsent name/Aaron Tan matric/A0123456B`
+**Mark a student as present** <br> - `markpresent name/NAME matric/STUDENT_NUMBER`<br> - `markpresent INDEX` | - `markpresent name/Aaron Tan matric/A0123456B` <br> - `markpresent 1`
+**Mark a student as absent** <br> - `markabsent name/NAME matric/STUDENT_NUMBER`<br>-`markabsent INDEX` | - `markabsent name/Aaron Tan matric/A0123456B`<br>- `markabsent 1`
 **Mark all students as present** <br> `markpresent all` | `markpresent all`
-**Flag attendance** <br> `flagatt grp/GROUP lsn/LESSON name/NAME matric/STUDENT_NUMBER` | `flagatt grp/G04 lsn/1-2 name/Aaron Tan matric/A0123456B`
+**Mark all students as absent** <br> `markabsent all` | `markabsent all`
+**Flag attendance** <br> - `flagatt name/NAME matric/STUDENT_NUMBER` <br> - `flagatt INDEX` | - `flagatt name/Aaron Tan matric/A0123456B` <br> - `flagatt 1`
+**Unflag attendance** <br> - `unflagatt name/NAME matric/STUDENT_NUMBER` <br> - `unflagatt INDEX` | - `unflagatt name/Aaron Tan matric/A0123456B`<br>  - `unflagatt 1` 
 **Export attendance** <br> `exportatt grp/GROUP` | `exportatt grp/G04`
 
 ### 6.3. Participation marking commands
 
 Command | Example
 ------------ | -------------
-**Add participation score** <br> `addscore name/NAME matric/STUDENT_NUMBER score/SCORE` | `addscore name/Aaron Tan matric/A0123456B add/3`
-**Subtract participation score** <br> `subscore name/NAME matric/STUDENT_NUMBER score/SCORE` | `subscore name/Aaron Tan matric/A0123456B sub/1`
+**Set participation score** <br> - `setscore name/NAME matric/STUDENT_NUMBER score/SCORE` <br> - `setscore INDEX score/SCORE` | - `setscore name/Aaron Tan matric/A0123456B score/3` <br> - `setscore 1 score/3`
+**Add participation score** <br> - `addscore name/NAME matric/STUDENT_NUMBER add/SCORE`<br> - `addscore INDEX add/SCORE` | - `addscore name/Aaron Tan matric/A0123456B add/3` <br> - `addscore 1 add/3`
+**Subtract participation score** <br> - `subscore name/NAME matric/STUDENT_NUMBER sub/SCORE` <br> - `subscore INDEX sub/SCORE` | - `subscore name/Aaron Tan matric/A0123456B sub/3` <br> - `subscore 1 sub/3`
 **Export participation scores** <br> `exportscore grp/GROUP` | `exportscore grp/G07`
 
 ### 6.4. Question addressing commands
