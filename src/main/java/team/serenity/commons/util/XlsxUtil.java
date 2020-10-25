@@ -2,8 +2,12 @@ package team.serenity.commons.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -53,7 +57,10 @@ public class XlsxUtil {
         Iterator<Row> rowIterator = sheet.iterator();
         skipRowsToHeaderRow(rowIterator);
         readDetailsOfStudents(rowIterator, students);
-        return students;
+        List<Student> studentList = new ArrayList<>(students);
+        Collections.sort(studentList, new StudentSorter());
+        Set<Student> newStudents = new LinkedHashSet<>(studentList);
+        return newStudents;
     }
 
     private Row skipRowsToHeaderRow(Iterator<Row> rowIterator) {
@@ -99,7 +106,10 @@ public class XlsxUtil {
         Iterator<Row> rowIterator = sheet.iterator();
         Row headerRow = skipRowsToHeaderRow(rowIterator);
         readDetailsOfLessons(headerRow, lessons, studentsInfo);
-        return lessons;
+        List<Lesson> lessonList = new ArrayList<>(lessons);
+        Collections.sort(lessonList, new LessonSorter());
+        Set<Lesson> newLessons = new LinkedHashSet<>(lessonList);
+        return newLessons;
     }
 
     private void readDetailsOfLessons(Row headerRow, Set<Lesson> lessons, Set<StudentInfo> studentsInfo) {
@@ -136,7 +146,82 @@ public class XlsxUtil {
         for (Student student : students) {
             studentsInfo.add(new StudentInfo(student));
         }
-        return studentsInfo;
+        List<StudentInfo> studentInfoList = new ArrayList<>(studentsInfo);
+        Collections.sort(studentInfoList, new StudentInfoSorter());
+        Set<StudentInfo> newStudentsInfo = new LinkedHashSet<>(studentInfoList);
+        return newStudentsInfo;
     }
 
+    private class LessonSorter implements Comparator<Lesson> {
+
+        @Override
+        public int compare(Lesson lessonOne, Lesson lessonTwo) {
+            int lesOneLen = lessonOne.getName().length();
+            int lesTwoLen = lessonTwo.getName().length();
+            int minLength = Math.min(lesOneLen, lesTwoLen);
+            for (int i = 0; i < minLength; i++) {
+                int lesOneChar = (int) lessonOne.getName().charAt(i);
+                int lesTwoChar = (int) lessonTwo.getName().charAt(i);
+
+                if (lesOneChar != lesTwoChar) {
+                    return lesOneChar - lesTwoChar;
+                }
+            }
+
+            if (lesOneLen != lesTwoLen) {
+                return lesOneLen - lesTwoLen;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    private class StudentSorter implements Comparator<Student> {
+
+        @Override
+        public int compare(Student studentOne, Student studentTwo) {
+            int sOneLen = studentOne.getName().length();
+            int sTwoLen = studentTwo.getName().length();
+            int minLength = Math.min(sOneLen, sTwoLen);
+            for (int i = 0; i < minLength; i++) {
+                int lesOneChar = (int) studentOne.getName().charAt(i);
+                int lesTwoChar = (int) studentTwo.getName().charAt(i);
+
+                if (lesOneChar != lesTwoChar) {
+                    return lesOneChar - lesTwoChar;
+                }
+            }
+
+            if (sOneLen != sTwoLen) {
+                return sOneLen - sTwoLen;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    private class StudentInfoSorter implements Comparator<StudentInfo> {
+
+        @Override
+        public int compare(StudentInfo infoOne, StudentInfo infoTwo) {
+            int infoOneLen = infoOne.getStudent().getName().length();
+            int infoTwoLen = infoTwo.getStudent().getName().length();
+            int minLength = Math.min(infoOneLen, infoTwoLen);
+            for (int i = 0; i < minLength; i++) {
+                int infoOneChar = (int) infoOne.getStudent().getName().charAt(i);
+                int infoTwoChar = (int) infoTwo.getStudent().getName().charAt(i);
+
+                if (infoOneChar != infoTwoChar) {
+                    return infoOneChar - infoTwoChar;
+                }
+            }
+
+            if (infoOneLen != infoTwoLen) {
+                return infoOneLen - infoTwoLen;
+            } else {
+                return 0;
+            }
+        }
+    }
 }
+
