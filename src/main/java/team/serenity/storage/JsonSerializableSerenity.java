@@ -1,6 +1,5 @@
 package team.serenity.storage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.ReadOnlySerenity;
-import team.serenity.model.Serenity;
+import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
 
 /**
@@ -53,7 +52,7 @@ class JsonSerializableSerenity {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public Serenity toModelType() throws IllegalValueException, IOException {
+    public Serenity toModelType() throws IllegalArgumentException, IllegalValueException {
         Serenity serenity = new Serenity();
         for (JsonAdaptedGroup jsonAdaptedGroup : this.groups) {
             Group group = jsonAdaptedGroup.toModelType();

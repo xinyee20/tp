@@ -6,8 +6,8 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.model.ReadOnlySerenity;
-import team.serenity.model.Serenity;
+import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
 
 /**

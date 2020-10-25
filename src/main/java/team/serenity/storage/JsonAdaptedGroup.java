@@ -1,16 +1,12 @@
 package team.serenity.storage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;
@@ -26,31 +22,28 @@ class JsonAdaptedGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
-    private final GroupName name;
-    private final List<String> students = new ArrayList<>();
+    private final String groupName;
+    private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
      * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
-        this.name = source.getGroupName();
+        this.groupName = source.getGroupName().toString();
         this.students.addAll(source.getStudents().asUnmodifiableObservableList().stream()
-            .map(this::convertStudentToString)
+            .map(JsonAdaptedStudent::new)
             .collect(Collectors.toList()));
         this.lessons.addAll(source.getSortedLessons().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedLesson::new)
             .collect(Collectors.toList()));
     }
 
-    private String convertStudentToString(Student s) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            String jsonInString = mapper.writeValueAsString(s);
-            return jsonInString;
-        } catch (JsonProcessingException e) {
-            return "";
-        }
+    @JsonCreator
+    public JsonAdaptedGroup(@JsonProperty("groupName") String name,
+        @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+        this.groupName = name;
+        this.lessons.addAll(lessons);
     }
 
     /**
@@ -58,14 +51,13 @@ class JsonAdaptedGroup {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted group.
      */
-    public Group toModelType() throws IOException {
-
-        String modelName = this.name.toString();
-        ObjectMapper mapper = new ObjectMapper();
+    public Group toModelType() throws IllegalArgumentException {
+        String modelName = this.groupName;
         final List<Student> groupStudents = new ArrayList<>();
-        for (String student : this.students) {
-            groupStudents.add(mapper.readValue(modelName, Student.class));
+        for (JsonAdaptedStudent student : this.students) {
+            groupStudents.add(student.toModelType());
         }
+
         final UniqueList<Student> modelStudents = new UniqueStudentList();
         modelStudents.setElementsWithList(new ArrayList<>(groupStudents));
 
@@ -73,7 +65,7 @@ class JsonAdaptedGroup {
 
         final List<Lesson> groupLessons = new ArrayList<>();
         for (JsonAdaptedLesson groupLesson : this.lessons) {
-            Lesson lessonItem = new Lesson(groupLesson.getName(), studentsInfo);
+            Lesson lessonItem = groupLesson.toModelType();
             groupLessons.add(lessonItem);
         }
         final UniqueList<Lesson> modelLessons = new UniqueLessonList();

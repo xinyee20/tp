@@ -1,4 +1,4 @@
-package team.serenity.model;
+package team.serenity.model.managers;
 
 import java.util.List;
 

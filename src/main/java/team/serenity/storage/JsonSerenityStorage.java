@@ -13,7 +13,7 @@ import team.serenity.commons.exceptions.DataConversionException;
 import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.commons.util.FileUtil;
 import team.serenity.commons.util.JsonUtil;
-import team.serenity.model.ReadOnlySerenity;
+import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.group.Group;
 
 /**
@@ -58,7 +58,7 @@ public class JsonSerenityStorage implements SerenityStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
-        } catch (IOException ive) {
+        } catch (IllegalArgumentException ive) {
             throw new DataConversionException(ive);
         }
     }

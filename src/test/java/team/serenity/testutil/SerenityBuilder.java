@@ -1,6 +1,6 @@
 package team.serenity.testutil;
 
-import team.serenity.model.Serenity;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
 
 /**

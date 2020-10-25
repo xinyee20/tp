@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import team.serenity.model.ReadOnlySerenity;
-import team.serenity.model.Serenity;
+import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;

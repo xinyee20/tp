@@ -1,7 +1,7 @@
 package team.serenity.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.group.student.Student;
@@ -13,37 +13,33 @@ import team.serenity.model.group.student.StudentNumber;
  */
 class JsonAdaptedStudent {
 
-    private final StudentName name;
-    private final StudentNumber studentNo;
+    private final String name;
+    private final String studentNo;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given {@code name} and {@ocde studentNumber}.
      */
     @JsonCreator
-    public JsonAdaptedStudent(String name, String studentNo) {
-        this.name = new StudentName(name);
-        this.studentNo = new StudentNumber(studentNo);
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("studentNo") String number) {
+        this.name = name;
+        this.studentNo = number;
     }
 
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
-        this.name = source.getStudentName();
-        this.studentNo = source.getStudentNo();
+        this.name = source.getStudentName().toString();
+        this.studentNo = source.getStudentNo().toString();
     }
 
-    @JsonValue
-    public String getName() {
-        return this.name.toString();
-    }
 
     /**
      * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
+     * @throws IllegalArgumentException if there were any data constraints violated in the adapted student.
      */
-    public Student toModelType() throws IllegalValueException {
+    public Student toModelType() throws IllegalArgumentException {
         // add some validation
         return new Student(this.name, this.studentNo);
     }

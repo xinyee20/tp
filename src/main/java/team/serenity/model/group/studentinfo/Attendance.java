@@ -31,12 +31,11 @@ public class Attendance {
      * @param isFlagged True to flag student and false to unflag student
      */
     public Attendance(boolean isPresent, boolean isFlagged) throws IllegalArgumentException {
-        if (isPresent) {
-            this.isPresent = isPresent;
-            this.isFlagged = isFlagged;
-        } else {
-            throw new IllegalArgumentException("Student should be present to be flagged");
+        if (isPresent && isFlagged) {
+            throw new IllegalArgumentException("Student should be absent to be flagged");
         }
+        this.isPresent = isPresent;
+        this.isFlagged = isFlagged;
     }
 
     @Override

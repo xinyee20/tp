@@ -1,12 +1,16 @@
-package team.serenity.model;
+package team.serenity.model.managers;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -15,36 +19,47 @@ import team.serenity.model.util.UniqueList;
 public class Serenity implements ReadOnlySerenity {
 
     private final UniqueList<Group> groups;
+    private final ReadOnlyGroupManager groupManager;
+    private final ReadOnlyLessonManager lessonManager;
+    private final ReadOnlyStudentManager studentManager;
+    private final ReadOnlyStudentInfoManager studentInfoManager;
 
     public Serenity() {
         this.groups = new UniqueGroupList();
+        this.groupManager = new GroupManager();
+        this.lessonManager = new LessonManager();
+        this.studentManager = new StudentManager();
+        this.studentInfoManager = new StudentInfoManager();
     }
 
     /**
      * Creates a Serenity object using the Groups in the {@code toBeCopied}.
      */
     public Serenity(ReadOnlySerenity toBeCopied) {
-        this();
-        resetData(toBeCopied);
+        
+        requireNonNull(toBeCopied);
+
+        //instantiate groups
+        this.groups = new UniqueGroupList();
+        this.groups.setElementsWithList(toBeCopied.getGroupList());
+
+        //instantiate groupmanager
+        this.groupManager = new GroupManager(this.groups);
+
+
+        Map<GroupName, UniqueList<Lesson>> lessonMap = new HashMap<>();
+        for (Group group : this.groups) {
+            GroupName name = group.getGroupName();
+            UniqueList<Lesson> lessons = group.getLessons();
+            lessonMap.put(name, lessons);
+        }
     }
 
-    //// list overwrite operations
 
-    /**
-     * Replaces the contents of the group list with {@code groups}. {@code groups} must not contain duplicate groups.
-     */
-    public void setGroups(List<Group> groups) {
-        this.groups.setElementsWithList(groups);
+    public ReadOnlyGroupManager instantiateGroupManager() {
+        return new GroupManager(this.groups);
     }
 
-
-    /**
-     * Resets the existing data of this {@code Serenity} with {@code newData}.
-     */
-    public void resetData(ReadOnlySerenity newData) {
-        requireNonNull(newData);
-        setGroups(newData.getGroupList());
-    }
 
     //// group-level operations
 

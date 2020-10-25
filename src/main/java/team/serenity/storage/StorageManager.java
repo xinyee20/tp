@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.model.ReadOnlySerenity;
+import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.group.Group;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
@@ -68,7 +68,8 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlySerenity> readSerenity() throws DataConversionException, IOException {
-        return readSerenity(this.serenityStorage.getSerenityFilePath());
+        Optional<ReadOnlySerenity> readSerenity = readSerenity(this.serenityStorage.getSerenityFilePath());
+        return readSerenity;
     }
 
     @Override
