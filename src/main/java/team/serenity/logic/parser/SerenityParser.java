@@ -18,10 +18,12 @@ import team.serenity.logic.commands.attendance.FlagAttCommand;
 import team.serenity.logic.commands.HelpCommand;
 import team.serenity.logic.commands.attendance.MarkAbsentCommand;
 import team.serenity.logic.commands.attendance.MarkPresentCommand;
+import team.serenity.logic.commands.partipation.AddScoreCommand;
 import team.serenity.logic.commands.partipation.SetScoreCommand;
 import team.serenity.logic.commands.attendance.UnflagAttCommand;
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.ViewLsnCommand;
+import team.serenity.logic.commands.partipation.SubScoreCommand;
 import team.serenity.logic.commands.question.AddQnCommand;
 import team.serenity.logic.commands.question.DelQnCommand;
 import team.serenity.logic.commands.question.FindQnCommand;
@@ -31,6 +33,8 @@ import team.serenity.logic.parser.attendance.MarkAbsentCommandParser;
 import team.serenity.logic.parser.attendance.MarkPresentCommandParser;
 import team.serenity.logic.parser.attendance.UnflagAttCommandParser;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.logic.parser.participation.AddScoreCommandParser;
+import team.serenity.logic.parser.participation.SubScoreCommandParser;
 import team.serenity.logic.parser.question.AddQnCommandParser;
 import team.serenity.logic.parser.question.DelQnCommandParser;
 import team.serenity.logic.parser.question.FindQnCommandParser;
@@ -71,6 +75,9 @@ public class SerenityParser {
         case AddLsnCommand.COMMAND_WORD:
             return new AddLsnCommandParser().parse(arguments);
 
+        case AddScoreCommand.COMMAND_WORD:
+            return new AddScoreCommandParser().parse(arguments);
+
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
@@ -97,6 +104,9 @@ public class SerenityParser {
 
         case SetScoreCommand.COMMAND_WORD:
             return new SetScoreCommandParser().parse(arguments);
+
+        case SubScoreCommand.COMMAND_WORD:
+            return new SubScoreCommandParser().parse(arguments);
 
         case ViewGrpCommand.COMMAND_WORD:
             return new ViewGrpCommandParser().parse(arguments);

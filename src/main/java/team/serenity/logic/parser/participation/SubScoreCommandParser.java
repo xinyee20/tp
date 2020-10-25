@@ -4,63 +4,65 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.logic.commands.partipation.SetScoreCommand;
+import team.serenity.logic.commands.Command;
+import team.serenity.logic.commands.CommandResult;
+import team.serenity.logic.commands.exceptions.CommandException;
+import team.serenity.logic.commands.partipation.AddScoreCommand;
+import team.serenity.logic.commands.partipation.SubScoreCommand;
 import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.model.Model;
 import team.serenity.model.group.Student;
 
 /**
- * Parses input arguments and creates a new SetScoreCommand object.
+ * Parses input arguments and creates a new SubScoreCommand object.
  * Current support:
- * setscore name/NAME id/STUDENT_NUMBER score/SCORE
- * setscore INDEX score/SCORE
+ * subscore name/NAME id/STUDENT_NUMBER sub/SCORE_TO_SUBTRACT
+ * subscore INDEX sub/SCORE_TO_SUBTRACT
  */
-public class SetScoreCommandParser implements Parser<SetScoreCommand> {
-
-    public static final String MESSAGE_STUDENT_NOT_GIVEN = "Please ensure student name / id is given";
+public class SubScoreCommandParser implements Parser<SubScoreCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SetScoreCommand and
-     * returns a SetScoreCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SubScoreCommand and
+     * returns a SubScoreCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public SetScoreCommand parse(String userInput) throws ParseException {
+    public SubScoreCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
-                PREFIX_NAME, PREFIX_ID, PREFIX_SET_SCORE);
+                PREFIX_NAME, PREFIX_ID, PREFIX_SUBTRACT_SCORE);
 
         Index index;
         String studentName;
         String studentNumber;
         Optional<Student> student;
-        int score;
+        int scoreToSub;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_SET_SCORE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
+        if (!arePrefixesPresent(argMultimap, PREFIX_SUBTRACT_SCORE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
             studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
             studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
-            score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
-            return new SetScoreCommand(student.get(), score);
+            scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
+            return new SubScoreCommand(student.get(), scoreToSub);
         } else {
             index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
-            return new SetScoreCommand(index, score);
+            scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
+            return new SubScoreCommand(index, scoreToSub);
         }
     }
 

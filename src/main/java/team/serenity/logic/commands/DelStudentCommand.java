@@ -1,6 +1,7 @@
 package team.serenity.logic.commands;
 
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_EMPTY;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
@@ -21,8 +22,6 @@ public class DelStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "delstudent";
     public static final String MESSAGE_SUCCESS = "You removed %s (%s) from tutorial group %s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
-            "Index %d is not found, please ensure that it exists";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Removes a new Student from a specified tutorial group. \n"
