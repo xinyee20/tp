@@ -168,7 +168,7 @@ public interface Model {
      */
     ObservableList<StudentInfo> getStudentsInfoList();
 
-    Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
+    UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
 
     /**
      * Updates the student info list to filter when changing to another lesson of interest.

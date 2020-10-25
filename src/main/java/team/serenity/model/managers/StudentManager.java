@@ -3,7 +3,6 @@ package team.serenity.model.managers;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

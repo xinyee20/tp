@@ -293,7 +293,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
+    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
         GroupLessonKey key = new GroupLessonKey(group, lesson);
         return this.studentInfoManager.getListOfStudentsInfoFromGroupLessonKey(key);
     }
