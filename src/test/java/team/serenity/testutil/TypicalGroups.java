@@ -25,7 +25,7 @@ public class TypicalGroups {
 
     public static final Group GROUP_D = new GroupBuilder().withName("G07")
         .withStudents(
-            new Student("Freddie", "A0000000U"),
+            new Student("Freddie", "A0000001U"),
             new Student("June", "A0101011U")
         ).withClasses("4-2", "5-1", "5-2", "6-1")
         .build();

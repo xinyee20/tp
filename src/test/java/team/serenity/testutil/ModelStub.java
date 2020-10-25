@@ -120,7 +120,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Optional<UniqueList<Student>> getListOfStudentsFromGroup(Group group) {
+    public UniqueList<Student> getListOfStudentsFromGroup(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 

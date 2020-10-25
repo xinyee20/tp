@@ -136,7 +136,7 @@ public interface Model {
      */
     ObservableList<Student> getStudentList();
 
-    Optional<UniqueList<Student>> getListOfStudentsFromGroup(Group group);
+    UniqueList<Student> getListOfStudentsFromGroup(Group group);
 
     /**
      * Removes a Student from a Group.
