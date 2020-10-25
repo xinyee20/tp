@@ -85,7 +85,6 @@ public class Group {
     }
 
     public UniqueList<Lesson> getLessons() {
-        UniqueList<Lesson> list = this.lessons;
         return this.lessons;
     }
 
