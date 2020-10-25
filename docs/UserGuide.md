@@ -468,17 +468,25 @@ attendance at the end of class.
 
 **Format:**
 
-`flagatt name/NAME matric/STUDENT_NUMBER`
+<br>`flagatt name/NAME matric/STUDENT_NUMBER`
+<br>`flagatt INDEX`
 
 **Example:**
 
-A student named `Aaron Tan` with student number `A0123456B` from another tutorial group decided to join
-your tutorial lesson `1-2` of tutorial group `G04`. You want to flag his attendance and check with his tutor 
-after your tutorial lesson. `Aaron Tan` is the first person on the student list so his `index` number is 1. 
+A student named `Aaron Tan` with student number `A0123456B` from your tutorial group `G04` decided to join
+another group for tutorial lesson `1-2`. You want to flag his attendance so that you will remember to check with the 
+other tutor later on. `Aaron Tan` is the first person on the student list so his `index` number is 1. 
 
-Flagging a student's attendance for a tutorial lesson:
+<ins>Method 1</ins> <br>
+Flagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
 1. Type `flagatt name/Aaron Tan matric/A0123456B` into the _Command Box_.
+2. Press `Enter` to execute.
+
+<ins>Method 2</ins><br>
+Flagging a student's attendance for a tutorial lesson by his `index` number:
+
+1. Type `flagatt 1` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
@@ -488,29 +496,38 @@ Outcome:
 
 #### 4.2.4. Unflag attendance of a student: `unflagatt`
 
-You can use this command to unflag attendance of a specific student after you flagged and checked the student's
-attendance at the end of class.
+You can use this command to unflag attendance of a specific student that was flagged after you have checked that the 
+student attended a replacement class.
 
 **Format:**
 
-`unflagatt name/NAME matric/STUDENT_NUMBER`
+<br>`unflagatt name/NAME matric/STUDENT_NUMBER`
+<br>`unflagatt 1`
 
 **Example:**
 
-A student named `Aaron Tan` with student number `A0123456B` from another tutorial group decided to join
-your tutorial lesson `1-2` of tutorial group `G04`. You previously flagged his attendance and now wants to unflag it
- after checking with his tutor after your tutorial lesson. `Aaron Tan` is the first person on the student list 
+A student named `Aaron Tan` with student number `A0123456B` from your tutorial group `G04` decided to go for 
+ another tutorial class for lesson `1-2`. You previously flagged his attendance and now wants to unflag it
+ after checking that he has attended the replacement class. `Aaron Tan` is the first person on the student list 
  so his `index` number is 1. 
 
-Unlagging a student's attendance for a tutorial lesson:
+
+<ins>Method 1</ins> <br>
+Unflagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
 1. Type `unflagatt name/Aaron Tan matric/A0123456B` into the _Command Box_.
+2. Press `Enter` to execute.
+
+<ins>Method 2</ins><br>
+Unflagging a student's attendance for a tutorial lesson by his `index` number:
+
+1. Type `unflagatt 1` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. His attendance will now be flagged for future follow-up actions.
+2. His attendance will now be unflagged.
 
 #### 4.2.5. Export attendance as CSV file: `exportatt`
 
