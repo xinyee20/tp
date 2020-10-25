@@ -115,7 +115,7 @@ public interface Model {
      */
     ObservableList<Lesson> getFilteredLessonList();
 
-    Optional<UniqueList<Lesson>> getListOfLessonsFromGroup(Group group);
+    UniqueList<Lesson> getListOfLessonsFromGroup(Group group);
 
     /**
      * Updates the lesson list to filter when changing to another group of interest.
