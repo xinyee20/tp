@@ -7,14 +7,18 @@ import static team.serenity.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
+import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import team.serenity.commons.core.GuiSettings;
-import team.serenity.model.group.exceptions.QuestionNotFoundException;
+import team.serenity.model.group.exceptions.DuplicateQuestionException;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.userprefs.UserPrefs;
 
 public class ModelManagerTest {
@@ -81,48 +85,55 @@ public class ModelManagerTest {
     // ========== QuestionManager ==========
 
     @Test
-    public void hasQuestionManagerModelManager() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasQuestion(null));
+    public void getQuestionManager() {
+        assertEquals(this.modelManager.getQuestionManager(), new QuestionManager());
+    }
+
+    @Test
+    public void setQuestionManager_nullQuestionManager_throwsNulPointerException() {
+        assertThrows(NullPointerException.class, () -> this.modelManager.setQuestionManager(null));
+    }
+
+    @Test
+    public void setQuestionManager_validQuestionManager_setsQuestionManager() {
+        List<Question> newQuestions = Arrays.asList(QUESTION_A, QUESTION_B);
+        QuestionManager newQuestionManager = getTypicalQuestionManager();
+        this.modelManager.setQuestionManager(newQuestionManager);
+        assertEquals(newQuestionManager, this.modelManager.getQuestionManager());
+    }
+
+    @Test
+    public void hasQuestion_nullQuestion_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.modelManager.hasQuestion(null));
+    }
+
+    @Test
+    public void hasQuestion_questionNotInModelManager_returnsFalse() {
         assertFalse(modelManager.hasQuestion(QUESTION_A));
     }
 
     @Test
-    public void deleteQuestionManagerModelManager() {
-        assertThrows(NullPointerException.class, () -> modelManager.deleteQuestion(null));
-        Question newQuestion = QUESTION_A;
-        assertThrows(QuestionNotFoundException.class, () -> modelManager.deleteQuestion(newQuestion));
-        modelManager.addQuestion(newQuestion);
-        modelManager.deleteQuestion(newQuestion);
-        assertFalse(modelManager.getFilteredQuestionList().contains(newQuestion));
-        assertFalse(modelManager.getFilteredQuestionList()
-                .contains(newQuestion));
-    }
-
-    @Test
-    public void addQuestionManagerModelManager() {
+    public void addQuestion_nullQuestion_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.addQuestion(null));
-        Question newQuestion = QUESTION_A;
-        modelManager.addQuestion(newQuestion);
-        assertTrue(modelManager.getFilteredQuestionList().contains(newQuestion));
-        assertFalse(modelManager.getFilteredQuestionList().contains(QUESTION_B));
     }
 
     @Test
-    public void setQuestionManagerModelManager() {
-        assertThrows(NullPointerException.class, () -> modelManager.setQuestion(null, null));
-        Question newQuestionA = QUESTION_A;
-        Question newQuestionB = QUESTION_B;
-        assertThrows(QuestionNotFoundException.class, () -> modelManager
-                .setQuestion(newQuestionA, newQuestionB)); // Event where tries to set non-existent activity.
-
-        modelManager.addQuestion(newQuestionA);
-        modelManager.setQuestion(newQuestionA, newQuestionB);
-        assertTrue(modelManager.getFilteredQuestionList().contains(newQuestionB));
-        assertFalse(modelManager.getFilteredQuestionList().contains(newQuestionA));
+    public void addQuestion_questionInModelManager_throwsDuplicateQuestionException() {
+        this.modelManager.addQuestion(QUESTION_A);
+        assertThrows(DuplicateQuestionException.class, () -> this.modelManager.addQuestion(QUESTION_A));
     }
 
     @Test
-    public void updateFilteredQuestionManagerModelManager() {
+    public void addQuestion_validQuestionToAdd_addsQuestion() {
+        QuestionManager expectedQuestionManager = new QuestionManager();
+        expectedQuestionManager.addQuestion(QUESTION_A);
+        ModelManager expectedModelManager = new ModelManager(new Serenity(), expectedQuestionManager, new UserPrefs());
+        this.modelManager.addQuestion(QUESTION_A);
+        assertEquals(expectedModelManager, this.modelManager);
+    }
+
+    @Test
+    public void updateFilteredQuestionList_nullPredicate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.updateFilteredQuestionList(null));
     }
 

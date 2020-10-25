@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
 
 import java.util.Arrays;
@@ -29,44 +30,62 @@ class QuestionManagerTest {
     }
 
     @Test
-    public void resetDataNullThrowsNullPointerException() {
+    public void setQuestions_nullListOfQuestions_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.questionManager.setQuestions(null));
+    }
+
+    @Test
+    public void setQuestions_invalidListOfQuestions_throwsDuplicateQuestionException() {
+        List<Question> newQuestions = Arrays.asList(QUESTION_A, QUESTION_A);
+        assertThrows(DuplicateQuestionException.class, () -> this.questionManager.setQuestions(newQuestions));;
+    }
+
+    @Test
+    public void setQuestions_validListOfQuestions_setsQuestions() {
+        List<Question> newQuestions = Arrays.asList(QUESTION_A, QUESTION_B);
+        this.questionManager.setQuestions(newQuestions);
+        assertEquals(newQuestions, this.questionManager.getListOfQuestions());
+    }
+
+    @Test
+    public void resetData_nullNewData_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> this.questionManager.resetData(null));
     }
 
     @Test
-    public void resetDataWithValidReadOnlyActivityManagerReplacesData() {
-        QuestionManager newData = getTypicalQuestionManager();
-        this.questionManager.resetData(newData);
-        assertEquals(newData, this.questionManager);
-    }
-
-    @Test
-    public void resetDataWithDuplicateQuestionThrowsDuplicateQuestionException() {
+    public void resetData_withDuplicateQuestionsInNewData_throwsDuplicateQuestionException() {
         List<Question> newQuestions = Arrays.asList(QUESTION_A, QUESTION_A);
         QuestionManagerStub newData = new QuestionManagerStub(newQuestions);
         assertThrows(DuplicateQuestionException.class, () -> this.questionManager.resetData(newData));
     }
 
     @Test
-    public void hasQuestionNullQuestion_throwsNullPointerException() {
+    public void resetData_withValidNewData_replacesData() {
+        QuestionManager newData = getTypicalQuestionManager();
+        this.questionManager.resetData(newData);
+        assertEquals(newData, this.questionManager);
+    }
+
+    @Test
+    public void getListOfQuestions_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> this.questionManager
+                .getListOfQuestions().remove(0));
+    }
+
+    @Test
+    public void hasQuestion_nullQuestion_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> this.questionManager.hasQuestion(null));
     }
 
     @Test
-    public void hasQuestionNotInQuestionManagerReturnsFalse() {
+    public void hasQuestion_questionNotInQuestionManager_returnsFalse() {
         assertFalse(this.questionManager.hasQuestion(QUESTION_A));
     }
 
     @Test
-    public void hasQuestionManagerInQuestionManagerReturnsTrue() {
+    public void hasQuestion_questionInQuestionManager_returnsTrue() {
         this.questionManager.addQuestion(QUESTION_A);
         assertTrue(this.questionManager.hasQuestion(QUESTION_A));
-    }
-
-    @Test
-    public void getQuestionModifyListThrowsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> this.questionManager
-                .getListOfQuestions().remove(0));
     }
 
     /**

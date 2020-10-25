@@ -69,7 +69,7 @@ class QuestionTest {
     }
 
     @Test
-    public void testEquals() {
+    public void test_equals() {
         // Same case
         Question editedQuestion = new Question("G04", "2-2", "What is the deadline for the report?");
         assertEquals(QUESTION_A, editedQuestion);
@@ -89,14 +89,13 @@ class QuestionTest {
     }
 
     @Test
-    public void testToString() {
+    public void test_toString() {
         // Same case
         Question editedQuestion = new Question("G04", "2-2", "What is the deadline for the report?");
         assertEquals(QUESTION_A.toString(), editedQuestion.toString());
 
         // Different case
         assertNotEquals(QUESTION_A.toString(), QUESTION_B.toString());
-
     }
 
 }

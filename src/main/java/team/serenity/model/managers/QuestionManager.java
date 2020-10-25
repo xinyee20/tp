@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import team.serenity.model.group.exceptions.DuplicateException;
+import team.serenity.model.group.exceptions.DuplicateQuestionException;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.question.UniqueQuestionList;
 import team.serenity.model.util.UniqueList;
@@ -41,6 +41,7 @@ public class QuestionManager implements ReadOnlyQuestionManager {
      * {@code newListOfQuestions} must not contain duplicate questions.
      */
     public void setQuestions(List<Question> newListOfQuestions) {
+        requireNonNull(newListOfQuestions);
         this.listOfQuestions.setElementsWithList(newListOfQuestions);
     }
 
@@ -73,7 +74,7 @@ public class QuestionManager implements ReadOnlyQuestionManager {
     public void addQuestion(Question toAdd) {
         requireNonNull(toAdd);
         if (hasQuestion(toAdd)) {
-            throw new DuplicateException();
+            throw new DuplicateQuestionException();
         }
         this.listOfQuestions.add(toAdd);
     }
@@ -86,6 +87,9 @@ public class QuestionManager implements ReadOnlyQuestionManager {
      */
     public void setQuestion(Question target, Question editedQuestion) {
         requireNonNull(editedQuestion);
+        if (hasQuestion(editedQuestion)) {
+            throw new DuplicateQuestionException();
+        }
         this.listOfQuestions.setElement(target, editedQuestion);
     }
 
