@@ -243,7 +243,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<Student>> getListOfStudentsFromGroup(Group group) {
+    public UniqueList<Student> getListOfStudentsFromGroup(Group group) {
         return this.studentManager.getListOfStudentsFromGroup(group);
     }
 
