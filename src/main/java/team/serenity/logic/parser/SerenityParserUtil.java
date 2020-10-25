@@ -6,8 +6,8 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.commons.util.StringUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Participation;
-import team.serenity.model.group.Question;
 import team.serenity.model.group.Student;
+import team.serenity.model.group.question.Question;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -39,7 +39,7 @@ public class SerenityParserUtil {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
         if (!Student.isValidStudentId(trimmedId)) {
-            throw new ParseException(Student.STUDENT_NUMBER_ERROR);
+            throw new ParseException(Student.STUDENT_ID_ERROR);
         }
         return trimmedId;
     }

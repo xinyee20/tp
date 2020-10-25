@@ -7,6 +7,7 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 public class AddGrpCommand extends Command {
 
@@ -42,6 +43,7 @@ public class AddGrpCommand extends Command {
         }
 
         model.addGroup(this.toAdd);
+        model.updateFilteredGroupList(new GroupContainsKeywordPredicate(this.toAdd.getName()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd),
             false, false, false, true, true, false);
     }

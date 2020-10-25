@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 
@@ -35,7 +35,7 @@ public class JsonSerializableQuestionManager {
     /**
      * Converts a given {@code ReadOnlyQuestionManager} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableTransportBookingManager}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableQuestionManager}.
      */
     public JsonSerializableQuestionManager(ReadOnlyQuestionManager source) {
         globalQuestionList.addAll(
@@ -47,7 +47,7 @@ public class JsonSerializableQuestionManager {
     }
 
     /**
-     * Converts this JsonSerializableTransportBookingManager into the model's {@code TransportBookingManager} object.
+     * Converts this JsonSerializableQuestionManager into the model's {@code QuestionManager} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

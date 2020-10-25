@@ -35,7 +35,7 @@ public class DelStudentCommandTest {
     public void execute_missingGroup() throws Exception {
         ModelStubWithoutGroup modelStub = new ModelStubWithoutGroup();
         Predicate<Group> pred = new GroupPredicateStub();
-        DelStudentCommand command = new DelStudentCommand("Jon", "e1234567", pred);
+        DelStudentCommand command = new DelStudentCommand("Jon", "A1234567U", pred);
 
         assertThrows(CommandException.class,
             MESSAGE_GROUP_EMPTY, () -> command.execute(modelStub));
@@ -45,7 +45,7 @@ public class DelStudentCommandTest {
     public void execute_missingStudent() throws Exception {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
-                new Student("Freddie", "e0000000")
+                new Student("Freddie", "A0000000U")
             ).withClasses("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
@@ -53,7 +53,7 @@ public class DelStudentCommandTest {
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubGroup modelStub = new ModelStubGroup(filteredList);
         GroupPredicateStub pred = new GroupPredicateStub();
-        DelStudentCommand command = new DelStudentCommand("June", "e1234567", pred);
+        DelStudentCommand command = new DelStudentCommand("June", "A1234567U", pred);
         assertThrows(CommandException.class,
             MESSAGE_STUDENT_EMPTY, () -> command.execute(modelStub));
     }
@@ -61,12 +61,12 @@ public class DelStudentCommandTest {
     @Test
     public void equals() {
         String studentName = "John";
-        String studentId = "e1234567";
+        String studentId = "A1234567U";
         GroupPredicateStub pred = new GroupPredicateStub();
         DelStudentCommand first = new DelStudentCommand(studentName, studentId, pred);
         DelStudentCommand second = new DelStudentCommand(studentName, studentId, pred);
         DelStudentCommand differentName = new DelStudentCommand("James", studentId, pred);
-        DelStudentCommand differentId = new DelStudentCommand(studentName, "e7654321", pred);
+        DelStudentCommand differentId = new DelStudentCommand(studentName, "A7654321U", pred);
         DelStudentCommand differentPred = new DelStudentCommand(studentName, studentId, new GroupPredicateStub());
 
         // same object -> returns true

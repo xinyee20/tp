@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import team.serenity.model.group.Question;
 import team.serenity.model.group.exceptions.DuplicateQuestionException;
+import team.serenity.model.group.question.Question;
 
 class QuestionManagerTest {
 

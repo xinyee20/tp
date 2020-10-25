@@ -1,13 +1,18 @@
-package team.serenity.logic.parser;
+package team.serenity.logic.parser.question;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 
 import java.util.stream.Stream;
 
-import team.serenity.logic.commands.AddQnCommand;
+import team.serenity.logic.commands.question.AddQnCommand;
+import team.serenity.logic.parser.ArgumentMultimap;
+import team.serenity.logic.parser.ArgumentTokenizer;
+import team.serenity.logic.parser.Parser;
+import team.serenity.logic.parser.Prefix;
+import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.Question;
+import team.serenity.model.group.question.Question;
 
 /**
  * Parses input arguments and creates a new AddQnCommand object.
