@@ -40,8 +40,17 @@
     -fx-font-family: "Raleway Semibold";
 }
 
+.tab {
+    -fx-background-insets: 0 2 0 2,0,0;
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
 .tab-pane {
-    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 1;
+    -fx-tab-min-width:90px;
 }
 
 .tab-pane .tab {
@@ -49,14 +58,26 @@
     -fx-border-insets: 0;
 }
 
-.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+.tab-pane .tab:selected {
     -fx-background-color: -color-blue3;
     -fx-border-insets: 0;
 }
 
-.tab-pane > .tab-header-area > .headers-region > .tab:hover {
+.tab-pane .tab:hover {
     -fx-background-color: -color-blue4;
     -fx-border-insets: 0;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: -color-blue2;
+    -fx-opacity: 0;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 .table-view {
@@ -69,7 +90,7 @@
 }
 
 .table-view .column-header-background {
-    -fx-background-color: transparent;
+    -fx-background-color: red;
 }
 
 .table-view .column-header, .table-view .filler {
@@ -85,7 +106,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 10pt;
     -fx-font-family: "Raleway Light";
     -fx-text-fill: -color-white;
     -fx-alignment: center-left;
@@ -288,4 +309,79 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+//Style of entire tableView
+.table-view{
+    /*-fx-background-color: transparent;*/
+ }
+
+ //Style of entire tableView when is getting focused
+.table-view:focused{
+    /*-fx-background-color: transparent;*/
+}
+
+
+
+//Style of each column header in the tableView
+.table-view .column-header {
+     -fx-background-color: transparent;
+}
+
+//Style of each column header's background in the tableView
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#131313 0.0%, #424141 100.0%);
+}
+
+ //Style of each column header's label  in the tableView
+.table-view .column-header-background .label{
+     -fx-background-color: transparent;
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+}
+
+//Style of each column in the tableView
+.table-view .table-column{
+    -fx-alignment:center;
+}
+
+ //Style of each table cell
+.table-view .table-cell{
+    -fx-font-weight:bold;
+    -fx-font-size:15px;           //the font size you asked in the comments below
+    /* -fx-text-fill:orange; */
+
+}
+
+
+//Style for each < non odd> row of table view
+/* .table-row-cell{
+    -fx-background-color: white;
+    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+    -fx-padding: 0.0em;
+}
+
+//Style for each <odd> row of table view
+.table-row-cell:odd{
+    -fx-background-color: orange;
+    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
+    -fx-padding: 0.0em;
+}
+*/
+
+//Style of each entire row in the table view
+.table-row-cell:selected {
+   /* -fx-border-color:transparent firebrick transparent firebrick  ;
+    -fx-border-width:2.0; */
+}
+
+
+//Style of each entire row in the table view when is hovered
+.table-row-cell:hover {
+    -fx-background-color:orange;
+}
+
+//Style of each entire row in the table view when is getting focused
+.table-row-cell:focused {
+    -fx-background-color:purple;
 }
