@@ -13,6 +13,7 @@ public interface ReadOnlyLessonManager {
     /**
      * Returns an unmodifiable view of the Lesson list.
      * This list will not contain any duplicate lesson.
+     * @return
      */
     public Map<Group, UniqueList<Lesson>> getLessonMap();
 }

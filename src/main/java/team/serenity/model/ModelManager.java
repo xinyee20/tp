@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -292,7 +291,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
+    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
         GroupLessonKey key = new GroupLessonKey(group, lesson);
         return this.studentInfoManager.getListOfStudentsInfoFromGroupLessonKey(key);
     }
