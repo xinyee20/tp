@@ -27,63 +27,63 @@ class GroupManagerTest {
     private final ReadOnlyGroupManager readOnlyGroupManager = new GroupManager();
 
     @Test
-    public void testConstructorNoParams() {
+    public void constructor_noParams() {
         assertEquals(Collections.emptyList(), this.groupManager.getListOfGroups());
     }
 
     @Test
-    public void testConstructorWithParams() {
+    public void constructor_withParams() {
         GroupManager actual = new GroupManager(this.readOnlyGroupManager);
         assertEquals(Collections.emptyList(), actual.getListOfGroups());
     }
 
     @Test
-    public void resetDataWithNullThrowsNullPointerException() {
+    public void resetData_withNull_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> this.groupManager.resetData(null));
     }
 
     @Test
-    public void resetDataWithValidReadOnlyGroupManager() {
+    public void resetData_withValidReadOnlyGroupManager() {
         GroupManager newData = getTypicalGroupManager();
         this.groupManager.resetData(newData);
         assertEquals(newData, this.groupManager);
     }
 
     @Test
-    public void resetDataWithDuplicateGroupThrowsDuplicateQuestionException() {
+    public void resetData_withDuplicateGroup_throwsDuplicateQuestionException() {
         List<Group> newGroups = Arrays.asList(GROUP_C, GROUP_C);
         GroupManagerStub newData = new GroupManagerStub(newGroups);
         assertThrows(DuplicateGroupException.class, () -> this.groupManager.resetData(newData));
     }
 
     @Test
-    public void hasGroupNullGroupThrowsNullPointerException() {
+    public void hasGroup_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> this.groupManager.hasGroup(null));
     }
 
     @Test
-    public void hasGroupNotInGroupManagerReturnFalse() {
+    public void hasGroup_notInGroupManager_returnFalse() {
         assertFalse(this.groupManager.hasGroup(GROUP_D));
     }
 
     @Test
-    public void hasGroupInGroupManagerReturnsTrue() {
+    public void hasGroup_groupInGroupManager_returnsTrue() {
         this.groupManager.addGroup(GROUP_D);
         assertTrue(this.groupManager.hasGroup(GROUP_D));
     }
 
     @Test
-    public void deleteGroupNullGroupThrowsNullPointerException() {
+    public void deleteGroup_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> this.groupManager.deleteGroup(null));
     }
 
     @Test
-    public void deleteGroupNotInGroupManagerThrowsGroupNotFoundException() {
+    public void deleteGroup_groupNotInGroupManager_throwsGroupNotFoundException() {
         assertThrows(GroupNotFoundException.class, () -> this.groupManager.deleteGroup(GROUP_D));
     }
 
     @Test
-    public void deleteGroupInGroupManager() {
+    public void deleteGroup_groupInGroupManager() {
         this.groupManager.addGroup(GROUP_D);
         assertTrue(this.groupManager.hasGroup(GROUP_D));
         this.groupManager.deleteGroup(GROUP_D);
@@ -91,7 +91,7 @@ class GroupManagerTest {
     }
 
     @Test
-    public void getGroupModifyListThrowsUnsupportedOperationException() {
+    public void getGroup_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> this.groupManager
                 .getListOfGroups().remove(0));
     }
