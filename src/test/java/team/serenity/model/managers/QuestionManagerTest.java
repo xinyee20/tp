@@ -187,7 +187,6 @@ class QuestionManagerTest {
         this.questionManager.setQuestions(questionList);
         questionManagerCopy.setQuestions(differentQuestionList);
         assertFalse(this.questionManager.equals(questionManagerCopy));
-
     }
 
     @Test
