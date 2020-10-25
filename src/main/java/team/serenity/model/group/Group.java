@@ -21,7 +21,7 @@ public class Group {
 
     // Data fields
     private final UniqueList<Student> students;
-    private final UniqueList<Lesson> lessons;
+    public final UniqueList<Lesson> lessons;
 
     /**
      * Constructs a {@code Group}
@@ -85,6 +85,7 @@ public class Group {
     }
 
     public UniqueList<Lesson> getLessons() {
+        UniqueList<Lesson> list = this.lessons;
         return this.lessons;
     }
 

@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
+import team.serenity.model.group.UniqueLessonList;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
 import team.serenity.model.util.UniqueList;
 
@@ -68,13 +69,14 @@ public class LessonManager implements ReadOnlyLessonManager {
      * @param targetLesson Lesson to check for
      * @return whether the given lesson for the specified group exist.
      */
-    public boolean targetGroupHasLesson(Group targetGroup, Lesson targetLesson) {
+    public boolean targetGroupHasLesson(Group targetGroup, Lesson targetLesson) throws GroupNotFoundException{
         requireAllNonNull(targetGroup, targetLesson);
         Optional<UniqueList<Lesson>> uniqueList = Optional.ofNullable(this.mapToListOfLessons.get(targetGroup));
-        if (uniqueList.isEmpty()) {
+        if (!uniqueList.isEmpty()) {
             return uniqueList.get().contains(targetLesson);
+        } else {
+            throw new GroupNotFoundException();
         }
-        return false;
     }
 
     /**
@@ -90,6 +92,16 @@ public class LessonManager implements ReadOnlyLessonManager {
         } else {
             throw new GroupNotFoundException();
         }
+    }
+
+    /**
+     * Adds a specified {@code UniqueList<Lesson>} to a {@code Group}.
+     * @param group Group to add the lessons to
+     * @param lessons Lesson to check add
+     */
+    public void addNewMapping(Group group, UniqueList<Lesson> lessons) {
+        requireAllNonNull(group, lessons);
+        this.mapToListOfLessons.put(group, lessons);
     }
 
     /**
@@ -119,6 +131,7 @@ public class LessonManager implements ReadOnlyLessonManager {
     }
 
     public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) throws GroupNotFoundException {
+        requireAllNonNull(group);
         Optional<UniqueList<Lesson>> lessonList = Optional.ofNullable(this.mapToListOfLessons.get(group));
         if (lessonList.isPresent()) {
             return lessonList.get();
