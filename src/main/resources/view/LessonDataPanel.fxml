@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="lessonList" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="5" left="10" right="10" top="5" />
+    </padding>
+   <TabPane fx:id="tabPane" minHeight="-Infinity" minWidth="680.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@DarkTheme.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+     <tabs>
+       <Tab text="Lesson" >
+            <content>
+                <ListView fx:id="studentInfoListView" />
+            </content>
+       </Tab>
+       <Tab text="Questions">
+            <content>
+               <ListView fx:id="questionListView" prefHeight="200.0" prefWidth="200.0" />
+            </content>
+       </Tab>
+     </tabs>
+   </TabPane>
+</VBox>

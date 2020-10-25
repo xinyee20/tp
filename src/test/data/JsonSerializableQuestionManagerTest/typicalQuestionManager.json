@@ -1,0 +1,16 @@
+{
+  "_comment": "QuestionManager save file which contains the same Question values as in TypicalQuestion#getTypicalQuestionManager()",
+  "globalQuestionList" : [ {
+    "group" : "G04",
+    "lesson" : "2-2",
+    "description" : "What is the deadline for the report?"
+  }, {
+    "group" : "G05",
+    "lesson" : "3-1",
+    "description" : "What do we need to prepare for tomorrow's lesson?"
+  }, {
+    "group" : "G05",
+    "lesson" : "1-2",
+    "description" : "How is the grading criteria like?"
+  } ]
+}
