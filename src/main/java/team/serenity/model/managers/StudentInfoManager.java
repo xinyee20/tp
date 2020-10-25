@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import team.serenity.model.group.GroupLessonKey;
-import team.serenity.model.group.StudentInfo;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 
 public class StudentInfoManager {

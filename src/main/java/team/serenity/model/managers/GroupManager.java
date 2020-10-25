@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Student;
+import team.serenity.model.group.student.Student;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -35,7 +35,7 @@ public class GroupManager {
     public boolean hasGroup(Group target) {
         requireNonNull(target);
         for (Group group : listOfGroups) {
-            if (group.getName().equals(target.getName()) || hasAtLeast1SameStudent(target)) {
+            if (group.getGroupName().equals(target.getGroupName()) || hasAtLeast1SameStudent(target)) {
                 return true;
             }
         }
@@ -51,7 +51,7 @@ public class GroupManager {
         for (Student targetStudent : target.getStudents()) {
             for (Group group : listOfGroups) {
                 for (Student groupStudent : group.getStudents()) {
-                    if (groupStudent.getName().equals(targetStudent.getName())) {
+                    if (groupStudent.getStudentName().equals(targetStudent.getStudentName())) {
                         return true;
                     }
                 }

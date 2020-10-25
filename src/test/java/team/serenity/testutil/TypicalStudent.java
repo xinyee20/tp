@@ -1,6 +1,6 @@
 package team.serenity.testutil;
 
-import team.serenity.model.group.Student;
+import team.serenity.model.group.student.Student;
 
 public class TypicalStudent {
 

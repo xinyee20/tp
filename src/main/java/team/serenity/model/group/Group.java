@@ -8,6 +8,11 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.util.XlsxUtil;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.UniqueLessonList;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.UniqueStudentList;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -17,7 +22,7 @@ import team.serenity.model.util.UniqueList;
 public class Group {
 
     // Identity field
-    private final String name;
+    private final GroupName groupName;
 
     // Data fields
     private final UniqueList<Student> students;
@@ -26,12 +31,12 @@ public class Group {
     /**
      * Constructs a {@code Group}
      *
-     * @param name     A valid name.
+     * @param groupName     A valid name.
      * @param filePath A valid filePath.
      */
-    public Group(String name, String filePath) {
-        requireAllNonNull(name, filePath);
-        this.name = name;
+    public Group(String groupName, String filePath) {
+        requireAllNonNull(groupName, filePath);
+        this.groupName = new GroupName(groupName);
         XlsxUtil util = new XlsxUtil(filePath);
         this.students = new UniqueStudentList();
         this.students.setElementsWithList(new ArrayList<>(util.readStudentsFromXlsx()));
@@ -44,32 +49,33 @@ public class Group {
     /**
      * Constructs a {@code Group}.
      *
-     * @param name     A valid name.
+     * @param groupName     A valid name.
      * @param students A list of students.
      */
-    public Group(String name, UniqueList<Student> students) {
-        requireAllNonNull(name, students);
-        this.name = name;
+    public Group(String groupName, UniqueList<Student> students) {
+        requireAllNonNull(groupName, students);
+        this.groupName = new GroupName(groupName);
         this.students = students;
         this.lessons = new UniqueLessonList();
     }
 
+
     /**
      * Constructs a {@code Group}.
      *
-     * @param name     A valid name.
+     * @param groupName     A valid name.
      * @param students A list of students.
      * @param lessons  A list of tutorial lessons.
      */
-    public Group(String name, UniqueList<Student> students, UniqueList<Lesson> lessons) {
-        requireAllNonNull(name, students, lessons);
-        this.name = name;
+    public Group(String groupName, UniqueList<Student> students, UniqueList<Lesson> lessons) {
+        requireAllNonNull(groupName, students, lessons);
+        this.groupName = new GroupName(groupName);
         this.students = students;
         this.lessons = lessons;
     }
 
-    public String getName() {
-        return this.name;
+    public GroupName getGroupName() {
+        return this.groupName;
     }
 
     public UniqueList<Student> getStudents() {
@@ -89,7 +95,7 @@ public class Group {
     }
 
     public UniqueList<Lesson> getSortedLessons() {
-        this.lessons.sort(Comparator.comparing(Lesson::getName));
+        this.lessons.sort(Comparator.comparing(x -> x.getLessonName().toString()));
         return this.lessons;
     }
 
@@ -123,7 +129,7 @@ public class Group {
             StudentInfo newStudent = new StudentInfo(student);
             UniqueList<StudentInfo> studentInfos = lesson.getStudentsInfo();
             studentInfos.add(newStudent);
-            Lesson updatedLesson = new Lesson(lesson.getName(), studentInfos);
+            Lesson updatedLesson = new Lesson(lesson.getLessonName(), studentInfos);
             this.lessons.setElement(lesson, updatedLesson);
         }
     }
@@ -133,7 +139,7 @@ public class Group {
             StudentInfo newStudent = new StudentInfo(student);
             UniqueList<StudentInfo> studentInfos = lesson.getStudentsInfo();
             studentInfos.remove(newStudent);
-            Lesson updatedLesson = new Lesson(lesson.getName(), studentInfos);
+            Lesson updatedLesson = new Lesson(lesson.getLessonName(), studentInfos);
             this.lessons.setElement(lesson, updatedLesson);
         }
     }
@@ -148,7 +154,7 @@ public class Group {
         }
 
         return otherGroup != null
-            && otherGroup.getName().equals(getName())
+            && otherGroup.getGroupName().equals(getGroupName())
             && otherGroup.getStudents().equals(getStudents())
             && otherGroup.getLessons().equals(getLessons());
     }
@@ -168,19 +174,19 @@ public class Group {
         }
 
         Group otherGroup = (Group) other;
-        return otherGroup.getName().equals(getName())
+        return otherGroup.getGroupName().equals(getGroupName())
             && otherGroup.getStudents().equals(getStudents())
             && otherGroup.getLessons().equals(getLessons());
     }
 
     @Override
     public int hashCode() {
-        return this.name.hashCode();
+        return this.groupName.hashCode();
     }
 
     @Override
     public String toString() {
-        return String.format("Group %s", this.name);
+        return String.format("Group %s", this.groupName);
     }
 
 

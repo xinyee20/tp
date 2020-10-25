@@ -10,7 +10,7 @@ import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 
 /**
@@ -53,7 +53,7 @@ public class AddQnCommand extends Command {
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        this.toAdd.setGroupAndLesson(uniqueGroup.getName(), uniqueLesson.getName());
+        this.toAdd.setGroupAndLesson(uniqueGroup.getGroupName().toString(), uniqueLesson.getLessonName().toString());
 
         if (model.hasQuestion(this.toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_QUESTION);

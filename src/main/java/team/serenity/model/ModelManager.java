@@ -15,14 +15,14 @@ import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.UniqueGroupList;
-import team.serenity.model.group.UniqueLessonList;
-import team.serenity.model.group.UniqueStudentInfoList;
-import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.UniqueStudentList;
+import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.LessonManager;
 import team.serenity.model.managers.QuestionManager;
@@ -294,7 +294,7 @@ public class ModelManager implements Model {
 
     @Override
     public Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
-        GroupLessonKey key = new GroupLessonKey(group, lesson);
+        GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
         return this.studentInfoManager.getListOfStudentsInfoFromGroupLessonKey(key);
     }
 
@@ -303,7 +303,7 @@ public class ModelManager implements Model {
         if (!this.filteredGroups.isEmpty() && !this.filteredLessons.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
             Lesson currentLesson = this.filteredLessons.get(0);
-            GroupLessonKey key = new GroupLessonKey(currentGroup, currentLesson);
+            GroupLessonKey key = new GroupLessonKey(currentGroup.getGroupName(), currentLesson.getLessonName());
             ObservableList<StudentInfo> studentInfos = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
             UniqueList<StudentInfo> uniqueStudentInfoList = currentLesson.getStudentsInfo();
             this.studentsInfo.setAll(studentInfos);

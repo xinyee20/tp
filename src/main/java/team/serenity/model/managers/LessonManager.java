@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.util.UniqueList;
 
 public class LessonManager {

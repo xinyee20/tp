@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Student;
+import team.serenity.model.group.student.Student;
 import team.serenity.model.util.UniqueList;
 
 public class StudentManager {

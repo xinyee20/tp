@@ -4,36 +4,38 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.group.Student;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Jackson-friendly version of {@link Student}.
  */
 class JsonAdaptedStudent {
 
-    private final String name;
-    private final String studentNo;
+    private final StudentName name;
+    private final StudentNumber studentNo;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given {@code name} and {@ocde studentNumber}.
      */
     @JsonCreator
     public JsonAdaptedStudent(String name, String studentNo) {
-        this.name = name;
-        this.studentNo = studentNo;
+        this.name = new StudentName(name);
+        this.studentNo = new StudentNumber(studentNo);
     }
 
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
-        this.name = source.getName();
+        this.name = source.getStudentName();
         this.studentNo = source.getStudentNo();
     }
 
     @JsonValue
     public String getName() {
-        return this.name;
+        return this.name.toString();
     }
 
     /**

@@ -7,7 +7,7 @@ import java.util.List;
 import team.serenity.logic.commands.CommandTestUtil;
 import team.serenity.model.Serenity;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Student;
+import team.serenity.model.group.student.Student;
 
 /**
  * A utility class containing a list of {@code Group} objects to be used in tests.

@@ -58,6 +58,8 @@ public class JsonSerenityStorage implements SerenityStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
+        } catch (IOException ive) {
+            throw new DataConversionException(ive);
         }
     }
 
