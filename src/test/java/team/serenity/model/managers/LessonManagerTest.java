@@ -7,13 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalGroups.GROUP_C;
 import static team.serenity.testutil.TypicalGroups.GROUP_D;
-import static team.serenity.testutil.TypicalLesson.getTypicalLessonManager;
-import static team.serenity.testutil.TypicalLesson.getTypicalLessons;
 import static team.serenity.testutil.TypicalLesson.LESSON_A;
 import static team.serenity.testutil.TypicalLesson.LESSON_B;
 import static team.serenity.testutil.TypicalLesson.LESSON_D;
 import static team.serenity.testutil.TypicalLesson.LESSON_E;
-
+import static team.serenity.testutil.TypicalLesson.getTypicalLessonManager;
+import static team.serenity.testutil.TypicalLesson.getTypicalLessons;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -66,18 +65,18 @@ class LessonManagerTest {
     }
 
     @Test
-    public void targetGroupHasLesson_TargetGroupDoesNotExist_throwGroupNotFoundException() {
+    public void targetGroupHasLesson_targetGroupDoesNotExist_throwGroupNotFoundException() {
         assertThrows(GroupNotFoundException.class, () -> this.lessonManager.targetGroupHasLesson(GROUP_C, LESSON_A));
     }
 
     @Test
-    public void targetGroupHasLesson_TargetLessonDoesNotExist_returnFalse() {
+    public void targetGroupHasLesson_targetLessonDoesNotExist_returnFalse() {
         LessonManager newData = getTypicalLessonManager();
         assertFalse(newData.targetGroupHasLesson(GROUP_C, new LessonBuilder().withName("1-1").build()));
     }
 
     @Test
-    public void targetGroupHasLesson_TargetLessonExist_returnTrue() {
+    public void targetGroupHasLesson_targetLessonExist_returnTrue() {
         LessonManager newData = getTypicalLessonManager();
         assertTrue(newData.targetGroupHasLesson(GROUP_D, new LessonBuilder().withName("4-2").build()));
     }
@@ -101,7 +100,7 @@ class LessonManagerTest {
     }
 
     @Test
-    public void addLessonToGroup_ValidLesson() {
+    public void addLessonToGroup_validLesson() {
         this.lessonManager.resetData(getTypicalLessonManager());
         assertFalse(this.lessonManager.targetGroupHasLesson(GROUP_D, LESSON_E));
         this.lessonManager.addLessonToGroup(GROUP_D, LESSON_E);
@@ -121,13 +120,13 @@ class LessonManagerTest {
     }
 
     @Test
-    public void deleteLessonFromGroup_LessonDoesNotExist_throwLessonNotFoundException() {
+    public void deleteLessonFromGroup_lessonDoesNotExist_throwLessonNotFoundException() {
         this.lessonManager.resetData(getTypicalLessonManager());
         assertThrows(LessonNotFoundException.class, () -> this.lessonManager.deleteLessonFromGroup(GROUP_C, LESSON_B));
     }
 
     @Test
-    public void deleteLessonFromGroup_ValidLesson() {
+    public void deleteLessonFromGroup_validLesson() {
         this.lessonManager.resetData(getTypicalLessonManager());
         assertTrue(this.lessonManager.targetGroupHasLesson(GROUP_C, LESSON_A));
         this.lessonManager.deleteLessonFromGroup(GROUP_C, LESSON_A);
@@ -136,9 +135,11 @@ class LessonManagerTest {
 
     @Test
     public void setListOfLessonsToGroup_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> this.lessonManager.setListOfLessonsToGroup(null,null));
-        assertThrows(NullPointerException.class, () -> this.lessonManager.setListOfLessonsToGroup(GROUP_C,null));
-        assertThrows(NullPointerException.class, () -> this.lessonManager.setListOfLessonsToGroup(null, getTypicalLessons()));
+        assertThrows(NullPointerException.class, () -> this.lessonManager.setListOfLessonsToGroup(null, null));
+        assertThrows(NullPointerException.class, () -> this.lessonManager.setListOfLessonsToGroup(GROUP_C, null));
+        assertThrows(NullPointerException.class, () ->
+            this.lessonManager.setListOfLessonsToGroup(null, getTypicalLessons())
+        );
     }
 
     @Test

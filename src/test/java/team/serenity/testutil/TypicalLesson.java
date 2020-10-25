@@ -5,7 +5,6 @@ import static team.serenity.testutil.TypicalGroups.GROUP_D;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Student;

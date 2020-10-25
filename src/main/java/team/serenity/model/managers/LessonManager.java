@@ -9,7 +9,6 @@ import java.util.Optional;
 
 import team.serenity.model.group.Group;
 import team.serenity.model.group.Lesson;
-import team.serenity.model.group.UniqueLessonList;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
 import team.serenity.model.util.UniqueList;
 
@@ -69,7 +68,7 @@ public class LessonManager implements ReadOnlyLessonManager {
      * @param targetLesson Lesson to check for
      * @return whether the given lesson for the specified group exist.
      */
-    public boolean targetGroupHasLesson(Group targetGroup, Lesson targetLesson) throws GroupNotFoundException{
+    public boolean targetGroupHasLesson(Group targetGroup, Lesson targetLesson) throws GroupNotFoundException {
         requireAllNonNull(targetGroup, targetLesson);
         Optional<UniqueList<Lesson>> uniqueList = Optional.ofNullable(this.mapToListOfLessons.get(targetGroup));
         if (!uniqueList.isEmpty()) {

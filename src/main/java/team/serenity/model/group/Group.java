@@ -21,7 +21,7 @@ public class Group {
 
     // Data fields
     private final UniqueList<Student> students;
-    public final UniqueList<Lesson> lessons;
+    private final UniqueList<Lesson> lessons;
 
     /**
      * Constructs a {@code Group}
