@@ -3,6 +3,7 @@ package team.serenity.model.managers;
 import java.util.Map;
 
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.util.UniqueList;
 
@@ -14,6 +15,6 @@ public interface ReadOnlyStudentManager {
      * Returns an Unmodifiable view of the Student HashMap
      * this Hashmap will not contain any duplicate Students
      */
-    public Map<Group, UniqueList<Student>> getStudentMap();
+    public Map<GroupName, UniqueList<Student>> getStudentMap();
 
 }

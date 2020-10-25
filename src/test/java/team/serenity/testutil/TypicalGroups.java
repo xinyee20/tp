@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import team.serenity.logic.commands.CommandTestUtil;
+import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.managers.GroupManager;
+import team.serenity.model.util.UniqueList;
 
 /**
  * A utility class containing a list of {@code Group} objects to be used in tests.
@@ -17,7 +19,7 @@ public class TypicalGroups {
 
     public static final Group GROUP_C = new GroupBuilder().withName("G06")
         .withStudents(
-            new Student("Jeffery", "A0000000U"),
+            new Student("Jeffery", "A0000001U"),
             new Student("Luna", "A0111111U"),
             new Student("Queenie", "A0222222U")
         ).withClasses("4-2", "5-1")
@@ -25,7 +27,7 @@ public class TypicalGroups {
 
     public static final Group GROUP_D = new GroupBuilder().withName("G07")
         .withStudents(
-            new Student("Freddie", "A0000000U"),
+            new Student("Freddie", "A0000001U"),
             new Student("June", "A0101011U")
         ).withClasses("4-2", "5-1", "5-2", "6-1")
         .build();
@@ -43,10 +45,11 @@ public class TypicalGroups {
      * Returns an {@code Serenity} with all the typical groups.
      */
     public static Serenity getTypicalSerenity() {
-        Serenity serenity = new Serenity();
+        UniqueList<Group> groups = new UniqueGroupList();
         for (Group group : getTypicalGroups()) {
-            serenity.addGroup(group);
+            groups.add(group);
         }
+        Serenity serenity = new Serenity(groups.asUnmodifiableObservableList());
         return serenity;
     }
 

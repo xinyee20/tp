@@ -1,16 +1,17 @@
 package team.serenity.model.managers;
 
 import static java.util.Objects.requireNonNull;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -32,34 +33,117 @@ public class Serenity implements ReadOnlySerenity {
         this.studentInfoManager = new StudentInfoManager();
     }
 
+    public Serenity(List<Group> groups) {
+
+        //instantiate groups
+        this.groups = new UniqueGroupList();
+        this.groups.setElementsWithList(groups);
+
+        //instantiate GroupManager
+        this.groupManager = new GroupManager(this.groups);
+
+        //instantiate other managers
+        LessonManager lessonManager = new LessonManager();
+        StudentManager studentManager = new StudentManager();
+        StudentInfoManager studentInfoManager = new StudentInfoManager();
+
+        //Create Maps for all the relevant data
+        Map<GroupName, UniqueList<Lesson>> lessonMap = new HashMap<>();
+        Map<GroupName, UniqueList<Student>> studentMap = new HashMap<>();
+        Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap = new HashMap<>();
+        for (Group group : this.groups) {
+            GroupName name = group.getGroupName();
+            UniqueList<Student> students = group.getStudents();
+            UniqueList<Lesson> lessons = group.getLessons();
+            lessonMap.put(name, lessons);
+            studentMap.put(name, students);
+
+            for (Lesson lesson : lessons) {
+                GroupLessonKey key = new GroupLessonKey(name, lesson.getLessonName());
+                studentInfoMap.put(key, lesson.getStudentsInfo());
+            }
+        }
+
+        //set maps to our managers
+        studentManager.setStudents(studentMap);
+        lessonManager.setLessons(lessonMap);
+        studentInfoManager.setStudentInfo(studentInfoMap);
+
+
+        //instantiate ReadOnlyStudentManager, ReadOnlyLessonManager and ReadOnlyStudentInfoManager
+        this.lessonManager = lessonManager;
+        this.studentManager = studentManager;
+        this.studentInfoManager = studentInfoManager;
+    }
+
     /**
      * Creates a Serenity object using the Groups in the {@code toBeCopied}.
      */
     public Serenity(ReadOnlySerenity toBeCopied) {
-        
+
         requireNonNull(toBeCopied);
 
         //instantiate groups
         this.groups = new UniqueGroupList();
         this.groups.setElementsWithList(toBeCopied.getGroupList());
 
-        //instantiate groupmanager
+        //instantiate GroupManager
         this.groupManager = new GroupManager(this.groups);
 
+        //instantiate other managers
+        LessonManager lessonManager = new LessonManager();
+        StudentManager studentManager = new StudentManager();
+        StudentInfoManager studentInfoManager = new StudentInfoManager();
 
+        //Create Maps for all the relevant data
         Map<GroupName, UniqueList<Lesson>> lessonMap = new HashMap<>();
+        Map<GroupName, UniqueList<Student>> studentMap = new HashMap<>();
+        Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap = new HashMap<>();
         for (Group group : this.groups) {
             GroupName name = group.getGroupName();
+            UniqueList<Student> students = group.getStudents();
             UniqueList<Lesson> lessons = group.getLessons();
             lessonMap.put(name, lessons);
+            studentMap.put(name, students);
+
+            for (Lesson lesson : lessons) {
+                GroupLessonKey key = new GroupLessonKey(name, lesson.getLessonName());
+                studentInfoMap.put(key, lesson.getStudentsInfo());
+            }
         }
+
+        //set maps to our managers
+        studentManager.setStudents(studentMap);
+        lessonManager.setLessons(lessonMap);
+        studentInfoManager.setStudentInfo(studentInfoMap);
+
+
+        //instantiate ReadOnlyStudentManager, ReadOnlyLessonManager and ReadOnlyStudentInfoManager
+        this.lessonManager = lessonManager;
+        this.studentManager = studentManager;
+        this.studentInfoManager = studentInfoManager;
     }
 
 
-    public ReadOnlyGroupManager instantiateGroupManager() {
-        return new GroupManager(this.groups);
+    @Override
+    public ReadOnlyGroupManager getGroupManager() {
+        return this.groupManager;
     }
 
+    @Override
+    public ReadOnlyLessonManager getLessonManager() {
+        return this.lessonManager;
+    }
+
+    @Override
+    public ReadOnlyStudentManager getStudentManager() {
+        return this.studentManager;
+    }
+
+    @Override
+    public ReadOnlyStudentInfoManager getStudentInfoManager() {
+        return this.studentInfoManager;
+    }
 
     //// group-level operations
 
@@ -74,8 +158,8 @@ public class Serenity implements ReadOnlySerenity {
     /**
      * Adds a group to the serenity. The group must not already exist in the serenity.
      */
-    public void addGroup(Group g) {
-        this.groups.add(g);
+    public void addGroup(Group group) {
+        this.groups.add(group);
     }
 
 

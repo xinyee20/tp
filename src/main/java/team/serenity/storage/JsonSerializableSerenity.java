@@ -10,9 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import team.serenity.commons.exceptions.IllegalValueException;
+import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
+import team.serenity.model.util.UniqueList;
 
 /**
  * An Immutable Serenity that is serializable to JSON format.
@@ -52,15 +55,13 @@ class JsonSerializableSerenity {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public Serenity toModelType() throws IllegalArgumentException, IllegalValueException {
-        Serenity serenity = new Serenity();
+    public Serenity toModelType() throws IllegalArgumentException, DuplicateException {
+        UniqueList<Group> groups = new UniqueGroupList();
         for (JsonAdaptedGroup jsonAdaptedGroup : this.groups) {
             Group group = jsonAdaptedGroup.toModelType();
-            if (serenity.hasGroup(group)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
-            serenity.addGroup(group);
+            groups.add(group);
         }
+        Serenity serenity = new Serenity(groups.asUnmodifiableObservableList());
         return serenity;
     }
 }

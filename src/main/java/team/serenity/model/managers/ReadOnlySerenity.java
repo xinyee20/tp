@@ -14,4 +14,12 @@ public interface ReadOnlySerenity {
      */
     List<Group> getGroupList();
 
+    ReadOnlyStudentInfoManager getStudentInfoManager();
+
+    ReadOnlyLessonManager getLessonManager();
+
+    ReadOnlyGroupManager getGroupManager();
+
+    ReadOnlyStudentManager getStudentManager();
+
 }

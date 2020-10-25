@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
@@ -42,11 +43,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlySerenity getSampleSerenity() {
-        Serenity samples = new Serenity();
+        UniqueList<Group> groups = new UniqueGroupList();
         for (Group sampleGroup : getSampleGroups()) {
-            samples.addGroup(sampleGroup);
+            groups.add(sampleGroup);
         }
-        return samples;
+        return new Serenity(groups.asUnmodifiableObservableList());
     }
 
     public static Set<StudentInfo> getStudentInfoSet(Student... students) {

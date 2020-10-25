@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -68,10 +67,10 @@ public class ModelManager implements Model {
 
         //instantiate individual managers
         this.userPrefs = new UserPrefs(userPrefs);
-        this.groupManager = new GroupManager();
-        this.studentManager = new StudentManager();
-        this.studentInfoManager = new StudentInfoManager();
-        this.lessonManager = new LessonManager();
+        this.groupManager = new GroupManager(serenity.getGroupManager());
+        this.studentManager = new StudentManager(serenity.getStudentManager());
+        this.studentInfoManager = new StudentInfoManager(serenity.getStudentInfoManager());
+        this.lessonManager = new LessonManager(serenity.getLessonManager());
         this.questionManager = new QuestionManager(questionManager);
 
         this.filteredGroups = new FilteredList<>(this.groupManager.getListOfGroups());
@@ -189,7 +188,7 @@ public class ModelManager implements Model {
         requireNonNull(group);
         UniqueList<Student> studentList = group.getStudents();
         this.groupManager.addGroup(group);
-        this.studentManager.addListOfStudentsToGroup(group, studentList);
+        this.studentManager.addListOfStudentsToGroup(group.getGroupName(), studentList);
     }
 
     @Override
@@ -244,8 +243,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<Student>> getListOfStudentsFromGroup(Group group) {
-        return this.studentManager.getListOfStudentsFromGroup(group);
+    public UniqueList<Student> getListOfStudentsFromGroup(Group group) {
+        return this.studentManager.getListOfStudentsFromGroup(group.getGroupName());
     }
 
     @Override
@@ -276,14 +275,14 @@ public class ModelManager implements Model {
         if (this.filteredGroups.size() == 1) {
             ObservableList<Student> studentList = this.filteredGroups.get(0).getStudentsAsUnmodifiableObservableList();
             this.students.setAll(studentList);
-            this.studentManager.setListOfStudentsToGroup(this.filteredGroups.get(0),
+            this.studentManager.setListOfStudentsToGroup(this.filteredGroups.get(0).getGroupName(),
                 this.filteredGroups.get(0).getStudents());
         }
     }
 
     @Override
     public boolean checkIfStudentExistsInGroup(Group group, Student student) {
-        return this.studentManager.checkIfStudentExistsInGroup(group, student);
+        return this.studentManager.checkIfStudentExistsInGroup(group.getGroupName(), student);
     }
 
     // ========== StudentInfoManager ==========
@@ -294,7 +293,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
+    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
         GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
         return this.studentInfoManager.getListOfStudentsInfoFromGroupLessonKey(key);
     }
