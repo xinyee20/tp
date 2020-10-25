@@ -201,7 +201,6 @@ class QuestionManagerTest {
         assertNotEquals(this.questionManager.toString(), differentQuestionManager.toString());
     }
 
-
     /**
      * A stub ReadOnlyQuestionManager whose question list can violate interface constraints.
      */
