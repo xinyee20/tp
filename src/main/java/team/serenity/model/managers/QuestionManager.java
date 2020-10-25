@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import team.serenity.model.group.exceptions.DuplicateQuestionException;
+import team.serenity.model.group.exceptions.QuestionNotFoundException;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.question.UniqueQuestionList;
 import team.serenity.model.util.UniqueList;
@@ -98,6 +99,10 @@ public class QuestionManager implements ReadOnlyQuestionManager {
      * {@code toDelete} must exist in the QuestionManager.
      */
     public void deleteQuestion(Question toDelete) {
+        requireNonNull(toDelete);
+        if (!hasQuestion(toDelete)) {
+            throw new QuestionNotFoundException();
+        }
         this.listOfQuestions.remove(toDelete);
     }
 

@@ -2,10 +2,12 @@ package team.serenity.model.managers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_C;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
 
 import java.util.Arrays;
@@ -18,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import team.serenity.model.group.exceptions.DuplicateQuestionException;
+import team.serenity.model.group.exceptions.QuestionNotFoundException;
 import team.serenity.model.group.question.Question;
 
 class QuestionManagerTest {
@@ -87,6 +90,117 @@ class QuestionManagerTest {
         this.questionManager.addQuestion(QUESTION_A);
         assertTrue(this.questionManager.hasQuestion(QUESTION_A));
     }
+
+    @Test
+    public void addQuestion_nullQuestion_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.questionManager.addQuestion(null));
+    }
+
+    @Test
+    public void addQuestion_validQuestion_addsQuestion() {
+        this.questionManager.addQuestion(QUESTION_A);
+        assertTrue(this.questionManager.hasQuestion(QUESTION_A));
+    }
+
+    @Test
+    public void addQuestion_duplicateQuestion_throwsDuplicateQuestionException() {
+        this.questionManager.addQuestion(QUESTION_A);
+        assertThrows(DuplicateQuestionException.class, () -> this.questionManager.addQuestion(QUESTION_A));
+    }
+
+    @Test
+    public void setQuestion_nullInputs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.questionManager.setQuestion(null, null));
+        assertThrows(NullPointerException.class, () -> this.questionManager.setQuestion(null, QUESTION_A));
+        assertThrows(NullPointerException.class, () -> this.questionManager.setQuestion(QUESTION_A, null));
+    }
+
+    @Test
+    public void setQuestion_targetQuestionNotInQuestionManager_throwsQuestionNotFoundException() {
+        assertThrows(QuestionNotFoundException.class, () -> this.questionManager.setQuestion(QUESTION_A, QUESTION_B));
+    }
+
+    @Test
+    public void setQuestion_editedQuestionInQuestionManager_throwsDuplicateQuestionException() {
+        this.questionManager.addQuestion(QUESTION_A);
+        this.questionManager.addQuestion(QUESTION_B);
+        assertThrows(DuplicateQuestionException.class, () -> this.questionManager.setQuestion(QUESTION_A, QUESTION_B));;
+    }
+
+    @Test
+    public void setQuestion_validInputs_setsQuestion() {
+        this.questionManager.addQuestion(QUESTION_A);
+        this.questionManager.setQuestion(QUESTION_A, QUESTION_B);
+        assertFalse(this.questionManager.hasQuestion(QUESTION_A));
+        assertTrue(this.questionManager.hasQuestion(QUESTION_B));
+    }
+
+    @Test
+    public void deleteQuestion_nullQuestion_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.questionManager.deleteQuestion(null));
+    }
+
+    @Test
+    public void deleteQuestion_questionNotInQuestionManager_throwsQuestionNotFoundException() {
+        assertThrows(QuestionNotFoundException.class, () -> this.questionManager.deleteQuestion(QUESTION_A));
+    }
+
+    @Test
+    public void deleteQuestion_validQuestion_deletesQuestion() {
+        this.questionManager.addQuestion(QUESTION_A);
+        this.questionManager.deleteQuestion(QUESTION_A);
+        assertFalse(this.questionManager.hasQuestion(QUESTION_A));
+    }
+
+    @Test
+    public void test_hashCode() {
+        // Same case
+        List<Question> questionList = Arrays.asList(QUESTION_A, QUESTION_B, QUESTION_C);
+        QuestionManager questionManagerCopy = new QuestionManager(this.questionManager);
+        this.questionManager.setQuestions(questionList);
+        questionManagerCopy.setQuestions(questionList);
+        assertEquals(this.questionManager.hashCode(), questionManagerCopy.hashCode());
+
+        // Different case
+        QuestionManager differentQuestionManager = new QuestionManager();
+        assertNotEquals(this.questionManager.hashCode(), differentQuestionManager.hashCode());
+    }
+
+    @Test
+    public void test_equals() {
+        // same values -> returns true
+        QuestionManager questionManagerCopy = new QuestionManager(this.questionManager);
+        assertTrue(this.questionManager.equals(questionManagerCopy));
+
+        // same object -> returns true
+        assertTrue(this.questionManager.equals(this.questionManager));
+
+        // null -> returns false
+        assertFalse(this.questionManager.equals(null));
+
+        // different types -> returns false
+        assertFalse(this.questionManager.equals(5));
+
+        // different listOfQuestions -> returns false
+        List<Question> questionList = Arrays.asList(QUESTION_A, QUESTION_B, QUESTION_C);
+        List<Question> differentQuestionList = Arrays.asList(QUESTION_A, QUESTION_B);
+        this.questionManager.setQuestions(questionList);
+        questionManagerCopy.setQuestions(differentQuestionList);
+        assertFalse(this.questionManager.equals(questionManagerCopy));
+
+    }
+
+    @Test
+    public void test_toString() {
+        // Same case
+        QuestionManager questionManagerCopy = new QuestionManager(this.questionManager);
+        assertEquals(this.questionManager.toString(), questionManagerCopy.toString());
+
+        // Different case
+        QuestionManager differentQuestionManager = getTypicalQuestionManager();
+        assertNotEquals(this.questionManager.toString(), differentQuestionManager.toString());
+    }
+
 
     /**
      * A stub ReadOnlyQuestionManager whose question list can violate interface constraints.
