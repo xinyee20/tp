@@ -118,7 +118,6 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
     }
 
     /**
-     * Deletes a student info from the specified GroupLessonKey
      * @param key
      * @param studentInfo
      * @throws GroupLessonPairNotFoundException
