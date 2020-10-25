@@ -22,10 +22,12 @@ import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.ViewLsnCommand;
 import team.serenity.logic.commands.question.AddQnCommand;
 import team.serenity.logic.commands.question.DelQnCommand;
+import team.serenity.logic.commands.question.FindQnCommand;
 import team.serenity.logic.commands.question.ViewQnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.logic.parser.question.AddQnCommandParser;
 import team.serenity.logic.parser.question.DelQnCommandParser;
+import team.serenity.logic.parser.question.FindQnCommandParser;
 
 /**
  * Parses user input.
@@ -96,6 +98,9 @@ public class SerenityParser {
 
         case DelQnCommand.COMMAND_WORD:
             return new DelQnCommandParser().parse(arguments);
+
+        case FindQnCommand.COMMAND_WORD:
+            return new FindQnCommandParser().parse(arguments);
 
         case ViewQnCommand.COMMAND_WORD:
             return new ViewQnCommand();
