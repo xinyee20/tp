@@ -12,7 +12,7 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.Student;
 import team.serenity.model.util.UniqueList;
 
-public class StudentManager implements ReadOnlyStudentManager{
+public class StudentManager {
 
     private final Map<Group, UniqueList<Student>> mapToListOfStudents;
 
@@ -34,11 +34,6 @@ public class StudentManager implements ReadOnlyStudentManager{
                 students.add(student);
             }
         }
-    }
-
-    @Override
-    public Map<Group, UniqueList<Student>> getMapOfStudent() {
-        return null;
     }
 
     // Student-level methods
