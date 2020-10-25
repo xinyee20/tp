@@ -1,4 +1,4 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.attendance;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
@@ -6,6 +6,8 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
+import team.serenity.logic.commands.Command;
+import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Attendance;

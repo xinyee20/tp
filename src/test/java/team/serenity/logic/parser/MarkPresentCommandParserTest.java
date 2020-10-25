@@ -2,6 +2,8 @@ package team.serenity.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
+import team.serenity.logic.parser.attendance.MarkPresentCommandParser;
+
 class MarkPresentCommandParserTest {
 
     private MarkPresentCommandParser parser = new MarkPresentCommandParser();
