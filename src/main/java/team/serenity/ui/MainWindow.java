@@ -2,14 +2,19 @@ package team.serenity.ui;
 
 import java.util.logging.Logger;
 
+import com.sun.javafx.scene.layout.region.Margins;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -211,12 +216,21 @@ public class MainWindow extends UiPart<Stage> {
      * Sets up the newly created group button.
      */
     public void setUpButton(Button groupButton) {
-        groupButton.setId(groupButton.getText());
-        groupButton.setAlignment(Pos.CENTER);
-        groupButton.setContentDisplay(ContentDisplay.CENTER);
+        groupButton.setLayoutX(20);
+        groupButton.setLayoutY(65);
         groupButton.setMnemonicParsing(false);
-        groupButton.setPrefWidth(50);
-        groupButton.setTextAlignment(TextAlignment.CENTER);
+        groupButton.setPrefWidth(65);
+        groupButton.setId(groupButton.getText());
+
+        Image groupImage = new Image("images/group.png");
+        ImageView groupImageView = new ImageView(groupImage);
+        groupImageView.setFitHeight(15);
+        groupImageView.setFitWidth(15);
+        groupImageView.setPickOnBounds(true);
+        groupImageView.setPreserveRatio(true);
+
+        groupButton.setGraphic(groupImageView);
+        VBox.setMargin(buttonPanelPlaceholder, new Insets(10));
         groupButton.setOnAction(event -> {
             String commandText = "viewgrp grp/" + groupButton.getText();
             try {
