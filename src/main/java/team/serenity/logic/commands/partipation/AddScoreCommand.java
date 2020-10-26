@@ -9,6 +9,8 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Optional;
+
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.Command;
@@ -38,13 +40,13 @@ public class AddScoreCommand extends Command {
             + "or INDEX " + PREFIX_ADD_SCORE + " SCORE_TO_ADD\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " e0123456 "
+            + PREFIX_MATRIC + " A0123456U "
             + PREFIX_ADD_SCORE + " 2\n"
-            + "or " + COMMAND_WORD + " 2"
+            + "or " + COMMAND_WORD + " 2 "
             + PREFIX_ADD_SCORE + " 2\n";
 
-    private Student toAddScore;
-    private Index index;
+    private Optional<Student> toAddScore;
+    private Optional<Index> index;
     private boolean isByIndex;
     private int score;
     private int scoreToAdd;
@@ -57,8 +59,9 @@ public class AddScoreCommand extends Command {
         requireNonNull(student);
         requireNonNull(scoreToAdd);
         // Specified student to add participation score
-        this.toAddScore = student;
+        this.toAddScore = Optional.ofNullable(student);
         this.scoreToAdd = scoreToAdd;
+        this.index = Optional.empty();
         this.isByIndex = false;
     }
 
@@ -69,7 +72,8 @@ public class AddScoreCommand extends Command {
         requireNonNull(index);
         requireNonNull(scoreToAdd);
         // Specified index of student to add participation score
-        this.index = index;
+        this.index = Optional.ofNullable(index);
+        this.toAddScore = Optional.empty();
         this.scoreToAdd = scoreToAdd;
         this.isByIndex = true;
     }
@@ -96,7 +100,7 @@ public class AddScoreCommand extends Command {
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
                 this.score = studentInfo.getParticipation().getScore();
-                this.isCorrectStudent = studentInfo.containsStudent(this.toAddScore);
+                this.isCorrectStudent = studentInfo.containsStudent(this.toAddScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
                     if (! currentAttendance.getAttendance()) {
@@ -118,13 +122,13 @@ public class AddScoreCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toAddScore));
             }
         } else {
-            if (index.getZeroBased() > studentsInfo.size()) {
+            if (index.get().getZeroBased() > studentsInfo.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        index.getOneBased()));
+                        index.get().getOneBased()));
             }
 
-            StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
-            toAddScore = studentInfo.getStudent();
+            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
+            toAddScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
             if (! currentAttendance.getAttendance()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore));
@@ -145,7 +149,9 @@ public class AddScoreCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddScoreCommand // instanceof handles nulls
+                && this.scoreToAdd == ((AddScoreCommand) other).scoreToAdd)
                 && this.toAddScore.equals(((AddScoreCommand) other).toAddScore)
-                && this.scoreToAdd == ((AddScoreCommand) other).scoreToAdd);
+                && this.index.equals(((AddScoreCommand) other).index)
+                && this.isByIndex == (((AddScoreCommand) other).isByIndex);
     }
 }

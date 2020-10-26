@@ -37,7 +37,7 @@ public class MarkAbsentCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " e0123456\n"
+            + PREFIX_MATRIC + " A0123456U\n"
             + "or " + COMMAND_WORD + " 2";
 
     private Optional<Student> toMarkAbsent;

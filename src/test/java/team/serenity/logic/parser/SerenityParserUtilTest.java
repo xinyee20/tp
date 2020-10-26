@@ -1,7 +1,7 @@
 package team.serenity.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static team.serenity.logic.parser.SerenityParserUtil.MESSAGE_INVALID_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 

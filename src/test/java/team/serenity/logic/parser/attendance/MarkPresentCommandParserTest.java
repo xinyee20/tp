@@ -1,4 +1,4 @@
-package team.serenity.logic.parser;
+package team.serenity.logic.parser.attendance;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.attendance.MarkPresentCommand;
-import team.serenity.logic.parser.attendance.MarkPresentCommandParser;
 import team.serenity.model.group.Student;
 import team.serenity.testutil.StudentBuilder;
 
@@ -41,7 +40,7 @@ class MarkPresentCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE);
         String empty = "";
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_INDEX, expectedMessage);
+        assertParseFailure(parser, INVALID_INDEX, expectedMessage);
         assertParseFailure(parser, empty, expectedMessage);
     }
 

@@ -41,7 +41,7 @@ public class MarkPresentCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " e0123456\n"
+            + PREFIX_MATRIC + " A0123456U\n"
             + "or " + COMMAND_WORD + " 2";
 
     private Optional<Student> toMarkPresent;
@@ -58,6 +58,7 @@ public class MarkPresentCommand extends Command {
         this.isWholeClass = true;
         this.toMarkPresent = Optional.empty();
         this.index = Optional.empty();
+        this.isByIndex = false;
     }
 
     /**
@@ -161,7 +162,7 @@ public class MarkPresentCommand extends Command {
                 || (other instanceof MarkPresentCommand // instanceof handles nulls
                 && this.toMarkPresent.equals(((MarkPresentCommand) other).toMarkPresent)
                 && this.index.equals(((MarkPresentCommand) other).index)
-                && this.isCorrectStudent == ((MarkPresentCommand) other).isCorrectStudent
+                && this.isByIndex == (((MarkPresentCommand) other).isByIndex)
                 && this.isWholeClass == ((MarkPresentCommand) other).isWholeClass);
     }
 

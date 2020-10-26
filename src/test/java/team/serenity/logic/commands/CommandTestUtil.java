@@ -1,11 +1,14 @@
 package team.serenity.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,6 +34,9 @@ public class CommandTestUtil {
     public static final String VALID_STUDENT_NAME = "Ryan Lim";
     public static final String VALID_STUDENT_NUMBER_A = "A0123456U";
     public static final String VALID_INDEX = "1";
+    public static final String VALID_SCORE = "1";
+    public static final String VALID_ADD = "1";
+    public static final String VALID_SUB = "1";
 
     public static final String GRP_DESC_GROUP_A = " " + PREFIX_GRP + VALID_GRP_GROUP_A;
     public static final String GRP_DESC_GROUP_B = " " + PREFIX_GRP + VALID_GRP_GROUP_B;
@@ -39,12 +45,18 @@ public class CommandTestUtil {
     public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;
     public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_DESC_B;
     public static final String STUDENT_DESC = " " + PREFIX_NAME + VALID_STUDENT_NAME + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
+    public static final String SET_SCORE_DESC = " " + PREFIX_SET_SCORE + VALID_SCORE;
+    public static final String ADD_SCORE_DESC = " " + PREFIX_ADD_SCORE + VALID_ADD;
+    public static final String SUB_SCORE_DESC = " " + PREFIX_SUBTRACT_SCORE + VALID_SUB;
 
     // Invalid descriptions for Serenity
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
     public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
     public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME;
     public static final String INVALID_INDEX = "A";
+    public static final String INVALID_SET_SCORE = " " + PREFIX_SET_SCORE + "A";
+    public static final String INVALID_ADD_SCORE = " " + PREFIX_ADD_SCORE + "A";
+    public static final String INVALID_SUB_SCORE = " " + PREFIX_SUBTRACT_SCORE + "A";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

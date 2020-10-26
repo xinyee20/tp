@@ -26,8 +26,6 @@ import team.serenity.model.group.Student;
  */
 public class SetScoreCommandParser implements Parser<SetScoreCommand> {
 
-    public static final String MESSAGE_STUDENT_NOT_GIVEN = "Please ensure student name / id is given";
-
     /**
      * Parses the given {@code String} of arguments in the context of the SetScoreCommand and
      * returns a SetScoreCommand object for execution.
@@ -46,6 +44,14 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
         int score;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_SET_SCORE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && !argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
+        }
+
+        if (!argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
         }
 

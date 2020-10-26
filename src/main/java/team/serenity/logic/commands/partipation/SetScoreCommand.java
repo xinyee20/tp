@@ -9,6 +9,8 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
 
+import java.util.Optional;
+
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.Command;
@@ -39,13 +41,13 @@ public class SetScoreCommand extends Command {
             + "or INDEX " + PREFIX_SET_SCORE + " SCORE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " e0123456 "
+            + PREFIX_MATRIC + " A0123456U "
             + PREFIX_SET_SCORE + " 2\n"
-            + "or " + COMMAND_WORD + " 2"
+            + "or " + COMMAND_WORD + " 2 "
             + PREFIX_SET_SCORE + " 2\n";
 
-    private Student toSetScore;
-    private Index index;
+    private Optional<Student> toSetScore;
+    private Optional<Index> index;
     private boolean isByIndex;
     private int scoreToSet;
     private boolean isCorrectStudent;
@@ -57,8 +59,9 @@ public class SetScoreCommand extends Command {
         requireNonNull(student);
         requireNonNull(scoreToSet);
         // Specified student to set participation score
-        this.toSetScore = student;
+        this.toSetScore = Optional.ofNullable(student);
         this.scoreToSet = scoreToSet;
+        this.index = Optional.empty();
         this.isByIndex = false;
     }
 
@@ -69,7 +72,8 @@ public class SetScoreCommand extends Command {
         requireNonNull(index);
         requireNonNull(scoreToSet);
         // Specified index of student to set participation score
-        this.index = index;
+        this.index = Optional.ofNullable(index);
+        this.toSetScore = Optional.empty();
         this.scoreToSet = scoreToSet;
         this.isByIndex = true;
     }
@@ -96,7 +100,7 @@ public class SetScoreCommand extends Command {
             // Update single student participation score
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
-                this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore);
+                this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
                     if (! currentAttendance.getAttendance()) {
@@ -118,13 +122,13 @@ public class SetScoreCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore));
             }
         } else {
-            if (index.getZeroBased() > studentsInfo.size()) {
+            if (index.get().getZeroBased() > studentsInfo.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        index.getOneBased()));
+                        index.get().getOneBased()));
             }
 
-            StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
-            toSetScore = studentInfo.getStudent();
+            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
+            toSetScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
             if (! currentAttendance.getAttendance()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore));
@@ -145,8 +149,10 @@ public class SetScoreCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SetScoreCommand // instanceof handles nulls
+                && this.scoreToSet == ((SetScoreCommand) other).scoreToSet)
                 && this.toSetScore.equals(((SetScoreCommand) other).toSetScore)
-                && this.scoreToSet == ((SetScoreCommand) other).scoreToSet);
+                && this.index.equals(((SetScoreCommand) other).index)
+                && this.isByIndex == (((SetScoreCommand) other).isByIndex);
     }
 
 }
