@@ -1,36 +1,39 @@
 package team.serenity.testutil;
 
-import team.serenity.model.group.Student;
+
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 public class StudentBuilder {
 
-    public static final String DEFAULT_NAME = "Ryan Lim";
-    public static final String DEFAULT_STUDENT_ID = "A0123456U";
+    public static final StudentName DEFAULT_NAME = new StudentName("Ryan Lim");
+    public static final StudentNumber DEFAULT_STUDENT_NUMBER = new StudentNumber("A0123456U");
 
-    private String name;
-    private String studentId;
+    private StudentName name;
+    private StudentNumber studentNumber;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
      */
     public StudentBuilder() {
         this.name = DEFAULT_NAME;
-        this.studentId = DEFAULT_STUDENT_ID;
+        this.studentNumber = DEFAULT_STUDENT_NUMBER;
     }
 
     /**
      * Initializes the StudentBuilder with the data of {@code studentToCopy}
      */
     public StudentBuilder(Student studentToCopy) {
-        this.name = studentToCopy.getName();
-        this.studentId = studentToCopy.getName();
+        this.name = studentToCopy.getStudentName();
+        this.studentNumber = studentToCopy.getStudentNo();
     }
 
     /**
      * Sets the {@code name} of the {@code Student} that we are building.
      */
     public StudentBuilder withName(String name) {
-        this.name = name;
+        this.name = new StudentName(name);
         return this;
     }
 
@@ -38,12 +41,12 @@ public class StudentBuilder {
      * Sets the {@code student id} pf the {@code Student} that we are building.
      */
     public StudentBuilder withId(String id) {
-        this.studentId = id;
+        this.studentNumber = new StudentNumber(id);
         return this;
     }
 
     public Student build() {
-        return new Student(this.name, this.studentId);
+        return new Student(this.name, this.studentNumber);
     }
 
 }

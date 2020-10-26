@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Student;
 import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.group.student.Student;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -33,6 +33,10 @@ public class GroupManager implements ReadOnlyGroupManager {
     public GroupManager(ReadOnlyGroupManager toBeCopied) {
         this.listOfGroups = new UniqueGroupList();
         resetData(toBeCopied);
+    }
+
+    public GroupManager(UniqueList<Group> groups) {
+        this.listOfGroups = groups;
     }
 
     // Methods that overrides the whole group list
@@ -71,7 +75,7 @@ public class GroupManager implements ReadOnlyGroupManager {
     public boolean hasGroup(Group target) {
         requireNonNull(target);
         for (Group group : listOfGroups) {
-            if (group.getName().equals(target.getName()) || hasAtLeast1SameStudent(target)) {
+            if (group.getGroupName().equals(target.getGroupName()) || hasAtLeast1SameStudent(target)) {
                 return true;
             }
         }
@@ -87,7 +91,7 @@ public class GroupManager implements ReadOnlyGroupManager {
         for (Student targetStudent : target.getStudents()) {
             for (Group group : listOfGroups) {
                 for (Student groupStudent : group.getStudents()) {
-                    if (groupStudent.getName().equals(targetStudent.getName())) {
+                    if (groupStudent.getStudentNo().equals(targetStudent.getStudentNo())) {
                         return true;
                     }
                 }

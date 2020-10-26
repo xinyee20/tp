@@ -9,7 +9,8 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import team.serenity.logic.commands.AddStudentCommand;
+import team.serenity.logic.commands.student.AddStudentCommand;
+import team.serenity.logic.parser.student.AddStudentCommandParser;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 
@@ -35,7 +36,7 @@ public class AddStudentCommandParserTest {
     @Test
     public void parse_successfulArguments() {
         String studentName = "John";
-        String studentId = "e1234567";
+        String studentId = "A0123456S";
         String groupName = "G04";
         String args = " " + PREFIX_GRP + groupName + " " + PREFIX_NAME
             + studentName + " " + PREFIX_ID + studentId;

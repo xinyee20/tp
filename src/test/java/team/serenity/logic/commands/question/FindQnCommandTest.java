@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
-import team.serenity.model.Serenity;
 import team.serenity.model.group.question.QuestionContainsKeywordPredicate;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.UserPrefs;
 
 /**

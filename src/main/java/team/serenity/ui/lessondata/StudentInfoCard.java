@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import team.serenity.model.group.StudentInfo;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.ui.UiPart;
 
 /**
@@ -36,8 +36,8 @@ public class StudentInfoCard extends UiPart<Region> {
         super(FXML);
         this.studentInfo = studentInfo;
         this.id.setText(displayedIndex + ". ");
-        this.name.setText(studentInfo.getStudent().getName());
-        this.studentNumber.setText(studentInfo.getStudent().getStudentNo());
+        this.name.setText(studentInfo.getStudent().getStudentName().toString());
+        this.studentNumber.setText(studentInfo.getStudent().getStudentNo().toString());
         this.attendance.setText(studentInfo.getAttendance().getAttendance() ? "Present" : "Absent");
         this.participation.setText(String.valueOf(studentInfo.getParticipation().getScore()));
     }

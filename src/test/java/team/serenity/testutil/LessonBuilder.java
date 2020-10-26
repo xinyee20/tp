@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueStudentInfoList;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
 public class LessonBuilder {
@@ -39,7 +39,7 @@ public class LessonBuilder {
      */
 
     public LessonBuilder(Lesson lessonToCopy) {
-        this.name = lessonToCopy.getName();
+        this.name = lessonToCopy.getLessonName().toString();
         this.studentInfos = lessonToCopy.getStudentsInfo();
     }
 
