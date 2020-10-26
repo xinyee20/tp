@@ -29,12 +29,7 @@
             <content>
                <StackPane prefHeight="150.0" prefWidth="200.0">
                   <children>
-                     <TableView fx:id="attendanceTableView" prefHeight="200.0" prefWidth="200.0">
-                       <columns>
-                         <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                         <TableColumn fx:id="studentNoColumn" prefWidth="75.0" text="Student Number" />
-                       </columns>
-                     </TableView>
+                     <TableView fx:id="attendanceTableView" prefHeight="200.0" prefWidth="200.0" />
                   </children>
                </StackPane>
             </content>

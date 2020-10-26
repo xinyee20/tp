@@ -73,7 +73,7 @@ public class GroupDataPanel extends DataPanel {
         for (Lesson lesson : lessonList) {
             TableColumn<Lesson, String> lessonColumn = new TableColumn<>();
             lessonColumn.setText(lesson.getName());
-            lessonColumn.setCellValueFactory(new PropertyValueFactory<>(lesson.getName()));
+            lessonColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             columns.add(lessonColumn);
         }
 
