@@ -22,7 +22,8 @@ public class AddGrpCommand extends Command {
         + PREFIX_PATH + "LUMINUS_GROUP_A.xlsx\n";
 
     public static final String MESSAGE_SUCCESS = "New tutorial group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This tutorial group already exists, or a student in this group is already in another group.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This tutorial group already exists,"
+        + " or a student in this group is already in another group.";
 
     private final Group toAdd;
 
