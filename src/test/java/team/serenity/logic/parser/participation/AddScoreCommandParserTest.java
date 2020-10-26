@@ -29,15 +29,17 @@ class AddScoreCommandParserTest {
     @Test
     public void parse_missingStudentName_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE);
+        String userInput = PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NAME + " " + ADD_SCORE_DESC;
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NAME + " " + ADD_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_missingStudentId_throwsCommandException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE);
+        String userInput = PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NUMBER + " " + ADD_SCORE_DESC;
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NUMBER + " " + ADD_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
@@ -68,8 +70,9 @@ class AddScoreCommandParserTest {
     public void parse_validStudentAndNumberParameter_returnsAddScoreCommand() {
         Student student = new StudentBuilder().build();
         int score = Integer.parseInt(VALID_SCORE);
+        String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + ADD_SCORE_DESC;
 
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_DESC + " " + ADD_SCORE_DESC, new AddScoreCommand(student, score));
+        assertParseSuccess(parser, userInput, new AddScoreCommand(student, score));
     }
 
     @Test

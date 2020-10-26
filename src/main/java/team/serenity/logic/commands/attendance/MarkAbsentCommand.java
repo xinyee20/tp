@@ -96,9 +96,9 @@ public class MarkAbsentCommand extends Command {
         UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
-        if (! this.isWholeClass) {
+        if (!this.isWholeClass) {
 
-            if (! isByIndex) {
+            if (!isByIndex) {
 
                 // Mark single student attendance
                 for (int i = 0; i < studentsInfo.size(); i++) {
@@ -114,7 +114,7 @@ public class MarkAbsentCommand extends Command {
                     }
                 }
 
-                if (! this.isCorrectStudent) {
+                if (!this.isCorrectStudent) {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND,
                             this.toMarkAbsent));
                 }

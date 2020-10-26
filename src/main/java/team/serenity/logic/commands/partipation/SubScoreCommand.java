@@ -95,7 +95,7 @@ public class SubScoreCommand extends Command {
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
         int newScore = 0;
 
-        if (! isByIndex) {
+        if (!isByIndex) {
             // Update single student participation score
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
@@ -103,7 +103,7 @@ public class SubScoreCommand extends Command {
                 this.isCorrectStudent = studentInfo.containsStudent(this.toSubScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
-                    if (! currentAttendance.getAttendance()) {
+                    if (!currentAttendance.getAttendance()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore));
                     }
                     newScore = score - scoreToSub;
@@ -118,7 +118,7 @@ public class SubScoreCommand extends Command {
                     break;
                 }
             }
-            if (! this.isCorrectStudent) {
+            if (!this.isCorrectStudent) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSubScore));
             }
         } else {
@@ -130,7 +130,7 @@ public class SubScoreCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toSubScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
-            if (! currentAttendance.getAttendance()) {
+            if (!currentAttendance.getAttendance()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore));
             }
             newScore = score - scoreToSub;

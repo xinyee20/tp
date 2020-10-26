@@ -29,15 +29,17 @@ class SubScoreCommandParserTest {
     @Test
     public void parse_missingStudentName_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE);
+        String userInput = PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NAME + " " + SUB_SCORE_DESC;
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NAME + " " + SUB_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_missingStudentId_throwsCommandException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE);
+        String userInput = PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NUMBER + " " + SUB_SCORE_DESC;
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NUMBER + " " + SUB_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
@@ -59,17 +61,20 @@ class SubScoreCommandParserTest {
     @Test
     public void parse_invalidScore_throwsCommandException() {
         String expectedMessage = String.format(Participation.SCORE_ERROR);
+        String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SUB_SCORE;
+        String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_SUB_SCORE;
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SUB_SCORE, expectedMessage);
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_SUB_SCORE, expectedMessage);
+        assertParseFailure(parser, userInputOne, expectedMessage);
+        assertParseFailure(parser, userInputTwo, expectedMessage);
     }
 
     @Test
     public void parse_validStudentAndNumberParameter_returnsSubScoreCommand() {
         Student student = new StudentBuilder().build();
         int score = Integer.parseInt(VALID_SCORE);
+        String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + SUB_SCORE_DESC;
 
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_DESC + " " + SUB_SCORE_DESC, new SubScoreCommand(student, score));
+        assertParseSuccess(parser, userInput, new SubScoreCommand(student, score));
     }
 
     @Test

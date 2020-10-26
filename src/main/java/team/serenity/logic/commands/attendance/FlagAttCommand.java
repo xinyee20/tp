@@ -85,7 +85,7 @@ public class FlagAttCommand extends Command {
         UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
-        if (! isByIndex) {
+        if (!isByIndex) {
 
             // Flag a student's attendance
             for (int i = 0; i < studentsInfo.size(); i++) {
@@ -105,7 +105,7 @@ public class FlagAttCommand extends Command {
                 }
             }
 
-            if (! this.isCorrectStudent) {
+            if (!this.isCorrectStudent) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toFlagAtt));
             }
         } else {

@@ -95,7 +95,7 @@ public class SetScoreCommand extends Command {
         UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
-        if (! isByIndex) {
+        if (!isByIndex) {
 
             // Update single student participation score
             for (int i = 0; i < studentsInfo.size(); i++) {
@@ -103,7 +103,7 @@ public class SetScoreCommand extends Command {
                 this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
-                    if (! currentAttendance.getAttendance()) {
+                    if (!currentAttendance.getAttendance()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore));
                     }
                     if (scoreToSet > 5 || scoreToSet < 0) {
@@ -118,7 +118,7 @@ public class SetScoreCommand extends Command {
                 }
             }
 
-            if (! this.isCorrectStudent) {
+            if (!this.isCorrectStudent) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore));
             }
         } else {
@@ -130,7 +130,7 @@ public class SetScoreCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toSetScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
-            if (! currentAttendance.getAttendance()) {
+            if (!currentAttendance.getAttendance()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore));
             }
             if (scoreToSet > 5 || scoreToSet < 0) {

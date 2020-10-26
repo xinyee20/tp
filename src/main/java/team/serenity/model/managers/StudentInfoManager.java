@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import team.serenity.model.group.GroupLessonKey;
-import team.serenity.model.group.Lesson;
 import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.exceptions.GroupLessonPairNotFoundException;
 import team.serenity.model.util.UniqueList;

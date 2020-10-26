@@ -95,7 +95,7 @@ public class AddScoreCommand extends Command {
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
         int newScore = 0;
 
-        if (! isByIndex) {
+        if (!isByIndex) {
             // Update single student participation score
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
@@ -103,7 +103,7 @@ public class AddScoreCommand extends Command {
                 this.isCorrectStudent = studentInfo.containsStudent(this.toAddScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
-                    if (! currentAttendance.getAttendance()) {
+                    if (!currentAttendance.getAttendance()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore));
                     }
                     newScore = score + scoreToAdd;
@@ -117,8 +117,8 @@ public class AddScoreCommand extends Command {
                     model.updateStudentsInfoList();
                     break;
                 }
-        }
-            if (! this.isCorrectStudent) {
+            }
+            if (!this.isCorrectStudent) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toAddScore));
             }
         } else {
@@ -130,7 +130,7 @@ public class AddScoreCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toAddScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
-            if (! currentAttendance.getAttendance()) {
+            if (!currentAttendance.getAttendance()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore));
             }
             newScore = score + scoreToAdd;
@@ -146,6 +146,11 @@ public class AddScoreCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAddScore, newScore));
     }
 
+    /**
+     * Check whether 2 AddScoreCommand objects are identical
+     * @param other The AddScoreCommand to be compared
+     * @return True if the 2 commands are identical, False otherwise
+     */
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddScoreCommand // instanceof handles nulls

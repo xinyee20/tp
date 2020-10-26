@@ -29,15 +29,17 @@ class SetScoreCommandParserTest {
     @Test
     public void parse_missingStudentName_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String userInput = PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NAME + " " + SET_SCORE_DESC;
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NAME + " " + SET_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_missingStudentId_throwsCommandException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String userInput = PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NUMBER + " " + SET_SCORE_DESC;
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NUMBER + " " + SET_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
@@ -59,17 +61,20 @@ class SetScoreCommandParserTest {
     @Test
     public void parse_invalidScore_throwsCommandException() {
         String expectedMessage = String.format(Participation.SCORE_ERROR);
+        String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SET_SCORE;
+        String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_SET_SCORE;
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SET_SCORE, expectedMessage);
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_SET_SCORE, expectedMessage);
+        assertParseFailure(parser, userInputOne, expectedMessage);
+        assertParseFailure(parser, userInputTwo, expectedMessage);
     }
 
     @Test
     public void parse_validStudentAndNumberParameter_returnsSetScoreCommand() {
         Student student = new StudentBuilder().build();
         int score = Integer.parseInt(VALID_SCORE);
+        String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + SET_SCORE_DESC;
 
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_DESC + " " + SET_SCORE_DESC, new SetScoreCommand(student, score));
+        assertParseSuccess(parser, userInput, new SetScoreCommand(student, score));
     }
 
     @Test

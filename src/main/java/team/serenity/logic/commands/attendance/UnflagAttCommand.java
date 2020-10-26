@@ -83,7 +83,7 @@ public class UnflagAttCommand extends Command {
         UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
-        if (! isByIndex) {
+        if (!isByIndex) {
 
             // Unflag a student's attendance
             for (int i = 0; i < studentsInfo.size(); i++) {
@@ -91,7 +91,7 @@ public class UnflagAttCommand extends Command {
                 Attendance current = studentInfo.getAttendance();
                 this.isCorrectStudent = studentInfo.containsStudent(this.toUnflagAtt.get());
                 if (this.isCorrectStudent) {
-                    if (! current.getFlagged()) {
+                    if (!current.getFlagged()) {
                         throw new CommandException(MESSAGE_FAILURE);
                     }
                     Attendance update = new Attendance(current.getAttendance(), false);
@@ -103,7 +103,7 @@ public class UnflagAttCommand extends Command {
                 }
             }
 
-            if (! this.isCorrectStudent) {
+            if (!this.isCorrectStudent) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toUnflagAtt));
             }
         } else {
@@ -115,7 +115,7 @@ public class UnflagAttCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             Attendance current = studentInfo.getAttendance();
             toUnflagAtt = Optional.ofNullable(studentInfo.getStudent());
-            if (! current.getFlagged()) {
+            if (!current.getFlagged()) {
                 throw new CommandException(MESSAGE_FAILURE);
             }
             Attendance update = new Attendance(current.getAttendance(), false);

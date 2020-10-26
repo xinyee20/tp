@@ -44,7 +44,8 @@ public class CommandTestUtil {
     public static final String PATH_DESC_GROUP_B = " " + PREFIX_PATH + VALID_PATH_GROUP_B;
     public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;
     public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_DESC_B;
-    public static final String STUDENT_DESC = " " + PREFIX_NAME + VALID_STUDENT_NAME + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
+    public static final String STUDENT_DESC =
+            " " + PREFIX_NAME + VALID_STUDENT_NAME + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
     public static final String SET_SCORE_DESC = " " + PREFIX_SET_SCORE + VALID_SCORE;
     public static final String ADD_SCORE_DESC = " " + PREFIX_ADD_SCORE + VALID_ADD;
     public static final String SUB_SCORE_DESC = " " + PREFIX_SUBTRACT_SCORE + VALID_SUB;
