@@ -1,7 +1,6 @@
 package team.serenity.model;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -115,7 +114,7 @@ public interface Model {
      */
     ObservableList<Lesson> getFilteredLessonList();
 
-    Optional<UniqueList<Lesson>> getListOfLessonsFromGroup(Group group);
+    UniqueList<Lesson> getListOfLessonsFromGroup(Group group);
 
     /**
      * Updates the lesson list to filter when changing to another group of interest.
@@ -136,7 +135,7 @@ public interface Model {
      */
     ObservableList<Student> getStudentList();
 
-    Optional<UniqueList<Student>> getListOfStudentsFromGroup(Group group);
+    UniqueList<Student> getListOfStudentsFromGroup(Group group);
 
     /**
      * Removes a Student from a Group.
@@ -168,7 +167,7 @@ public interface Model {
      */
     ObservableList<StudentInfo> getStudentsInfoList();
 
-    Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
+    UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
 
     /**
      * Updates the student info list to filter when changing to another lesson of interest.
