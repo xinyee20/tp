@@ -15,27 +15,27 @@ class ViewGrpCommandParserTest {
 
     @Test
     void parse_emptyString_throwsParseException() {
-        assertThrows(ParseException.class,() -> this.parser.parse(""));
+        assertThrows(ParseException.class, () -> this.parser.parse(""));
     }
 
     @Test
     void parse_whiteSpace_throwsParseException() {
-        assertThrows(ParseException.class,() -> this.parser.parse("  "));
+        assertThrows(ParseException.class, () -> this.parser.parse("  "));
     }
 
     @Test
     void parse_noPrefixRandomStringInput_throwsParseException() {
-        assertThrows(ParseException.class,() -> this.parser.parse("12da"));
+        assertThrows(ParseException.class, () -> this.parser.parse("12da"));
     }
 
     @Test
     void parse_prefixWithoutParameters_throwsParseException() {
-        assertThrows(ParseException.class,() -> this.parser.parse("grp/"));
+        assertThrows(ParseException.class, () -> this.parser.parse("grp/"));
     }
 
     @Test
     void parse_prefixWithWhiteSpaceOnly_throwsParseException() {
-        assertThrows(ParseException.class,() -> this.parser.parse("grp/   "));
+        assertThrows(ParseException.class, () -> this.parser.parse("grp/   "));
     }
 
     @Test
