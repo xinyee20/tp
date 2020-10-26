@@ -74,6 +74,12 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.2. View an existing tutorial lesson: `viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn)
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.3. View attendance sheet of a tutorial group: `viewatt`](#452-view-an-existing-tutorial-lesson-viewlsn)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.4. View participation score sheet of a tutorial group: `viewscore`](#452-view-an-existing-tutorial-lesson-viewlsn)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.5. View all questions: `viewqn`](#452-view-an-existing-tutorial-lesson-viewlsn)
+
 [5. FAQ](#5-faq)
 
 [6. Command summary](#6-command-summary)
@@ -334,7 +340,7 @@ You can use this command to add a new student to a tutorial group.
 
 **Format:**
 
-`addstudent grp/GROUP name/NAME matric/STUDENT_NUMBER`
+`addstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER`
 
 **Example:**
 
@@ -356,8 +362,8 @@ Outcome:
 You can use this command to delete an existing student from a tutorial group.
 
 **Format:**
-<br>`delstudent grp/GROUP name/NAME matric/STUDENT_NUMBER`
-<br>`delstudent INDEX grp/GROUP`
+<br>`delstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER`
+<br>`delstudent INDEX grp/GROUP_NAME`
 
 **Example:**
 
@@ -514,7 +520,7 @@ Outcome:
 
 <H4 style="color: #477B9F"> 4.2.4. Flag attendance of a student: <code>flagatt</code></H4>
 
-You can use this command to flag attendance of a specific student so you will be reminded to check the student's
+You can use this command to flag attendance of a specific student so you can remember to check the student's
 attendance at the end of class.
 
 **Format:**
@@ -524,14 +530,14 @@ attendance at the end of class.
 **Example:**
 
 A student named `Aaron Tan` with student number `A3333333S` from your tutorial group `G04` decided to join
-another group for tutorial lesson `1-2`. You want to flag his attendance so that you will remember to check with the 
+another group for tutorial lesson `1-2`. You want to flag his attendance so that you can remember to check with the 
 other tutor later on. `Aaron Tan` is the first person on the student list so his `index` number is 1. 
 
 <ins>Method 1</ins> <br>
 Flagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `flagatt name/AARON TAN matric/A3333333s` into the _Command Box_.
+2. Type `flagatt name/AARON TAN matric/A3333333S` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins><br>
@@ -548,7 +554,7 @@ Outcome:
 
 <H4 style="color: #477B9F"> 4.2.4. Unflag attendance of a student: <code>unflagatt</code></H4>
 
-You can use this command to unflag attendance of a specific student that was flagged after you have checked that the 
+You can use this command to unflag attendance of a specific student that was flagged after you have checked whether the 
 student attended a replacement class.
 
 **Format:**
@@ -558,9 +564,9 @@ student attended a replacement class.
 **Example:**
 
 A student named `Aaron Tan` with student number `A3333333S` from your tutorial group `G04` decided to go for 
- another tutorial class for lesson `1-2`. You previously flagged his attendance and now wants to unflag it
- after checking that he has attended the replacement class. `Aaron Tan` is the first person on the student list 
- so his `index` number is 1. 
+another tutorial class for lesson `1-2`. You previously flagged his attendance and you now want to unflag it
+after checking that he has attended the replacement class. `Aaron Tan` is the first person on the student list 
+so his `index` number is 1. 
 
 <ins>Method 1</ins> <br>
 Unflagging a student's attendance for a tutorial lesson by his `name` and `student number`:
@@ -817,9 +823,9 @@ Outcome:
 
 The following commands allow you to navigate between different views.
 
-<H4 style="color: #477B9F"> 4.5.1. View an existing tutorial group: <code>viewgrp</code> </H4>
+<H4 style="color: #477B9F"> 4.5.1. View a tutorial group: <code>viewgrp</code> </H4>
 
-You can use this command to view the list of students and tutorial lessons of an existing tutorial group.
+You can use this command to view the list of students and tutorial lessons of a tutorial group.
 You will also be able to execute tutorial group-related commands.
 
 **Format:**
@@ -840,10 +846,10 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the information for tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.5.2. View an existing tutorial lesson: <code>viewlsn</code></H4>
+<H4 style="color: #477B9F"> 4.5.2. View a tutorial lesson: <code>viewlsn</code></H4>
 
-You can use this command to view the attendance and participation scores of an existing
-tutorial group. You will also be able to execute tutorial lesson-related commands.
+You can use this command to view and modify the attendance and participation scores of 
+a tutorial lesson. You will also be able to execute tutorial lesson-related commands.
 
 **Format:**
 
@@ -862,6 +868,85 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the students' information for tutorial lesson `1-2` of tutorial group `G04`.
+
+<H4 style="color: #477B9F"> 4.5.3. View attendance sheet of a tutorial group: <code>viewatt</code></H4>
+
+You can use this command to view the attendance sheet of the students in a tutorial group across all tutorial lessons.
+The attendance sheet will be displayed in table form.
+
+> ℹ **Note regarding the `viewatt` command:**
+> You can view the attendance of all your students in the tutorial group at one glance.
+> You can also preview the XLSX file that you can generate with the `exportatt` command,
+> before generating the actual XLSX file.
+
+**Format:**
+
+`viewatt grp/GROUP_NAME`
+
+**Example:**
+
+You want to view the attendance sheet of the students in tutorial group `G04`.
+
+Viewing the attendance sheet of a tutorial lesson:
+
+1. Type `viewatt grp/G04` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the attendance sheet of tutorial group `G04`.
+
+<H4 style="color: #477B9F"> 4.5.4. View participation score sheet of a tutorial group: <code>viewscore</code></H4>
+
+You can use this command to view the participation score sheet of the students in a tutorial group
+across all tutorial lessons. The participation score sheet will be displayed in table form.
+
+> ℹ **Note regarding the `viewscore` command:**
+> In a similar way to the `viewatt` command,
+> you can view the participation score of all your students in the tutorial group at one glance.
+> You can also preview the XLSX file that you can generate with the `exportscore` command,
+> before generating the actual XLSX file.
+
+**Format:**
+
+`viewscore grp/GROUP_NAME`
+
+**Example:**
+
+You want to view the participation score sheet of the students in tutorial group `G04`.
+
+Viewing the participation score sheet of a tutorial lesson:
+
+1. Type `viewscore grp/G04` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the participation score sheet of tutorial group `G04`.
+
+<H4 style="color: #477B9F"> 4.5.5. View all pending questions: <code>viewqn</code></H4>
+
+You can use this command to view all questions that have yet to be addressed.
+
+**Format:**
+
+`viewqn`
+
+**Example:**
+
+You want to view all pending questions.
+
+Viewing all pending questions:
+
+1. Type `viewqn` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the list of pending questions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -886,11 +971,11 @@ your **Serenity** application on your other computer. **Serenity** will automati
 Command | Example
 ------------ | -------------
 **Add tutorial group** <br>`addgrp grp/GROUP_NAME path/PATH_TO_XLSX`| <br>`addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`
-**Delete tutorial group** <br> `delgrp grp/GROUP`| <br>`delgrp grp/G04`
-**Add tutorial lesson** <br> `addlsn grp/GROUP lsn/LESSON` | <br>`addlsn grp/G04 lsn/1-2`
-**Delete tutorial lesson** <br> `dellsn grp/GROUP lsn/LESSON` | <br>`dellsn grp/G04 lsn/1-3`
-**Add student** <br> `addstudent grp/GROUP name/NAME matric/STUDENT_NUMBER` | <br>`addstudent grp/G04 name/AARON TAN matric/A3333333s`
-**Delete student** <br> - `delstudent grp/GROUP name/NAME matric/STUDENT_NUMBER`<br> - `delstudent INDEX grp/GROUP` | <br> - `delstudent grp/G04 name/AARON TAN matric/A3333333S` <br> - `delstudent 1 grp/G04`
+**Delete tutorial group** <br> `delgrp grp/GROUP_NAME`| <br>`delgrp grp/G04`
+**Add tutorial lesson** <br> `addlsn grp/GROUP_NAME lsn/LESSON_NAME` | <br>`addlsn grp/G04 lsn/1-2`
+**Delete tutorial lesson** <br> `dellsn grp/GROUP_NAME lsn/LESSON_NAME` | <br>`dellsn grp/G04 lsn/1-3`
+**Add student** <br> `addstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER` | <br>`addstudent grp/G04 name/AARON TAN matric/A3333333S`
+**Delete student** <br> - `delstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER`<br> - `delstudent INDEX grp/GROUP` | <br> - `delstudent grp/G04 name/AARON TAN matric/A3333333S` <br> - `delstudent 1 grp/G04`
 
 <H3 style="color: #477B9F"> 6.2. Attendance taking commands </H3>
 
@@ -927,3 +1012,6 @@ Command | Example
 ------------ | -------------
 **View tutorial group** <br> `viewgrp grp/GROUP_NAME` | `viewgrp grp/G04`
 **View tutorial lesson** <br> `viewlsn grp/GROUP_NAME lsn/LESSON_NAME` | `viewlsn grp/G04 lsn/1-2`
+**View attendance** <br> `viewatt grp/GROUP_NAME` | `viewatt grp/G04`
+**VIew participation score** <br> `viewscore grp/GROUP_NAME` | `viewscore grp/G04`
+**View questions** <br> `viewqn` | `viewqn`
