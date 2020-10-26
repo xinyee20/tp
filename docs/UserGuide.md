@@ -516,7 +516,7 @@ You can find the XLSX file at the location where your **Serenity** application i
 Need to keep track of all your students' participation during lessons quickly? This feature allows you to key in a 
 student's participation score easily with a scale for reference.
 
-#### 4.3.1. Award participation score for a student: `setscore`
+#### 4.3.1. Award participation score for a student: `addscore`
 You can use this command to add the participation score for a specific student in a tutorial lesson.
 
 With a scale from 1 to 5:
