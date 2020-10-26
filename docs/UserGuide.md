@@ -38,11 +38,11 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;[4.2. Attendance taking](#42-attendance-taking)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Mark a student as present: `markpresent`](#421-mark-a-student-as-present-markpresent)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Mark all students as present: `markpresent`](#421-mark-all-students-as-present-markpresent-all)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.2. Mark a student as absent: `markabsent`](#422-mark-a-student-as-absent-markabsent)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.3 Mark all students as present: `markpresent all`](#423-mark-all-students-as-present-markpresent-all)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.3 Mark a student as present: `markpresent all`](#423-mark-a-student-as-present-markpresent)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.4. Flag attendance of a student: `flagatt`](#424-flag-attendance-of-a-student-flagatt)
 
@@ -374,59 +374,7 @@ Outcome:
 Need to mark attendance of your students at the start of each lesson quickly?
 This feature allows you to mark attendance of students easily.
 
-#### 4.2.1. Mark a student as present: `markpresent`
-
-You can use this command to mark a specific student as present for a tutorial lesson.
-
-**Format:**
-
-`markpresent name/NAME id/STUDENT_ID`
-
-**Example:**
-
-A student named `Aaron Tan` with student ID `A1234567U` is present for your tutorial lesson `1-2` of tutorial group `G04`. 
-
-Marking a student as present for a tutorial lesson:
-
-To mark him present:
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markpresent name/Aaron Tan id/A1234567U` into the *Command Box*.
-3. Press `Enter` to execute.
-
-Outcome:
-
-1. The _Result Display_ will show a success message.
-2. You can now see that his attendance has been updated on the _Student Information Panel_.
-
-![Figure 4.2.1. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
-_Figure 4.2.1. Outcome of a successful mark a student present command_
-
-#### 4.2.2. Mark a student as absent: `markabsent`
-
-You can use this command to mark a specific student as absent for a tutorial lesson.
-
-**Format:**
-
-`markabsent name/NAME id/STUDENT_ID`
-
-**Example:**
-
-A student named `Aaron Tan` with student ID `A1234567U` is absent for your tutorial lesson `1-2` of tutorial group `G04`. 
-
-To mark him absent:
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markabsent name/Aaron Tan id/A1234567U` into the *Command Box*.
-3. Press `Enter` to execute.
-
-Outcome:
-
-1. The _Result Display_ will show a success message.
-2. You can now see that his attendance has been updated on the _Student Information Panel_.
-
-![Figure 4.2.2. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png)
-_Figure 4.2.2. Outcome of a successful mark a student absent command_
-
-#### 4.2.3. Mark all students as present: `markpresent all`
+#### 4.2.1. Mark all students as present: `markpresent all`
 
 You can use this command to mark all students in a tutorial group as present for a tutorial lesson.
 
@@ -454,8 +402,60 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-![Figure 4.2.3. Outcome of a successful mark attendance for all students command](images/ui/markpresent_all.png)
-_Figure 4.2.3. Outcome of a successful mark attendance for all students command_
+![Figure 4.2.1. Outcome of a successful mark attendance for all students command](images/ui/markpresent_all.png)
+_Figure 4.2.1. Outcome of a successful mark attendance for all students command_
+
+#### 4.2.2. Mark a student as absent: `markabsent`
+
+You can use this command to mark a specific student as absent for a tutorial lesson.
+
+**Format:**
+
+`markabsent name/NAME id/STUDENT_ID`
+
+**Example:**
+
+A student named `Aaron Tan` with student ID `A1234567U` is absent for your tutorial lesson `1-2` of tutorial group `G04`. 
+
+To mark him absent:
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `markabsent name/Aaron Tan id/A1234567U` into the *Command Box*.
+3. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. You can now see that his attendance has been updated on the _Student Information Panel_.
+
+![Figure 4.2.2. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png)
+_Figure 4.2.2. Outcome of a successful mark a student absent command_
+
+#### 4.2.3. Mark a student as present: `markpresent`
+
+You can use this command to mark a specific student as present for a tutorial lesson.
+
+**Format:**
+
+`markpresent name/NAME id/STUDENT_ID`
+
+**Example:**
+
+A student named `Aaron Tan` with student ID `A1234567U` is present for your tutorial lesson `1-2` of tutorial group `G04`. 
+
+Marking a student as present for a tutorial lesson:
+
+To mark him present:
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+2. Type `markpresent name/Aaron Tan id/A1234567U` into the *Command Box*.
+3. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. You can now see that his attendance has been updated on the _Student Information Panel_.
+
+![Figure 4.2.3. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
+_Figure 4.2.3. Outcome of a successful mark a student present command_
 
 #### 4.2.4. Flag attendance of a student: `flagatt`
 
