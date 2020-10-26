@@ -116,7 +116,7 @@ public class MarkAbsentCommand extends Command {
 
                 if (!this.isCorrectStudent) {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND,
-                            this.toMarkAbsent));
+                            this.toMarkAbsent.get()));
                 }
 
             } else {
@@ -133,7 +133,7 @@ public class MarkAbsentCommand extends Command {
                 model.updateLessonList();
                 model.updateStudentsInfoList();
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, this.toMarkAbsent));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, this.toMarkAbsent.get()));
         } else {
 
             // Mark whole class absent

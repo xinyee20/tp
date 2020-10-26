@@ -30,10 +30,7 @@ public class Attendance {
      * @param isPresent True if student is present and false if student is absent
      * @param isFlagged True to flag student and false to unflag student
      */
-    public Attendance(boolean isPresent, boolean isFlagged) throws IllegalArgumentException {
-        if (isPresent && isFlagged) {
-            throw new IllegalArgumentException("Student should be absent to be flagged!");
-        }
+    public Attendance(boolean isPresent, boolean isFlagged) {
         this.isPresent = isPresent;
         this.isFlagged = isFlagged;
     }

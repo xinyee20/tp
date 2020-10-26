@@ -104,7 +104,7 @@ public class UnflagAttCommand extends Command {
             }
 
             if (!this.isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toUnflagAtt));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toUnflagAtt.get()));
             }
         } else {
             if (index.get().getZeroBased() > studentsInfo.size()) {
@@ -124,7 +124,7 @@ public class UnflagAttCommand extends Command {
             model.updateLessonList();
             model.updateStudentsInfoList();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toUnflagAtt));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toUnflagAtt.get()));
     }
 
     @Override

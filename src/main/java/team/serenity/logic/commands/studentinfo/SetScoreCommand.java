@@ -104,7 +104,7 @@ public class SetScoreCommand extends Command {
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
                     if (!currentAttendance.getAttendance()) {
-                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore));
+                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
                     }
                     if (scoreToSet > 5 || scoreToSet < 0) {
                         throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
@@ -119,7 +119,7 @@ public class SetScoreCommand extends Command {
             }
 
             if (!this.isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore.get()));
             }
         } else {
             if (index.get().getZeroBased() > studentsInfo.size()) {
@@ -131,7 +131,7 @@ public class SetScoreCommand extends Command {
             toSetScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
             if (!currentAttendance.getAttendance()) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
             }
             if (scoreToSet > 5 || scoreToSet < 0) {
                 throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
@@ -142,7 +142,7 @@ public class SetScoreCommand extends Command {
             model.updateLessonList();
             model.updateStudentsInfoList();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSetScore, scoreToSet));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSetScore.get(), scoreToSet));
     }
 
     @Override

@@ -104,7 +104,7 @@ public class AddScoreCommand extends Command {
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
                     if (!currentAttendance.getAttendance()) {
-                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore));
+                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
                     }
                     newScore = score + scoreToAdd;
                     if (newScore > 5 || newScore < 0) {
@@ -119,7 +119,7 @@ public class AddScoreCommand extends Command {
                 }
             }
             if (!this.isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toAddScore));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toAddScore.get()));
             }
         } else {
             if (index.get().getZeroBased() > studentsInfo.size()) {
@@ -131,7 +131,7 @@ public class AddScoreCommand extends Command {
             toAddScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
             if (!currentAttendance.getAttendance()) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
             }
             newScore = score + scoreToAdd;
             if (newScore > 5 || newScore < 0) {
@@ -143,7 +143,7 @@ public class AddScoreCommand extends Command {
             model.updateLessonList();
             model.updateStudentsInfoList();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAddScore, newScore));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAddScore.get(), newScore));
     }
 
     /**

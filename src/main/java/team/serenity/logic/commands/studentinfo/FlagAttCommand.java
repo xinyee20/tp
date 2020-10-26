@@ -29,7 +29,7 @@ public class FlagAttCommand extends Command {
 
     public static final String COMMAND_WORD = "flagatt";
     public static final String MESSAGE_SUCCESS = "%s: \nAttendance is flagged!";
-    public static final String MESSAGE_FAILURE = "Flagging attendance is for absent students.";
+    public static final String MESSAGE_FAILURE = "Student should be absent to be flagged!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Flags the attendance of a specific student for a lesson. \n"
@@ -106,7 +106,7 @@ public class FlagAttCommand extends Command {
             }
 
             if (!this.isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toFlagAtt));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toFlagAtt.get()));
             }
         } else {
             if (index.get().getZeroBased() > studentsInfo.size()) {
@@ -116,6 +116,9 @@ public class FlagAttCommand extends Command {
 
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             Attendance current = studentInfo.getAttendance();
+            if (current.getAttendance()) {
+                throw new CommandException(MESSAGE_FAILURE);
+            }
             toFlagAtt = Optional.ofNullable(studentInfo.getStudent());
             Attendance update = new Attendance(current.getAttendance(), true);
             StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
@@ -123,7 +126,7 @@ public class FlagAttCommand extends Command {
             model.updateLessonList();
             model.updateStudentsInfoList();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toFlagAtt));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toFlagAtt.get()));
     }
 
     @Override
