@@ -4,7 +4,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
@@ -24,11 +24,11 @@ public class AddStudentCommand extends Command {
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
         + PREFIX_NAME + "STUDENT_NAME "
-        + PREFIX_ID + "STUDENT_ID\n"
+        + PREFIX_MATRIC + "STUDENT_NUMBER\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G04 "
         + PREFIX_NAME + "Ryan "
-        + PREFIX_ID + "A01234567\n";
+        + PREFIX_MATRIC + "A01234567\n";
 
     public static final String MESSAGE_SUCCESS = "You added %s (%s) to tutorial group %s.";
 

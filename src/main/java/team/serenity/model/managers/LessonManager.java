@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
 import team.serenity.model.group.lesson.Lesson;
@@ -117,6 +118,15 @@ public class LessonManager implements ReadOnlyLessonManager {
         } else {
             throw new GroupNotFoundException();
         }
+    }
+
+    /**
+     * Adds a specified {@code UniqueList<Lesson>} to a {@code Group}.
+     * @param group
+     * @param lessons
+     */
+    public void addListOfLessonsToGroup(Group group, UniqueList<Lesson> lessons) {
+        this.mapToListOfLessons.put(group.getGroupName(), lessons);
     }
 
     /**

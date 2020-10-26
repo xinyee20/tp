@@ -1,6 +1,7 @@
 package team.serenity.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.commons.util.StringUtil;
@@ -14,8 +15,6 @@ import team.serenity.model.group.studentinfo.Participation;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class SerenityParserUtil {
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
      * Parses a {@code String studentName} into a {@code String}. Leading and trailing whitespaces will be trimmed.

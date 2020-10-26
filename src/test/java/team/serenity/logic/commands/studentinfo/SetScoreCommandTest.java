@@ -1,16 +1,12 @@
-package team.serenity.logic.commands;
-
-import static team.serenity.testutil.Assert.assertThrows;
+package team.serenity.logic.commands.studentinfo;
 
 import org.junit.jupiter.api.Test;
 
-import team.serenity.logic.commands.studentinfo.AddScoreCommand;
-
-class AddScoreCommandTest {
+class SetScoreCommandTest {
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddScoreCommand(null, 2));
+
     }
 
     @Test

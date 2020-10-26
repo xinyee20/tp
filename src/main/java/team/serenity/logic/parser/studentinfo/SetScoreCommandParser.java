@@ -1,15 +1,15 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.logic.commands.studentinfo.AddScoreCommand;
+import team.serenity.logic.commands.studentinfo.SetScoreCommand;
 import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
@@ -19,52 +19,52 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
 
 /**
- * Parses input arguments and creates a new AddScoreCommand object.
+ * Parses input arguments and creates a new SetScoreCommand object.
  * Current support:
- * addscore name/NAME id/STUDENT_NUMBER add/SCORE_TO_ADD
- * addscore INDEX add/SCORE_TO_ADD
+ * setscore name/NAME id/STUDENT_NUMBER score/SCORE
+ * setscore INDEX score/SCORE
  */
-public class AddScoreCommandParser implements Parser<AddScoreCommand> {
+public class SetScoreCommandParser implements Parser<SetScoreCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddScoreCommand and
-     * returns a AddScoreCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SetScoreCommand and
+     * returns a SetScoreCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public AddScoreCommand parse(String userInput) throws ParseException {
+    public SetScoreCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
-                PREFIX_NAME, PREFIX_MATRIC, PREFIX_ADD_SCORE);
+                PREFIX_NAME, PREFIX_MATRIC, PREFIX_SET_SCORE);
 
         Index index;
         String studentName;
         String studentNumber;
         Optional<Student> student;
-        int scoreToAdd;
+        int score;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ADD_SCORE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+        if (!arePrefixesPresent(argMultimap, PREFIX_SET_SCORE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && !argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
         }
 
         if (!argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
             studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
-            scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
-            return new AddScoreCommand(student.get(), scoreToAdd);
+            score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
+            return new SetScoreCommand(student.get(), score);
         } else {
             index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
-            return new AddScoreCommand(index, scoreToAdd);
+            score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
+            return new SetScoreCommand(index, score);
         }
     }
 

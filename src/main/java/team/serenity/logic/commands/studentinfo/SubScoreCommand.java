@@ -5,9 +5,9 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
 import java.util.Optional;
 
@@ -24,57 +24,57 @@ import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 
-public class AddScoreCommand extends Command {
-    public static final String COMMAND_WORD = "addscore";
+public class SubScoreCommand extends Command {
+    public static final String COMMAND_WORD = "subscore";
     public static final String MESSAGE_SUCCESS = "%s: \nUpdated Participation Score: %d";
     public static final String MESSAGE_STUDENT_NOT_PRESENT =
-            "%s is not present. \nPlease ensure student is present before adding score!";
+            "%s is not present. \nPlease ensure student is present before subtracting score!";
     public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Increase the participation score of a specific student for a lesson.\n"
+            + ": Decrease the participation score of a specific student for a lesson.\n"
             + "Parameters: "
             + PREFIX_NAME + " STUDENT_NAME "
             + PREFIX_MATRIC + " STUDENT_NUMBER "
-            + PREFIX_ADD_SCORE + " SCORE_TO_ADD "
-            + "or INDEX " + PREFIX_ADD_SCORE + " SCORE_TO_ADD\n"
+            + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT "
+            + "or INDEX " + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U "
-            + PREFIX_ADD_SCORE + " 2\n"
-            + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_ADD_SCORE + " 2\n";
+            + PREFIX_MATRIC + " A0123456B "
+            + PREFIX_SUBTRACT_SCORE + " 2\n"
+            + "or " + COMMAND_WORD + " 2"
+            + PREFIX_SUBTRACT_SCORE + " 2\n";
 
-    private Optional<Student> toAddScore;
+    private Optional<Student> toSubScore;
     private Optional<Index> index;
     private boolean isByIndex;
     private int score;
-    private int scoreToAdd;
+    private int scoreToSub;
     private boolean isCorrectStudent;
 
     /**
-     * Creates an AddScoreCommand to increase the specified {@code Student}'s participation score.
+     * Creates an SubScoreCommand to decrease the specified {@code Student}'s participation score.
      */
-    public AddScoreCommand(Student student, int scoreToAdd) {
+    public SubScoreCommand(Student student, int scoreToSub) {
         requireNonNull(student);
-        requireNonNull(scoreToAdd);
+        requireNonNull(scoreToSub);
         // Specified student to add participation score
-        this.toAddScore = Optional.ofNullable(student);
-        this.scoreToAdd = scoreToAdd;
+        this.toSubScore = Optional.ofNullable(student);
+        this.scoreToSub = scoreToSub;
         this.index = Optional.empty();
         this.isByIndex = false;
     }
 
     /**
-     * Creates an AddScoreCommand to increase the specified {@code Student}'s participation score by index.
+     * Creates an SubScoreCommand to decrease the specified {@code Student}'s participation score by index.
      */
-    public AddScoreCommand(Index index, int scoreToAdd) {
+    public SubScoreCommand(Index index, int scoreToSub) {
         requireNonNull(index);
-        requireNonNull(scoreToAdd);
-        // Specified index of student to add participation score
+        requireNonNull(scoreToSub);
+        // Specified index of student to decrease participation score
         this.index = Optional.ofNullable(index);
-        this.toAddScore = Optional.empty();
-        this.scoreToAdd = scoreToAdd;
+        this.toSubScore = Optional.empty();
+        this.scoreToSub = scoreToSub;
         this.isByIndex = true;
     }
 
@@ -100,13 +100,13 @@ public class AddScoreCommand extends Command {
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
                 this.score = studentInfo.getParticipation().getScore();
-                this.isCorrectStudent = studentInfo.containsStudent(this.toAddScore.get());
+                this.isCorrectStudent = studentInfo.containsStudent(this.toSubScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
                     if (!currentAttendance.getAttendance()) {
-                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
+                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
                     }
-                    newScore = score + scoreToAdd;
+                    newScore = score - scoreToSub;
                     if (newScore > 5 || newScore < 0) {
                         throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
                     }
@@ -119,7 +119,7 @@ public class AddScoreCommand extends Command {
                 }
             }
             if (!this.isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toAddScore.get()));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSubScore.get()));
             }
         } else {
             if (index.get().getZeroBased() > studentsInfo.size()) {
@@ -128,12 +128,12 @@ public class AddScoreCommand extends Command {
             }
 
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
-            toAddScore = Optional.ofNullable(studentInfo.getStudent());
+            toSubScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
             if (!currentAttendance.getAttendance()) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
+                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
             }
-            newScore = score + scoreToAdd;
+            newScore = score - scoreToSub;
             if (newScore > 5 || newScore < 0) {
                 throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
             }
@@ -143,20 +143,16 @@ public class AddScoreCommand extends Command {
             model.updateLessonList();
             model.updateStudentsInfoList();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAddScore.get(), newScore));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSubScore.get(), newScore));
     }
 
-    /**
-     * Check whether 2 AddScoreCommand objects are identical
-     * @param other The AddScoreCommand to be compared
-     * @return True if the 2 commands are identical, False otherwise
-     */
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddScoreCommand // instanceof handles nulls
-                && this.scoreToAdd == ((AddScoreCommand) other).scoreToAdd)
-                && this.toAddScore.equals(((AddScoreCommand) other).toAddScore)
-                && this.index.equals(((AddScoreCommand) other).index)
-                && this.isByIndex == (((AddScoreCommand) other).isByIndex);
+                || (other instanceof SubScoreCommand // instanceof handles nulls
+                && this.toSubScore.equals(((SubScoreCommand) other).toSubScore)
+                && this.scoreToSub == ((SubScoreCommand) other).scoreToSub)
+                && this.index.equals(((SubScoreCommand) other).index)
+                && this.isByIndex == (((SubScoreCommand) other).isByIndex);
     }
 }
