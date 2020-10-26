@@ -9,7 +9,8 @@ import team.serenity.model.Model;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
- * Finds and lists all students and lessons in the group specifeied. Keyword matching is case insensitive.
+ * Display the attendance data of all students across all lessons in the group specified.
+ * Keyword matching is case insensitive.
  */
 public class ViewAttCommand extends Command {
 
