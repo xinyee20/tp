@@ -3,10 +3,7 @@ package team.serenity.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.group.student.Student;
-import team.serenity.model.group.student.StudentName;
-import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Jackson-friendly version of {@link Student}.

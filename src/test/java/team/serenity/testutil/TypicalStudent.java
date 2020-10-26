@@ -2,8 +2,10 @@ package team.serenity.testutil;
 
 import static team.serenity.testutil.TypicalGroups.GROUP_C;
 import static team.serenity.testutil.TypicalGroups.GROUP_D;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.student.UniqueStudentList;
 import team.serenity.model.managers.StudentManager;

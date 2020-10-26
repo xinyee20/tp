@@ -2,7 +2,6 @@ package team.serenity.model.managers;
 
 import java.util.Map;
 
-import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.util.UniqueList;

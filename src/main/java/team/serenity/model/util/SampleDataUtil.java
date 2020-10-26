@@ -6,10 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import team.serenity.model.group.UniqueGroupList;
-import team.serenity.model.managers.ReadOnlySerenity;
-import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.question.Question;
@@ -19,6 +17,8 @@ import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

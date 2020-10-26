@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import team.serenity.commons.exceptions.IllegalValueException;
+import team.serenity.model.group.Group;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.managers.Serenity;
-import team.serenity.model.group.Group;
 import team.serenity.model.util.UniqueList;
 
 /**

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
 import team.serenity.model.group.student.Student;
@@ -63,7 +62,7 @@ public class StudentManager implements ReadOnlyStudentManager {
      * @param group
      * @param student
      */
-    public void addStudentToGroup(Group group, Student student) throws GroupNotFoundException {
+    public void addStudentToGroup(GroupName group, Student student) throws GroupNotFoundException {
         requireAllNonNull(group, student);
         Optional<UniqueList<Student>> studentsOptional = Optional.ofNullable(this.mapToListOfStudents.get(group));
         if (studentsOptional.isPresent()) {

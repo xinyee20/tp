@@ -10,12 +10,12 @@ import java.util.stream.Stream;
 
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.commons.util.FileUtil;
 import team.serenity.commons.util.JsonUtil;
+import team.serenity.model.group.Group;
 import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.managers.ReadOnlySerenity;
-import team.serenity.model.group.Group;
+
 
 /**
  * A class to access Serenity data stored as a json file on the hard disk.

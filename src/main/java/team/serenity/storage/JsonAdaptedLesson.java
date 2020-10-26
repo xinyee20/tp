@@ -3,12 +3,11 @@ package team.serenity.storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import team.serenity.model.group.lesson.Lesson;
-import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
@@ -25,7 +24,8 @@ class JsonAdaptedLesson {
      * Constructs a {@code JsonAdaptedLesson} with the given {@code name}.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("name") String name, @JsonProperty("studentInfos") List<JsonAdaptedStudentInfo> studentInfos) {
+    public JsonAdaptedLesson(@JsonProperty("name") String name,
+        @JsonProperty("studentInfos") List<JsonAdaptedStudentInfo> studentInfos) {
         this.studentInfos.addAll(studentInfos);
         this.name = name;
     }
@@ -35,13 +35,15 @@ class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         this.name = source.getLessonName().toString();
-        this.studentInfos.addAll(source.getStudentsInfo().asUnmodifiableObservableList().stream().map(JsonAdaptedStudentInfo::new).collect(
+        this.studentInfos.addAll(source.getStudentsInfo()
+            .asUnmodifiableObservableList().stream()
+            .map(JsonAdaptedStudentInfo::new).collect(
             Collectors.toList()));
     }
 
     public Lesson toModelType() throws IllegalArgumentException {
         UniqueList<StudentInfo> studentInfos = new UniqueStudentInfoList();
-        for (JsonAdaptedStudentInfo  jsonStudentInfo : this.studentInfos) {
+        for (JsonAdaptedStudentInfo jsonStudentInfo : this.studentInfos) {
             StudentInfo studentInfo = jsonStudentInfo.toModelType();
             studentInfos.add(studentInfo);
         }

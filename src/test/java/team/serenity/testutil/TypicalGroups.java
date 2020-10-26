@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import team.serenity.logic.commands.CommandTestUtil;
-import team.serenity.model.group.UniqueGroupList;
-import team.serenity.model.managers.Serenity;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.managers.GroupManager;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.util.UniqueList;
 
 /**

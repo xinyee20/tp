@@ -1,9 +1,11 @@
 package team.serenity.model.managers;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
@@ -25,6 +27,9 @@ public class Serenity implements ReadOnlySerenity {
     private final ReadOnlyStudentManager studentManager;
     private final ReadOnlyStudentInfoManager studentInfoManager;
 
+    /**
+     * Creates a {@code Serenity}.
+     */
     public Serenity() {
         this.groups = new UniqueGroupList();
         this.groupManager = new GroupManager();
@@ -33,6 +38,10 @@ public class Serenity implements ReadOnlySerenity {
         this.studentInfoManager = new StudentInfoManager();
     }
 
+    /**
+     * Creates a {@code Serenity} using a List of Groups.
+     * @param groups
+     */
     public Serenity(List<Group> groups) {
 
         //instantiate groups
@@ -155,13 +164,6 @@ public class Serenity implements ReadOnlySerenity {
         return this.groups.contains(group);
     }
 
-    /**
-     * Adds a group to the serenity. The group must not already exist in the serenity.
-     */
-    public void addGroup(Group group) {
-        this.groups.add(group);
-    }
-
 
     /**
      * Replaces the given group {@code group} in the list with {@code editedGroup}. {@code target} must exist in
@@ -184,7 +186,6 @@ public class Serenity implements ReadOnlySerenity {
     @Override
     public String toString() {
         return this.groups.asUnmodifiableObservableList().size() + " groups";
-        // TODO: refine later
     }
 
     @Override
