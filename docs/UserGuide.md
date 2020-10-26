@@ -84,7 +84,7 @@ By: `Team Serenity` Since: `Aug 2020`
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 1. Introduction </H2>
+<H2 style="color: blue"> 1. Introduction </H2>
 
 Welcome to the User Guide of **Serenity**!
 
