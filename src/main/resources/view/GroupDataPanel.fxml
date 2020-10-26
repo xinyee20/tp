@@ -25,7 +25,7 @@
                <ListView fx:id="studentListView" />
             </content>
        </Tab>
-         <Tab fx:id="attendanceTab" text="Attendance">
+         <Tab text="Attendance">
             <content>
                <StackPane prefHeight="150.0" prefWidth="200.0">
                   <children>
@@ -39,7 +39,7 @@
                </StackPane>
             </content>
          </Tab>
-         <Tab fx:id="participationTab" text="Participation">
+         <Tab text="Participation">
             <content>
                <StackPane prefHeight="150.0" prefWidth="200.0">
                   <children>

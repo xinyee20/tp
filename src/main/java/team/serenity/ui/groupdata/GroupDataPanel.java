@@ -31,12 +31,6 @@ public class GroupDataPanel extends DataPanel {
     @FXML
     private TabPane tabPane;
 
-    @FXML
-    private Tab attendanceTab;
-
-    @FXML
-    private Tab participationTab;
-
     SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
 
     @FXML
@@ -88,16 +82,17 @@ public class GroupDataPanel extends DataPanel {
     }
 
     /**
-     * Switch tabs.
+     * Switch to attendanceTab.
      */
-    public void changeTab(String tabName) {
-        if (tabName.equals("attendanceTab")) {
-            selectionModel.select(2);
-        } else if (tabName.equals("participationTab")) {
-            selectionModel.select(3);
-        } else {
-            // error
-        }
+    public void changeAttendanceTab() {
+        selectionModel.select(2);
+    }
+
+    /**
+     * Switch to participationTab.
+     */
+    public void changeParticipationTab() {
+        selectionModel.select(3);
     }
 
     class LessonListViewCell extends ListCell<Lesson> {

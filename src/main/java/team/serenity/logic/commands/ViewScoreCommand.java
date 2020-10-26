@@ -9,14 +9,14 @@ import team.serenity.model.Model;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
- * Display the attendance data of all students across all lessons in the group specified.
+ * Display the participation score data of all students across all lessons in the group specified.
  * Keyword matching is case insensitive.
  */
-public class ViewAttCommand extends Command {
+public class ViewScoreCommand extends Command {
 
-    public static final String COMMAND_WORD = "viewatt";
+    public static final String COMMAND_WORD = "viewscore";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
-        + ": View attendance sheet of all students in the specified group (case-insensitive) "
+        + ": View participation score sheet of all students in the specified group (case-insensitive) "
         + "and displays them as a table.\n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP\n"
@@ -25,7 +25,7 @@ public class ViewAttCommand extends Command {
 
     private final GroupContainsKeywordPredicate predicate;
 
-    public ViewAttCommand(GroupContainsKeywordPredicate predicate) {
+    public ViewScoreCommand(GroupContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -39,14 +39,14 @@ public class ViewAttCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
-        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, true, false);
+        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, false, true);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof ViewAttCommand // instanceof handles nulls
-            && this.predicate.equals(((ViewAttCommand) other).predicate)); // state check
+            || (other instanceof ViewScoreCommand // instanceof handles nulls
+            && this.predicate.equals(((ViewScoreCommand) other).predicate)); // state check
     }
 
 }

@@ -21,6 +21,7 @@ import team.serenity.logic.commands.MarkPresentCommand;
 import team.serenity.logic.commands.ViewAttCommand;
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.ViewLsnCommand;
+import team.serenity.logic.commands.ViewScoreCommand;
 import team.serenity.logic.commands.question.AddQnCommand;
 import team.serenity.logic.commands.question.DelQnCommand;
 import team.serenity.logic.commands.question.FindQnCommand;
@@ -94,6 +95,9 @@ public class SerenityParser {
 
         case ViewAttCommand.COMMAND_WORD:
             return new ViewAttCommandParser().parse(arguments);
+
+        case ViewScoreCommand.COMMAND_WORD:
+            return new ViewScoreCommandParser().parse(arguments);
 
         // ========================== Question Commands =========================
 

@@ -67,7 +67,7 @@ public class AddLsnCommand extends Command {
         model.updateFilteredLessonList(new LessonContainsKeywordPredicate(this.toAdd));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, targetGrp),
-            false, false, true, false, false, false, false);
+            false, false, true, false, false, false, false, false);
     }
 
     @Override

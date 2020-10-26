@@ -253,7 +253,14 @@ public class MainWindow extends UiPart<Stage> {
      * Views attendance sheet of the specified group.
      */
     private void handleViewAtt() {
-        ((GroupDataPanel) this.groupDataPanel).changeTab("attendanceTab");
+        ((GroupDataPanel) this.groupDataPanel).changeAttendanceTab();
+    }
+
+    /**
+     * Views participation score sheet of the specified group.
+     */
+    private void handleViewScore() {
+        ((GroupDataPanel) this.groupDataPanel).changeParticipationTab();
     }
 
     /**
@@ -297,6 +304,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isViewAtt()) {
                 handleViewAtt();
+            }
+
+            if (commandResult.isViewScore()) {
+                handleViewScore();
             }
 
             return commandResult;
