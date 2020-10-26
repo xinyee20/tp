@@ -4,6 +4,8 @@ import static team.serenity.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import team.serenity.logic.commands.studentinfo.AddScoreCommand;
+
 class AddScoreCommandTest {
 
     @Test

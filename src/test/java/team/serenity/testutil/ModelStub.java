@@ -1,7 +1,6 @@
 package team.serenity.testutil;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -9,10 +8,10 @@ import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.util.UniqueList;
@@ -100,7 +99,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Optional<UniqueList<Lesson>> getListOfLessonsFromGroup(Group group) {
+    public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -120,7 +119,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Optional<UniqueList<Student>> getListOfStudentsFromGroup(Group group) {
+    public UniqueList<Student> getListOfStudentsFromGroup(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -150,7 +149,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
+    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
         throw new AssertionError("This method should not be called.");
     }
 

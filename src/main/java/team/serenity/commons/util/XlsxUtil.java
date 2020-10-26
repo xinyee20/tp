@@ -12,10 +12,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueStudentInfoList;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -70,7 +70,8 @@ public class XlsxUtil {
         return row;
     }
 
-    private void readDetailsOfStudents(Iterator<Row> rowIterator, Set<Student> students) {
+    private void readDetailsOfStudents(Iterator<Row> rowIterator,
+        Set<Student> students) throws IllegalArgumentException {
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
             Iterator<Cell> cellIterator = row.cellIterator();
