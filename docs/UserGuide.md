@@ -129,11 +129,9 @@ To get started with using **Serenity**, you can follow these steps:
 
 This User Guide have been structured such that you can easily find what you need.
 
-In the next subsection [Reading this document](#32-reading-this-document),
-you can find useful tips on reading this document.
+In [section 3.2](#32-reading-this-document), you can find useful tips on reading this document.
 
-It is then followed by section [Features](#4-features),
-where you can find details of the three main features of **Serenity**:
+In [section 4](#4-features), you can find details of the three main features of **Serenity**:
 
 * Attendance taking
 
