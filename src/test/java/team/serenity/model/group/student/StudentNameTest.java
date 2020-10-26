@@ -6,7 +6,6 @@ import static team.serenity.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-
 public class StudentNameTest {
     @Test
     public void constructor_null_throwsNullPointerException() {

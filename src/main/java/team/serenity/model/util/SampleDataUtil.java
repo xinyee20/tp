@@ -26,18 +26,19 @@ import team.serenity.model.managers.Serenity;
 public class SampleDataUtil {
 
     public static Group[] getSampleGroups() {
-        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "A6543210C"),
-            new Student("James", "A0123456C"));
+        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "E0123456"),
+            new Student("James", "E02030303"));
         UniqueList<StudentInfo> studentsInfoList = new UniqueStudentInfoList();
         studentsInfoList.setElementsWithList(new ArrayList<>(studentsInfo));
 
-        Set<Student> students = getStudentSet(new Student("John", "A6543210C"),
-            new Student("James", "A0123456C"));
+        Set<Student> students = getStudentSet(new Student("John", "E0123456"),
+            new Student("James", "E02030303"));
         UniqueList<Student> studentsList = new UniqueStudentList();
         studentsList.setElementsWithList(new ArrayList<>(students));
 
         UniqueList<Lesson> lessonsList = new UniqueLessonList();
-        lessonsList.add(new Lesson("1-1", studentsInfoList));
+        Set<Lesson> lessons = new HashSet<>();
+        lessons.add(new Lesson("1-1", studentsInfoList));
         return new Group[] {new Group("G04", studentsList, lessonsList)};
     }
 
