@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -18,7 +17,6 @@ import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.UniqueLessonList;
 import team.serenity.model.group.UniqueStudentInfoList;
 import team.serenity.model.group.UniqueStudentList;
@@ -55,7 +53,7 @@ public class ModelManager implements Model {
     private final FilteredList<Question> filteredQuestions;
 
     /**
-     * Initializes a ModelManager with the given serenity and userPrefs.
+     * Initializes a ModelManager with the given serenity, userPrefs and Respective Managers.
      */
     public ModelManager(ReadOnlySerenity serenity,
                         ReadOnlyQuestionManager questionManager,
@@ -67,7 +65,7 @@ public class ModelManager implements Model {
 
         //instantiate individual managers
         this.userPrefs = new UserPrefs(userPrefs);
-        this.groupManager = new GroupManager(new UniqueGroupList());
+        this.groupManager = new GroupManager();
         this.studentManager = new StudentManager();
         this.studentInfoManager = new StudentInfoManager();
         this.lessonManager = new LessonManager();
@@ -92,7 +90,7 @@ public class ModelManager implements Model {
 
         //instantiate individual managers
         this.userPrefs = new UserPrefs(userPrefs);
-        this.groupManager = new GroupManager(new UniqueGroupList());
+        this.groupManager = new GroupManager();
         this.studentInfoManager = new StudentInfoManager();
         this.studentManager = new StudentManager();
         this.lessonManager = new LessonManager();
@@ -212,7 +210,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<Lesson>> getListOfLessonsFromGroup(Group group) {
+    public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) {
         return this.lessonManager.getListOfLessonsFromGroup(group);
     }
 
@@ -243,7 +241,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<Student>> getListOfStudentsFromGroup(Group group) {
+    public UniqueList<Student> getListOfStudentsFromGroup(Group group) {
         return this.studentManager.getListOfStudentsFromGroup(group);
     }
 
@@ -293,7 +291,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<UniqueList<StudentInfo>> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
+    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
         GroupLessonKey key = new GroupLessonKey(group, lesson);
         return this.studentInfoManager.getListOfStudentsInfoFromGroupLessonKey(key);
     }

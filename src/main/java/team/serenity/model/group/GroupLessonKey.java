@@ -30,4 +30,12 @@ public class GroupLessonKey {
         String cocatenated = groupName + lessonName;
         return cocatenated.hashCode();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this
+                || (obj instanceof GroupLessonKey
+                && this.group.equals(((GroupLessonKey) obj).group)
+                && this.lesson.equals(((GroupLessonKey) obj).lesson));
+    }
 }
