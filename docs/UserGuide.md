@@ -549,10 +549,6 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-
-<H4 style="color: #477B9F"> Viewing statistics of class participation: <code>stats</code></H4>
-
-
 <H4 style="color: #477B9F"> 4.3.2. Subtract participation score of a student: <code>subscore</code></H4>
 
 You can use this command to decrease the participation score of a specific student for a tutorial lesson.
