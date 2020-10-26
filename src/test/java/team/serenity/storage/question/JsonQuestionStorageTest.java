@@ -30,6 +30,12 @@ class JsonQuestionStorageTest {
     public Path testFolder;
 
     @Test
+    public void getQuestionManagerStorageFilePath() {
+        JsonQuestionStorage questionStorage = new JsonQuestionStorage(TEST_DATA_FOLDER);
+        assertEquals(TEST_DATA_FOLDER, questionStorage.getQuestionManagerStorageFilePath());
+    }
+
+    @Test
     public void readQuestionManager_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readQuestionManager(null));
     }
