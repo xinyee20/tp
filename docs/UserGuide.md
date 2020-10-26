@@ -333,12 +333,12 @@ You can use this command to add a new student to a tutorial group.
 
 **Example:**
 
-A new student named `Aaron Tan` with student ID `e0123456` entered your tutorial group,
+A new student named `Aaron Tan` with student ID `A1234567U` entered your tutorial group,
 and you want to add him to tutorial group `G04`.
 
 Adding a new student to a tutorial group:
 
-1. Type `addstudent grp/G04 name/Aaron Tan id/e0123456` into the _Command Box_.
+1. Type `addstudent grp/G04 name/Aaron Tan id/A1234567U` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
@@ -356,12 +356,12 @@ You can use this command to delete an existing student from a tutorial group.
 
 **Example:**
 
-A student named `Aaron Tan` with student ID `e0123456` dropped the CS2101 module,
+A student named `Aaron Tan` with student ID `A1234567U` dropped the CS2101 module,
 and you need to remove him from the tutorial group `G04`.
 
 Deleting an existing student from a tutorial group:
 
-1. Type `delstudent grp/G04 name/Aaron Tan id/e0123456` into the _Command Box_.
+1. Type `delstudent grp/G04 name/Aaron Tan id/A1234567U` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
@@ -384,13 +384,13 @@ You can use this command to mark a specific student as present for a tutorial le
 
 **Example:**
 
-A student named `Aaron Tan` with student ID `e0123456` is present for your tutorial lesson `1-2` of tutorial group `G04`. 
+A student named `Aaron Tan` with student ID `A1234567U` is present for your tutorial lesson `1-2` of tutorial group `G04`. 
 
 Marking a student as present for a tutorial lesson:
 
 To mark him present:
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markpresent name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Type `markpresent name/Aaron Tan id/A1234567U` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -411,11 +411,11 @@ You can use this command to mark a specific student as absent for a tutorial les
 
 **Example:**
 
-A student named `Aaron Tan` with student ID `e0123456` is absent for your tutorial lesson `1-2` of tutorial group `G04`. 
+A student named `Aaron Tan` with student ID `A1234567U` is absent for your tutorial lesson `1-2` of tutorial group `G04`. 
 
 To mark him absent:
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markabsent name/Aaron Tan id/e0123456` into the *Command Box*.
+2. Type `markabsent name/Aaron Tan id/A1234567U` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -468,13 +468,13 @@ attendance at the end of class.
 
 **Example:**
 
-A student named `Aaron Tan` with student ID `e0123456` from another tutorial group decided to join
+A student named `Aaron Tan` with student ID `A1234567U` from another tutorial group decided to join
 your tutorial lesson `1-2` of tutorial group `G04`.
 You want to flag his attendance and check with his tutor after your tutorial lesson. 
 
 Flagging a student's attendance for a tutorial lesson:
 
-1. Type `flagatt grp/G04 lsn/1-2 name/Aaron Tan id/e0123456` into the _Command Box_.
+1. Type `flagatt grp/G04 lsn/1-2 name/Aaron Tan id/A1234567U` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
@@ -537,12 +537,12 @@ With a scale from 1 to 5:
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you noticed that your student named `Aaron Tan` with student ID `e0123456` often participated in class discussions.
+you noticed that your student named `Aaron Tan` with student ID `A1234567U` often participated in class discussions.
 You decided to add `3` marks to his participation score for this tutorial lesson.
 
 Adding participation score of a student in a tutorial lesson:
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `setscore name/Aaron Tan id/e0123456 add/3` into the *Command Box*.
+2. Type `setscore name/Aaron Tan id/A1234567U add/3` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -569,13 +569,13 @@ You can use this command to decrease the participation score of a specific stude
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student ID `e0123456` did not provide insightful responses to some questions.
+you felt that your student named `Aaron Tan` with student ID `A1234567U` did not provide insightful responses to some questions.
 You decided to subtract `1` mark from his participation score for this tutorial lesson.
 
 Subtracting participation score of a student in a tutorial lesson:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `subscore name/Aaron Tan id/e0123456 score/1` into the _Command Box_.
+2. Type `subscore name/Aaron Tan id/A1234567U score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -739,25 +739,25 @@ Command | Example
 **Delete tutorial group** <br> `delgrp grp/GROUP_NAME`| `delgrp grp/G04`
 **Add tutorial lesson** <br> `addlsn grp/GROUP_NAME lsn/LESSON_NAME` | `addlsn grp/G04 lsn/1-2`
 **Delete tutorial lesson** <br> `dellsn grp/GROUP_NAME lsn/LESSON_NAME` | `dellsn grp/G04 lsn/1-3`
-**Add student** <br> `addstudent grp/GROUP_NAME name/NAME id/STUDENT_ID` | `addstudent grp/G04 name/Aaron Tan id/e0123456`
-**Delete student** <br> `delstudent grp/GROUP_NAME name/NAME id/STUDENT_ID` | `delstudent grp/G04 name/Aaron Tan id/e0123456`
+**Add student** <br> `addstudent grp/GROUP_NAME name/NAME id/STUDENT_ID` | `addstudent grp/G04 name/Aaron Tan id/A1234567U`
+**Delete student** <br> `delstudent grp/GROUP_NAME name/NAME id/STUDENT_ID` | `delstudent grp/G04 name/Aaron Tan id/A1234567U`
 
 ### 6.2. Attendance taking commands
 
 Command | Example
 ------------ | -------------
-**Mark a student as present** <br> `markpresent name/NAME id/STUDENT_ID` | `markpresent name/Aaron Tan id/e0123456`
-**Mark a student as absent** <br> `markabsent name/NAME id/STUDENT_ID` | `markabsent name/Aaron Tan id/e0123456`
+**Mark a student as present** <br> `markpresent name/NAME id/STUDENT_ID` | `markpresent name/Aaron Tan id/A1234567U`
+**Mark a student as absent** <br> `markabsent name/NAME id/STUDENT_ID` | `markabsent name/Aaron Tan id/A1234567U`
 **Mark all students as present** <br> `markpresent all` | `markpresent all`
-**Flag attendance** <br> `flagatt grp/GROUP_NAME lsn/LESSON_NAME name/NAME id/STUDENT_ID` | `flagatt grp/G04 lsn/1-2 name/Aaron Tan id/e0123456`
+**Flag attendance** <br> `flagatt grp/GROUP_NAME lsn/LESSON_NAME name/NAME id/STUDENT_ID` | `flagatt grp/G04 lsn/1-2 name/Aaron Tan id/A1234567U`
 **Export attendance** <br> `exportatt grp/GROUP_NAME` | `exportatt grp/G04`
 
 ### 6.3. Participation marking commands
 
 Command | Example
 ------------ | -------------
-**Add participation score** <br> `addscore name/NAME id/STUDENT_ID score/SCORE` | `addscore name/Aaron Tan id/e0123456 score/3`
-**Subtract participation score** <br> `subscore name/NAME id/STUDENT_ID score/SCORE` | `subscore name/Aaron Tan id/e0123456 score/1`
+**Add participation score** <br> `addscore name/NAME id/STUDENT_ID score/SCORE` | `addscore name/Aaron Tan id/A1234567U score/3`
+**Subtract participation score** <br> `subscore name/NAME id/STUDENT_ID score/SCORE` | `subscore name/Aaron Tan id/A1234567U score/1`
 **Export participation scores** <br> `exportscore grp/GROUP_NAME` | `exportscore grp/G07`
 
 ### 6.4. Question addressing commands
