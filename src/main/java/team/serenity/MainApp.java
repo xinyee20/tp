@@ -1,5 +1,6 @@
 package team.serenity;
 
+import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -19,6 +20,7 @@ import team.serenity.logic.LogicManager;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
@@ -74,10 +76,19 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
+        updateModelGroupList(); //show first group view
 
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+    }
+
+    private void updateModelGroupList() {
+        requireNonNull(model);
+        Optional<Group> firstGroup = Optional.ofNullable(model.getFilteredGroupList().get(0));
+        if (firstGroup.isPresent()) {
+            model.updateFilteredGroupList(new GroupContainsKeywordPredicate(firstGroup.get().getGroupName().toString()));
+        }
     }
 
     /**
