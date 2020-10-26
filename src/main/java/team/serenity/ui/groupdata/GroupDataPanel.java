@@ -1,24 +1,16 @@
 package team.serenity.ui.groupdata;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Student;
@@ -31,7 +23,7 @@ public class GroupDataPanel extends DataPanel {
     @FXML
     private TabPane tabPane;
 
-    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+    private SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
 
     @FXML
     private ListView<Student> studentListView;
@@ -64,6 +56,7 @@ public class GroupDataPanel extends DataPanel {
         this.attendanceTableView.setItems(lessonList);
         this.participationTableView.setItems(lessonList);
 
+        /*
         List<TableColumn<Lesson, String>> columns = new ArrayList<>();
         this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         columns.add(nameColumn);
@@ -79,6 +72,7 @@ public class GroupDataPanel extends DataPanel {
 
         this.attendanceTableView.getColumns().setAll(columns);
         this.participationTableView.getColumns().setAll(columns);
+         */
     }
 
     /**
