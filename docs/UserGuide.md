@@ -619,7 +619,7 @@ easily for future reference.
 #### 4.4.1. Add a new question: `addqn`
 
 You can use this command to add a question that was asked in a tutorial lesson, so that you can address the question
-at the end of the tutorial lesson.
+in the future.
 
 **Format:**
 
@@ -629,7 +629,7 @@ at the end of the tutorial lesson.
 
 A student asked you, "`What is the deadline for the report?`" in a tutorial lesson.
 As the deadline of the report has changed, you want to note this question down, check the new deadline and
-address the question after the tutorial lesson. 
+address the question in the future. 
 
 Adding a question:
 
