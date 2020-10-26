@@ -6,9 +6,10 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import team.serenity.commons.core.index.Index;
 import team.serenity.commons.util.StringUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.Participation;
-import team.serenity.model.group.Student;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.Participation;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

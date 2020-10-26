@@ -16,10 +16,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueStudentInfoList;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -77,7 +77,8 @@ public class XlsxUtil {
         return row;
     }
 
-    private void readDetailsOfStudents(Iterator<Row> rowIterator, Set<Student> students) {
+    private void readDetailsOfStudents(Iterator<Row> rowIterator,
+        Set<Student> students) throws IllegalArgumentException {
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
             Iterator<Cell> cellIterator = row.cellIterator();
@@ -156,12 +157,14 @@ public class XlsxUtil {
 
         @Override
         public int compare(Lesson lessonOne, Lesson lessonTwo) {
-            int lesOneLen = lessonOne.getName().length();
-            int lesTwoLen = lessonTwo.getName().length();
+            String lesOne = lessonOne.getLessonName().lessonName;
+            int lesOneLen = lesOne.length();
+            String lesTwo = lessonTwo.getLessonName().lessonName;
+            int lesTwoLen = lesTwo.length();
             int minLength = Math.min(lesOneLen, lesTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int lesOneChar = (int) lessonOne.getName().charAt(i);
-                int lesTwoChar = (int) lessonTwo.getName().charAt(i);
+                int lesOneChar = (int) lesOne.charAt(i);
+                int lesTwoChar = (int) lesTwo.charAt(i);
 
                 if (lesOneChar != lesTwoChar) {
                     return lesOneChar - lesTwoChar;
@@ -180,12 +183,14 @@ public class XlsxUtil {
 
         @Override
         public int compare(Student studentOne, Student studentTwo) {
-            int sOneLen = studentOne.getName().length();
-            int sTwoLen = studentTwo.getName().length();
+            String sOne = studentOne.getStudentName().fullName;
+            int sOneLen = sOne.length();
+            String sTwo = studentTwo.getStudentName().fullName;
+            int sTwoLen = sTwo.length();
             int minLength = Math.min(sOneLen, sTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int lesOneChar = (int) studentOne.getName().charAt(i);
-                int lesTwoChar = (int) studentTwo.getName().charAt(i);
+                int lesOneChar = (int) sOne.charAt(i);
+                int lesTwoChar = (int) sTwo.charAt(i);
 
                 if (lesOneChar != lesTwoChar) {
                     return lesOneChar - lesTwoChar;
@@ -203,13 +208,15 @@ public class XlsxUtil {
     private class StudentInfoSorter implements Comparator<StudentInfo> {
 
         @Override
-        public int compare(StudentInfo infoOne, StudentInfo infoTwo) {
-            int infoOneLen = infoOne.getStudent().getName().length();
-            int infoTwoLen = infoTwo.getStudent().getName().length();
+        public int compare(StudentInfo studentInfoOne, StudentInfo studentInfoTwo) {
+            String infoOne = studentInfoOne.getStudent().getStudentName().fullName;
+            int infoOneLen = infoOne.length();
+            String infoTwo = studentInfoTwo.getStudent().getStudentName().fullName;
+            int infoTwoLen = infoTwo.length();
             int minLength = Math.min(infoOneLen, infoTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int infoOneChar = (int) infoOne.getStudent().getName().charAt(i);
-                int infoTwoChar = (int) infoTwo.getStudent().getName().charAt(i);
+                int infoOneChar = (int) infoOne.charAt(i);
+                int infoTwoChar = (int) infoTwo.charAt(i);
 
                 if (infoOneChar != infoTwoChar) {
                     return infoOneChar - infoTwoChar;

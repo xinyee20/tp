@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.model.ReadOnlySerenity;
+import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.storage.question.QuestionStorage;

@@ -2,6 +2,7 @@ package team.serenity.logic.commands;
 
 import org.junit.jupiter.api.Test;
 
+import team.serenity.logic.commands.studentinfo.MarkAbsentCommand;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
 

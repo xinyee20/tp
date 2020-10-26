@@ -15,10 +15,10 @@ import team.serenity.logic.parser.SerenityParser;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.storage.Storage;
 
 /**

@@ -8,8 +8,8 @@ import static team.serenity.testutil.TypicalStudent.JUNE;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueStudentInfoList;
+import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.managers.StudentInfoManager;
 import team.serenity.model.util.UniqueList;
 

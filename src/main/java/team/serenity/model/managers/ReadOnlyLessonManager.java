@@ -1,9 +1,10 @@
 package team.serenity.model.managers;
 
+
 import java.util.Map;
 
-import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -15,5 +16,7 @@ public interface ReadOnlyLessonManager {
      * This list will not contain any duplicate lesson.
      * @return
      */
-    public Map<Group, UniqueList<Lesson>> getLessonMap();
+    public Map<GroupName, UniqueList<Lesson>> getLessonMap();
+
+
 }

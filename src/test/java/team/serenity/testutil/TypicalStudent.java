@@ -6,8 +6,8 @@ import static team.serenity.testutil.TypicalGroups.GROUP_D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import team.serenity.model.group.Student;
-import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.UniqueStudentList;
 import team.serenity.model.managers.StudentManager;
 import team.serenity.model.util.UniqueList;
 
@@ -33,8 +33,8 @@ public class TypicalStudent {
 
     public static StudentManager getTypicalStudentManager() {
         StudentManager studentManager = new StudentManager();
-        studentManager.setListOfStudentsToGroup(GROUP_C, GROUP_C.getStudents());
-        studentManager.setListOfStudentsToGroup(GROUP_D, GROUP_D.getStudents());
+        studentManager.setListOfStudentsToGroup(GROUP_C.getGroupName(), GROUP_C.getStudents());
+        studentManager.setListOfStudentsToGroup(GROUP_D.getGroupName(), GROUP_D.getStudents());
         return studentManager;
     }
 }

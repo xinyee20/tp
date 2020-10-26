@@ -4,7 +4,7 @@ import static team.serenity.testutil.TypicalGroups.GROUP_D;
 
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
-import team.serenity.model.group.Lesson;
+import team.serenity.model.group.lesson.Lesson;
 
 public class GroupLessonKeyBuilder {
 
@@ -39,6 +39,6 @@ public class GroupLessonKeyBuilder {
     }
 
     public GroupLessonKey build() {
-        return new GroupLessonKey(this.group, this.lesson);
+        return new GroupLessonKey(this.group.getGroupName(), this.lesson.getLessonName());
     }
 }

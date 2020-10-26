@@ -8,7 +8,8 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import team.serenity.logic.commands.DelStudentCommand;
+import team.serenity.logic.commands.student.DelStudentCommand;
+import team.serenity.logic.parser.student.DelStudentCommandParser;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 public class DelStudentCommandParserTest {

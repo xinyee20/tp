@@ -14,17 +14,19 @@ import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueLessonList;
-import team.serenity.model.group.UniqueStudentInfoList;
-import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.UniqueStudentList;
+import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.LessonManager;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.managers.StudentInfoManager;
 import team.serenity.model.managers.StudentManager;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
@@ -65,10 +67,10 @@ public class ModelManager implements Model {
 
         //instantiate individual managers
         this.userPrefs = new UserPrefs(userPrefs);
-        this.groupManager = new GroupManager();
-        this.studentManager = new StudentManager();
-        this.studentInfoManager = new StudentInfoManager();
-        this.lessonManager = new LessonManager();
+        this.groupManager = new GroupManager(serenity.getGroupManager());
+        this.studentManager = new StudentManager(serenity.getStudentManager());
+        this.studentInfoManager = new StudentInfoManager(serenity.getStudentInfoManager());
+        this.lessonManager = new LessonManager(serenity.getLessonManager());
         this.questionManager = new QuestionManager(questionManager);
 
         this.filteredGroups = new FilteredList<>(this.groupManager.getListOfGroups());
@@ -187,7 +189,7 @@ public class ModelManager implements Model {
         UniqueList<Student> studentList = group.getStudents();
         UniqueList<Lesson> lessonList = group.getLessons();
         this.groupManager.addGroup(group);
-        this.studentManager.addListOfStudentsToGroup(group, studentList);
+        this.studentManager.addListOfStudentsToGroup(group.getGroupName(), studentList);
         this.lessonManager.addListOfLessonsToGroup(group, lessonList);
         UniqueList<StudentInfo> studentInfoList = new UniqueStudentInfoList();
         ObservableList<Student> uniqueStudentList = studentList.getList();
@@ -199,7 +201,7 @@ public class ModelManager implements Model {
         for (int i = 0; i < lessonList.size(); i++) {
             ObservableList<Lesson> uniqueLessonList = lessonList.getList();
             Lesson uniqueLesson = uniqueLessonList.get(i);
-            GroupLessonKey groupLessonKey = new GroupLessonKey(group, uniqueLesson);
+            GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), uniqueLesson.getLessonName());
             this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(groupLessonKey, studentInfoList);
         }
     }
@@ -226,7 +228,7 @@ public class ModelManager implements Model {
 
     @Override
     public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) {
-        return this.lessonManager.getListOfLessonsFromGroup(group);
+        return this.lessonManager.getListOfLessonsFromGroup(group.getGroupName());
     }
 
     @Override
@@ -236,7 +238,7 @@ public class ModelManager implements Model {
             ObservableList<Lesson> lessons = currentGroup.getLessonsAsUnmodifiableObservableList();
             UniqueList<Lesson> lessonList = currentGroup.getLessons();
             this.lessons.setAll(lessons);
-            this.lessonManager.setListOfLessonsToGroup(currentGroup, lessonList);
+            this.lessonManager.setListOfLessonsToGroup(currentGroup.getGroupName(), lessonList);
         }
     }
 
@@ -257,7 +259,7 @@ public class ModelManager implements Model {
 
     @Override
     public UniqueList<Student> getListOfStudentsFromGroup(Group group) {
-        return this.studentManager.getListOfStudentsFromGroup(group);
+        return this.studentManager.getListOfStudentsFromGroup(group.getGroupName());
     }
 
     @Override
@@ -288,14 +290,14 @@ public class ModelManager implements Model {
         if (this.filteredGroups.size() == 1) {
             ObservableList<Student> studentList = this.filteredGroups.get(0).getStudentsAsUnmodifiableObservableList();
             this.students.setAll(studentList);
-            this.studentManager.setListOfStudentsToGroup(this.filteredGroups.get(0),
+            this.studentManager.setListOfStudentsToGroup(this.filteredGroups.get(0).getGroupName(),
                 this.filteredGroups.get(0).getStudents());
         }
     }
 
     @Override
     public boolean checkIfStudentExistsInGroup(Group group, Student student) {
-        return this.studentManager.checkIfStudentExistsInGroup(group, student);
+        return this.studentManager.checkIfStudentExistsInGroup(group.getGroupName(), student);
     }
 
     // ========== StudentInfoManager ==========
@@ -307,7 +309,7 @@ public class ModelManager implements Model {
 
     @Override
     public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
-        GroupLessonKey key = new GroupLessonKey(group, lesson);
+        GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
         return this.studentInfoManager.getListOfStudentsInfoFromGroupLessonKey(key);
     }
 
@@ -316,7 +318,7 @@ public class ModelManager implements Model {
         if (!this.filteredGroups.isEmpty() && !this.filteredLessons.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
             Lesson currentLesson = this.filteredLessons.get(0);
-            GroupLessonKey key = new GroupLessonKey(currentGroup, currentLesson);
+            GroupLessonKey key = new GroupLessonKey(currentGroup.getGroupName(), currentLesson.getLessonName());
             ObservableList<StudentInfo> studentInfos = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
             UniqueList<StudentInfo> uniqueStudentInfoList = currentLesson.getStudentsInfo();
             this.studentsInfo.setAll(studentInfos);
