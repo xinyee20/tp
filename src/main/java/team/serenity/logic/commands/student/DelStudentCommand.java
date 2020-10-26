@@ -12,13 +12,13 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
+import team.serenity.logic.commands.Command;
+import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
-import team.serenity.model.util.UniqueList;
-import team.serenity.logic.commands.Command;
-import team.serenity.logic.commands.CommandResult;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.util.UniqueList;
 
 public class DelStudentCommand extends Command {
 
