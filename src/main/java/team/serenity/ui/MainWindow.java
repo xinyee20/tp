@@ -1,5 +1,9 @@
 package team.serenity.ui;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import com.sun.javafx.scene.layout.region.Margins;
@@ -12,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,6 +32,7 @@ import team.serenity.logic.Logic;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.ui.groupdata.AttendanceTable;
 import team.serenity.ui.groupdata.GroupDataPanel;
 import team.serenity.ui.lessondata.LessonDataPanel;
 

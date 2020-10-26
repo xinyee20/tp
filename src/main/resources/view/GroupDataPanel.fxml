@@ -31,9 +31,23 @@
                   <children>
                      <TableView fx:id="attendanceTableView" prefHeight="200.0" prefWidth="200.0">
                        <columns>
-                         <TableColumn prefWidth="75.0" text="Name" />
-                         <TableColumn prefWidth="75.0" text="Student Number" />
+                         <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                         <TableColumn fx:id="studentNoColumn" prefWidth="75.0" text="Student Number" />
                        </columns>
+                     </TableView>
+                  </children>
+               </StackPane>
+            </content>
+         </Tab>
+         <Tab text="Participation">
+            <content>
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <TableView fx:id="participationTableView" prefHeight="200.0" prefWidth="200.0">
+                        <columns>
+                           <TableColumn fx:id="nameColumn1" prefWidth="75.0" text="Name" />
+                           <TableColumn fx:id="studentNoColumn1" prefWidth="75.0" text="Student Number" />
+                        </columns>
                      </TableView>
                   </children>
                </StackPane>
