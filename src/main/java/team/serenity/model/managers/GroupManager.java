@@ -91,7 +91,7 @@ public class GroupManager implements ReadOnlyGroupManager {
         for (Student targetStudent : target.getStudents()) {
             for (Group group : listOfGroups) {
                 for (Student groupStudent : group.getStudents()) {
-                    if (groupStudent.getStudentName().equals(targetStudent.getStudentName())) {
+                    if (groupStudent.getStudentNo().equals(targetStudent.getStudentNo())) {
                         return true;
                     }
                 }

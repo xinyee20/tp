@@ -18,6 +18,7 @@ import team.serenity.model.group.exceptions.DuplicateQuestionException;
 import team.serenity.model.group.exceptions.QuestionNotFoundException;
 import team.serenity.model.group.question.QuestionContainsKeywordPredicate;
 import team.serenity.model.managers.QuestionManager;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.testutil.question.QuestionManagerBuilder;
 

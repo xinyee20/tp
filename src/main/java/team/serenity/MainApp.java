@@ -2,7 +2,6 @@ package team.serenity;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -18,10 +17,6 @@ import team.serenity.logic.Logic;
 import team.serenity.logic.LogicManager;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
-import team.serenity.model.group.Group;
-import team.serenity.model.group.GroupName;
-import team.serenity.model.group.lesson.Lesson;
-import team.serenity.model.group.student.Student;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.ReadOnlySerenity;
@@ -29,7 +24,6 @@ import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.model.util.SampleDataUtil;
-import team.serenity.model.util.UniqueList;
 import team.serenity.storage.JsonSerenityStorage;
 import team.serenity.storage.SerenityStorage;
 import team.serenity.storage.Storage;
@@ -100,12 +94,6 @@ public class MainApp extends Application {
             }
             serenity =
                 serenityOptional.orElseGet(SampleDataUtil::getSampleSerenity);
-            List<Group> groups = serenity.getGroupList();
-            for (Group group : groups) {
-                GroupName name = group.getGroupName();
-                UniqueList<Lesson> lessons = group.getLessons();
-                UniqueList<Student> students = group.getStudents();
-            }
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty"
                 + " Serenity.");
