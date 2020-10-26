@@ -2,6 +2,8 @@ package team.serenity.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 
@@ -26,6 +28,9 @@ public class CommandTestUtil {
     public static final String VALID_LSN_B = "3-1";
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
     public static final String VALID_QN_DESC_B = "When is the consultation held?";
+    public static final String VALID_STUDENT_NAME = "Ryan Lim";
+    public static final String VALID_STUDENT_NUMBER_A = "A0123456U";
+    public static final String VALID_INDEX = "1";
 
     public static final String GRP_DESC_GROUP_A = " " + PREFIX_GRP + VALID_GRP_GROUP_A;
     public static final String GRP_DESC_GROUP_B = " " + PREFIX_GRP + VALID_GRP_GROUP_B;
@@ -33,9 +38,13 @@ public class CommandTestUtil {
     public static final String PATH_DESC_GROUP_B = " " + PREFIX_PATH + VALID_PATH_GROUP_B;
     public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;
     public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_DESC_B;
+    public static final String STUDENT_DESC = " " + PREFIX_NAME + VALID_STUDENT_NAME + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
 
     // Invalid descriptions for Serenity
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
+    public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
+    public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME;
+    public static final String INVALID_INDEX = "A";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
