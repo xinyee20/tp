@@ -88,8 +88,8 @@ public class MainApp extends Application {
         requireNonNull(model);
         Optional<Group> firstGroup = Optional.ofNullable(model.getFilteredGroupList().get(0));
         if (firstGroup.isPresent()) {
-            model.updateFilteredGroupList(new GroupContainsKeywordPredicate(firstGroup
-                .get().getGroupName().toString()));
+            model.updateFilteredGroupList(new GroupContainsKeywordPredicate(
+                firstGroup.get().getGroupName().toString()));
         }
     }
 
