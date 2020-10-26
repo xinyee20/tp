@@ -184,14 +184,14 @@ You can use commands to tell **Serenity** to perform a specific task.
 `COMMAND_WORD prefix/PARAMETER`
 
 > ℹ **Notes regarding the command format:**
->* Words in upper case are the parameters to be supplied by you.<br>e.g. in `viewgrp grp/GROUP`, `GROUP` is a parameter which can be used as `viewgrp grp/G04`
->* Parameters have to be in the specified order.<br>e.g. if the command specifies `grp/GROUP lsn/LESSON`, `lsn/LESSON grp/GROUP` is not acceptable.
+>* Words in upper case are the parameters to be supplied by you.<br>e.g. in `viewgrp grp/GROUP_NAME`, `GROUP_NAME` is a parameter which can be used as `viewgrp grp/G04`
+>* Parameters have to be in the specified order.<br>e.g. if the command specifies `grp/GROUP_NAME lsn/LESSON_NAME`, `lsn/LESSON_NAME grp/GROUP_NAME` is not acceptable.
 
 **Example:**
 
 If you need to add a new tutorial lesson, you can type the following command.
 
-`addlsn grp/GROUP lsn/LESSON`
+`addlsn grp/GROUP_NAME lsn/LESSON_NAME`
 
 Analysis:
 
@@ -199,7 +199,7 @@ Analysis:
 
 * Command Word: `addlsn`
 
-* Parameter: `GROUP`, `LESSON`
+* Parameter: `GROUP_NAME`, `LESSON_NAME`
 
 * Prefix: `grp/`, `lsn/`
 
@@ -236,7 +236,7 @@ You can use this command to add a new tutorial group automatically from XLSX dat
 
 **Format:**
 
-`addgrp grp/GROUP path/PATH_TO_XLSX`
+`addgrp grp/GROUP_NAME path/PATH_TO_XLSX`
 
 **Example:**
 
@@ -260,7 +260,7 @@ You can use this command to delete an existing tutorial group.
 
 **Format:**
 
-`delgrp grp/GROUP`
+`delgrp grp/GROUP_NAME`
 
 **Example:**
 
@@ -283,11 +283,11 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 
 **Format:**
 
-`addlsn grp/GROUP lsn/LESSON`
+`addlsn grp/GROUP_NAME lsn/LESSON_NAME`
 
 **Example:**
 
-You want to create a new tutorial lesson `1-2` for tutorial group `G04`.
+You want to create a new tutorial lesson called `1-2` for tutorial group `G04`.
 
 Adding a tutorial lesson to a tutorial group:
 
@@ -306,7 +306,7 @@ You can use this command to delete an existing lesson from a specified tutorial 
 
 **Format:**
 
-`dellsn grp/GROUP lsn/LESSON`
+`dellsn grp/GROUP_NAME lsn/LESSON_NAME`
 
 **Example:**
 
@@ -329,7 +329,7 @@ You can use this command to add a new student to a tutorial group.
 
 **Format:**
 
-`addstudent grp/GROUP name/NAME id/STUDENT_ID`
+`addstudent grp/GROUP_NAME name/NAME id/STUDENT_ID`
 
 **Example:**
 
@@ -352,7 +352,7 @@ You can use this command to delete an existing student from a tutorial group.
 
 **Format:**
 
-`delstudent grp/GROUP name/NAME id/STUDENT_ID`
+`delstudent grp/GROUP_NAME name/NAME id/STUDENT_ID`
 
 **Example:**
 
@@ -464,7 +464,7 @@ attendance at the end of class.
 
 **Format:**
 
-`flagatt grp/GROUP lsn/LESSON name/NAME id/STUDENT_ID`
+`flagatt grp/GROUP_NAME lsn/LESSON_NAME name/NAME id/STUDENT_ID`
 
 **Example:**
 
@@ -496,7 +496,7 @@ You can use this command to export the attendance sheet of a specific tutorial g
 
 **Format**:
 
-`exportatt grp/GROUP`
+`exportatt grp/GROUP_NAME`
 
 **Example**:
 
@@ -593,7 +593,7 @@ You can use this command to export the participation score sheet of a specific t
 
 **Format:**
 
-`exportscore grp/GROUP`
+`exportscore grp/GROUP_NAME`
 
 **Example:**
 
@@ -674,7 +674,7 @@ You will also be able to execute tutorial group-related commands.
 
 **Format:**
 
-`viewgrp grp/GROUP`
+`viewgrp grp/GROUP_NAME`
 
 **Example:**
 
@@ -697,7 +697,7 @@ tutorial group. You will also be able to execute tutorial lesson-related command
 
 **Format:**
 
-`viewlsn grp/GROUP lsn/LESSON`
+`viewlsn grp/GROUP_NAME lsn/LESSON_NAME`
 
 **Example:**
 
@@ -735,12 +735,12 @@ your **Serenity** application on your other computer. **Serenity** will automati
 
 Command | Example
 ------------ | -------------
-**Add tutorial group** <br>`addgrp grp/GROUP path/PATH_TO_XLSX`| `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`
-**Delete tutorial group** <br> `delgrp grp/GROUP`| `delgrp grp/G04`
-**Add tutorial lesson** <br> `addlsn grp/GROUP lsn/LESSON` | `addlsn grp/G04 lsn/1-2`
-**Delete tutorial lesson** <br> `dellsn grp/GROUP lsn/LESSON` | `dellsn grp/G04 lsn/1-3`
-**Add student** <br> `addstudent grp/GROUP name/NAME id/STUDENT_ID` | `addstudent grp/G04 name/Aaron Tan id/e0123456`
-**Delete student** <br> `delstudent grp/GROUP name/NAME id/STUDENT_ID` | `delstudent grp/G04 name/Aaron Tan id/e0123456`
+**Add tutorial group** <br>`addgrp grp/GROUP_NAME path/PATH_TO_XLSX`| `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`
+**Delete tutorial group** <br> `delgrp grp/GROUP_NAME`| `delgrp grp/G04`
+**Add tutorial lesson** <br> `addlsn grp/GROUP_NAME lsn/LESSON_NAME` | `addlsn grp/G04 lsn/1-2`
+**Delete tutorial lesson** <br> `dellsn grp/GROUP_NAME lsn/LESSON_NAME` | `dellsn grp/G04 lsn/1-3`
+**Add student** <br> `addstudent grp/GROUP_NAME name/NAME id/STUDENT_ID` | `addstudent grp/G04 name/Aaron Tan id/e0123456`
+**Delete student** <br> `delstudent grp/GROUP_NAME name/NAME id/STUDENT_ID` | `delstudent grp/G04 name/Aaron Tan id/e0123456`
 
 ### 6.2. Attendance taking commands
 
@@ -749,8 +749,8 @@ Command | Example
 **Mark a student as present** <br> `markpresent name/NAME id/STUDENT_ID` | `markpresent name/Aaron Tan id/e0123456`
 **Mark a student as absent** <br> `markabsent name/NAME id/STUDENT_ID` | `markabsent name/Aaron Tan id/e0123456`
 **Mark all students as present** <br> `markpresent all` | `markpresent all`
-**Flag attendance** <br> `flagatt grp/GROUP lsn/LESSON name/NAME id/STUDENT_ID` | `flagatt grp/G04 lsn/1-2 name/Aaron Tan id/e0123456`
-**Export attendance** <br> `exportatt grp/GROUP` | `exportatt grp/G04`
+**Flag attendance** <br> `flagatt grp/GROUP_NAME lsn/LESSON_NAME name/NAME id/STUDENT_ID` | `flagatt grp/G04 lsn/1-2 name/Aaron Tan id/e0123456`
+**Export attendance** <br> `exportatt grp/GROUP_NAME` | `exportatt grp/G04`
 
 ### 6.3. Participation marking commands
 
@@ -758,7 +758,7 @@ Command | Example
 ------------ | -------------
 **Add participation score** <br> `addscore name/NAME id/STUDENT_ID score/SCORE` | `addscore name/Aaron Tan id/e0123456 score/3`
 **Subtract participation score** <br> `subscore name/NAME id/STUDENT_ID score/SCORE` | `subscore name/Aaron Tan id/e0123456 score/1`
-**Export participation scores** <br> `exportscore grp/GROUP` | `exportscore grp/G07`
+**Export participation scores** <br> `exportscore grp/GROUP_NAME` | `exportscore grp/G07`
 
 ### 6.4. Question addressing commands
 
@@ -771,5 +771,5 @@ Command | Example
 
 Command | Example
 ------------ | -------------
-**View tutorial group** <br> `viewgrp grp/GROUP` | `viewgrp grp/G04`
-**View tutorial lesson** <br> `viewlsn grp/GROUP lsn/LESSON` | `viewlsn grp/G04 lsn/1-2`
+**View tutorial group** <br> `viewgrp grp/GROUP_NAME` | `viewgrp grp/G04`
+**View tutorial lesson** <br> `viewlsn grp/GROUP_NAME lsn/LESSON_NAME` | `viewlsn grp/G04 lsn/1-2`
