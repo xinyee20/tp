@@ -22,7 +22,7 @@ By: `Team Serenity` Since: `Aug 2020`
 
 [4. Features](#4-features)
 
-&nbsp;&nbsp;&nbsp;[4.1. Setting up](#41-setup)
+&nbsp;&nbsp;&nbsp;[4.1. Getting started](#41-setup)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Add a new tutorial group from XLSX file: `addgrp`](#411-add-a-new-tutorial-group-from-xlsx-file-addgrp)
    
@@ -209,8 +209,14 @@ Analysis:
 
 This section contains all the information you need to know about the features of **Serenity**.
 To use each feature or sub-feature, you will need to enter the command into the _Command Box_.
+Below is an overview of the features availablie in **Serenity** :
 
-### 4.1. Setting up
+1. [Setting up](#41-setting-up) feature provides you the tools to set up your tutorial groups and lessons.
+2. [Attendance taking](#42-attendance-taking) feature provides you the tools to mark attendance for your lessons.
+3. [Participation marking](#43-participation-marking) feature provides you the tools to grade student participation. 
+4. [Question addressing](#44-question-addressing) feature provides you the tools to keep track of questions asked by students.
+
+### 4.1. Setting Up
 
 It is the start of the semester! Brand new classes, brand new students and a whole new experience.
 Follow the instructions below to set up your new classes, and watch **Serenity** do the magic for you.
