@@ -5,11 +5,9 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
@@ -36,12 +34,12 @@ public class SetScoreCommand extends Command {
             + ": Awards a specific student a participation score for a lesson.\n"
             + "Parameters: "
             + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_ID + " STUDENT_NUMBER "
+            + PREFIX_MATRIC + " STUDENT_NUMBER "
             + PREFIX_SET_SCORE + " SCORE "
             + "or INDEX " + PREFIX_SET_SCORE + " SCORE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456 "
+            + PREFIX_MATRIC + " e0123456 "
             + PREFIX_SET_SCORE + " 2\n"
             + "or " + COMMAND_WORD + " 2"
             + PREFIX_SET_SCORE + " 2\n";

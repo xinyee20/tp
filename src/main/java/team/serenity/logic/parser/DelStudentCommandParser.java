@@ -2,7 +2,7 @@ package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
@@ -22,7 +22,7 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
 
     @Override
     public DelStudentCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_NAME, PREFIX_ID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_NAME, PREFIX_MATRIC);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GRP)) {
             throw this.deleteStudentCommandParserException;
@@ -31,9 +31,9 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
         Index index;
         String[] grpKeywordArray = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             String[] studentNameArray = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-            String[] studentIdArray = argMultimap.getValue(PREFIX_ID).get().split("\\s+");
+            String[] studentIdArray = argMultimap.getValue(PREFIX_MATRIC).get().split("\\s+");
 
             //if id or group keyword is more than 1, or if student name has more than 10 letters, throw exception
             boolean matchesGrp = grpKeywordArray.length == 1;

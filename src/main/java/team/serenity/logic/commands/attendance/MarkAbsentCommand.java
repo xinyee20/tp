@@ -5,8 +5,10 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
@@ -31,15 +33,15 @@ public class MarkAbsentCommand extends Command {
             + "Parameters: "
             + "all or "
             + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_ID + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456\n"
+            + PREFIX_MATRIC + " e0123456\n"
             + "or " + COMMAND_WORD + " 2";
 
-    private Student toMarkAbsent;
-    private Index index;
+    private Optional<Student> toMarkAbsent;
+    private Optional<Index> index;
     private boolean isByIndex;
     private boolean isWholeClass;
     private boolean isCorrectStudent;
@@ -50,6 +52,8 @@ public class MarkAbsentCommand extends Command {
     public MarkAbsentCommand() {
         // Mark all students absent
         this.isWholeClass = true;
+        this.toMarkAbsent = Optional.empty();
+        this.index = Optional.empty();
     }
 
     /**
@@ -59,7 +63,8 @@ public class MarkAbsentCommand extends Command {
         requireNonNull(student);
         this.isWholeClass = false;
         // Specified student to mark present
-        this.toMarkAbsent = student;
+        this.toMarkAbsent = Optional.ofNullable(student);
+        this.index = Optional.empty();
         this.isByIndex = false;
     }
 
@@ -70,7 +75,8 @@ public class MarkAbsentCommand extends Command {
         requireNonNull(index);
         this.isWholeClass = false;
         // Specified index of student to mark present
-        this.index = index;
+        this.index = Optional.ofNullable(index);
+        this.toMarkAbsent = Optional.empty();
         this.isByIndex = true;
     }
 
@@ -97,7 +103,7 @@ public class MarkAbsentCommand extends Command {
                 // Mark single student attendance
                 for (int i = 0; i < studentsInfo.size(); i++) {
                     StudentInfo studentInfo = studentsInfo.get(i);
-                    this.isCorrectStudent = studentInfo.containsStudent(this.toMarkAbsent);
+                    this.isCorrectStudent = studentInfo.containsStudent(this.toMarkAbsent.get());
                     if (this.isCorrectStudent) {
                         Attendance update = studentInfo.getAttendance().setNewAttendance(false);
                         StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
@@ -114,13 +120,13 @@ public class MarkAbsentCommand extends Command {
                 }
 
             } else {
-                if (index.getZeroBased() > studentsInfo.size()) {
+                if (index.get().getZeroBased() > studentsInfo.size()) {
                     throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                            index.getOneBased()));
+                            index.get().getOneBased()));
                 }
 
-                StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
-                toMarkAbsent = studentInfo.getStudent();
+                StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
+                toMarkAbsent = Optional.ofNullable(studentInfo.getStudent());
                 Attendance update = studentInfo.getAttendance().setNewAttendance(false);
                 StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                 uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
@@ -150,6 +156,7 @@ public class MarkAbsentCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof MarkAbsentCommand // instanceof handles nulls
                 && this.toMarkAbsent.equals(((MarkAbsentCommand) other).toMarkAbsent)
+                && this.index.equals(((MarkAbsentCommand) other).index)
                 && this.isCorrectStudent == ((MarkAbsentCommand) other).isCorrectStudent
                 && this.isWholeClass == ((MarkAbsentCommand) other).isWholeClass);
     }

@@ -5,8 +5,10 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
@@ -32,14 +34,14 @@ public class UnflagAttCommand extends Command {
             + ": Unflags the attendance of a specific student for a lesson. \n"
             + "Parameters: "
             + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_ID + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456\n"
+            + PREFIX_MATRIC + " A0123456U\n"
             + "or " + COMMAND_WORD + " 2";
 
-    private Student toUnflagAtt;
-    private Index index;
+    private Optional<Student> toUnflagAtt;
+    private Optional<Index> index;
     private boolean isByIndex;
     private boolean isCorrectStudent;
 
@@ -49,7 +51,8 @@ public class UnflagAttCommand extends Command {
     public UnflagAttCommand(Student student) {
         requireNonNull(student);
         // Specified student to flag attendance
-        this.toUnflagAtt = student;
+        this.toUnflagAtt = Optional.ofNullable(student);
+        this.index = Optional.empty();
         this.isByIndex = false;
     }
 
@@ -59,7 +62,8 @@ public class UnflagAttCommand extends Command {
     public UnflagAttCommand(Index index) {
         requireNonNull(index);
         // Specified index of student to unflag attendance
-        this.index = index;
+        this.index = Optional.ofNullable(index);
+        this.toUnflagAtt = Optional.empty();
         this.isByIndex = true;
     }
 
@@ -85,7 +89,7 @@ public class UnflagAttCommand extends Command {
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
                 Attendance current = studentInfo.getAttendance();
-                this.isCorrectStudent = studentInfo.containsStudent(this.toUnflagAtt);
+                this.isCorrectStudent = studentInfo.containsStudent(this.toUnflagAtt.get());
                 if (this.isCorrectStudent) {
                     if (! current.getFlagged()) {
                         throw new CommandException(MESSAGE_FAILURE);
@@ -103,14 +107,14 @@ public class UnflagAttCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toUnflagAtt));
             }
         } else {
-            if (index.getZeroBased() > studentsInfo.size()) {
+            if (index.get().getZeroBased() > studentsInfo.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        index.getOneBased()));
+                        index.get().getOneBased()));
             }
 
-            StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
+            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             Attendance current = studentInfo.getAttendance();
-            toUnflagAtt = studentInfo.getStudent();
+            toUnflagAtt = Optional.ofNullable(studentInfo.getStudent());
             if (! current.getFlagged()) {
                 throw new CommandException(MESSAGE_FAILURE);
             }
@@ -121,5 +125,14 @@ public class UnflagAttCommand extends Command {
             model.updateStudentsInfoList();
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toUnflagAtt));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UnflagAttCommand // instanceof handles nulls
+                && this.toUnflagAtt.equals(((UnflagAttCommand) other).toUnflagAtt)
+                && this.index.equals(((UnflagAttCommand) other).index)
+                && this.isCorrectStudent == ((UnflagAttCommand) other).isCorrectStudent);
     }
 }

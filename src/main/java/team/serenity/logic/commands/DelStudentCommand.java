@@ -5,7 +5,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_EMPTY;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
@@ -28,11 +28,11 @@ public class DelStudentCommand extends Command {
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
         + PREFIX_NAME + "STUDENT_NAME "
-        + PREFIX_ID + "STUDENT_NUMBER " + "or INDEX\n"
+        + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G04 "
         + PREFIX_NAME + "Ryan "
-        + PREFIX_ID + "e1234567\n"
+        + PREFIX_MATRIC + "e1234567\n"
         + "or " + COMMAND_WORD + " 2 "
             + PREFIX_GRP + "G04";
 

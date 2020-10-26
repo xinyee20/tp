@@ -1,11 +1,9 @@
 package team.serenity.logic.parser.participation;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -39,7 +37,7 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
     @Override
     public SetScoreCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
-                PREFIX_NAME, PREFIX_ID, PREFIX_SET_SCORE);
+                PREFIX_NAME, PREFIX_MATRIC, PREFIX_SET_SCORE);
 
         Index index;
         String studentName;
@@ -51,9 +49,9 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ID).isPresent()) {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_ID).get());
+            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
             score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
             return new SetScoreCommand(student.get(), score);

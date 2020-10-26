@@ -6,9 +6,8 @@ import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
@@ -34,12 +33,12 @@ public class AddScoreCommand extends Command {
             + ": Increase the participation score of a specific student for a lesson.\n"
             + "Parameters: "
             + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_ID + " STUDENT_NUMBER "
+            + PREFIX_MATRIC + " STUDENT_NUMBER "
             + PREFIX_ADD_SCORE + " SCORE_TO_ADD "
             + "or INDEX " + PREFIX_ADD_SCORE + " SCORE_TO_ADD\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456 "
+            + PREFIX_MATRIC + " e0123456 "
             + PREFIX_ADD_SCORE + " 2\n"
             + "or " + COMMAND_WORD + " 2"
             + PREFIX_ADD_SCORE + " 2\n";

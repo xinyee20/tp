@@ -5,8 +5,10 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
@@ -33,15 +35,15 @@ public class FlagAttCommand extends Command {
             + ": Flags the attendance of a specific student for a lesson. \n"
             + "Parameters: "
             + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_ID + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456\n"
+            + PREFIX_MATRIC + " A0123456U\n"
             + "or " + COMMAND_WORD + " 2";
 
 
-    private Student toFlagAtt;
-    private Index index;
+    private Optional<Student> toFlagAtt;
+    private Optional<Index> index;
     private boolean isByIndex;
     private boolean isCorrectStudent;
 
@@ -51,7 +53,8 @@ public class FlagAttCommand extends Command {
     public FlagAttCommand(Student student) {
         requireNonNull(student);
         // Specified student to flag attendance
-        this.toFlagAtt = student;
+        this.toFlagAtt = Optional.ofNullable(student);
+        this.index = Optional.empty();
         this.isByIndex = false;
     }
 
@@ -61,7 +64,8 @@ public class FlagAttCommand extends Command {
     public FlagAttCommand(Index index) {
         requireNonNull(index);
         // Specified index of student to flag attendance
-        this.index = index;
+        this.index = Optional.ofNullable(index);
+        this.toFlagAtt = Optional.empty();
         this.isByIndex = true;
     }
 
@@ -87,8 +91,11 @@ public class FlagAttCommand extends Command {
             for (int i = 0; i < studentsInfo.size(); i++) {
                 StudentInfo studentInfo = studentsInfo.get(i);
                 Attendance current = studentInfo.getAttendance();
-                this.isCorrectStudent = studentInfo.containsStudent(this.toFlagAtt);
+                this.isCorrectStudent = studentInfo.containsStudent(this.toFlagAtt.get());
                 if (this.isCorrectStudent) {
+                    if (current.getAttendance()) {
+                        throw new CommandException(MESSAGE_FAILURE);
+                    }
                     Attendance update = new Attendance(current.getAttendance(), true);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
@@ -102,14 +109,14 @@ public class FlagAttCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toFlagAtt));
             }
         } else {
-            if (index.getZeroBased() > studentsInfo.size()) {
+            if (index.get().getZeroBased() > studentsInfo.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        index.getOneBased()));
+                        index.get().getOneBased()));
             }
 
-            StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
+            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             Attendance current = studentInfo.getAttendance();
-            toFlagAtt = studentInfo.getStudent();
+            toFlagAtt = Optional.ofNullable(studentInfo.getStudent());
             Attendance update = new Attendance(current.getAttendance(), true);
             StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
             uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
@@ -117,5 +124,14 @@ public class FlagAttCommand extends Command {
             model.updateStudentsInfoList();
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toFlagAtt));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FlagAttCommand // instanceof handles nulls
+                && this.toFlagAtt.equals(((FlagAttCommand) other).toFlagAtt)
+                && this.index.equals(((FlagAttCommand) other).index)
+                && this.isCorrectStudent == ((FlagAttCommand) other).isCorrectStudent);
     }
 }

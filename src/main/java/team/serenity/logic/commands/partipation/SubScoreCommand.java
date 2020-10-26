@@ -5,7 +5,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
@@ -33,12 +33,12 @@ public class SubScoreCommand extends Command {
             + ": Decrease the participation score of a specific student for a lesson.\n"
             + "Parameters: "
             + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_ID + " STUDENT_NUMBER "
+            + PREFIX_MATRIC + " STUDENT_NUMBER "
             + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT "
             + "or INDEX " + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456 "
+            + PREFIX_MATRIC + " e0123456 "
             + PREFIX_SUBTRACT_SCORE + " 2\n"
             + "or " + COMMAND_WORD + " 2"
             + PREFIX_SUBTRACT_SCORE + " 2\n";

@@ -5,7 +5,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Optional;
@@ -18,12 +18,9 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Attendance;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.Lesson;
 import team.serenity.model.group.Student;
 import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueStudentList;
-import team.serenity.model.managers.StudentInfoManager;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -40,15 +37,15 @@ public class MarkPresentCommand extends Command {
             + "Parameters: "
             + "all or "
             + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_ID + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_ID + " e0123456\n"
+            + PREFIX_MATRIC + " e0123456\n"
             + "or " + COMMAND_WORD + " 2";
 
-    private Student toMarkPresent;
-    private Index index;
+    private Optional<Student> toMarkPresent;
+    private Optional<Index> index;
     private boolean isByIndex;
     private boolean isWholeClass;
     private boolean isCorrectStudent;
@@ -59,6 +56,8 @@ public class MarkPresentCommand extends Command {
     public MarkPresentCommand() {
         // Mark all students present
         this.isWholeClass = true;
+        this.toMarkPresent = Optional.empty();
+        this.index = Optional.empty();
     }
 
     /**
@@ -68,7 +67,8 @@ public class MarkPresentCommand extends Command {
         requireNonNull(student);
         this.isWholeClass = false;
         // Specified student to mark present
-        this.toMarkPresent = student;
+        this.toMarkPresent = Optional.ofNullable(student);
+        this.index = Optional.empty();
         this.isByIndex = false;
     }
 
@@ -79,7 +79,8 @@ public class MarkPresentCommand extends Command {
         requireNonNull(index);
         this.isWholeClass = false;
         // Specified index of student to mark present
-        this.index = index;
+        this.index = Optional.ofNullable(index);
+        this.toMarkPresent = Optional.empty();
         this.isByIndex = true;
     }
 
@@ -110,7 +111,7 @@ public class MarkPresentCommand extends Command {
                 // Mark single student present
                 for (int i = 0; i < studentsInfo.size(); i++) {
                     StudentInfo studentInfo = studentsInfo.get(i);
-                    this.isCorrectStudent = studentInfo.containsStudent(this.toMarkPresent);
+                    this.isCorrectStudent = studentInfo.containsStudent(this.toMarkPresent.get());
                     if (this.isCorrectStudent) {
                         Attendance update = studentInfo.getAttendance().setNewAttendance(true);
                         StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
@@ -125,13 +126,13 @@ public class MarkPresentCommand extends Command {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toMarkPresent));
                 }
             } else {
-                if (index.getZeroBased() > studentsInfo.size()) {
+                if (index.get().getZeroBased() > studentsInfo.size()) {
                     throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                            index.getOneBased()));
+                            index.get().getOneBased()));
                 }
 
-                StudentInfo studentInfo = studentsInfo.get(index.getZeroBased());
-                toMarkPresent = studentInfo.getStudent();
+                StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
+                toMarkPresent = Optional.ofNullable(studentInfo.getStudent());
                 Attendance update = studentInfo.getAttendance().setNewAttendance(true);
                 StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                 uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
@@ -159,6 +160,7 @@ public class MarkPresentCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof MarkPresentCommand // instanceof handles nulls
                 && this.toMarkPresent.equals(((MarkPresentCommand) other).toMarkPresent)
+                && this.index.equals(((MarkPresentCommand) other).index)
                 && this.isCorrectStudent == ((MarkPresentCommand) other).isCorrectStudent
                 && this.isWholeClass == ((MarkPresentCommand) other).isWholeClass);
     }
