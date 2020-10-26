@@ -1,22 +1,13 @@
 package team.serenity.ui;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
-
-import com.sun.javafx.scene.layout.region.Margins;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +15,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.core.LogsCenter;
@@ -32,7 +22,6 @@ import team.serenity.logic.Logic;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.ui.groupdata.AttendanceTable;
 import team.serenity.ui.groupdata.GroupDataPanel;
 import team.serenity.ui.lessondata.LessonDataPanel;
 
@@ -214,14 +203,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleAddGrp(String groupName) {
         Button groupButton = new Button(groupName);
-        setUpButton(groupButton);
+        setUpGroupButton(groupButton);
         buttonBar.addGroupButton(groupButton);
     }
 
     /**
      * Sets up the newly created group button.
      */
-    public void setUpButton(Button groupButton) {
+    public void setUpGroupButton(Button groupButton) {
         groupButton.setLayoutX(20);
         groupButton.setLayoutY(65);
         groupButton.setMnemonicParsing(false);
