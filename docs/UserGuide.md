@@ -22,9 +22,9 @@ By: `Team Serenity` Since: `Aug 2020`
 
 [4. Features](#4-features)
 
-&nbsp;&nbsp;&nbsp;[4.1. Setup](#41-setup)
+&nbsp;&nbsp;&nbsp;[4.1. Setting up](#41-setup)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Add a new tutorial group from CSV file: `addgrp`](#411-add-a-new-tutorial-group-from-csv-file-addgrp)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Add a new tutorial group from XLSX file: `addgrp`](#411-add-a-new-tutorial-group-from-xlsx-file-addgrp)
    
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.2. Delete-an-existing-tutorial-group: `delgrp`](#412-delete-an-existing-tutorial-group-delgrp)
 
@@ -46,7 +46,7 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.4. Flag attendance of a student: `flagatt`](#424-flag-attendance-of-a-student-flagatt)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.5. Export attendance as CSV file: `exportatt`](#425-export-attendance-as-csv-file-exportatt)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.5. Export attendance as XLSX file: `exportatt`](#425-export-attendance-as-xlsx-file-exportatt)
 
 &nbsp;&nbsp;&nbsp;[4.3. Participation marking](#43-participation-marking)
 
@@ -54,7 +54,7 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.2. Subtract participation score of a student: `subscore`](#432-subtract-participation-score-of-a-student-subscore)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.3. Export participation scores as CSV file: `exportscore`](#433-export-participation-scores-as-csv-file-exportscore)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.3. Export participation scores as XLSX file: `exportscore`](#433-export-participation-scores-as-xlsx-file-exportscore)
 
 &nbsp;&nbsp;&nbsp;[4.4. Question addressing](#44-question-addressing)
 
@@ -151,6 +151,8 @@ User Guide.
 The following figure shows the _GUI_ of **Serenity**.
 It is annotated with the name of the _GUI_ components.
 
+![Ui](images/Ui_annotated.png)
+
 #### 3.2.2. General symbols and syntax
 
 The table below explains the general symbols and syntax used throughout the document.
@@ -173,6 +175,7 @@ Command | The instruction that the user types into the command box for **Serenit
 Command word | The first word of the command that tells **Serenity** which task should be performed.
 Parameter | The word or phrase following the command word that provides further details of the task (if necessary).
 Prefix | The letter that is placed at the start of each parameter to distinguish one parameter from another.
+XLSX | File format for all excel files.
 
 #### 3.2.4. Command format
 
@@ -209,36 +212,36 @@ Analysis:
 This section contains all the information you need to know about the features of **Serenity**.
 To use each feature or sub-feature, you will need to enter the command into the _Command Box_.
 
-### 4.1. Setup
+### 4.1. Setting up
 
 It is the start of the semester! Brand new classes, brand new students and a whole new experience.
 Follow the instructions below to set up your new classes, and watch **Serenity** do the magic for you.
 
-#### 4.1.1. Add a new tutorial group from CSV file: `addgrp`
+#### 4.1.1. Add a new tutorial group from XLSX file: `addgrp`
 
-You can use this command to add a new tutorial group automatically from CSV data.
+You can use this command to add a new tutorial group automatically from XLSX data.
 
 > ℹ **Notes regarding the `addgrp` command:**
-> * The CSV file should store a list of students.
-> * The format of the CSV file is the same as the CSV file that you may download from LUMINUS.
-> * To obtain PATH_TO_CSV, either:<br>
->    ◦ Get the location of the CSV file in your computer.<br>
->      e.g. `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.csv`<br>
->    ◦ Copy and paste the CSV file into the same folder as your **Serenity** application, then type the name of the CSV file.<br>
->      e.g. `addgrp grp/G04 path/CS2101_G04.csv`
+> * The XLSX file should store a list of students.
+> * The format of the XLSX file is the same as the XLSX file that you may download from LUMINUS.
+> * To obtain PATH_TO_XLSX, either:<br>
+>    ◦ Get the location of the XLSX file in your computer.<br>
+>      e.g. `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`<br>
+>    ◦ Copy and paste the XLSX file into the same folder as your **Serenity** application, then type the name of the XLSX file.<br>
+>      e.g. `addgrp grp/G04 path/CS2101_G04.xlsx`
 
 **Format:**
 
-`addgrp grp/GROUP path/PATH_TO_CSV`
+`addgrp grp/GROUP path/PATH_TO_XLSX`
 
 **Example:**
 
 You are adding a new tutorial group named `G04` to prepare for a new semester.
-The CSV data of the tutorial group is stored at `C:\Users\serene\CS2101_G04.csv`.
+The XLSX data of the tutorial group is stored at `C:\Users\serene\CS2101_G04.xlsx`.
 
 Adding a new tutorial group:
 
-1. Type `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.csv` into the _Command Box_.
+1. Type `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
@@ -475,16 +478,16 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. His attendance will now be flagged for future follow-up actions.
 
-#### 4.2.5. Export attendance as CSV file: `exportatt`
+#### 4.2.5. Export attendance as XLSX file: `exportatt`
 
-You can use this command to export the attendance sheet of a specific tutorial group as a CSV file.
+You can use this command to export the attendance sheet of a specific tutorial group as a XLSX file.
 
 > 💡 **Tip for the `exportatt` command:**
 > You can conveniently obtain the soft copy version of the attendance sheet for
 > attendance list submission as part of NUS Centre for English Language Communication requirements.
 
 > ℹ **Note regarding the `exportatt` command:**
-> The attendance sheet will be saved as a CSV file named after the tutorial group.
+> The attendance sheet will be saved as a XLSX file named after the tutorial group.
 > The file will be saved at the same folder as your **Serenity** application.
 
 **Format**:
@@ -501,8 +504,8 @@ Exporting attendance sheet of a tutorial group:
 
 Outcome:
 1. The _Result Display_ will show a success message.
-2. The attendance sheet of tutorial group `G04` will be saved as `G04_attendance.csv`.
-You can find the CSV file at the location where your **Serenity** application is located.
+2. The attendance sheet of tutorial group `G04` will be saved as `G04_attendance.xlsx`.
+You can find the XLSX file at the location where your **Serenity** application is located.
 
 ### 4.3. Participation marking
 
@@ -576,12 +579,12 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-#### 4.3.3. Export participation scores as CSV file: `exportscore`
+#### 4.3.3. Export participation scores as XLSX file: `exportscore`
 
-You can use this command to export the participation score sheet of a specific tutorial group as a CSV file.
+You can use this command to export the participation score sheet of a specific tutorial group as a XLSX file.
 
 > ℹ **Note regarding the `exportscore` command:**
-> The participation score sheet will be saved as a CSV file named after the tutorial group.
+> The participation score sheet will be saved as a XLSX file named after the tutorial group.
 > The file will be saved at the same folder as your **Serenity** application.
 
 **Format:**
@@ -590,7 +593,7 @@ You can use this command to export the participation score sheet of a specific t
 
 **Example:**
 
-You want to collate the participation scores of tutorial group `GO7` into a CSV file for grading on a 
+You want to collate the participation scores of tutorial group `GO7` into a XLSX file for grading on a 
 different platform (i.e. LumiNUS).
 
 Exporting participation score sheet of a tutorial group:
@@ -601,8 +604,8 @@ Exporting participation score sheet of a tutorial group:
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. The participation score sheet of tutorial group `G04` will be saved as `G04_participation.csv`.
-You can find the CSV file at the location where your **Serenity** application is located.
+2. The participation score sheet of tutorial group `G04` will be saved as `G04_participation.xlsx`.
+You can find the XLSX file at the location where your **Serenity** application is located.
 
 ### 4.4. Question addressing
 
@@ -728,7 +731,7 @@ your **Serenity** application on your other computer. **Serenity** will automati
 
 Command | Example
 ------------ | -------------
-**Add tutorial group** <br>`addgrp grp/GROUP path/PATH_TO_CSV`| `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.csv`
+**Add tutorial group** <br>`addgrp grp/GROUP path/PATH_TO_XLSX`| `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`
 **Delete tutorial group** <br> `delgrp grp/GROUP`| `delgrp grp/G04`
 **Add tutorial lesson** <br> `addlsn grp/GROUP lsn/LESSON` | `addlsn grp/G04 lsn/1-2`
 **Delete tutorial lesson** <br> `dellsn grp/GROUP lsn/LESSON` | `dellsn grp/G04 lsn/1-3`
