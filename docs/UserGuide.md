@@ -227,7 +227,7 @@ You can use this command to add a new tutorial group automatically from XLSX dat
 
 > ℹ **Notes regarding the `addgrp` command:**
 > * The XLSX file should store a list of students.
-> * The format of the XLSX file is the same as the XLSX file that you may download from LUMINUS.
+> * The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS.
 > * To obtain PATH_TO_XLSX, either:<br>
 >    ◦ Get the location of the XLSX file in your computer.<br>
 >      e.g. `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`<br>
