@@ -132,14 +132,14 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample QuestionManager.");
             }
             questionManager =
-                    questionManagerOptional.orElseGet(SampleDataUtil::getSampleQuestionManager);
+                questionManagerOptional.orElseGet(SampleDataUtil::getSampleQuestionManager);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty"
-                    + "QuestionManager.");
+                + "QuestionManager.");
             questionManager = new QuestionManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty "
-                    + "QuestionManager.");
+                + "QuestionManager.");
             questionManager = new QuestionManager();
         }
 
