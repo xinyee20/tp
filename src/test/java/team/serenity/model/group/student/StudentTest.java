@@ -6,9 +6,6 @@ import static team.serenity.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import team.serenity.model.group.student.Student;
-import team.serenity.model.group.student.StudentName;
-
 class StudentTest {
 
     @Test

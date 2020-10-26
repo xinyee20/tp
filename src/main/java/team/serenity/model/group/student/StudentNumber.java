@@ -11,7 +11,8 @@ import static team.serenity.commons.util.AppUtil.checkArgument;
 public class StudentNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Student number must be alphanumeric, starts with A and is 9 characters long, ending with an uppercase character.";
+        "Student number must be alphanumeric, "
+            + "starts with A and is 9 characters long, ending with an uppercase character.";
 
     /*
      * Alphanumeric, no white space
