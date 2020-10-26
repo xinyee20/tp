@@ -11,12 +11,12 @@ import team.serenity.model.group.GroupContainsKeywordPredicate;
 /**
  * Finds and lists all students and lessons in the group specifeied. Keyword matching is case insensitive.
  */
-public class ViewGrpCommand extends Command {
+public class ViewAttCommand extends Command {
 
-    public static final String COMMAND_WORD = "viewgrp";
+    public static final String COMMAND_WORD = "viewatt";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
-        + ": Finds all students who are part of the specified group (case-insensitive) "
-        + "and displays them as a list with index numbers.\n"
+        + ": View attendance sheet of all students in the specified group (case-insensitive) "
+        + "and displays them as a table.\n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP\n"
         + "Example: " + COMMAND_WORD + " "
@@ -24,28 +24,28 @@ public class ViewGrpCommand extends Command {
 
     private final GroupContainsKeywordPredicate predicate;
 
-    public ViewGrpCommand(GroupContainsKeywordPredicate predicate) {
+    public ViewAttCommand(GroupContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
     private String getMessage(Model model) {
         return model.getFilteredGroupList().isEmpty()
-                ? MESSAGE_GROUP_EMPTY
-                : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getName());
+            ? MESSAGE_GROUP_EMPTY
+            : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getName());
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
-        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, false);
+        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, true);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ViewGrpCommand // instanceof handles nulls
-                && this.predicate.equals(((ViewGrpCommand) other).predicate)); // state check
+            || (other instanceof ViewAttCommand // instanceof handles nulls
+            && this.predicate.equals(((ViewAttCommand) other).predicate)); // state check
     }
 
 }

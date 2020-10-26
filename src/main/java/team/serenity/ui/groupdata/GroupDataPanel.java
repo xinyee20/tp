@@ -9,7 +9,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -24,6 +27,17 @@ import team.serenity.ui.DataPanel;
 public class GroupDataPanel extends DataPanel {
     private static final String FXML = "GroupDataPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(GroupDataPanel.class);
+
+    @FXML
+    private TabPane tabPane;
+
+    @FXML
+    private Tab attendanceTab;
+
+    @FXML
+    private Tab participationTab;
+
+    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
 
     @FXML
     private ListView<Student> studentListView;
@@ -71,6 +85,19 @@ public class GroupDataPanel extends DataPanel {
 
         this.attendanceTableView.getColumns().setAll(columns);
         this.participationTableView.getColumns().setAll(columns);
+    }
+
+    /**
+     * Switch tabs.
+     */
+    public void changeTab(String tabName) {
+        if (tabName.equals("attendanceTab")) {
+            selectionModel.select(2);
+        } else if (tabName.equals("participationTab")) {
+            selectionModel.select(3);
+        } else {
+            // error
+        }
     }
 
     class LessonListViewCell extends ListCell<Lesson> {

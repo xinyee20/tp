@@ -250,6 +250,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Views attendance sheet of the specified group.
+     */
+    private void handleViewAtt() {
+        ((GroupDataPanel) this.groupDataPanel).changeTab("attendanceTab");
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see Logic#execute(String)
@@ -286,6 +293,10 @@ public class MainWindow extends UiPart<Stage> {
                 // commandText would be in DelGrpCommand format correctly by the time it reaches here
                 String groupName = commandText.split(" ")[1].split("/")[1];
                 handleDelGrp(groupName);
+            }
+
+            if (commandResult.isViewAtt()) {
+                handleViewAtt();
             }
 
             return commandResult;
