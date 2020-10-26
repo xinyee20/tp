@@ -26,7 +26,7 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Add a new tutorial group from XLSX file: `addgrp`](#411-add-a-new-tutorial-group-from-xlsx-file-addgrp)
    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.2. Delete-an-existing-tutorial-group: `delgrp`](#412-delete-an-existing-tutorial-group-delgrp)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.2. Delete an existing tutorial group: `delgrp`](#412-delete-an-existing-tutorial-group-delgrp)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.3. Add a new tutorial lesson: `addlsn`](#413-add-a-new-tutorial-lesson-addlsn)
 
@@ -90,8 +90,7 @@ Welcome to the User Guide of **Serenity**!
 
 Are you a tutor teaching CS2101 in NUS? Do you struggle to keep track of students' attendance and class participation
 on many different excel sheets for different lessons? Do you also tend to forget to address questions students asked
-during lessons? Fret not, our application, **Serenity**, will help keep you sane when doing the necessary administrative
-work.
+during lessons? Fret not, our application, **Serenity**, will help keep you sane when managing tutorial groups.
 
 **Serenity** is a desktop application that helps CS2101 tutors manage their lessons. This application is optimized
 for use through a _Command Line Interface (CLI)_, meaning that you operate the application by typing commands into a
