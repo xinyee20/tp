@@ -103,7 +103,7 @@ public class SetScoreCommand extends Command {
                 this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
-                    if (!currentAttendance.getAttendance()) {
+                    if (!currentAttendance.isPresent()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
                     }
                     if (scoreToSet > 5 || scoreToSet < 0) {
@@ -130,7 +130,7 @@ public class SetScoreCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toSetScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
-            if (!currentAttendance.getAttendance()) {
+            if (!currentAttendance.isPresent()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
             }
             if (scoreToSet > 5 || scoreToSet < 0) {

@@ -16,11 +16,12 @@ public class TitleDisplay extends UiPart<Region> {
 
     public TitleDisplay() {
         super(FXML);
-        setWelcomeTitle();
+        setDefaultTitle();
     }
 
-    public void setWelcomeTitle() {
-        this.titleDisplay.setText("Welcome to Serenity!");
+    public void setDefaultTitle() {
+        String defaultTitle = "Serenity";
+        this.titleDisplay.setText(defaultTitle);
     }
 
     public void setGroupTitle(String groupName) {

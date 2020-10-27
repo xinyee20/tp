@@ -19,6 +19,7 @@ public class StudentInfoCard extends UiPart<Region> {
     public final StudentInfo studentInfo;
 
     private Image presentImg = new Image("images/tick.png");
+    private Image flaggedImg = new Image("images/flag.png");
     private Image absentImg = new Image("images/cross.png");
 
     @FXML
@@ -47,9 +48,12 @@ public class StudentInfoCard extends UiPart<Region> {
         this.id.setText(displayedIndex + ". ");
         this.name.setText(studentInfo.getStudent().getStudentName().toString());
         this.studentNumber.setText(studentInfo.getStudent().getStudentNo().toString());
-        if (studentInfo.getAttendance().getAttendance()) {
+        if (studentInfo.getAttendance().isPresent()) {
             this.attendance.setText("Present");
             this.attendanceImg.setImage(presentImg);
+        } else if (studentInfo.getAttendance().isFlagged()) {
+            this.attendance.setText("Flagged");
+            this.attendanceImg.setImage(flaggedImg);
         } else {
             this.attendance.setText("Absent");
             this.attendanceImg.setImage(absentImg);

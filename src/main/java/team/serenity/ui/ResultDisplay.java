@@ -18,6 +18,14 @@ public class ResultDisplay extends UiPart<Region> {
 
     public ResultDisplay() {
         super(FXML);
+        setDefaultFeedback();
+    }
+
+    public void setDefaultFeedback() {
+        String defaultFeedback = "Welcome!\n"
+            + "You may begin by adding or viewing a tutorial group\n"
+            + "Start teaching grace and serenity";
+        this.resultDisplay.setText(defaultFeedback);
     }
 
     public void setFeedbackToUser(String feedbackToUser) {

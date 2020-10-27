@@ -12,6 +12,7 @@ import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.ui.DataPanel;
 import team.serenity.ui.groupdata.GroupDataPanel;
+import team.serenity.ui.serenitydata.QuestionListViewCell;
 
 public class LessonDataPanel extends DataPanel {
     private static final String FXML = "LessonDataPanel.fxml";
@@ -49,21 +50,6 @@ public class LessonDataPanel extends DataPanel {
                 setText(null);
             } else {
                 setGraphic(new StudentInfoCard(studentInfo, getIndex() + 1).getRoot());
-            }
-        }
-    }
-
-    class QuestionListViewCell extends ListCell<Question> {
-
-        @Override
-        protected void updateItem(Question question, boolean empty) {
-            super.updateItem(question, empty);
-
-            if (empty || question == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new QuestionCard(question, getIndex() + 1).getRoot());
             }
         }
     }

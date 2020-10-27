@@ -21,8 +21,8 @@ public class JsonAdaptedStudentInfo {
      */
     public JsonAdaptedStudentInfo(StudentInfo source) {
         this.student = new JsonAdaptedStudent(source.getStudent());
-        this.isPresent = source.getAttendance().getAttendance();
-        this.isFlagged = source.getAttendance().getFlagged();
+        this.isPresent = source.getAttendance().isPresent();
+        this.isFlagged = source.getAttendance().isFlagged();
         this.participation = source.getParticipation().getScore();
     }
 

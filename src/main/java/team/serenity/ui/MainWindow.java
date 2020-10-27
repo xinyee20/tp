@@ -25,6 +25,7 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
 import team.serenity.ui.groupdata.GroupDataPanel;
 import team.serenity.ui.lessondata.LessonDataPanel;
+import team.serenity.ui.serenitydata.SerenityDataPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -46,6 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private ButtonBar buttonBar;
 
     // Ui parts relating to serenity
+    private DataPanel serenityDataPanel;
     private DataPanel groupDataPanel;
     private DataPanel lessonDataPanel;
 
@@ -131,6 +133,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        toggleSerenityView();
+
         this.titleDisplay = new TitleDisplay();
         this.titleDisplayPlaceholder.getChildren().add(this.titleDisplay.getRoot());
 
@@ -214,6 +218,17 @@ public class MainWindow extends UiPart<Stage> {
         this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
         this.dataDisplayPlaceholder.getChildren().clear();
         this.dataDisplayPlaceholder.getChildren().add(this.groupDataPanel.getRoot());
+    }
+
+    /**
+     * Switch to serenity data view.
+     */
+    @FXML
+    private void toggleSerenityView() {
+        this.serenityDataPanel = new SerenityDataPanel(this.logic.getStudentInfoList(),
+            this.logic.getFilteredQuestionList());
+        this.dataDisplayPlaceholder.getChildren().clear();
+        this.dataDisplayPlaceholder.getChildren().add(this.serenityDataPanel.getRoot());
     }
 
     /**

@@ -93,10 +93,10 @@ public class FlagAttCommand extends Command {
                 Attendance current = studentInfo.getAttendance();
                 this.isCorrectStudent = studentInfo.containsStudent(this.toFlagAtt.get());
                 if (this.isCorrectStudent) {
-                    if (current.getAttendance()) {
+                    if (current.isPresent()) {
                         throw new CommandException(MESSAGE_FAILURE);
                     }
-                    Attendance update = new Attendance(current.getAttendance(), true);
+                    Attendance update = new Attendance(current.isPresent(), true);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
@@ -116,11 +116,11 @@ public class FlagAttCommand extends Command {
 
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             Attendance current = studentInfo.getAttendance();
-            if (current.getAttendance()) {
+            if (current.isPresent()) {
                 throw new CommandException(MESSAGE_FAILURE);
             }
             toFlagAtt = Optional.ofNullable(studentInfo.getStudent());
-            Attendance update = new Attendance(current.getAttendance(), true);
+            Attendance update = new Attendance(current.isPresent(), true);
             StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
             uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
             model.updateLessonList();
