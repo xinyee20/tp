@@ -29,10 +29,10 @@ public class Group {
     private final UniqueList<Lesson> lessons;
 
     /**
-     * Constructs a {@code Group}
+     * Constructs a {@code Group}.
      *
      * @param groupName     A valid name.
-     * @param filePath A valid filePath.
+     * @param filePath      A valid filePath.
      */
     public Group(String groupName, String filePath) {
         requireAllNonNull(groupName, filePath);
@@ -47,27 +47,27 @@ public class Group {
     }
 
     /**
-     * Constructs a {@code Group}
+     * Constructs a {@code Group}.
      *
      * @param groupName     A valid group name.
-     * @param workbook A valid workbook.
+     * @param grpExcelData  A valid group excel data.
      */
-    public Group(GroupName groupName, XlsxUtil workbook) {
-        requireAllNonNull(groupName, workbook);
+    public Group(GroupName groupName, XlsxUtil grpExcelData) {
+        requireAllNonNull(groupName, grpExcelData);
         this.groupName = groupName;
         this.students = new UniqueStudentList();
-        this.students.setElementsWithList(new ArrayList<>(workbook.readStudentsFromXlsx()));
+        this.students.setElementsWithList(new ArrayList<>(grpExcelData.readStudentsFromXlsx()));
         // TODO: implement scores data
-        Set<StudentInfo> studentsInfo = workbook.readStudentsInfoFromXlsx(workbook.readStudentsFromXlsx());
+        Set<StudentInfo> studentsInfo = grpExcelData.readStudentsInfoFromXlsx(grpExcelData.readStudentsFromXlsx());
         this.lessons = new UniqueLessonList();
-        this.lessons.setElementsWithList(new ArrayList<>(workbook.readLessonsFromXlsx(studentsInfo)));
+        this.lessons.setElementsWithList(new ArrayList<>(grpExcelData.readLessonsFromXlsx(studentsInfo)));
     }
 
     /**
      * Constructs a {@code Group}.
      *
      * @param groupName     A valid name.
-     * @param students A list of students.
+     * @param students      A list of students.
      */
     public Group(String groupName, UniqueList<Student> students) {
         requireAllNonNull(groupName, students);
