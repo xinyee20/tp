@@ -57,19 +57,46 @@ class GroupManagerTest {
     }
 
     @Test
-    public void hasGroup_nullGroup_throwsNullPointerException() {
+    public void hasAGroup_noGroupsInGroupManager_returnFalse() {
+        assertFalse(this.groupManager.hasAGroup());
+    }
+
+    @Test
+    public void hasAGroup_groupsInGroupManager_returnsTrue() {
+        this.groupManager.addGroup(GROUP_D);
+        assertTrue(this.groupManager.hasAGroup());
+    }
+
+    @Test
+    public void hasGroupName_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.groupManager.hasGroupName(null));
+    }
+
+    @Test
+    public void hasGroupName_notInGroupManager_returnFalse() {
+        assertFalse(this.groupManager.hasGroupName(GROUP_D.getGroupName()));
+    }
+
+    @Test
+    public void hasGroupName_groupInGroupManager_returnsTrue() {
+        this.groupManager.addGroup(GROUP_D);
+        assertTrue(this.groupManager.hasGroupName(GROUP_D.getGroupName()));
+    }
+
+    @Test
+    public void isValidGroupToAdd_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> this.groupManager.isValidGroupToAdd(null));
     }
 
     @Test
-    public void hasGroup_notInGroupManager_returnFalse() {
-        assertFalse(this.groupManager.isValidGroupToAdd(GROUP_D));
+    public void isValidGroupToAdd_notInGroupManager_returnFalse() {
+        assertTrue(this.groupManager.isValidGroupToAdd(GROUP_D));
     }
 
     @Test
-    public void hasGroup_groupInGroupManager_returnsTrue() {
+    public void isValidGroupToAdd_groupInGroupManager_returnsTrue() {
         this.groupManager.addGroup(GROUP_D);
-        assertTrue(this.groupManager.isValidGroupToAdd(GROUP_D));
+        assertFalse(this.groupManager.isValidGroupToAdd(GROUP_D));
     }
 
     @Test
@@ -85,9 +112,9 @@ class GroupManagerTest {
     @Test
     public void deleteGroup_groupInGroupManager() {
         this.groupManager.addGroup(GROUP_D);
-        assertTrue(this.groupManager.isValidGroupToAdd(GROUP_D));
-        this.groupManager.deleteGroup(GROUP_D);
         assertFalse(this.groupManager.isValidGroupToAdd(GROUP_D));
+        this.groupManager.deleteGroup(GROUP_D);
+        assertTrue(this.groupManager.isValidGroupToAdd(GROUP_D));
     }
 
     @Test

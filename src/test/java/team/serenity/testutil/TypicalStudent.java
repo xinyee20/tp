@@ -13,6 +13,7 @@ import team.serenity.model.util.UniqueList;
 
 public class TypicalStudent {
 
+    public static final Student AARON = new StudentBuilder().withName("Aaron").withId("A0000000U").build();
     public static final Student JOHN = new StudentBuilder().withName("John").withId("A0000001U").build();
     public static final Student JAMES = new StudentBuilder().withName("James").withId("A0000002U").build();
     public static final Student JEFFERY = new StudentBuilder().withName("Jeffery").withId("A0000003U").build();
