@@ -1,6 +1,8 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
+import static team.serenity.logic.commands.CommandTestUtil.VALID_INDEX;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
@@ -8,6 +10,7 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.student.DelStudentCommand;
 import team.serenity.logic.parser.student.DelStudentCommandParser;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
@@ -28,6 +31,7 @@ public class DelStudentCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, missingId, expectedMessage);
         CommandParserTestUtil.assertParseFailure(parser, doubleGroup, expectedMessage);
         CommandParserTestUtil.assertParseFailure(parser, doubleId, expectedMessage);
+        CommandParserTestUtil.assertParseFailure(parser, INVALID_INDEX, expectedMessage);
     }
 
     @Test
@@ -40,5 +44,9 @@ public class DelStudentCommandParserTest {
         DelStudentCommand result = new DelStudentCommand(studentName, studentId,
             new GroupContainsKeywordPredicate(groupName));
         assertParseSuccess(parser, args, result);
+        String indexArgs = " " + VALID_INDEX + " " + PREFIX_GRP + groupName;
+        Index index = Index.fromOneBased(Integer.parseInt(VALID_INDEX));
+        DelStudentCommand indexTest = new DelStudentCommand(index,  new GroupContainsKeywordPredicate(groupName));
+        assertParseSuccess(parser, indexArgs, indexTest);
     }
 }
