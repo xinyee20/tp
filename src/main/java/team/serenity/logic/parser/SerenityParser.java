@@ -17,6 +17,7 @@ import team.serenity.logic.commands.lesson.DelLsnCommand;
 import team.serenity.logic.commands.lesson.ViewLsnCommand;
 import team.serenity.logic.commands.question.AddQnCommand;
 import team.serenity.logic.commands.question.DelQnCommand;
+import team.serenity.logic.commands.question.EditQnCommand;
 import team.serenity.logic.commands.question.FindQnCommand;
 import team.serenity.logic.commands.question.ViewQnCommand;
 import team.serenity.logic.commands.student.AddStudentCommand;
@@ -34,6 +35,7 @@ import team.serenity.logic.parser.lesson.DelLsnCommandParser;
 import team.serenity.logic.parser.lesson.ViewLsnCommandParser;
 import team.serenity.logic.parser.question.AddQnCommandParser;
 import team.serenity.logic.parser.question.DelQnCommandParser;
+import team.serenity.logic.parser.question.EditQnCommandParser;
 import team.serenity.logic.parser.question.FindQnCommandParser;
 import team.serenity.logic.parser.student.AddStudentCommandParser;
 import team.serenity.logic.parser.student.DelStudentCommandParser;
@@ -126,6 +128,9 @@ public class SerenityParser {
 
         case DelQnCommand.COMMAND_WORD:
             return new DelQnCommandParser().parse(arguments);
+
+        case EditQnCommand.COMMAND_WORD:
+            return new EditQnCommandParser().parse(arguments);
 
         case FindQnCommand.COMMAND_WORD:
             return new FindQnCommandParser().parse(arguments);
