@@ -13,6 +13,7 @@ import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.util.UniqueList;
 
@@ -55,7 +56,10 @@ public interface Model {
 
     // ========== Serenity ==========
 
-    // ========== GroupManager ==========
+    /**
+     * Returns serenity.
+     */
+    ReadOnlySerenity getSerenity();
 
     /**
      * Returns the GroupManager.
@@ -66,6 +70,8 @@ public interface Model {
      * Returns the user prefs' serenity file path.
      */
     Path getSerenityFilePath();
+
+    // ========== GroupManager ==========
 
     /**
      * Returns an unmodifiable view of the filtered group list.

@@ -1,8 +1,10 @@
 package team.serenity.model.group.studentinfo;
 
+import static team.serenity.commons.util.AppUtil.checkArgument;
+
 public class Participation {
 
-    public static final String SCORE_ERROR = "Score must be a number";
+    public static final String MESSAGE_CONSTRAINTS = "Score must be a number between 0 to 5 inclusive.";
     private final int score;
 
     public Participation() {
@@ -14,11 +16,12 @@ public class Participation {
      * @param score Score of Student
      */
     public Participation(int score) throws IllegalArgumentException {
-        if (score >= 0 && score <= 5) {
-            this.score = score;
-        } else {
-            throw new IllegalArgumentException("Score must be within the range of 0 to 5");
-        }
+        checkArgument(isValidParticipation(score), MESSAGE_CONSTRAINTS);
+        this.score = score;
+    }
+
+    public static boolean isValidParticipation(int test) {
+        return test >= 0 && test <= 5;
     }
 
     @Override

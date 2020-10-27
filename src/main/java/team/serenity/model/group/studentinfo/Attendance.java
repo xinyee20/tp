@@ -1,9 +1,13 @@
 package team.serenity.model.group.studentinfo;
 
+import static team.serenity.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a {@code Student} attendance in a Lesson.
  */
 public class Attendance {
+
+    public static final String MESSAGE_CONSTRAINTS = "Cannot be present and flagged at the same time.";
 
     private final boolean isPresent;
     private final boolean isFlagged;
@@ -31,8 +35,13 @@ public class Attendance {
      * @param isFlagged True to flag student and false to unflag student
      */
     public Attendance(boolean isPresent, boolean isFlagged) {
+        checkArgument(isValidAttendance(isPresent, isFlagged), MESSAGE_CONSTRAINTS);
         this.isPresent = isPresent;
         this.isFlagged = isFlagged;
+    }
+
+    public static boolean isValidAttendance(boolean isPresent, boolean isFlagged) {
+        return !(isPresent && isFlagged);
     }
 
     @Override

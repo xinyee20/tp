@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.exceptions.DataConversionException;
+import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.commons.util.FileUtil;
 import team.serenity.commons.util.JsonUtil;
 import team.serenity.model.group.Group;
@@ -35,7 +36,7 @@ public class JsonSerenityStorage implements SerenityStorage {
     }
 
     @Override
-    public Optional<ReadOnlySerenity> readSerenity() throws DataConversionException {
+    public Optional<ReadOnlySerenity> readSerenity() throws IllegalValueException, DataConversionException {
         return readSerenity(this.filePath);
     }
 
@@ -45,7 +46,8 @@ public class JsonSerenityStorage implements SerenityStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlySerenity> readSerenity(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlySerenity> readSerenity(Path filePath)
+        throws IllegalValueException, DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableSerenity> jsonSerenity = JsonUtil.readJsonFile(
