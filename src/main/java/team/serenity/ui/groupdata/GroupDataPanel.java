@@ -1,6 +1,5 @@
 package team.serenity.ui.groupdata;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -19,7 +18,6 @@ import team.serenity.commons.core.LogsCenter;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
-import team.serenity.model.util.UniqueList;
 import team.serenity.ui.DataPanel;
 
 public class GroupDataPanel extends DataPanel {
@@ -42,6 +40,12 @@ public class GroupDataPanel extends DataPanel {
 
     @FXML
     private TableView<Integer> participationTableView;
+
+    @FXML
+    private TableColumn<Integer, String> nameColumn;
+
+    @FXML
+    private TableColumn<Integer, String> studentNoColumn;
 
     /**
      * Constructor for panel to display tutorial group data.
@@ -114,6 +118,7 @@ public class GroupDataPanel extends DataPanel {
      */
     public void changeAttendanceTab() {
         selectionModel.select(2);
+        attendanceTableView.refresh();
     }
 
     /**
@@ -121,6 +126,7 @@ public class GroupDataPanel extends DataPanel {
      */
     public void changeParticipationTab() {
         selectionModel.select(3);
+        attendanceTableView.refresh();
     }
 
     class LessonListViewCell extends ListCell<Lesson> {
