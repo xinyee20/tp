@@ -44,7 +44,6 @@ public class UniqueGroupList implements UniqueList<Group> {
 
     /**
      * Converts to stream
-     * @return
      */
     @Override
     public Stream<Group> stream() {

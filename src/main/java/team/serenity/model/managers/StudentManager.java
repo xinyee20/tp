@@ -85,6 +85,14 @@ public class StudentManager implements ReadOnlyStudentManager {
     }
 
     /**
+     * Returns true if the student manager contains an equivalent student as the given argument.
+     */
+    public boolean hasStudent(Student toCheck) {
+        requireNonNull(toCheck);
+        return this.mapToListOfStudents.values().stream().anyMatch(students -> students.contains(toCheck));
+    }
+
+    /**
      * Checks if the specified {@code Student} exists in the {@code Group}.
      * @param group
      * @param student
