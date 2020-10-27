@@ -86,12 +86,12 @@ class EditQnCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        // TODO: WENJIN
+        // TODO: WJ execute_noFieldSpecifiedUnfilteredList_success
     }
 
     @Test
     public void execute_filteredList_success() {
-        // TODO: WENJIN
+        // TODO: WJ execute_filteredList_success
     }
 
     @Test
@@ -132,7 +132,7 @@ class EditQnCommandTest {
      */
     @Test
     public void execute_invalidQuestionIndexFilteredList_failure() {
-        // TODO: WENJIN
+        // TODO: WJ execute_invalidQuestionIndexFilteredList_failure
     }
 
     @Test

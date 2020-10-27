@@ -110,7 +110,7 @@ public class CommandTestUtil {
      * selected person in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
-        // TODO
+        // TODO: assertCommandFailure
         /*
         FOR REFERENCE (AB3)
         // we are unable to defensively copy the model for comparison later, so we can
