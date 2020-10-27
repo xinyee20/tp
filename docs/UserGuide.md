@@ -10,25 +10,25 @@
 ![Serenity Logo](images/logo.png)
 
 
-# <H2 style="color: #477B9F"> 1. Introduction </H2>
+<H2 style="color: #477B9F"> 1. Introduction </H2>
 
-Welcome to the User Guide of **Serenity**!
+<p>Welcome to the User Guide of <b>Serenity</b> </p>
 
-Are you a tutor teaching CS2101 in NUS? Do you struggle to keep track of students' attendance and class participation
+<p>Are you a tutor teaching CS2101 in NUS? Do you struggle to keep track of students' attendance and class participation
 on many different excel sheets for different lessons? Do you also tend to forget to address questions students asked
-during lessons? Fret not, our application, **Serenity**, will help keep you sane when managing tutorial groups.
+during lessons? Fret not, our application, <b>Serenity</b>, will help keep you sane when managing tutorial groups.</p>
 
-**Serenity** is a desktop application that helps CS2101 tutors manage their lessons. This application is optimized
-for use through a _Command Line Interface (CLI)_, meaning that you operate the application by typing commands into a
-command box. This application also has a _Graphical User Interface (GUI)_, where you can interact with the application
-through graphical icons such as buttons.
+<p><b>Serenity</b> is a desktop application that helps CS2101 tutors manage their lessons. This application is optimized
+for use through a <i>Command Line Interface (CLI)</i>, meaning that you operate the application by typing commands into a
+command box. This application also has a <i>Graphical User Interface (GUI)</i>, 
+where you can interact with the application through graphical icons such as buttons.</p>
 
-This user guide serves to provide you with an in-depth documentation on how to set up and use our application.
-With that said, let's get [started](#2-quick-start)!
+<p>This user guide serves to provide you with an in-depth documentation on how to set up and use our application.
+With that said, let's get <a href="quickstart">started</a>!</p>
 
 --------------------------------------------------------------------------------------------------------------------
 
-# <H2 style="color: #477B9F"> 2. Quick start </H2>
+<H2 id="quickstart" style="color: #477B9F"> 2. Quick start </H2>
 
 To get started with using **Serenity**, you can follow these steps:
 
