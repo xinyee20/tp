@@ -31,8 +31,8 @@ public class Group {
     /**
      * Constructs a {@code Group}.
      *
-     * @param groupName     A valid name.
-     * @param filePath      A valid filePath.
+     * @param groupName A valid name.
+     * @param filePath A valid filePath.
      */
     public Group(String groupName, String filePath) {
         requireAllNonNull(groupName, filePath);
@@ -49,8 +49,8 @@ public class Group {
     /**
      * Constructs a {@code Group}.
      *
-     * @param groupName     A valid group name.
-     * @param grpExcelData  A valid group excel data.
+     * @param groupName A valid group name.
+     * @param grpExcelData A valid group excel data.
      */
     public Group(GroupName groupName, XlsxUtil grpExcelData) {
         requireAllNonNull(groupName, grpExcelData);
@@ -66,8 +66,8 @@ public class Group {
     /**
      * Constructs a {@code Group}.
      *
-     * @param groupName     A valid name.
-     * @param students      A list of students.
+     * @param groupName A valid name.
+     * @param students A list of students.
      */
     public Group(String groupName, UniqueList<Student> students) {
         requireAllNonNull(groupName, students);
@@ -80,9 +80,9 @@ public class Group {
     /**
      * Constructs a {@code Group}.
      *
-     * @param groupName     A valid name.
+     * @param groupName A valid name.
      * @param students A list of students.
-     * @param lessons  A list of tutorial lessons.
+     * @param lessons A list of tutorial lessons.
      */
     public Group(String groupName, UniqueList<Student> students, UniqueList<Lesson> lessons) {
         requireAllNonNull(groupName, students, lessons);
@@ -117,7 +117,7 @@ public class Group {
     }
 
     /**
-     * Adds a Student to a Group
+     * Adds a Student to a Group.
      *
      * @param student Student to be added
      */
