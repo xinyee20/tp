@@ -50,7 +50,7 @@ To get started with using **Serenity**, you can follow these steps:
 --------------------------------------------------------------------------------------------------------------------
 ## **3. About**
 
-<H3 style="color: #477B9F"> 3.1. Structure of this document </H3>
+### 3.1. Structure of this document
 
 This User Guide have been structured such that you can easily find what you need.
 
@@ -64,19 +64,19 @@ In [section 4](#4-features), you can find details of the three main features of 
 
 * Question addressing
 
-<H3 style="color: #477B9F"> 3.2. Reading this document </H3>
+### 3.2. Reading this document 
 
 In this subsection, you can find the explanation of the technical terms, symbols and syntax that are used in this
 User Guide.
 
-<H4 style="color: #477B9F"> 3.2.1. Terminology related to the <i>GUI</i> </H4>
+#### 3.2.1. Terminology related to the _GUI_
 
 The following figure shows the _GUI_ of **Serenity**.
 It is annotated with the name of the _GUI_ components.
 
 ![Ui](images/Ui_annotated.png)
 
-<H4 style="color: #477B9F"> 3.2.2. General symbols and syntax </H4>
+#### 3.2.2. General symbols and syntax
 
 The table below explains the general symbols and syntax used throughout the document.
 
@@ -88,7 +88,7 @@ _GUI_ | This indicates a graphical component, such as a button, layout format an
 💡 | This indicates a tip.
 ⚠ | This indicates a warning.
 
-<H4 style="color: #477B9F"> 3.2.3. Command syntax and usage </H4>
+#### 3.2.3. Command syntax and usage
 
 The table below explains some important technical terms.
 
@@ -100,7 +100,7 @@ Parameter | The word or phrase following the command word that provides further 
 Prefix | The letter that is placed at the start of each parameter to distinguish one parameter from another.
 XLSX | File format for all excel files.
 
-<H4 style="color: #477B9F"> 3.2.4. Command format </H4>
+#### 3.2.4. Command format
 
 You can use commands to tell **Serenity** to perform a specific task.
 
@@ -141,12 +141,12 @@ Below is an overview of the features availablie in **Serenity** :
 3. [Participation marking](#43-participation-marking) feature provides you the tools to grade student participation. 
 4. [Question addressing](#44-question-addressing) feature provides you the tools to keep track of questions asked by students.
 
-<H3 style="color: #477B9F"> 4.1. Setting Up </H3>
+### 4.1. Setting Up
 
 It is the start of the semester! Brand new classes, brand new students and a whole new experience.
 Follow the instructions below to set up your new classes, and watch **Serenity** do the magic for you.
 
-<H4 style="color: #477B9F"> 4.1.1. Add a new tutorial group from XLSX file: <code>addgrp</code> </H4>
+#### 4.1.1. Add a new tutorial group from XLSX file: `addgrp`
 
 You can use this command to add a new tutorial group automatically from XLSX data.
 
@@ -179,7 +179,7 @@ Outcome:
 2. **Serenity** will switch to tutorial group `G04` page.
 3. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.1.2. Delete an existing tutorial group: <code>delgrp</code> </H4>
+####  4.1.2. Delete an existing tutorial group: `delgrp`
 
 You can use this command to delete an existing tutorial group.
 
@@ -202,7 +202,7 @@ Outcome:
 2. **Serenity** will exit tutorial group `G04` page.
 3. You can now see that tutorial group `G04` no longer exists.
 
-<H4 style="color: #477B9F"> 4.1.3. Add a new tutorial lesson: <code>addlsn</code></H4>
+#### 4.1.3. Add a new tutorial lesson: `addlsn`
 
 You can use this command to add a new tutorial lesson for a specified tutorial group.
 
@@ -225,7 +225,7 @@ Outcome:
 2. **Serenity** will display tutorial lesson `1-2` page.
 3. You can now see that tutorial lesson `1-2` has been added to tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.1.4. Delete an existing tutorial lesson: <code>dellsn</code></H4>
+#### 4.1.4. Delete an existing tutorial lesson: `dellsn`
 
 You can use this command to delete an existing lesson from a specified tutorial group.
 
@@ -248,7 +248,7 @@ Outcome:
 2. **Serenity** will exit tutorial lesson `1-3` page and enter tutorial group `G04` page.
 3. You can now see that tutorial lesson `1-3` no longer exists.
 
-<H4 style="color: #477B9F"> 4.1.5. Add a new student: <code>addstudent</code></H4>
+#### 4.1.5. Add a new student: `addstudent`
 
 You can use this command to add a new student to a tutorial group.
 
@@ -271,7 +271,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. `Aaron Tan` will be added to the list of students in tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.1.6. Delete an existing student: <code>delstudent</code></H4>
+#### 4.1.6. Delete an existing student: `delstudent`
 
 You can use this command to delete an existing student from a tutorial group.
 
@@ -302,12 +302,12 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. `Aaron Tan` will no longer be in the list of students in tutorial group `G04`.
 
-<H3 style="color: #477B9F"> 4.2. Attendance taking </H3>
+### 4.2. Attendance taking
 
 Need to mark attendance of your students at the start of each lesson quickly?
 This feature allows you to mark attendance of students easily.
 
-<H4 style="color: #477B9F"> 4.2.1. Mark all students as present: <code>markpresent all</code></H4>
+#### 4.2.1. Mark all students as present: `markpresent all`
 
 You can use this command to mark all students in a tutorial group as present for a tutorial lesson.
 
@@ -337,7 +337,7 @@ Outcome:
 
 ![Figure 4.2.1. Outcome of a successful mark all students present command](images/ui/markpresent_all.png)
 
-<H4 style="color: #477B9F"> 4.2.2. Mark a student as present: <code>markpresent</code></H4>
+#### 4.2.2. Mark a student as present: `markpresent`
 
 You can use this command to mark a specific student as present for a tutorial lesson.
 
@@ -373,7 +373,7 @@ Outcome:
 
 ![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
 
-<H4 style="color: #477B9F"> 4.2.2. Mark a student as absent: <code>markabsent</code></H4>
+#### 4.2.2. Mark a student as absent: `markabsent`
 
 You can use this command to mark a specific student as absent for a tutorial lesson.
 
@@ -407,7 +407,7 @@ Outcome:
 
 ![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png) 
 
-<H4 style="color: #477B9F">  4.2.3. Mark all students as absent: <code>markabsent all</code></H4>
+#### 4.2.3. Mark all students as absent: `markabsent all`
 
 Accidentally marked all the students as present and want to make them back absent? You can use this command to mark 
 all students in a tutorial group back as absent for a tutorial lesson.
@@ -430,7 +430,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-<H4 style="color: #477B9F"> 4.2.4. Flag attendance of a student: <code>flagatt</code></H4>
+#### 4.2.4. Flag attendance of a student: `flagatt`
 
 You can use this command to flag attendance of a specific student so you can remember to check the student's
 attendance at the end of class.
@@ -464,7 +464,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. His attendance will now be flagged for future follow-up actions.
 
-<H4 style="color: #477B9F"> 4.2.4. Unflag attendance of a student: <code>unflagatt</code></H4>
+#### 4.2.4. Unflag attendance of a student: `unflagatt`
 
 You can use this command to unflag attendance of a specific student that was flagged after you have checked whether the 
 student attended a replacement class.
@@ -499,7 +499,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. His attendance will now be unflagged.
 
-<H4 style="color: #477B9F"> 4.2.5. Export attendance as XLSX file: <code>exportatt</code></H4>
+#### 4.2.5. Export attendance as XLSX file: `exportatt`
 
 You can use this command to export the attendance sheet of a specific tutorial group as a XLSX file.
 
@@ -528,12 +528,12 @@ Outcome:
 2. The attendance sheet of tutorial group `G04` will be saved as `G04_attendance.xlsx`.
 You can find the XLSX file at the location where your **Serenity** application is located.
 
-<H3 style="color: #477B9F"> 4.3. Participation marking </H3>
+### 4.3. Participation marking
 
 Need to keep track of all your students' participation during lessons quickly? This feature allows you to key in a 
 student's participation score easily with a scale for reference.
 
-<H4 style="color: #477B9F"> 4.3.1. Award participation score for a student: <code>setscore</code></H4>
+#### 4.3.1. Award participation score for a student: `setscore`
 
 You can use this command to add the participation score for a specific student in a tutorial lesson.
 
@@ -573,7 +573,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-<H4 style="color: #477B9F"> 4.3.2. Add participation score of a student: <code>addscore</code></H4>
+#### 4.3.2. Add participation score of a student: `addscore`
 
 You can use this command to increase the participation score of a specific student for a tutorial lesson.
 
@@ -611,7 +611,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-<H4 style="color: #477B9F"> 4.3.2. Subtract participation score of a student: <code>subscore</code></H4>
+#### 4.3.2. Subtract participation score of a student: `subscore`
 
 You can use this command to decrease the participation score of a specific student for a tutorial lesson.
 
@@ -650,7 +650,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-<H4 style="color: #477B9F"> 4.3.3. Export participation scores as XLSX file: <code>exportscore</code>`</H4>
+#### 4.3.3. Export participation scores as XLSX file: `exportscore`
 
 You can use this command to export the participation score sheet of a specific tutorial group as a XLSX file.
 
@@ -678,12 +678,12 @@ Outcome:
 2. The participation score sheet of tutorial group `G04` will be saved as `G04_participation.xlsx`.
 You can find the XLSX file at the location where your **Serenity** application is located.
 
-<H3 style="color: #477B9F"> 4.4. Question addressing </H3>
+### 4.4. Question addressing
 
 Need to keep track of all your students' questions during lessons quickly? This feature allows you to key in questions
 easily for future reference.
 
-<H4 style="color: #477B9F"> 4.4.1. Add a new question: <code>addqn</code></H4>
+#### 4.4.1. Add a new question: `addqn`
 
 You can use this command to add a question that was asked in a tutorial lesson, so that you can address the question
 in the future.
@@ -708,7 +708,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The question will be added to the list of questions.
 
-<H4 style="color: #477B9F"> 4.4.2. Delete an existing question: <code>delqn</code> </H4>
+#### 4.4.2. Delete an existing question: `delqn`
 
 You can use this command to delete a question after addressing it.
 
@@ -731,11 +731,11 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The question will be deleted from the list of questions.
 
-<H3 style="color: #477B9F"> 4.5 Utility viewing</H3>
+### 4.5 Utility viewing
 
 The following commands allow you to navigate between different views.
 
-<H4 style="color: #477B9F"> 4.5.1. View a tutorial group: <code>viewgrp</code> </H4>
+#### 4.5.1. View a tutorial group: `viewgrp`
 
 You can use this command to view the list of students and tutorial lessons of a tutorial group.
 You will also be able to execute tutorial group-related commands.
@@ -758,7 +758,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the information for tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.5.2. View a tutorial lesson: <code>viewlsn</code></H4>
+#### 4.5.2. View a tutorial lesson: `viewlsn`
 
 You can use this command to view and modify the attendance and participation scores of 
 a tutorial lesson. You will also be able to execute tutorial lesson-related commands.
@@ -781,7 +781,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the students' information for tutorial lesson `1-2` of tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.5.3. View attendance sheet of a tutorial group: <code>viewatt</code></H4>
+#### 4.5.3. View attendance sheet of a tutorial group: `viewatt`
 
 You can use this command to view the attendance sheet of the students in a tutorial group across all tutorial lessons.
 The attendance sheet will be displayed in table form.
@@ -809,7 +809,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the attendance sheet of tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.5.4. View participation score sheet of a tutorial group: <code>viewscore</code></H4>
+#### 4.5.4. View participation score sheet of a tutorial group: `viewscore`
 
 You can use this command to view the participation score sheet of the students in a tutorial group
 across all tutorial lessons. The participation score sheet will be displayed in table form.
@@ -838,7 +838,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the participation score sheet of tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.5.5. View all pending questions: <code>viewqn</code></H4>
+#### 4.5.5. View all pending questions: `viewqn`
 
 You can use this command to view all questions that have yet to be addressed.
 
@@ -878,7 +878,7 @@ your **Serenity** application on your other computer. **Serenity** will automati
 
 ## **6. Command summary**
 
-<H3 style="color: #477B9F"> 6.1. Setup commands </H3>
+### 6.1. Setup commands 
 
 Command | Example
 ------------ | -------------
@@ -889,7 +889,7 @@ Command | Example
 **Add student** <br> `addstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER` | <br>`addstudent grp/G04 name/AARON TAN matric/A0123456U`
 **Delete student** <br> - `delstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER`<br> - `delstudent INDEX grp/GROUP` | <br> - `delstudent grp/G04 name/AARON TAN matric/A0123456U` <br> - `delstudent 1 grp/G04`
 
-<H3 style="color: #477B9F"> 6.2. Attendance taking commands </H3>
+### 6.2. Attendance taking commands
 
 Command | Example
 ------------ | -------------
@@ -901,7 +901,7 @@ Command | Example
 **Unflag attendance** <br> - `unflagatt name/NAME matric/STUDENT_NUMBER` <br> - `unflagatt INDEX` | <br> - `unflagatt name/AARON TAN matric/A0123456U`<br> - `unflagatt 1` 
 **Export attendance** <br> `exportatt grp/GROUP_NAME` | `exportatt grp/G04`
 
-<H3 style="color: #477B9F"> 6.3. Participation marking commands </H3>
+### 6.3. Participation marking commands
 
 Command | Example
 ------------ | -------------
@@ -911,14 +911,14 @@ Command | Example
 **Export participation scores** <br> `exportscore grp/GROUP_NAME` | <br>`exportscore grp/G07`
 
 
-<H3 style="color: #477B9F"> 6.4. Question addressing commands </H3>
+### 6.4. Question addressing commands 
 
 Command | Example
 ------------ | -------------
 **Add question** <br> `addqn qn/QUESTION` | `addqn qn/What is the deadline for the report?`
 **Delete question** <br> `delqn INDEX` | `delqn 5`
 
-<H3 style="color: #477B9F"> 6.5. Utility viewing commands </H3>
+### 6.5. Utility viewing commands 
 
 Command | Example
 ------------ | -------------
