@@ -108,7 +108,7 @@ You can use commands to tell **Serenity** to perform a specific task.
 
 `COMMAND_WORD prefix/PARAMETER`
 
-> ℹ **Notes regarding the command format:**
+> :memo: **Notes regarding the command format:**
 >* Words in upper case are the parameters to be supplied by you.<br>e.g. in `viewgrp grp/GROUP_NAME`, `GROUP_NAME` is a parameter which can be used as `viewgrp grp/G04`
 >* Parameters have to be in the specified order.<br>e.g. if the command specifies `grp/GROUP_NAME lsn/LESSON_NAME`, `lsn/LESSON_NAME grp/GROUP_NAME` is not acceptable.
 
@@ -150,7 +150,7 @@ Follow the instructions below to set up your new classes, and watch **Serenity**
 
 You can use this command to add a new tutorial group automatically from XLSX data.
 
-> ℹ **Notes regarding the `addgrp` command:**
+> :memo: **Notes regarding the `addgrp` command:**
 > * The XLSX file should store a list of students.
 > * The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS.
 > * To obtain PATH_TO_XLSX, either:<br>
@@ -577,7 +577,7 @@ Outcome:
 
 You can use this command to increase the participation score of a specific student for a tutorial lesson.
 
-> ⚠ **Warning regarding the `addscore` command:**
+> :warning: **Warning regarding the `addscore` command:**
 > You cannot increase the participation score of a student such that the final score is more than 5.
 > The maximum score is 5
 
@@ -615,7 +615,7 @@ Outcome:
 
 You can use this command to decrease the participation score of a specific student for a tutorial lesson.
 
-> ⚠ **Warning regarding the `subscore` command:**
+> :warning: **Warning regarding the `subscore` command:**
 > You cannot decrease the participation score of a student such that the final score is less than 0.
 > The maximum score you can subtract is 5.
 
@@ -654,7 +654,7 @@ Outcome:
 
 You can use this command to export the participation score sheet of a specific tutorial group as a XLSX file.
 
-> ℹ **Note regarding the `exportscore` command:**
+> :memo: **Note regarding the `exportscore` command:**
 > The participation score sheet will be saved as a XLSX file named after the tutorial group.
 > The file will be saved at the same folder as your **Serenity** application.
 
@@ -786,7 +786,7 @@ Outcome:
 You can use this command to view the attendance sheet of the students in a tutorial group across all tutorial lessons.
 The attendance sheet will be displayed in table form.
 
-> ℹ **Note regarding the `viewatt` command:**
+> :memo: **Note regarding the `viewatt` command:**
 > You can view the attendance of all your students in the tutorial group at one glance.
 > You can also preview the XLSX file that you can generate with the `exportatt` command,
 > before generating the actual XLSX file.
