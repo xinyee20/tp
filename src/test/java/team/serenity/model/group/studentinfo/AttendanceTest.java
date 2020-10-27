@@ -3,6 +3,7 @@ package team.serenity.model.group.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.serenity.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,11 @@ public class AttendanceTest {
     public void constructor_markPresent_success() {
         Attendance test = new Attendance(true);
         assertTrue(test.getAttendance());
+    }
+
+    @Test
+    public void constructor_presentAndFlagged_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Attendance(true, true));
     }
 
     @Test
