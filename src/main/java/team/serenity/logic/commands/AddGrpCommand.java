@@ -46,7 +46,7 @@ public class AddGrpCommand extends Command {
         model.addGroup(this.toAdd);
         model.updateFilteredGroupList(new GroupContainsKeywordPredicate(this.toAdd.getGroupName().toString()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd),
-            false, false, false, true, true, false);
+            false, false, false, true, true, false, false, false);
     }
 
     @Override

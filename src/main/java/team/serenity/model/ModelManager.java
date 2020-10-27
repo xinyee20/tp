@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -288,9 +289,11 @@ public class ModelManager implements Model {
         updateFilteredGroupList(predicate);
         if (!this.filteredGroups.isEmpty() && !this.students.contains(student)) {
             this.students.add(student);
+            this.students.sort(Comparator.comparing(x -> x.getStudentName().toString()));
             Group currentGroup = this.filteredGroups.get(0);
             currentGroup.addStudentToGroup(student);
         }
+        updateStudentsInfoList();
     }
 
     @Override

@@ -42,10 +42,20 @@ public class CommandResult {
     private final boolean isDelGrp;
 
     /**
+     * The application should select attendanceTab in group data screen.
+     */
+    private final boolean isViewAtt;
+
+    /**
+     * The application should select participationTab in group data screen.
+     */
+    private final boolean isViewScore;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewLsn, boolean viewGrp,
-        boolean addGrp, boolean delGrp) {
+        boolean addGrp, boolean delGrp, boolean viewAtt, boolean viewScore) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -53,6 +63,8 @@ public class CommandResult {
         this.isViewGrp = viewGrp;
         this.isAddGrp = addGrp;
         this.isDelGrp = delGrp;
+        this.isViewAtt = viewAtt;
+        this.isViewScore = viewScore;
     }
 
     /**
@@ -60,7 +72,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -91,6 +103,14 @@ public class CommandResult {
         return isDelGrp;
     }
 
+    public boolean isViewAtt() {
+        return this.isViewAtt;
+    }
+
+    public boolean isViewScore() {
+        return isViewScore;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -109,7 +129,9 @@ public class CommandResult {
             && this.isViewGrp == otherCommandResult.isViewGrp
             && this.isViewLsn == otherCommandResult.isViewLsn
             && this.isAddGrp == otherCommandResult.isAddGrp
-            && this.isDelGrp == otherCommandResult.isDelGrp;
+            && this.isDelGrp == otherCommandResult.isDelGrp
+            && this.isViewAtt == otherCommandResult.isViewAtt
+            && this.isViewScore == otherCommandResult.isViewScore;
     }
 
     @Override

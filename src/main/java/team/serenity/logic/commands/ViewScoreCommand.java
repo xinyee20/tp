@@ -9,43 +9,44 @@ import team.serenity.model.Model;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
- * Finds and lists all students and lessons in the group specifeied. Keyword matching is case insensitive.
+ * Display the participation score data of all students across all lessons in the group specified.
+ * Keyword matching is case insensitive.
  */
-public class ViewGrpCommand extends Command {
+public class ViewScoreCommand extends Command {
 
-    public static final String COMMAND_WORD = "viewgrp";
+    public static final String COMMAND_WORD = "viewscore";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
-        + ": Finds all students who are part of the specified group (case-insensitive) "
-        + "and displays them as a list with index numbers.\n"
+        + ": View participation score sheet of all students in the specified group (case-insensitive) "
+        + "and displays them as a table.\n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + "G04\n";
+        + PREFIX_GRP + " G04\n";
 
     private final GroupContainsKeywordPredicate predicate;
 
-    public ViewGrpCommand(GroupContainsKeywordPredicate predicate) {
+    public ViewScoreCommand(GroupContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
     private String getMessage(Model model) {
         return model.getFilteredGroupList().isEmpty()
-                ? MESSAGE_GROUP_EMPTY
-                : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
+            ? MESSAGE_GROUP_EMPTY
+            : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
-        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, false, false);
+        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, false, true);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ViewGrpCommand // instanceof handles nulls
-                && this.predicate.equals(((ViewGrpCommand) other).predicate)); // state check
+            || (other instanceof ViewScoreCommand // instanceof handles nulls
+            && this.predicate.equals(((ViewScoreCommand) other).predicate)); // state check
     }
 
 }
