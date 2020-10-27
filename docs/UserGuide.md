@@ -9,7 +9,8 @@
 --------------------------------------------------------------------------------------------------------------------
 ![Serenity Logo](images/logo.png)
 
-# Introduction
+
+# <H2 style="color: #477B9F"> 1. Introduction </H2>
 
 Welcome to the User Guide of **Serenity**!
 
@@ -23,17 +24,17 @@ command box. This application also has a _Graphical User Interface (GUI)_, where
 through graphical icons such as buttons.
 
 This user guide serves to provide you with an in-depth documentation on how to set up and use our application.
-With that said, let's get [started](#quick-start)!
+With that said, let's get [started](#2-quick-start)!
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick start
+# <H2 style="color: #477B9F"> 2. Quick start </H2>
 
 To get started with using **Serenity**, you can follow these steps:
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `Serenity.jar` from [here](https://github.com/AY2021S1-CS2103T-W12-4/tp/releases).
+2. Download the latest `Serenity.jar` from [here]().
 
 3. Copy the file to the folder you want to use as the home folder for your **Serenity** application.
 
@@ -47,7 +48,7 @@ To get started with using **Serenity**, you can follow these steps:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 3. About 
+<H2 style="color: #477B9F"> 3. About </H2>
 
 <H3 style="color: #477B9F"> 3.1. Structure of this document </H3>
 
@@ -129,7 +130,7 @@ Analysis:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 4. Features 
+<H2 style="color: #477B9F"> 4. Features </H2>
 
 This section contains all the information you need to know about the features of **Serenity**.
 To use each feature or sub-feature, you will need to enter the command into the _Command Box_.
@@ -861,7 +862,7 @@ Outcome:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 5. FAQ
+<H2 style="color: #477B9F"> 5. FAQ</H2>
 
 **Q:** How many tutorial groups can I manage in **Serenity**?
 
@@ -875,7 +876,7 @@ your **Serenity** application on your other computer. **Serenity** will automati
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 6. Command summary
+<H2 style="color: #477B9F"> 6. Command summary </H2>
 
 <H3 style="color: #477B9F"> 6.1. Setup commands </H3>
 
