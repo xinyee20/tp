@@ -6,9 +6,11 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 
 import java.util.stream.Stream;
 
+import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.commands.AddGrpCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 
 /**
  * Parses input arguments and creates a new AddGrpCommand object.
@@ -28,11 +30,11 @@ public class AddGrpCommandParser implements Parser<AddGrpCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGrpCommand.MESSAGE_USAGE));
         }
 
-        String grpName = argMultimap.getValue(PREFIX_GRP).get();
-        String filePath = argMultimap.getValue(PREFIX_PATH).get();
+        GroupName groupName = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
+        XlsxUtil grpExcelData = SerenityParserUtil.parseFilePath(argMultimap.getValue(PREFIX_PATH).get());
 
         try {
-            Group group = new Group(grpName, filePath);
+            Group group = new Group(groupName, grpExcelData);
             return new AddGrpCommand(group);
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());

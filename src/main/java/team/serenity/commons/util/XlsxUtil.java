@@ -39,11 +39,21 @@ public class XlsxUtil {
      */
     public XlsxUtil(String filePath) {
         try {
-            workbook = new XSSFWorkbook(filePath);
-            sheet = workbook.getSheetAt(0);
+            this.workbook = new XSSFWorkbook(filePath);
+            this.sheet = this.workbook.getSheetAt(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Creates a XlsxUtil object that manages XLSX files.
+     *
+     * @param workbook The workbook of the XLSX file.
+     */
+    public XlsxUtil(XSSFWorkbook workbook) {
+        this.workbook = workbook;
+        this.sheet = this.workbook.getSheetAt(0);
     }
 
     /**
@@ -54,7 +64,7 @@ public class XlsxUtil {
      */
     public Set<Student> readStudentsFromXlsx() {
         Set<Student> students = new HashSet<>();
-        Iterator<Row> rowIterator = sheet.iterator();
+        Iterator<Row> rowIterator = this.sheet.iterator();
         skipRowsToHeaderRow(rowIterator);
         readDetailsOfStudents(rowIterator, students);
         List<Student> studentList = new ArrayList<>(students);
@@ -68,9 +78,9 @@ public class XlsxUtil {
         while (rowIterator.hasNext()) {
             row = rowIterator.next();
 
-            if (formatter.formatCellValue(row.getCell(0)).equals("Photo")
-                && formatter.formatCellValue(row.getCell(1)).equals("Name")
-                && formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
+            if (this.formatter.formatCellValue(row.getCell(0)).equals("Photo")
+                && this.formatter.formatCellValue(row.getCell(1)).equals("Name")
+                && this.formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
                 break;
             }
         }
@@ -87,10 +97,10 @@ public class XlsxUtil {
             // Photo
 
             Cell nameCell = cellIterator.next();
-            String name = formatter.formatCellValue(nameCell);
+            String name = this.formatter.formatCellValue(nameCell);
 
             Cell studentIdCell = cellIterator.next();
-            String studentId = formatter.formatCellValue(studentIdCell);
+            String studentId = this.formatter.formatCellValue(studentIdCell);
 
             Student student = new Student(name, studentId);
             students.add(student);
@@ -104,7 +114,7 @@ public class XlsxUtil {
      */
     public Set<Lesson> readLessonsFromXlsx(Set<StudentInfo> studentsInfo) {
         Set<Lesson> lessons = new HashSet<>();
-        Iterator<Row> rowIterator = sheet.iterator();
+        Iterator<Row> rowIterator = this.sheet.iterator();
         Row headerRow = skipRowsToHeaderRow(rowIterator);
         readDetailsOfLessons(headerRow, lessons, studentsInfo);
         List<Lesson> lessonList = new ArrayList<>(lessons);
@@ -118,8 +128,8 @@ public class XlsxUtil {
         while (cellIterator.hasNext()) {
             Cell cell = cellIterator.next();
 
-            if (formatter.formatCellValue(cell).startsWith("T")) {
-                String lessonName = formatter.formatCellValue(cell);
+            if (this.formatter.formatCellValue(cell).startsWith("T")) {
+                String lessonName = this.formatter.formatCellValue(cell);
                 String formattedLessonName = formatLessonName(lessonName);
                 UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
                 newStudentsInfo.setElementsWithList(new ArrayList<>(studentsInfo));

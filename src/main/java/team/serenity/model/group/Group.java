@@ -47,6 +47,23 @@ public class Group {
     }
 
     /**
+     * Constructs a {@code Group}
+     *
+     * @param groupName     A valid group name.
+     * @param workbook A valid workbook.
+     */
+    public Group(GroupName groupName, XlsxUtil workbook) {
+        requireAllNonNull(groupName, workbook);
+        this.groupName = groupName;
+        this.students = new UniqueStudentList();
+        this.students.setElementsWithList(new ArrayList<>(workbook.readStudentsFromXlsx()));
+        // TODO: implement scores data
+        Set<StudentInfo> studentsInfo = workbook.readStudentsInfoFromXlsx(workbook.readStudentsFromXlsx());
+        this.lessons = new UniqueLessonList();
+        this.lessons.setElementsWithList(new ArrayList<>(workbook.readLessonsFromXlsx(studentsInfo)));
+    }
+
+    /**
      * Constructs a {@code Group}.
      *
      * @param groupName     A valid name.
