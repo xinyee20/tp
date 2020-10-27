@@ -58,18 +58,18 @@ class GroupManagerTest {
 
     @Test
     public void hasGroup_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> this.groupManager.hasGroup(null));
+        assertThrows(NullPointerException.class, () -> this.groupManager.isValidGroupToAdd(null));
     }
 
     @Test
     public void hasGroup_notInGroupManager_returnFalse() {
-        assertFalse(this.groupManager.hasGroup(GROUP_D));
+        assertFalse(this.groupManager.isValidGroupToAdd(GROUP_D));
     }
 
     @Test
     public void hasGroup_groupInGroupManager_returnsTrue() {
         this.groupManager.addGroup(GROUP_D);
-        assertTrue(this.groupManager.hasGroup(GROUP_D));
+        assertTrue(this.groupManager.isValidGroupToAdd(GROUP_D));
     }
 
     @Test
@@ -85,9 +85,9 @@ class GroupManagerTest {
     @Test
     public void deleteGroup_groupInGroupManager() {
         this.groupManager.addGroup(GROUP_D);
-        assertTrue(this.groupManager.hasGroup(GROUP_D));
+        assertTrue(this.groupManager.isValidGroupToAdd(GROUP_D));
         this.groupManager.deleteGroup(GROUP_D);
-        assertFalse(this.groupManager.hasGroup(GROUP_D));
+        assertFalse(this.groupManager.isValidGroupToAdd(GROUP_D));
     }
 
     @Test

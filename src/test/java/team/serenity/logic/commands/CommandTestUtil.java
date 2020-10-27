@@ -34,8 +34,10 @@ public class CommandTestUtil {
     public static final String VALID_LSN_B = "3-1";
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
     public static final String VALID_QN_DESC_B = "When is the consultation held?";
-    public static final String VALID_STUDENT_NAME = "Ryan Lim";
-    public static final String VALID_STUDENT_NUMBER_A = "A0123456U";
+    public static final String VALID_STUDENT_NAME_A = "Aaron Tan";
+    public static final String VALID_STUDENT_NAME_B = "Betty Ling";
+    public static final String VALID_STUDENT_NUMBER_A = "A0000000U";
+    public static final String VALID_STUDENT_NUMBER_B = "A0000001U";
     public static final String VALID_INDEX = "1";
     public static final String VALID_SCORE = "1";
     public static final String VALID_ADD = "1";
@@ -48,7 +50,7 @@ public class CommandTestUtil {
     public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;
     public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_DESC_B;
     public static final String STUDENT_DESC =
-            " " + PREFIX_NAME + VALID_STUDENT_NAME + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
+            " " + PREFIX_NAME + VALID_STUDENT_NAME_A + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
     public static final String SET_SCORE_DESC = " " + PREFIX_SET_SCORE + VALID_SCORE;
     public static final String ADD_SCORE_DESC = " " + PREFIX_ADD_SCORE + VALID_ADD;
     public static final String SUB_SCORE_DESC = " " + PREFIX_SUBTRACT_SCORE + VALID_SUB;
@@ -59,7 +61,7 @@ public class CommandTestUtil {
     public static final String INVALID_PATH = " " + PREFIX_PATH + "this is an invalid path";
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
     public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
-    public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME;
+    public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME_A;
     public static final String INVALID_INDEX = "A";
     public static final String INVALID_SET_SCORE = " " + PREFIX_SET_SCORE + "A";
     public static final String INVALID_ADD_SCORE = " " + PREFIX_ADD_SCORE + "A";

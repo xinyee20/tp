@@ -24,18 +24,18 @@ import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.managers.Serenity;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Serenity} with sample data.
  */
 public class SampleDataUtil {
 
     public static Group[] getSampleGroups() {
-        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("Aaron Tan", "A0123456U"),
-            new Student("Bu Wen Jin", "A0123456M"));
+        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("Aaron Tan", "A0000000A"),
+            new Student("Bu Wen Jin", "A0000001M"));
         UniqueList<StudentInfo> studentsInfoList = new UniqueStudentInfoList();
         studentsInfoList.setElementsWithList(new ArrayList<>(studentsInfo));
 
-        Set<Student> students = getStudentSet(new Student("Aaron Tan", "A0123456U"),
-            new Student("Bu Wen Jin", "A0123456M"));
+        Set<Student> students = getStudentSet(new Student("Aaron Tan", "A0000000U"),
+            new Student("Bu Wen Jin", "A0000001M"));
         UniqueList<Student> studentsList = new UniqueStudentList();
         studentsList.setElementsWithList(new ArrayList<>(students));
 

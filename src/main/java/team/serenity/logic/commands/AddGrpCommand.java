@@ -8,6 +8,7 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.student.Student;
 
 public class AddGrpCommand extends Command {
 
@@ -22,8 +23,10 @@ public class AddGrpCommand extends Command {
         + PREFIX_PATH + "CS2101_G04.xlsx\n";
 
     public static final String MESSAGE_SUCCESS = "New tutorial group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP =
-        "This tutorial group already exists, or a student in this group is already in another group.";
+    public static final String MESSAGE_DUPLICATE_STUDENT_FORMAT =
+            "A student already exists in another group.\nStudent Name:\t\t%s\nStudent Number:\t%s";
+    public static final String MESSAGE_DUPLICATE_GROUP_NAME_FORMAT =
+            "This tutorial group name \"%s\" already exists. Please try again with another group name.";
 
     private final Group toAdd;
 
@@ -39,8 +42,18 @@ public class AddGrpCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasGroup(this.toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        // Check if group name exist in the group manager
+        if (model.hasGroupName(this.toAdd.getGroupName())) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_GROUP_NAME_FORMAT,
+                    this.toAdd.getGroupName().groupName));
+        }
+
+        // Check if students in the new group already exist in student manager
+        for (Student student : this.toAdd.getStudents()) {
+            if (model.hasStudent(student)) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT_FORMAT,
+                        student.getStudentName(), student.getStudentNo()));
+            }
         }
 
         model.addGroup(this.toAdd);

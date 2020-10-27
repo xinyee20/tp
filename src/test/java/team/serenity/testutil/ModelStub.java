@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
@@ -23,12 +24,7 @@ import team.serenity.model.util.UniqueList;
 public class ModelStub implements Model {
 
     @Override
-    public boolean hasGroup() {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public boolean hasGroup(Group group) {
+    public boolean hasAGroup() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -77,7 +73,10 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
-
+    @Override
+    public boolean hasGroupName(GroupName toCheck) {
+        throw new AssertionError("This method should not be called.");
+    }
 
     @Override
     public void deleteGroup(Group target) {
@@ -126,6 +125,11 @@ public class ModelStub implements Model {
 
     @Override
     public UniqueList<Student> getListOfStudentsFromGroup(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasStudent(Student toCheck) {
         throw new AssertionError("This method should not be called.");
     }
 

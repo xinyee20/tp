@@ -50,7 +50,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(this.model);
 
         //Write to storage, if group exists
-        boolean dataExists = this.model.hasGroup();
+        boolean dataExists = this.model.hasAGroup();
         if (dataExists) {
             try {
                 this.storage.saveSerenity(this.model.getGroupStream());

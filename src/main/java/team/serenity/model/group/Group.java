@@ -76,7 +76,6 @@ public class Group {
         this.lessons = new UniqueLessonList();
     }
 
-
     /**
      * Constructs a {@code Group}.
      *
