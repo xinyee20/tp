@@ -1,16 +1,17 @@
-
+---
+layout: page
+title: User guide
+---
 
 * Table of Contents
 {:toc}
-
-
 
 
 --------------------------------------------------------------------------------------------------------------------
 ![Serenity Logo](images/logo.png)
 
 
-<H2 style="color: #477B9F"> 1. Introduction </H2>
+## **Introduction**
 
 <p>Welcome to the User Guide of <b>Serenity</b> </p>
 
