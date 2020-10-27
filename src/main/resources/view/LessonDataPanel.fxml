@@ -10,9 +10,9 @@
     <padding>
         <Insets bottom="5" left="10" right="10" top="5" />
     </padding>
-   <TabPane fx:id="tabPane" minHeight="-Infinity" minWidth="680.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@DarkTheme.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+   <TabPane fx:id="tabPane" minHeight="-Infinity" minWidth="680.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@SerenityTheme.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
      <tabs>
-       <Tab text="Lesson" >
+       <Tab text="Lesson">
             <content>
                 <ListView fx:id="studentInfoListView" />
             </content>

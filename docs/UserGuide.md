@@ -74,6 +74,12 @@ By: `Team Serenity` Since: `Aug 2020`
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.2. View an existing tutorial lesson: `viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn)
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.3. View attendance sheet of a tutorial group: `viewatt`](#452-view-an-existing-tutorial-lesson-viewlsn)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.4. View participation score sheet of a tutorial group: `viewscore`](#452-view-an-existing-tutorial-lesson-viewlsn)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.5. View all questions: `viewqn`](#452-view-an-existing-tutorial-lesson-viewlsn)
+
 [5. FAQ](#5-faq)
 
 [6. Command summary](#6-command-summary)
@@ -334,16 +340,16 @@ You can use this command to add a new student to a tutorial group.
 
 **Format:**
 
-`addstudent grp/GROUP name/NAME matric/STUDENT_NUMBER`
+`addstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER`
 
 **Example:**
 
-A new student named `Aaron Tan` with student number `A3333333S` entered your tutorial group,
+A new student named `Aaron Tan` with student number `A0123456U` entered your tutorial group,
 and you want to add him to tutorial group `G04`.
 
 Adding a new student to a tutorial group:
 
-1. Type `addstudent grp/G04 name/AARON TAN matric/A3333333S` into the _Command Box_.
+1. Type `addstudent grp/G04 name/AARON TAN matric/A0123456U` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
@@ -356,19 +362,19 @@ Outcome:
 You can use this command to delete an existing student from a tutorial group.
 
 **Format:**
-<br>`delstudent grp/GROUP name/NAME matric/STUDENT_NUMBER`
-<br>`delstudent INDEX grp/GROUP`
+<br>`delstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER`
+<br>`delstudent INDEX grp/GROUP_NAME`
 
 **Example:**
 
-A student named `Aaron Tan` with student number `A3333333S` dropped the CS2101 module,
+A student named `Aaron Tan` with student number `A0123456U` dropped the CS2101 module,
 and you need to remove him from the tutorial group `G04`. `Aaron Tan` is the first person on the student list
 so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
 Deleting an existing student from a tutorial group by `name` and `student number`:
 
-1. Type `delstudent grp/G04 name/AARON TAN matric/A3333333S` into the _Command Box_.
+1. Type `delstudent grp/G04 name/AARON TAN matric/A0123456U` into the _Command Box_.
 2. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
@@ -415,7 +421,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-![Figure 4.2.1. Outcome of a successful mark all students present command]()
+![Figure 4.2.1. Outcome of a successful mark all students present command](images/ui/markpresent_all.png)
 
 <H4 style="color: #477B9F"> 4.2.2. Mark a student as present: <code>markpresent</code></H4>
 
@@ -427,7 +433,7 @@ You can use this command to mark a specific student as present for a tutorial le
 
 **Example:**
 
-A student named `Aaron Tan` with student number `A3333333S` is present for your tutorial lesson 
+A student named `Aaron Tan` with student number `A0123456U` is present for your tutorial lesson 
 `1-2` of tutorial group `G04`. `Aaron Tan` is the first person on the student list so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
@@ -435,7 +441,7 @@ Marking a student as present for a tutorial lesson by `name` and `student number
 
 To mark him present:
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markpresent name/AARON TAN matric/A3333333S` into the *Command Box*.
+2. Type `markpresent name/AARON TAN matric/A0123456U` into the *Command Box*.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
@@ -451,7 +457,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student present command]()
+![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
 
 <H4 style="color: #477B9F"> 4.2.2. Mark a student as absent: <code>markabsent</code></H4>
 
@@ -463,14 +469,14 @@ You can use this command to mark a specific student as absent for a tutorial les
 
 **Example:**
 
-A student named `Aaron Tan` with student number `A3333333S` is absent for your tutorial lesson `1-2` of tutorial group `G04`.
+A student named `Aaron Tan` with student number `A0123456U` is absent for your tutorial lesson `1-2` of tutorial group `G04`.
 `Aaron Tan` is the first person on the student list so his `index` number is 1. 
 
 <ins>Method 1</ins> <br>
 Marking a student as absent for a tutorial lesson by `name` and `student number`:
 
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `markabsent name/AARON TAN matric/A3333333S` into the *Command Box*.
+2. Type `markabsent name/AARON TAN matric/A0123456U` into the *Command Box*.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
@@ -485,7 +491,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student absent command]() 
+![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png) 
 
 <H4 style="color: #477B9F">  4.2.3. Mark all students as absent: <code>markabsent all</code></H4>
 
@@ -510,11 +516,9 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark all students absent command]()
-
 <H4 style="color: #477B9F"> 4.2.4. Flag attendance of a student: <code>flagatt</code></H4>
 
-You can use this command to flag attendance of a specific student so you will be reminded to check the student's
+You can use this command to flag attendance of a specific student so you can remember to check the student's
 attendance at the end of class.
 
 **Format:**
@@ -523,15 +527,15 @@ attendance at the end of class.
 
 **Example:**
 
-A student named `Aaron Tan` with student number `A3333333S` from your tutorial group `G04` decided to join
-another group for tutorial lesson `1-2`. You want to flag his attendance so that you will remember to check with the 
+A student named `Aaron Tan` with student number `A0123456U` from your tutorial group `G04` decided to join
+another group for tutorial lesson `1-2`. You want to flag his attendance so that you can remember to check with the 
 other tutor later on. `Aaron Tan` is the first person on the student list so his `index` number is 1. 
 
 <ins>Method 1</ins> <br>
 Flagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `flagatt name/AARON TAN matric/A3333333s` into the _Command Box_.
+2. Type `flagatt name/AARON TAN matric/A0123456U` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins><br>
@@ -548,7 +552,7 @@ Outcome:
 
 <H4 style="color: #477B9F"> 4.2.4. Unflag attendance of a student: <code>unflagatt</code></H4>
 
-You can use this command to unflag attendance of a specific student that was flagged after you have checked that the 
+You can use this command to unflag attendance of a specific student that was flagged after you have checked whether the 
 student attended a replacement class.
 
 **Format:**
@@ -557,16 +561,16 @@ student attended a replacement class.
 
 **Example:**
 
-A student named `Aaron Tan` with student number `A3333333S` from your tutorial group `G04` decided to go for 
- another tutorial class for lesson `1-2`. You previously flagged his attendance and now wants to unflag it
- after checking that he has attended the replacement class. `Aaron Tan` is the first person on the student list 
- so his `index` number is 1. 
+A student named `Aaron Tan` with student number `A0123456U` from your tutorial group `G04` decided to go for 
+another tutorial class for lesson `1-2`. You previously flagged his attendance and you now want to unflag it
+after checking that he has attended the replacement class. `Aaron Tan` is the first person on the student list 
+so his `index` number is 1. 
 
 <ins>Method 1</ins> <br>
 Unflagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `unflagatt name/AARON TAN matric/A3333333S` into the _Command Box_.
+2. Type `unflagatt name/AARON TAN matric/A0123456U` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins><br>
@@ -632,7 +636,7 @@ With a scale from 1 to 5:
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you noticed that your student named `Aaron Tan` with student number `A3333333S` often participated in class discussions.
+you noticed that your student named `Aaron Tan` with student number `A0123456U` often participated in class discussions.
 You decided to give him `3` marks for his participation score for this tutorial lesson. `Aaron Tan` is the first person on 
 the student list so his `index` number is 1.
 
@@ -640,7 +644,7 @@ the student list so his `index` number is 1.
 Set participation score of a student in a tutorial lesson by `name` and `student number`:
 
 1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `setscore name/AARON TAN matric/A3333333S score/3` into the *Command Box*.
+2. Type `setscore name/AARON TAN matric/A0123456U score/3` into the *Command Box*.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
@@ -670,7 +674,7 @@ You can use this command to increase the participation score of a specific stude
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student number `A3333333S` provided some good insights during lessons. 
+you felt that your student named `Aaron Tan` with student number `A0123456U` provided some good insights during lessons. 
 You decided to add `1` mark to his participation score for this tutorial lesson. `Aaron Tan` 
 is the first person on the student list so his `index` number is 1.
 
@@ -678,7 +682,7 @@ is the first person on the student list so his `index` number is 1.
 Adding participation score of a student in a tutorial lesson by `name` and `student number`:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `addscore name/AARON TAN matric/A3333333S add/1` into the _Command Box_.
+2. Type `addscore name/AARON TAN matric/A0123456U add/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
@@ -709,7 +713,7 @@ You can use this command to decrease the participation score of a specific stude
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student number `A3333333S` did not provide insightful responses 
+you felt that your student named `Aaron Tan` with student number `A0123456U` did not provide insightful responses 
 to some questions. You decided to subtract `1` mark from his participation score for this tutorial lesson. `Aaron Tan` 
 is the first person on the student list so his `index` number is 1.
 
@@ -717,7 +721,7 @@ is the first person on the student list so his `index` number is 1.
 Subtracting participation score of a student in a tutorial lesson by `name` and `student number`:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
-2. Type `subscore name/AARON TAN matric/A3333333S sub/1` into the _Command Box_.
+2. Type `subscore name/AARON TAN matric/A0123456U sub/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
@@ -817,9 +821,9 @@ Outcome:
 
 The following commands allow you to navigate between different views.
 
-<H4 style="color: #477B9F"> 4.5.1. View an existing tutorial group: <code>viewgrp</code> </H4>
+<H4 style="color: #477B9F"> 4.5.1. View a tutorial group: <code>viewgrp</code> </H4>
 
-You can use this command to view the list of students and tutorial lessons of an existing tutorial group.
+You can use this command to view the list of students and tutorial lessons of a tutorial group.
 You will also be able to execute tutorial group-related commands.
 
 **Format:**
@@ -840,10 +844,10 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the information for tutorial group `G04`.
 
-<H4 style="color: #477B9F"> 4.5.2. View an existing tutorial lesson: <code>viewlsn</code></H4>
+<H4 style="color: #477B9F"> 4.5.2. View a tutorial lesson: <code>viewlsn</code></H4>
 
-You can use this command to view the attendance and participation scores of an existing
-tutorial group. You will also be able to execute tutorial lesson-related commands.
+You can use this command to view and modify the attendance and participation scores of 
+a tutorial lesson. You will also be able to execute tutorial lesson-related commands.
 
 **Format:**
 
@@ -862,6 +866,85 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the students' information for tutorial lesson `1-2` of tutorial group `G04`.
+
+<H4 style="color: #477B9F"> 4.5.3. View attendance sheet of a tutorial group: <code>viewatt</code></H4>
+
+You can use this command to view the attendance sheet of the students in a tutorial group across all tutorial lessons.
+The attendance sheet will be displayed in table form.
+
+> ℹ **Note regarding the `viewatt` command:**
+> You can view the attendance of all your students in the tutorial group at one glance.
+> You can also preview the XLSX file that you can generate with the `exportatt` command,
+> before generating the actual XLSX file.
+
+**Format:**
+
+`viewatt grp/GROUP_NAME`
+
+**Example:**
+
+You want to view the attendance sheet of the students in tutorial group `G04`.
+
+Viewing the attendance sheet of a tutorial lesson:
+
+1. Type `viewatt grp/G04` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the attendance sheet of tutorial group `G04`.
+
+<H4 style="color: #477B9F"> 4.5.4. View participation score sheet of a tutorial group: <code>viewscore</code></H4>
+
+You can use this command to view the participation score sheet of the students in a tutorial group
+across all tutorial lessons. The participation score sheet will be displayed in table form.
+
+> ℹ **Note regarding the `viewscore` command:**
+> In a similar way to the `viewatt` command,
+> you can view the participation score of all your students in the tutorial group at one glance.
+> You can also preview the XLSX file that you can generate with the `exportscore` command,
+> before generating the actual XLSX file.
+
+**Format:**
+
+`viewscore grp/GROUP_NAME`
+
+**Example:**
+
+You want to view the participation score sheet of the students in tutorial group `G04`.
+
+Viewing the participation score sheet of a tutorial lesson:
+
+1. Type `viewscore grp/G04` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the participation score sheet of tutorial group `G04`.
+
+<H4 style="color: #477B9F"> 4.5.5. View all pending questions: <code>viewqn</code></H4>
+
+You can use this command to view all questions that have yet to be addressed.
+
+**Format:**
+
+`viewqn`
+
+**Example:**
+
+You want to view all pending questions.
+
+Viewing all pending questions:
+
+1. Type `viewqn` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the list of pending questions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -886,31 +969,31 @@ your **Serenity** application on your other computer. **Serenity** will automati
 Command | Example
 ------------ | -------------
 **Add tutorial group** <br>`addgrp grp/GROUP_NAME path/PATH_TO_XLSX`| <br>`addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`
-**Delete tutorial group** <br> `delgrp grp/GROUP`| <br>`delgrp grp/G04`
-**Add tutorial lesson** <br> `addlsn grp/GROUP lsn/LESSON` | <br>`addlsn grp/G04 lsn/1-2`
-**Delete tutorial lesson** <br> `dellsn grp/GROUP lsn/LESSON` | <br>`dellsn grp/G04 lsn/1-3`
-**Add student** <br> `addstudent grp/GROUP name/NAME matric/STUDENT_NUMBER` | <br>`addstudent grp/G04 name/AARON TAN matric/A3333333s`
-**Delete student** <br> - `delstudent grp/GROUP name/NAME matric/STUDENT_NUMBER`<br> - `delstudent INDEX grp/GROUP` | <br> - `delstudent grp/G04 name/AARON TAN matric/A3333333S` <br> - `delstudent 1 grp/G04`
+**Delete tutorial group** <br> `delgrp grp/GROUP_NAME`| <br>`delgrp grp/G04`
+**Add tutorial lesson** <br> `addlsn grp/GROUP_NAME lsn/LESSON_NAME` | <br>`addlsn grp/G04 lsn/1-2`
+**Delete tutorial lesson** <br> `dellsn grp/GROUP_NAME lsn/LESSON_NAME` | <br>`dellsn grp/G04 lsn/1-3`
+**Add student** <br> `addstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER` | <br>`addstudent grp/G04 name/AARON TAN matric/A0123456U`
+**Delete student** <br> - `delstudent grp/GROUP_NAME name/NAME matric/STUDENT_NUMBER`<br> - `delstudent INDEX grp/GROUP` | <br> - `delstudent grp/G04 name/AARON TAN matric/A0123456U` <br> - `delstudent 1 grp/G04`
 
 <H3 style="color: #477B9F"> 6.2. Attendance taking commands </H3>
 
 Command | Example
 ------------ | -------------
-**Mark a student as present** <br> - `markpresent name/NAME matric/STUDENT_NUMBER`<br> - `markpresent INDEX` | <br> - `markpresent name/AARON TAN matric/A3333333S` <br> - `markpresent 1`
-**Mark a student as absent** <br> - `markabsent name/NAME matric/STUDENT_NUMBER`<br>-`markabsent INDEX` | <br> - `markabsent name/AARON TAN matric/A3333333S`<br> - `markabsent 1`
+**Mark a student as present** <br> - `markpresent name/NAME matric/STUDENT_NUMBER`<br> - `markpresent INDEX` | <br> - `markpresent name/AARON TAN matric/A0123456U` <br> - `markpresent 1`
+**Mark a student as absent** <br> - `markabsent name/NAME matric/STUDENT_NUMBER`<br>-`markabsent INDEX` | <br> - `markabsent name/AARON TAN matric/A0123456U`<br> - `markabsent 1`
 **Mark all students as present** <br> `markpresent all` | <br>`markpresent all`
 **Mark all students as absent** <br> `markabsent all` | <br>`markabsent all`
-**Flag attendance** <br> - `flagatt name/NAME matric/STUDENT_NUMBER` <br> - `flagatt INDEX` | <br> - `flagatt name/AARON TAN matric/A3333333S` <br> - `flagatt 1`
-**Unflag attendance** <br> - `unflagatt name/NAME matric/STUDENT_NUMBER` <br> - `unflagatt INDEX` | <br> - `unflagatt name/AARON TAN matric/A3333333S`<br> - `unflagatt 1` 
+**Flag attendance** <br> - `flagatt name/NAME matric/STUDENT_NUMBER` <br> - `flagatt INDEX` | <br> - `flagatt name/AARON TAN matric/A0123456U` <br> - `flagatt 1`
+**Unflag attendance** <br> - `unflagatt name/NAME matric/STUDENT_NUMBER` <br> - `unflagatt INDEX` | <br> - `unflagatt name/AARON TAN matric/A0123456U`<br> - `unflagatt 1` 
 **Export attendance** <br> `exportatt grp/GROUP_NAME` | `exportatt grp/G04`
 
 <H3 style="color: #477B9F"> 6.3. Participation marking commands </H3>
 
 Command | Example
 ------------ | -------------
-**Set participation score** <br> - `setscore name/NAME matric/STUDENT_NUMBER score/SCORE` <br> - `setscore INDEX score/SCORE` | <br>- `setscore name/AARON TAN matric/A3333333S score/3` <br> - `setscore 1 score/3`
-**Add participation score** <br> - `addscore name/NAME matric/STUDENT_NUMBER add/SCORE`<br> - `addscore INDEX add/SCORE` | <br>- `addscore name/AARON TAN matric/A3333333S add/3` <br> - `addscore 1 add/3`
-**Subtract participation score** <br> - `subscore name/NAME matric/STUDENT_NUMBER sub/SCORE` <br> - `subscore INDEX sub/SCORE` | <br>- `subscore name/AARON TAN matric/A3333333S sub/3` <br> - `subscore 1 sub/3`
+**Set participation score** <br> - `setscore name/NAME matric/STUDENT_NUMBER score/SCORE` <br> - `setscore INDEX score/SCORE` | <br>- `setscore name/AARON TAN matric/A0123456U score/3` <br> - `setscore 1 score/3`
+**Add participation score** <br> - `addscore name/NAME matric/STUDENT_NUMBER add/SCORE`<br> - `addscore INDEX add/SCORE` | <br>- `addscore name/AARON TAN matric/A0123456U add/3` <br> - `addscore 1 add/3`
+**Subtract participation score** <br> - `subscore name/NAME matric/STUDENT_NUMBER sub/SCORE` <br> - `subscore INDEX sub/SCORE` | <br>- `subscore name/AARON TAN matric/A0123456U sub/3` <br> - `subscore 1 sub/3`
 **Export participation scores** <br> `exportscore grp/GROUP_NAME` | <br>`exportscore grp/G07`
 
 
@@ -927,3 +1010,6 @@ Command | Example
 ------------ | -------------
 **View tutorial group** <br> `viewgrp grp/GROUP_NAME` | `viewgrp grp/G04`
 **View tutorial lesson** <br> `viewlsn grp/GROUP_NAME lsn/LESSON_NAME` | `viewlsn grp/G04 lsn/1-2`
+**View attendance** <br> `viewatt grp/GROUP_NAME` | `viewatt grp/G04`
+**VIew participation score** <br> `viewscore grp/GROUP_NAME` | `viewscore grp/G04`
+**View questions** <br> `viewqn` | `viewqn`

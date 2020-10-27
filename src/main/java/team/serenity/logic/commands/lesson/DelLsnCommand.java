@@ -66,7 +66,7 @@ public class DelLsnCommand extends Command {
         model.updateLessonList();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toDel, this.targetGrpPredicate),
-            false, false, false, true, false, false);
+            false, false, false, true, false, false, false, false);
     }
 
     @Override
