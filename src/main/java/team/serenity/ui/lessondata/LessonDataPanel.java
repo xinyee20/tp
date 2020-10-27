@@ -39,7 +39,7 @@ public class LessonDataPanel extends DataPanel {
         this.tabPane.getSelectionModel().select(0);
     }
 
-    class StudentInfoListViewCell extends ListCell<StudentInfo> {
+    public static class StudentInfoListViewCell extends ListCell<StudentInfo> {
 
         @Override
         protected void updateItem(StudentInfo studentInfo, boolean empty) {

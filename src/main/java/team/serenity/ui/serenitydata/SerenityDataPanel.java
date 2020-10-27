@@ -13,6 +13,7 @@ import team.serenity.commons.core.LogsCenter;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.ui.DataPanel;
+import team.serenity.ui.lessondata.LessonDataPanel.StudentInfoListViewCell;
 import team.serenity.ui.lessondata.StudentInfoCard;
 
 public class SerenityDataPanel extends DataPanel {
@@ -36,7 +37,7 @@ public class SerenityDataPanel extends DataPanel {
     public SerenityDataPanel(ObservableList<StudentInfo> studentInfo, ObservableList<Question> questionList) {
         super(FXML);
         this.flaggedAttendanceListView.setItems(studentInfo);
-        this.flaggedAttendanceListView.setCellFactory(listView -> new FlaggedAttendanceListViewCell());
+        this.flaggedAttendanceListView.setCellFactory(listView -> new StudentInfoListViewCell());
         this.questionListView.setItems(questionList);
         this.questionListView.setCellFactory(listView -> new QuestionListViewCell());
     }
