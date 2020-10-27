@@ -1,4 +1,4 @@
-# About Us 
+# About Us
 
 **Serenity** was developed by the team `W12-4`
 
