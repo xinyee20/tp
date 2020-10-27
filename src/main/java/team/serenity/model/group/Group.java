@@ -111,6 +111,11 @@ public class Group {
         return this.lessons;
     }
 
+    public UniqueList<Student> getSortedStudents() {
+        this.students.sort(Comparator.comparing(x -> x.getStudentName().toString()));
+        return this.students;
+    }
+
     public UniqueList<Lesson> getSortedLessons() {
         this.lessons.sort(Comparator.comparing(x -> x.getLessonName().toString()));
         return this.lessons;

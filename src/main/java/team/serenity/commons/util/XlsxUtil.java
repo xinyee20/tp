@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -24,6 +26,9 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
+import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.managers.StudentInfoManager;
@@ -262,18 +267,35 @@ public class XlsxUtil {
      * Write data to XLSX file
      */
     public void writeGroupToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
-        UniqueList<Lesson> lessonList = group.getLessons();
+        UniqueList<Student> studentList = group.getSortedStudents();
+        UniqueList<Lesson> lessonList = group.getSortedLessons();
 
         List<List<Object>> data = new ArrayList<>();
+        Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
 
         for (Lesson lesson : lessonList) {
-            List<Object> studentDetails = new ArrayList<>();
             GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
             for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
-                studentDetails.add(studentInfo.getStudent().getStudentName());
-                studentDetails.add(studentInfo.getStudent().getStudentNo());
-                studentDetails.add(studentInfo.getAttendance());
+                Student student = studentInfo.getStudent();
+                Optional<List<Integer>> attendanceList = Optional.ofNullable(studentDetailsMap.get(student));
+                List<Integer> newAttendanceList;
+                if (attendanceList.isEmpty()) {
+                    newAttendanceList = new ArrayList<>();
+                } else {
+                    newAttendanceList = attendanceList.get();
+                }
+                newAttendanceList.add(studentInfo.getAttendance().getIntegerAttendance());
+                studentDetailsMap.put(student.getStudentNo(), newAttendanceList);
             }
+        }
+
+        for (Student student : studentList) {
+            List<Object> studentDetails = new ArrayList<>();
+            studentDetails.add(student.getStudentName().toString());
+            studentDetails.add(student.getStudentNo().toString());
+            List<Integer> attendanceList = studentDetailsMap.get(student.getStudentNo());
+            studentDetails.addAll(attendanceList);
+            data.add(studentDetails);
         }
 
         Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
