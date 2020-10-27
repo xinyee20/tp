@@ -19,8 +19,8 @@ public class Question {
 
     /**
      * Constructs an {@code Question}.
-     *  @param groupName
-     * @param lessonName
+     *  @param groupName A valid group name.
+     * @param lessonName A valid lesson name.
      * @param description A valid question.
      */
     public Question(GroupName groupName, LessonName lessonName, Description description) {
