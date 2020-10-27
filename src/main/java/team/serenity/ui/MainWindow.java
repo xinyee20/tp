@@ -135,7 +135,12 @@ public class MainWindow extends UiPart<Stage> {
 
         this.buttonBar = new ButtonBar();
         this.buttonPanelPlaceholder.getChildren().add(this.buttonBar);
+    }
 
+    /**
+     * Adds group buttons for existing groups.
+     */
+    void loadGroupButtons() {
         if (logic.hasGroup()) {
             for (Group group : logic.getGroups()) {
                 handleAddGrp(group.getGroupName().toString());
