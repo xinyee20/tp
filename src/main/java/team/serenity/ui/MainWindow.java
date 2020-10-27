@@ -22,6 +22,7 @@ import team.serenity.logic.Logic;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.model.group.Group;
 import team.serenity.ui.groupdata.GroupDataPanel;
 import team.serenity.ui.lessondata.LessonDataPanel;
 
@@ -134,6 +135,12 @@ public class MainWindow extends UiPart<Stage> {
 
         this.buttonBar = new ButtonBar();
         this.buttonPanelPlaceholder.getChildren().add(this.buttonBar);
+
+        if (logic.hasGroup()) {
+            for (Group group : logic.getGroups()) {
+                handleAddGrp(group.getGroupName().toString());
+            }
+        }
     }
 
     /**

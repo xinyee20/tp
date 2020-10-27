@@ -69,4 +69,18 @@ public interface Logic {
      */
     ObservableList<Question> getFilteredQuestionList();
 
+    /**
+     * Returns true if there is at least 1 existing group. Else returns false.
+     *
+     * @return true if there is at least 1 existing group.
+     */
+    boolean hasGroup();
+
+    /**
+     * Returns a list of existing groups.
+     *
+     * @return a list of existing groups.
+     */
+    ObservableList<Group> getGroups();
+
 }

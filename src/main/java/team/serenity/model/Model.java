@@ -11,6 +11,7 @@ import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.util.UniqueList;
@@ -55,6 +56,11 @@ public interface Model {
     // ========== Serenity ==========
 
     // ========== GroupManager ==========
+
+    /**
+     * Returns the GroupManager.
+     */
+    GroupManager getGroupManager();
 
     /**
      * Returns the user prefs' serenity file path.

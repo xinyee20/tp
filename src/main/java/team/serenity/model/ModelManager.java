@@ -139,6 +139,11 @@ public class ModelManager implements Model {
     // ========== GroupManager ==========
 
     @Override
+    public GroupManager getGroupManager() {
+        return groupManager;
+    }
+
+    @Override
     public Path getSerenityFilePath() {
         return this.userPrefs.getSerenityFilePath();
     }

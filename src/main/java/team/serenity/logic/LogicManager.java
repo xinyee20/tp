@@ -106,4 +106,14 @@ public class LogicManager implements Logic {
         return this.model.getFilteredQuestionList();
     }
 
+    @Override
+    public boolean hasGroup() {
+        return model.hasGroup();
+    }
+
+    @Override
+    public ObservableList<Group> getGroups() {
+        return model.getGroupManager().getListOfGroups();
+    }
+
 }
