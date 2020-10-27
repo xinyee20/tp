@@ -41,6 +41,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final UserPrefs userPrefs;
+    private final Serenity serenity;
     private final GroupManager groupManager;
     private final StudentManager studentManager;
     private final StudentInfoManager studentInfoManager;
@@ -67,6 +68,7 @@ public class ModelManager implements Model {
 
         //instantiate individual managers
         this.userPrefs = new UserPrefs(userPrefs);
+        this.serenity = new Serenity(serenity);
         this.groupManager = new GroupManager(serenity.getGroupManager());
         this.studentManager = new StudentManager(serenity.getStudentManager());
         this.studentInfoManager = new StudentInfoManager(serenity.getStudentInfoManager());
@@ -92,6 +94,7 @@ public class ModelManager implements Model {
 
         //instantiate individual managers
         this.userPrefs = new UserPrefs(userPrefs);
+        this.serenity = new Serenity();
         this.groupManager = new GroupManager();
         this.studentInfoManager = new StudentInfoManager();
         this.studentManager = new StudentManager();
@@ -136,7 +139,10 @@ public class ModelManager implements Model {
 
     // ========== Serenity ================================================================================
 
-    // ========== GroupManager ==========
+    @Override
+    public ReadOnlySerenity getSerenity() {
+        return this.serenity;
+    }
 
     @Override
     public GroupManager getGroupManager() {
@@ -147,6 +153,8 @@ public class ModelManager implements Model {
     public Path getSerenityFilePath() {
         return this.userPrefs.getSerenityFilePath();
     }
+
+    // ========== GroupManager ==========
 
     /**
      * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of

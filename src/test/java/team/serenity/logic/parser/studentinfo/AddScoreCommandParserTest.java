@@ -60,7 +60,7 @@ class AddScoreCommandParserTest {
 
     @Test
     public void parse_invalidScore_throwsCommandException() {
-        String expectedMessage = String.format(Participation.SCORE_ERROR);
+        String expectedMessage = String.format(Participation.MESSAGE_CONSTRAINTS);
 
         assertParseFailure(parser, PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_ADD_SCORE, expectedMessage);
         assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_ADD_SCORE, expectedMessage);
