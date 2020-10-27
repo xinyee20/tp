@@ -24,7 +24,7 @@ command box. This application also has a <i>Graphical User Interface (GUI)</i>,
 where you can interact with the application through graphical icons such as buttons.</p>
 
 <p>This user guide serves to provide you with an in-depth documentation on how to set up and use our application.
-With that said, let's get <a href="quickstart">started</a>!</p>
+With that said, let's get <a href="#quickstart">started</a>!</p>
 
 --------------------------------------------------------------------------------------------------------------------
 
