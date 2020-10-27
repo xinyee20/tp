@@ -10,9 +10,6 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
@@ -23,10 +20,10 @@ import team.serenity.model.Model;
 public class CommandTestUtil {
 
     // Valid descriptions for Serenity
-    public static final String VALID_GRP_GROUP_A = "G04";
-    public static final String VALID_GRP_GROUP_B = "G05";
-    public static final Path VALID_PATH_GROUP_A = Paths.get("LUMINUS_GROUP_A.csv");
-    public static final Path VALID_PATH_GROUP_B = Paths.get("LUMINUS_GROUP_B.csv");
+    public static final String VALID_GROUP_NAME_A = "G04";
+    public static final String VALID_GROUP_NAME_B = "G05";
+    public static final String VALID_PATH_A = "CS2101_G04.xlsx";
+    public static final String VALID_PATH_B = "CS2101_G05.xlsx";
     public static final String VALID_LSN_A = "2-2";
     public static final String VALID_LSN_B = "3-1";
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
@@ -38,10 +35,10 @@ public class CommandTestUtil {
     public static final String VALID_ADD = "1";
     public static final String VALID_SUB = "1";
 
-    public static final String GRP_DESC_GROUP_A = " " + PREFIX_GRP + VALID_GRP_GROUP_A;
-    public static final String GRP_DESC_GROUP_B = " " + PREFIX_GRP + VALID_GRP_GROUP_B;
-    public static final String PATH_DESC_GROUP_A = " " + PREFIX_PATH + VALID_PATH_GROUP_A;
-    public static final String PATH_DESC_GROUP_B = " " + PREFIX_PATH + VALID_PATH_GROUP_B;
+    public static final String GRP_DESC_GROUP_A = " " + PREFIX_GRP + VALID_GROUP_NAME_A;
+    public static final String GRP_DESC_GROUP_B = " " + PREFIX_GRP + VALID_GROUP_NAME_B;
+    public static final String PATH_DESC_GROUP_A = " " + PREFIX_PATH + VALID_PATH_A;
+    public static final String PATH_DESC_GROUP_B = " " + PREFIX_PATH + VALID_PATH_B;
     public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;
     public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_DESC_B;
     public static final String STUDENT_DESC =
@@ -51,6 +48,9 @@ public class CommandTestUtil {
     public static final String SUB_SCORE_DESC = " " + PREFIX_SUBTRACT_SCORE + VALID_SUB;
 
     // Invalid descriptions for Serenity
+    public static final String INVALID_GROUP_NAME_LOWERCASE = " " + PREFIX_GRP + "g07";
+    public static final String INVALID_GROUP_NAME_NON_DIGITS = " " + PREFIX_GRP + "Gxx";
+    public static final String INVALID_PATH = " " + PREFIX_PATH + "this is an invalid path";
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
     public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
     public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME;

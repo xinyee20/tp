@@ -18,7 +18,6 @@ import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Participation;
 
-
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -50,7 +49,7 @@ public class SerenityParserUtil {
         String trimmedFilePath = filePath.trim();
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(trimmedFilePath);
-            return new XlsxUtil(workbook);
+            return new XlsxUtil(trimmedFilePath, workbook);
         } catch (InvalidOperationException | IOException e) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
         }

@@ -27,6 +27,7 @@ import team.serenity.model.util.UniqueList;
  */
 public class XlsxUtil {
 
+    private String filePath;
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
 
@@ -39,6 +40,7 @@ public class XlsxUtil {
      */
     public XlsxUtil(String filePath) {
         try {
+            this.filePath = filePath;
             this.workbook = new XSSFWorkbook(filePath);
             this.sheet = this.workbook.getSheetAt(0);
         } catch (IOException e) {
@@ -51,7 +53,8 @@ public class XlsxUtil {
      *
      * @param workbook The workbook of the XLSX file.
      */
-    public XlsxUtil(XSSFWorkbook workbook) {
+    public XlsxUtil(String filePath, XSSFWorkbook workbook) {
+        this.filePath = filePath;
         this.workbook = workbook;
         this.sheet = this.workbook.getSheetAt(0);
     }
@@ -239,6 +242,13 @@ public class XlsxUtil {
                 return 0;
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this // short circuit if same object
+                || (obj instanceof XlsxUtil // instanceof handles nulls
+                && this.filePath.equals(((XlsxUtil) obj).filePath));
     }
 }
 
