@@ -1,102 +1,15 @@
-![Serenity Logo](images/logo.png)
 
-By: `Team Serenity` Since: `Aug 2020`
 
-[1. Introduction](#1-introduction)
+* Table of Contents
+{:toc}
 
-[2. Quick start](#2-quick-start)
 
-[3. About](#3-about)
 
-&nbsp;&nbsp;&nbsp;[3.1. Structure of this document](#31-structure-of-this-document)
-    
-&nbsp;&nbsp;&nbsp;[3.2. Reading this document](#32-reading-this-document)
-   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.1. Terminology related to the _GUI_](#321-terminology-related-to-the-_gui_)
-   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.2. General symbols and syntax](#322-general-symbols-and-syntax)
-   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.3. Command syntax and usage](#323-command-syntax-and-usage)
-   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3.2.4. Command format](#324-command-format)
-
-[4. Features](#4-features)
-
-&nbsp;&nbsp;&nbsp;[4.1. Getting started](#41-setup)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.1. Add a new tutorial group from XLSX file: `addgrp`](#411-add-a-new-tutorial-group-from-xlsx-file-addgrp)
-   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.2. Delete an existing tutorial group: `delgrp`](#412-delete-an-existing-tutorial-group-delgrp)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.3. Add a new tutorial lesson: `addlsn`](#413-add-a-new-tutorial-lesson-addlsn)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.4. Delete an existing tutorial lesson: `dellsn`](#414-delete-an-existing-tutorial-lesson-dellsn)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.5. Add a new student: `addstudent`](#415-add-a-new-student-addstudent)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.1.6. Delete an existing student: `delstudent`](#416-delete-an-existing-student-delstudent)
-
-&nbsp;&nbsp;&nbsp;[4.2. Attendance taking](#42-attendance-taking)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.1. Mark all students as present: `markpresent`](#421-mark-all-students-as-present-markpresent-all)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.2. Mark a student as absent: `markabsent`](#422-mark-a-student-as-absent-markabsent)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.3 Mark a student as present: `markpresent all`](#423-mark-a-student-as-present-markpresent)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.4 Mark all students as absent: `markabsent all`](#424-mark-all-students-as-absent-markabsent-all)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.5. Flag attendance of a student: `flagatt`](#425-flag-attendance-of-a-student-flagatt)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.6. Unflag attendance of a student: `unflagatt`](#426-unflag-attendance-of-a-student-unflagatt)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.2.7. Export attendance as CSV file: `exportatt`](#427-export-attendance-as-csv-file-exportatt)
-
-&nbsp;&nbsp;&nbsp;[4.3. Participation marking](#43-participation-marking)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.1. Set participation score of a student: `setscore`](#431-set-participation-score-of-a-student-setscore)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.2. Add participation score of a student: `addscore`](#432-add-participation-score-of-a-student-addscore)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.3. Subtract participation score of a student: `subscore`](#433-subtract-participation-score-of-a-student-subscore)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.3.4. Export participation scores as XLSX file: `exportscore`](#434-export-participation-scores-as-xlsx-file-exportscore)
-
-&nbsp;&nbsp;&nbsp;[4.4. Question addressing](#44-question-addressing)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.4.1. Add a new question: `addqn`](#441-add-a-new-question-addqn)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.4.2. Delete an existing question: `delqn`](#442-delete-an-existing-question-delqn)
-
-&nbsp;&nbsp;&nbsp;[4.5. Utility viewing](#45-utility-viewing)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.1. View an existing tutorial group: `viewgrp`](#451-view-an-existing-tutorial-group-viewgrp)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.2. View an existing tutorial lesson: `viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.3. View attendance sheet of a tutorial group: `viewatt`](#452-view-an-existing-tutorial-lesson-viewlsn)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.4. View participation score sheet of a tutorial group: `viewscore`](#452-view-an-existing-tutorial-lesson-viewlsn)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.5. View all questions: `viewqn`](#452-view-an-existing-tutorial-lesson-viewlsn)
-
-[5. FAQ](#5-faq)
-
-[6. Command summary](#6-command-summary)
-
-&nbsp;&nbsp;&nbsp;[6.1. Setup commands](#61-setup-commands)
-
-&nbsp;&nbsp;&nbsp;[6.2. Attendance taking commands](#62-attendance-taking-commands)
-
-&nbsp;&nbsp;&nbsp;[6.3. Participation marking commands](#63-participation-marking-commands)
-
-&nbsp;&nbsp;&nbsp;[6.4. Question addressing commands](#64-question-addressing-commands)
-
-&nbsp;&nbsp;&nbsp;[6.5. Utlity viewing commands](#65-utility-viewing-commands)
 
 --------------------------------------------------------------------------------------------------------------------
+![Serenity Logo](images/logo.png)
 
-<H2 style="color: #477B9F"> 1. Introduction </H2>
+# Introduction
 
 Welcome to the User Guide of **Serenity**!
 
@@ -110,17 +23,17 @@ command box. This application also has a _Graphical User Interface (GUI)_, where
 through graphical icons such as buttons.
 
 This user guide serves to provide you with an in-depth documentation on how to set up and use our application.
-With that said, let's get [started](#2-quick-start)!
+With that said, let's get [started](#quick-start)!
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 2. Quick start </H2>
+# Quick start
 
 To get started with using **Serenity**, you can follow these steps:
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `Serenity.jar` from [here]().
+2. Download the latest `Serenity.jar` from [here](https://github.com/AY2021S1-CS2103T-W12-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your **Serenity** application.
 
@@ -134,7 +47,7 @@ To get started with using **Serenity**, you can follow these steps:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 3. About </H2>
+# 3. About 
 
 <H3 style="color: #477B9F"> 3.1. Structure of this document </H3>
 
@@ -216,7 +129,7 @@ Analysis:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 4. Features </H2>
+# 4. Features 
 
 This section contains all the information you need to know about the features of **Serenity**.
 To use each feature or sub-feature, you will need to enter the command into the _Command Box_.
@@ -948,7 +861,7 @@ Outcome:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 5. FAQ</H2>
+# 5. FAQ
 
 **Q:** How many tutorial groups can I manage in **Serenity**?
 
@@ -962,7 +875,7 @@ your **Serenity** application on your other computer. **Serenity** will automati
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 6. Command summary </H2>
+# 6. Command summary
 
 <H3 style="color: #477B9F"> 6.1. Setup commands </H3>
 
