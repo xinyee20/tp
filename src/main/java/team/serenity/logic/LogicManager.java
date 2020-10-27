@@ -3,7 +3,6 @@ package team.serenity.logic;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
@@ -51,11 +50,10 @@ public class LogicManager implements Logic {
         commandResult = command.execute(this.model);
 
         //Write to storage, if group exists
-        boolean dataExists = this.model.hasGroup();
+        boolean dataExists = this.model.hasAGroup();
         if (dataExists) {
-            Stream<Group> groups = this.model.getGroupStream();
             try {
-                this.storage.saveSerenity(groups);
+                this.storage.saveSerenity(this.model.getGroupStream());
                 this.storage.saveQuestionManager(this.model.getQuestionManager());
             } catch (IOException e) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + e, e);
@@ -102,8 +100,23 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<StudentInfo> getAllStudentInfo() {
+        return this.model.getAllStudentInfo();
+    }
+
+    @Override
     public ObservableList<Question> getFilteredQuestionList() {
         return this.model.getFilteredQuestionList();
+    }
+
+    @Override
+    public boolean hasGroup() {
+        return model.hasAGroup();
+    }
+
+    @Override
+    public ObservableList<Group> getGroups() {
+        return model.getGroupManager().getListOfGroups();
     }
 
 }

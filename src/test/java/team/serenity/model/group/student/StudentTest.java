@@ -19,7 +19,6 @@ class StudentTest {
         assertThrows(IllegalArgumentException.class, () -> new Student("", "E1234567"));
     }
 
-
     @Test
     public void constructor_invalidStudentNumber_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Student("John", "A012334444333"));

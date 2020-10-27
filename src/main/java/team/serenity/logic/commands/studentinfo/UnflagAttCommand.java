@@ -33,11 +33,11 @@ public class UnflagAttCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unflags the attendance of a specific student for a lesson. \n"
             + "Parameters: "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456U\n"
             + "or " + COMMAND_WORD + " 2";
 
     private Optional<Student> toUnflagAtt;
@@ -91,10 +91,10 @@ public class UnflagAttCommand extends Command {
                 Attendance current = studentInfo.getAttendance();
                 this.isCorrectStudent = studentInfo.containsStudent(this.toUnflagAtt.get());
                 if (this.isCorrectStudent) {
-                    if (!current.getFlagged()) {
+                    if (!current.isFlagged()) {
                         throw new CommandException(MESSAGE_FAILURE);
                     }
-                    Attendance update = new Attendance(current.getAttendance(), false);
+                    Attendance update = new Attendance(current.isPresent(), false);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
@@ -115,10 +115,10 @@ public class UnflagAttCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             Attendance current = studentInfo.getAttendance();
             toUnflagAtt = Optional.ofNullable(studentInfo.getStudent());
-            if (!current.getFlagged()) {
+            if (!current.isFlagged()) {
                 throw new CommandException(MESSAGE_FAILURE);
             }
-            Attendance update = new Attendance(current.getAttendance(), false);
+            Attendance update = new Attendance(current.isPresent(), false);
             StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
             uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
             model.updateLessonList();

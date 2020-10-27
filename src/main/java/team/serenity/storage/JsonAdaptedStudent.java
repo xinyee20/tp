@@ -58,7 +58,7 @@ class JsonAdaptedStudent {
                 StudentName.MESSAGE_CONSTRAINTS));
         }
 
-        if (!StudentNumber.isValidName(this.name)) {
+        if (!StudentNumber.isValidName(this.studentNo)) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 StudentNumber.MESSAGE_CONSTRAINTS));
         }

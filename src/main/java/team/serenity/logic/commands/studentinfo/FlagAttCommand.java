@@ -34,11 +34,11 @@ public class FlagAttCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Flags the attendance of a specific student for a lesson. \n"
             + "Parameters: "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456U\n"
             + "or " + COMMAND_WORD + " 2";
 
 
@@ -93,10 +93,10 @@ public class FlagAttCommand extends Command {
                 Attendance current = studentInfo.getAttendance();
                 this.isCorrectStudent = studentInfo.containsStudent(this.toFlagAtt.get());
                 if (this.isCorrectStudent) {
-                    if (current.getAttendance()) {
+                    if (current.isPresent()) {
                         throw new CommandException(MESSAGE_FAILURE);
                     }
-                    Attendance update = new Attendance(current.getAttendance(), true);
+                    Attendance update = new Attendance(current.isPresent(), true);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
@@ -116,11 +116,11 @@ public class FlagAttCommand extends Command {
 
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             Attendance current = studentInfo.getAttendance();
-            if (current.getAttendance()) {
+            if (current.isPresent()) {
                 throw new CommandException(MESSAGE_FAILURE);
             }
             toFlagAtt = Optional.ofNullable(studentInfo.getStudent());
-            Attendance update = new Attendance(current.getAttendance(), true);
+            Attendance update = new Attendance(current.isPresent(), true);
             StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
             uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
             model.updateLessonList();

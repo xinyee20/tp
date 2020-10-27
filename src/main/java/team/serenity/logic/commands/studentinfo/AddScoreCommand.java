@@ -34,16 +34,16 @@ public class AddScoreCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Increase the participation score of a specific student for a lesson.\n"
             + "Parameters: "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER "
-            + PREFIX_ADD_SCORE + " SCORE_TO_ADD "
-            + "or INDEX " + PREFIX_ADD_SCORE + " SCORE_TO_ADD\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER "
+            + PREFIX_ADD_SCORE + "SCORE_TO_ADD "
+            + "or INDEX " + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U "
-            + PREFIX_ADD_SCORE + " 2\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456U "
+            + PREFIX_ADD_SCORE + "2\n"
             + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_ADD_SCORE + " 2\n";
+            + PREFIX_ADD_SCORE + "2\n";
 
     private Optional<Student> toAddScore;
     private Optional<Index> index;
@@ -103,7 +103,7 @@ public class AddScoreCommand extends Command {
                 this.isCorrectStudent = studentInfo.containsStudent(this.toAddScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
-                    if (!currentAttendance.getAttendance()) {
+                    if (!currentAttendance.isPresent()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
                     }
                     newScore = score + scoreToAdd;
@@ -130,7 +130,7 @@ public class AddScoreCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toAddScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
-            if (!currentAttendance.getAttendance()) {
+            if (!currentAttendance.isPresent()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
             }
             newScore = score + scoreToAdd;

@@ -1,5 +1,12 @@
 package team.serenity.testutil;
 
+import static team.serenity.logic.commands.CommandTestUtil.VALID_PATH_A;
+import static team.serenity.testutil.TypicalStudent.FREDDIE;
+import static team.serenity.testutil.TypicalStudent.JEFFERY;
+import static team.serenity.testutil.TypicalStudent.JUNE;
+import static team.serenity.testutil.TypicalStudent.LUNA;
+import static team.serenity.testutil.TypicalStudent.QUEENIE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +14,6 @@ import java.util.List;
 import team.serenity.logic.commands.CommandTestUtil;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.UniqueGroupList;
-import team.serenity.model.group.student.Student;
 import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.Serenity;
 import team.serenity.model.util.UniqueList;
@@ -17,24 +23,19 @@ import team.serenity.model.util.UniqueList;
  */
 public class TypicalGroups {
 
-    public static final Group GROUP_C = new GroupBuilder().withName("G06")
-        .withStudents(
-            new Student("Jeffery", "A0000001U"),
-            new Student("Luna", "A0111111U"),
-            new Student("Queenie", "A0222222U")
-        ).withClasses("4-2", "5-1")
+    public static final Group GROUP_C = new GroupBuilder().withName("G01")
+        .withStudents(JEFFERY, LUNA, QUEENIE)
+        .withClasses("4-2", "5-1")
         .build();
 
-    public static final Group GROUP_D = new GroupBuilder().withName("G07")
-        .withStudents(
-            new Student("Freddie", "A0000001U"),
-            new Student("June", "A0101011U")
-        ).withClasses("4-2", "5-1", "5-2", "6-1")
+    public static final Group GROUP_D = new GroupBuilder().withName("G02")
+        .withStudents(FREDDIE, JUNE)
+        .withClasses("4-2", "5-1", "5-2", "6-1")
         .build();
 
     // Manually added - Group's details found in {@code CommandTestUtil}
-    public static final Group GROUP_A = new GroupBuilder().withName(CommandTestUtil.VALID_GRP_GROUP_A)
-        .withFilePath(CommandTestUtil.VALID_PATH_GROUP_A).build();
+    public static final Group GROUP_A = new GroupBuilder().withName(CommandTestUtil.VALID_GROUP_NAME_A)
+        .withFilePath(VALID_PATH_A).build();
     //    public static final Group GROUP_B = new GroupBuilder().withName(CommandTestUtil.VALID_GRP_GROUP_B)
     //        .withFilePath(CommandTestUtil.VALID_PATH_GROUP_B).build();
 
