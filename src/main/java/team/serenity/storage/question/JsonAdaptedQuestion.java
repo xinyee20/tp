@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import team.serenity.commons.exceptions.IllegalValueException;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
+import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 
 /**
@@ -13,19 +16,19 @@ public class JsonAdaptedQuestion {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Question's %s field is missing!";
 
-    private final String group;
-    private final String lesson;
+    private final String groupName;
+    private final String lessonName;
     private final String description;
 
     /**
      * Constructs a {@code JsonAdaptedQuestion} with the given question details.
      */
     @JsonCreator
-    public JsonAdaptedQuestion(@JsonProperty("group") String group,
-                               @JsonProperty("lesson") String lesson,
+    public JsonAdaptedQuestion(@JsonProperty("group") String groupName,
+                               @JsonProperty("lesson") String lessonName,
                                @JsonProperty("description") String description) {
-        this.group = group;
-        this.lesson = lesson;
+        this.groupName = groupName;
+        this.lessonName = lessonName;
         this.description = description;
     }
 
@@ -33,9 +36,9 @@ public class JsonAdaptedQuestion {
      * Converts a given {@code Question} into this class for Jackson use.
      */
     public JsonAdaptedQuestion(Question source) {
-        this.group = source.getGroup();
-        this.lesson = source.getLesson();
-        this.description = source.getDescription();
+        this.groupName = source.getGroupName().groupName;
+        this.lessonName = source.getLessonName().lessonName;
+        this.description = source.getDescription().description;
     }
 
     /**
@@ -44,21 +47,28 @@ public class JsonAdaptedQuestion {
      * @throws IllegalValueException if there were any data constraints violated in the adapted question.
      */
     public Question toModelType() throws IllegalValueException {
-        if (this.group == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Group"));
+        if (this.groupName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                GroupName.class.getSimpleName()));
         }
+        final GroupName modelGroupName = new GroupName(this.groupName);
 
-        if (this.lesson == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Lesson"));
+        if (this.lessonName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                LessonName.class.getSimpleName()));
         }
+        final LessonName modelLessonName = new LessonName(this.lessonName);
 
         if (this.description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Description"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Description.class.getSimpleName()));
         }
-        if (!Question.isValidDescription(this.description)) {
-            throw new IllegalValueException(Question.MESSAGE_CONSTRAINTS);
+        if (!Description.isValidDescription(this.description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        return new Question(this.group, this.lesson, this.description);
+        final Description modelDescription = new Description(this.description);
+
+        return new Question(modelGroupName, modelLessonName, modelDescription);
     }
 
 }

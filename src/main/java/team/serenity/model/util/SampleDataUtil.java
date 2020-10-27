@@ -7,9 +7,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.lesson.UniqueLessonList;
+import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.student.UniqueStudentList;
@@ -75,8 +78,10 @@ public class SampleDataUtil {
 
     public static Question[] getSampleQuestion() {
         return new Question[]{
-            new Question("G04", "2-2", "What is the deadline for the report?"),
-            new Question("G05", "3-1", "When is the consultation held?")
+            new Question(new GroupName("G04"), new LessonName("2-2"),
+                new Description("What is the deadline for the report?")),
+            new Question(new GroupName("G05"), new LessonName("3-1"),
+                new Description("When is the consultation held?"))
         };
     }
 

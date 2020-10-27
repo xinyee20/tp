@@ -13,6 +13,7 @@ import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.util.UniqueList;
 
@@ -53,6 +54,11 @@ public class ModelStub implements Model {
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlySerenity getSerenity() {
         throw new AssertionError("This method should not be called.");
     }
 
