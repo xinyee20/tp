@@ -37,7 +37,7 @@ public class DelStudentCommand extends Command {
         + PREFIX_NAME + "Ryan "
         + PREFIX_MATRIC + "A1234567U\n"
         + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_GRP + "G04";
+        + PREFIX_GRP + "G04";
 
     private Optional<String> studentName;
     private Optional<String> studentId;
@@ -95,7 +95,8 @@ public class DelStudentCommand extends Command {
             }
         } else {
             if (index.get().getZeroBased() > uniqueStudentList.size()) {
-                throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.get().getOneBased()));
+                throw new CommandException(
+                        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.get().getOneBased()));
             }
 
             toDelete = Optional.ofNullable(uniqueStudentList.getList().get(index.get().getZeroBased()));
@@ -126,7 +127,6 @@ public class DelStudentCommand extends Command {
         return this.studentName.equals(other.studentName)
                 && this.studentId.equals(other.studentId)
                 && this.index.equals(other.index)
-                && this.isByIndex == (other.isByIndex)
                 && this.predicate.equals(other.predicate);
     }
 

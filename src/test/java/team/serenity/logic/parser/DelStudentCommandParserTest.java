@@ -46,7 +46,7 @@ public class DelStudentCommandParserTest {
         assertParseSuccess(parser, args, result);
         String indexArgs = " " + VALID_INDEX + " " + PREFIX_GRP + groupName;
         Index index = Index.fromOneBased(Integer.parseInt(VALID_INDEX));
-        DelStudentCommand indexTest = new DelStudentCommand(index,  new GroupContainsKeywordPredicate(groupName));
+        DelStudentCommand indexTest = new DelStudentCommand(index, new GroupContainsKeywordPredicate(groupName));
         assertParseSuccess(parser, indexArgs, indexTest);
     }
 }
