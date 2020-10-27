@@ -108,6 +108,11 @@ public interface Model {
     void addGroup(Group group);
 
     /**
+     * Exports the given group as XLSX file.
+     */
+    void exportGroup(Group group);
+
+    /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.

@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.core.LogsCenter;
+import team.serenity.commons.util.XlsxUtil;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
@@ -217,6 +218,13 @@ public class ModelManager implements Model {
             GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), uniqueLesson.getLessonName());
             this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(groupLessonKey, studentInfoList);
         }
+    }
+
+    @Override
+    public void exportGroup(Group group) {
+        requireNonNull(group);
+        XlsxUtil util = new XlsxUtil();
+        util.writeGroupToXlsx(group, this.studentInfoManager.getStudentInfoMap());
     }
 
     @Override

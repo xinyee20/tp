@@ -1,13 +1,17 @@
 package team.serenity.commons.util;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -16,10 +20,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
+import team.serenity.model.managers.StudentInfoManager;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -44,6 +51,14 @@ public class XlsxUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Creates a XlsxUtil object that exports a group as a XLSX file.
+     */
+    public XlsxUtil() {
+        workbook = new XSSFWorkbook();
+        sheet = workbook.createSheet();
     }
 
     /**
@@ -228,6 +243,53 @@ public class XlsxUtil {
             } else {
                 return 0;
             }
+        }
+    }
+
+    /**
+     * Write data to XLSX file
+     */
+    public void writeGroupToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+        UniqueList<Lesson> lessonList = group.getLessons();
+
+        List<List<Object>> data = new ArrayList<>();
+
+        for (Lesson lesson : lessonList) {
+            List<Object> studentDetails = new ArrayList<>();
+            GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+            for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
+                studentDetails.add(studentInfo.getStudent().getStudentName());
+                studentDetails.add(studentInfo.getStudent().getStudentNo());
+                studentDetails.add(studentInfo.getAttendance());
+            }
+        }
+
+        Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
+
+        int rowCount = 0;
+
+        for (Object[] aBook : bookData) {
+            Row row = sheet.createRow(++rowCount);
+
+            int columnCount = 0;
+
+            for (Object field : aBook) {
+                Cell cell = row.createCell(++columnCount);
+                if (field instanceof String) {
+                    cell.setCellValue((String) field);
+                } else if (field instanceof Integer) {
+                    cell.setCellValue((Integer) field);
+                }
+            }
+        }
+
+
+        try {
+            String outputFIleName = String.format("%s_attendance.xlsx", group.getGroupName().toString());
+            FileOutputStream outputStream = new FileOutputStream(outputFIleName);
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

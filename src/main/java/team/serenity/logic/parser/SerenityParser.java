@@ -24,6 +24,7 @@ import team.serenity.logic.commands.question.ViewQnCommand;
 import team.serenity.logic.commands.student.AddStudentCommand;
 import team.serenity.logic.commands.student.DelStudentCommand;
 import team.serenity.logic.commands.studentinfo.AddScoreCommand;
+import team.serenity.logic.commands.studentinfo.ExportAttCommand;
 import team.serenity.logic.commands.studentinfo.FlagAttCommand;
 import team.serenity.logic.commands.studentinfo.MarkAbsentCommand;
 import team.serenity.logic.commands.studentinfo.MarkPresentCommand;
@@ -40,6 +41,7 @@ import team.serenity.logic.parser.question.FindQnCommandParser;
 import team.serenity.logic.parser.student.AddStudentCommandParser;
 import team.serenity.logic.parser.student.DelStudentCommandParser;
 import team.serenity.logic.parser.studentinfo.AddScoreCommandParser;
+import team.serenity.logic.parser.studentinfo.ExportAttCommandParser;
 import team.serenity.logic.parser.studentinfo.FlagAttCommandParser;
 import team.serenity.logic.parser.studentinfo.MarkAbsentCommandParser;
 import team.serenity.logic.parser.studentinfo.MarkPresentCommandParser;
@@ -108,6 +110,9 @@ public class SerenityParser {
 
         case UnflagAttCommand.COMMAND_WORD:
             return new UnflagAttCommandParser().parse(arguments);
+
+        case ExportAttCommand.COMMAND_WORD:
+            return new ExportAttCommandParser().parse(arguments);
 
         case SetScoreCommand.COMMAND_WORD:
             return new SetScoreCommandParser().parse(arguments);
