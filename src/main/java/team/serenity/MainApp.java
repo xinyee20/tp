@@ -17,10 +17,10 @@ import team.serenity.logic.Logic;
 import team.serenity.logic.LogicManager;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
-import team.serenity.model.ReadOnlySerenity;
-import team.serenity.model.Serenity;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.model.util.SampleDataUtil;
@@ -87,8 +87,6 @@ public class MainApp extends Application {
 
     private ReadOnlySerenity initSerenity(Storage storage) {
         ReadOnlySerenity serenity;
-        serenity = new Serenity();
-        /*
         try {
             Optional<ReadOnlySerenity> serenityOptional = storage.readSerenity();
             if (serenityOptional.isEmpty()) {
@@ -98,23 +96,13 @@ public class MainApp extends Application {
                 serenityOptional.orElseGet(SampleDataUtil::getSampleSerenity);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty"
-                + "Serenity.");
+                + " Serenity.");
             serenity = new Serenity();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty "
                 + "Serenity.");
             serenity = new Serenity();
         }
-
-        try {
-            storage.saveSerenity(serenity);
-            logger.info("Saving initial data of Serenity.");
-        } catch (IOException e) {
-            logger.warning("Problem while saving to the file.");
-        }
-
-         */
-
         return serenity;
     }
 
@@ -132,14 +120,14 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample QuestionManager.");
             }
             questionManager =
-                    questionManagerOptional.orElseGet(SampleDataUtil::getSampleQuestionManager);
+                questionManagerOptional.orElseGet(SampleDataUtil::getSampleQuestionManager);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty"
-                    + "QuestionManager.");
+                + "QuestionManager.");
             questionManager = new QuestionManager();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty "
-                    + "QuestionManager.");
+                + "QuestionManager.");
             questionManager = new QuestionManager();
         }
 

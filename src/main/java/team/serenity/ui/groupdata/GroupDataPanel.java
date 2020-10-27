@@ -12,8 +12,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import team.serenity.commons.core.LogsCenter;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.student.Student;
 import team.serenity.ui.DataPanel;
 
 public class GroupDataPanel extends DataPanel {

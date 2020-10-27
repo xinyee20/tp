@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 class JsonAdaptedGroupTest {
 
-    private static final String VALID_NAME = GROUP_A.getName();
+    private static final String VALID_NAME = GROUP_A.getGroupName().toString();
     private static final List<JsonAdaptedStudent> VALID_STUDENTS = GROUP_A.getStudents().asUnmodifiableObservableList()
             .stream()
         .map(JsonAdaptedStudent::new)
