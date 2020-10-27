@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import team.serenity.logic.commands.question.AddQnCommand;
 import team.serenity.model.group.question.Description;
-import team.serenity.model.group.question.Question;
-import team.serenity.testutil.question.QuestionBuilder;
 
 class AddQnCommandParserTest {
 

@@ -11,7 +11,7 @@ import team.serenity.model.managers.QuestionManager;
 public class TypicalQuestion {
 
     public static final Description QUESTION_A_DESC = new Description("What is the deadline for the report?");
-    public static final Description QUESTION_B_DESC = new Description("What do we need to prepare for tomorrow's lesson?");
+    public static final Description QUESTION_B_DESC = new Description("What do we need to prepare for the lesson?");
     public static final Description QUESTION_C_DESC = new Description("How is the grading criteria like?");
 
     public static final Question QUESTION_A = new QuestionBuilder().withGroupName("G04")

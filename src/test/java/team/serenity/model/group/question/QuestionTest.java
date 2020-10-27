@@ -1,9 +1,7 @@
 package team.serenity.model.group.question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;

@@ -11,7 +11,6 @@ import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Description;
-import team.serenity.model.group.question.Question;
 
 class JsonAdaptedQuestionTest {
 

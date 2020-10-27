@@ -78,8 +78,10 @@ public class SampleDataUtil {
 
     public static Question[] getSampleQuestion() {
         return new Question[]{
-            new Question(new GroupName("G04"), new LessonName("2-2"), new Description("What is the deadline for the report?")),
-            new Question(new GroupName("G05"), new LessonName("3-1"), new Description("When is the consultation held?"))
+            new Question(new GroupName("G04"), new LessonName("2-2"),
+                new Description("What is the deadline for the report?")),
+            new Question(new GroupName("G05"), new LessonName("3-1"),
+                new Description("When is the consultation held?"))
         };
     }
 

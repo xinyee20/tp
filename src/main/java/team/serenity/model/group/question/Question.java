@@ -1,6 +1,5 @@
 package team.serenity.model.group.question;
 
-import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;

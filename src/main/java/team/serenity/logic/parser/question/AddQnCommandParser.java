@@ -13,7 +13,6 @@ import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.question.Description;
-import team.serenity.model.group.question.Question;
 
 /**
  * Parses input arguments and creates a new AddQnCommand object.
