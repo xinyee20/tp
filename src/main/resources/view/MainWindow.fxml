@@ -60,7 +60,7 @@
             <left>
                <ScrollPane prefWidth="85.0" BorderPane.alignment="CENTER">
                  <content>
-                     <VBox fx:id="buttonPanelPlaceholder" alignment="CENTER" fillWidth="false" prefWidth="85.0" spacing="10">
+                     <VBox spacing="10" fx:id="buttonPanelPlaceholder" alignment="CENTER" fillWidth="false" prefWidth="85.0">
                         <opaqueInsets>
                            <Insets />
                         </opaqueInsets>

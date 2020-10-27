@@ -1,5 +1,6 @@
 package team.serenity.ui;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -8,6 +9,8 @@ public class ButtonBar extends VBox {
 
     public ButtonBar() {
         setFillWidth(true);
+        setSpacing(10);
+        setPadding(new Insets(10, 0, 0, 0));
     }
 
     public void addButton(Button button) {

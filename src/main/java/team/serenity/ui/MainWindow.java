@@ -411,11 +411,13 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isFlagAtt()) {
                 toggleSerenityView();
                 handleFlagAtt();
+                this.titleDisplay.setDefaultTitle();
             }
 
             if (commandResult.isViewQn()) {
                 toggleSerenityView();
                 handleViewQn();
+                this.titleDisplay.setDefaultTitle();
             }
 
             return commandResult;
