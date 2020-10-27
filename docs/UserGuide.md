@@ -13,19 +13,19 @@ title: User guide
 
 ## **1. Introduction**
 
-<p>Welcome to the User Guide of <b>Serenity</b> </p>
+Welcome to the User Guide of **Serenity**!
 
-<p>Are you a tutor teaching CS2101 in NUS? Do you struggle to keep track of students' attendance and class participation
+Are you a tutor teaching CS2101 in NUS? Do you struggle to keep track of students' attendance and class participation
 on many different excel sheets for different lessons? Do you also tend to forget to address questions students asked
-during lessons? Fret not, our application, <b>Serenity</b>, will help keep you sane when managing tutorial groups.</p>
+during lessons? Fret not, our application, **Serenity**, will help keep you sane when managing tutorial groups.
 
-<p><b>Serenity</b> is a desktop application that helps CS2101 tutors manage their lessons. This application is optimized
+**Serenity** is a desktop application that helps CS2101 tutors manage their lessons. This application is optimized
 for use through a <i>Command Line Interface (CLI)</i>, meaning that you operate the application by typing commands into a
 command box. This application also has a <i>Graphical User Interface (GUI)</i>, 
-where you can interact with the application through graphical icons such as buttons.</p>
+where you can interact with the application through graphical icons such as buttons.
 
-<p>This user guide serves to provide you with an in-depth documentation on how to set up and use our application.
-With that said, let's get <a href="#quickstart">started</a>!</p>
+This user guide serves to provide you with an in-depth documentation on how to set up and use our application.
+With that said, let's get [started](#2-quick-start)!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -326,7 +326,7 @@ All students in group `G04` are present for your tutorial lesson `1-2` of tutori
 Marking all students in a tutorial group as present for a tutorial lesson:
 
 To mark all of them present at once:
-1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `markpresent all` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -354,7 +354,7 @@ A student named `Aaron Tan` with student number `A0123456U` is present for your 
 Marking a student as present for a tutorial lesson by `name` and `student number`:
 
 To mark him present:
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `markpresent name/AARON TAN matric/A0123456U` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -362,7 +362,7 @@ To mark him present:
 Marking a student as present for a tutorial lesson by `index` number:
 
 To mark him present:
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `markpresent 1` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -389,14 +389,14 @@ A student named `Aaron Tan` with student number `A0123456U` is absent for your t
 <ins>Method 1</ins> <br>
 Marking a student as absent for a tutorial lesson by `name` and `student number`:
 
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `markabsent name/AARON TAN matric/A0123456U` into the *Command Box*.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Marking a student as absent for a tutorial lesson by `index` number:
 
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `markabsent 1` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -421,7 +421,7 @@ All students in group `G04` are present for your tutorial lesson `1-2` of tutori
 
 Marking all students in a tutorial group as absent for a tutorial lesson:
 
-1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group `G04` lesson `1-2` via [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `markabsent all` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -448,14 +448,14 @@ other tutor later on. `Aaron Tan` is the first person on the student list so his
 <ins>Method 1</ins> <br>
 Flagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `flagatt name/AARON TAN matric/A0123456U` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins><br>
 Flagging a student's attendance for a tutorial lesson by his `index` number:
 
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `flagatt 1` into the _Command Box_.
 3. Press `Enter` to execute.
 
@@ -483,14 +483,14 @@ so his `index` number is 1.
 <ins>Method 1</ins> <br>
 Unflagging a student's attendance for a tutorial lesson by his `name` and `student number`:
 
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `unflagatt name/AARON TAN matric/A0123456U` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins><br>
 Unflagging a student's attendance for a tutorial lesson by his `index` number:
 
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `unflagatt 1` into the _Command Box_.
 3. Press `Enter` to execute.
 
@@ -557,14 +557,14 @@ the student list so his `index` number is 1.
 <ins>Method 1</ins> <br>
 Set participation score of a student in a tutorial lesson by `name` and `student number`:
 
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `setscore name/AARON TAN matric/A0123456U score/3` into the *Command Box*.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Set participation score of a student in a tutorial lesson by `index` number:
 
-1. Navigate to view group G04 lesson 1-2 via [`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view group G04 lesson 1-2 via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `setscore 1 score/3` into the *Command Box*.
 3. Press `Enter` to execute.
 
@@ -595,14 +595,14 @@ is the first person on the student list so his `index` number is 1.
 <ins>Method 1</ins> <br>
 Adding participation score of a student in a tutorial lesson by `name` and `student number`:
 
-1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `addscore name/AARON TAN matric/A0123456U add/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Adding participation score of a student in a tutorial lesson by `index`number:
 
-1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `addscore 1 add/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
@@ -634,14 +634,14 @@ is the first person on the student list so his `index` number is 1.
 <ins>Method 1</ins> <br>
 Subtracting participation score of a student in a tutorial lesson by `name` and `student number`:
 
-1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `subscore name/AARON TAN matric/A0123456U sub/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Subtracting participation score of a student in a tutorial lesson:
 
-1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via ![`viewlsn`](#452-view-an-existing-tutorial-lesson-viewlsn) command.
+1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `subscore 1 sub/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
