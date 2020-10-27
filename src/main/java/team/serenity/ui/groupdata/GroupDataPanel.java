@@ -56,8 +56,11 @@ public class GroupDataPanel extends DataPanel {
         this.studentListView.setCellFactory(listView -> new StudentListViewCell());
         this.lessonListView.setItems(lessonList);
         this.lessonListView.setCellFactory(listView -> new LessonListViewCell());
+        populateTable(lessonList, studentList);
+    }
 
-        for (int i = 0; i < studentList.size() ; i++) {
+    private void populateTable(ObservableList<Lesson> lessonList, ObservableList<Student> studentList) {
+        for (int i = 0; i < studentList.size(); i++) {
             attendanceTableView.getItems().add(i);
             participationTableView.getItems().add(i);
         }
@@ -73,6 +76,7 @@ public class GroupDataPanel extends DataPanel {
             attendanceColumnList.add(attendanceColumn);
             participationColumnList.add(participationColumn);
         }
+
         this.attendanceTableView.getColumns().setAll(attendanceColumnList);
         this.participationTableView.getColumns().setAll(participationColumnList);
     }
@@ -104,7 +108,8 @@ public class GroupDataPanel extends DataPanel {
         return column;
     }
 
-    private TableColumn<Integer, String> getParticipationColumn(ObservableList<StudentInfo> studentInfos, Lesson lesson) {
+    private TableColumn<Integer, String> getParticipationColumn(ObservableList<StudentInfo> studentInfos,
+                                                                Lesson lesson) {
         TableColumn<Integer, String> column = new TableColumn<>();
         column.setText(lesson.getLessonName().toString());
         column.setCellValueFactory(cellData -> {
