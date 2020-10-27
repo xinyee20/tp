@@ -77,6 +77,7 @@ class JsonAdaptedGroup {
         final List<Student> groupStudents = new ArrayList<>();
 
         for (JsonAdaptedStudent student : this.students) {
+            Student studentModel = student.toModelType();
             groupStudents.add(student.toModelType());
         }
 

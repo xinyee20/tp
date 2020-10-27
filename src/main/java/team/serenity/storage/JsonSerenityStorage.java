@@ -16,6 +16,7 @@ import team.serenity.commons.util.JsonUtil;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 
 
 /**
@@ -57,7 +58,8 @@ public class JsonSerenityStorage implements SerenityStorage {
         }
 
         try {
-            return Optional.of(jsonSerenity.get().toModelType());
+            Serenity fromData = jsonSerenity.get().toModelType();
+            return Optional.of(fromData);
         } catch (DuplicateException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
