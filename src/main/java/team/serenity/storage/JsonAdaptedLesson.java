@@ -57,7 +57,8 @@ class JsonAdaptedLesson {
                 LessonName.class.getSimpleName()));
         }
         if (this.studentInfos == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UniqueStudentInfoList.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                UniqueStudentInfoList.class.getSimpleName()));
         }
 
         if (!LessonName.isValidName(this.name)) {

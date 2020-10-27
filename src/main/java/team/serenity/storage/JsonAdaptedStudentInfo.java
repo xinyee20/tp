@@ -63,6 +63,9 @@ public class JsonAdaptedStudentInfo {
             throw new IllegalValueException(Participation.MESSAGE_CONSTRAINTS);
         }
 
+        if (!Attendance.isValidAttendance(isPresent, isFlagged)) {
+            throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
+        }
 
         Student student = this.student.toModelType();
         Attendance attendance = new Attendance(this.isPresent, this.isFlagged);

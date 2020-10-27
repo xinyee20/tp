@@ -43,20 +43,24 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
 
-        if (this.name ==  null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentName.class.getSimpleName()));
+        if (this.name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                StudentName.class.getSimpleName()));
         }
 
         if (this.studentNo == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                StudentNumber.class.getSimpleName()));
         }
 
         if (!StudentName.isValidName(this.name)) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentName.MESSAGE_CONSTRAINTS));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                StudentName.MESSAGE_CONSTRAINTS));
         }
 
         if (!StudentNumber.isValidName(this.name)) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentNumber.MESSAGE_CONSTRAINTS));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                StudentNumber.MESSAGE_CONSTRAINTS));
         }
 
         return new Student(this.name, this.studentNo);

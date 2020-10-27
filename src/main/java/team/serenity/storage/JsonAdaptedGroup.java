@@ -14,8 +14,6 @@ import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.student.UniqueStudentList;
-import team.serenity.model.group.studentinfo.StudentInfo;
-import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -57,15 +55,18 @@ class JsonAdaptedGroup {
     public Group toModelType() throws IllegalValueException {
 
         if (this.groupName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                GroupName.class.getSimpleName()));
         }
 
         if (this.students == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UniqueStudentList.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                UniqueStudentList.class.getSimpleName()));
         }
 
         if (this.lessons == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UniqueLessonList.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                UniqueLessonList.class.getSimpleName()));
         }
 
         if (!GroupName.isValidName(this.groupName)) {
