@@ -57,7 +57,7 @@ public class SerenityParserUtil {
             score = Integer.parseInt(trimmedScore);
             return score;
         } catch (Exception e) {
-            throw new ParseException(Participation.SCORE_ERROR);
+            throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
         }
     }
 

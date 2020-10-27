@@ -55,7 +55,7 @@ class JsonSerializableSerenity {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public Serenity toModelType() throws IllegalArgumentException, DuplicateException {
+    public Serenity toModelType() throws IllegalValueException, DuplicateException {
         UniqueList<Group> groups = new UniqueGroupList();
         for (JsonAdaptedGroup jsonAdaptedGroup : this.groups) {
             Group group = jsonAdaptedGroup.toModelType();
