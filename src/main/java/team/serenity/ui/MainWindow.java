@@ -3,6 +3,7 @@ package team.serenity.ui;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -22,8 +23,10 @@ import team.serenity.logic.Logic;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.model.group.Group;
 import team.serenity.ui.groupdata.GroupDataPanel;
 import team.serenity.ui.lessondata.LessonDataPanel;
+import team.serenity.ui.serenitydata.SerenityDataPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -39,11 +42,13 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private TitleDisplay titleDisplay;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ButtonBar buttonBar;
 
     // Ui parts relating to serenity
+    private DataPanel serenityDataPanel;
     private DataPanel groupDataPanel;
     private DataPanel lessonDataPanel;
 
@@ -55,6 +60,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane titleDisplayPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -126,6 +134,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        toggleSerenityView();
+
+        this.titleDisplay = new TitleDisplay();
+        this.titleDisplayPlaceholder.getChildren().add(this.titleDisplay.getRoot());
+
         this.resultDisplay = new ResultDisplay();
         this.resultDisplayPlaceholder.getChildren().add(this.resultDisplay.getRoot());
 
@@ -134,6 +147,17 @@ public class MainWindow extends UiPart<Stage> {
 
         this.buttonBar = new ButtonBar();
         this.buttonPanelPlaceholder.getChildren().add(this.buttonBar);
+    }
+
+    /**
+     * Adds group buttons for existing groups.
+     */
+    void loadGroupButtons() {
+        if (logic.hasGroup()) {
+            for (Group group : logic.getGroups()) {
+                handleAddGrp(group.getGroupName().toString());
+            }
+        }
     }
 
     /**
@@ -198,42 +222,87 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Switch to serenity data view.
+     */
+    @FXML
+    private void toggleSerenityView() {
+        this.serenityDataPanel = new SerenityDataPanel(this.logic.getAllStudentInfo(),
+            this.logic.getFilteredQuestionList());
+        this.dataDisplayPlaceholder.getChildren().clear();
+        this.dataDisplayPlaceholder.getChildren().add(this.serenityDataPanel.getRoot());
+    }
+
+    /**
      * Adds a new group button.
      */
     @FXML
     private void handleAddGrp(String groupName) {
         Button groupButton = new Button(groupName);
         setUpGroupButton(groupButton);
-        buttonBar.addGroupButton(groupButton);
+    }
+
+    public void setUpButton(Button button, String imgUrl, EventHandler<ActionEvent> event) {
+        button.setLayoutX(20);
+        button.setLayoutY(65);
+        button.setMnemonicParsing(false);
+        button.setPrefWidth(65);
+        button.setId(button.getText());
+
+        Image image = new Image(imgUrl);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(15);
+        imageView.setFitWidth(15);
+        imageView.setPickOnBounds(true);
+        imageView.setPreserveRatio(true);
+
+        button.setGraphic(imageView);
+        VBox.setMargin(buttonPanelPlaceholder, new Insets(10));
+        button.setOnAction(event);
+        buttonBar.addButton(button);
+    }
+
+    public void setUpAttButton() {
+        Button attButton = new Button("Att");
+        String attImgUrl = "images/flag.png";
+        EventHandler<ActionEvent> attEvent = event -> {
+            String commandText = "viewflag";
+            try {
+                executeCommand(commandText);
+            } catch (CommandException | ParseException e) {
+                e.printStackTrace();
+            }
+        };
+        setUpButton(attButton, attImgUrl, attEvent);
+    }
+
+    public void setUpQnButton() {
+        Button qnButton = new Button("Qn");
+        String qnImgUrl = "images/question.png";
+        EventHandler<ActionEvent> qnEvent = event -> {
+            String commandText = "viewqn";
+            try {
+                executeCommand(commandText);
+            } catch (CommandException | ParseException e) {
+                e.printStackTrace();
+            }
+        };
+        setUpButton(qnButton, qnImgUrl, qnEvent);
     }
 
     /**
      * Sets up the newly created group button.
      */
     public void setUpGroupButton(Button groupButton) {
-        groupButton.setLayoutX(20);
-        groupButton.setLayoutY(65);
-        groupButton.setMnemonicParsing(false);
-        groupButton.setPrefWidth(65);
-        groupButton.setId(groupButton.getText());
-
-        Image groupImage = new Image("images/group.png");
-        ImageView groupImageView = new ImageView(groupImage);
-        groupImageView.setFitHeight(15);
-        groupImageView.setFitWidth(15);
-        groupImageView.setPickOnBounds(true);
-        groupImageView.setPreserveRatio(true);
-
-        groupButton.setGraphic(groupImageView);
-        VBox.setMargin(buttonPanelPlaceholder, new Insets(10));
-        groupButton.setOnAction(event -> {
+        String groupImgUrl = "images/group.png";
+        EventHandler<ActionEvent> groupEvent = event -> {
             String commandText = "viewgrp grp/" + groupButton.getText();
             try {
                 executeCommand(commandText);
             } catch (CommandException | ParseException e) {
                 e.printStackTrace();
             }
-        });
+        };
+        setUpButton(groupButton, groupImgUrl, groupEvent);
     }
 
     /**
@@ -243,7 +312,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDelGrp(String groupName) {
         for (Node groupButton : buttonBar.getChildren()) {
             if (groupButton.getId().equals(groupName)) {
-                buttonBar.deleteGroupButton(groupButton);
+                buttonBar.deleteButton(groupButton);
                 break;
             }
         }
@@ -263,6 +332,30 @@ public class MainWindow extends UiPart<Stage> {
     private void handleViewScore() {
         GroupDataPanel groupDataPanel = (GroupDataPanel) this.groupDataPanel;
         groupDataPanel.changeParticipationTab();
+    }
+
+    /**
+     * View all students with flagged attendance.
+     */
+    private void handleFlagAtt() {
+        SerenityDataPanel serenityDataPanel = (SerenityDataPanel) this.serenityDataPanel;
+        serenityDataPanel.changeFlaggedAttendanceTab();
+    }
+
+    /**
+     * View all pending questions.
+     */
+    private void handleViewQn() {
+        SerenityDataPanel serenityDataPanel = (SerenityDataPanel) this.serenityDataPanel;
+        serenityDataPanel.changeQuestionTab();
+    }
+
+    private String getGroupName(String commandText) {
+        return commandText.split(" ")[1].split("/")[1];
+    }
+
+    private String getLessonName(String commandText) {
+        return commandText.split(" ")[2].split("/")[1];
     }
 
     /**
@@ -286,21 +379,24 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isToggleGrpView()) {
                 toggleGrpView();
+                String groupName = getGroupName(commandText);
+                this.titleDisplay.setGroupTitle(groupName);
             }
 
             if (commandResult.isToggleLsnView()) {
                 toggleLsnView();
+                String groupName = getGroupName(commandText);
+                String lessonName = getLessonName(commandText);
+                this.titleDisplay.setLessonTitle(groupName, lessonName);
             }
 
             if (commandResult.isAddGrp()) {
-                // commandText would be in AddGrpCommand format correctly by the time it reaches here
-                String groupName = commandText.split(" ")[1].split("/")[1];
+                String groupName = getGroupName(commandText);
                 handleAddGrp(groupName);
             }
 
             if (commandResult.isDelGrp()) {
-                // commandText would be in DelGrpCommand format correctly by the time it reaches here
-                String groupName = commandText.split(" ")[1].split("/")[1];
+                String groupName = getGroupName(commandText);
                 handleDelGrp(groupName);
             }
 
@@ -310,6 +406,18 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isViewScore()) {
                 handleViewScore();
+            }
+
+            if (commandResult.isFlagAtt()) {
+                toggleSerenityView();
+                handleFlagAtt();
+                this.titleDisplay.setDefaultTitle();
+            }
+
+            if (commandResult.isViewQn()) {
+                toggleSerenityView();
+                handleViewQn();
+                this.titleDisplay.setDefaultTitle();
             }
 
             return commandResult;

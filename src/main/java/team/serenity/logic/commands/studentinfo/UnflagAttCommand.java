@@ -91,10 +91,10 @@ public class UnflagAttCommand extends Command {
                 Attendance current = studentInfo.getAttendance();
                 this.isCorrectStudent = studentInfo.containsStudent(this.toUnflagAtt.get());
                 if (this.isCorrectStudent) {
-                    if (!current.getFlagged()) {
+                    if (!current.isFlagged()) {
                         throw new CommandException(MESSAGE_FAILURE);
                     }
-                    Attendance update = new Attendance(current.getAttendance(), false);
+                    Attendance update = new Attendance(current.isPresent(), false);
                     StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
@@ -115,10 +115,10 @@ public class UnflagAttCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             Attendance current = studentInfo.getAttendance();
             toUnflagAtt = Optional.ofNullable(studentInfo.getStudent());
-            if (!current.getFlagged()) {
+            if (!current.isFlagged()) {
                 throw new CommandException(MESSAGE_FAILURE);
             }
-            Attendance update = new Attendance(current.getAttendance(), false);
+            Attendance update = new Attendance(current.isPresent(), false);
             StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
             uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
             model.updateLessonList();

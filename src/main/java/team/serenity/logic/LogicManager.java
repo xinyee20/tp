@@ -100,8 +100,23 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<StudentInfo> getAllStudentInfo() {
+        return this.model.getAllStudentInfo();
+    }
+
+    @Override
     public ObservableList<Question> getFilteredQuestionList() {
         return this.model.getFilteredQuestionList();
+    }
+
+    @Override
+    public boolean hasGroup() {
+        return model.hasAGroup();
+    }
+
+    @Override
+    public ObservableList<Group> getGroups() {
+        return model.getGroupManager().getListOfGroups();
     }
 
 }

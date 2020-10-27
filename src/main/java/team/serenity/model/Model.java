@@ -12,6 +12,7 @@ import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
@@ -62,6 +63,11 @@ public interface Model {
     ReadOnlySerenity getSerenity();
 
     /**
+     * Returns the GroupManager.
+     */
+    GroupManager getGroupManager();
+
+    /**
      * Returns the user prefs' serenity file path.
      */
     Path getSerenityFilePath();
@@ -98,6 +104,16 @@ public interface Model {
     void addGroup(Group group);
 
     /**
+     * Exports attendance data of the given group as XLSX file.
+     */
+    void exportAttendance(Group group);
+
+    /**
+     * Exports participation data of the given group as XLSX file.
+     */
+    void exportParticipation(Group group);
+
+    /**
      * Returns true if a group with a GroupName that is the same as {@code toCheck} exists in the
      * GroupManager.
      *
@@ -112,6 +128,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Get all student info objects from all groups.
+     */
+    ObservableList<StudentInfo> getAllStudentInfo();
 
     // ========== LessonManager ==========
 

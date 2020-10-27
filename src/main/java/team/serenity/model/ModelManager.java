@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.core.LogsCenter;
+import team.serenity.commons.util.XlsxUtil;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.GroupName;
@@ -147,6 +148,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public GroupManager getGroupManager() {
+        return groupManager;
+    }
+
+    @Override
     public Path getSerenityFilePath() {
         return this.userPrefs.getSerenityFilePath();
     }
@@ -213,6 +219,20 @@ public class ModelManager implements Model {
             GroupLessonKey groupLessonKey = new GroupLessonKey(newGroup.getGroupName(), uniqueLesson.getLessonName());
             this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(groupLessonKey, studentInfoList);
         }
+    }
+
+    @Override
+    public void exportAttendance(Group group) {
+        requireNonNull(group);
+        XlsxUtil util = new XlsxUtil();
+        util.writeAttendanceToXlsx(group, this.studentInfoManager.getStudentInfoMap());
+    }
+
+    @Override
+    public void exportParticipation(Group group) {
+        requireNonNull(group);
+        XlsxUtil util = new XlsxUtil();
+        util.writeParticipationToXlsx(group, this.studentInfoManager.getStudentInfoMap());
     }
 
     @Override
@@ -340,6 +360,21 @@ public class ModelManager implements Model {
             this.studentsInfo.setAll(studentInfos);
             this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, uniqueStudentInfoList);
         }
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getAllStudentInfo() {
+        ObservableList<StudentInfo> studentInfoList = null;
+        for (Group group : getListOfGroups()) {
+            for (Lesson lesson : group.getLessons()) {
+                if (studentInfoList == null) {
+                    studentInfoList = new ArrayObservableList<>(lesson.getStudentsInfoAsUnmodifiableObservableList());
+                } else {
+                    studentInfoList.addAll(lesson.getStudentsInfo().getList());
+                }
+            }
+        }
+        return studentInfoList;
     }
 
     // ========== QuestionManager ==========

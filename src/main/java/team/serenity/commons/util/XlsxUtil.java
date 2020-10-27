@@ -1,13 +1,17 @@
 package team.serenity.commons.util;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -16,8 +20,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentNumber;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
@@ -48,6 +55,13 @@ public class XlsxUtil {
         }
     }
 
+    /**
+     * Creates a XlsxUtil object that exports a group as a XLSX file.
+     */
+    public XlsxUtil() {
+        workbook = new XSSFWorkbook();
+        sheet = workbook.createSheet();
+    }
     /**
      * Creates a XlsxUtil object that manages XLSX files.
      *
@@ -241,6 +255,112 @@ public class XlsxUtil {
             } else {
                 return 0;
             }
+        }
+    }
+
+    /**
+     * Write attendance data to XLSX file.
+     */
+    public void writeAttendanceToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+        UniqueList<Student> studentList = group.getSortedStudents();
+        UniqueList<Lesson> lessonList = group.getSortedLessons();
+
+        List<List<Object>> data = new ArrayList<>();
+        Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
+
+        for (Lesson lesson : lessonList) {
+            GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+            for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
+                Student student = studentInfo.getStudent();
+                Optional<List<Integer>> attendanceList = Optional.ofNullable(studentDetailsMap.get(student));
+                List<Integer> newAttendanceList;
+                if (attendanceList.isEmpty()) {
+                    newAttendanceList = new ArrayList<>();
+                } else {
+                    newAttendanceList = attendanceList.get();
+                }
+                newAttendanceList.add(studentInfo.getAttendance().getIntegerAttendance());
+                studentDetailsMap.put(student.getStudentNo(), newAttendanceList);
+            }
+        }
+
+        for (Student student : studentList) {
+            List<Object> studentDetails = new ArrayList<>();
+            studentDetails.add(student.getStudentName().toString());
+            studentDetails.add(student.getStudentNo().toString());
+            List<Integer> attendanceList = studentDetailsMap.get(student.getStudentNo());
+            studentDetails.addAll(attendanceList);
+            data.add(studentDetails);
+        }
+
+        String outputFileName = String.format("%s_attendance.xlsx", group.getGroupName().toString());
+        writeDataToXlsx(data, outputFileName);
+    }
+
+    /**
+     * Write participation score data to XLSX file.
+     */
+    public void writeParticipationToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+        UniqueList<Student> studentList = group.getSortedStudents();
+        UniqueList<Lesson> lessonList = group.getSortedLessons();
+
+        List<List<Object>> data = new ArrayList<>();
+        Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
+
+        for (Lesson lesson : lessonList) {
+            GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+            for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
+                Student student = studentInfo.getStudent();
+                Optional<List<Integer>> participationList = Optional.ofNullable(studentDetailsMap.get(student));
+                List<Integer> newParticipationList;
+                if (participationList.isEmpty()) {
+                    newParticipationList = new ArrayList<>();
+                } else {
+                    newParticipationList = participationList.get();
+                }
+                newParticipationList.add(studentInfo.getParticipation().getScore());
+                studentDetailsMap.put(student.getStudentNo(), newParticipationList);
+            }
+        }
+
+        for (Student student : studentList) {
+            List<Object> studentDetails = new ArrayList<>();
+            studentDetails.add(student.getStudentName().toString());
+            studentDetails.add(student.getStudentNo().toString());
+            List<Integer> participationList = studentDetailsMap.get(student.getStudentNo());
+            studentDetails.addAll(participationList);
+            data.add(studentDetails);
+        }
+
+        String outputFileName = String.format("%s_participation.xlsx", group.getGroupName().toString());
+        writeDataToXlsx(data, outputFileName);
+    }
+
+    private void writeDataToXlsx(List<List<Object>> data, String outputFileName) {
+        Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
+
+        int rowCount = 0;
+
+        for (Object[] aBook : bookData) {
+            Row row = sheet.createRow(++rowCount);
+
+            int columnCount = 0;
+
+            for (Object field : aBook) {
+                Cell cell = row.createCell(++columnCount);
+                if (field instanceof String) {
+                    cell.setCellValue((String) field);
+                } else if (field instanceof Integer) {
+                    cell.setCellValue((Integer) field);
+                }
+            }
+        }
+
+        try {
+            FileOutputStream outputStream = new FileOutputStream(outputFileName);
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

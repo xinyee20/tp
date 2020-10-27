@@ -49,7 +49,15 @@ public class Attendance {
         return Boolean.toString(this.isPresent);
     }
 
-    public boolean getAttendance() {
+    public int getIntegerAttendance() {
+        if (this.isPresent) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean isPresent() {
         return this.isPresent;
     }
 
@@ -58,13 +66,13 @@ public class Attendance {
         return updatedAttendance;
     }
 
-    public boolean getFlagged() {
+    public boolean isFlagged() {
         return this.isFlagged;
     }
 
     @Override
     public boolean equals(Object obj) {
         Attendance other = (Attendance) obj;
-        return other.getAttendance() == getAttendance() && other.getFlagged() == getFlagged();
+        return other.isPresent() == isPresent() && other.isFlagged() == isFlagged();
     }
 }
