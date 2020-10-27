@@ -1,4 +1,4 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.studentinfo;
 
 import org.junit.jupiter.api.Test;
 

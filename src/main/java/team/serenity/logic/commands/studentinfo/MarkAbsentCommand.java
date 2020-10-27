@@ -32,12 +32,12 @@ public class MarkAbsentCommand extends Command {
             + ": Marks a specific student or all students absent from a lesson.\n"
             + "Parameters: "
             + "all or "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX\n"
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456U\n"
             + "or " + COMMAND_WORD + " 2";
 
     private Optional<Student> toMarkAbsent;
