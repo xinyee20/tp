@@ -6,18 +6,19 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import team.serenity.model.ReadOnlySerenity;
-import team.serenity.model.Serenity;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueLessonList;
-import team.serenity.model.group.UniqueStudentInfoList;
-import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.UniqueStudentList;
+import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -25,28 +26,27 @@ import team.serenity.model.managers.ReadOnlyQuestionManager;
 public class SampleDataUtil {
 
     public static Group[] getSampleGroups() {
-        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "E0123456"),
-            new Student("James", "E02030303"));
+        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "A0123456R"),
+            new Student("James", "A6543210R"));
         UniqueList<StudentInfo> studentsInfoList = new UniqueStudentInfoList();
         studentsInfoList.setElementsWithList(new ArrayList<>(studentsInfo));
 
-        Set<Student> students = getStudentSet(new Student("John", "E0123456"),
-            new Student("James", "E02030303"));
+        Set<Student> students = getStudentSet(new Student("John", "A0123456R"),
+            new Student("James", "A6543210R"));
         UniqueList<Student> studentsList = new UniqueStudentList();
         studentsList.setElementsWithList(new ArrayList<>(students));
 
         UniqueList<Lesson> lessonsList = new UniqueLessonList();
-        Set<Lesson> lessons = new HashSet<>();
-        lessons.add(new Lesson("1-1", studentsInfoList));
+        lessonsList.add(new Lesson("1-1", studentsInfoList));
         return new Group[] {new Group("G04", studentsList, lessonsList)};
     }
 
     public static ReadOnlySerenity getSampleSerenity() {
-        Serenity samples = new Serenity();
+        UniqueList<Group> groups = new UniqueGroupList();
         for (Group sampleGroup : getSampleGroups()) {
-            samples.addGroup(sampleGroup);
+            groups.add(sampleGroup);
         }
-        return samples;
+        return new Serenity(groups.asUnmodifiableObservableList());
     }
 
     public static Set<StudentInfo> getStudentInfoSet(Student... students) {

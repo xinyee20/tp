@@ -7,14 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import team.serenity.model.group.Group;
-import team.serenity.model.group.Student;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
+import team.serenity.model.group.student.Student;
 import team.serenity.model.util.UniqueList;
 
 public class StudentManager implements ReadOnlyStudentManager {
 
-    private final Map<Group, UniqueList<Student>> mapToListOfStudents;
+    private final Map<GroupName, UniqueList<Student>> mapToListOfStudents;
 
     /**
      * Instantiates a new LessonManager
@@ -37,7 +37,7 @@ public class StudentManager implements ReadOnlyStudentManager {
      * Replaces the contents of the student map with {@code newStudentMap}.
      * {@code newStudentMap} must not contain duplicate students.
      */
-    public void setStudents(Map<Group, UniqueList<Student>> newStudentMap) {
+    public void setStudents(Map<GroupName, UniqueList<Student>> newStudentMap) {
         this.mapToListOfStudents.clear();
         this.mapToListOfStudents.putAll(newStudentMap);
     }
@@ -51,7 +51,7 @@ public class StudentManager implements ReadOnlyStudentManager {
     }
 
     @Override
-    public Map<Group, UniqueList<Student>> getStudentMap() {
+    public Map<GroupName, UniqueList<Student>> getStudentMap() {
         return this.mapToListOfStudents;
     }
 
@@ -62,7 +62,7 @@ public class StudentManager implements ReadOnlyStudentManager {
      * @param group
      * @param student
      */
-    public void addStudentToGroup(Group group, Student student) throws GroupNotFoundException {
+    public void addStudentToGroup(GroupName group, Student student) throws GroupNotFoundException {
         requireAllNonNull(group, student);
         Optional<UniqueList<Student>> studentsOptional = Optional.ofNullable(this.mapToListOfStudents.get(group));
         if (studentsOptional.isPresent()) {
@@ -79,7 +79,7 @@ public class StudentManager implements ReadOnlyStudentManager {
      * @param group Group of interest
      * @param students new list of students to replace with
      */
-    public void addListOfStudentsToGroup(Group group, UniqueList<Student> students) {
+    public void addListOfStudentsToGroup(GroupName group, UniqueList<Student> students) {
         requireAllNonNull(group, students);
         this.mapToListOfStudents.put(group, students);
     }
@@ -90,7 +90,7 @@ public class StudentManager implements ReadOnlyStudentManager {
      * @param student
      * @return whether Student exists in the Group
      */
-    public boolean checkIfStudentExistsInGroup(Group group, Student student) throws GroupNotFoundException {
+    public boolean checkIfStudentExistsInGroup(GroupName group, Student student) throws GroupNotFoundException {
         requireAllNonNull(group, student);
         Optional<UniqueList<Student>> studentsOptional = Optional.ofNullable(this.mapToListOfStudents.get(group));
         if (studentsOptional.isPresent()) {
@@ -105,7 +105,7 @@ public class StudentManager implements ReadOnlyStudentManager {
      * @param group Group to check for
      * @return All students from a particular group
      */
-    public UniqueList<Student> getListOfStudentsFromGroup(Group group) throws GroupNotFoundException {
+    public UniqueList<Student> getListOfStudentsFromGroup(GroupName group) throws GroupNotFoundException {
         requireNonNull(group);
         Optional<UniqueList<Student>> studentList = Optional.ofNullable(this.mapToListOfStudents.get(group));
         if (studentList.isPresent()) {
@@ -120,7 +120,7 @@ public class StudentManager implements ReadOnlyStudentManager {
      * @param group
      * @param newListOfStudents
      */
-    public void setListOfStudentsToGroup(Group group, UniqueList<Student> newListOfStudents) {
+    public void setListOfStudentsToGroup(GroupName group, UniqueList<Student> newListOfStudents) {
         requireAllNonNull(group, newListOfStudents);
         this.mapToListOfStudents.put(group, newListOfStudents);
     }
@@ -131,7 +131,7 @@ public class StudentManager implements ReadOnlyStudentManager {
      * @param student student to be deleted
      * @throws GroupNotFoundException
      */
-    public void deleteStudentFromGroup(Group group, Student student) throws GroupNotFoundException {
+    public void deleteStudentFromGroup(GroupName group, Student student) throws GroupNotFoundException {
         requireAllNonNull(group, student);
         Optional<UniqueList<Student>> studentList = Optional.ofNullable(this.mapToListOfStudents.get(group));
         if (studentList.isPresent()) {

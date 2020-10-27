@@ -22,7 +22,7 @@ public class GroupUtil {
      */
     public static String getGroupDetails(Group group) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_GRP + group.getName() + " ");
+        sb.append(PREFIX_GRP + group.getGroupName().toString() + " ");
         // need more modifications
         return sb.toString();
     }

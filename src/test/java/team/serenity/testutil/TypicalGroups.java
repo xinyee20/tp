@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import team.serenity.logic.commands.CommandTestUtil;
-import team.serenity.model.Serenity;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Student;
+import team.serenity.model.group.UniqueGroupList;
+import team.serenity.model.group.student.Student;
 import team.serenity.model.managers.GroupManager;
+import team.serenity.model.managers.Serenity;
+import team.serenity.model.util.UniqueList;
 
 /**
  * A utility class containing a list of {@code Group} objects to be used in tests.
@@ -43,10 +45,11 @@ public class TypicalGroups {
      * Returns an {@code Serenity} with all the typical groups.
      */
     public static Serenity getTypicalSerenity() {
-        Serenity serenity = new Serenity();
+        UniqueList<Group> groups = new UniqueGroupList();
         for (Group group : getTypicalGroups()) {
-            serenity.addGroup(group);
+            groups.add(group);
         }
+        Serenity serenity = new Serenity(groups.asUnmodifiableObservableList());
         return serenity;
     }
 

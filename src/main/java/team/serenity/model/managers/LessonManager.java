@@ -8,13 +8,14 @@ import java.util.Map;
 import java.util.Optional;
 
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.util.UniqueList;
 
 public class LessonManager implements ReadOnlyLessonManager {
 
-    private final Map<Group, UniqueList<Lesson>> mapToListOfLessons;
+    private final Map<GroupName, UniqueList<Lesson>> mapToListOfLessons;
 
     /**
      * Instantiates a new LessonManager.
@@ -38,7 +39,7 @@ public class LessonManager implements ReadOnlyLessonManager {
      * Replaces the contents of the Lesson map with {@code newLessonMap}.
      * {@code newLessonMap} must not contain duplicate groups.
      */
-    public void setLessons(Map<Group, UniqueList<Lesson>> newLessonMap) {
+    public void setLessons(Map<GroupName, UniqueList<Lesson>> newLessonMap) {
         this.mapToListOfLessons.clear();
         this.mapToListOfLessons.putAll(newLessonMap);
     }
@@ -55,7 +56,7 @@ public class LessonManager implements ReadOnlyLessonManager {
      * Returns the map of lessons as an unmodifiable map.
      */
     @Override
-    public Map<Group, UniqueList<Lesson>> getLessonMap() {
+    public Map<GroupName, UniqueList<Lesson>> getLessonMap() {
         return Collections.unmodifiableMap(this.mapToListOfLessons);
     }
 
@@ -68,7 +69,7 @@ public class LessonManager implements ReadOnlyLessonManager {
      * @param targetLesson Lesson to check for
      * @return whether the given lesson for the specified group exist.
      */
-    public boolean targetGroupHasLesson(Group targetGroup, Lesson targetLesson) throws GroupNotFoundException {
+    public boolean targetGroupHasLesson(GroupName targetGroup, Lesson targetLesson) throws GroupNotFoundException {
         requireAllNonNull(targetGroup, targetLesson);
         Optional<UniqueList<Lesson>> uniqueList = Optional.ofNullable(this.mapToListOfLessons.get(targetGroup));
         if (!uniqueList.isEmpty()) {
@@ -83,7 +84,7 @@ public class LessonManager implements ReadOnlyLessonManager {
      * @param group Group to add the lesson to
      * @param lesson Lesson to check add
      */
-    public void addLessonToGroup(Group group, Lesson lesson) throws GroupNotFoundException {
+    public void addLessonToGroup(GroupName group, Lesson lesson) throws GroupNotFoundException {
         requireAllNonNull(group, lesson);
         Optional<UniqueList<Lesson>> lessonList = Optional.ofNullable(this.mapToListOfLessons.get(group));
         if (!lessonList.isEmpty()) {
@@ -98,7 +99,7 @@ public class LessonManager implements ReadOnlyLessonManager {
      * @param group Group to add the lessons to
      * @param lessons Lesson to check add
      */
-    public void addNewMapping(Group group, UniqueList<Lesson> lessons) {
+    public void addNewMapping(GroupName group, UniqueList<Lesson> lessons) {
         requireAllNonNull(group, lessons);
         this.mapToListOfLessons.put(group, lessons);
     }
@@ -109,7 +110,7 @@ public class LessonManager implements ReadOnlyLessonManager {
      * @param targetLesson Lesson to check delete
      * @throws GroupNotFoundException
      */
-    public void deleteLessonFromGroup(Group targetGroup, Lesson targetLesson) throws GroupNotFoundException {
+    public void deleteLessonFromGroup(GroupName targetGroup, Lesson targetLesson) throws GroupNotFoundException {
         requireAllNonNull(targetGroup, targetLesson);
         Optional<UniqueList<Lesson>> lessonList = Optional.ofNullable(this.mapToListOfLessons.get(targetGroup));
         if (!lessonList.isEmpty()) {
@@ -120,16 +121,25 @@ public class LessonManager implements ReadOnlyLessonManager {
     }
 
     /**
+     * Adds a specified {@code UniqueList<Lesson>} to a {@code Group}.
+     * @param group
+     * @param lessons
+     */
+    public void addListOfLessonsToGroup(Group group, UniqueList<Lesson> lessons) {
+        this.mapToListOfLessons.put(group.getGroupName(), lessons);
+    }
+
+    /**
      * Replaces listOfLessons stored in {@code Group} with {@code newListOfLessons}
      * @param group
      * @param newListOfLessons
      */
-    public void setListOfLessonsToGroup(Group group, UniqueList<Lesson> newListOfLessons) {
+    public void setListOfLessonsToGroup(GroupName group, UniqueList<Lesson> newListOfLessons) {
         requireAllNonNull(group, newListOfLessons);
         this.mapToListOfLessons.put(group, newListOfLessons);
     }
 
-    public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) throws GroupNotFoundException {
+    public UniqueList<Lesson> getListOfLessonsFromGroup(GroupName group) throws GroupNotFoundException {
         requireAllNonNull(group);
         Optional<UniqueList<Lesson>> lessonList = Optional.ofNullable(this.mapToListOfLessons.get(group));
         if (lessonList.isPresent()) {

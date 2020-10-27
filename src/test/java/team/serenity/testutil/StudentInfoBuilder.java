@@ -1,9 +1,10 @@
 package team.serenity.testutil;
 
-import team.serenity.model.group.Attendance;
-import team.serenity.model.group.Participation;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
+
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.Attendance;
+import team.serenity.model.group.studentinfo.Participation;
+import team.serenity.model.group.studentinfo.StudentInfo;
 
 public class StudentInfoBuilder {
 

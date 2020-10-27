@@ -6,9 +6,9 @@ import static team.serenity.testutil.TypicalGroups.GROUP_D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.UniqueLessonList;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.UniqueLessonList;
+import team.serenity.model.group.student.Student;
 import team.serenity.model.managers.LessonManager;
 import team.serenity.model.util.UniqueList;
 
@@ -65,8 +65,8 @@ public class TypicalLesson {
 
     public static LessonManager getTypicalLessonManager() {
         LessonManager lessonManager = new LessonManager();
-        lessonManager.addNewMapping(GROUP_C, GROUP_C.getLessons());
-        lessonManager.addNewMapping(GROUP_D, GROUP_D.getLessons());
+        lessonManager.addNewMapping(GROUP_C.getGroupName(), GROUP_C.getLessons());
+        lessonManager.addNewMapping(GROUP_D.getGroupName(), GROUP_D.getLessons());
         return lessonManager;
     }
 }

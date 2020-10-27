@@ -1,7 +1,9 @@
 package team.serenity.logic.commands.question;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
@@ -77,6 +79,18 @@ class AddQnCommandTest {
 
         // different group -> returns false
         assertFalse(addQnACommand.equals(addQnBCommand));
+    }
+
+    @Test
+    public void test_hashCode() {
+        AddQnCommand addQnACommand = new AddQnCommand(QUESTION_A);
+        AddQnCommand addQnBCommand = new AddQnCommand(QUESTION_B);
+
+        // Same case
+        assertEquals(addQnACommand.hashCode(), addQnACommand.hashCode());
+
+        // Different case
+        assertNotEquals(addQnACommand.hashCode(), addQnBCommand.hashCode());
     }
 
     /**

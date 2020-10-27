@@ -3,7 +3,7 @@ package team.serenity.model.managers;
 import java.util.Map;
 
 import team.serenity.model.group.GroupLessonKey;
-import team.serenity.model.group.StudentInfo;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 
 /**
