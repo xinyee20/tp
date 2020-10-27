@@ -60,7 +60,7 @@ class SetScoreCommandParserTest {
 
     @Test
     public void parse_invalidScore_throwsCommandException() {
-        String expectedMessage = String.format(Participation.SCORE_ERROR);
+        String expectedMessage = String.format(Participation.MESSAGE_CONSTRAINTS);
         String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SET_SCORE;
         String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_SET_SCORE;
 
