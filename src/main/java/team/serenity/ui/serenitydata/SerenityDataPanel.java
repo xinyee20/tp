@@ -14,7 +14,6 @@ import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.ui.DataPanel;
 import team.serenity.ui.lessondata.LessonDataPanel.StudentInfoListViewCell;
-import team.serenity.ui.lessondata.StudentInfoCard;
 
 public class SerenityDataPanel extends DataPanel {
     private static final String FXML = "SerenityDataPanel.fxml";
@@ -44,32 +43,17 @@ public class SerenityDataPanel extends DataPanel {
     }
 
     /**
-     * Switch to attendanceTab.
+     * Switch to flaggedAttendanceTab.
      */
-    public void changeAttendanceTab() {
-        selectionModel.select(2);
+    public void changeFlaggedAttendanceTab() {
+        selectionModel.select(0);
     }
 
     /**
-     * Switch to participationTab.
+     * Switch to questionTab.
      */
-    public void changeParticipationTab() {
-        selectionModel.select(3);
-    }
-
-    class FlaggedAttendanceListViewCell extends ListCell<StudentInfo> {
-
-        @Override
-        protected void updateItem(StudentInfo studentInfo, boolean empty) {
-            super.updateItem(studentInfo, empty);
-
-            if (empty || studentInfo == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new StudentInfoCard(studentInfo, getIndex() + 1).getRoot());
-            }
-        }
+    public void changeQuestionTab() {
+        selectionModel.select(1);
     }
 
 }

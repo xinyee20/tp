@@ -264,9 +264,9 @@ public class XlsxUtil {
     }
 
     /**
-     * Write data to XLSX file
+     * Write attendance data to XLSX file.
      */
-    public void writeGroupToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+    public void writeAttendanceToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
         UniqueList<Student> studentList = group.getSortedStudents();
         UniqueList<Lesson> lessonList = group.getSortedLessons();
 
@@ -298,6 +298,50 @@ public class XlsxUtil {
             data.add(studentDetails);
         }
 
+        String outputFileName = String.format("%s_attendance.xlsx", group.getGroupName().toString());
+        writeDataToXlsx(data, outputFileName);
+    }
+
+    /**
+     * Write participation score data to XLSX file.
+     */
+    public void writeParticipationToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+        UniqueList<Student> studentList = group.getSortedStudents();
+        UniqueList<Lesson> lessonList = group.getSortedLessons();
+
+        List<List<Object>> data = new ArrayList<>();
+        Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
+
+        for (Lesson lesson : lessonList) {
+            GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+            for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
+                Student student = studentInfo.getStudent();
+                Optional<List<Integer>> participationList = Optional.ofNullable(studentDetailsMap.get(student));
+                List<Integer> newParticipationList;
+                if (participationList.isEmpty()) {
+                    newParticipationList = new ArrayList<>();
+                } else {
+                    newParticipationList = participationList.get();
+                }
+                newParticipationList.add(studentInfo.getParticipation().getScore());
+                studentDetailsMap.put(student.getStudentNo(), newParticipationList);
+            }
+        }
+
+        for (Student student : studentList) {
+            List<Object> studentDetails = new ArrayList<>();
+            studentDetails.add(student.getStudentName().toString());
+            studentDetails.add(student.getStudentNo().toString());
+            List<Integer> participationList = studentDetailsMap.get(student.getStudentNo());
+            studentDetails.addAll(participationList);
+            data.add(studentDetails);
+        }
+
+        String outputFileName = String.format("%s_participation.xlsx", group.getGroupName().toString());
+        writeDataToXlsx(data, outputFileName);
+    }
+
+    private void writeDataToXlsx(List<List<Object>> data, String outputFileName) {
         Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
 
         int rowCount = 0;
@@ -318,8 +362,7 @@ public class XlsxUtil {
         }
 
         try {
-            String outputFIleName = String.format("%s_attendance.xlsx", group.getGroupName().toString());
-            FileOutputStream outputStream = new FileOutputStream(outputFIleName);
+            FileOutputStream outputStream = new FileOutputStream(outputFileName);
             workbook.write(outputStream);
         } catch (IOException e) {
             e.printStackTrace();

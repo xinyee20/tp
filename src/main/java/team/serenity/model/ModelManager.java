@@ -222,10 +222,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void exportGroup(Group group) {
+    public void exportAttendance(Group group) {
         requireNonNull(group);
         XlsxUtil util = new XlsxUtil();
-        util.writeGroupToXlsx(group, this.studentInfoManager.getStudentInfoMap());
+        util.writeAttendanceToXlsx(group, this.studentInfoManager.getStudentInfoMap());
+    }
+
+    @Override
+    public void exportParticipation(Group group) {
+        requireNonNull(group);
+        XlsxUtil util = new XlsxUtil();
+        util.writeParticipationToXlsx(group, this.studentInfoManager.getStudentInfoMap());
     }
 
     @Override
@@ -353,6 +360,21 @@ public class ModelManager implements Model {
             this.studentsInfo.setAll(studentInfos);
             this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, uniqueStudentInfoList);
         }
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getAllStudentInfo() {
+        ObservableList<StudentInfo> studentInfoList = null;
+        for (Group group : getListOfGroups()) {
+            for (Lesson lesson : group.getLessons()) {
+                if (studentInfoList == null) {
+                    studentInfoList = new ArrayObservableList<>(lesson.getStudentsInfoAsUnmodifiableObservableList());
+                } else {
+                    studentInfoList.addAll(lesson.getStudentsInfo().getList());
+                }
+            }
+        }
+        return studentInfoList;
     }
 
     // ========== QuestionManager ==========

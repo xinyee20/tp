@@ -104,9 +104,14 @@ public interface Model {
     void addGroup(Group group);
 
     /**
-     * Exports the given group as XLSX file.
+     * Exports attendance data of the given group as XLSX file.
      */
-    void exportGroup(Group group);
+    void exportAttendance(Group group);
+
+    /**
+     * Exports participation data of the given group as XLSX file.
+     */
+    void exportParticipation(Group group);
 
     /**
      * Returns true if a group with a GroupName that is the same as {@code toCheck} exists in the
@@ -123,6 +128,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Get all student info objects from all groups.
+     */
+    ObservableList<StudentInfo> getAllStudentInfo();
 
     // ========== LessonManager ==========
 

@@ -65,6 +65,11 @@ public interface Logic {
     ObservableList<StudentInfo> getStudentInfoList();
 
     /**
+     * Returns all student info across all tutorial groups.
+     */
+    ObservableList<StudentInfo> getAllStudentInfo();
+
+    /**
      * Returns an unmodifiable view of the list of questions from a group-lesson.
      */
     ObservableList<Question> getFilteredQuestionList();

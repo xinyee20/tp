@@ -10,12 +10,12 @@ public class ButtonBar extends VBox {
         setFillWidth(true);
     }
 
-    public void addGroupButton(Button groupButton) {
-        this.getChildren().add(groupButton);
+    public void addButton(Button button) {
+        this.getChildren().add(button);
     }
 
-    public void deleteGroupButton(Node groupButtonNode) {
-        this.getChildren().remove(groupButtonNode);
+    public void deleteButton(Node buttonNode) {
+        this.getChildren().remove(buttonNode);
     }
 
 }
