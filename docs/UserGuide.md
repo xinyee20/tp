@@ -11,7 +11,7 @@ title: User guide
 ![Serenity Logo](images/logo.png)
 
 
-## **Introduction**
+## **1. Introduction**
 
 <p>Welcome to the User Guide of <b>Serenity</b> </p>
 
@@ -29,13 +29,13 @@ With that said, let's get <a href="#quickstart">started</a>!</p>
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 id="quickstart" style="color: #477B9F"> 2. Quick start </H2>
+## **2. Quick start**
 
 To get started with using **Serenity**, you can follow these steps:
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `Serenity.jar` from [here]().
+2. Download the latest `Serenity.jar` from [here](https://github.com/AY2021S1-CS2103T-W12-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your **Serenity** application.
 
@@ -48,8 +48,7 @@ To get started with using **Serenity**, you can follow these steps:
 6. Refer to the [Features](#4-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
-<H2 style="color: #477B9F"> 3. About </H2>
+## **3. About**
 
 <H3 style="color: #477B9F"> 3.1. Structure of this document </H3>
 
@@ -131,7 +130,7 @@ Analysis:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 4. Features </H2>
+## **4. Features**
 
 This section contains all the information you need to know about the features of **Serenity**.
 To use each feature or sub-feature, you will need to enter the command into the _Command Box_.
@@ -863,7 +862,7 @@ Outcome:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 5. FAQ</H2>
+## **5.FAQ**
 
 **Q:** How many tutorial groups can I manage in **Serenity**?
 
@@ -877,7 +876,7 @@ your **Serenity** application on your other computer. **Serenity** will automati
 
 --------------------------------------------------------------------------------------------------------------------
 
-<H2 style="color: #477B9F"> 6. Command summary </H2>
+## **6. Command summary**
 
 <H3 style="color: #477B9F"> 6.1. Setup commands </H3>
 
