@@ -3,7 +3,6 @@ package team.serenity.logic;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
