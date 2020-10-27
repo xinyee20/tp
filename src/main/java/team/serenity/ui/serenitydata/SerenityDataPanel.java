@@ -36,6 +36,7 @@ public class SerenityDataPanel extends DataPanel {
      */
     public SerenityDataPanel(ObservableList<StudentInfo> studentInfo, ObservableList<Question> questionList) {
         super(FXML);
+        studentInfo = studentInfo.filtered(info -> info.getAttendance().isFlagged());
         this.flaggedAttendanceListView.setItems(studentInfo);
         this.flaggedAttendanceListView.setCellFactory(listView -> new StudentInfoListViewCell());
         this.questionListView.setItems(questionList);

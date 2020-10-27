@@ -225,6 +225,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void toggleSerenityView() {
+        this.logic.getStudentInfoList();
         this.serenityDataPanel = new SerenityDataPanel(this.logic.getStudentInfoList(),
             this.logic.getFilteredQuestionList());
         this.dataDisplayPlaceholder.getChildren().clear();
