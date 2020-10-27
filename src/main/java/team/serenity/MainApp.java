@@ -94,6 +94,7 @@ public class MainApp extends Application {
             }
             serenity =
                 serenityOptional.orElseGet(SampleDataUtil::getSampleSerenity);
+            storage.saveSerenity(serenity);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty"
                 + " Serenity.");
