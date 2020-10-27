@@ -6,6 +6,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import team.serenity.commons.core.index.Index;
 import team.serenity.commons.util.StringUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Participation;
@@ -65,15 +66,16 @@ public class SerenityParserUtil {
      * Parses a {@code String questionDescription} into a {@code String}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code question} is invalid.
+     * @return a Description object with the given {@code questionDescription}.
+     * @throws ParseException if the given {@code questionDescription} is invalid.
      */
-    public static String parseDescription(String questionDescription) throws ParseException {
+    public static Description parseDescription(String questionDescription) throws ParseException {
         requireNonNull(questionDescription);
         String trimmedQuestionDescription = questionDescription.trim();
-        if (!Question.isValidDescription(trimmedQuestionDescription)) {
-            throw new ParseException(Question.MESSAGE_CONSTRAINTS);
+        if (!Description.isValidDescription(trimmedQuestionDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return trimmedQuestionDescription;
+        return new Description(trimmedQuestionDescription);
     }
 
     /**

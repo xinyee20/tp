@@ -12,6 +12,7 @@ import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 
 /**
@@ -32,9 +33,9 @@ public class AddQnCommandParser implements Parser<AddQnCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddQnCommand.MESSAGE_USAGE));
         }
 
-        String questionDescription = SerenityParserUtil.parseDescription(argMultimap.getValue(PREFIX_QN).get());
+        Description questionDescription = SerenityParserUtil.parseDescription(argMultimap.getValue(PREFIX_QN).get());
 
-        return new AddQnCommand(new Question(questionDescription));
+        return new AddQnCommand(questionDescription);
     }
 
     /**

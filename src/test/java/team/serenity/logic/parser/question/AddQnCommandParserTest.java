@@ -11,6 +11,7 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import team.serenity.logic.commands.question.AddQnCommand;
+import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 import team.serenity.testutil.question.QuestionBuilder;
 
@@ -20,11 +21,11 @@ class AddQnCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Question expectedQuestion = new QuestionBuilder().withDescription(VALID_QN_DESC_A).build();
+        Description expectedDescription = new Description(VALID_QN_DESC_A);
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + QN_DESC_GROUP_A,
-                new AddQnCommand(expectedQuestion));
+                new AddQnCommand(expectedDescription));
     }
 
     @Test
@@ -35,7 +36,7 @@ class AddQnCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, INVALID_QN_DESC, Question.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_QN_DESC, Description.MESSAGE_CONSTRAINTS);
     }
 
 }

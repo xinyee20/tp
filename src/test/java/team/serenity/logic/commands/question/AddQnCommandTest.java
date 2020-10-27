@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A_DESC;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B_DESC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,14 +63,14 @@ class AddQnCommandTest {
 
     @Test
     public void equals() {
-        AddQnCommand addQnACommand = new AddQnCommand(QUESTION_A);
-        AddQnCommand addQnBCommand = new AddQnCommand(QUESTION_B);
+        AddQnCommand addQnACommand = new AddQnCommand(QUESTION_A_DESC);
+        AddQnCommand addQnBCommand = new AddQnCommand(QUESTION_B_DESC);
 
         // same object -> returns true
         assertTrue(addQnACommand.equals(addQnACommand));
 
         // same values -> returns true
-        AddQnCommand addQnACommandCopy = new AddQnCommand(QUESTION_A);
+        AddQnCommand addQnACommandCopy = new AddQnCommand(QUESTION_A_DESC);
         assertTrue(addQnACommandCopy.equals(addQnACommand));
 
         // different types -> returns false
@@ -83,8 +85,8 @@ class AddQnCommandTest {
 
     @Test
     public void test_hashCode() {
-        AddQnCommand addQnACommand = new AddQnCommand(QUESTION_A);
-        AddQnCommand addQnBCommand = new AddQnCommand(QUESTION_B);
+        AddQnCommand addQnACommand = new AddQnCommand(QUESTION_A_DESC);
+        AddQnCommand addQnBCommand = new AddQnCommand(QUESTION_B_DESC);
 
         // Same case
         assertEquals(addQnACommand.hashCode(), addQnACommand.hashCode());
