@@ -80,6 +80,10 @@
     -fx-font-weight: bold;
 }
 
+.tab-content-area  {
+    -fx-background-color: -color-blue1;
+}
+
 .table-view {
     -fx-base: #1d1d1d;
     -fx-control-inner-background: -color-blue2;
@@ -138,6 +142,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: -color-blue1;
 }
 
 .list-cell:filled:even {
@@ -146,15 +151,6 @@
 
 .list-cell:filled:odd {
     -fx-background-color: -color-blue1;
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
 }
 
 .list-cell .label {
