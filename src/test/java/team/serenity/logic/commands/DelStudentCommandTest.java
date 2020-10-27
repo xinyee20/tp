@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.commands.student.DelStudentCommand;
 import team.serenity.model.group.Group;
@@ -64,22 +65,29 @@ public class DelStudentCommandTest {
         String studentName = "John";
         String studentId = "A1234567U";
         GroupPredicateStub pred = new GroupPredicateStub();
+        Index index = Index.fromOneBased(Integer.parseInt("1"));
+
         DelStudentCommand first = new DelStudentCommand(studentName, studentId, pred);
         DelStudentCommand second = new DelStudentCommand(studentName, studentId, pred);
+        DelStudentCommand third = new DelStudentCommand(index, pred);
+        DelStudentCommand fourth = new DelStudentCommand(index, pred);
         DelStudentCommand differentName = new DelStudentCommand("James", studentId, pred);
         DelStudentCommand differentId = new DelStudentCommand(studentName, "A7654321U", pred);
         DelStudentCommand differentPred = new DelStudentCommand(studentName, studentId, new GroupPredicateStub());
+        DelStudentCommand differentIndex = new DelStudentCommand(Index.fromOneBased(Integer.parseInt("2")), pred);
 
         // same object -> returns true
         assertTrue(first.equals(first));
 
         //same values -> return true
         assertTrue(first.equals(second));
+        assertTrue(third.equals(fourth));
 
         //different values -> return false
         assertFalse(first.equals(differentName));
         assertFalse(first.equals(differentId));
         assertFalse(first.equals(differentPred));
+        assertFalse(third.equals(differentIndex));
 
         // different types -> returns false
         assertFalse(first.equals(1));

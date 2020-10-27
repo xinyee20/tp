@@ -22,7 +22,10 @@ public class DelLsnCommand extends Command {
         + ": Deletes a specified lesson from a specified tutorial group. "
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
-        + PREFIX_LSN + "PATH\n";
+        + PREFIX_LSN + "LESSON\n"
+        + "Example: "
+        + PREFIX_GRP + "G04 "
+        + PREFIX_LSN + "1-1";
 
     public static final String MESSAGE_SUCCESS = "lesson for tutorial group %2$s deleted: %1$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "Lesson  %1$s does not exist.";
