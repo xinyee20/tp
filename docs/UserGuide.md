@@ -84,9 +84,9 @@ Symbol/syntax | Meaning
 --------|------------------
 `command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#323-command-syntax-and-usage).
 _GUI_ | This indicates a graphical component, such as a button, layout format and text input box.
-ℹ | This indicates a note.
-💡 | This indicates a tip.
-⚠ | This indicates a warning.
+:memo: | This indicates a note.
+:bulb: | This indicates a tip.
+:warning: | This indicates a warning.
 
 #### 3.2.3. Command syntax and usage
 
@@ -311,7 +311,7 @@ This feature allows you to mark attendance of students easily.
 
 You can use this command to mark all students in a tutorial group as present for a tutorial lesson.
 
-> 💡 **Tip for the `markpresent all` command:**
+> :bulb: **Tip for the `markpresent all` command:**
 > You can conveniently mark all students as present at once in the beginning of the tutorial lesson,
 > then mark some students as absent afterwards. You can then start your tutorial lesson without much hassle.
 
@@ -503,11 +503,11 @@ Outcome:
 
 You can use this command to export the attendance sheet of a specific tutorial group as a XLSX file.
 
-> 💡 **Tip for the `exportatt` command:**
+> :bulb: **Tip for the `exportatt` command:**
 > You can conveniently obtain the soft copy version of the attendance sheet for
 > attendance list submission as part of NUS Centre for English Language Communication requirements.
 
-> ℹ **Note regarding the `exportatt` command:**
+> :memo: **Note regarding the `exportatt` command:**
 > The attendance sheet will be saved as a XLSX file named after the tutorial group.
 > The file will be saved at the same folder as your **Serenity** application.
 
