@@ -9,10 +9,16 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
+import static team.serenity.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
+import team.serenity.model.group.question.Question;
+import team.serenity.model.managers.QuestionManager;
 
 /**
  * Contains helper methods for testing commands.
@@ -105,6 +111,48 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
          */
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
+     * {@code expectedMessage}.
+     */
+    public static void assertAddQnCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br> - a {@code CommandException} is thrown <br> - the
+     * CommandException message matches {@code expectedMessage} <br> - the question manager, filtered question list and
+     * selected question in {@code actualModel} remain unchanged
+     */
+    public static void assertAddQnCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        QuestionManager expectedQuestionManager = new QuestionManager(actualModel.getQuestionManager());
+        List<Question> expectedFilteredList = new ArrayList<>(actualModel.getFilteredQuestionList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedQuestionManager, actualModel.getQuestionManager());
+        assertEquals(expectedFilteredList, actualModel.getFilteredQuestionList());
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br> - a {@code CommandException} is thrown <br> - the
+     * CommandException message matches {@code expectedMessage} <br> - the question manager, filtered question list and
+     * selected question in {@code actualModel} remain unchanged
+     */
+    public static void assertDelQnCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        QuestionManager expectedQuestionManager = new QuestionManager(actualModel.getQuestionManager());
+        List<Question> expectedFilteredList = new ArrayList<>(actualModel.getFilteredQuestionList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedQuestionManager, actualModel.getQuestionManager());
+        assertEquals(expectedFilteredList, actualModel.getFilteredQuestionList());
     }
 
     /**

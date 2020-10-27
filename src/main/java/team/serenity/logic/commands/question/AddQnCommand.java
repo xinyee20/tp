@@ -11,6 +11,7 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 
 /**
@@ -29,14 +30,15 @@ public class AddQnCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New question added: %1$s";
     public static final String MESSAGE_DUPLICATE_QUESTION = "This question already exists.";
 
-    private final Question toAdd;
+    private final Description toAdd;
 
     /**
-     * Creates an AddQnCommand to add the specified {@code Question}.
+     * Creates an AddQnCommand to add the specified question {@code Description}.
+     * @param questionDescription the description of the question to add.
      */
-    public AddQnCommand(Question question) {
-        requireNonNull(question);
-        this.toAdd = question;
+    public AddQnCommand(Description questionDescription) {
+        requireNonNull(questionDescription);
+        this.toAdd = questionDescription;
     }
 
     @Override
@@ -53,14 +55,14 @@ public class AddQnCommand extends Command {
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        this.toAdd.setGroupAndLesson(uniqueGroup.getGroupName().toString(), uniqueLesson.getLessonName().toString());
+        Question questionToAdd = new Question(uniqueGroup.getGroupName(), uniqueLesson.getLessonName(), this.toAdd);
 
-        if (model.hasQuestion(this.toAdd)) {
+        if (model.hasQuestion(questionToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_QUESTION);
         }
 
-        model.addQuestion(this.toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAdd));
+        model.addQuestion(questionToAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, questionToAdd));
 
     }
 

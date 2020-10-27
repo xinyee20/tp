@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupName;
-import team.serenity.model.group.question.Question;
+import team.serenity.model.group.question.Description;
 
 public class SerenityParserUtilTest {
 
     // Serenity
     private static final String VALID_GROUP_NAME = "G04";
     private static final String VALID_FILE_PATH = "CS2101_G04.xlsx";
-    private static final String VALID_QUESTION = "What is the deadline for the report?";
+    private static final String VALID_QUESTION_DESC = "What is the deadline for the report?";
 
     private static final String INVALID_GROUP_NAME_LOWERCASE = "g04";
     private static final String INVALID_GROUP_NAME_NON_DIGIT = "Gxx ";
     private static final String INVALID_FILE_PATH = "invalid/path.xlsx";
-    private static final String INVALID_QUESTION = " ";
+    private static final String INVALID_QUESTION_DESC = " ";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -98,25 +98,25 @@ public class SerenityParserUtilTest {
 
     @Test
     public void parseDescription_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> SerenityParserUtil.parseDescription((String) null));
+        assertThrows(NullPointerException.class, () -> SerenityParserUtil.parseDescription(null));
     }
 
     @Test
     public void parseDescription_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> SerenityParserUtil.parseDescription(INVALID_QUESTION));
+        assertThrows(ParseException.class, () -> SerenityParserUtil.parseDescription(INVALID_QUESTION_DESC));
     }
 
     @Test
     public void parseDescription_validValueWithoutWhitespace_returnsQuestion() throws Exception {
-        String expectedQuestion = new Question(VALID_QUESTION).getDescription();
-        assertEquals(expectedQuestion, SerenityParserUtil.parseDescription(VALID_QUESTION));
+        Description expectedDescription = new Description(VALID_QUESTION_DESC);
+        assertEquals(expectedDescription, SerenityParserUtil.parseDescription(VALID_QUESTION_DESC));
     }
 
     @Test
     public void parseDescription_validValueWithWhitespace_returnsTrimmedQuestion() throws Exception {
-        String questionWithWhitespace = WHITESPACE + VALID_QUESTION + WHITESPACE;
-        String expectedQuestion = new Question(VALID_QUESTION).getDescription();
-        assertEquals(expectedQuestion, SerenityParserUtil.parseDescription(questionWithWhitespace));
+        String questionWithWhitespace = WHITESPACE + VALID_QUESTION_DESC + WHITESPACE;
+        Description expectedDescription = new Description(VALID_QUESTION_DESC);
+        assertEquals(expectedDescription, SerenityParserUtil.parseDescription(questionWithWhitespace));
     }
 
 }
