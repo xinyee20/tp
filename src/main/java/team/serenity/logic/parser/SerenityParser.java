@@ -11,7 +11,9 @@ import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.DelGrpCommand;
 import team.serenity.logic.commands.ExitCommand;
 import team.serenity.logic.commands.HelpCommand;
+import team.serenity.logic.commands.ViewAttCommand;
 import team.serenity.logic.commands.ViewGrpCommand;
+import team.serenity.logic.commands.ViewScoreCommand;
 import team.serenity.logic.commands.lesson.AddLsnCommand;
 import team.serenity.logic.commands.lesson.DelLsnCommand;
 import team.serenity.logic.commands.lesson.ViewLsnCommand;
@@ -118,6 +120,12 @@ public class SerenityParser {
 
         case ViewLsnCommand.COMMAND_WORD:
             return new ViewLsnCommandParser().parse(arguments);
+
+        case ViewAttCommand.COMMAND_WORD:
+            return new ViewAttCommandParser().parse(arguments);
+
+        case ViewScoreCommand.COMMAND_WORD:
+            return new ViewScoreCommandParser().parse(arguments);
 
         // ========================== Question Commands =========================
 

@@ -30,12 +30,13 @@ public class SampleDataUtil {
 
     public static Group[] getSampleGroups() {
         Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("Aaron Tan", "A0000000A"),
-            new Student("Bu Wen Jin", "A0000001M"));
+            new Student("John Doe", "A0000001M"));
         UniqueList<StudentInfo> studentsInfoList = new UniqueStudentInfoList();
         studentsInfoList.setElementsWithList(new ArrayList<>(studentsInfo));
 
         Set<Student> students = getStudentSet(new Student("Aaron Tan", "A0000000U"),
-            new Student("Bu Wen Jin", "A0000001M"));
+            new Student("John Doe", "A0000001M"));
+
         UniqueList<Student> studentsList = new UniqueStudentList();
         studentsList.setElementsWithList(new ArrayList<>(students));
 

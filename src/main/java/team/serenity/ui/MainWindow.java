@@ -4,17 +4,17 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.commons.core.LogsCenter;
@@ -203,20 +203,29 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleAddGrp(String groupName) {
         Button groupButton = new Button(groupName);
-        setUpButton(groupButton);
+        setUpGroupButton(groupButton);
         buttonBar.addGroupButton(groupButton);
     }
 
     /**
      * Sets up the newly created group button.
      */
-    public void setUpButton(Button groupButton) {
-        groupButton.setId(groupButton.getText());
-        groupButton.setAlignment(Pos.CENTER);
-        groupButton.setContentDisplay(ContentDisplay.CENTER);
+    public void setUpGroupButton(Button groupButton) {
+        groupButton.setLayoutX(20);
+        groupButton.setLayoutY(65);
         groupButton.setMnemonicParsing(false);
-        groupButton.setPrefWidth(50);
-        groupButton.setTextAlignment(TextAlignment.CENTER);
+        groupButton.setPrefWidth(65);
+        groupButton.setId(groupButton.getText());
+
+        Image groupImage = new Image("images/group.png");
+        ImageView groupImageView = new ImageView(groupImage);
+        groupImageView.setFitHeight(15);
+        groupImageView.setFitWidth(15);
+        groupImageView.setPickOnBounds(true);
+        groupImageView.setPreserveRatio(true);
+
+        groupButton.setGraphic(groupImageView);
+        VBox.setMargin(buttonPanelPlaceholder, new Insets(10));
         groupButton.setOnAction(event -> {
             String commandText = "viewgrp grp/" + groupButton.getText();
             try {
@@ -238,6 +247,22 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             }
         }
+    }
+
+    /**
+     * Views attendance sheet of the specified group.
+     */
+    private void handleViewAtt() {
+        GroupDataPanel groupDataPanel = (GroupDataPanel) this.groupDataPanel;
+        groupDataPanel.changeAttendanceTab();
+    }
+
+    /**
+     * Views participation score sheet of the specified group.
+     */
+    private void handleViewScore() {
+        GroupDataPanel groupDataPanel = (GroupDataPanel) this.groupDataPanel;
+        groupDataPanel.changeParticipationTab();
     }
 
     /**
@@ -277,6 +302,14 @@ public class MainWindow extends UiPart<Stage> {
                 // commandText would be in DelGrpCommand format correctly by the time it reaches here
                 String groupName = commandText.split(" ")[1].split("/")[1];
                 handleDelGrp(groupName);
+            }
+
+            if (commandResult.isViewAtt()) {
+                handleViewAtt();
+            }
+
+            if (commandResult.isViewScore()) {
+                handleViewScore();
             }
 
             return commandResult;

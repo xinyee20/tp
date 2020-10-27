@@ -52,7 +52,7 @@ public class DelGrpCommand extends Command {
         model.deleteGroup(toDel);
         model.updateFilteredGroupList(this.grpPredicate);
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, toDel),
-            false, false, false, false, false, true);
+            false, false, false, false, false, true, false, false);
     }
 
     @Override
