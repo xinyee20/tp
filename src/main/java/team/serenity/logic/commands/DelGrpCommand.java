@@ -38,7 +38,7 @@ public class DelGrpCommand extends Command {
 
         if (!model.getListOfGroups().isEmpty()) {
             for (Group group : model.getListOfGroups()) {
-                if (group.getName().equals(this.grpPredicate.getKeyword())) {
+                if (group.getGroupName().toString().equals(this.grpPredicate.getKeyword())) {
                     toDel = group;
                     break;
                 }
