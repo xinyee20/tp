@@ -106,6 +106,7 @@ public class Group {
      */
     public void addStudentToGroup(Student student) {
         addToStudentList(student);
+        this.students.sort(Comparator.comparing(x -> x.getStudentName().toString()));
         addToStudentListInLessons(student);
     }
 
@@ -129,6 +130,7 @@ public class Group {
             StudentInfo newStudent = new StudentInfo(student);
             UniqueList<StudentInfo> studentInfos = lesson.getStudentsInfo();
             studentInfos.add(newStudent);
+            studentInfos.sort(Comparator.comparing(x -> x.getStudent().getStudentName().toString()));
             Lesson updatedLesson = new Lesson(lesson.getLessonName(), studentInfos);
             this.lessons.setElement(lesson, updatedLesson);
         }

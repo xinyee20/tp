@@ -13,41 +13,41 @@
     <padding>
         <Insets bottom="5" left="10" right="10" top="5" />
     </padding>
-   <TabPane fx:id="tabPane" minHeight="-Infinity" minWidth="680.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@SerenityTheme.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-     <tabs>
-       <Tab text="Lessons">
-            <content>
-               <ListView fx:id="lessonListView" />
-            </content>
-       </Tab>
-       <Tab text="Students">
-            <content>
-               <ListView fx:id="studentListView" />
-            </content>
-       </Tab>
-         <Tab text="Attendance">
-            <content>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <TableView fx:id="attendanceTableView" prefHeight="200.0" prefWidth="200.0" />
-                  </children>
-               </StackPane>
-            </content>
-         </Tab>
-         <Tab text="Participation">
-            <content>
-               <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <children>
-                     <TableView fx:id="participationTableView" prefHeight="200.0" prefWidth="200.0">
-                        <columns>
-                           <TableColumn fx:id="nameColumn1" prefWidth="75.0" text="Name" />
-                           <TableColumn fx:id="studentNoColumn1" prefWidth="75.0" text="Student Number" />
-                        </columns>
-                     </TableView>
-                  </children>
-               </StackPane>
-            </content>
-         </Tab>
-     </tabs>
-   </TabPane>
+    <TabPane fx:id="tabPane" minHeight="-Infinity" minWidth="680.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@SerenityTheme.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <tabs>
+            <Tab text="Lessons">
+                <content>
+                    <ListView fx:id="lessonListView" />
+                </content>
+            </Tab>
+            <Tab text="Students">
+                <content>
+                    <ListView fx:id="studentListView" />
+                </content>
+            </Tab>
+            <Tab text="Attendance">
+                <content>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <children>
+                            <TableView fx:id="attendanceTableView" prefHeight="200.0" prefWidth="200.0" />
+                        </children>
+                    </StackPane>
+                </content>
+            </Tab>
+            <Tab text="Participation">
+                <content>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <children>
+                            <TableView fx:id="participationTableView" prefHeight="200.0" prefWidth="200.0">
+                                <columns>
+                                    <TableColumn fx:id="nameColumn1" prefWidth="75.0" text="Name" />
+                                    <TableColumn fx:id="studentNoColumn1" prefWidth="75.0" text="Student Number" />
+                                </columns>
+                            </TableView>
+                        </children>
+                    </StackPane>
+                </content>
+            </Tab>
+        </tabs>
+    </TabPane>
 </VBox>
