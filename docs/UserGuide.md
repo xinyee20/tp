@@ -421,7 +421,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-![Figure 4.2.1. Outcome of a successful mark all students present command]()
+![Figure 4.2.1. Outcome of a successful mark all students present command](images/ui/markpresent_all.png)
 
 <H4 style="color: #477B9F"> 4.2.2. Mark a student as present: <code>markpresent</code></H4>
 
@@ -457,7 +457,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student present command]()
+![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
 
 <H4 style="color: #477B9F"> 4.2.2. Mark a student as absent: <code>markabsent</code></H4>
 
@@ -491,7 +491,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student absent command]() 
+![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png) 
 
 <H4 style="color: #477B9F">  4.2.3. Mark all students as absent: <code>markabsent all</code></H4>
 
@@ -515,8 +515,6 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
-
-![Figure X. Outcome of a successful mark all students absent command]()
 
 <H4 style="color: #477B9F"> 4.2.4. Flag attendance of a student: <code>flagatt</code></H4>
 
