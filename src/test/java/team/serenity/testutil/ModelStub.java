@@ -13,6 +13,7 @@ import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
@@ -59,6 +60,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public GroupManager getGroupManager() {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
     public Path getSerenityFilePath() {
         throw new AssertionError("This method should not be called.");
     }
@@ -89,7 +95,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void exportAttendance(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void exportParticipation(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getAllStudentInfo() {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -69,7 +69,8 @@ public class ViewLsnCommand extends Command {
             throw new CommandException(LESSON_DOES_NOT_EXIST_MESSAGE);
         }
 
-        return new CommandResult(this.getMessage(model), false, false, true, false, false, false, false, false, false, false);
+        return new CommandResult(this.getMessage(model), false, false, true, false,
+            false, false, false, false, false, false);
     }
 
     @Override

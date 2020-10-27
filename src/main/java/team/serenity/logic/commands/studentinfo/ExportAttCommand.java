@@ -23,8 +23,8 @@ public class ExportAttCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G04";
 
-    public static final String MESSAGE_SUCCESS
-        = "Attendance sheet of tutorial group %s has been exported as %s_attendance.xlsx";
+    public static final String MESSAGE_SUCCESS =
+        "Attendance sheet of tutorial group %s has been exported as %s_attendance.xlsx";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "Specified Tutorial Group does not exist!";
 
     private final GroupContainsKeywordPredicate grpPredicate;
@@ -49,7 +49,8 @@ public class ExportAttCommand extends Command {
         Group trgtGrp = model.getFilteredGroupList().get(0);
 
         model.exportAttendance(trgtGrp);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, trgtGrp.getGroupName().toString(), trgtGrp.getGroupName().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+            trgtGrp.getGroupName().toString(), trgtGrp.getGroupName().toString()));
     }
 
     @Override

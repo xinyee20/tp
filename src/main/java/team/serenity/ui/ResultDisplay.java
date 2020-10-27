@@ -16,11 +16,17 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Constructs a ResultDisplay.
+     */
     public ResultDisplay() {
         super(FXML);
         setDefaultFeedback();
     }
 
+    /**
+     * Feedback to the user a default message.
+     */
     public void setDefaultFeedback() {
         String defaultFeedback = "Welcome!\n"
             + "You may begin by adding or viewing a tutorial group\n"
@@ -28,6 +34,10 @@ public class ResultDisplay extends UiPart<Region> {
         this.resultDisplay.setText(defaultFeedback);
     }
 
+    /**
+     * Feedback to the user.
+     * @param feedbackToUser The feedback.
+     */
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         this.resultDisplay.setText(feedbackToUser);

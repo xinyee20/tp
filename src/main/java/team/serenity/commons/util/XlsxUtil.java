@@ -1,10 +1,8 @@
 package team.serenity.commons.util;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -26,12 +24,9 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
-import team.serenity.model.group.student.StudentName;
 import team.serenity.model.group.student.StudentNumber;
-import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
-import team.serenity.model.managers.StudentInfoManager;
 import team.serenity.model.util.UniqueList;
 
 /**
