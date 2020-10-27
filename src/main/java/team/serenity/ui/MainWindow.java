@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private TitleDisplay titleDisplay;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ButtonBar buttonBar;
@@ -56,6 +57,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane titleDisplayPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -127,6 +131,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        this.titleDisplay = new TitleDisplay();
+        this.titleDisplayPlaceholder.getChildren().add(this.titleDisplay.getRoot());
+
         this.resultDisplay = new ResultDisplay();
         this.resultDisplayPlaceholder.getChildren().add(this.resultDisplay.getRoot());
 
@@ -277,6 +284,14 @@ public class MainWindow extends UiPart<Stage> {
         groupDataPanel.changeParticipationTab();
     }
 
+    private String getGroupName(String commandText) {
+        return commandText.split(" ")[1].split("/")[1];
+    }
+
+    private String getLessonName(String commandText) {
+        return commandText.split(" ")[2].split("/")[1];
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -298,21 +313,24 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isToggleGrpView()) {
                 toggleGrpView();
+                String groupName = getGroupName(commandText);
+                this.titleDisplay.setGroupTitle(groupName);
             }
 
             if (commandResult.isToggleLsnView()) {
                 toggleLsnView();
+                String groupName = getGroupName(commandText);
+                String lessonName = getLessonName(commandText);
+                this.titleDisplay.setLessonTitle(groupName, lessonName);
             }
 
             if (commandResult.isAddGrp()) {
-                // commandText would be in AddGrpCommand format correctly by the time it reaches here
-                String groupName = commandText.split(" ")[1].split("/")[1];
+                String groupName = getGroupName(commandText);
                 handleAddGrp(groupName);
             }
 
             if (commandResult.isDelGrp()) {
-                // commandText would be in DelGrpCommand format correctly by the time it reaches here
-                String groupName = commandText.split(" ")[1].split("/")[1];
+                String groupName = getGroupName(commandText);
                 handleDelGrp(groupName);
             }
 

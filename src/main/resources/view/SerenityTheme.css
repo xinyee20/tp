@@ -297,6 +297,18 @@
     -fx-background-radius: 0;
 }
 
+.text-area {
+    -fx-text-fill: -color-white;
+}
+
+.text-area .content {
+    -fx-background-color: -color-blue1;
+}
+
+#titleDisplay *.text {
+    -fx-text-alignment: center;
+}
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;

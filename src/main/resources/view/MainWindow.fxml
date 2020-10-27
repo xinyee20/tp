@@ -28,6 +28,7 @@
          <BorderPane>
             <center>
             <VBox>
+                  <StackPane fx:id="titleDisplayPlaceholder" layoutX="10.0" layoutY="10.0" minWidth="680.0" prefHeight="20.0" prefWidth="200.0" styleClass="pane-with-border" />
                 <StackPane fx:id="dataDisplayPlaceholder" minWidth="680.0" prefHeight="150.0" prefWidth="200.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           </StackPane>
                 <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
