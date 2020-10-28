@@ -1,6 +1,7 @@
 package team.serenity.logic.commands.question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.EDITED_QN_A;
@@ -13,6 +14,9 @@ import static team.serenity.logic.commands.CommandTestUtil.assertQuestionCommand
 import static team.serenity.logic.commands.CommandTestUtil.showQuestionAtIndex;
 import static team.serenity.logic.commands.question.EditQnCommand.MESSAGE_DUPLICATE_QUESTION;
 import static team.serenity.logic.commands.question.EditQnCommand.MESSAGE_EDIT_QUESTION_SUCCESS;
+import static team.serenity.logic.commands.question.EditQnCommand.MESSAGE_GROUP_NOT_FOUND_FORMAT;
+import static team.serenity.logic.commands.question.EditQnCommand.MESSAGE_LESSON_NOT_FOUND_FORMAT;
+import static team.serenity.logic.commands.question.EditQnCommand.MESSAGE_NOT_EDITED;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
@@ -24,6 +28,8 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.question.EditQnCommand.EditQuestionDescriptor;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.UserPrefs;
@@ -90,8 +96,29 @@ class EditQnCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
-        // TODO: WJ execute_filteredList_success
+    public void execute_noFieldSpecifiedFilteredList_success() {
+        // TODO: WJ execute_noFieldSpecifiedFilteredList_success
+    }
+
+    @Test
+    public void execute_questionNotEditedUnfilteredList_failure() {
+        Question questionToEdit = this.model.getFilteredQuestionList().get(INDEX_FIRST.getZeroBased());
+        EditQnCommand editCommand = new EditQnCommand(INDEX_FIRST,
+                new EditQuestionDescriptorBuilder(questionToEdit).build());
+
+        assertQuestionCommandFailure(editCommand, this.model, MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void execute_questionNotEditedQuestionFilteredList_failure() {
+        showQuestionAtIndex(this.model, INDEX_FIRST);
+
+        // edit question in filtered list in question manager with a same fields
+        Question questionToEdit = this.model.getQuestionManager().getListOfQuestions().get(INDEX_FIRST.getZeroBased());
+        EditQnCommand editCommand = new EditQnCommand(INDEX_FIRST,
+                new EditQuestionDescriptorBuilder(questionToEdit).build());
+
+        assertQuestionCommandFailure(editCommand, this.model, MESSAGE_NOT_EDITED);
     }
 
     @Test
@@ -113,6 +140,69 @@ class EditQnCommandTest {
                 new EditQuestionDescriptorBuilder(questionInList).build());
 
         assertQuestionCommandFailure(editCommand, this.model, MESSAGE_DUPLICATE_QUESTION);
+    }
+
+    @Test
+    public void execute_groupNameNotFoundUnfilteredList_failure() {
+        Question questionToEdit = this.model.getFilteredQuestionList().get(INDEX_FIRST.getZeroBased());
+        assertFalse(this.model.hasGroupName(new GroupName("G10")));
+        EditQuestionDescriptor editedQuestionWithGroupNameNotFound =
+            new EditQuestionDescriptorBuilder(questionToEdit).withGroupName("G10").build();
+
+        String expectedMessage = String.format(MESSAGE_GROUP_NOT_FOUND_FORMAT,
+                editedQuestionWithGroupNameNotFound.getGroupName().get().groupName);
+        EditQnCommand editCommand = new EditQnCommand(INDEX_SECOND, editedQuestionWithGroupNameNotFound);
+
+        assertQuestionCommandFailure(editCommand, this.model, expectedMessage);
+    }
+
+    @Test
+    public void execute_groupNameNotFoundFilteredList_failure() {
+        showQuestionAtIndex(this.model, INDEX_FIRST);
+
+        // edit question in filtered list in question manager with a group name that don't exists in group manager
+        Question questionToEdit = this.model.getQuestionManager().getListOfQuestions().get(INDEX_FIRST.getZeroBased());
+        assertFalse(this.model.hasGroupName(new GroupName("G10")));
+        EditQuestionDescriptor editedQuestionWithGroupNameNotFound =
+                new EditQuestionDescriptorBuilder(questionToEdit).withGroupName("G10").build();
+
+        String expectedMessage = String.format(MESSAGE_GROUP_NOT_FOUND_FORMAT,
+                editedQuestionWithGroupNameNotFound.getGroupName().get().groupName);
+        EditQnCommand editCommand = new EditQnCommand(INDEX_FIRST, editedQuestionWithGroupNameNotFound);
+
+        assertQuestionCommandFailure(editCommand, this.model, expectedMessage);
+    }
+
+    @Test
+    public void execute_lessonNameNotFoundUnfilteredList_failure() {
+        Question questionToEdit = this.model.getFilteredQuestionList().get(INDEX_FIRST.getZeroBased());
+        assertFalse(this.model.ifTargetGroupHasLessonName(questionToEdit.getGroupName(), new LessonName("10-1")));
+
+        EditQuestionDescriptor editedQuestionWithLessonNameNotFound =
+                new EditQuestionDescriptorBuilder(questionToEdit).withLessonName("10-1").build();
+        String expectedMessage = String.format(MESSAGE_LESSON_NOT_FOUND_FORMAT,
+                editedQuestionWithLessonNameNotFound.getLessonName().get().lessonName);
+        EditQnCommand editCommand = new EditQnCommand(INDEX_FIRST, editedQuestionWithLessonNameNotFound);
+
+        assertQuestionCommandFailure(editCommand, this.model, expectedMessage);
+    }
+
+    @Test
+    public void execute_lessonNameNotFoundFilteredList_failure() {
+        showQuestionAtIndex(this.model, INDEX_FIRST);
+
+        // edit question in filtered list in question manager with a group name that don't exists in group manager
+        Question questionToEdit = this.model.getQuestionManager().getListOfQuestions().get(INDEX_FIRST.getZeroBased());
+        assertFalse(this.model.ifTargetGroupHasLessonName(questionToEdit.getGroupName(), new LessonName("10-1")));
+
+        EditQuestionDescriptor editedQuestionWithLessonNameNotFound =
+                new EditQuestionDescriptorBuilder(questionToEdit).withLessonName("10-1").build();
+
+        String expectedMessage = String.format(MESSAGE_LESSON_NOT_FOUND_FORMAT,
+                editedQuestionWithLessonNameNotFound.getLessonName().get().lessonName);
+        EditQnCommand editCommand = new EditQnCommand(INDEX_FIRST, editedQuestionWithLessonNameNotFound);
+
+        assertQuestionCommandFailure(editCommand, this.model, expectedMessage);
     }
 
     @Test
@@ -159,6 +249,20 @@ class EditQnCommandTest {
 
         // different descriptor -> returns false
         assertNotEquals(standardCommand, new EditQnCommand(INDEX_FIRST, EDITED_QN_B));
+    }
+
+    @Test
+    public void test_hashCode() {
+        EditQuestionDescriptor editedQuestionA = new EditQuestionDescriptorBuilder().build();
+        EditQuestionDescriptor editedQuestionB = new EditQuestionDescriptorBuilder().withGroupName("G10").build();
+        EditQnCommand editQnACommand = new EditQnCommand(INDEX_FIRST, editedQuestionA);
+        EditQnCommand editQnBCommand = new EditQnCommand(INDEX_SECOND, editedQuestionB);
+
+        // Same case
+        assertEquals(editQnACommand.hashCode(), editQnACommand.hashCode());
+
+        // Different case
+        assertNotEquals(editQnACommand.hashCode(), editQnBCommand.hashCode());
     }
 
 }
