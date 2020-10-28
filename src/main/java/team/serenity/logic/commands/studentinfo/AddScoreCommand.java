@@ -129,6 +129,7 @@ public class AddScoreCommand extends Command {
 
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toAddScore = Optional.ofNullable(studentInfo.getStudent());
+            this.score = studentInfo.getParticipation().getScore();
             Attendance currentAttendance = studentInfo.getAttendance();
             if (!currentAttendance.getAttendance()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
