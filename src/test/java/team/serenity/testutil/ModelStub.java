@@ -10,6 +10,7 @@ import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
@@ -126,6 +127,11 @@ public class ModelStub implements Model {
 
     @Override
     public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean ifTargetGroupHasLessonName(GroupName groupName, LessonName lessonName) {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -3,6 +3,8 @@ package team.serenity.logic.commands.question;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 
 import java.util.List;
@@ -27,17 +29,23 @@ public class EditQnCommand extends Command {
 
     public static final String COMMAND_WORD = "editqn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the description of the question identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the question identified "
             + "by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_QN + "TITLE\n"
+            + "[" + PREFIX_GRP + "GROUP_NAME] "
+            + "[" + PREFIX_LSN + "LESSON_NAME] "
+            + "[" + PREFIX_QN + "QUESTION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_QN + "Can you repeat the deadlines for all submissions?";
 
     public static final String MESSAGE_EDIT_QUESTION_SUCCESS = "Edited Question: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "Question is not edited.";
+    public static final String MESSAGE_NOT_EDITED = "Question is not edited.\n"
+        + "At least one field needs to be change from the original question.";
+    public static final String MESSAGE_GROUP_NOT_FOUND_FORMAT = "This group \"%s\" does not exists.";
+    public static final String MESSAGE_LESSON_NOT_FOUND_FORMAT = "This lesson \"%s\" does not exists.";
     public static final String MESSAGE_DUPLICATE_QUESTION = "This question already exists in the list.";
+
 
     private final Index index;
     private final EditQuestionDescriptor editQuestionDescriptor;
@@ -65,12 +73,28 @@ public class EditQnCommand extends Command {
         Question questionToEdit = lastShownList.get(index.getZeroBased());
         Question editedQuestion = createEditedQuestion(questionToEdit, editQuestionDescriptor);
 
-        if (!questionToEdit.getGroupName().equals(editedQuestion.getGroupName())) {
-
+        // Checks if the edited question is the same as question to edit
+        if (questionToEdit.equals(editedQuestion)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
+        // Checks if the edited question exists in the question manager
         if (!questionToEdit.equals(editedQuestion) && model.hasQuestion(editedQuestion)) {
             throw new CommandException(MESSAGE_DUPLICATE_QUESTION);
+        }
+
+        // Checks if the edited question's group name exists in serenity
+        if (!questionToEdit.getGroupName().equals(editedQuestion.getGroupName())
+            && !model.hasGroupName(editedQuestion.getGroupName())) {
+            throw new CommandException(String.format(MESSAGE_GROUP_NOT_FOUND_FORMAT,
+                editedQuestion.getGroupName().groupName));
+        }
+
+        // Checks if the edited question's lesson name exists in the group and serenity
+        if (!questionToEdit.getLessonName().equals(editedQuestion.getLessonName())
+            && !model.ifTargetGroupHasLessonName(editedQuestion.getGroupName(), editedQuestion.getLessonName())) {
+            throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND_FORMAT,
+                    editedQuestion.getLessonName().lessonName));
         }
 
         model.setQuestion(questionToEdit, editedQuestion);
@@ -114,7 +138,7 @@ public class EditQnCommand extends Command {
      */
     public static class EditQuestionDescriptor {
         private GroupName groupName;
-        private LessonName lessonName;
+        private team.serenity.model.group.lesson.LessonName lessonName;
         private Description description;
 
         public EditQuestionDescriptor() {
@@ -145,11 +169,11 @@ public class EditQnCommand extends Command {
             return Optional.ofNullable(this.groupName);
         }
 
-        public void setLessonName(LessonName lessonName) {
+        public void setLessonName(team.serenity.model.group.lesson.LessonName lessonName) {
             this.lessonName = lessonName;
         }
 
-        public Optional<LessonName> getLessonName() {
+        public Optional<team.serenity.model.group.lesson.LessonName> getLessonName() {
             return Optional.ofNullable(this.lessonName);
         }
 

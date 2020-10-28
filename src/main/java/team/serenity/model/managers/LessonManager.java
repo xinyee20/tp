@@ -11,6 +11,7 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
 import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.util.UniqueList;
 
 public class LessonManager implements ReadOnlyLessonManager {
@@ -61,6 +62,22 @@ public class LessonManager implements ReadOnlyLessonManager {
     }
 
     // Lesson-level operations
+
+    /**
+     * Checks if {@code targetLesson} exists for a specified (@code targetGroup).
+     *
+     * @param targetGroup group to search for the lesson name in
+     * @param targetLesson lesson name to check for
+     * @return true if the given lesson name exists for the specified group.
+     */
+    public boolean ifTargetGroupHasLessonName(GroupName targetGroup, LessonName targetLesson) {
+        requireAllNonNull(targetGroup, targetLesson);
+        if (this.mapToListOfLessons.containsKey(targetGroup)) {
+            return this.mapToListOfLessons.get(targetGroup).stream()
+                .anyMatch(lesson -> lesson.getLessonName().equals(targetLesson));
+        }
+        return false;
+    }
 
     /**
      * Checks if a Lesson exists for a specified group.

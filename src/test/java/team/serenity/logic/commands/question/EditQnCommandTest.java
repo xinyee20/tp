@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.EDITED_QN_A;
 import static team.serenity.logic.commands.CommandTestUtil.EDITED_QN_B;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_GRP_GROUP_B;
+import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_B;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_LSN_B;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_QN_DESC_B;
 import static team.serenity.logic.commands.CommandTestUtil.assertQuestionCommandFailure;
@@ -63,12 +63,12 @@ class EditQnCommandTest {
         Question lastQuestion = this.model.getFilteredQuestionList().get(indexLastQuestion.getZeroBased());
 
         QuestionBuilder questionInList = new QuestionBuilder(lastQuestion);
-        Question editedQuestion = questionInList.withGroupName(VALID_GRP_GROUP_B)
+        Question editedQuestion = questionInList.withGroupName(VALID_GROUP_NAME_B)
                 .withLessonName(VALID_LSN_B)
                 .withDescription(VALID_QN_DESC_B)
                 .build();
 
-        EditQuestionDescriptor descriptor = new EditQuestionDescriptorBuilder().withGroupName(VALID_GRP_GROUP_B)
+        EditQuestionDescriptor descriptor = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_B)
                 .withLessonName(VALID_LSN_B)
                 .withDescription(VALID_QN_DESC_B)
                 .build();
@@ -118,7 +118,7 @@ class EditQnCommandTest {
     @Test
     public void execute_invalidQuestionIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(this.model.getFilteredQuestionList().size() + 1);
-        EditQuestionDescriptor descriptor = new EditQuestionDescriptorBuilder().withGroupName(VALID_GRP_GROUP_B)
+        EditQuestionDescriptor descriptor = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_B)
                 .build();
         EditQnCommand editCommand = new EditQnCommand(outOfBoundIndex, descriptor);
         String expectedMessage = String.format(MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX);
