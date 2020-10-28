@@ -52,10 +52,20 @@ public class CommandResult {
     private final boolean isViewScore;
 
     /**
+     * The application should select flaggedAttendanceTab in serenity data screen.
+     */
+    private final boolean isFlagAtt;
+
+    /**
+     * The application should select questionTab in serenity data screen.
+     */
+    private final boolean isViewQn;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewLsn, boolean viewGrp,
-        boolean addGrp, boolean delGrp, boolean viewAtt, boolean viewScore) {
+        boolean addGrp, boolean delGrp, boolean viewAtt, boolean viewScore, boolean flagAtt, boolean viewQn) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -65,6 +75,8 @@ public class CommandResult {
         this.isDelGrp = delGrp;
         this.isViewAtt = viewAtt;
         this.isViewScore = viewScore;
+        this.isFlagAtt = flagAtt;
+        this.isViewQn = viewQn;
     }
 
     /**
@@ -72,7 +84,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -111,6 +123,14 @@ public class CommandResult {
         return isViewScore;
     }
 
+    public boolean isFlagAtt() {
+        return isFlagAtt;
+    }
+
+    public boolean isViewQn() {
+        return isViewQn;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -131,12 +151,14 @@ public class CommandResult {
             && this.isAddGrp == otherCommandResult.isAddGrp
             && this.isDelGrp == otherCommandResult.isDelGrp
             && this.isViewAtt == otherCommandResult.isViewAtt
-            && this.isViewScore == otherCommandResult.isViewScore;
+            && this.isViewScore == otherCommandResult.isViewScore
+            && this.isFlagAtt == otherCommandResult.isFlagAtt
+            && this.isViewQn == otherCommandResult.isViewQn;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(this.feedbackToUser, this.showHelp, this.exit, this.isViewGrp, this.isViewLsn,
-            this.isAddGrp, this.isDelGrp);
+            this.isAddGrp, this.isDelGrp, this.isViewAtt, this.isViewScore, this.isFlagAtt, this.isViewQn);
     }
 }

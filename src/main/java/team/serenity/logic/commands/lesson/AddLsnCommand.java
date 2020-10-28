@@ -2,7 +2,7 @@ package team.serenity.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
 
 import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.CommandResult;
@@ -21,10 +21,14 @@ public class AddLsnCommand extends Command {
 
     public static final String COMMAND_WORD = "addlsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a new lesson to a specified tutorial group. "
+        + ": Adds a new lesson to a specified tutorial group. \n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
-        + PREFIX_PATH + "PATH ";
+        + PREFIX_LSN + "LESSON \n"
+        + "Example: "
+        + COMMAND_WORD + " "
+        + PREFIX_GRP + "G04 "
+        + PREFIX_LSN + "5-1";
 
     public static final String MESSAGE_SUCCESS = "New lesson for tutorial group %2$s added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson for tutorial group %1$s already exists.";
@@ -69,7 +73,7 @@ public class AddLsnCommand extends Command {
         model.updateFilteredLessonList(new LessonContainsKeywordPredicate(this.toAdd));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, targetGrp),
-            false, false, true, false, false, false, false, false);
+            false, false, true, false, false, false, false, false, false, false);
     }
 
     @Override

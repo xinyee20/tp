@@ -35,16 +35,16 @@ public class SetScoreCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Awards a specific student a participation score for a lesson.\n"
             + "Parameters: "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER "
-            + PREFIX_SET_SCORE + " SCORE "
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER "
+            + PREFIX_SET_SCORE + "SCORE "
             + "or INDEX " + PREFIX_SET_SCORE + " SCORE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U "
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456U "
             + PREFIX_SET_SCORE + " 2\n"
             + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_SET_SCORE + " 2\n";
+            + PREFIX_SET_SCORE + "2\n";
 
     private Optional<Student> toSetScore;
     private Optional<Index> index;
@@ -103,7 +103,7 @@ public class SetScoreCommand extends Command {
                 this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
-                    if (!currentAttendance.getAttendance()) {
+                    if (!currentAttendance.isPresent()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
                     }
                     if (scoreToSet > 5 || scoreToSet < 0) {
@@ -130,7 +130,7 @@ public class SetScoreCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toSetScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
-            if (!currentAttendance.getAttendance()) {
+            if (!currentAttendance.isPresent()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
             }
             if (scoreToSet > 5 || scoreToSet < 0) {

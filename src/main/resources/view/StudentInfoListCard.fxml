@@ -50,13 +50,13 @@
             <children>
                <HBox alignment="CENTER_LEFT" spacing="5">
                   <children>
-                     <ImageView fx:id="attendanceIcon" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="attendanceImg" fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@../images/cross.png" />
                         </image>
                      </ImageView>
                      <Label fx:id="attendance" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="cell_small_label" text="\$attendance" textFill="#ff5440" />
-                     <ImageView fx:id="participationIcon" fitHeight="17.0" fitWidth="17.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="participationImg" fitHeight="17.0" fitWidth="17.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@../images/participation.png" />
                         </image>

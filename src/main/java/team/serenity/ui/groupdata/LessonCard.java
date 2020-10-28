@@ -30,7 +30,7 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         this.id.setText(displayedIndex + ". ");
-        this.name.setText("tutorial " + lesson.getLessonName());
+        this.name.setText("Tutorial " + lesson.getLessonName());
     }
 
     @Override

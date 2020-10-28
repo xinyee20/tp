@@ -8,11 +8,14 @@ import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
+import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.util.UniqueList;
 
@@ -22,12 +25,7 @@ import team.serenity.model.util.UniqueList;
 public class ModelStub implements Model {
 
     @Override
-    public boolean hasGroup() {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public boolean hasGroup(Group group) {
+    public boolean hasAGroup() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -57,6 +55,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ReadOnlySerenity getSerenity() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public GroupManager getGroupManager() {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
     public Path getSerenityFilePath() {
         throw new AssertionError("This method should not be called.");
     }
@@ -71,7 +79,10 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
-
+    @Override
+    public boolean hasGroupName(GroupName toCheck) {
+        throw new AssertionError("This method should not be called.");
+    }
 
     @Override
     public void deleteGroup(Group target) {
@@ -84,7 +95,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void exportAttendance(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void exportParticipation(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getAllStudentInfo() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -120,6 +146,11 @@ public class ModelStub implements Model {
 
     @Override
     public UniqueList<Student> getListOfStudentsFromGroup(Group group) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasStudent(Student toCheck) {
         throw new AssertionError("This method should not be called.");
     }
 

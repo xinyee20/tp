@@ -1,12 +1,16 @@
 package team.serenity.testutil;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import team.serenity.commons.util.CsvUtil;
+import team.serenity.commons.util.XlsxUtil;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
@@ -84,8 +88,13 @@ public class GroupBuilder {
     /**
      * Parses the {@code filePath} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
-    public GroupBuilder withFilePath(Path filePath) {
-        students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+    public GroupBuilder withFilePath(String filePath) {
+        try {
+            students.setElementsWithList(new ArrayList<>(new XlsxUtil(filePath,
+                new XSSFWorkbook(filePath)).readStudentsFromXlsx()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 

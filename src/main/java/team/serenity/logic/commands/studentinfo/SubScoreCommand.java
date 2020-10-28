@@ -34,16 +34,16 @@ public class SubScoreCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Decrease the participation score of a specific student for a lesson.\n"
             + "Parameters: "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER "
-            + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT "
-            + "or INDEX " + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER "
+            + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT "
+            + "or INDEX " + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456B "
-            + PREFIX_SUBTRACT_SCORE + " 2\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456B "
+            + PREFIX_SUBTRACT_SCORE + "2\n"
             + "or " + COMMAND_WORD + " 2"
-            + PREFIX_SUBTRACT_SCORE + " 2\n";
+            + PREFIX_SUBTRACT_SCORE + "2\n";
 
     private Optional<Student> toSubScore;
     private Optional<Index> index;
@@ -103,7 +103,7 @@ public class SubScoreCommand extends Command {
                 this.isCorrectStudent = studentInfo.containsStudent(this.toSubScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
-                    if (!currentAttendance.getAttendance()) {
+                    if (!currentAttendance.isPresent()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
                     }
                     newScore = score - scoreToSub;
@@ -130,7 +130,7 @@ public class SubScoreCommand extends Command {
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toSubScore = Optional.ofNullable(studentInfo.getStudent());
             Attendance currentAttendance = studentInfo.getAttendance();
-            if (!currentAttendance.getAttendance()) {
+            if (!currentAttendance.isPresent()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
             }
             newScore = score - scoreToSub;

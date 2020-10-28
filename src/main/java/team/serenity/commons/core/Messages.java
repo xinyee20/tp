@@ -6,6 +6,8 @@ package team.serenity.commons.core;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_INVALID_FILE_PATH = "Invalid file path!\nIf you are unsure on how to get"
+        + " the file path, type the 'help' command to refer to our user guide.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
     public static final String MESSAGE_GROUP_LISTED_OVERVIEW = "You are in tutorial group %1$s.";

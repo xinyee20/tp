@@ -3,12 +3,15 @@ package team.serenity.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.model.group.studentinfo.StudentInfo;
 
 public class JsonAdaptedStudentInfo {
+
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "StudentInfo's %s field is missing!";
 
     private final JsonAdaptedStudent student;
     private final boolean isPresent;
@@ -21,8 +24,8 @@ public class JsonAdaptedStudentInfo {
      */
     public JsonAdaptedStudentInfo(StudentInfo source) {
         this.student = new JsonAdaptedStudent(source.getStudent());
-        this.isPresent = source.getAttendance().getAttendance();
-        this.isFlagged = source.getAttendance().getFlagged();
+        this.isPresent = source.getAttendance().isPresent();
+        this.isFlagged = source.getAttendance().isFlagged();
         this.participation = source.getParticipation().getScore();
     }
 
@@ -48,9 +51,22 @@ public class JsonAdaptedStudentInfo {
 
     /**
      * Converts this Jackson-friendly adapted StudentInfo object into the model's {@code StudentInfo} object.
-     * @throws IllegalArgumentException if there were any data constraints violated in the adapted group.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted group.
      */
-    public StudentInfo toModelType() throws IllegalArgumentException {
+    public StudentInfo toModelType() throws IllegalValueException {
+
+        if (this.student == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Student.class.getSimpleName()));
+        }
+
+        if (!Participation.isValidParticipation(this.participation)) {
+            throw new IllegalValueException(Participation.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Attendance.isValidAttendance(isPresent, isFlagged)) {
+            throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+
         Student student = this.student.toModelType();
         Attendance attendance = new Attendance(this.isPresent, this.isFlagged);
         Participation participation = new Participation(this.participation);
