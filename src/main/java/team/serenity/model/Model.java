@@ -7,10 +7,12 @@ import java.util.stream.Stream;
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.managers.GroupManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
@@ -61,6 +63,11 @@ public interface Model {
     ReadOnlySerenity getSerenity();
 
     /**
+     * Returns the GroupManager.
+     */
+    GroupManager getGroupManager();
+
+    /**
      * Returns the user prefs' serenity file path.
      */
     Path getSerenityFilePath();
@@ -75,21 +82,16 @@ public interface Model {
     ObservableList<Group> getListOfGroups();
 
     /**
-     * Returns true if a group with the same identity as {@code group} exists in serenity.
-     */
-    boolean hasGroup(Group group);
-
-    /**
-     * Returns true if at least one group exists
-     * @return whether any group exists
-     */
-    boolean hasGroup();
-
-    /**
      * Get stream of groups
      * @return Stream of groups
      */
     Stream<Group> getGroupStream();
+
+    /**
+     * Returns true if at least one group exists in serenity.
+     * @return whether any group exists
+     */
+    boolean hasAGroup();
 
     /**
      * Deletes the given group. The group must exist in serenity.
@@ -102,11 +104,35 @@ public interface Model {
     void addGroup(Group group);
 
     /**
+     * Exports attendance data of the given group as XLSX file.
+     */
+    void exportAttendance(Group group);
+
+    /**
+     * Exports participation data of the given group as XLSX file.
+     */
+    void exportParticipation(Group group);
+
+    /**
+     * Returns true if a group with a GroupName that is the same as {@code toCheck} exists in the
+     * GroupManager.
+     *
+     * @param toCheck the given group name.
+     * @return true if the given group name already exist in the GroupManager.
+     */
+    boolean hasGroupName(GroupName toCheck);
+
+    /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Get all student info objects from all groups.
+     */
+    ObservableList<StudentInfo> getAllStudentInfo();
 
     // ========== LessonManager ==========
 
@@ -142,6 +168,15 @@ public interface Model {
     ObservableList<Student> getStudentList();
 
     UniqueList<Student> getListOfStudentsFromGroup(Group group);
+
+    /**
+     * Returns true if a question that is the same as {@code toCheck} exists in the
+     * StudentManager.
+     *
+     * @param toCheck the given student.
+     * @return true if the given student already exist in the StudentManager.
+     */
+    boolean hasStudent(Student toCheck);
 
     /**
      * Removes a Student from a Group.
@@ -193,7 +228,7 @@ public interface Model {
     void setQuestionManager(ReadOnlyQuestionManager questionManager);
 
     /**
-     * Returns true if a question that is the same as {@code target} exists in the
+     * Returns true if a question that is the same as {@code toCheck} exists in the
      * QuestionManager.
      *
      * @param toCheck the given question.

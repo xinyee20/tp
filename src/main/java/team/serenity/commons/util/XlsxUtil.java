@@ -1,13 +1,17 @@
 package team.serenity.commons.util;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -16,8 +20,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentNumber;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
@@ -27,6 +34,7 @@ import team.serenity.model.util.UniqueList;
  */
 public class XlsxUtil {
 
+    private String filePath;
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
 
@@ -39,11 +47,30 @@ public class XlsxUtil {
      */
     public XlsxUtil(String filePath) {
         try {
-            workbook = new XSSFWorkbook(filePath);
-            sheet = workbook.getSheetAt(0);
+            this.filePath = filePath;
+            this.workbook = new XSSFWorkbook(filePath);
+            this.sheet = this.workbook.getSheetAt(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Creates a XlsxUtil object that exports a group as a XLSX file.
+     */
+    public XlsxUtil() {
+        workbook = new XSSFWorkbook();
+        sheet = workbook.createSheet();
+    }
+    /**
+     * Creates a XlsxUtil object that manages XLSX files.
+     *
+     * @param workbook The workbook of the XLSX file.
+     */
+    public XlsxUtil(String filePath, XSSFWorkbook workbook) {
+        this.filePath = filePath;
+        this.workbook = workbook;
+        this.sheet = this.workbook.getSheetAt(0);
     }
 
     /**
@@ -54,7 +81,7 @@ public class XlsxUtil {
      */
     public Set<Student> readStudentsFromXlsx() {
         Set<Student> students = new HashSet<>();
-        Iterator<Row> rowIterator = sheet.iterator();
+        Iterator<Row> rowIterator = this.sheet.iterator();
         skipRowsToHeaderRow(rowIterator);
         readDetailsOfStudents(rowIterator, students);
         List<Student> studentList = new ArrayList<>(students);
@@ -68,9 +95,9 @@ public class XlsxUtil {
         while (rowIterator.hasNext()) {
             row = rowIterator.next();
 
-            if (formatter.formatCellValue(row.getCell(0)).equals("Photo")
-                && formatter.formatCellValue(row.getCell(1)).equals("Name")
-                && formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
+            if (this.formatter.formatCellValue(row.getCell(0)).equals("Photo")
+                && this.formatter.formatCellValue(row.getCell(1)).equals("Name")
+                && this.formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
                 break;
             }
         }
@@ -87,10 +114,10 @@ public class XlsxUtil {
             // Photo
 
             Cell nameCell = cellIterator.next();
-            String name = formatter.formatCellValue(nameCell);
+            String name = this.formatter.formatCellValue(nameCell);
 
             Cell studentIdCell = cellIterator.next();
-            String studentId = formatter.formatCellValue(studentIdCell);
+            String studentId = this.formatter.formatCellValue(studentIdCell);
 
             Student student = new Student(name, studentId);
             students.add(student);
@@ -104,7 +131,7 @@ public class XlsxUtil {
      */
     public Set<Lesson> readLessonsFromXlsx(Set<StudentInfo> studentsInfo) {
         Set<Lesson> lessons = new HashSet<>();
-        Iterator<Row> rowIterator = sheet.iterator();
+        Iterator<Row> rowIterator = this.sheet.iterator();
         Row headerRow = skipRowsToHeaderRow(rowIterator);
         readDetailsOfLessons(headerRow, lessons, studentsInfo);
         List<Lesson> lessonList = new ArrayList<>(lessons);
@@ -118,8 +145,8 @@ public class XlsxUtil {
         while (cellIterator.hasNext()) {
             Cell cell = cellIterator.next();
 
-            if (formatter.formatCellValue(cell).startsWith("T")) {
-                String lessonName = formatter.formatCellValue(cell);
+            if (this.formatter.formatCellValue(cell).startsWith("T")) {
+                String lessonName = this.formatter.formatCellValue(cell);
                 String formattedLessonName = formatLessonName(lessonName);
                 UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
                 newStudentsInfo.setElementsWithList(new ArrayList<>(studentsInfo));
@@ -229,6 +256,119 @@ public class XlsxUtil {
                 return 0;
             }
         }
+    }
+
+    /**
+     * Write attendance data to XLSX file.
+     */
+    public void writeAttendanceToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+        UniqueList<Student> studentList = group.getSortedStudents();
+        UniqueList<Lesson> lessonList = group.getSortedLessons();
+
+        List<List<Object>> data = new ArrayList<>();
+        Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
+
+        for (Lesson lesson : lessonList) {
+            GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+            for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
+                Student student = studentInfo.getStudent();
+                Optional<List<Integer>> attendanceList = Optional.ofNullable(studentDetailsMap.get(student));
+                List<Integer> newAttendanceList;
+                if (attendanceList.isEmpty()) {
+                    newAttendanceList = new ArrayList<>();
+                } else {
+                    newAttendanceList = attendanceList.get();
+                }
+                newAttendanceList.add(studentInfo.getAttendance().getIntegerAttendance());
+                studentDetailsMap.put(student.getStudentNo(), newAttendanceList);
+            }
+        }
+
+        for (Student student : studentList) {
+            List<Object> studentDetails = new ArrayList<>();
+            studentDetails.add(student.getStudentName().toString());
+            studentDetails.add(student.getStudentNo().toString());
+            List<Integer> attendanceList = studentDetailsMap.get(student.getStudentNo());
+            studentDetails.addAll(attendanceList);
+            data.add(studentDetails);
+        }
+
+        String outputFileName = String.format("%s_attendance.xlsx", group.getGroupName().toString());
+        writeDataToXlsx(data, outputFileName);
+    }
+
+    /**
+     * Write participation score data to XLSX file.
+     */
+    public void writeParticipationToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+        UniqueList<Student> studentList = group.getSortedStudents();
+        UniqueList<Lesson> lessonList = group.getSortedLessons();
+
+        List<List<Object>> data = new ArrayList<>();
+        Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
+
+        for (Lesson lesson : lessonList) {
+            GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+            for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
+                Student student = studentInfo.getStudent();
+                Optional<List<Integer>> participationList = Optional.ofNullable(studentDetailsMap.get(student));
+                List<Integer> newParticipationList;
+                if (participationList.isEmpty()) {
+                    newParticipationList = new ArrayList<>();
+                } else {
+                    newParticipationList = participationList.get();
+                }
+                newParticipationList.add(studentInfo.getParticipation().getScore());
+                studentDetailsMap.put(student.getStudentNo(), newParticipationList);
+            }
+        }
+
+        for (Student student : studentList) {
+            List<Object> studentDetails = new ArrayList<>();
+            studentDetails.add(student.getStudentName().toString());
+            studentDetails.add(student.getStudentNo().toString());
+            List<Integer> participationList = studentDetailsMap.get(student.getStudentNo());
+            studentDetails.addAll(participationList);
+            data.add(studentDetails);
+        }
+
+        String outputFileName = String.format("%s_participation.xlsx", group.getGroupName().toString());
+        writeDataToXlsx(data, outputFileName);
+    }
+
+    private void writeDataToXlsx(List<List<Object>> data, String outputFileName) {
+        Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
+
+        int rowCount = 0;
+
+        for (Object[] aBook : bookData) {
+            Row row = sheet.createRow(++rowCount);
+
+            int columnCount = 0;
+
+            for (Object field : aBook) {
+                Cell cell = row.createCell(++columnCount);
+                if (field instanceof String) {
+                    cell.setCellValue((String) field);
+                } else if (field instanceof Integer) {
+                    cell.setCellValue((Integer) field);
+                }
+            }
+        }
+
+        try {
+            FileOutputStream outputStream = new FileOutputStream(outputFileName);
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this // short circuit if same object
+                || (obj instanceof XlsxUtil // instanceof handles nulls
+                && this.filePath.equals(((XlsxUtil) obj).filePath));
     }
 }
 

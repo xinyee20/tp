@@ -64,21 +64,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasGroup_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> this.modelManager.hasGroup(null));
-    }
-
-    @Test
-    public void hasGroup_groupNotInSerenity_returnsFalse() {
-        // TODO
-    }
-
-    @Test
-    public void hasGroup_groupInSerenity_returnsTrue() {
-        // TODO
-    }
-
-    @Test
     public void getFilteredGroupList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> this.modelManager.getFilteredGroupList().remove(0));
     }

@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.util.UniqueList;
@@ -66,35 +67,41 @@ public class GroupManager implements ReadOnlyGroupManager {
 
     // Group-level operations
 
-    /**
-     * Checks whether group exists.
-     *
-     * @param target Group to check for
-     * @return Whether given group exists
-     */
-    public boolean hasGroup(Group target) {
-        requireNonNull(target);
-        for (Group group : listOfGroups) {
-            if (group.getGroupName().equals(target.getGroupName()) || hasAtLeast1SameStudent(target)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean hasGroup() {
+    public boolean hasAGroup() {
         return this.listOfGroups.size() > 0;
     }
 
-    // TODO: improve this method's efficiency
-    private boolean hasAtLeast1SameStudent(Group target) {
-        for (Student targetStudent : target.getStudents()) {
-            for (Group group : listOfGroups) {
-                for (Student groupStudent : group.getStudents()) {
-                    if (groupStudent.getStudentNo().equals(targetStudent.getStudentNo())) {
-                        return true;
-                    }
-                }
+    /**
+     * Returns true if the group manager contains an equivalent group name as the given argument.
+     */
+    public boolean hasGroupName(GroupName toCheck) {
+        requireNonNull(toCheck);
+        return this.listOfGroups.stream().anyMatch(grp -> grp.getGroupName().equals(toCheck));
+    }
+
+    /**
+     * Checks whether the group is valid to add to Group Manager.
+     * A group is valid if it has a unique {@code GroupName} and none of the students from the group
+     * exists in other existing groups in the Group Manager.
+     *
+     * @param target Group to check for
+     * @return Whether given group is valid to be added to the Group Manager
+     */
+    public boolean isValidGroupToAdd(Group target) {
+        requireNonNull(target);
+        for (Group existingGroup : listOfGroups) {
+            if (existingGroup.getGroupName().equals(target.getGroupName()) // Checks if group name is unique
+                || hasAtLeast1SameStudent(existingGroup, target)) { // Checks if students are unique
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasAtLeast1SameStudent(Group existingGroup, Group target) {
+        for (Student newStudent : target.getStudents()) {
+            if (existingGroup.getStudents().contains(newStudent)) {
+                return true;
             }
         }
         return false;
@@ -111,7 +118,7 @@ public class GroupManager implements ReadOnlyGroupManager {
      */
     public void addGroup(Group group) {
         requireNonNull(group);
-        if (!hasGroup(group)) {
+        if (isValidGroupToAdd(group)) {
             this.listOfGroups.add(group);
         }
     }

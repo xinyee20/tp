@@ -44,6 +44,9 @@ public class UiManager implements Ui {
             this.mainWindow = new MainWindow(primaryStage, this.logic);
             this.mainWindow.show(); //This should be called before creating other UI parts
             this.mainWindow.fillInnerParts();
+            this.mainWindow.setUpAttButton();
+            this.mainWindow.setUpQnButton();
+            this.mainWindow.loadGroupButtons();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

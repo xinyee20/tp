@@ -21,7 +21,6 @@ import team.serenity.model.ModelManager;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.ReadOnlySerenity;
-import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.model.util.SampleDataUtil;
@@ -87,24 +86,31 @@ public class MainApp extends Application {
     }
 
     private ReadOnlySerenity initSerenity(Storage storage) {
+        Optional<ReadOnlySerenity> serenityOptional = null;
         ReadOnlySerenity serenity;
         try {
-            Optional<ReadOnlySerenity> serenityOptional = storage.readSerenity();
-            if (serenityOptional.isEmpty()) {
-                logger.info("Data file not found. Will be starting with a sample Serenity.");
-            }
-            serenity =
-                serenityOptional.orElseGet(SampleDataUtil::getSampleSerenity);
+            serenityOptional = storage.readSerenity();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty"
                 + " Serenity.");
-            serenity = new Serenity();
+            serenityOptional = null;
         } catch (IllegalValueException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty "
                 + "Serenity.");
-            serenity = new Serenity();
+            serenityOptional = null;
         }
-        return serenity;
+        if (serenityOptional == null || serenityOptional.isEmpty()) {
+            logger.info("Data file not found. Will be starting with a sample Serenity.");
+            serenity = SampleDataUtil.getSampleSerenity();
+            try {
+                storage.saveSerenity(serenity);
+            } catch (IOException e) {
+                logger.warning("Data was not saved");
+            }
+            return serenity;
+        } else {
+            return serenityOptional.get();
+        }
     }
 
     /**

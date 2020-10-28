@@ -68,6 +68,14 @@ public class Student {
         return this.studentNo;
     }
 
+    /**
+     * Returns true if both student have the same student number.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameStudent(Student other) {
+        return this.studentNo.equals(other.studentNo);
+    }
+
     @Override
     public String toString() {
         return this.studentName + " " + this.studentNo;

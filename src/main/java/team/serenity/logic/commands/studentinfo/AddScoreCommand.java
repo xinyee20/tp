@@ -103,7 +103,7 @@ public class AddScoreCommand extends Command {
                 this.isCorrectStudent = studentInfo.containsStudent(this.toAddScore.get());
                 if (this.isCorrectStudent) {
                     Attendance currentAttendance = studentInfo.getAttendance();
-                    if (!currentAttendance.getAttendance()) {
+                    if (!currentAttendance.isPresent()) {
                         throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
                     }
                     newScore = score + scoreToAdd;
@@ -131,7 +131,7 @@ public class AddScoreCommand extends Command {
             toAddScore = Optional.ofNullable(studentInfo.getStudent());
             this.score = studentInfo.getParticipation().getScore();
             Attendance currentAttendance = studentInfo.getAttendance();
-            if (!currentAttendance.getAttendance()) {
+            if (!currentAttendance.isPresent()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
             }
             newScore = score + scoreToAdd;
