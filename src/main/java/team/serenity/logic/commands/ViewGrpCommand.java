@@ -9,7 +9,7 @@ import team.serenity.model.Model;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
- * Finds and lists all students and lessons in the group specifeied. Keyword matching is case insensitive.
+ * Finds and lists all students and lessons in the group specified. Keyword matching is case insensitive.
  */
 public class ViewGrpCommand extends Command {
 
