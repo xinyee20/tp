@@ -51,7 +51,7 @@ public class TestUtil {
     /**
      * Returns the question in the {@code model}'s question list at {@code index}.
      */
-    public static Question geQuestion(Model model, Index index) {
+    public static Question getQuestion(Model model, Index index) {
         // TODO: Wen Jin to complete when implementing view/find question
         return model.getFilteredQuestionList().get(index.getZeroBased());
     }
