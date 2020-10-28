@@ -51,8 +51,10 @@ public class EditQnCommand extends Command {
     private final EditQuestionDescriptor editQuestionDescriptor;
 
     /**
-     * @param index                  of the question in the filtered question list to edit
-     * @param editQuestionDescriptor details to edit the activity with
+     * Creates an EditQnCommand to edit the specified question at {@code index} in the current question display list.
+     *
+     * @param index of the question in the filtered question list to edit
+     * @param editQuestionDescriptor details to edit the question with
      */
     public EditQnCommand(Index index, EditQuestionDescriptor editQuestionDescriptor) {
         requireAllNonNull(index, editQuestionDescriptor);
@@ -79,7 +81,7 @@ public class EditQnCommand extends Command {
         }
 
         // Checks if the edited question exists in the question manager
-        if (!questionToEdit.equals(editedQuestion) && model.hasQuestion(editedQuestion)) {
+        if (model.hasQuestion(editedQuestion)) {
             throw new CommandException(MESSAGE_DUPLICATE_QUESTION);
         }
 
@@ -133,12 +135,12 @@ public class EditQnCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the fixed expense with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the question with. Each non-empty field value will replace the
+     * corresponding field value of the question.
      */
     public static class EditQuestionDescriptor {
         private GroupName groupName;
-        private team.serenity.model.group.lesson.LessonName lessonName;
+        private LessonName lessonName;
         private Description description;
 
         public EditQuestionDescriptor() {
@@ -146,7 +148,6 @@ public class EditQnCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditQuestionDescriptor(EditQuestionDescriptor toCopy) {
             setGroupName(toCopy.groupName);
@@ -169,11 +170,11 @@ public class EditQnCommand extends Command {
             return Optional.ofNullable(this.groupName);
         }
 
-        public void setLessonName(team.serenity.model.group.lesson.LessonName lessonName) {
+        public void setLessonName(LessonName lessonName) {
             this.lessonName = lessonName;
         }
 
-        public Optional<team.serenity.model.group.lesson.LessonName> getLessonName() {
+        public Optional<LessonName> getLessonName() {
             return Optional.ofNullable(this.lessonName);
         }
 
