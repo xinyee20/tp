@@ -101,8 +101,9 @@ public class EditQnCommand extends Command {
 
         model.setQuestion(questionToEdit, editedQuestion);
         model.updateFilteredQuestionList(Model.PREDICATE_SHOW_ALL_QUESTIONS);
-        // TODO: Ryan/Ruien to add the viewQn boolean to CommandResult constructor to switch to view question tab
-        return new CommandResult(String.format(MESSAGE_EDIT_QUESTION_SUCCESS, editedQuestion));
+        return new CommandResult(String.format(MESSAGE_EDIT_QUESTION_SUCCESS, editedQuestion),
+                false, false, false, false, false, false,
+                false, false, false, true);
     }
 
     /**

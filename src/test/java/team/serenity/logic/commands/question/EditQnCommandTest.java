@@ -10,7 +10,7 @@ import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_B;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_LSN_B;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_QN_DESC_B;
 import static team.serenity.logic.commands.CommandTestUtil.assertQuestionCommandFailure;
-import static team.serenity.logic.commands.CommandTestUtil.assertQuestionCommandSuccess;
+import static team.serenity.logic.commands.CommandTestUtil.assertQuestionViewsQuestionTabCommandSuccess;
 import static team.serenity.logic.commands.CommandTestUtil.showQuestionAtIndex;
 import static team.serenity.logic.commands.question.EditQnCommand.MESSAGE_DUPLICATE_QUESTION;
 import static team.serenity.logic.commands.question.EditQnCommand.MESSAGE_EDIT_QUESTION_SUCCESS;
@@ -87,7 +87,7 @@ class EditQnCommandTest {
 
         expectedModel.setQuestion(lastQuestion, editedQuestion);
 
-        assertQuestionCommandSuccess(editCommand, this.model, expectedMessage, expectedModel);
+        assertQuestionViewsQuestionTabCommandSuccess(editCommand, this.model, expectedMessage, expectedModel);
     }
 
     @Test
