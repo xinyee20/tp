@@ -1,9 +1,11 @@
 package team.serenity.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
+import static team.serenity.logic.commands.student.AddStudentCommand.MESSAGE_SUCCESS;
 import static team.serenity.testutil.Assert.assertThrows;
 
 import java.util.function.Predicate;
@@ -44,7 +46,7 @@ public class AddStudentCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudent() throws Exception {
+    public void execute_duplicateStudent() {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "A0000000U"),
@@ -59,6 +61,44 @@ public class AddStudentCommandTest {
         AddStudentCommand command = new AddStudentCommand("Freddie", "A0000000U", pred);
         assertThrows(CommandException.class,
             MESSAGE_DUPLICATE_STUDENT, () -> command.execute(modelStub));
+    }
+
+    @Test
+    public void execute_refreshesUi() throws CommandException {
+        Group stubGroup = new GroupBuilder().withName("G07")
+            .withStudents(
+                new Student("Freddie", "A0000000U"),
+                new Student("June", "A0101011U")
+            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            .build();
+        UniqueList<Group> groupList = new UniqueGroupList();
+        groupList.add(stubGroup);
+        FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
+        Predicate<Group> pred = new GroupPredicateStub();
+        AddStudentCommand command = new AddStudentCommand("John", "A1234567U", pred);
+        CommandResult result = command.execute(modelStub);
+        CommandResult expectedResult = new CommandResult(
+            String.format(MESSAGE_SUCCESS, "John", "A1234567U",
+               "G07"), false, false, false, true, false, false, false, false, false, false);
+        assertTrue(result.equals(expectedResult));
+    }
+
+    @Test
+    public void execute_sameNameDifferentMatric() {
+        Group stubGroup = new GroupBuilder().withName("G07")
+            .withStudents(
+                new Student("Freddie", "A0000000U"),
+                new Student("June", "A0101011U")
+            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            .build();
+        UniqueList<Group> groupList = new UniqueGroupList();
+        groupList.add(stubGroup);
+        FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
+        ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
+        Predicate<Group> pred = new GroupPredicateStub();
+        AddStudentCommand command = new AddStudentCommand("Freddie", "A1234567U", pred);
+        assertDoesNotThrow(() -> command.execute(modelStub));
     }
 
     @Test
@@ -111,6 +151,11 @@ class ModelStubWithGroup extends ModelStub {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
+    }
+
+    @Override
+    public void addStudentToGroup(Student student, Predicate<Group> predicate) {
+        return;
     }
 }
 

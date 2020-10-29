@@ -185,8 +185,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAGroup() {
-        return groupManager.hasAGroup();
+    public boolean isEmpty() {
+        return groupManager.isEmpty();
     }
 
     @Override
@@ -235,7 +235,7 @@ public class ModelManager implements Model {
     public void exportParticipation(Group group) {
         requireNonNull(group);
         XlsxUtil util = new XlsxUtil();
-        util.writeParticipationToXlsx(group, this.studentInfoManager.getStudentInfoMap());
+        util.writeScoreToXlsx(group, this.studentInfoManager.getStudentInfoMap());
     }
 
     @Override
@@ -308,11 +308,9 @@ public class ModelManager implements Model {
     public void deleteStudentFromGroup(Student student, Predicate<Group> predicate) {
         requireAllNonNull(student, predicate);
         updateFilteredGroupList(predicate);
-        UniqueList<Student> students = this.filteredGroups.get(0).getStudents();
-        if (!this.filteredGroups.isEmpty() && students.contains(student)) {
-            students.remove(student);
+        if (!this.filteredGroups.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
-            currentGroup.deleteStudentFromGroup(student);
+            this.groupManager.deleteStudentFromGroup(currentGroup, student);
         }
     }
 
@@ -372,14 +370,11 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<StudentInfo> getAllStudentInfo() {
-        ObservableList<StudentInfo> studentInfoList = null;
+        ObservableList<StudentInfo> studentInfoList =
+                new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
         for (Group group : getListOfGroups()) {
             for (Lesson lesson : group.getLessons()) {
-                if (studentInfoList == null) {
-                    studentInfoList = new ArrayObservableList<>(lesson.getStudentsInfoAsUnmodifiableObservableList());
-                } else {
-                    studentInfoList.addAll(lesson.getStudentsInfo().getList());
-                }
+                studentInfoList.addAll(lesson.getStudentsInfo().getList());
             }
         }
         return studentInfoList;

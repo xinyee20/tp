@@ -28,9 +28,9 @@ public class ResultDisplay extends UiPart<Region> {
      * Feedback to the user a default message.
      */
     public void setDefaultFeedback() {
-        String defaultFeedback = "Welcome!\n"
-            + "You may begin by adding or viewing a tutorial group\n"
-            + "Start teaching grace and serenity";
+        String defaultFeedback = "Welcome to Serenity!\n"
+            + "You may begin by adding or viewing a tutorial group.\n"
+            + "Start teaching with serenity!";
         this.resultDisplay.setText(defaultFeedback);
     }
 

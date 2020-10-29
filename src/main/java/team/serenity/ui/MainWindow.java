@@ -116,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        toggleSerenityView();
+        toggleHomeView();
 
         this.titleDisplay = new TitleDisplay();
         this.titleDisplayPlaceholder.getChildren().add(this.titleDisplay.getRoot());
@@ -183,31 +183,33 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Switch to group data view if in lesson data view.
-     */
-    @FXML
-    private void toggleLsnView() {
-        this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(),
-                this.logic.getFilteredQuestionList());
-        this.dataDisplayPlaceholder.getChildren().clear();
-        this.dataDisplayPlaceholder.getChildren().add(this.lessonDataPanel.getRoot());
-    }
-
-    /**
      * Switch to lesson data view if in group data view.
      */
     @FXML
-    private void toggleGrpView() {
+    private void handleViewGrp(String groupName) {
         this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
         this.dataDisplayPlaceholder.getChildren().clear();
         this.dataDisplayPlaceholder.getChildren().add(this.groupDataPanel.getRoot());
+        this.titleDisplay.setGroupTitle(groupName);
+    }
+
+    /**
+     * Switch to group data view if in lesson data view.
+     */
+    @FXML
+    private void handleViewLsn(String groupName, String lessonName) {
+        this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(),
+                this.logic.getFilteredQuestionList(), groupName, lessonName);
+        this.dataDisplayPlaceholder.getChildren().clear();
+        this.dataDisplayPlaceholder.getChildren().add(this.lessonDataPanel.getRoot());
+        this.titleDisplay.setLessonTitle(groupName, lessonName);
     }
 
     /**
      * Switch to serenity data view.
      */
     @FXML
-    private void toggleSerenityView() {
+    private void toggleHomeView() {
         this.serenityDataPanel = new SerenityDataPanel(this.logic.getAllStudentInfo(),
             this.logic.getFilteredQuestionList());
         this.dataDisplayPlaceholder.getChildren().clear();
@@ -227,7 +229,7 @@ public class MainWindow extends UiPart<Stage> {
         button.setLayoutX(20);
         button.setLayoutY(65);
         button.setMnemonicParsing(false);
-        button.setPrefWidth(65);
+        button.setPrefWidth(70);
         button.setId(button.getText());
 
         Image image = new Image(imgUrl);
@@ -244,7 +246,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public void setUpAttButton() {
-        Button attButton = new Button("Att");
+        Button attButton = new Button("Flags");
         String attImgUrl = "images/flag.png";
         EventHandler<ActionEvent> attEvent = event -> {
             String commandText = "viewflag";
@@ -258,7 +260,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public void setUpQnButton() {
-        Button qnButton = new Button("Qn");
+        Button qnButton = new Button("Qns");
         String qnImgUrl = "images/question.png";
         EventHandler<ActionEvent> qnEvent = event -> {
             String commandText = "viewqn";
@@ -320,16 +322,20 @@ public class MainWindow extends UiPart<Stage> {
      * View all students with flagged attendance.
      */
     private void handleFlagAtt() {
+        toggleHomeView();
         SerenityDataPanel serenityDataPanel = (SerenityDataPanel) this.serenityDataPanel;
         serenityDataPanel.changeFlaggedAttendanceTab();
+        this.titleDisplay.setDefaultTitle();
     }
 
     /**
      * View all pending questions.
      */
     private void handleViewQn() {
+        toggleHomeView();
         SerenityDataPanel serenityDataPanel = (SerenityDataPanel) this.serenityDataPanel;
         serenityDataPanel.changeQuestionTab();
+        this.titleDisplay.setDefaultTitle();
     }
 
     private String getGroupName(String commandText) {
@@ -359,17 +365,15 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isToggleGrpView()) {
-                toggleGrpView();
+            if (commandResult.isViewGrp()) {
                 String groupName = getGroupName(commandText);
-                this.titleDisplay.setGroupTitle(groupName);
+                handleViewGrp(groupName);
             }
 
-            if (commandResult.isToggleLsnView()) {
-                toggleLsnView();
+            if (commandResult.isViewLsn()) {
                 String groupName = getGroupName(commandText);
                 String lessonName = getLessonName(commandText);
-                this.titleDisplay.setLessonTitle(groupName, lessonName);
+                handleViewLsn(groupName, lessonName);
             }
 
             if (commandResult.isAddGrp()) {
@@ -378,7 +382,6 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isDelGrp()) {
-                toggleSerenityView();
                 String groupName = getGroupName(commandText);
                 handleDelGrp(groupName);
             }
@@ -392,15 +395,11 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isFlagAtt()) {
-                toggleSerenityView();
                 handleFlagAtt();
-                this.titleDisplay.setDefaultTitle();
             }
 
             if (commandResult.isViewQn()) {
-                toggleSerenityView();
                 handleViewQn();
-                this.titleDisplay.setDefaultTitle();
             }
 
             return commandResult;

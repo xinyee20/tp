@@ -67,8 +67,8 @@ public class GroupManager implements ReadOnlyGroupManager {
 
     // Group-level operations
 
-    public boolean hasAGroup() {
-        return this.listOfGroups.size() > 0;
+    public boolean isEmpty() {
+        return this.listOfGroups.size() == 0;
     }
 
     /**
@@ -105,6 +105,18 @@ public class GroupManager implements ReadOnlyGroupManager {
             }
         }
         return false;
+    }
+
+    /**
+     * Removes Student from a specified Group
+     */
+    public void deleteStudentFromGroup(Group group, Student student) {
+        for (Group existingGroup: listOfGroups) {
+            if (existingGroup.equals(group)) {
+                UniqueList<Student> students = existingGroup.getStudents();
+                students.remove(student);
+            }
+        }
     }
 
     public Stream<Group> getStream() {
