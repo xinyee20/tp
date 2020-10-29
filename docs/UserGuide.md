@@ -740,10 +740,10 @@ You can use this command to edit an existing question that was asked in a tutori
 `editqn INDEX [grp/GROUP_NAME] [lsn/LESSON_NAME] [qn/QUESTION]`
 
 > :memo: **Note regarding the `editqn` command:**
-> * You must supply at least one optional parameter.
+> * You can edit the question's description, or the group/lesson the question was asked in.
 > * The existing values will be updated to the new values.
 > * If `grp/GROUP_NAME` or `lsn/LESSON_NAME` is supplied, ensure that the group or lesson exists.
-> Else, an error message will be displayed to alert you.
+> Otherwise, an error message will be displayed to alert you.
 
 **Example:**
 
