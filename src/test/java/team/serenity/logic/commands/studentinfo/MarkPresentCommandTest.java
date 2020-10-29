@@ -1,8 +1,14 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.testutil.Assert.assertThrows;
+import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
+import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
+import static team.serenity.testutil.TypicalStudent.AARON;
+import static team.serenity.testutil.TypicalStudent.JOHN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +86,32 @@ class MarkPresentCommandTest {
         assertEquals(String.format(MarkPresentCommand.MESSAGE_ALL_SUCCESS), commandResult.getFeedbackToUser());
     }
 
+    @Test
+    public void equals() {
+        MarkPresentCommand markAllPresentCommandA = new MarkPresentCommand();
+        MarkPresentCommand markStudentPresentCommandA = new MarkPresentCommand(AARON);
+        MarkPresentCommand copyMarkStudentPresentCommandA = new MarkPresentCommand(AARON);
+        MarkPresentCommand markStudentPresentCommandB = new MarkPresentCommand(JOHN);
+        MarkPresentCommand markIndexPresentCommandA = new MarkPresentCommand(INDEX_FIRST);
+        MarkPresentCommand copyMarkIndexPresentCommandA = new MarkPresentCommand(INDEX_FIRST);
+        MarkPresentCommand markIndexPresentCommandB = new MarkPresentCommand(INDEX_SECOND);
+
+        // same object -> returns true
+        assertTrue(markAllPresentCommandA.equals(markAllPresentCommandA));
+        assertTrue(markStudentPresentCommandA.equals(markStudentPresentCommandA));
+        assertTrue(markIndexPresentCommandA.equals(markIndexPresentCommandA));
+
+        // same values -> return true
+        assertTrue(markStudentPresentCommandA.equals(copyMarkStudentPresentCommandA));
+        assertTrue(markIndexPresentCommandA.equals(copyMarkIndexPresentCommandA));
+
+        // different types -> return false
+        assertFalse(markStudentPresentCommandA.equals(markIndexPresentCommandA));
+
+        // different values -> return different
+        assertFalse(markStudentPresentCommandA.equals(markStudentPresentCommandB));
+        assertFalse(markIndexPresentCommandA.equals(markIndexPresentCommandB));
+    }
 }
 
 /**
