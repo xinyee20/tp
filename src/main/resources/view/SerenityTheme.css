@@ -17,7 +17,7 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-opacity: 0.9;
+    -fx-text-fill: -color-white;
 }
 
 .label-bright {
