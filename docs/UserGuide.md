@@ -8,10 +8,9 @@ title: User guide
 
 
 --------------------------------------------------------------------------------------------------------------------
-![Serenity Logo](images/logo.png)
-
-
 ## **1. Introduction**
+
+![Serenity Logo](images/logo.png)
 
 Welcome to the User Guide of **Serenity**!
 
