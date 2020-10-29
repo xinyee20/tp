@@ -62,7 +62,7 @@ easier for the teacher to track and is much more organised.
 The StudentInfo Manager contains a HashMap whose key is a GroupLessonKey and value is a UniqueList. 
 The following Class Diagram describes the structure of StudentInfoManager and its relevant classes.
 
-![Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes](./images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png)
+<p align="center"><img src="./images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></img></p>
 <p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
 
 From the diagram above, we can see that StudentInfoManager can contain multiple GroupLessonKey as well as 
@@ -77,7 +77,7 @@ setscore | Set the participation score of a student for a lesson
 In this section, we will outline the `markpresent` command handled by the StudentInfoManager which is summarised by the Activity Diagram below. 
 We will be using the index version of the markpresent command.
 
-![Figure 4.5.2.2 Activity Diagram of a markpresent command (by INDEX)](./images/developerGuide/MarkPresentSequenceDiagram.png)
+<p align="center"><img src="./images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 4.5.2.2 Activity Diagram of a markpresent command (by INDEX)"></img></p>
 <p align="center"><i>Figure 4.5.2.2 Activity Diagram of a <code>markpresent</code> command by index</i></p>
 
 When the user enters the `markpresent` command followed by an index to mark a student in a lesson present, 
@@ -88,8 +88,10 @@ The following steps will describe the execution of the MarkPresentCommand by IND
 `UniqueStudentInfoList` from the HashMap. 
 2. The `StudentInfoManager` then checks whether the index is valid and marks the student present if it is valid.
 3. Afterwards, the `StudentInfoManager` will update the `UniqueStudentInfoList`.
-4. The `Ui` component will detect this change and update the GUI.
-5. If the above steps are all successful, a successful message will be displayed on the GUI.
+4. The `Ui` component will detect this change and update the 
+<span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
+5. If the above steps are all successful, a successful message will be displayed on the
+<span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
 
 *If the index is not valid, an error will be thrown to prompt the user to choose another index.
 
@@ -131,7 +133,8 @@ of the lessons for each tutorial group. It does not allow the user to add questi
 In this section, we will outline the `findqn` command of the question manager which is summarised by the 
 Activity Diagram below.
 
-![Figure 4.6.2.1 Activity diagram of a `findqn` command](./images/developerGuide/FindQnActivityDiagram.png)
+
+<p align="center"><img src="./images/developerGuide/FindQnActivityDiagram.png" alt="Figure 4.6.2.1 Activity diagram of a <code>findqn</code> command"></img></p>
 <p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
 
 When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
@@ -148,7 +151,7 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 
 The Sequence Diagram below summarises the aforementioned steps.
 
-![Figure 4.6.2.2 Sequence diagram detailing execution of `FindQnCommand`](./images/developerGuide/FindQnSequenceDiagram.png)
+<p align="center"><img src="./images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 4.6.2.2 Sequence diagram detailing execution of <code>FindQnCommand</code>"></img></p>
 <p align="center"><i>Figure 4.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
 
 #### **4.6.3. Design Consideration**
@@ -180,8 +183,11 @@ The Sequence Diagram below summarises the aforementioned steps.
 * Is reasonably comfortable using CLI apps
 
 **Value proposition:** 
-* Serenity can help assist the management of a CS2101 class faster than a typical mouse / GUI driven app through easy reference and editing of class data.
-* Serenity consolidates administrative information on a GUI for convenient viewing.
+* Serenity can help assist the management of a CS2101 class faster than a typical mouse / 
+ <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span> driven app through easy reference and editing of class data.
+* Serenity consolidates administrative information on a 
+ <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>
+ for convenient viewing.
 * Serenity gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
 
 ## **Appendix B: User Stories**
@@ -247,7 +253,7 @@ Given below are instructions to test the app manually.
 **Launch and Shutdown**
  1. Initial launch
     1. Download the jar file and copy into an empty folder
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span> with a set of sample contacts. The window size may not be optimum.
  1. Saving window preferences
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
     1. Re-launch the app by double-clicking the jar file.
