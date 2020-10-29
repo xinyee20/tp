@@ -146,12 +146,11 @@ public class LessonManager implements ReadOnlyLessonManager {
         this.mapToListOfLessons.remove(group.getGroupName());
     }
 
-
-        /**
-         * Adds a specified {@code UniqueList<Lesson>} to a {@code Group}.
-         * @param group
-         * @param lessons
-         */
+    /**
+     * Adds a specified {@code UniqueList<Lesson>} to a {@code Group}.
+     * @param group
+     * @param lessons
+     */
     public void addListOfLessonsToGroup(Group group, UniqueList<Lesson> lessons) {
         this.mapToListOfLessons.put(group.getGroupName(), lessons);
     }

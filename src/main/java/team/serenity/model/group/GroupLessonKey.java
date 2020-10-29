@@ -12,13 +12,6 @@ public class GroupLessonKey {
     private final LessonName lessonName;
 
     /**
-     * Retrieves groupName.
-     */
-    public GroupName getGroupName() {
-        return groupName;
-    }
-
-    /**
      * Instantiates a GroupLessonKey object.
      * @param groupName
      * @param lessonName
@@ -27,6 +20,13 @@ public class GroupLessonKey {
         requireAllNonNull(groupName, lessonName);
         this.groupName = groupName;
         this.lessonName = lessonName;
+    }
+
+    /**
+     * Retrieves groupName.
+     */
+    public GroupName getGroupName() {
+        return groupName;
     }
 
     /**

@@ -1,9 +1,7 @@
 package team.serenity.model.managers;
 
 import static java.util.Objects.requireNonNull;
-import static java.util.stream.Collectors.toList;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -122,7 +120,7 @@ public class QuestionManager implements ReadOnlyQuestionManager {
         Iterator<Question> iterator = listOfQuestions.iterator();
         while (iterator.hasNext()) {
             Question question = iterator.next();
-            if(question.getGroupName().toString().equals(group.getGroupName().toString())) {
+            if (question.getGroupName().toString().equals(group.getGroupName().toString())) {
                 iterator.remove();
             }
         }
