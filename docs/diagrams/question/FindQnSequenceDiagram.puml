@@ -1,0 +1,43 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":**FindQnCommand**" as FindQnCommand LOGIC_COLOR
+participant "**r:CommandResult**" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "**m:ModelManager**" as ModelManager MODEL_COLOR
+end box
+
+[-> FindQnCommand : ""execute(m)""
+activate FindQnCommand
+
+FindQnCommand -> ModelManager : ""updateFilteredQuestionList(p)""
+activate ModelManager
+
+note right
+""p"" is the Predicate
+which check if the
+given ""Question""'s
+description has the
+user input keywords
+end note
+
+ModelManager --> FindQnCommand
+deactivate
+
+create CommandResult
+FindQnCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindQnCommand : ""r""
+deactivate CommandResult
+
+[<-- FindQnCommand : ""r""
+deactivate FindQnCommand
+
+FindQnCommand -[hidden]> CommandResult
+destroy FindQnCommand
+
+@enduml
