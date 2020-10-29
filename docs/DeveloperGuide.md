@@ -45,6 +45,62 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### **4.6 Question Manager**
 
+Serenity allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
+ 
+The question manager is one of the `Feature Manager`s (See [Feature-Manager](#41-feature-managers)). 
+On top of the basic operations provided above it also allows the user to find questions by keywords using the `findqn` 
+command. The `findqn` command does not restrict users to find via only one keyword. They are able to find via multiple 
+keywords, similar to a search bar. E.g. `findqn deadline report` will search and list all question entries with 
+`deadline` and `report` in the question description.
+
+#### **4.6.1. Rationale**
+
+The question manager is an important feature to have because in any tutorial lesson, students will be asking tutors 
+many questions, verbally or through virtual means such as Whatsapp or Telegram. Thus, we decided to create a question 
+manager to manage and track all the questions asked during lessons.
+
+#### **4.6.2. Current Implementation**
+
+The current implementation of the question manager only allows the user to keep track of a list of questions for each 
+of the lessons for each tutorial group. It does not allow the user to add questions without a tutorial group and lesson.
+ 
+In this section, we will outline the `findqn` command of the question manager which is summarised by the 
+Activity Diagram below.
+
+![Figure 4.6.2.1 Activity diagram of a `findqn` command]()
+<p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
+
+When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
+parsing as described in [Design-Logic](#33-logic-component). During the parsing, a predicate is created. This predicate 
+checks if a given `Question`'s description contains the user input keywords. The `FindQnCommand` will then receive 
+this predicate when it is created.
+
+The following steps will describe the execution of the `FindQnCommand` in detail, assuming that no error is encountered.
+
+1. When the `execute` method of the `FindQnCommand` is called, the `ModelManager`’s `updateFilteredQuestionList` method is called.
+2. The `ModelManager` will then update its filtered list of `Question`'s to contain only `Question`'s that fulfil the given predicate.
+3. The Ui component will detect this change and update the GUI.
+4. If the above steps are all successful, the `FindQnCommand` will then create a `CommandResult` object and return the result.
+
+The Sequence Diagram below summarises the aforementioned steps.
+
+![Figure 4.6.2.2 Sequence diagram detailing execution of `FindQnCommand`]()
+<p align="center"><i>Figure 4.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
+
+#### **4.6.3. Design Consideration**
+
+**Aspect:** Deciding between storing a question in a global question list and a lesson-specified question list.
+
+|   |**Pros**|**Cons**|
+|---|---|---|
+| **Option 1 (Current)**<br>To store the questions to a global question list. | Better user experience as the user is able to see the full list of questions from every lesson.<br><br>Reduce data nesting as the list of questions are abstracted out as a separate component. | Complicated to filter out questions for a specific tutorial group and lesson. |
+| **Option 2**<br>To store the questions in a list in each lesson. | Straight-forward and easier to implement.|Difficult to sieve through each lesson to collate all the questions from every group to display. |
+
+**Reasons for choosing option 1:**
+
+* The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
+* Both options have overheads when trying to view all questions and to view an individual lesson’s questions. However, option 2 is more costly and complicated to implement given the time constraints. Thus, we decided option 1 is better.
+
 ## **Appendix A: Product Scope**
 
 **Target user profile:**
