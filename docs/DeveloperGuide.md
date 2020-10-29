@@ -250,6 +250,8 @@ Tutor | The list of commands to be as short as possible | Be productive trying t
 ## **Appendix C: Use Cases**
 For all use cases below, the System is `Serenity` and the Actor is the `User`, unless specified otherwise.
 
+**Setting Up**
+
 ```
 UC01: Set up tutorial group
 
@@ -267,6 +269,173 @@ MSS:
     4. Serenity adds the tutorial groups and students to the respective lists.
 Use case ends.
 ```
+**Attendance Taking**
+
+```
+UC02: For a tutorial group, mark all students present for a lesson
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - Each student is marked present for a lesson upon successful command.
+
+MSS:
+    1. User requests to mark all students from a specific tutorial group present for a lesson.
+    2. User receives a confirmation message.
+    3. System shows the updated attendance list for the lesson.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+```
+
+```
+UC03: Mark a student present or absent for a specific lesson
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - A specific student is marked present or absent for a lesson upon successful command.
+
+MSS:
+    1. User requests to mark a student from a specific tutorial group present or absent for a lesson.
+    2. User receives a confirmation message.
+    3. System shows the updated attendance list for the lesson.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+
+```
+
+```
+UC04: For a tutorial group, view attendance of each student for every lesson
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - User can view the attendance list of a lesson for a specific tutorial class upon successful command.
+
+MSS:
+    1. User requests to view the attendance list for a lesson of a specific tutorial class.
+    2. User receives a confirmation message.
+    3. System shows the attendance list for the lesson.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+
+```
+
+**Class Participation**
+
+``` 
+UC05: Add class participation marks to a student
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - For a lesson, class participation marks for a specific student is added upon successful command.
+
+MSS:
+    1. User requests to add class participation marks to a student.
+    2. User receives a confirmation message.
+    3. System shows the updated class participation marks of the student.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+
+```
+
+``` 
+UC06: View average class participation score of all students in a tutorial group
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - User can view the average class participation score of all students in a tutorial group upon successful command.
+
+MSS:
+    1. User requests to view the average class participation score of all students in a tutorial group.
+    2. User receives a confirmation message.
+    3. System shows the average class participation score of all students in the tutorial group
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+
+```
+
+**Addressing Questions**
+
+
+``` 
+ 
+UC07: Add a question to a tutorial group’s question list
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - Question will be added into a question list upon successful command.
+
+MSS:
+    1. User requests to create a new question for a tutorial group.
+    2. System shows an updated list of questions.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+
+```
+
+``` 
+UC08: View all questions of a tutorial group
+
+System: Serenity
+Actor: User
+
+Preconditions: Tutorial groups and students have been set up
+Guarantees:
+    - User can view the list of questions upon successful command.
+
+MSS:
+    1. User requests to view the list of questions for a tutorial group.
+    2. System shows the attendance list for the lesson.
+Use case ends.
+
+Extensions:
+    1a. Incomplete details are given.
+        1a1. System shows an error message.
+        Use case resumes at step 1.
+
+```
+
+
 ## **Appendix D: Non Functional Requirements**
 
 1. Should work on any <span style="color:purple"><i>mainstream OS</i></span> as long as it has Java 11 or above installed.
@@ -330,6 +499,6 @@ Missing data files
 1. Test case: In the folder where Serenity is stored, delete `serenity.json` in `data` folder 
     1. Expected: New tutorial group G01 created with two students, Aaron Tan and John Doe.
     
-**Editing**
+<!-- Editing commented out because there is nothing here -->
 
 
