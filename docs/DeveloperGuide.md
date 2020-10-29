@@ -227,9 +227,69 @@ These five main XYZManagers provide a way for tutors to manage the different asp
 so as to facilitate teaching a class more effectively.   
 
 #### **4.1.2 Current Implementation**
+These five main `XYZManagers` provide a way for tutors to manage the different aspects of teaching a class, 
+so as to facilitate teaching a class more effectively.
 
+#### **4.1.2 Current Implementation**
+
+This section describes the main implementation common across all `XYZManagers`.
+
+Each `XYZManager` contains one or more `UniqueList`, 
+a generic interface that enforces uniqueness of the item in the list. 
+This ensures that every item in the list is unique.
+ For example, a `GroupManager` cannot contain more than one Group with the name `G04`.  
+
+Each `XYZManager` supports basic <span><a href="#appendix-e-glossary" style="color:purple"><i>CRUD</i></a></span> 
+operations such as add, delete,
+get as well as additional functionality such as sorting.
+
+The XYZManager implements the `ReadOnlyXYZManager` interface. 
+This interface has the `getXYZList` method which returns an `ObservableList` of items.
+The `ObservableList` of items allows the `Ui` model to use the Observer Pattern to update the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> 
+whenever changes are made to the `UniqueList`.
+
+There are two different types of `XYZManager`, one which stores a single `UniqueList`, 
+such as `GroupManager` and `QuestionManager`, while others store multiple `UniqueList` in a `HashMap`. For instance, 
+a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for the `HashMap`. 
+This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
+
+![Structure of `GroupManager`, an example of a `XYZManager` which stores a single `UniqueList`](images/FeatureManagerDiagram.png)
+
+<p align="center"><i>Figure 4.1.2.1: <code>Structure of `GroupManager</code>, an example of 
+a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
 
 ### **4.2 Group Manager**
+
+(contributed by Lim Chun Yong)
+
+The `GroupManager` is responsible for storing the tutorial groups taught by the Tutor. 
+
+#### **4.2.1. Rationale**
+A tutor has multiple tutorial groups to teach, hence the implementation requires a way to store multiple tutorial groups.
+
+#### **4.2.2. Current Implementation**
+
+`GroupManager` contains a `UniqueList` that can store multiple unique `Group` items.
+
+We outline the execution of the `DelGrpCommand` as an example of a command that makes use of `GroupManager`.
+
+The following steps describe the execution of `DelGrpCommand` in detail, assuming that no error is encountered.
+
+1. When the execute method of the DelGrpCommand is called, the ModelManager’s deleteGroup method is called.
+1. The ModelManager then proceeds to call the deleteGroup method of the GroupManager.
+1. The GroupManager will then remove the group from its UniqueList
+1. If the above steps are all successful, the DelGrpCommand will then create a CommandResult object and return the result.
+
+The sequence diagram below documents the execution.
+
+![Figure 9. Sequence diagram detailing execution of DelGrpCommand](images/GroupManagerSequenceDiagram.png)
+
+<p align="center"><i>Figure 9. Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
+
+#### **4.2.3 Design Consideration**
+
+Encapsulating tutorial groups within a `GroupManager` follows the Separation of Concerns principle, 
+by ensuring that all logic and functionality related to a Tutorial group is encapsulated within `GroupManager`.
 
 ### **4.3 Lesson Manager**
 
