@@ -74,21 +74,22 @@ This segment will explain the structure and responsibilities of the Ui component
 
 <p align="center"><i>Figure 3.2.1 Structure of the <code>Ui</code> component.</i></p>
 
-The Ui component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox` as shown in the Class Diagram above. The MainWindow and its parts inherit from the abstract UiPart class.
+The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
+ as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
  
-The Ui component uses <span style="color:purple"><i>JavaFX</i></span> UI framework. 
+The `Ui` component uses <span style="color:purple"><i>JavaFX</i></span> UI framework. 
 The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder. 
 For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
 #### **3.2.2 Responsibilities**
 
 The `Ui` component,
-Executes user commands using the Logic component.
-Listens for changes to Model data so that the <span style="color:purple"><i>GUI</i></span> can be updated with the modified data.
+* Executes user commands using the `Logic` component.
+* Listens for changes to `Model` data so that the <span style="color:purple"><i>GUI</i></span> can be updated with the modified data.
 
 ### **3.3 Logic component**
 
-(Contributed by Neo Rui En
+(Contributed by Neo Rui En)
 
 This segment will explain the structure and responsibilities of the `Logic`component.
 
@@ -104,7 +105,7 @@ This allows the `LogicManager` to execute these commands without having to know 
 
 #### **3.3.2 Responsibilities**
 
-The `Logic `component is in charge of command parsing from the commands given by the user through the `Ui` component. It is also responsible for command execution.
+The `Logic` component is in charge of command parsing from the commands given by the user through the `Ui` component. It is also responsible for command execution.
 
 1. `Logic` uses the `SerenityParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -154,12 +155,12 @@ Each unique list implements the `UniqueList` interface.
 
 #### **3.4.2 Responsibilities**
 
-The Model component,
+The `Model` component,
 
-* Represents data of different features of Serenity..
+* Represents data of different features of **Serenity**.
 * Stores these data in-memory when the App is running.
-* Does not depend on the Ui, Logic and Storage components.
-* Contains observable data so that the GUI can automatically update upon data changes.
+* Does not depend on the `Ui`, `Logic` and `Storage` components.
+* Contains observable data so that the <span style="color:purple"><i>GUI</i></span> can automatically update upon data changes.
 
 ### **3.5 Storage Component**
 
@@ -181,12 +182,12 @@ which supports the storage of data in the application.
 
 #### **3.5.2 Responsibilities**
 
-The Storage component,
+The `Storage` component,
 
-* Can save the UserPref object in a JSON format.
-* Can parse a json file in the correct format to get the UserPref object.
+* Can save the `UserPref` object in a JSON format.
+* Can parse a JSON file in the correct format to get the `UserPref` object.
 * Can save the Serenity data in a JSON format.
-* Can parse a json file in the correct format to get Serenity data.
+* Can parse a JSON file in the correct format to get **Serenity** data.
 
 ### **3.6 Common Classes**
 
