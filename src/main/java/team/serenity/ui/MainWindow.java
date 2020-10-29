@@ -54,25 +54,22 @@ public class MainWindow extends UiPart<Stage> {
     private DataPanel lessonDataPanel;
 
     @FXML
-    private StackPane commandBoxPlaceholder;
-
-    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private ScrollPane sidebarPlaceholder;
 
     @FXML
     private StackPane titleDisplayPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
-
-    @FXML
     private StackPane dataDisplayPlaceholder;
 
     @FXML
-    private ScrollPane sidebarPlaceholder;
+    private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane commandBoxPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
