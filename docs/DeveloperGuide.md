@@ -171,7 +171,8 @@ This segment will explain the structure and responsibilities of the Storage comp
 
 #### **3.5.1 Structure**
 
-<img alt="Class diagram of Storage component" src="images/StorageClassDiagram.png" align="center">
+<p align="center">
+<img alt="Class diagram of Storage component" src="images/StorageClassDiagram.png" align="center"></p>
 
 <p align="center"><i>Figure 3.5.1 Class diagram of <code>Storage</code> component.</i></p>
 
