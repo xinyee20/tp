@@ -15,11 +15,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -267,7 +264,6 @@ public class XlsxUtil {
     public void writeAttendanceToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
         UniqueList<Student> studentList = group.getSortedStudents();
         UniqueList<Lesson> lessonList = group.getSortedLessons();
-
         List<List<Object>> data = new ArrayList<>();
         Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
 
@@ -276,37 +272,22 @@ public class XlsxUtil {
             for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
                 Student student = studentInfo.getStudent();
                 Optional<List<Integer>> attendanceList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
-                List<Integer> newAttendanceList;
-                if (attendanceList.isEmpty()) {
-                    newAttendanceList = new ArrayList<>();
-                } else {
-                    newAttendanceList = attendanceList.get();
-                }
+                List<Integer> newAttendanceList = attendanceList.isEmpty() ? new ArrayList<>() : attendanceList.get();
                 newAttendanceList.add(studentInfo.getAttendance().getIntegerAttendance());
                 studentDetailsMap.put(student.getStudentNo(), newAttendanceList);
             }
         }
 
-        for (Student student : studentList) {
-            List<Object> studentDetails = new ArrayList<>();
-            studentDetails.add(student.getStudentName().toString());
-            studentDetails.add(student.getStudentNo().toString());
-            List<Integer> attendanceList = studentDetailsMap.get(student.getStudentNo());
-            studentDetails.addAll(attendanceList);
-            data.add(studentDetails);
-        }
-
-        String outputFileName = String.format("%s_attendance.xlsx", group.getGroupName().toString());
-        writeDataToXlsx(data, outputFileName, group);
+        generateData(data, studentList, studentDetailsMap);
+        writeDataToXlsx(data, String.format("%s_attendance.xlsx", group.getGroupName().toString()), group);
     }
 
     /**
      * Write participation score data to XLSX file.
      */
-    public void writeParticipationToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+    public void writeScoreToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
         UniqueList<Student> studentList = group.getSortedStudents();
         UniqueList<Lesson> lessonList = group.getSortedLessons();
-
         List<List<Object>> data = new ArrayList<>();
         Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
 
@@ -314,43 +295,27 @@ public class XlsxUtil {
             GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
             for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
                 Student student = studentInfo.getStudent();
-                Optional<List<Integer>> participationList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
-                List<Integer> newParticipationList;
-                if (participationList.isEmpty()) {
-                    newParticipationList = new ArrayList<>();
-                } else {
-                    newParticipationList = participationList.get();
-                }
-                newParticipationList.add(studentInfo.getParticipation().getScore());
-                studentDetailsMap.put(student.getStudentNo(), newParticipationList);
+                Optional<List<Integer>> scoreList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
+                List<Integer> newScoreList = scoreList.isEmpty() ? new ArrayList<>() : scoreList.get();
+                newScoreList.add(studentInfo.getParticipation().getScore());
+                studentDetailsMap.put(student.getStudentNo(), newScoreList);
             }
         }
 
+        generateData(data, studentList, studentDetailsMap);
+        writeDataToXlsx(data, String.format("%s_participation.xlsx", group.getGroupName().toString()), group);
+    }
+
+    private void generateData(List<List<Object>> data, UniqueList<Student> studentList,
+        Map<StudentNumber,List<Integer>> studentDetailsMap) {
         for (Student student : studentList) {
             List<Object> studentDetails = new ArrayList<>();
             studentDetails.add(student.getStudentName().toString());
             studentDetails.add(student.getStudentNo().toString());
-            List<Integer> participationList = studentDetailsMap.get(student.getStudentNo());
-            studentDetails.addAll(participationList);
+            List<Integer> lst = studentDetailsMap.get(student.getStudentNo());
+            studentDetails.addAll(lst);
             data.add(studentDetails);
         }
-
-        String outputFileName = String.format("%s_participation.xlsx", group.getGroupName().toString());
-        writeDataToXlsx(data, outputFileName, group);
-    }
-
-    private void addTitle(Cell titleCell, String groupName) {
-        String title = String.format("CS2101 %s Attendance Sheet", groupName);
-        titleCell.setCellValue(title);
-    }
-
-    private int skipOneRow(int rowCount) {
-        return rowCount + 2;
-    }
-
-    private void addHeader(int columnCount, Row headerRow, String headerName) {
-        Cell headerCell = headerRow.createCell(columnCount);
-        headerCell.setCellValue(headerName);
     }
 
     private void writeDataToXlsx(List<List<Object>> data, String outputFileName, Group group) {
@@ -361,28 +326,52 @@ public class XlsxUtil {
         Cell cell = row.createCell(columnCount);
 
         addTitle(cell, group.getGroupName().toString());
-        rowCount = skipOneRow(rowCount);
+        addHeaders(goToHeaderRow(rowCount), columnCount, group.getLessons());
+        addContent(goToContentRow(rowCount), data);
 
-        row = sheet.createRow(rowCount);
+        try {
+            FileOutputStream outputStream = new FileOutputStream(outputFileName);
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void addTitle(Cell titleCell, String groupName) {
+        String title = String.format("CS2101 %s Attendance Sheet", groupName);
+        titleCell.setCellValue(title);
+    }
+
+    private int goToHeaderRow(int rowCount) {
+        return rowCount + 2;
+    }
+
+    private int goToContentRow(int rowCount) {
+        return rowCount + 3;
+    }
+    private void addHeader(int columnCount, Row headerRow, String headerName) {
+        Cell headerCell = headerRow.createCell(columnCount);
+        headerCell.setCellValue(headerName);
+    }
+
+    private void addHeaders(int rowCount, int columnCount, UniqueList<Lesson> lessonList) {
+        Row row = sheet.createRow(rowCount);
         addHeader(columnCount, row, "Name");
         columnCount++;
         addHeader(columnCount, row, "Student Number");
         columnCount++;
-        for (Lesson lesson : group.getLessons()) {
+        for (Lesson lesson : lessonList) {
             addHeader(columnCount, row, lesson.getLessonName().toString());
             columnCount++;
         }
+    }
 
-        Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
-
-        for (Object[] aBook : bookData) {
-            row = sheet.createRow(++rowCount);
-
-            columnCount = 0;
-
-            for (Object field : aBook) {
-                cell = row.createCell(columnCount);
+    private void addContent(int rowCount, List<List<Object>> data) {
+        for (List<Object> studentDetails : data) {
+            Row row = sheet.createRow(rowCount);
+            int columnCount = 0;
+            for (Object field : studentDetails) {
+                Cell cell = row.createCell(columnCount);
                 if (field instanceof String) {
                     cell.setCellValue((String) field);
                 } else if (field instanceof Integer) {
@@ -390,13 +379,7 @@ public class XlsxUtil {
                 }
                 columnCount++;
             }
-        }
-
-        try {
-            FileOutputStream outputStream = new FileOutputStream(outputFileName);
-            workbook.write(outputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
+            rowCount++;
         }
     }
 
