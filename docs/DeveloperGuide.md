@@ -30,28 +30,21 @@ The Architecture Diagram given in Figure 1 below explains the high-level design 
 
 > :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder. 
 
-| Tables        | Are           | Cool  |
- | ------------- |:-------------:| -----:|
- | col 3 is      | right-aligned | $1600 |
- | col 2 is      | centered      |   $12 |
- | zebra stripes | are neat      |    $1 |
- | <ul><li>item1</li><li>item2</li></ul>| See the list | from the first column|
-
 Component | Description
 ------------ | -------------
-| `Main` | Has two classes called `Main` and `MainApp`. It is responsible for: <ul><li>At app launch: Initializes the components in the correct sequence, and connects them up with one another.</li><li> At shut down: Shuts down the components and cleanup resources where necessary.</li></ul>
-| `Commons` | Represents a collection of classes used by multiple different components. |
-|`Ui`| Displays the Ui of the App to users. Defines its API in the Ui interface and exposes its functionality through the UiManager class.
-| `Logic` | Executes the command that user inputs. Defines its API in the Logic interface and exposes its functionality through the LogicManager class.
-| `Model` | Holds the data of the App in-memory. Defines its API in the Model interface and exposes its functionality through the ModelManager class.
-| `Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the Storage interface and exposes its functionality through the StorageManager class.
+`Main` | Has two classes called `Main` and `MainApp`. It is responsible for: <ul><li>At app launch: Initializes the components in the correct sequence, and connects them up with one another.</li><li> At shut down: Shuts down the components and cleanup resources where necessary.</li></ul>
+`Commons` | Represents a collection of classes used by multiple different components. |
+`Ui`| Displays the Ui of the App to users. Defines its API in the Ui interface and exposes its functionality through the UiManager class.
+`Logic` | Executes the command that user inputs. Defines its API in the Logic interface and exposes its functionality through the LogicManager class.
+`Model` | Holds the data of the App in-memory. Defines its API in the Model interface and exposes its functionality through the ModelManager class.
+`Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the Storage interface and exposes its functionality through the StorageManager class.
 
 **How the architecture components interact with each other**
 The Sequence Diagram in Figure 2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
 
 ![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
 
-<p align="center">Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command</p>
+<p align="center"><i>Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
 The sections below give more details of each component.
 
@@ -64,7 +57,7 @@ This segment will explain the structure and responsibilities of the Ui component
 
 ![Figure 3.2.1](images/UiClassDiagram.png)
 
-<p align="center">Figure 3.2.1 Structure of the `Ui` component</p>
+<p align="center"><i>Figure 3.2.1 Structure of the <code>Ui</code> component.</i></p>
 
 The Ui component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox` as shown in the Class Diagram above. The MainWindow and its parts inherit from the abstract UiPart class.
  
@@ -84,17 +77,104 @@ Listens for changes to Model data so that the <span style="color:purple"><i>GUI<
 (Contributed by Neo Rui En)
 This segment will explain the structure and responsibilities of the `Logic`component.
 
-#### 3.3.1 Structure
+#### **3.3.1 Structure**
 
 ![Figure 3.3.1 Structure of `Logic` component](images/LogicClassDiagram.png)
 
-<p align="center">Figure 3.3.1 Strucutre of `Logic` component</p>
+<p align="center"><i>Figure 3.3.1 Structure of <code>Logic</code> component.</i></p>
+
+From the diagram above, you can see that the `Logic` component is split into 2 groups, one for command and another for command parsing. 
+As Serenity follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class. 
+This allows the `LogicManager` to execute these commands without having to know each command type.
+
+#### **3.3.2 Responsibilities**
+
+The `Logic `component is in charge of command parsing from the commands given by the user through the `Ui` component. It is also responsible for command execution.
+
+1. `Logic` uses the `SerenityParser` class to parse the user command.
+1. This results in a `Command` object which is executed by the `LogicManager`.
+1. The command execution can affect the `Model` (e.g. adding an activity).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+
+The steps described above will be the standard command parsing and execution of every command in **Serenity**. 
+To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command delgrp grp/G04 is shown below. 
+The diagram starts with the `execute("delgrp grp/G04")` API call.
+
+> :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 
 ### **3.4 Model Component**
 
+(Contributed by Ryan Lim)
+This segment will explain the structure and responsibilities of the Model component.
+
+#### **3.4.1 Structure**
+
+![Figure 3.4.1.1 Simplified Class Diagram of `model` component ](images/ModelClassDiagram.png)
+
+<p align="center"><i>Figure 3.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
+
+The `UserPrefs` class represents the user’s preference.
+
+The `ObservableList` interface is exposed by the `Model` component for the `Ui` component to observe and automatically update the <span style="color:purple"><i>GUI</i></span> when data in the `Model` component changes.
+
+The `XYZManager` is a generic name given to the following managers, these managers supports each feature of Serenity :
+
+* `GroupManager`
+* `StudentManager`
+* `StudentInfoManager`
+* `LessonManager`
+* `QuestionManager`
+
+The `UniqueXYZList` is a generic name given to the following unique list, these unique lists supports the storing and manipulation of data in-memory when the App is running: 
+
+* `UniqueGroupList`
+* `UniqueStudentList`
+* `UniqueStudentInfoList`
+* `UniqueLessonList`
+* `UniqueQuestionList`
+
+Each unique list implements the `UniqueList` interface.
+
+#### **3.4.2 Responsibilities**
+
+The Model component,
+
+* Represents data of different features of Serenity..
+* Stores these data in-memory when the App is running.
+* Does not depend on the Ui, Logic and Storage components.
+* Contains observable data so that the GUI can automatically update upon data changes.
+
+
 ### **3.5 Storage Component**
 
+(contributed by Ryan Lim)
+This segment will explain the structure and responsibilities of the Storage component.
+
+#### **3.5.1 Structure**
+
+![Figure 3.5.1 Class diagram of `Storage` component](images/StorageClassDiagram.png)
+
+<p align="center"><i>Figure 3.5.1 Class diagram of <code>Storage</code> component.</i></p>
+
+The `UserPrefStorage` interface and `SerenityStorage` interface defines the API
+for reading and saving the Model component’s data from and to the hard disk in JSON format.
+
+The `JsonSerenityStorage` is the implementation of the `SerenityStorage` interface 
+which supports the storage of data in the application.
+
+#### **3.5.2 Responsibilities**
+
+The Storage component,
+
+* Can save the UserPref object in a JSON format.
+* Can parse a json file in the correct format to get the UserPref object.
+* Can save the Serenity data in a JSON format.
+* Can parse a json file in the correct format to get Serenity data.
+
 ### **3.6 Common Classes**
+
+Classes used by multiple other components are in the `team.serenity.commons package` package.
 
 ## **4. Implementation** 
 
