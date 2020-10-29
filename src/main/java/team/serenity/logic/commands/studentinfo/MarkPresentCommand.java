@@ -108,7 +108,7 @@ public class MarkPresentCommand extends Command {
 
         if (!this.isWholeClass) {
 
-            if (!isByIndex) {
+            if (! isByIndex) {
 
                 // Mark single student present
                 for (int i = 0; i < studentsInfo.size(); i++) {
@@ -124,10 +124,11 @@ public class MarkPresentCommand extends Command {
                     }
                 }
 
-                if (!this.isCorrectStudent) {
+                if (! this.isCorrectStudent) {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toMarkPresent.get()));
                 }
             } else {
+                
                 if (index.get().getZeroBased() > studentsInfo.size()) {
                     throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                             index.get().getOneBased()));
