@@ -382,6 +382,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isDelGrp()) {
+                toggleSerenityView();
                 String groupName = getGroupName(commandText);
                 handleDelGrp(groupName);
             }

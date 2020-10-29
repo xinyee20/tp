@@ -192,9 +192,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteGroup(Group group) {
         this.groupManager.deleteGroup(group);
+        this.studentManager.deleteAllStudentsFromGroup(group);
+        this.studentInfoManager.deleteAllStudentInfosFromGroup(group);
+        this.lessonManager.deleteAllLessonsFromGroup(group);
+        this.questionManager.deleteAllQuestionsFromGroup(group);
         this.students.clear();
         this.lessons.clear();
-        this.filteredLessons.clear();
         this.studentsInfo.clear();
     }
 
@@ -369,14 +372,11 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<StudentInfo> getAllStudentInfo() {
-        ObservableList<StudentInfo> studentInfoList = null;
+        ObservableList<StudentInfo> studentInfoList =
+                new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
         for (Group group : getListOfGroups()) {
             for (Lesson lesson : group.getLessons()) {
-                if (studentInfoList == null) {
-                    studentInfoList = new ArrayObservableList<>(lesson.getStudentsInfoAsUnmodifiableObservableList());
-                } else {
-                    studentInfoList.addAll(lesson.getStudentsInfo().getList());
-                }
+                studentInfoList.addAll(lesson.getStudentsInfo().getList());
             }
         }
         return studentInfoList;
