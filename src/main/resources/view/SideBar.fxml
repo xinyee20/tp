@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<ScrollPane prefWidth="85.0" stylesheets="@SerenityTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox fx:id="buttonBar" alignment="CENTER" fillWidth="false" prefWidth="85.0" spacing="10" />
+   </content>
+</ScrollPane>
