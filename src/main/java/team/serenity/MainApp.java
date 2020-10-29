@@ -40,8 +40,7 @@ import team.serenity.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 0, true);
-
+    public static final Version VERSION = new Version(1, 3, 1, true);
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
