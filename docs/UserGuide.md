@@ -8,10 +8,9 @@ title: User guide
 
 
 --------------------------------------------------------------------------------------------------------------------
-![Serenity Logo](images/logo.png)
-
-
 ## **1. Introduction**
+
+![Serenity Logo](images/logo.png)
 
 Welcome to the User Guide of **Serenity**!
 
@@ -134,7 +133,7 @@ Analysis:
 
 This section contains all the information you need to know about the features of **Serenity**.
 To use each feature or sub-feature, you will need to enter the command into the _Command Box_.
-Below is an overview of the features availablie in **Serenity** :
+Below is an overview of the features available in **Serenity** :
 
 1. [Setting up](#41-setting-up) feature provides you the tools to set up your tutorial groups and lessons.
 2. [Attendance taking](#42-attendance-taking) feature provides you the tools to mark attendance for your lessons.
@@ -143,7 +142,7 @@ Below is an overview of the features availablie in **Serenity** :
 
 ### 4.1. Setting Up
 
-It is the start of the semester! Brand new classes, brand new students and a whole new experience.
+It is the start of the semester! Brand-new classes, brand-new students and a whole new experience.
 Follow the instructions below to set up your new classes, and watch **Serenity** do the magic for you.
 
 #### 4.1.1. Add a new tutorial group from XLSX file: `addgrp`
@@ -153,7 +152,7 @@ You can use this command to add a new tutorial group automatically from XLSX dat
 > :memo: **Notes regarding the `addgrp` command:**
 > * The XLSX file should store a list of students.
 > * The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS.
-> * To obtain PATH_TO_XLSX, either:<br>
+> * To obtain the PATH_TO_XLSX, either:<br>
 >    ◦ Get the location of the XLSX file in your computer.<br>
 >      e.g. `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`<br>
 >    ◦ Copy and paste the XLSX file into the same folder as your **Serenity** application, then type the name of the XLSX file.<br>
@@ -731,6 +730,60 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The question will be deleted from the list of questions.
 
+#### 4.4.3. Edit an existing question: `editqn`
+
+You can use this command to edit an existing question that was asked in a tutorial lesson.
+
+**Format:**
+
+`editqn INDEX [grp/GROUP_NAME] [lsn/LESSON_NAME] [qn/QUESTION]`
+
+> :memo: **Note regarding the `editqn` command:**
+> * You can edit the question's description, or the group/lesson the question was asked in.
+> * The existing values will be updated to the new values.
+> * If `grp/GROUP_NAME` or `lsn/LESSON_NAME` is supplied, ensure that the group or lesson exists.
+> Otherwise, an error message will be displayed to alert you.
+
+**Example:**
+
+Suppose you have accidentally made a spelling mistake in the `second` question in the displayed list and 
+wish to change it from "`What is the dedline for the report?`" to "`What is the deadline for the report?`". 
+You can do so as follows.
+
+Editing a question:
+
+1. Type `editqn 2 qn/What is the deadline for the report?` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the list of all your questions, including the edited question.
+
+#### 4.4.4. Find questions by keywords: `findqn`
+
+You can use this command to find a question that was asked in a tutorial lesson. 
+Serenity will help you search for questions that contain the keywords that you are finding.
+
+**Format:**
+
+`findqn KEYWORD [MORE_KEYWORDS]...`
+
+**Example:**
+
+Let say your question list has a bunch of questions from all your tutorial lessons. 
+You want to search for a specific one with the word `deadline` in the question. You can do so as follows.
+
+Finding questions:
+
+1. Type `findqn deadline` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the list of questions with the keyword `deadline`.
+
 ### 4.5 Utility viewing
 
 The following commands allow you to navigate between different views.
@@ -917,6 +970,8 @@ Command | Example
 ------------ | -------------
 **Add question** <br> `addqn qn/QUESTION` | `addqn qn/What is the deadline for the report?`
 **Delete question** <br> `delqn INDEX` | `delqn 5`
+**Edit question** <br> `editqn INDEX [grp/GROUP_NAME] [lsn/LESSON_NAME] [qn/QUESTION]` | `editqn 2 qn/What is the deadline for the report?`
+**Find question** <br> `findqn KEYWORD [MORE_KEYWORDS]...` | `findqn deadline`
 
 ### 6.5. Utility viewing commands 
 

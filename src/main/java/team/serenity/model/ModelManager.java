@@ -192,7 +192,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteGroup(Group group) {
         this.groupManager.deleteGroup(group);
-        this.filteredGroups.clear();
         this.students.clear();
         this.lessons.clear();
         this.filteredLessons.clear();
