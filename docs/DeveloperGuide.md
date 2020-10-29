@@ -62,7 +62,7 @@ easier for the teacher to track and is much more organised.
 The StudentInfo Manager contains a HashMap whose key is a GroupLessonKey and value is a UniqueList. 
 The following Class Diagram describes the structure of StudentInfoManager and its relevant classes.
 
-![Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes](./images/developerGuide/Simplified StudentInfo ManagerClassDiagram.png)
+![Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes](./images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png)
 <p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
 
 From the diagram above, we can see that StudentInfoManager can contain multiple GroupLessonKey as well as 
