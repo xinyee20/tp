@@ -6,236 +6,49 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+![Serenity Logo](images/logo.png)
 
-## **Setting up, getting started**
+## **1. Introduction**
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+## **3. Design**
 
-## **Design**
+### **3.1 Architecture**
 
-### Architecture
+### **3.2 UI Component**
 
-<img src="images/ArchitectureDiagram.png" width="450" />
+### **3.3 Logic component**
 
-The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
+### **3.4 Model Component**
 
-<div markdown="span" class="alert alert-primary">
+### **3.5 Storage Component**
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+### **3.6 Common Classes**
 
-</div>
+## **4. Implementation** 
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+### **4.1 Feature Managers**
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+### **4.2 Group Manager**
 
-The rest of the App consists of four components.
+### **4.3 Lesson Manager**
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+### **4.4 Student Manager**
 
-Each of the four components,
+### **4.5 StudentInfo Manager**
 
-* defines its *API* in an `interface` with the same name as the Component.
-* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
+### **4.6 Question Manager**
 
-For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
+## **Appendix A: Product Scope**
 
-![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
-
-**How the architecture components interact with each other**
-
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
-
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
-The sections below give more details of each component.
-
-### UI component
-
-![Structure of the UI Component](images/UiClassDiagram.png)
-
-**API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
-
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
-
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
-
-The `UI` component,
-
-* Executes user commands using the `Logic` component.
-* Listens for changes to `Model` data so that the UI can be updated with the modified data.
-
-### Logic component
-
-![Structure of the Logic Component](images/LogicClassDiagram.png)
-
-**API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
-
-1. `Logic` uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
-1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
-
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
-
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
-### Model component
-
-![Structure of the Model Component](images/ModelClassDiagram.png)
-
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
-
-The `Model`,
-
-* stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
-
-
-### Storage component
-
-![Structure of the Storage Component](images/StorageClassDiagram.png)
-
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
-
-The `Storage` component,
-* can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
-
-### Common classes
-
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-#### Design consideration:
-
-##### Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Documentation, logging, testing, configuration, dev-ops**
-
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Appendix: Requirements**
-
-### Product scope
-
-**Target user profile**:
-
+**Target user profile:**
 * Has a need to manage a significant number of students from various CS2101 classes
 * Has a need to keep track of the students' attendance throughout the semester
 * Has a need to keep track of the students' participation throughout the semester
@@ -246,45 +59,37 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-
-* Serenity can help assist the management of a CS2101 class 
-faster than a typical mouse/GUI driven app through easy reference and editing of class data.
-* Serenity consolidates administrative information on a Graphical User Interface for convenient viewing. 
+**Value proposition:** 
+* Serenity can help assist the management of a CS2101 class faster than a typical mouse / GUI driven app through easy reference and editing of class data.
+* Serenity consolidates administrative information on a GUI for convenient viewing.
 * Serenity gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
 
-### User stories
+## **Appendix B: User Stories**
+As a... | I want to... | So that I can...
+------------ | ------------- | -------------
+Tutor | Set up tutorial groups that I am teaching at the start of every semester | Perform administrative functions more efficiently
+Tutor | Mark attendance across every lesson | Grade effectively at the end of the term
+Tutor | Flag the attendance of a student | Be reminded to check up on this student after lesson
+Tutor | View the attendance sheet for each class | Identify the students who did not attend a lesson
+Tutor | Export attendance of all my tutorial groups as a XLSX file | Submit attendance as a softcopy to the school
+Tutor | Use a participation system to keep track of participation | Grade effectively at the end of the term
+Tutor | Give a participation score to a student | Grade the student's participation
+Tutor | Generate the average score for each student across each session | Have an additional set of data to cross reference to
+Tutor | Export participation scores of each class as a XLSX file | Submit it as a softcopy for marks generation
+Tutor | Add a question to the question list | Be reminded to answer the question after the lesson ends
+Tutor | Remove a question from the question list | Prevent the list from becoming too cluttered
+Tutor | View the list of questions for each class | Identify the questions that I have not answered in class
+Tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class
+Tutor | Import data of my students | Avoid manually entering the data
+Tutor | Access the list of commands easily on the software without referring to the user guide | Operate the software easily while teaching in class
+Tutor | Use an app that does not take up too much screen space | Continue to teach the content effectively
+Tutor | The list of commands to be as short as possible | Be productive trying to recall more important things for the lesson
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | -------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | Tutor | Set up classes that I am teaching at the start of every semester | Perform administrative functions more efficiently |
-| `* * *`  | Tutor | Mark attendance across every lesson | Grade effectively at the end of the term |
-| `*` | Tutor | Flag the attendance of a student | Be reminded to check up on this student after lesson |
-| `* * *` | Tutor | View the attendance sheet for each class | Identify the students who did not attend a lesson |
-| `*` | Tutor | Export monthly attendance of all my classes as a CSV file | Submit attendance as a softcopy to the school |
-| `* * *` | Tutor | Give a participation score to a student | Grade the student's participation |
-| `* *` | Tutor | Use a participation system to keep track of participation | Grade effectively at the end of the term |
-| `* *` | Tutor | Generate the average score for each student across each session | Have an additional set of data to cross reference to |
-| `*` | Tutor | Export participation scores of all my classes as a CSV file | Submit it as a softcopy for marks generation |
-| `* * *` | Tutor | Add a question to the question list | Be reminded to answer the question after the lesson ends |
-| `* *` | Tutor | Remove a question from the question list | Prevent the list from becoming too cluttered |
-| `* *` | Tutor | View the list of questions for each class | Identify the questions that I have not answered in class |
-| `* *` | Forgetful tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class |
-| `* *` | Tutor | Import data of my students | Avoid manually entering the data |
-| `* *` | Tutor | Access the list of commands easily on the software without referring to the user guide | Operate the software easily while teaching in class |
-| `* *` | Tutor who dislikes clutter | Use an app that does not take up too much screen space | Continue to teach the content effectively |
-| `* *` | Tutor who has other important things to remember | The list of commands to be as short as possible | Be productive trying to recall more important things for the lesson |
+## **Appendix C: Use Cases**
+For all use cases below, the System is `Serenity` and the Actor is the `User`, unless specified otherwise.
 
-*{More to be added}*
-
-### Use cases
-
-(For all use cases below, the **System** is `Serenity` and the **Actor** is the `User`, unless specified otherwise)
-
-**Setting Up**
-```
+----------------------------------------------------------------------------------------------------------------
 UC01: Set up tutorial group
 
 System: Serenity
@@ -300,227 +105,63 @@ MSS:
     3. Serenity reads the csv file.
     4. Serenity adds the tutorial groups and students to the respective lists.
 Use case ends.
-```
+----------------------------------------------------------------------------------------------------------------
 
-**Attendance Taking**
-```
-UC02: For a tutorial group, mark all students present for a lesson
+## **Appendix D: Non Functional Requirements**
 
-System: Serenity
-Actor: User
+1. Should work on any <span style="color:purple"><i>mainstream OS</i></span> as long as it has Java 11 or above installed.
+2. Should be able to hold up to 30 students per tutorial group and up 10 tutorial groups without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - Each student is marked present for a lesson upon successful command.
 
-MSS:
-    1. User requests to mark all students from a specific tutorial group present for a lesson.
-    2. User receives a confirmation message.
-    3. System shows the updated attendance list for the lesson.
-Use case ends.
+## **Appendix E: Glossary**
 
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-```
-
-```
-UC03: Mark a student present or absent for a specific lesson
-
-System: Serenity
-Actor: User
-
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - A specific student is marked present or absent for a lesson upon successful command.
-
-MSS:
-    1. User requests to mark a student from a specific tutorial group present or absent for a lesson.
-    2. User receives a confirmation message.
-    3. System shows the updated attendance list for the lesson.
-Use case ends.
-
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-```
-
-```
-UC04: For a tutorial group, view attendance of each student for every lesson
-
-System: Serenity
-Actor: User
-
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - User can view the attendance list of a lesson for a specific tutorial class upon successful command.
-
-MSS:
-    1. User requests to view the attendance list for a lesson of a specific tutorial class.
-    2. User receives a confirmation message.
-    3. System shows the attendance list for the lesson.
-Use case ends.
-
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-
-```
-
-**Class Participation**
-```
-UC05: Add class participation marks to a student
-
-System: Serenity
-Actor: User
-
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - For a lesson, class participation marks for a specific student is added upon successful command.
-
-MSS:
-    1. User requests to add class participation marks to a student.
-    2. User receives a confirmation message.
-    3. System shows the updated class participation marks of the student.
-Use case ends.
-
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-```
-
-```
-UC06: View average class participation score of all students in a tutorial group
-
-System: Serenity
-Actor: User
-
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - User can view the average class participation score of all students in a tutorial group upon successful command.
-
-MSS:
-    1. User requests to view the average class participation score of all students in a tutorial group.
-    2. User receives a confirmation message.
-    3. System shows the average class participation score of all students in the tutorial group
-Use case ends.
-
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-```
-
-**Addressing Questions**
-```
-UC07: Add a question to a tutorial group’s question list
-
-System: Serenity
-Actor: User
-
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - Question will be added into a question list upon successful command.
-
-MSS:
-    1. User requests to create a new question for a tutorial group.
-    2. System shows an updated list of questions.
-Use case ends.
-
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-```
-
-```
-UC08: View all questions of a tutorial group
-
-System: Serenity
-Actor: User
-
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - User can view the list of questions upon successful command.
-
-MSS:
-    1. User requests to view the list of questions for a tutorial group.
-    2. System shows the attendance list for the lesson.
-Use case ends.
-
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-```
-
-*{More to be added}*
-
-### Non-Functional Requirements
-
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
-
-### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
+> :memo: Note: These instructions only provide a starting point for testers to work on; 
+>testers are expected to do more **exploratory** testing.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**Launch and Shutdown**
+ 1. Initial launch
+    1. Download the jar file and copy into an empty folder
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+ 1. Saving window preferences
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Re-launch the app by double-clicking the jar file.
+    1. Expected: The most recent window size and location is retained.
 
-</div>
+ 
+**Adding/Setting**
 
-### Launch and shutdown
+Add a new tutorial group in Serenity.
+ 1. Prerequisites: XLSX file must be in the same folder as `Serenity`
+ 1. Test case: `addgrp grp grp/<NAME OF TUTORIAL GROUP> path/<NAME OF FILE>.xlsx`
+    1. Expected: Tutorial group created, <span style="color:purple"><i>GUI</i></span> updates to show the tutorial lessons specified in the XLSX file.
+ 1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<NAME OF TUTORIAL GROUP>`, `addgrp path/<NAME OF FILE>.csv`
+    1. Expected: Error message shown.
+ 
+Adding Lesson to a Group
+1. Prerequisites: Tutorial group is already set up, lesson name to be added does not already exist in the group.
+1. Test case: `addlsn grp/<NAME OF TUTORIAL GROUP> lsn/<LESSON NAME TO ADD>`
+    1. Expected: Tutorial lesson added, <span style="color:purple"><i>GUI</i></span> updates to show the new tutorial lesson created.
+ 1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<NAME OF TUTORIAL GROUP>`, `addlsn lsn/<LESSON NAME TO ADD>`
+    1. Expected: Error message shown.
+ 
+Adding Student to a Group
+1. Prerequisites: Tutorial group is already set up.
+1. Test case: `addstudent grp/<NAME OF TUTORIAL GROUP> name/<NAME OF STUDENT TO ADD> matric/<MATRICULATION NUMBER OF STUDENT>`
+    1. Expected: Success message shown: `You added <Student name> to <Tutorial Group>.`
+ 1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<NAME OF TUTORIAL GROUP>` `addstudent name/<NAME OF STUDENT>`
+    1. Expected: Error message shown.
+ 	
 
-1. Initial launch
+**Data**
 
-   1. Download the jar file and copy into an empty folder
+Missing data files
+1. Test case: In the folder where Serenity is stored, delete `serenity.json` in `data` folder 
+    1. Expected: New tutorial group `G01` created.
+    
+**Editing**
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
