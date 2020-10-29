@@ -9,9 +9,9 @@ title: Developer Guide
 
 ![Serenity Logo](images/logo.png)
 
-(Contributed by: Wen Jin)
+(Contributed by Bu Wen Jin)
 
-Serenity is a desktop lesson management application made for CS2101 tutors who want to manage administrative work.
+Serenity is a desktop lesson management application made for CS2101 tutors who want to manage and reduce administrative work.
 It focuses on the <span style="color:purple"><i>Command Line Interface (CLI)</i></span>
 while providing users with a simple and clean <span style="color:purple"><i>Graphical User Interface (GUI)</i></span>.
 Thus, the main interaction with Serenity will be done through commands.
@@ -35,6 +35,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ### **3.1 Architecture**
 
 (Contributed by Neo Rui En)
+
 The Architecture Diagram given in Figure 1 below explains the high-level design of Serenity.
 
 ![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
@@ -64,6 +65,7 @@ The sections below give more details of each component.
 ### **3.2 UI Component**
 
 (Contributed by Neo Rui En)
+
 This segment will explain the structure and responsibilities of the Ui component.
 
 #### **3.2.1. Structure**
@@ -86,7 +88,8 @@ Listens for changes to Model data so that the <span style="color:purple"><i>GUI<
 
 ### **3.3 Logic component**
 
-(Contributed by Neo Rui En)
+(Contributed by Neo Rui En
+
 This segment will explain the structure and responsibilities of the `Logic`component.
 
 #### **3.3.1 Structure**
@@ -118,6 +121,7 @@ The diagram starts with the `execute("delgrp grp/G04")` API call.
 ### **3.4 Model Component**
 
 (Contributed by Ryan Lim)
+
 This segment will explain the structure and responsibilities of the Model component.
 
 #### **3.4.1 Structure**
@@ -160,6 +164,7 @@ The Model component,
 ### **3.5 Storage Component**
 
 (contributed by Ryan Lim)
+
 This segment will explain the structure and responsibilities of the Storage component.
 
 #### **3.5.1 Structure**
