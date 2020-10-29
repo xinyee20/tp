@@ -5,13 +5,26 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
-
 ## **1. Introduction**
+
 ![Serenity Logo](images/logo.png)
 
+(Contributed by: Wen Jin)
 
---------------------------------------------------------------------------------------------------------------------
+Serenity is a desktop lesson management application made for CS2101 tutors who want to manage administrative work.
+It focuses on the <span style="color:purple"><i>Command Line Interface (CLI)</i></span>
+while providing users with a simple and clean <span style="color:purple"><i>Graphical User Interface (GUI)</i></span>.
+Thus, the main interaction with Serenity will be done through commands.
+
+Serenity allows tutors to keep track of their lessons administrative work in a single, 
+simple-to-use platform. The information that can be managed by Serenity includes:
+* Tutorial group students information
+* Student attendance for each lesson
+* Student class participation scores for each lesson
+* Questions for each lesson
+
+The purpose of this Developer Guide is to help you understand the design
+and implementation of Serenity so that you can get started on your contributions to Serenity.
 
 ## **2. Setting up, getting started**
 
@@ -34,10 +47,10 @@ Component | Description
 ------------ | -------------
 `Main` | Has two classes called `Main` and `MainApp`. It is responsible for: <ul><li>At app launch: Initializes the components in the correct sequence, and connects them up with one another.</li><li> At shut down: Shuts down the components and cleanup resources where necessary.</li></ul>
 `Commons` | Represents a collection of classes used by multiple different components. |
-`Ui`| Displays the Ui of the App to users. Defines its API in the Ui interface and exposes its functionality through the UiManager class.
-`Logic` | Executes the command that user inputs. Defines its API in the Logic interface and exposes its functionality through the LogicManager class.
-`Model` | Holds the data of the App in-memory. Defines its API in the Model interface and exposes its functionality through the ModelManager class.
-`Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the Storage interface and exposes its functionality through the StorageManager class.
+`Ui`| Displays the `Ui` of the App to users. Defines its API in the `Ui` interface and exposes its functionality through the `UiManager` class.
+`Logic` | Executes the command that user inputs. Defines its API in the `Logic` interface and exposes its functionality through the `LogicManager` class.
+`Model` | Holds the data of the App in-memory. Defines its API in the `Model` interface and exposes its functionality through the `ModelManager` class.
+`Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the `Storage` interface and exposes its functionality through the `StorageManager` class.
 
 **How the architecture components interact with each other**
 The Sequence Diagram in Figure 2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
@@ -70,7 +83,6 @@ For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 The `Ui` component,
 Executes user commands using the Logic component.
 Listens for changes to Model data so that the <span style="color:purple"><i>GUI</i></span> can be updated with the modified data.
-
 
 ### **3.3 Logic component**
 
@@ -144,7 +156,6 @@ The Model component,
 * Stores these data in-memory when the App is running.
 * Does not depend on the Ui, Logic and Storage components.
 * Contains observable data so that the GUI can automatically update upon data changes.
-
 
 ### **3.5 Storage Component**
 
@@ -230,7 +241,6 @@ Tutor | Access the list of commands easily on the software without referring to 
 Tutor | Use an app that does not take up too much screen space | Continue to teach the content effectively
 Tutor | The list of commands to be as short as possible | Be productive trying to recall more important things for the lesson
 
-
 ## **Appendix C: Use Cases**
 For all use cases below, the System is `Serenity` and the Actor is the `User`, unless specified otherwise.
 
@@ -251,14 +261,11 @@ MSS:
     4. Serenity adds the tutorial groups and students to the respective lists.
 Use case ends.
 ```
-
-
 ## **Appendix D: Non Functional Requirements**
 
 1. Should work on any <span style="color:purple"><i>mainstream OS</i></span> as long as it has Java 11 or above installed.
 2. Should be able to hold up to 30 students per tutorial group and up 10 tutorial groups without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
 
 ## **Appendix E: Glossary**
 
