@@ -6,9 +6,11 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import team.serenity.commons.exceptions.DataConversionException;
-import team.serenity.model.ReadOnlySerenity;
-import team.serenity.model.Serenity;
+import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.group.Group;
+import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
+
 
 /**
  * Represents a storage for {@link Serenity}.
@@ -27,13 +29,13 @@ public interface SerenityStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException             if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlySerenity> readSerenity() throws DataConversionException, IOException;
+    Optional<ReadOnlySerenity> readSerenity() throws IllegalValueException, DataConversionException;
 
     /**
      * @see #getSerenityFilePath()
      */
     Optional<ReadOnlySerenity> readSerenity(Path filePath)
-        throws DataConversionException, IOException;
+        throws IllegalValueException, DataConversionException;
 
     /**
      * Saves the given {@link ReadOnlySerenity} to the storage.

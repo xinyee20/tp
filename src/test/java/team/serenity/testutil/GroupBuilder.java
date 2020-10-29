@@ -1,19 +1,24 @@
 package team.serenity.testutil;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import team.serenity.commons.util.CsvUtil;
+import team.serenity.commons.util.XlsxUtil;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueLessonList;
-import team.serenity.model.group.UniqueStudentInfoList;
-import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.UniqueLessonList;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.UniqueStudentList;
+import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -33,7 +38,7 @@ public class GroupBuilder {
     public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>(Arrays.asList(
     ));
 
-    private String name;
+    private GroupName name;
     private UniqueList<Student> students = new UniqueStudentList();
     private UniqueList<Lesson> lessons = new UniqueLessonList();
 
@@ -41,7 +46,7 @@ public class GroupBuilder {
      * Creates a {@code GroupBuilder} with the default details.
      */
     public GroupBuilder() {
-        name = DEFAULT_NAME;
+        name = new GroupName(DEFAULT_NAME);
         students.setElementsWithList(new ArrayList<>(DEFAULT_STUDENTS));
         lessons.setElementsWithList(new ArrayList<>(DEFAULT_CLASSES));
     }
@@ -50,7 +55,7 @@ public class GroupBuilder {
      * Initializes the GroupBuilder with the data of {@code groupToCopy}.
      */
     public GroupBuilder(Group groupToCopy) {
-        name = groupToCopy.getName();
+        name = groupToCopy.getGroupName();
         students = groupToCopy.getStudents();
         lessons = groupToCopy.getLessons();
     }
@@ -59,7 +64,7 @@ public class GroupBuilder {
      * Initializes the GroupBuilder from the data inside the CSV file.
      */
     public GroupBuilder(String name, Path filePath) {
-        this.name = name;
+        this.name = new GroupName(name);
         students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
         lessons.setElementsWithList(new ArrayList<>());
     }
@@ -68,7 +73,7 @@ public class GroupBuilder {
      * Sets the {@code Name} of the {@code Group} that we are building.
      */
     public GroupBuilder withName(String name) {
-        this.name = name;
+        this.name = new GroupName(name);
         return this;
     }
 
@@ -83,8 +88,13 @@ public class GroupBuilder {
     /**
      * Parses the {@code filePath} into a {@code Set<Student>} and set it to the {@code Group} that we are building.
      */
-    public GroupBuilder withFilePath(Path filePath) {
-        students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+    public GroupBuilder withFilePath(String filePath) {
+        try {
+            students.setElementsWithList(new ArrayList<>(new XlsxUtil(filePath,
+                new XSSFWorkbook(filePath)).readStudentsFromXlsx()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 
@@ -104,7 +114,7 @@ public class GroupBuilder {
     }
 
     public Group build() {
-        return new Group(this.name, this.students, this.lessons);
+        return new Group(this.name.toString(), this.students, this.lessons);
     }
 
 }

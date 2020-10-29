@@ -3,7 +3,7 @@ package team.serenity.logic.commands.question;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static team.serenity.commons.core.Messages.MESSAGE_QUESTIONS_LISTED_OVERVIEW;
-import static team.serenity.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static team.serenity.logic.commands.CommandTestUtil.assertQuestionViewsQuestionTabCommandSuccess;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
 
@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
-import team.serenity.model.Serenity;
 import team.serenity.model.group.question.QuestionContainsKeywordPredicate;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.UserPrefs;
 
 /**
@@ -67,7 +67,7 @@ class FindQnCommandTest {
         QuestionContainsKeywordPredicate predicate = preparePredicate(" ");
         FindQnCommand command = new FindQnCommand(predicate);
         this.expectedModel.updateFilteredQuestionList(predicate);
-        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertQuestionViewsQuestionTabCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(Collections.emptyList(), this.model.getFilteredQuestionList());
     }
 
@@ -78,7 +78,7 @@ class FindQnCommandTest {
         QuestionContainsKeywordPredicate predicate = preparePredicate("deadline");
         FindQnCommand command = new FindQnCommand(predicate);
         this.expectedModel.updateFilteredQuestionList(predicate);
-        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertQuestionViewsQuestionTabCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(Collections.singletonList(QUESTION_A), this.model.getFilteredQuestionList());
     }
 

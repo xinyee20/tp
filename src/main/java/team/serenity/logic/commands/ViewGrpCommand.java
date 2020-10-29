@@ -20,7 +20,7 @@ public class ViewGrpCommand extends Command {
         + "Parameters: "
         + PREFIX_GRP + "GROUP\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + " G04\n";
+        + PREFIX_GRP + "G04\n";
 
     private final GroupContainsKeywordPredicate predicate;
 
@@ -31,14 +31,15 @@ public class ViewGrpCommand extends Command {
     private String getMessage(Model model) {
         return model.getFilteredGroupList().isEmpty()
                 ? MESSAGE_GROUP_EMPTY
-                : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getName());
+                : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
-        return new CommandResult(this.getMessage(model), false, false, false, true, false, false);
+        return new CommandResult(this.getMessage(model), false, false,
+            false, true, false, false, false, false, false, false);
     }
 
     @Override

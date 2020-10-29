@@ -3,8 +3,8 @@ package team.serenity.logic.commands.question;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
-import static team.serenity.logic.commands.CommandTestUtil.assertCommandFailure;
 import static team.serenity.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static team.serenity.logic.commands.CommandTestUtil.assertDelQnCommandFailure;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test;
 import team.serenity.commons.core.index.Index;
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
-import team.serenity.model.Serenity;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.testutil.question.QuestionBuilder;
 
@@ -51,9 +51,9 @@ class DelQnCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredQuestionList().size() + 1);
         DelQnCommand delQnCommand = new DelQnCommand(outOfBoundIndex);
-        String expectedMessage = String.format(MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX);
+        String expectedMessage = MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
 
-        assertCommandFailure(delQnCommand, model, expectedMessage);
+        assertDelQnCommandFailure(delQnCommand, model, expectedMessage);
     }
 
     @Test

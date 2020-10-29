@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import team.serenity.model.group.exceptions.DuplicateException;
+import team.serenity.model.group.exceptions.DuplicateQuestionException;
+import team.serenity.model.group.exceptions.QuestionNotFoundException;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.question.UniqueQuestionList;
 import team.serenity.model.util.UniqueList;
@@ -27,7 +28,7 @@ public class QuestionManager implements ReadOnlyQuestionManager {
     }
 
     /**
-     * Creates a QuestionManager using the Questions in the {@code} toBeCopied}
+     * Creates a QuestionManager using the Questions in the {@code toBeCopied}
      */
     public QuestionManager(ReadOnlyQuestionManager toBeCopied) {
         this.listOfQuestions = new UniqueQuestionList();
@@ -41,6 +42,7 @@ public class QuestionManager implements ReadOnlyQuestionManager {
      * {@code newListOfQuestions} must not contain duplicate questions.
      */
     public void setQuestions(List<Question> newListOfQuestions) {
+        requireNonNull(newListOfQuestions);
         this.listOfQuestions.setElementsWithList(newListOfQuestions);
     }
 
@@ -52,6 +54,10 @@ public class QuestionManager implements ReadOnlyQuestionManager {
         setQuestions(newData.getListOfQuestions());
     }
 
+    /**
+     * Returns the list of questions as an unmodifiable list
+     */
+    @Override
     public ObservableList<Question> getListOfQuestions() {
         return this.listOfQuestions.asUnmodifiableObservableList();
     }
@@ -73,7 +79,7 @@ public class QuestionManager implements ReadOnlyQuestionManager {
     public void addQuestion(Question toAdd) {
         requireNonNull(toAdd);
         if (hasQuestion(toAdd)) {
-            throw new DuplicateException();
+            throw new DuplicateQuestionException();
         }
         this.listOfQuestions.add(toAdd);
     }
@@ -86,6 +92,9 @@ public class QuestionManager implements ReadOnlyQuestionManager {
      */
     public void setQuestion(Question target, Question editedQuestion) {
         requireNonNull(editedQuestion);
+        if (hasQuestion(editedQuestion)) {
+            throw new DuplicateQuestionException();
+        }
         this.listOfQuestions.setElement(target, editedQuestion);
     }
 
@@ -94,6 +103,10 @@ public class QuestionManager implements ReadOnlyQuestionManager {
      * {@code toDelete} must exist in the QuestionManager.
      */
     public void deleteQuestion(Question toDelete) {
+        requireNonNull(toDelete);
+        if (!hasQuestion(toDelete)) {
+            throw new QuestionNotFoundException();
+        }
         this.listOfQuestions.remove(toDelete);
     }
 

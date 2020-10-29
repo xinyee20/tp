@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import team.serenity.model.group.Lesson;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.ui.UiPart;
 
 /**
@@ -30,7 +30,7 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         this.id.setText(displayedIndex + ". ");
-        this.name.setText("tutorial " + lesson.getName());
+        this.name.setText("Tutorial " + lesson.getLessonName());
     }
 
     @Override

@@ -8,10 +8,11 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import team.serenity.commons.core.LogsCenter;
-import team.serenity.model.group.StudentInfo;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.ui.DataPanel;
 import team.serenity.ui.groupdata.GroupDataPanel;
+import team.serenity.ui.serenitydata.QuestionListViewCell;
 
 public class LessonDataPanel extends DataPanel {
     private static final String FXML = "LessonDataPanel.fxml";
@@ -38,7 +39,7 @@ public class LessonDataPanel extends DataPanel {
         this.tabPane.getSelectionModel().select(0);
     }
 
-    class StudentInfoListViewCell extends ListCell<StudentInfo> {
+    public static class StudentInfoListViewCell extends ListCell<StudentInfo> {
 
         @Override
         protected void updateItem(StudentInfo studentInfo, boolean empty) {
@@ -49,21 +50,6 @@ public class LessonDataPanel extends DataPanel {
                 setText(null);
             } else {
                 setGraphic(new StudentInfoCard(studentInfo, getIndex() + 1).getRoot());
-            }
-        }
-    }
-
-    class QuestionListViewCell extends ListCell<Question> {
-
-        @Override
-        protected void updateItem(Question question, boolean empty) {
-            super.updateItem(question, empty);
-
-            if (empty || question == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new QuestionCard(question, getIndex() + 1).getRoot());
             }
         }
     }

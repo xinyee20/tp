@@ -24,7 +24,8 @@ public class QuestionContainsKeywordPredicate implements Predicate<Question> {
     @Override
     public boolean test(Question question) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsCharSequenceIgnoreCase(question.getDescription(), keyword));
+                .anyMatch(keyword -> StringUtil
+                        .containsCharSequenceIgnoreCase(question.getDescription().description, keyword));
 
     }
 

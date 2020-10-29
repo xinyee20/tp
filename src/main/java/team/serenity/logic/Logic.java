@@ -8,10 +8,11 @@ import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.StudentInfo;
+
 
 /**
  * API of the Logic component.
@@ -64,8 +65,27 @@ public interface Logic {
     ObservableList<StudentInfo> getStudentInfoList();
 
     /**
+     * Returns all student info across all tutorial groups.
+     */
+    ObservableList<StudentInfo> getAllStudentInfo();
+
+    /**
      * Returns an unmodifiable view of the list of questions from a group-lesson.
      */
     ObservableList<Question> getFilteredQuestionList();
+
+    /**
+     * Returns true if there is at least 1 existing group. Else returns false.
+     *
+     * @return true if there is at least 1 existing group.
+     */
+    boolean hasGroup();
+
+    /**
+     * Returns a list of existing groups.
+     *
+     * @return a list of existing groups.
+     */
+    ObservableList<Group> getGroups();
 
 }

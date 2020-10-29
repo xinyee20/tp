@@ -30,6 +30,12 @@ class JsonQuestionStorageTest {
     public Path testFolder;
 
     @Test
+    public void getQuestionManagerStorageFilePath() {
+        JsonQuestionStorage questionStorage = new JsonQuestionStorage(TEST_DATA_FOLDER);
+        assertEquals(TEST_DATA_FOLDER, questionStorage.getQuestionManagerStorageFilePath());
+    }
+
+    @Test
     public void readQuestionManager_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readQuestionManager(null));
     }
@@ -78,7 +84,7 @@ class JsonQuestionStorageTest {
         assertEquals(original, new QuestionManager(readBack));
 
         //Modify data, overwrite exiting file and read back
-        Question newQuestion = new QuestionBuilder(QUESTION_B).withGroup("G10").withLesson("1-1").build();
+        Question newQuestion = new QuestionBuilder(QUESTION_B).withGroupName("G10").withLessonName("1-1").build();
         original.addQuestion(newQuestion);
         original.deleteQuestion(QUESTION_A);
         jsonQuestionStorage.saveQuestionManager(original, filePath);
@@ -86,7 +92,7 @@ class JsonQuestionStorageTest {
         assertEquals(original, new QuestionManager(readBack));
 
         // Save and read without specifying file path
-        Question newQuestion1 = new QuestionBuilder(QUESTION_C).withGroup("G10").withLesson("1-1").build();
+        Question newQuestion1 = new QuestionBuilder(QUESTION_C).withGroupName("G10").withLessonName("1-1").build();
         original.addQuestion(newQuestion1);
         jsonQuestionStorage.saveQuestionManager(original);
         readBack = jsonQuestionStorage.readQuestionManager().get();

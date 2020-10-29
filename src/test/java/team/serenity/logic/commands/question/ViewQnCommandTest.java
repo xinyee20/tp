@@ -1,7 +1,6 @@
 package team.serenity.logic.commands.question;
 
-
-import static team.serenity.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static team.serenity.logic.commands.CommandTestUtil.assertQuestionViewsQuestionTabCommandSuccess;
 import static team.serenity.logic.commands.CommandTestUtil.showQuestionAtIndex;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
@@ -11,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import team.serenity.model.Model;
 import team.serenity.model.ModelManager;
-import team.serenity.model.Serenity;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.UserPrefs;
 
 /**
@@ -30,13 +29,15 @@ class ViewQnCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ViewQnCommand(), this.model, ViewQnCommand.MESSAGE_SUCCESS, this.expectedModel);
+        assertQuestionViewsQuestionTabCommandSuccess(new ViewQnCommand(), this.model,
+                ViewQnCommand.MESSAGE_SUCCESS, this.expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showQuestionAtIndex(this.model, INDEX_FIRST);
-        assertCommandSuccess(new ViewQnCommand(), this.model, ViewQnCommand.MESSAGE_SUCCESS, this.expectedModel);
+        assertQuestionViewsQuestionTabCommandSuccess(new ViewQnCommand(), this.model,
+                ViewQnCommand.MESSAGE_SUCCESS, this.expectedModel);
     }
 
 }

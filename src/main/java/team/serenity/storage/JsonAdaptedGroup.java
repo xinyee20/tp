@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.Lesson;
-import team.serenity.model.group.Student;
-import team.serenity.model.group.StudentInfo;
-import team.serenity.model.group.UniqueLessonList;
-import team.serenity.model.group.UniqueStudentInfoList;
-import team.serenity.model.group.UniqueStudentList;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.UniqueLessonList;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.UniqueStudentList;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -21,7 +23,7 @@ class JsonAdaptedGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
-    private final String name;
+    private final String groupName;
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
@@ -29,13 +31,20 @@ class JsonAdaptedGroup {
      * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
-        this.name = source.getName();
+        this.groupName = source.getGroupName().toString();
         this.students.addAll(source.getStudents().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedStudent::new)
             .collect(Collectors.toList()));
         this.lessons.addAll(source.getSortedLessons().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedLesson::new)
             .collect(Collectors.toList()));
+    }
+
+    @JsonCreator
+    public JsonAdaptedGroup(@JsonProperty("groupName") String name,
+        @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+        this.groupName = name;
+        this.lessons.addAll(lessons);
     }
 
     /**
@@ -45,22 +54,42 @@ class JsonAdaptedGroup {
      */
     public Group toModelType() throws IllegalValueException {
 
-        String modelName = this.name;
-
-        final List<Student> groupStudents = new ArrayList<>();
-        for (JsonAdaptedStudent groupStudent : this.students) {
-            groupStudents.add(groupStudent.toModelType());
+        if (this.groupName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                GroupName.class.getSimpleName()));
         }
+
+        if (this.students == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                UniqueStudentList.class.getSimpleName()));
+        }
+
+        if (this.lessons == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                UniqueLessonList.class.getSimpleName()));
+        }
+
+        if (!GroupName.isValidName(this.groupName)) {
+            throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+
+        String modelName = this.groupName;
+        final List<Student> groupStudents = new ArrayList<>();
+
+        for (JsonAdaptedStudent student : this.students) {
+            Student studentModel = student.toModelType();
+            groupStudents.add(student.toModelType());
+        }
+
         final UniqueList<Student> modelStudents = new UniqueStudentList();
         modelStudents.setElementsWithList(new ArrayList<>(groupStudents));
 
-        final UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
-
         final List<Lesson> groupLessons = new ArrayList<>();
         for (JsonAdaptedLesson groupLesson : this.lessons) {
-            Lesson lessonItem = new Lesson(groupLesson.getName(), studentsInfo);
+            Lesson lessonItem = groupLesson.toModelType();
             groupLessons.add(lessonItem);
         }
+
         final UniqueList<Lesson> modelLessons = new UniqueLessonList();
         modelLessons.setElementsWithList(new ArrayList<>(groupLessons));
 
