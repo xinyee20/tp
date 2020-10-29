@@ -971,6 +971,8 @@ Command | Example
 ------------ | -------------
 **Add question** <br> `addqn qn/QUESTION` | `addqn qn/What is the deadline for the report?`
 **Delete question** <br> `delqn INDEX` | `delqn 5`
+**Edit question** <br> `editqn INDEX [grp/GROUP_NAME] [lsn/LESSON_NAME] [qn/QUESTION]` | `editqn 2 qn/What is the deadline for the report?`
+**Find question** <br> `findqn KEYWORD [MORE_KEYWORDS]...` | `findqn deadline`
 
 ### 6.5. Utility viewing commands 
 
