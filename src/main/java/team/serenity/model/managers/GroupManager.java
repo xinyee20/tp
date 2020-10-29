@@ -107,6 +107,18 @@ public class GroupManager implements ReadOnlyGroupManager {
         return false;
     }
 
+    /**
+     * Removes Student from a specified Group
+     */
+    public void deleteStudentFromGroup(Group group, Student student) {
+        for (Group existingGroup: listOfGroups) {
+            if (existingGroup.equals(group)) {
+                UniqueList<Student> students = existingGroup.getStudents();
+                students.remove(student);
+            }
+        }
+    }
+
     public Stream<Group> getStream() {
         return this.listOfGroups.stream();
     }

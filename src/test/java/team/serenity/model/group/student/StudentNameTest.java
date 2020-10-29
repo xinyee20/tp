@@ -41,7 +41,9 @@ public class StudentNameTest {
         StudentName john = new StudentName("John");
         assertTrue(john.equals(john)); //same object
         assertTrue(john.equals(new StudentName("John"))); //different object, same contents
+        assertTrue(john.equals(new StudentName("JOHN"))); //different object, same name in caps
 
+        assertFalse(john.equals(new StudentName("John "))); //different object, same name with space
         assertFalse(john.equals(null));
         assertFalse(john.equals(new StudentName("Sally"))); //different object, different contents
     }

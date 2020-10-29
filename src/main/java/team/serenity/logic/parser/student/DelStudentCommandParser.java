@@ -50,7 +50,7 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
 
             //if id or group keyword is more than 1, or if student name has more than 10 letters, throw exception
             boolean matchesGrp = grpKeywordArray.length == 1;
-            boolean matchesId = studentIdArray.length == 1 && studentIdArray[0].length() == 8;
+            boolean matchesId = studentIdArray.length == 1 && studentIdArray[0].length() == 9;
             boolean matchesStudentName = studentNameArray.length <= 10;
             if (!matchesGrp || !matchesId || !matchesStudentName) {
                 throw this.deleteStudentCommandParserException;

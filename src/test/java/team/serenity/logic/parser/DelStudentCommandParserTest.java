@@ -37,7 +37,7 @@ public class DelStudentCommandParserTest {
     @Test
     public void parse_successfulArguments() {
         String studentName = "John";
-        String studentId = "e1234567";
+        String studentId = "A0123456U";
         String groupName = "G04";
         String args = " " + PREFIX_GRP + groupName + " " + PREFIX_NAME
             + studentName + " " + PREFIX_MATRIC + studentId;
