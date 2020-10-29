@@ -25,7 +25,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 The Architecture Diagram given in Figure 1 below explains the high-level design of Serenity.
 
 ![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
-Figure 3.1.1 Architecture Diagram of Serenity
+
+<p align="center">Figure 3.1.1 Architecture Diagram of Serenity</p>
 
 > :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder. 
 
@@ -49,7 +50,8 @@ Component | Description
 The Sequence Diagram in Figure 2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
 
 ![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
-Figure 3.1.2 Interactions between components for the `delgrp grp/G04` command
+
+<p align="center">Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command</p>
 
 The sections below give more details of each component.
 
@@ -61,7 +63,8 @@ This segment will explain the structure and responsibilities of the Ui component
 #### **3.2.1. Structure**
 
 ![Figure 3.2.1](images/UiClassDiagram.png)
-Figure 3.2.1 Structure of the `Ui` component
+
+<p align="center">Figure 3.2.1 Structure of the `Ui` component</p>
 
 The Ui component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox` as shown in the Class Diagram above. The MainWindow and its parts inherit from the abstract UiPart class.
  
@@ -84,7 +87,8 @@ This segment will explain the structure and responsibilities of the `Logic`compo
 #### 3.3.1 Structure
 
 ![Figure 3.3.1 Structure of `Logic` component](images/LogicClassDiagram.png)
-<span style="text-align:center">Figure 3.3.1 Strucutre of `Logic` component</span>
+
+<p align="center">Figure 3.3.1 Strucutre of `Logic` component</p>
 
 ### **3.4 Model Component**
 
