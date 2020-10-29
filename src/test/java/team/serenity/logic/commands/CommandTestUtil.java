@@ -16,9 +16,11 @@ import java.util.List;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.exceptions.CommandException;
+import team.serenity.logic.commands.question.EditQnCommand;
 import team.serenity.model.Model;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
+import team.serenity.testutil.question.EditQuestionDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -30,8 +32,8 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_NAME_B = "G05";
     public static final String VALID_PATH_A = "CS2101_G04.xlsx";
     public static final String VALID_PATH_B = "CS2101_G05.xlsx";
-    public static final String VALID_LSN_A = "2-2";
-    public static final String VALID_LSN_B = "3-1";
+    public static final String VALID_LSN_A = "1-1";
+    public static final String VALID_LSN_B = "1-2";
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
     public static final String VALID_QN_DESC_B = "When is the consultation held?";
     public static final String VALID_STUDENT_NAME_A = "Aaron";
@@ -68,6 +70,16 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_A;
+    public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_B;
+
+    static {
+        EDITED_QN_A = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_A)
+                .withLessonName(VALID_LSN_A).withDescription(VALID_QN_DESC_A).build();
+        EDITED_QN_B = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_B)
+                .withLessonName(VALID_LSN_B).withDescription(VALID_QN_DESC_B).build();
+    }
+
     /**
      * Executes the given {@code command}, confirms that <br> - the returned {@link CommandResult} matches {@code
      * expectedCommandResult} <br> - the {@code actualModel} matches {@code expectedModel}
@@ -99,7 +111,7 @@ public class CommandTestUtil {
      * selected person in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
-        // TODO
+        // TODO: assertCommandFailure
         /*
         FOR REFERENCE (AB3)
         // we are unable to defensively copy the model for comparison later, so we can
@@ -117,8 +129,20 @@ public class CommandTestUtil {
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
      * {@code expectedMessage}.
      */
-    public static void assertAddQnCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
+    public static void assertQuestionViewsQuestionTabCommandSuccess(Command command, Model actualModel,
+                                                                    String expectedMessage, Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false,
+                false, false, false, false, false,
+                false, false, true);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
+     * {@code expectedMessage}.
+     */
+    public static void assertQuestionCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                                    Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -128,7 +152,7 @@ public class CommandTestUtil {
      * CommandException message matches {@code expectedMessage} <br> - the question manager, filtered question list and
      * selected question in {@code actualModel} remain unchanged
      */
-    public static void assertAddQnCommandFailure(Command command, Model actualModel, String expectedMessage) {
+    public static void assertQuestionCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         QuestionManager expectedQuestionManager = new QuestionManager(actualModel.getQuestionManager());

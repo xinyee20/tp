@@ -18,6 +18,7 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
@@ -258,6 +259,11 @@ public class ModelManager implements Model {
     @Override
     public UniqueList<Lesson> getListOfLessonsFromGroup(Group group) {
         return this.lessonManager.getListOfLessonsFromGroup(group.getGroupName());
+    }
+
+    @Override
+    public boolean ifTargetGroupHasLessonName(GroupName groupName, LessonName lessonName) {
+        return this.lessonManager.ifTargetGroupHasLessonName(groupName, lessonName);
     }
 
     @Override
