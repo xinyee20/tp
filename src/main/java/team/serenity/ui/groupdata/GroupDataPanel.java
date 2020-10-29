@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
@@ -52,10 +53,16 @@ public class GroupDataPanel extends DataPanel {
      */
     public GroupDataPanel(ObservableList<Lesson> lessonList, ObservableList<Student> studentList) {
         super(FXML);
+        String noStudentsMessage = "There are no students here. You may use addstudent command to add a student";
+        String noLessonsMessage = "There are no lessons here. Yoou may use addlsn command to add a lesson";
         this.studentListView.setItems(studentList);
         this.studentListView.setCellFactory(listView -> new StudentListViewCell());
+        this.studentListView.setPlaceholder(new Label(noStudentsMessage));
         this.lessonListView.setItems(lessonList);
         this.lessonListView.setCellFactory(listView -> new LessonListViewCell());
+        this.lessonListView.setPlaceholder(new Label(noLessonsMessage));
+        this.attendanceTableView.setPlaceholder(new Label(noStudentsMessage));
+        this.participationTableView.setPlaceholder(new Label(noStudentsMessage));
         populateTable(lessonList, studentList);
     }
 
