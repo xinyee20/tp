@@ -1,11 +1,15 @@
 package team.serenity.model.managers;
 
 import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import team.serenity.model.group.Group;
 import team.serenity.model.group.exceptions.DuplicateQuestionException;
 import team.serenity.model.group.exceptions.QuestionNotFoundException;
 import team.serenity.model.group.question.Question;
@@ -108,6 +112,20 @@ public class QuestionManager implements ReadOnlyQuestionManager {
             throw new QuestionNotFoundException();
         }
         this.listOfQuestions.remove(toDelete);
+    }
+
+    /**
+     * Delete all questions from group.
+     */
+    public void deleteAllQuestionsFromGroup(Group group) {
+        requireNonNull(group);
+        Iterator<Question> iterator = listOfQuestions.iterator();
+        while (iterator.hasNext()) {
+            Question question = iterator.next();
+            if(question.getGroupName().toString().equals(group.getGroupName().toString())) {
+                iterator.remove();
+            }
+        }
     }
 
     // Util Methods

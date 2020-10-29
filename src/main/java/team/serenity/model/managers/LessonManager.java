@@ -1,5 +1,6 @@
 package team.serenity.model.managers;
 
+import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -138,10 +139,19 @@ public class LessonManager implements ReadOnlyLessonManager {
     }
 
     /**
-     * Adds a specified {@code UniqueList<Lesson>} to a {@code Group}.
-     * @param group
-     * @param lessons
+     * Delete all lessons in the group.
      */
+    public void deleteAllLessonsFromGroup(Group group) {
+        requireNonNull(group);
+        this.mapToListOfLessons.remove(group.getGroupName());
+    }
+
+
+        /**
+         * Adds a specified {@code UniqueList<Lesson>} to a {@code Group}.
+         * @param group
+         * @param lessons
+         */
     public void addListOfLessonsToGroup(Group group, UniqueList<Lesson> lessons) {
         this.mapToListOfLessons.put(group.getGroupName(), lessons);
     }
