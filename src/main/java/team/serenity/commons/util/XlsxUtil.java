@@ -339,41 +339,42 @@ public class XlsxUtil {
         writeDataToXlsx(data, outputFileName, group);
     }
 
-    private void writeDataToXlsx(List<List<Object>> data, String outputFileName, Group group) {
-        Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
+    private void addTitle(Cell titleCell, String groupName) {
+        String title = String.format("CS2101 %s Attendance Sheet", groupName);
+        titleCell.setCellValue(title);
+    }
 
+    private int skipOneRow(int rowCount) {
+        return rowCount + 2;
+    }
+
+    private void addHeader(int columnCount, Row headerRow, String headerName) {
+        Cell headerCell = headerRow.createCell(columnCount);
+        headerCell.setCellValue(headerName);
+    }
+
+    private void writeDataToXlsx(List<List<Object>> data, String outputFileName, Group group) {
         int rowCount = 0;
         int columnCount = 0;
 
         Row row = sheet.createRow(rowCount);
         Cell cell = row.createCell(columnCount);
-        String title = String.format("CS2101 %s Attendance Sheet", group.getGroupName().toString());
-        cell.setCellValue(title);
 
-        rowCount++;
-
-        rowCount++;
+        addTitle(cell, group.getGroupName().toString());
+        rowCount = skipOneRow(rowCount);
 
         row = sheet.createRow(rowCount);
 
-        String nameHeader = "Name";
-        cell = row.createCell(columnCount);
-        cell.setCellValue(nameHeader);
-
+        addHeader(columnCount, row, "Name");
         columnCount++;
-
-        String studentNumberHeader = "Student Number";
-        cell = row.createCell(columnCount);
-        cell.setCellValue(studentNumberHeader);
-
+        addHeader(columnCount, row, "Student Number");
         columnCount++;
-
         for (Lesson lesson : group.getLessons()) {
-            String lessonHeader = lesson.getLessonName().toString();
-            cell = row.createCell(columnCount);
-            cell.setCellValue(lessonHeader);
+            addHeader(columnCount, row, lesson.getLessonName().toString());
             columnCount++;
         }
+
+        Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
 
         for (Object[] aBook : bookData) {
             row = sheet.createRow(++rowCount);
