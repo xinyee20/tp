@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private TitleDisplay titleDisplay;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private ButtonBar buttonBar;
+    private SideBar sideBar;
 
     // Ui parts relating to serenity
     private DataPanel serenityDataPanel;
@@ -56,7 +57,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private VBox buttonPanelPlaceholder;
+    private ScrollPane sidebarPlaceholder;
 
     @FXML
     private StackPane titleDisplayPlaceholder;
@@ -126,8 +127,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         this.commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        this.buttonBar = new ButtonBar();
-        this.buttonPanelPlaceholder.getChildren().add(this.buttonBar);
+        this.sideBar = new SideBar();
+        this.sidebarPlaceholder.setContent(this.sideBar.getRoot());
     }
 
     /**
@@ -239,9 +240,9 @@ public class MainWindow extends UiPart<Stage> {
         imageView.setPreserveRatio(true);
 
         button.setGraphic(imageView);
-        VBox.setMargin(buttonPanelPlaceholder, new Insets(10));
+        VBox.setMargin(sidebarPlaceholder, new Insets(10));
         button.setOnAction(event);
-        buttonBar.addButton(button);
+        sideBar.addButton(button);
     }
 
     public void setUpAttButton() {
@@ -293,10 +294,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDelGrp(String groupName) {
-        toggleHomeView();
-        for (Node groupButton : buttonBar.getChildren()) {
+        for (Node groupButton : this.sideBar.getButtons()) {
             if (groupButton.getId().equals(groupName)) {
-                buttonBar.deleteButton(groupButton);
+                sideBar.deleteButton(groupButton);
                 break;
             }
         }

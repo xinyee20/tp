@@ -41,7 +41,7 @@ public class QuestionCard extends UiPart<Region> {
         this.question = question;
         this.id.setText(displayedIndex + ". ");
         this.questionDescription.setText(question.getDescription().description);
-        this.questionDetails.setText(String.format("Asked in tutorial lesson %s-%s",
+        this.questionDetails.setText(String.format("Asked in tutorial lesson %s %s",
             question.getGroupName(), question.getLessonName()));
     }
 

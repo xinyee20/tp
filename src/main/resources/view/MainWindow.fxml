@@ -58,15 +58,7 @@
            </MenuBar>
             </top>
             <left>
-               <ScrollPane prefWidth="90.0" BorderPane.alignment="CENTER">
-                 <content>
-                     <VBox fx:id="buttonPanelPlaceholder" alignment="CENTER" fillWidth="false" prefWidth="90.0" spacing="10">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                     </VBox>
-                 </content>
-               </ScrollPane>
+               <ScrollPane fx:id="sidebarPlaceholder" prefWidth="85.0" BorderPane.alignment="CENTER" />
             </left>
          </BorderPane>
     </Scene>
