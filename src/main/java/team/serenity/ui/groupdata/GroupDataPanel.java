@@ -137,7 +137,14 @@ public class GroupDataPanel extends DataPanel {
      */
     public void changeParticipationTab() {
         selectionModel.select(3);
-        attendanceTableView.refresh();
+        participationTableView.refresh();
+    }
+
+    /**
+     * refresh table everytime a change is done to group / lesson
+     */
+    public void refreshTables(ObservableList<Lesson> lessonList, ObservableList<Student> studentList) {
+        populateTable(lessonList, studentList);
     }
 
     class LessonListViewCell extends ListCell<Lesson> {

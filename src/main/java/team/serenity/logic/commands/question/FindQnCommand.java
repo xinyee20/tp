@@ -35,8 +35,8 @@ public class FindQnCommand extends Command {
         return new CommandResult(String.format(MESSAGE_QUESTIONS_LISTED_OVERVIEW,
             model.getFilteredQuestionList().size(), "questions")
             + String.format("\nUse the \"%s\" command to show all questions", ViewQnCommand.COMMAND_WORD),
-                false, false, false, false, false, false,
-                false, false, false, true);
+            CommandResult.UiAction.VIEW_QN
+        );
     }
 
     @Override
