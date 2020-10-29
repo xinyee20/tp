@@ -285,7 +285,7 @@ The sequence diagram below documents the execution.
 <p align="center">
 <img src="images/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
 
-<p align="center"><i>Figure 9. Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
+<p align="center"><i>Figure 4.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
 #### **4.2.3 Design Consideration**
 
