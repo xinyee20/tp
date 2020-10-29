@@ -3,7 +3,6 @@ package team.serenity.commons.util;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -265,10 +264,10 @@ public class XlsxUtil {
             GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
             for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
                 Student student = studentInfo.getStudent();
-                Optional<List<Integer>> attendanceList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
-                List<Integer> newAttendanceList = attendanceList.isEmpty() ? new ArrayList<>() : attendanceList.get();
-                newAttendanceList.add(studentInfo.getAttendance().getIntegerAttendance());
-                studentDetailsMap.put(student.getStudentNo(), newAttendanceList);
+                Optional<List<Integer>> attList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
+                List<Integer> newAttList = attList.isEmpty() ? new ArrayList<>() : attList.get();
+                newAttList.add(studentInfo.getAttendance().getIntegerAttendance());
+                studentDetailsMap.put(student.getStudentNo(), newAttList);
             }
         }
 
@@ -301,7 +300,7 @@ public class XlsxUtil {
     }
 
     private void generateData(List<List<Object>> data, UniqueList<Student> studentList,
-        Map<StudentNumber,List<Integer>> studentDetailsMap) {
+        Map<StudentNumber, List<Integer>> studentDetailsMap) {
         for (Student student : studentList) {
             List<Object> studentDetails = new ArrayList<>();
             studentDetails.add(student.getStudentName().toString());
