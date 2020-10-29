@@ -77,7 +77,7 @@ public class XlsxUtil {
      * Reads XLSX file that the tutor downloads from LUMINUS.
      * The XLSX file stores a list of {@code Student} that are in a tutorial group.
      *
-     * @return
+     * @return a set of students.
      */
     public Set<Student> readStudentsFromXlsx() {
         Set<Student> students = new HashSet<>();
@@ -85,9 +85,8 @@ public class XlsxUtil {
         skipRowsToHeaderRow(rowIterator);
         readDetailsOfStudents(rowIterator, students);
         List<Student> studentList = new ArrayList<>(students);
-        Collections.sort(studentList, new StudentSorter());
-        Set<Student> newStudents = new LinkedHashSet<>(studentList);
-        return newStudents;
+        studentList.sort(new StudentSorter());
+        return new LinkedHashSet<>(studentList);
     }
 
     private Row skipRowsToHeaderRow(Iterator<Row> rowIterator) {
@@ -135,16 +134,12 @@ public class XlsxUtil {
         Row headerRow = skipRowsToHeaderRow(rowIterator);
         readDetailsOfLessons(headerRow, lessons, studentsInfo);
         List<Lesson> lessonList = new ArrayList<>(lessons);
-        Collections.sort(lessonList, new LessonSorter());
-        Set<Lesson> newLessons = new LinkedHashSet<>(lessonList);
-        return newLessons;
+        lessonList.sort(new LessonSorter());
+        return new LinkedHashSet<>(lessonList);
     }
 
     private void readDetailsOfLessons(Row headerRow, Set<Lesson> lessons, Set<StudentInfo> studentsInfo) {
-        Iterator<Cell> cellIterator = headerRow.iterator();
-        while (cellIterator.hasNext()) {
-            Cell cell = cellIterator.next();
-
+        for (Cell cell : headerRow) {
             if (this.formatter.formatCellValue(cell).startsWith("T")) {
                 String lessonName = this.formatter.formatCellValue(cell);
                 String formattedLessonName = formatLessonName(lessonName);
@@ -175,12 +170,11 @@ public class XlsxUtil {
             studentsInfo.add(new StudentInfo(student));
         }
         List<StudentInfo> studentInfoList = new ArrayList<>(studentsInfo);
-        Collections.sort(studentInfoList, new StudentInfoSorter());
-        Set<StudentInfo> newStudentsInfo = new LinkedHashSet<>(studentInfoList);
-        return newStudentsInfo;
+        studentInfoList.sort(new StudentInfoSorter());
+        return new LinkedHashSet<>(studentInfoList);
     }
 
-    private class LessonSorter implements Comparator<Lesson> {
+    private static class LessonSorter implements Comparator<Lesson> {
 
         @Override
         public int compare(Lesson lessonOne, Lesson lessonTwo) {
@@ -190,8 +184,8 @@ public class XlsxUtil {
             int lesTwoLen = lesTwo.length();
             int minLength = Math.min(lesOneLen, lesTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int lesOneChar = (int) lesOne.charAt(i);
-                int lesTwoChar = (int) lesTwo.charAt(i);
+                int lesOneChar = lesOne.charAt(i);
+                int lesTwoChar = lesTwo.charAt(i);
 
                 if (lesOneChar != lesTwoChar) {
                     return lesOneChar - lesTwoChar;
@@ -206,7 +200,7 @@ public class XlsxUtil {
         }
     }
 
-    private class StudentSorter implements Comparator<Student> {
+    private static class StudentSorter implements Comparator<Student> {
 
         @Override
         public int compare(Student studentOne, Student studentTwo) {
@@ -216,8 +210,8 @@ public class XlsxUtil {
             int sTwoLen = sTwo.length();
             int minLength = Math.min(sOneLen, sTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int lesOneChar = (int) sOne.charAt(i);
-                int lesTwoChar = (int) sTwo.charAt(i);
+                int lesOneChar = sOne.charAt(i);
+                int lesTwoChar = sTwo.charAt(i);
 
                 if (lesOneChar != lesTwoChar) {
                     return lesOneChar - lesTwoChar;
@@ -232,7 +226,7 @@ public class XlsxUtil {
         }
     }
 
-    private class StudentInfoSorter implements Comparator<StudentInfo> {
+    private static class StudentInfoSorter implements Comparator<StudentInfo> {
 
         @Override
         public int compare(StudentInfo studentInfoOne, StudentInfo studentInfoTwo) {
@@ -242,8 +236,8 @@ public class XlsxUtil {
             int infoTwoLen = infoTwo.length();
             int minLength = Math.min(infoOneLen, infoTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int infoOneChar = (int) infoOne.charAt(i);
-                int infoTwoChar = (int) infoTwo.charAt(i);
+                int infoOneChar = infoOne.charAt(i);
+                int infoTwoChar = infoTwo.charAt(i);
 
                 if (infoOneChar != infoTwoChar) {
                     return infoOneChar - infoTwoChar;
