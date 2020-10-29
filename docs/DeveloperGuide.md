@@ -13,7 +13,7 @@ title: Developer Guide
 
 Serenity is a desktop lesson management application made for CS2101 tutors who want to manage and reduce administrative work.
 It focuses on the <span style="color:purple"><i>Command Line Interface (CLI)</i></span>
-while providing users with a simple and clean <span style="color:purple"><i>Graphical User Interface (GUI)</i></span>.
+while providing users with a simple and clean <span style="color:purple"><a href="#appendix-e-glossary"><i>Graphical User Interface (GUI)</i></a></span>.
 Thus, the main interaction with Serenity will be done through commands.
 
 Serenity allows tutors to keep track of their lessons administrative work in a single, 
