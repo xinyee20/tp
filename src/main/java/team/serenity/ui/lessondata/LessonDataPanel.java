@@ -4,10 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import team.serenity.commons.core.LogsCenter;
+import team.serenity.commons.core.Messages;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.ui.DataPanel;
@@ -34,6 +36,7 @@ public class LessonDataPanel extends DataPanel {
         super(FXML);
         this.studentInfoListView.setItems(studentInfoList);
         this.studentInfoListView.setCellFactory(listView -> new StudentInfoListViewCell());
+        this.studentInfoListView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));
         this.questionListView.setItems(questionList);
         this.questionListView.setCellFactory(listView -> new QuestionListViewCell());
         this.tabPane.getSelectionModel().select(0);

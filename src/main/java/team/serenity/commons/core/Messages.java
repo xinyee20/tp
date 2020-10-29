@@ -30,4 +30,10 @@ public class Messages {
     public static final String MESSAGE_QUESTIONS_LISTED_OVERVIEW = "%1$d %2$s listed!";
     public static final String MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX = "The question index provided is invalid.";
 
+    public static final String MESSAGE_NO_FLAGGED_ATTENDANCE = "There is no flagged attendance to follow up with.";
+    public static final String MESSAGE_NO_PENDING_QUESTIONS = "There are no pending questions to answer.";
+    public static final String MESSAGE_NO_STUDENTS =
+        "There are no students in this group. You may use addstudent command to add a student.";
+    public static final String MESSAGE_NO_LESSONS =
+        "There are no lessons in this group. Yoo may use addlsn command to add a lesson.";
 }

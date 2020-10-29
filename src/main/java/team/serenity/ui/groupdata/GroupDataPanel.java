@@ -16,6 +16,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import team.serenity.commons.core.LogsCenter;
+import team.serenity.commons.core.Messages;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
@@ -53,16 +54,14 @@ public class GroupDataPanel extends DataPanel {
      */
     public GroupDataPanel(ObservableList<Lesson> lessonList, ObservableList<Student> studentList) {
         super(FXML);
-        String noStudentsMessage = "There are no students here. You may use addstudent command to add a student";
-        String noLessonsMessage = "There are no lessons here. Yoou may use addlsn command to add a lesson";
         this.studentListView.setItems(studentList);
         this.studentListView.setCellFactory(listView -> new StudentListViewCell());
-        this.studentListView.setPlaceholder(new Label(noStudentsMessage));
+        this.studentListView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));
         this.lessonListView.setItems(lessonList);
         this.lessonListView.setCellFactory(listView -> new LessonListViewCell());
-        this.lessonListView.setPlaceholder(new Label(noLessonsMessage));
-        this.attendanceTableView.setPlaceholder(new Label(noStudentsMessage));
-        this.participationTableView.setPlaceholder(new Label(noStudentsMessage));
+        this.lessonListView.setPlaceholder(new Label(Messages.MESSAGE_NO_LESSONS));
+        this.attendanceTableView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));
+        this.participationTableView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));
         populateTable(lessonList, studentList);
     }
 

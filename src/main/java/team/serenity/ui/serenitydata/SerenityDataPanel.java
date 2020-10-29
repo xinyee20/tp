@@ -10,6 +10,7 @@ import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import team.serenity.commons.core.LogsCenter;
+import team.serenity.commons.core.Messages;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.ui.DataPanel;
@@ -37,14 +38,12 @@ public class SerenityDataPanel extends DataPanel {
     public SerenityDataPanel(ObservableList<StudentInfo> studentInfo, ObservableList<Question> questionList) {
         super(FXML);
         studentInfo = studentInfo.filtered(info -> info.getAttendance().isFlagged());
-        String noFlaggedAttendanceMessage = "Great! You have no flagged attendance to follow up with";
-        String noPendingQuestionsMessage = "Great! You have no pending questions to answer";
         this.flaggedAttendanceListView.setItems(studentInfo);
         this.flaggedAttendanceListView.setCellFactory(listView -> new StudentInfoListViewCell());
-        this.flaggedAttendanceListView.setPlaceholder(new Label(noFlaggedAttendanceMessage));
+        this.flaggedAttendanceListView.setPlaceholder(new Label(Messages.MESSAGE_NO_FLAGGED_ATTENDANCE));
         this.questionListView.setItems(questionList);
         this.questionListView.setCellFactory(listView -> new QuestionListViewCell());
-        this.questionListView.setPlaceholder(new Label(noPendingQuestionsMessage));
+        this.questionListView.setPlaceholder(new Label(Messages.MESSAGE_NO_PENDING_QUESTIONS));
     }
 
     /**
