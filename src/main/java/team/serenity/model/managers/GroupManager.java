@@ -67,8 +67,8 @@ public class GroupManager implements ReadOnlyGroupManager {
 
     // Group-level operations
 
-    public boolean hasAGroup() {
-        return this.listOfGroups.size() > 0;
+    public boolean isEmpty() {
+        return this.listOfGroups.size() == 0;
     }
 
     /**

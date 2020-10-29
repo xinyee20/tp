@@ -99,11 +99,11 @@ public class CommandResult {
         return this.exit;
     }
 
-    public boolean isToggleLsnView() {
+    public boolean isViewLsn() {
         return this.isViewLsn;
     }
 
-    public boolean isToggleGrpView() {
+    public boolean isViewGrp() {
         return this.isViewGrp;
     }
 

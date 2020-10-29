@@ -185,8 +185,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAGroup() {
-        return groupManager.hasAGroup();
+    public boolean isEmpty() {
+        return groupManager.isEmpty();
     }
 
     @Override
@@ -235,7 +235,7 @@ public class ModelManager implements Model {
     public void exportParticipation(Group group) {
         requireNonNull(group);
         XlsxUtil util = new XlsxUtil();
-        util.writeParticipationToXlsx(group, this.studentInfoManager.getStudentInfoMap());
+        util.writeScoreToXlsx(group, this.studentInfoManager.getStudentInfoMap());
     }
 
     @Override
