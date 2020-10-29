@@ -241,7 +241,7 @@ Tutor | Export participation scores of each class as a XLSX file | Submit it as 
 Tutor | Add a question to the question list | Be reminded to answer the question after the lesson ends
 Tutor | Remove a question from the question list | Prevent the list from becoming too cluttered
 Tutor | View the list of questions for each class | Identify the questions that I have not answered in class
-Tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class
+Forgetful Tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class
 Tutor | Import data of my students | Avoid manually entering the data
 Tutor | Access the list of commands easily on the software without referring to the user guide | Operate the software easily while teaching in class
 Tutor | Use an app that does not take up too much screen space | Continue to teach the content effectively
