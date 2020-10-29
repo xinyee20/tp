@@ -99,11 +99,8 @@ public class MarkPresentCommand extends Command {
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        //      Optional<UniqueList<StudentInfo>> studentInfoList = model.
-        //      getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
-        //      UniqueList<StudentInfo> uniqueStudentInfoList = studentInfoList.get();
-        //      ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
-        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        UniqueList<StudentInfo> uniqueStudentInfoList =
+                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         if (!this.isWholeClass) {
