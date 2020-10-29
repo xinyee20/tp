@@ -30,6 +30,11 @@ public interface Model {
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
+     * {@code Predicate} that always evaluate to true.
+     */
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
+
+    /**
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Question> PREDICATE_SHOW_ALL_QUESTIONS = unused -> true;
