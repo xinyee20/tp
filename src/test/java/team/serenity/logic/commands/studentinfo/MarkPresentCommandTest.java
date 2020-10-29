@@ -3,6 +3,8 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
+import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
@@ -60,6 +62,24 @@ class MarkPresentCommandTest {
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongNumber);
 
         assertThrows(CommandException.class, String.format(MESSAGE_STUDENT_NOT_FOUND, wrongNumber), () -> markPresentCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_notInGroup_throwsCommandException() {
+        ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
+        Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
+        MarkPresentCommand markPresentCommand = new MarkPresentCommand(toMarkPresent);
+
+        assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> markPresentCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_notInLesson_throwsCommandException() {
+        ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
+        Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
+        MarkPresentCommand markPresentCommand = new MarkPresentCommand(toMarkPresent);
+
+        assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_LESSON, () -> markPresentCommand.execute(modelStub));
     }
 
     @Test
@@ -217,4 +237,43 @@ class ModelStubWithIndexAbsent extends ModelStub {
         return;
     }
 
+}
+
+/**
+ * A Model stub containing no group
+ */
+class ModelStubWithNoGroup extends ModelStub {
+
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        List<Group> grpList = new ArrayList<>();
+        UniqueList<Group> groupUniqueList = new UniqueGroupList();
+        groupUniqueList.setElementsWithList(grpList);
+        return groupUniqueList.asUnmodifiableObservableList();
+    }
+}
+
+/**
+ * A Model stub containing no lesson
+ */
+class ModelStubWithNoLesson extends ModelStub {
+    Group uniqueGroup;
+
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        List<Group> grpList = new ArrayList<>();
+        this.uniqueGroup = new GroupBuilder().build();
+        grpList.add(uniqueGroup);
+        UniqueList<Group> groupUniqueList = new UniqueGroupList();
+        groupUniqueList.setElementsWithList(grpList);
+        return groupUniqueList.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        List<Lesson> lsnList = new ArrayList<>();
+        UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
+        lessonUniqueList.setElementsWithList(lsnList);
+        return lessonUniqueList.asUnmodifiableObservableList();
+    }
 }
