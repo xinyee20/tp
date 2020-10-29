@@ -22,8 +22,12 @@ import team.serenity.commons.core.LogsCenter;
 import team.serenity.logic.Logic;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
+import team.serenity.logic.commands.lesson.ViewLsnCommand;
+import team.serenity.logic.parser.SerenityParser;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.ui.groupdata.GroupDataPanel;
 import team.serenity.ui.lessondata.LessonDataPanel;
 import team.serenity.ui.serenitydata.SerenityDataPanel;
@@ -204,11 +208,12 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to group data view if in lesson data view.
      */
     @FXML
-    private void toggleLsnView() {
+    private void toggleLsnView(String groupName, String lessonName) {
         this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(),
-                this.logic.getFilteredQuestionList());
+                this.logic.getFilteredQuestionList(), groupName, lessonName);
         this.dataDisplayPlaceholder.getChildren().clear();
         this.dataDisplayPlaceholder.getChildren().add(this.lessonDataPanel.getRoot());
+        this.titleDisplay.setLessonTitle(groupName, lessonName);
     }
 
     /**
@@ -366,6 +371,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = this.logic.execute(commandText);
+            SerenityParser parser = new SerenityParser();
             this.logger.info("Result: " + commandResult.getFeedbackToUser());
             this.resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -384,10 +390,9 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isToggleLsnView()) {
-                toggleLsnView();
                 String groupName = getGroupName(commandText);
                 String lessonName = getLessonName(commandText);
-                this.titleDisplay.setLessonTitle(groupName, lessonName);
+                toggleLsnView(groupName, lessonName);
             }
 
             if (commandResult.isAddGrp()) {
