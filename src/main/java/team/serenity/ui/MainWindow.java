@@ -259,7 +259,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public void setUpQnButton() {
-        Button qnButton = new Button("Qn");
+        Button qnButton = new Button("Qns");
         String qnImgUrl = "images/question.png";
         EventHandler<ActionEvent> qnEvent = event -> {
             String commandText = "viewqn";
