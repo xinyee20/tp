@@ -306,11 +306,9 @@ public class ModelManager implements Model {
     public void deleteStudentFromGroup(Student student, Predicate<Group> predicate) {
         requireAllNonNull(student, predicate);
         updateFilteredGroupList(predicate);
-        UniqueList<Student> students = this.filteredGroups.get(0).getStudents();
-        if (!this.filteredGroups.isEmpty() && students.contains(student)) {
-            students.remove(student);
+        if (!this.filteredGroups.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
-            currentGroup.deleteStudentFromGroup(student);
+            this.groupManager.deleteStudentFromGroup(currentGroup, student);
         }
     }
 

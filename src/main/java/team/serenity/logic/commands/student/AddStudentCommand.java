@@ -69,7 +69,9 @@ public class AddStudentCommand extends Command {
             model.addStudentToGroup(student, predicate);
             return new CommandResult(
                 String.format(MESSAGE_SUCCESS, studentName, studentId,
-                    model.getFilteredGroupList().get(0).getGroupName()));
+                    model.getFilteredGroupList().get(0).getGroupName()),
+                false, false, false, true,
+                false, false, false, false, false, false);
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());
         }
