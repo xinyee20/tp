@@ -1,5 +1,6 @@
 package team.serenity.model.managers;
 
+import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -135,6 +136,14 @@ public class LessonManager implements ReadOnlyLessonManager {
         } else {
             throw new GroupNotFoundException();
         }
+    }
+
+    /**
+     * Delete all lessons in the group.
+     */
+    public void deleteAllLessonsFromGroup(Group group) {
+        requireNonNull(group);
+        this.mapToListOfLessons.remove(group.getGroupName());
     }
 
     /**

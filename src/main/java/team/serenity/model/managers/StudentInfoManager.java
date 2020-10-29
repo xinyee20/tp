@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.exceptions.GroupLessonPairNotFoundException;
 import team.serenity.model.group.studentinfo.StudentInfo;
@@ -131,6 +133,21 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
         } else {
             throw new GroupLessonPairNotFoundException();
         }
+    }
+
+    /**
+     * Delete all student infos from group.
+     */
+    public void deleteAllStudentInfosFromGroup(Group group) {
+        requireNonNull(group);
+        Iterator<Map.Entry<GroupLessonKey, UniqueList<StudentInfo>>> iterator =
+            mapToListOfStudentsInfo.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<GroupLessonKey, UniqueList<StudentInfo>> entry = iterator.next();
+            if (entry.getKey().getGroupName().equals(group.getGroupName())) {
+                iterator.remove();
+            }
+        } ;
     }
 
     //util methods
