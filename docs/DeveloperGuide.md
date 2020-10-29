@@ -62,7 +62,7 @@ easier for the teacher to track and is much more organised.
 The StudentInfo Manager contains a HashMap whose key is a GroupLessonKey and value is a UniqueList. 
 The following Class Diagram describes the structure of StudentInfoManager and its relevant classes.
 
-<p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></img></p>
+<p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
 <p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
 
 From the diagram above, we can see that StudentInfoManager can contain multiple GroupLessonKey as well as 
@@ -77,7 +77,7 @@ setscore | Set the participation score of a student for a lesson
 In this section, we will outline the `markpresent` command handled by the StudentInfoManager which is summarised by the Activity Diagram below. 
 We will be using the index version of the markpresent command.
 
-<p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 4.5.2.2 Activity Diagram of a markpresent command (by INDEX)"></img></p>
+<p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 4.5.2.2 Activity Diagram of a markpresent command (by INDEX)"></p>
 <p align="center"><i>Figure 4.5.2.2 Activity Diagram of a <code>markpresent</code> command by index</i></p>
 
 When the user enters the `markpresent` command followed by an index to mark a student in a lesson present, 
@@ -134,7 +134,7 @@ In this section, we will outline the `findqn` command of the question manager wh
 Activity Diagram below.
 
 
-<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 4.6.2.1 Activity diagram of a findqn command"></img></p>
+<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 4.6.2.1 Activity diagram of a findqn command"></p>
 <p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
 
 When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
@@ -151,7 +151,7 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 
 The Sequence Diagram below summarises the aforementioned steps.
 
-<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 4.6.2.2 Sequence diagram detailing execution of FindQnCommand"></img></p>
+<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 4.6.2.2 Sequence diagram detailing execution of FindQnCommand"></p>
 <p align="center"><i>Figure 4.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
 
 #### **4.6.3. Design Consideration**
