@@ -298,9 +298,75 @@ by ensuring that all logic and functionality related to a Tutorial group is enca
 
 ### **4.5 StudentInfo Manager**
 
+(contributed by Xin Yee)
+
+**Serenity** allows users to keep track of the attendance and participation of students from his/her tutorial lessons. 
+
+The `StudentInfoManager` is one of the `Feature Manager`s (See [Feature-Manager](#41-feature-managers)). 
+The `StudentInfoManager` helps to collate all the information related to the student, consisting of the student’s 
+attendance as well as participation score for each lesson. 
+It contains a `UniqueStudentInfoList` which contains all the `StudentInfo` of every student for each lesson.
+
+#### **4.5.1. Rationale**
+
+The `StudentInfoManager` is an important feature to have because a tutor has to keep track of both the attendance 
+as well as participation of every student. By putting the things to track under `StudentInfo`, it will be much 
+easier for the teacher to track and is much more organised.
+
+#### **4.5.2. Current Implementation**
+The `StudentInfoManager` contains a `HashMap` whose key is a `GroupLessonKey` and value is a `UniqueList`. 
+The following Class Diagram describes the structure of `StudentInfoManager` and its relevant classes.
+
+<p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
+<p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
+
+From the diagram above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
+`UniqueStudentInfoList` for each `GroupLessonKey`. The table below shows the commands managed by the `StudentInfoManager`.
+
+Commands | Purpose
+-------|--------
+`markpresent` / `markabsent` | Mark student present / absent during a lesson
+`flagatt` / `unflagatt` | Flag the attendance of a student for special scenarios
+`setscore` / `addscore` / `subscore` | Set / add / subtract the participation score of a student for a lesson 
+ 
+In this section, we will outline the `markpresent` command handled by the `StudentInfoManager` which is summarised by the Activity Diagram below. 
+We will be using the index version of the markpresent command.
+
+<p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 4.5.2.2 Activity Diagram of a markpresent command by index"></p>
+<p align="center"><i>Figure 4.5.2.2 Activity Diagram of a <code>markpresent</code> command by index</i></p>
+
+When the user enters the `markpresent` command followed by an index to mark a student in a lesson present, 
+the user input command undergoes the parsing to retrieve the index. 
+The following steps will describe the execution of the `MarkPresentCommand` by index,  assuming that no error is encountered.
+
+1. When the `execute()` method of the `MarkPresentCommand` is called, the `GroupLessonKey` is retrieved to obtain the 
+`UniqueStudentInfoList` from the `HashMap`. 
+2. The `StudentInfoManager` then checks whether the index is valid and marks the student present if it is valid.
+3. Afterwards, the `StudentInfoManager` will update the `UniqueStudentInfoList`.
+4. The `Ui` component will detect this change and update the 
+<span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
+5. If the above steps are all successful, a successful message will be displayed on the
+<span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
+
+*If the index is not valid, an error will be thrown to prompt the user to choose another index.
+
+#### **4.5.3. Design Consideration**
+**Aspect:** Deciding between retrieving `StudentInfo` through deep nesting methods or using `HashMap` to retrieve `StudentInfo` with `GroupLessonKey`.
+
+|   |**Pros**|**Cons**|
+|---|---|---|
+| **Option 1**<br>Reach into `Group`, followed by `Lesson` to retrieve `StudentInfo`. | More intuitive. | Nesting of data makes it harder to test. 
+| **Option 2 (current)**<br>Store and retrieve `StudentInfo` from a `HashMap` with the combination of `Group` name and `Lesson` name forming the key. | Easier to retrieve data. <br> <br> Less nesting of data allows testing to be done more easily. | Need to put in more thought into coming up with the Manager structures to prevent cyclic dependencies. |
+
+**Reasons for choosing option 2:**
+
+* We originally used Option 1. However, deep nesting of data is a very worrying problem as it makes it hard to test the code and increases the chances of
+the code breaking if any intermediate classes are not functioning properly. 
+* Option 2, despite being more complicated, solves our problem without adding much overhead. Thus, we decided option 2 is better.
+
 ### **4.6 Question Manager**
 
-Serenity allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
+**Serenity** allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
  
 The question manager is one of the `Feature Manager`s (See [Feature-Manager](#41-feature-managers)). 
 On top of the basic operations provided above it also allows the user to find questions by keywords using the `findqn` 
@@ -310,19 +376,20 @@ keywords, similar to a search bar. E.g. `findqn deadline report` will search and
 
 #### **4.6.1. Rationale**
 
-The question manager is an important feature to have because in any tutorial lesson, students will be asking tutors 
+The `QuestionManager` is an important feature to have because in any tutorial lesson, students will be asking tutors 
 many questions, verbally or through virtual means such as Whatsapp or Telegram. Thus, we decided to create a question 
 manager to manage and track all the questions asked during lessons.
 
 #### **4.6.2. Current Implementation**
 
-The current implementation of the question manager only allows the user to keep track of a list of questions for each 
+The current implementation of the `QuestionManager` only allows the user to keep track of a list of questions for each 
 of the lessons for each tutorial group. It does not allow the user to add questions without a tutorial group and lesson.
  
-In this section, we will outline the `findqn` command of the question manager which is summarised by the 
+In this section, we will outline the `findqn` command of the `QuestionManager` which is summarised by the 
 Activity Diagram below.
 
-![Figure 4.6.2.1 Activity diagram of a `findqn` command](./images/developerGuide/FindQnActivityDiagram.png)
+
+<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 4.6.2.1 Activity diagram of a findqn command"></p>
 <p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
 
 When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
@@ -334,12 +401,12 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 
 1. When the `execute` method of the `FindQnCommand` is called, the `ModelManager`’s `updateFilteredQuestionList` method is called.
 2. The `ModelManager` will then update its filtered list of `Question`'s to contain only `Question`'s that fulfil the given predicate.
-3. The Ui component will detect this change and update the <span style="color:purple"><i>GUI</i></span>.
+3. The `Ui` component will detect this change and update the <span style="color:purple"><i>GUI</i></span>.
 4. If the above steps are all successful, the `FindQnCommand` will then create a `CommandResult` object and return the result.
 
 The Sequence Diagram below summarises the aforementioned steps.
 
-![Figure 4.6.2.2 Sequence diagram detailing execution of `FindQnCommand`](./images/developerGuide/FindQnSequenceDiagram.png)
+<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 4.6.2.2 Sequence diagram detailing execution of FindQnCommand"></p>
 <p align="center"><i>Figure 4.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
 
 #### **4.6.3. Design Consideration**
@@ -371,9 +438,12 @@ The Sequence Diagram below summarises the aforementioned steps.
 * Is reasonably comfortable using CLI apps
 
 **Value proposition:** 
-* Serenity can help assist the management of a CS2101 class faster than a typical mouse / GUI driven app through easy reference and editing of class data.
-* Serenity consolidates administrative information on a GUI for convenient viewing.
-* Serenity gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
+* **Serenity** can help assist the management of a CS2101 class faster than a typical mouse / 
+ <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span> driven app through easy reference and editing of class data.
+* **Serenity** consolidates administrative information on a 
+ <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>
+ for convenient viewing.
+* **Serenity** gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
 
 ## **Appendix B: User Stories**
 
@@ -612,7 +682,7 @@ Given below are instructions to test the app manually.
 **Launch and Shutdown**
  1. Initial launch
     1. Download the jar file and copy into an empty folder
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span> with a set of sample contacts. The window size may not be optimum.
  1. Saving window preferences
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
     1. Re-launch the app by double-clicking the jar file.
@@ -621,7 +691,7 @@ Given below are instructions to test the app manually.
  
 **Adding/Setting**
 
-Add a new tutorial group in Serenity.
+Add a new tutorial group in **Serenity**.
  1. Prerequisites: XLSX file must be in the same folder as `Serenity`
  1. Test case: `addgrp grp grp/<NAME OF TUTORIAL GROUP> path/<NAME OF FILE>.xlsx`
     1. Expected: Tutorial group created, <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
@@ -646,7 +716,7 @@ Adding Student to a Group
 **Data**
 
 Missing data files
-1. Test case: In the folder where Serenity is stored, delete `serenity.json` in `data` folder 
+1. Test case: In the folder where **Serenity** is stored, delete `serenity.json` in `data` folder 
     1. Expected: New tutorial group G01 created with two students, Aaron Tan and John Doe.
     
 <!-- Editing commented out because there is nothing here -->
