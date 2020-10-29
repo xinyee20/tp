@@ -99,12 +99,13 @@ public class MarkPresentCommand extends Command {
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<StudentInfo> uniqueStudentInfoList = model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
+        UniqueList<StudentInfo> uniqueStudentInfoList =
+                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         if (!this.isWholeClass) {
 
-            if (! isByIndex) {
+            if (!isByIndex) {
 
                 // Mark single student present
                 for (int i = 0; i < studentsInfo.size(); i++) {
@@ -120,7 +121,7 @@ public class MarkPresentCommand extends Command {
                     }
                 }
 
-                if (! this.isCorrectStudent) {
+                if (!this.isCorrectStudent) {
                     throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toMarkPresent.get()));
                 }
             } else {

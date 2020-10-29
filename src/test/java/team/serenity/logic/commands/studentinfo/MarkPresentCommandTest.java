@@ -43,7 +43,8 @@ class MarkPresentCommandTest {
         Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
 
         CommandResult commandResult = new MarkPresentCommand(toMarkPresent).execute(modelStub);
-        assertEquals(String.format(MarkPresentCommand.MESSAGE_SUCCESS, toMarkPresent), commandResult.getFeedbackToUser());
+        assertEquals(String.format(MarkPresentCommand.MESSAGE_SUCCESS, toMarkPresent),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -52,7 +53,8 @@ class MarkPresentCommandTest {
         Student wrongName = new Student("Aaron", "A0123456U");
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongName);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_STUDENT_NOT_FOUND, wrongName), () -> markPresentCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_STUDENT_NOT_FOUND, wrongName), () -> markPresentCommand.execute(modelStub));
     }
 
     @Test
@@ -61,7 +63,8 @@ class MarkPresentCommandTest {
         Student wrongNumber = new Student("Aaron Tan", "A0000000U");
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongNumber);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_STUDENT_NOT_FOUND, wrongNumber), () -> markPresentCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_STUDENT_NOT_FOUND, wrongNumber), () -> markPresentCommand.execute(modelStub));
     }
 
     @Test
@@ -89,7 +92,8 @@ class MarkPresentCommandTest {
         Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
 
         CommandResult commandResult = new MarkPresentCommand(validIndex).execute(modelStub);
-        assertEquals(String.format(MarkPresentCommand.MESSAGE_SUCCESS, toMarkPresent), commandResult.getFeedbackToUser());
+        assertEquals(String.format(MarkPresentCommand.MESSAGE_SUCCESS, toMarkPresent),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -141,8 +145,8 @@ class MarkPresentCommandTest {
  * A Model stub containing absent students
  */
 class ModelStubWithStudentsAbsent extends ModelStub {
-    Group uniqueGroup;
-    Lesson uniqueLesson;
+    private Group uniqueGroup;
+    private Lesson uniqueLesson;
 
 
     @Override
@@ -190,8 +194,8 @@ class ModelStubWithStudentsAbsent extends ModelStub {
  * A Model stub containing an absent student
  */
 class ModelStubWithIndexAbsent extends ModelStub {
-    Group uniqueGroup;
-    Lesson uniqueLesson;
+    private Group uniqueGroup;
+    private Lesson uniqueLesson;
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
@@ -257,7 +261,7 @@ class ModelStubWithNoGroup extends ModelStub {
  * A Model stub containing no lesson
  */
 class ModelStubWithNoLesson extends ModelStub {
-    Group uniqueGroup;
+    private Group uniqueGroup;
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {

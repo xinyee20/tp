@@ -35,7 +35,7 @@ public class CommandTestUtil {
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
     public static final String VALID_QN_DESC_B = "When is the consultation held?";
     public static final String VALID_STUDENT_NAME_A = "Aaron";
-    public static final String VALID_STUDENT_NUMBER_A = "A0000000U";
+    public static final String VALID_STUDENT_NUMBER_A = "A0123456U";
     public static final String VALID_INDEX = "1";
     public static final String VALID_SCORE = "1";
     public static final String VALID_ADD = "1";

@@ -94,7 +94,8 @@ public class SetScoreCommand extends Command {
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<StudentInfo> uniqueStudentInfoList = model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
+        UniqueList<StudentInfo> uniqueStudentInfoList =
+                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         if (!isByIndex) {
