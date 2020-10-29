@@ -228,7 +228,7 @@ public class MainWindow extends UiPart<Stage> {
         button.setLayoutX(20);
         button.setLayoutY(65);
         button.setMnemonicParsing(false);
-        button.setPrefWidth(65);
+        button.setPrefWidth(70);
         button.setId(button.getText());
 
         Image image = new Image(imgUrl);
@@ -245,7 +245,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public void setUpAttButton() {
-        Button attButton = new Button("Att");
+        Button attButton = new Button("Flags");
         String attImgUrl = "images/flag.png";
         EventHandler<ActionEvent> attEvent = event -> {
             String commandText = "viewflag";
@@ -382,7 +382,6 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isDelGrp()) {
-                toggleSerenityView();
                 String groupName = getGroupName(commandText);
                 handleDelGrp(groupName);
             }
