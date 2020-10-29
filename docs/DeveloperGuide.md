@@ -64,6 +64,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * Serenity gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
 
 ## **Appendix B: User Stories**
+
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+
 As a... | I want to... | So that I can...
 | ------------- | ------------- | ------------- |
 | Tutor | Set up tutorial groups that I am teaching at the start of every semester | Perform administrative functions more efficiently
