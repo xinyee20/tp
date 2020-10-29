@@ -21,9 +21,70 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### **3.1 Architecture**
 
+(Contributed by Neo Rui En)
+The Architecture Diagram given in Figure 1 below explains the high-level design of Serenity.
+
+![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
+Figure 3.1.1 Architecture Diagram of Serenity
+
+> :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder. 
+
+| Tables        | Are           | Cool  |
+ | ------------- |:-------------:| -----:|
+ | col 3 is      | right-aligned | $1600 |
+ | col 2 is      | centered      |   $12 |
+ | zebra stripes | are neat      |    $1 |
+ | <ul><li>item1</li><li>item2</li></ul>| See the list | from the first column|
+
+Component | Description
+------------ | -------------
+| `Main` | Has two classes called `Main` and `MainApp`. It is responsible for: <ul><li>At app launch: Initializes the components in the correct sequence, and connects them up with one another.</li><li> At shut down: Shuts down the components and cleanup resources where necessary.</li></ul>
+| `Commons` | Represents a collection of classes used by multiple different components. |
+|`Ui`| Displays the Ui of the App to users. Defines its API in the Ui interface and exposes its functionality through the UiManager class.
+| `Logic` | Executes the command that user inputs. Defines its API in the Logic interface and exposes its functionality through the LogicManager class.
+| `Model` | Holds the data of the App in-memory. Defines its API in the Model interface and exposes its functionality through the ModelManager class.
+| `Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the Storage interface and exposes its functionality through the StorageManager class.
+
+**How the architecture components interact with each other**
+The Sequence Diagram in Figure 2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
+
+![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
+Figure 3.1.2 Interactions between components for the `delgrp grp/G04` command
+
+The sections below give more details of each component.
+
 ### **3.2 UI Component**
 
+(Contributed by Neo Rui En)
+This segment will explain the structure and responsibilities of the Ui component.
+
+#### **3.2.1. Structure**
+
+![Figure 3.2.1](images/UiClassDiagram.png)
+Figure 3.2.1 Structure of the `Ui` component
+
+The Ui component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox` as shown in the Class Diagram above. The MainWindow and its parts inherit from the abstract UiPart class.
+ 
+The Ui component uses <span style="color:purple"><i>JavaFX</i></span> UI framework. 
+The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder. 
+For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
+
+#### **3.2.2 Responsibilities**
+
+The `Ui` component,
+Executes user commands using the Logic component.
+Listens for changes to Model data so that the <span style="color:purple"><i>GUI</i></span> can be updated with the modified data.
+
+
 ### **3.3 Logic component**
+
+(Contributed by Neo Rui En)
+This segment will explain the structure and responsibilities of the `Logic`component.
+
+#### 3.3.1 Structure
+
+![Figure 3.3.1 Structure of `Logic` component](images/LogicClassDiagram.png)
+<span style="text-align:center">Figure 3.3.1 Strucutre of `Logic` component</span>
 
 ### **3.4 Model Component**
 
