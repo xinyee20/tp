@@ -1,7 +1,6 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
 import java.util.stream.Stream;
 
