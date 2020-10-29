@@ -109,7 +109,7 @@ public class DelStudentCommand extends Command {
         model.deleteStudentFromGroup(toDelete.get(), this.predicate);
         model.updateFilteredGroupList(this.predicate);
         return new CommandResult(
-            String.format(MESSAGE_SUCCESS, this.studentName, this.studentId,
+            String.format(MESSAGE_SUCCESS, this.studentName.get(), this.studentId.get(),
             model.getFilteredGroupList().get(0).getGroupName()));
     }
 
