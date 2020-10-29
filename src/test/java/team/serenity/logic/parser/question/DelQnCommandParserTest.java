@@ -14,14 +14,14 @@ import team.serenity.logic.commands.question.DelQnCommand;
  * outside of the DelQnCommand code. For example, inputs "1" and "1 abc" take the
  * same path through the DelQnCommand, and therefore we test only one of them.
  * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
+ * therefore should be covered by the SerenityParserUtilTest.
  */
 class DelQnCommandParserTest {
 
     private DelQnCommandParser parser = new DelQnCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteActivityCommand() {
+    public void parse_validArgs_returnsDelQnCommand() {
         assertParseSuccess(parser, "1", new DelQnCommand(INDEX_FIRST));
     }
 

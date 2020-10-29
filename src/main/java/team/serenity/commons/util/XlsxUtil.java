@@ -3,7 +3,6 @@ package team.serenity.commons.util;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -77,7 +76,7 @@ public class XlsxUtil {
      * Reads XLSX file that the tutor downloads from LUMINUS.
      * The XLSX file stores a list of {@code Student} that are in a tutorial group.
      *
-     * @return
+     * @return a set of students.
      */
     public Set<Student> readStudentsFromXlsx() {
         Set<Student> students = new HashSet<>();
@@ -85,9 +84,8 @@ public class XlsxUtil {
         skipRowsToHeaderRow(rowIterator);
         readDetailsOfStudents(rowIterator, students);
         List<Student> studentList = new ArrayList<>(students);
-        Collections.sort(studentList, new StudentSorter());
-        Set<Student> newStudents = new LinkedHashSet<>(studentList);
-        return newStudents;
+        studentList.sort(new StudentSorter());
+        return new LinkedHashSet<>(studentList);
     }
 
     private Row skipRowsToHeaderRow(Iterator<Row> rowIterator) {
@@ -135,16 +133,12 @@ public class XlsxUtil {
         Row headerRow = skipRowsToHeaderRow(rowIterator);
         readDetailsOfLessons(headerRow, lessons, studentsInfo);
         List<Lesson> lessonList = new ArrayList<>(lessons);
-        Collections.sort(lessonList, new LessonSorter());
-        Set<Lesson> newLessons = new LinkedHashSet<>(lessonList);
-        return newLessons;
+        lessonList.sort(new LessonSorter());
+        return new LinkedHashSet<>(lessonList);
     }
 
     private void readDetailsOfLessons(Row headerRow, Set<Lesson> lessons, Set<StudentInfo> studentsInfo) {
-        Iterator<Cell> cellIterator = headerRow.iterator();
-        while (cellIterator.hasNext()) {
-            Cell cell = cellIterator.next();
-
+        for (Cell cell : headerRow) {
             if (this.formatter.formatCellValue(cell).startsWith("T")) {
                 String lessonName = this.formatter.formatCellValue(cell);
                 String formattedLessonName = formatLessonName(lessonName);
@@ -175,12 +169,11 @@ public class XlsxUtil {
             studentsInfo.add(new StudentInfo(student));
         }
         List<StudentInfo> studentInfoList = new ArrayList<>(studentsInfo);
-        Collections.sort(studentInfoList, new StudentInfoSorter());
-        Set<StudentInfo> newStudentsInfo = new LinkedHashSet<>(studentInfoList);
-        return newStudentsInfo;
+        studentInfoList.sort(new StudentInfoSorter());
+        return new LinkedHashSet<>(studentInfoList);
     }
 
-    private class LessonSorter implements Comparator<Lesson> {
+    private static class LessonSorter implements Comparator<Lesson> {
 
         @Override
         public int compare(Lesson lessonOne, Lesson lessonTwo) {
@@ -190,8 +183,8 @@ public class XlsxUtil {
             int lesTwoLen = lesTwo.length();
             int minLength = Math.min(lesOneLen, lesTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int lesOneChar = (int) lesOne.charAt(i);
-                int lesTwoChar = (int) lesTwo.charAt(i);
+                int lesOneChar = lesOne.charAt(i);
+                int lesTwoChar = lesTwo.charAt(i);
 
                 if (lesOneChar != lesTwoChar) {
                     return lesOneChar - lesTwoChar;
@@ -206,7 +199,7 @@ public class XlsxUtil {
         }
     }
 
-    private class StudentSorter implements Comparator<Student> {
+    private static class StudentSorter implements Comparator<Student> {
 
         @Override
         public int compare(Student studentOne, Student studentTwo) {
@@ -216,8 +209,8 @@ public class XlsxUtil {
             int sTwoLen = sTwo.length();
             int minLength = Math.min(sOneLen, sTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int lesOneChar = (int) sOne.charAt(i);
-                int lesTwoChar = (int) sTwo.charAt(i);
+                int lesOneChar = sOne.charAt(i);
+                int lesTwoChar = sTwo.charAt(i);
 
                 if (lesOneChar != lesTwoChar) {
                     return lesOneChar - lesTwoChar;
@@ -232,7 +225,7 @@ public class XlsxUtil {
         }
     }
 
-    private class StudentInfoSorter implements Comparator<StudentInfo> {
+    private static class StudentInfoSorter implements Comparator<StudentInfo> {
 
         @Override
         public int compare(StudentInfo studentInfoOne, StudentInfo studentInfoTwo) {
@@ -242,8 +235,8 @@ public class XlsxUtil {
             int infoTwoLen = infoTwo.length();
             int minLength = Math.min(infoOneLen, infoTwoLen);
             for (int i = 0; i < minLength; i++) {
-                int infoOneChar = (int) infoOne.charAt(i);
-                int infoTwoChar = (int) infoTwo.charAt(i);
+                int infoOneChar = infoOne.charAt(i);
+                int infoTwoChar = infoTwo.charAt(i);
 
                 if (infoOneChar != infoTwoChar) {
                     return infoOneChar - infoTwoChar;
@@ -264,7 +257,6 @@ public class XlsxUtil {
     public void writeAttendanceToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
         UniqueList<Student> studentList = group.getSortedStudents();
         UniqueList<Lesson> lessonList = group.getSortedLessons();
-
         List<List<Object>> data = new ArrayList<>();
         Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
 
@@ -272,38 +264,23 @@ public class XlsxUtil {
             GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
             for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
                 Student student = studentInfo.getStudent();
-                Optional<List<Integer>> attendanceList = Optional.ofNullable(studentDetailsMap.get(student));
-                List<Integer> newAttendanceList;
-                if (attendanceList.isEmpty()) {
-                    newAttendanceList = new ArrayList<>();
-                } else {
-                    newAttendanceList = attendanceList.get();
-                }
-                newAttendanceList.add(studentInfo.getAttendance().getIntegerAttendance());
-                studentDetailsMap.put(student.getStudentNo(), newAttendanceList);
+                Optional<List<Integer>> attList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
+                List<Integer> newAttList = attList.isEmpty() ? new ArrayList<>() : attList.get();
+                newAttList.add(studentInfo.getAttendance().getIntegerAttendance());
+                studentDetailsMap.put(student.getStudentNo(), newAttList);
             }
         }
 
-        for (Student student : studentList) {
-            List<Object> studentDetails = new ArrayList<>();
-            studentDetails.add(student.getStudentName().toString());
-            studentDetails.add(student.getStudentNo().toString());
-            List<Integer> attendanceList = studentDetailsMap.get(student.getStudentNo());
-            studentDetails.addAll(attendanceList);
-            data.add(studentDetails);
-        }
-
-        String outputFileName = String.format("%s_attendance.xlsx", group.getGroupName().toString());
-        writeDataToXlsx(data, outputFileName);
+        generateData(data, studentList, studentDetailsMap);
+        writeDataToXlsx(data, String.format("%s_attendance.xlsx", group.getGroupName().toString()), group);
     }
 
     /**
      * Write participation score data to XLSX file.
      */
-    public void writeParticipationToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
+    public void writeScoreToXlsx(Group group, Map<GroupLessonKey, UniqueList<StudentInfo>> studentInfoMap) {
         UniqueList<Student> studentList = group.getSortedStudents();
         UniqueList<Lesson> lessonList = group.getSortedLessons();
-
         List<List<Object>> data = new ArrayList<>();
         Map<StudentNumber, List<Integer>> studentDetailsMap = new HashMap<>();
 
@@ -311,56 +288,91 @@ public class XlsxUtil {
             GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
             for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
                 Student student = studentInfo.getStudent();
-                Optional<List<Integer>> participationList = Optional.ofNullable(studentDetailsMap.get(student));
-                List<Integer> newParticipationList;
-                if (participationList.isEmpty()) {
-                    newParticipationList = new ArrayList<>();
-                } else {
-                    newParticipationList = participationList.get();
-                }
-                newParticipationList.add(studentInfo.getParticipation().getScore());
-                studentDetailsMap.put(student.getStudentNo(), newParticipationList);
+                Optional<List<Integer>> scoreList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
+                List<Integer> newScoreList = scoreList.isEmpty() ? new ArrayList<>() : scoreList.get();
+                newScoreList.add(studentInfo.getParticipation().getScore());
+                studentDetailsMap.put(student.getStudentNo(), newScoreList);
             }
         }
 
+        generateData(data, studentList, studentDetailsMap);
+        writeDataToXlsx(data, String.format("%s_participation.xlsx", group.getGroupName().toString()), group);
+    }
+
+    private void generateData(List<List<Object>> data, UniqueList<Student> studentList,
+        Map<StudentNumber, List<Integer>> studentDetailsMap) {
         for (Student student : studentList) {
             List<Object> studentDetails = new ArrayList<>();
             studentDetails.add(student.getStudentName().toString());
             studentDetails.add(student.getStudentNo().toString());
-            List<Integer> participationList = studentDetailsMap.get(student.getStudentNo());
-            studentDetails.addAll(participationList);
+            List<Integer> lst = studentDetailsMap.get(student.getStudentNo());
+            studentDetails.addAll(lst);
             data.add(studentDetails);
         }
-
-        String outputFileName = String.format("%s_participation.xlsx", group.getGroupName().toString());
-        writeDataToXlsx(data, outputFileName);
     }
 
-    private void writeDataToXlsx(List<List<Object>> data, String outputFileName) {
-        Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
-
+    private void writeDataToXlsx(List<List<Object>> data, String outputFileName, Group group) {
         int rowCount = 0;
+        int columnCount = 0;
 
-        for (Object[] aBook : bookData) {
-            Row row = sheet.createRow(++rowCount);
+        Row row = sheet.createRow(rowCount);
+        Cell cell = row.createCell(columnCount);
 
-            int columnCount = 0;
-
-            for (Object field : aBook) {
-                Cell cell = row.createCell(++columnCount);
-                if (field instanceof String) {
-                    cell.setCellValue((String) field);
-                } else if (field instanceof Integer) {
-                    cell.setCellValue((Integer) field);
-                }
-            }
-        }
+        addTitle(cell, group.getGroupName().toString());
+        addHeaders(goToHeaderRow(rowCount), columnCount, group.getLessons());
+        addContent(goToContentRow(rowCount), data);
 
         try {
             FileOutputStream outputStream = new FileOutputStream(outputFileName);
             workbook.write(outputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void addTitle(Cell titleCell, String groupName) {
+        String title = String.format("CS2101 %s Attendance Sheet", groupName);
+        titleCell.setCellValue(title);
+    }
+
+    private int goToHeaderRow(int rowCount) {
+        return rowCount + 2;
+    }
+
+    private int goToContentRow(int rowCount) {
+        return rowCount + 3;
+    }
+    private void addHeader(int columnCount, Row headerRow, String headerName) {
+        Cell headerCell = headerRow.createCell(columnCount);
+        headerCell.setCellValue(headerName);
+    }
+
+    private void addHeaders(int rowCount, int columnCount, UniqueList<Lesson> lessonList) {
+        Row row = sheet.createRow(rowCount);
+        addHeader(columnCount, row, "Name");
+        columnCount++;
+        addHeader(columnCount, row, "Student Number");
+        columnCount++;
+        for (Lesson lesson : lessonList) {
+            addHeader(columnCount, row, lesson.getLessonName().toString());
+            columnCount++;
+        }
+    }
+
+    private void addContent(int rowCount, List<List<Object>> data) {
+        for (List<Object> studentDetails : data) {
+            Row row = sheet.createRow(rowCount);
+            int columnCount = 0;
+            for (Object field : studentDetails) {
+                Cell cell = row.createCell(columnCount);
+                if (field instanceof String) {
+                    cell.setCellValue((String) field);
+                } else if (field instanceof Integer) {
+                    cell.setCellValue((Integer) field);
+                }
+                columnCount++;
+            }
+            rowCount++;
         }
     }
 

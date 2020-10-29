@@ -5,237 +5,361 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+## **1. Introduction**
 
-## **Setting up, getting started**
+![Serenity Logo](images/logo.png)
+
+(Contributed by Bu Wen Jin)
+
+**Serenity** is a desktop lesson management application made for CS2101 tutors who want to manage and reduce administrative work.
+It focuses on the <span><a href="#appendix-e-glossary" style="color:purple"><i>Command Line Interface (CLI)</i></a></span>
+while providing users with a simple and clean <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
+Thus, the main interaction with Serenity will be done through commands.
+
+**Serenity** allows tutors to keep track of their lessons administrative work in a single, 
+simple-to-use platform. The information that can be managed by Serenity includes:
+
+* Tutorial group students information
+* Student attendance for each lesson
+* Student class participation scores for each lesson
+* Questions for each lesson
+
+The purpose of this Developer Guide is to help you understand the design
+and implementation of **Serenity** so that you can get started on your contributions to **Serenity**.
+
+## **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+## **3. Design**
 
-## **Design**
+### **3.1 Architecture**
 
-### Architecture
+(Contributed by Neo Rui En)
 
-<img src="images/ArchitectureDiagram.png" width="450" />
+The Architecture Diagram given in Figure 1 below explains the high-level design of Serenity.
 
-The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
+![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
 
-<div markdown="span" class="alert alert-primary">
+<p align="center">Figure 3.1.1 Architecture Diagram of Serenity</p>
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+> :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder. 
 
-</div>
-
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
-
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-
-The rest of the App consists of four components.
-
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
-
-Each of the four components,
-
-* defines its *API* in an `interface` with the same name as the Component.
-* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
-
-For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
-
-![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+Component | Description
+------------ | -------------
+`Main` | Has two classes called `Main` and `MainApp`. It is responsible for initializing the components in the correct sequence, and connects them up with one another. At shut down, it shuts the components down and cleans up resources where necessary.
+`Commons` | Represents a collection of classes used by multiple different components. |
+`Ui`| Displays the `Ui` of the App to users. Defines its API in the `Ui` interface and exposes its functionality through the `UiManager` class.
+`Logic` | Executes the command that user inputs. Defines its API in the `Logic` interface and exposes its functionality through the `LogicManager` class.
+`Model` | Holds the data of the App in-memory. Defines its API in the `Model` interface and exposes its functionality through the `ModelManager` class.
+`Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the `Storage` interface and exposes its functionality through the `StorageManager` class.
 
 **How the architecture components interact with each other**
+The Sequence Diagram in Figure 2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<p align="center"><i>Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
 The sections below give more details of each component.
 
-### UI component
+### **3.2 UI Component**
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+(Contributed by Neo Rui En)
 
-**API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+This segment will explain the structure and responsibilities of the Ui component.
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+#### **3.2.1. Structure**
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+![Figure 3.2.1](images/UiClassDiagram.png)
 
-The `UI` component,
+<p align="center"><i>Figure 3.2.1 Structure of the <code>Ui</code> component.</i></p>
 
+The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
+ as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
+ 
+The `Ui` component uses <span><a href="#appendix-e-glossary" style="color:purple"><i>JavaFX</i></a></span> UI framework. 
+The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder. 
+For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
+
+#### **3.2.2 Responsibilities**
+
+The `Ui` component,
 * Executes user commands using the `Logic` component.
-* Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* Listens for changes to `Model` data so that the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> can be updated with the modified data.
 
-### Logic component
+### **3.3 Logic component**
 
-![Structure of the Logic Component](images/LogicClassDiagram.png)
+(Contributed by Neo Rui En)
 
-**API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+This segment will explain the structure and responsibilities of the `Logic`component.
 
-1. `Logic` uses the `AddressBookParser` class to parse the user command.
+#### **3.3.1 Structure**
+
+<p align="center">
+<img src="images/LogicClassDiagram.png" alt="Class diagram of Logic component">
+</p>
+
+<p align="center"><i>Figure 3.3.1 Structure of <code>Logic</code> component.</i></p>
+
+From the diagram above, you can see that the `Logic` component is split into 2 groups, one for command and another for command parsing. 
+As Serenity follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class. 
+This allows the `LogicManager` to execute these commands without having to know each command type.
+
+#### **3.3.2 Responsibilities**
+
+The `Logic` component is in charge of command parsing from the commands given by the user through the `Ui` component. It is also responsible for command execution.
+
+1. `Logic` uses the `SerenityParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a person).
+1. The command execution can affect the `Model` (e.g. adding an activity).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+The steps described above will be the standard command parsing and execution of every command in **Serenity**. 
+To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command delgrp grp/G04 is shown below. 
+The diagram starts with the `execute("delgrp grp/G04")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+> :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+### **3.4 Model Component**
 
-### Model component
+(Contributed by Ryan Lim)
 
-![Structure of the Model Component](images/ModelClassDiagram.png)
+This segment will explain the structure and responsibilities of the Model component.
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+#### **3.4.1 Structure**
 
-The `Model`,
+![Figure 3.4.1.1 Simplified Class Diagram of `model` component ](images/ModelClassDiagram.png)
 
-* stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+<p align="center"><i>Figure 3.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
 
+The `UserPrefs` class represents the user’s preference.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
+The `ObservableList` interface is exposed by the `Model` component for the `Ui` component to observe and automatically update the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> when data in the `Model` component changes.
 
-</div>
+The `XYZManager` is a generic name given to the following managers, these managers supports each feature of Serenity :
 
+* `GroupManager`
+* `StudentManager`
+* `StudentInfoManager`
+* `LessonManager`
+* `QuestionManager`
 
-### Storage component
+The `UniqueXYZList` is a generic name given to the following unique list, these unique lists supports the storing and manipulation of data in-memory when the App is running: 
 
-![Structure of the Storage Component](images/StorageClassDiagram.png)
+* `UniqueGroupList`
+* `UniqueStudentList`
+* `UniqueStudentInfoList`
+* `UniqueLessonList`
+* `UniqueQuestionList`
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+Each unique list implements the `UniqueList` interface.
+
+#### **3.4.2 Responsibilities**
+
+The `Model` component,
+
+* Represents data of different features of **Serenity**.
+* Stores these data in-memory when the App is running.
+* Does not depend on the `Ui`, `Logic` and `Storage` components.
+* Contains observable data so that the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> can automatically update upon data changes.
+
+### **3.5 Storage Component**
+
+(contributed by Ryan Lim)
+
+This segment will explain the structure and responsibilities of the Storage component.
+
+#### **3.5.1 Structure**
+
+<p align="center">
+<img alt="Class diagram of Storage component" src="images/StorageClassDiagram.png" ></p>
+
+<p align="center"><i>Figure 3.5.1 Class diagram of <code>Storage</code> component.</i></p>
+
+The `UserPrefStorage` interface and `SerenityStorage` interface defines the API
+for reading and saving the Model component’s data from and to the hard disk in JSON format.
+
+The `JsonSerenityStorage` is the implementation of the `SerenityStorage` interface 
+which supports the storage of data in the application.
+
+#### **3.5.2 Responsibilities**
 
 The `Storage` component,
-* can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
 
-### Common classes
+* Can save the `UserPref` object in a JSON format.
+* Can parse a JSON file in the correct format to get the `UserPref` object.
+* Can save the Serenity data in a JSON format.
+* Can parse a JSON file in the correct format to get **Serenity** data.
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+### **3.6 Common Classes**
 
---------------------------------------------------------------------------------------------------------------------
+Classes used by multiple other components are in the `team.serenity.commons package` package.
 
-## **Implementation**
+## **4. Implementation** 
+
+(contributed by Lim Chun Yong)
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+### **4.1 Feature Managers**
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+**Serenity** provides support for tutors to manage their classes in the following aspects:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* Tutorial groups
+* Tutorial lessons
+* Students in each tutorial group
+* Participation grades and Attendance
+* Questions
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These individual features are supported by an individual Manager 
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+ * `GroupManager`
+ * `LessonManager`
+ * `StudentManager`
+ * `StudentInfoManager`
+ * `QuestionManager`
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+When describing some common features across all managers, a typical manager shall be referred to as `XYZManager`.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+#### **4.1.1 Rationale**
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+These five main XYZManagers provide a way for tutors to manage the different aspects of teaching a class, 
+so as to facilitate teaching a class more effectively.   
 
-![UndoRedoState1](images/UndoRedoState1.png)
+#### **4.1.2 Current Implementation**
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+This section describes the main implementation common across all `XYZManagers`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+Each `XYZManager` contains one or more `UniqueList`, 
+a generic interface that enforces uniqueness of the item in the list. 
+This ensures that every item in the list is unique.
+ For example, a `GroupManager` cannot contain more than one Group with the name `G04`.  
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Each `XYZManager` supports basic <span><a href="#appendix-e-glossary" style="color:purple"><i>CRUD</i></a></span> 
+operations such as add, delete,
+get as well as additional functionality such as sorting.
 
-</div>
+The XYZManager implements the `ReadOnlyXYZManager` interface. 
+This interface has the `getXYZList` method which returns an `ObservableList` of items.
+The `ObservableList` of items allows the `Ui` model to use the Observer Pattern to update the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> 
+whenever changes are made to the `UniqueList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+There are two different types of `XYZManager`, one which stores a single `UniqueList`, 
+such as `GroupManager` and `QuestionManager`, while others store multiple `UniqueList` in a `HashMap`. For instance, 
+a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for the `HashMap`. 
+This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<p align="center">
+<img src="images/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<p align="center"><i>Figure 4.1.2.1: Structure of <code>GroupManager</code>, an example of 
+a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
 
-</div>
+### **4.2 Group Manager**
 
-The following sequence diagram shows how the undo operation works:
+(contributed by Lim Chun Yong)
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+The `GroupManager` is responsible for storing the tutorial groups taught by the Tutor. 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+#### **4.2.1. Rationale**
+A tutor has multiple tutorial groups to teach, hence the implementation requires a way to store multiple tutorial groups.
 
-</div>
+#### **4.2.2. Current Implementation**
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+`GroupManager` contains a `UniqueList` that can store multiple unique `Group` items.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+We outline the execution of the `DelGrpCommand` as an example of a command that makes use of `GroupManager`.
 
-</div>
+The following steps describe the execution of `DelGrpCommand` in detail, assuming that no error is encountered.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+1. When the execute method of the DelGrpCommand is called, the ModelManager’s deleteGroup method is called.
+1. The ModelManager then proceeds to call the deleteGroup method of the GroupManager.
+1. The GroupManager will then remove the group from its UniqueList
+1. If the above steps are all successful, the DelGrpCommand will then create a CommandResult object and return the result.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+The sequence diagram below documents the execution.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+<p align="center">
+<img src="images/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<p align="center"><i>Figure 4.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
-The following activity diagram summarizes what happens when a user executes a new command:
+#### **4.2.3 Design Consideration**
 
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
+Encapsulating tutorial groups within a `GroupManager` follows the Separation of Concerns principle, 
+by ensuring that all logic and functionality related to a Tutorial group is encapsulated within `GroupManager`.
 
-#### Design consideration:
+### **4.3 Lesson Manager**
 
-##### Aspect: How undo & redo executes
+### **4.4 Student Manager**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+### **4.5 StudentInfo Manager**
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+### **4.6 Question Manager**
 
-_{more aspects and alternatives to be added}_
+Serenity allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
+ 
+The question manager is one of the `Feature Manager`s (See [Feature-Manager](#41-feature-managers)). 
+On top of the basic operations provided above it also allows the user to find questions by keywords using the `findqn` 
+command. The `findqn` command does not restrict users to find via only one keyword. They are able to find via multiple 
+keywords, similar to a search bar. E.g. `findqn deadline report` will search and list all question entries with 
+`deadline` and `report` in the `Question`'s description.
 
-### \[Proposed\] Data archiving
+#### **4.6.1. Rationale**
 
-_{Explain here how the data archiving feature will be implemented}_
+The question manager is an important feature to have because in any tutorial lesson, students will be asking tutors 
+many questions, verbally or through virtual means such as Whatsapp or Telegram. Thus, we decided to create a question 
+manager to manage and track all the questions asked during lessons.
+
+#### **4.6.2. Current Implementation**
+
+The current implementation of the question manager only allows the user to keep track of a list of questions for each 
+of the lessons for each tutorial group. It does not allow the user to add questions without a tutorial group and lesson.
+ 
+In this section, we will outline the `findqn` command of the question manager which is summarised by the 
+Activity Diagram below.
+
+![Figure 4.6.2.1 Activity diagram of a `findqn` command](./images/developerGuide/FindQnActivityDiagram.png)
+<p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
+
+When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
+parsing as described in [Design-Logic](#33-logic-component). During the parsing, a predicate is created. This predicate 
+checks if a given `Question`'s description contains the user input keywords. The `FindQnCommand` will then receive 
+this predicate when it is created.
+
+The following steps will describe the execution of the `FindQnCommand` in detail, assuming that no error is encountered.
+
+1. When the `execute` method of the `FindQnCommand` is called, the `ModelManager`’s `updateFilteredQuestionList` method is called.
+2. The `ModelManager` will then update its filtered list of `Question`'s to contain only `Question`'s that fulfil the given predicate.
+3. The Ui component will detect this change and update the <span style="color:purple"><i>GUI</i></span>.
+4. If the above steps are all successful, the `FindQnCommand` will then create a `CommandResult` object and return the result.
+
+The Sequence Diagram below summarises the aforementioned steps.
+
+![Figure 4.6.2.2 Sequence diagram detailing execution of `FindQnCommand`](./images/developerGuide/FindQnSequenceDiagram.png)
+<p align="center"><i>Figure 4.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
+
+#### **4.6.3. Design Consideration**
+
+**Aspect:** Deciding between storing a question in a global question list and a lesson-specified question list.
+
+|   |**Pros**|**Cons**|
+|---|---|---|
+| **Option 1 (Current)**<br>To store the questions to a global question list. | Better user experience as the user is able to see the full list of questions from every lesson.<br><br>Reduce data nesting as the list of questions are abstracted out as a separate component. | Complicated to filter out questions for a specific tutorial group and lesson. |
+| **Option 2**<br>To store the questions in a list in each lesson. | Straight-forward and easier to implement.|Difficult to sieve through each lesson to collate all the questions from every group to display. |
+
+**Reasons for choosing option 1:**
+
+* The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
+* Both options have overheads when trying to view all questions and to view an individual lesson’s questions. However, option 2 is more costly and complicated to implement given the time constraints. Thus, we decided option 1 is better.
 
 
---------------------------------------------------------------------------------------------------------------------
+## **Appendix A: Product Scope**
 
-## **Documentation, logging, testing, configuration, dev-ops**
-
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Appendix: Requirements**
-
-### Product scope
-
-**Target user profile**:
-
+**Target user profile:**
 * Has a need to manage a significant number of students from various CS2101 classes
 * Has a need to keep track of the students' attendance throughout the semester
 * Has a need to keep track of the students' participation throughout the semester
@@ -246,44 +370,38 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-
-* Serenity can help assist the management of a CS2101 class 
-faster than a typical mouse/GUI driven app through easy reference and editing of class data.
-* Serenity consolidates administrative information on a Graphical User Interface for convenient viewing. 
+**Value proposition:** 
+* Serenity can help assist the management of a CS2101 class faster than a typical mouse / GUI driven app through easy reference and editing of class data.
+* Serenity consolidates administrative information on a GUI for convenient viewing.
 * Serenity gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
 
-### User stories
+## **Appendix B: User Stories**
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+As a... | I want to... | So that I can...
+| ------------- | ------------- | ------------- |
+Tutor | Set up tutorial groups that I am teaching at the start of every semester | Perform administrative functions more efficiently
+Tutor | Mark attendance across every lesson | Grade effectively at the end of the term
+Tutor | Flag the attendance of a student | Be reminded to check up on this student after lesson
+Tutor | View the attendance sheet for each class | Identify the students who did not attend a lesson
+Tutor | Export attendance of all my tutorial groups as a XLSX file | Submit attendance as a softcopy to the school
+Tutor | Use a participation system to keep track of participation | Grade effectively at the end of the term
+Tutor | Give a participation score to a student | Grade the student's participation
+Tutor | Generate the average score for each student across each session | Have an additional set of data to cross reference to
+Tutor | Export participation scores of each class as a XLSX file | Submit it as a softcopy for marks generation
+Tutor | Add a question to the question list | Be reminded to answer the question after the lesson ends
+Tutor | Remove a question from the question list | Prevent the list from becoming too cluttered
+Tutor | View the list of questions for each class | Identify the questions that I have not answered in class
+Forgetful Tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class
+Tutor | Import data of my students | Avoid manually entering the data
+Tutor | Access the list of commands easily on the software without referring to the user guide | Operate the software easily while teaching in class
+Tutor | Use an app that does not take up too much screen space | Continue to teach the content effectively
+Tutor | The list of commands to be as short as possible | Be productive trying to recall more important things for the lesson
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | -------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | Tutor | Set up classes that I am teaching at the start of every semester | Perform administrative functions more efficiently |
-| `* * *`  | Tutor | Mark attendance across every lesson | Grade effectively at the end of the term |
-| `*` | Tutor | Flag the attendance of a student | Be reminded to check up on this student after lesson |
-| `* * *` | Tutor | View the attendance sheet for each class | Identify the students who did not attend a lesson |
-| `*` | Tutor | Export monthly attendance of all my classes as a CSV file | Submit attendance as a softcopy to the school |
-| `* * *` | Tutor | Give a participation score to a student | Grade the student's participation |
-| `* *` | Tutor | Use a participation system to keep track of participation | Grade effectively at the end of the term |
-| `* *` | Tutor | Generate the average score for each student across each session | Have an additional set of data to cross reference to |
-| `*` | Tutor | Export participation scores of all my classes as a CSV file | Submit it as a softcopy for marks generation |
-| `* * *` | Tutor | Add a question to the question list | Be reminded to answer the question after the lesson ends |
-| `* *` | Tutor | Remove a question from the question list | Prevent the list from becoming too cluttered |
-| `* *` | Tutor | View the list of questions for each class | Identify the questions that I have not answered in class |
-| `* *` | Forgetful tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class |
-| `* *` | Tutor | Import data of my students | Avoid manually entering the data |
-| `* *` | Tutor | Access the list of commands easily on the software without referring to the user guide | Operate the software easily while teaching in class |
-| `* *` | Tutor who dislikes clutter | Use an app that does not take up too much screen space | Continue to teach the content effectively |
-| `* *` | Tutor who has other important things to remember | The list of commands to be as short as possible | Be productive trying to recall more important things for the lesson |
-
-*{More to be added}*
-
-### Use cases
-
-(For all use cases below, the **System** is `Serenity` and the **Actor** is the `User`, unless specified otherwise)
+## **Appendix C: Use Cases**
+For all use cases below, the System is `Serenity` and the Actor is the `User`, unless specified otherwise.
 
 **Setting Up**
+
 ```
 UC01: Set up tutorial group
 
@@ -301,8 +419,8 @@ MSS:
     4. Serenity adds the tutorial groups and students to the respective lists.
 Use case ends.
 ```
-
 **Attendance Taking**
+
 ```
 UC02: For a tutorial group, mark all students present for a lesson
 
@@ -345,6 +463,7 @@ Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
         Use case resumes at step 1.
+
 ```
 
 ```
@@ -371,7 +490,8 @@ Extensions:
 ```
 
 **Class Participation**
-```
+
+``` 
 UC05: Add class participation marks to a student
 
 System: Serenity
@@ -391,9 +511,10 @@ Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
         Use case resumes at step 1.
-```
 
 ```
+
+``` 
 UC06: View average class participation score of all students in a tutorial group
 
 System: Serenity
@@ -413,10 +534,14 @@ Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
         Use case resumes at step 1.
+
 ```
 
 **Addressing Questions**
-```
+
+
+``` 
+ 
 UC07: Add a question to a tutorial group’s question list
 
 System: Serenity
@@ -435,9 +560,10 @@ Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
         Use case resumes at step 1.
-```
 
 ```
+
+``` 
 UC08: View all questions of a tutorial group
 
 System: Serenity
@@ -456,71 +582,73 @@ Extensions:
     1a. Incomplete details are given.
         1a1. System shows an error message.
         Use case resumes at step 1.
+
 ```
 
-*{More to be added}*
 
-### Non-Functional Requirements
+## **Appendix D: Non Functional Requirements**
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any <span><a href="#appendix-e-glossary" style="color:purple"><i>mainstream OS</i></a></span> as long as it has Java 11 or above installed.
+2. Should be able to hold up to 30 students per tutorial group and up 10 tutorial groups without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+## **Appendix E: Glossary**
 
-### Glossary
+**Name** | **Description**
+------------ | -------------
+**Command Line Interface (CLI)** | This refers to the text-based user interface used for entering commands.
+**CRUD** | This represents the four basic functions of storage: create, read, update, and delete.
+**Graphical User Interface (GUI)** | This refers to the visual display shown on the screen.
+**JavaFX** | This is a software platform for creating and delivering desktop applications, as well as rich Internet applications (RIAs) that can run across a wide variety of devices.
+**Key** | In a Hash Table, a key is mapped to a value. This enables quick retrieval of the value associated with a key.
+**Mainstream OS** | This consists of Windows, Linux, Unix, macOS.
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
+> :memo: Note: These instructions only provide a starting point for testers to work on; 
+>testers are expected to do more **exploratory** testing.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**Launch and Shutdown**
+ 1. Initial launch
+    1. Download the jar file and copy into an empty folder
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+ 1. Saving window preferences
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Re-launch the app by double-clicking the jar file.
+    1. Expected: The most recent window size and location is retained.
 
-</div>
+ 
+**Adding/Setting**
 
-### Launch and shutdown
+Add a new tutorial group in Serenity.
+ 1. Prerequisites: XLSX file must be in the same folder as `Serenity`
+ 1. Test case: `addgrp grp grp/<NAME OF TUTORIAL GROUP> path/<NAME OF FILE>.xlsx`
+    1. Expected: Tutorial group created, <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
+ 1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<NAME OF TUTORIAL GROUP>`, `addgrp path/<NAME OF FILE>.csv`
+    1. Expected: Error message shown.
+ 
+Adding Lesson to a Group
+1. Prerequisites: Tutorial group is already set up, lesson name to be added does not already exist in the group.
+1. Test case: `addlsn grp/<NAME OF TUTORIAL GROUP> lsn/<LESSON NAME TO ADD>`
+    1. Expected: Tutorial lesson added, <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the new tutorial lesson created.
+ 1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<NAME OF TUTORIAL GROUP>`, `addlsn lsn/<LESSON NAME TO ADD>`
+    1. Expected: Error message shown.
+ 
+Adding Student to a Group
+1. Prerequisites: Tutorial group is already set up.
+1. Test case: `addstudent grp/<NAME OF TUTORIAL GROUP> name/<NAME OF STUDENT TO ADD> matric/<MATRICULATION NUMBER OF STUDENT>`
+    1. Expected: Success message shown: `You added <Student name> to <Tutorial Group>.`
+ 1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<NAME OF TUTORIAL GROUP>` `addstudent name/<NAME OF STUDENT>`
+    1. Expected: Error message shown.
+ 	
 
-1. Initial launch
+**Data**
 
-   1. Download the jar file and copy into an empty folder
+Missing data files
+1. Test case: In the folder where Serenity is stored, delete `serenity.json` in `data` folder 
+    1. Expected: New tutorial group G01 created with two students, Aaron Tan and John Doe.
+    
+<!-- Editing commented out because there is nothing here -->
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
@@ -15,6 +16,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import team.serenity.commons.core.LogsCenter;
+import team.serenity.commons.core.Messages;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
@@ -54,8 +56,12 @@ public class GroupDataPanel extends DataPanel {
         super(FXML);
         this.studentListView.setItems(studentList);
         this.studentListView.setCellFactory(listView -> new StudentListViewCell());
+        this.studentListView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));
         this.lessonListView.setItems(lessonList);
         this.lessonListView.setCellFactory(listView -> new LessonListViewCell());
+        this.lessonListView.setPlaceholder(new Label(Messages.MESSAGE_NO_LESSONS));
+        this.attendanceTableView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));
+        this.participationTableView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));
         populateTable(lessonList, studentList);
     }
 

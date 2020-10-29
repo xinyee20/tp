@@ -14,6 +14,7 @@ import team.serenity.commons.util.StringUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Participation;
@@ -53,6 +54,21 @@ public class SerenityParserUtil {
         } catch (InvalidOperationException | IOException e) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
         }
+    }
+
+    /**
+     * Parses a {@code String lessonName} into a {@code LessonName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lessonName} is invalid.
+     */
+    public static LessonName parseLessonName(String lessonName) throws ParseException {
+        requireNonNull(lessonName);
+        String trimmedLessonName = lessonName.trim();
+        if (!LessonName.isValidName(trimmedLessonName)) {
+            throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonName(trimmedLessonName);
     }
 
     /**
