@@ -97,7 +97,7 @@ public interface Model {
      * Returns true if at least one group exists in serenity.
      * @return whether any group exists
      */
-    boolean hasAGroup();
+    boolean isEmpty();
 
     /**
      * Deletes the given group. The group must exist in serenity.

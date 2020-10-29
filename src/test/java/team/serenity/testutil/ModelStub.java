@@ -26,7 +26,7 @@ import team.serenity.model.util.UniqueList;
 public class ModelStub implements Model {
 
     @Override
-    public boolean hasAGroup() {
+    public boolean isEmpty() {
         throw new AssertionError("This method should not be called.");
     }
 

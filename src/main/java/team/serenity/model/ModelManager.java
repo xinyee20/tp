@@ -185,8 +185,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAGroup() {
-        return groupManager.hasAGroup();
+    public boolean isEmpty() {
+        return groupManager.isEmpty();
     }
 
     @Override
