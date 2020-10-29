@@ -73,6 +73,7 @@ public class DelLsnCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DelLsnCommand // instanceof handles nulls
+                && this.targetGroupName.equals(((DelLsnCommand) other).targetGroupName)
                 && this.toDel.equals(((DelLsnCommand) other).toDel));
     }
 }
