@@ -171,7 +171,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 
 #### **3.5.1 Structure**
 
-![Figure 3.5.1 Class diagram of `Storage` component](images/StorageClassDiagram.png)
+<img alt="Class diagram of Storage component" src="images/StorageClassDiagram.png" align="center">
 
 <p align="center"><i>Figure 3.5.1 Class diagram of <code>Storage</code> component.</i></p>
 
@@ -219,16 +219,12 @@ These individual features are supported by an individual Manager
  * `StudentInfoManager`
  * `QuestionManager`
 
-When describing some common features across all managers, a typical manager shall be referred to as `XYZManager`
+When describing some common features across all managers, a typical manager shall be referred to as `XYZManager`.
 
 #### **4.1.1 Rationale**
 
 These five main XYZManagers provide a way for tutors to manage the different aspects of teaching a class, 
 so as to facilitate teaching a class more effectively.   
-
-#### **4.1.2 Current Implementation**
-These five main `XYZManagers` provide a way for tutors to manage the different aspects of teaching a class, 
-so as to facilitate teaching a class more effectively.
 
 #### **4.1.2 Current Implementation**
 
