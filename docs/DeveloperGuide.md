@@ -67,7 +67,7 @@ of the lessons for each tutorial group. It does not allow the user to add questi
 In this section, we will outline the `findqn` command of the question manager which is summarised by the 
 Activity Diagram below.
 
-![Figure 4.6.2.1 Activity diagram of a `findqn` command]()
+![Figure 4.6.2.1 Activity diagram of a `findqn` command](./images/developerGuide/FindQnActivityDiagram.png)
 <p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
 
 When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
@@ -84,7 +84,7 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 
 The Sequence Diagram below summarises the aforementioned steps.
 
-![Figure 4.6.2.2 Sequence diagram detailing execution of `FindQnCommand`]()
+![Figure 4.6.2.2 Sequence diagram detailing execution of `FindQnCommand`](./images/developerGuide/FindQnSequenceDiagram.png)
 <p align="center"><i>Figure 4.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
 
 #### **4.6.3. Design Consideration**
