@@ -34,7 +34,7 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
     // Methods that overrides the whole StudentInfo Map
 
     /**
-     * Replaces the contentws of the studentInfo map with {@code newStudentInfoMap}.
+     * Replaces the contents of the studentInfo map with {@code newStudentInfoMap}.
      * {@code newStudentInfoMap} must not contain duplicate students.
      */
     public void setStudentInfo(Map<GroupLessonKey, UniqueList<StudentInfo>> newStudentInfoMap) {

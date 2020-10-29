@@ -11,7 +11,9 @@ import static team.serenity.testutil.TypicalStudent.AARON;
 import static team.serenity.testutil.TypicalStudent.JOHN;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +22,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
@@ -115,14 +118,18 @@ class MarkPresentCommandTest {
 }
 
 /**
- * A Model stub containing an absent student
+ * A Model stub containing absent students
  */
 class ModelStubWithStudentsAbsent extends ModelStub {
+    Group uniqueGroup;
+    Lesson uniqueLesson;
+
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         List<Group> grpList = new ArrayList<>();
-        grpList.add(new GroupBuilder().build());
+        this.uniqueGroup = new GroupBuilder().build();
+        grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
         return groupUniqueList.asUnmodifiableObservableList();
@@ -131,10 +138,20 @@ class ModelStubWithStudentsAbsent extends ModelStub {
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         List<Lesson> lsnList = new ArrayList<>();
-        lsnList.add(new LessonBuilder().build());
+        this.uniqueLesson = new LessonBuilder().build();
+        lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
         lessonUniqueList.setElementsWithList(lsnList);
         return lessonUniqueList.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
+        GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+        GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
+        uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
+        return uniqueStudentInfoList.get(key);
     }
 
     @Override
@@ -149,14 +166,20 @@ class ModelStubWithStudentsAbsent extends ModelStub {
 
 }
 
+/**
+ * A Model stub containing an absent student
+ */
 class ModelStubWithIndexAbsent extends ModelStub {
+    Group uniqueGroup;
+    Lesson uniqueLesson;
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         List<Group> grpList = new ArrayList<>();
-        grpList.add(new GroupBuilder().withName("G01")
+        this.uniqueGroup = new GroupBuilder().withName("G01")
                 .withStudents(new Student("Aaron Tan", "A0123456U"))
-                .withClasses("1-1").build());
+                .withClasses("1-1").build();
+        grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
         return groupUniqueList.asUnmodifiableObservableList();
@@ -165,13 +188,23 @@ class ModelStubWithIndexAbsent extends ModelStub {
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         List<Lesson> lsnList = new ArrayList<>();
-        lsnList.add(new LessonBuilder()
+        this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
                 .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U")))
-                        .build());
+                .build();
+        lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
         lessonUniqueList.setElementsWithList(lsnList);
         return lessonUniqueList.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
+        GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+        GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
+        uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
+        return uniqueStudentInfoList.get(key);
     }
 
     @Override
