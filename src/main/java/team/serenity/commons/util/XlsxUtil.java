@@ -15,8 +15,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -272,7 +275,7 @@ public class XlsxUtil {
             GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
             for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
                 Student student = studentInfo.getStudent();
-                Optional<List<Integer>> attendanceList = Optional.ofNullable(studentDetailsMap.get(student));
+                Optional<List<Integer>> attendanceList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
                 List<Integer> newAttendanceList;
                 if (attendanceList.isEmpty()) {
                     newAttendanceList = new ArrayList<>();
@@ -294,7 +297,7 @@ public class XlsxUtil {
         }
 
         String outputFileName = String.format("%s_attendance.xlsx", group.getGroupName().toString());
-        writeDataToXlsx(data, outputFileName);
+        writeDataToXlsx(data, outputFileName, group);
     }
 
     /**
@@ -311,7 +314,7 @@ public class XlsxUtil {
             GroupLessonKey groupLessonKey = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
             for (StudentInfo studentInfo : studentInfoMap.get(groupLessonKey)) {
                 Student student = studentInfo.getStudent();
-                Optional<List<Integer>> participationList = Optional.ofNullable(studentDetailsMap.get(student));
+                Optional<List<Integer>> participationList = Optional.ofNullable(studentDetailsMap.get(student.getStudentNo()));
                 List<Integer> newParticipationList;
                 if (participationList.isEmpty()) {
                     newParticipationList = new ArrayList<>();
@@ -333,26 +336,58 @@ public class XlsxUtil {
         }
 
         String outputFileName = String.format("%s_participation.xlsx", group.getGroupName().toString());
-        writeDataToXlsx(data, outputFileName);
+        writeDataToXlsx(data, outputFileName, group);
     }
 
-    private void writeDataToXlsx(List<List<Object>> data, String outputFileName) {
+    private void writeDataToXlsx(List<List<Object>> data, String outputFileName, Group group) {
         Object[][] bookData = data.stream().map(u -> u.toArray(new Object[0])).toArray(Object[][]::new);
 
         int rowCount = 0;
+        int columnCount = 0;
+
+        Row row = sheet.createRow(rowCount);
+        Cell cell = row.createCell(columnCount);
+        String title = String.format("CS2101 %s Attendance Sheet", group.getGroupName().toString());
+        cell.setCellValue(title);
+
+        rowCount++;
+
+        rowCount++;
+
+        row = sheet.createRow(rowCount);
+
+        String nameHeader = "Name";
+        cell = row.createCell(columnCount);
+        cell.setCellValue(nameHeader);
+
+        columnCount++;
+
+        String studentNumberHeader = "Student Number";
+        cell = row.createCell(columnCount);
+        cell.setCellValue(studentNumberHeader);
+
+        columnCount++;
+
+        for (Lesson lesson : group.getLessons()) {
+            String lessonHeader = lesson.getLessonName().toString();
+            cell = row.createCell(columnCount);
+            cell.setCellValue(lessonHeader);
+            columnCount++;
+        }
 
         for (Object[] aBook : bookData) {
-            Row row = sheet.createRow(++rowCount);
+            row = sheet.createRow(++rowCount);
 
-            int columnCount = 0;
+            columnCount = 0;
 
             for (Object field : aBook) {
-                Cell cell = row.createCell(++columnCount);
+                cell = row.createCell(columnCount);
                 if (field instanceof String) {
                     cell.setCellValue((String) field);
                 } else if (field instanceof Integer) {
                     cell.setCellValue((Integer) field);
                 }
+                columnCount++;
             }
         }
 
