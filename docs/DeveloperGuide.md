@@ -89,7 +89,7 @@ Tutor | The list of commands to be as short as possible | Be productive trying t
 ## **Appendix C: Use Cases**
 For all use cases below, the System is `Serenity` and the Actor is the `User`, unless specified otherwise.
 
-----------------------------------------------------------------------------------------------------------------
+```
 UC01: Set up tutorial group
 
 System: Serenity
@@ -105,7 +105,8 @@ MSS:
     3. Serenity reads the csv file.
     4. Serenity adds the tutorial groups and students to the respective lists.
 Use case ends.
-----------------------------------------------------------------------------------------------------------------
+```
+
 
 ## **Appendix D: Non Functional Requirements**
 
@@ -160,7 +161,7 @@ Adding Student to a Group
 
 Missing data files
 1. Test case: In the folder where Serenity is stored, delete `serenity.json` in `data` folder 
-    1. Expected: New tutorial group `G01` created.
+    1. Expected: New tutorial group G01 created with two students, Aaron Tan and John Doe.
     
 **Editing**
 
