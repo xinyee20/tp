@@ -1,7 +1,6 @@
 package team.serenity.ui.lessondata;
 
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,8 +10,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TabPane;
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.core.Messages;
-import team.serenity.model.group.GroupName;
-import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.ui.DataPanel;
