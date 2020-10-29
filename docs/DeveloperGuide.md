@@ -51,7 +51,7 @@ The question manager is one of the `Feature Manager`s (See [Feature-Manager](#41
 On top of the basic operations provided above it also allows the user to find questions by keywords using the `findqn` 
 command. The `findqn` command does not restrict users to find via only one keyword. They are able to find via multiple 
 keywords, similar to a search bar. E.g. `findqn deadline report` will search and list all question entries with 
-`deadline` and `report` in the question description.
+`deadline` and `report` in the `Question`'s description.
 
 #### **4.6.1. Rationale**
 
@@ -79,7 +79,7 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 
 1. When the `execute` method of the `FindQnCommand` is called, the `ModelManager`’s `updateFilteredQuestionList` method is called.
 2. The `ModelManager` will then update its filtered list of `Question`'s to contain only `Question`'s that fulfil the given predicate.
-3. The Ui component will detect this change and update the GUI.
+3. The Ui component will detect this change and update the <span style="color:purple"><i>GUI</i></span>.
 4. If the above steps are all successful, the `FindQnCommand` will then create a `CommandResult` object and return the result.
 
 The Sequence Diagram below summarises the aforementioned steps.
@@ -100,6 +100,7 @@ The Sequence Diagram below summarises the aforementioned steps.
 
 * The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
 * Both options have overheads when trying to view all questions and to view an individual lesson’s questions. However, option 2 is more costly and complicated to implement given the time constraints. Thus, we decided option 1 is better.
+
 
 ## **Appendix A: Product Scope**
 
