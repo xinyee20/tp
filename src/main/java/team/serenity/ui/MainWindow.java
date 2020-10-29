@@ -187,8 +187,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleViewGrp(String groupName) {
-        this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
         this.dataDisplayPlaceholder.getChildren().clear();
+        this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
         this.dataDisplayPlaceholder.getChildren().add(this.groupDataPanel.getRoot());
         this.titleDisplay.setGroupTitle(groupName);
     }
@@ -338,6 +338,14 @@ public class MainWindow extends UiPart<Stage> {
         this.titleDisplay.setDefaultTitle();
     }
 
+
+    private void refreshTable() {
+        this.dataDisplayPlaceholder.getChildren().clear();
+        this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
+        this.dataDisplayPlaceholder.getChildren().add(this.groupDataPanel.getRoot());
+    }
+
+
     private String getGroupName(String commandText) {
         return commandText.split(" ")[1].split("/")[1];
     }
@@ -353,56 +361,69 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            String groupName;
+            String lessonName;
             CommandResult commandResult = this.logic.execute(commandText);
             this.logger.info("Result: " + commandResult.getFeedbackToUser());
             this.resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getUiAction()) {
+            case SHOW_HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.isExit()) {
+            case EXIT:
                 handleExit();
-            }
+                break;
 
-            if (commandResult.isViewGrp()) {
-                String groupName = getGroupName(commandText);
+            case VIEW_GRP:
+                groupName = getGroupName(commandText);
                 handleViewGrp(groupName);
-            }
+                break;
 
-            if (commandResult.isViewLsn()) {
-                String groupName = getGroupName(commandText);
-                String lessonName = getLessonName(commandText);
+            case VIEW_LSN:
+                groupName = getGroupName(commandText);
+                lessonName = getLessonName(commandText);
                 handleViewLsn(groupName, lessonName);
-            }
+                break;
 
-            if (commandResult.isAddGrp()) {
-                String groupName = getGroupName(commandText);
+            case ADD_GRP:
+                groupName = getGroupName(commandText);
                 handleAddGrp(groupName);
-            }
+                handleViewGrp(groupName);
+                break;
 
-            if (commandResult.isDelGrp()) {
-                String groupName = getGroupName(commandText);
+            case DEL_GRP:
+                groupName = getGroupName(commandText);
                 handleDelGrp(groupName);
-            }
+                break;
 
-            if (commandResult.isViewAtt()) {
+            case VIEW_ATT:
                 handleViewAtt();
-            }
+                break;
 
-            if (commandResult.isViewScore()) {
+            case VIEW_SCORE:
                 handleViewScore();
-            }
+                break;
 
-            if (commandResult.isFlagAtt()) {
+            case FLAG_ATT:
                 handleFlagAtt();
-            }
+                break;
 
-            if (commandResult.isViewQn()) {
+            case VIEW_QN:
                 handleViewQn();
+                break;
+
+            case REFRESH_TABLE:
+                refreshTable();
+                break;
+
+            default:
+
             }
 
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             this.logger.info("Invalid command: " + commandText);
             this.resultDisplay.setFeedbackToUser(e.getMessage());

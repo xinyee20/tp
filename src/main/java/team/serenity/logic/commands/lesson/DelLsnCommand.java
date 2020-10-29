@@ -63,10 +63,13 @@ public class DelLsnCommand extends Command {
         Lesson lessonToDel = model.getFilteredLessonList().get(0);
 
         trgtGrp.getLessons().remove(lessonToDel);
+        model.getLessonList().remove(lessonToDel);
+
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toDel, this.targetGroupName),
-            false, false, false, true, false, false, false, false, false, false);
+                CommandResult.UiAction.VIEW_GRP
+        );
     }
 
     @Override
