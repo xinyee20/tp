@@ -262,6 +262,15 @@ Use case ends.
 
 ## **Appendix E: Glossary**
 
+**Name** | **Description**
+------------ | -------------
+**Command Line Interface (CLI)** | This refers to the text-based user interface used for entering commands.
+**CRUD** | This represents the four basic functions of storage: create, read, update, and delete.
+**Graphical User Interface (GUI)** | This refers to the visual display shown on the screen.
+**JavaFX** | This is a software platform for creating and delivering desktop applications, as well as rich Internet applications (RIAs) that can run across a wide variety of devices.
+**Key** | In a Hash Table, a key is mapped to a value. This enables quick retrieval of the value associated with a key.
+**Mainstream OS** | This consists of Windows, Linux, Unix, macOS.
+
 ## **Appendix F: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
