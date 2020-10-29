@@ -96,7 +96,9 @@ This segment will explain the structure and responsibilities of the `Logic`compo
 
 #### **3.3.1 Structure**
 
-![Figure 3.3.1 Structure of `Logic` component](images/LogicClassDiagram.png)
+<p align="center">
+<img src="images/LogicClassDiagram.png" alt="Class diagram of Logic component">
+</p>
 
 <p align="center"><i>Figure 3.3.1 Structure of <code>Logic</code> component.</i></p>
 
@@ -172,7 +174,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 #### **3.5.1 Structure**
 
 <p align="center">
-<img alt="Class diagram of Storage component" src="images/StorageClassDiagram.png" align="center"></p>
+<img alt="Class diagram of Storage component" src="images/StorageClassDiagram.png" ></p>
 
 <p align="center"><i>Figure 3.5.1 Class diagram of <code>Storage</code> component.</i></p>
 
@@ -250,9 +252,11 @@ such as `GroupManager` and `QuestionManager`, while others store multiple `Uniqu
 a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for the `HashMap`. 
 This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
 
-![Structure of `GroupManager`, an example of a `XYZManager` which stores a single `UniqueList`](images/FeatureManagerDiagram.png)
 
-<p align="center"><i>Figure 4.1.2.1: <code>Structure of `GroupManager</code>, an example of 
+<p align="center">
+<img src="images/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
+
+<p align="center"><i>Figure 4.1.2.1: Structure of <code></code>GroupManager</code>, an example of 
 a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
 
 ### **4.2 Group Manager**
