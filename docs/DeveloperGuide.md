@@ -65,7 +65,7 @@ The following Class Diagram describes the structure of `StudentInfoManager` and 
 <p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
 <p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
 
-From the diagram above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as 
+From the diagram above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
 `UniqueStudentInfoList` for each `GroupLessonKey`. The table below shows the commands managed by the `StudentInfoManager`.
 
 Commands | Purpose
