@@ -11,20 +11,21 @@ title: Developer Guide
 
 (Contributed by Bu Wen Jin)
 
-Serenity is a desktop lesson management application made for CS2101 tutors who want to manage and reduce administrative work.
-It focuses on the <span style="color:purple"><i>Command Line Interface (CLI)</i></span>
+**Serenity** is a desktop lesson management application made for CS2101 tutors who want to manage and reduce administrative work.
+It focuses on the <span><a href="#appendix-e-glossary" style="color:purple"><i>Command Line Interface (CLI)</i></a></span>
 while providing users with a simple and clean <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
 Thus, the main interaction with Serenity will be done through commands.
 
-Serenity allows tutors to keep track of their lessons administrative work in a single, 
+**Serenity** allows tutors to keep track of their lessons administrative work in a single, 
 simple-to-use platform. The information that can be managed by Serenity includes:
+
 * Tutorial group students information
 * Student attendance for each lesson
 * Student class participation scores for each lesson
 * Questions for each lesson
 
 The purpose of this Developer Guide is to help you understand the design
-and implementation of Serenity so that you can get started on your contributions to Serenity.
+and implementation of **Serenity** so that you can get started on your contributions to **Serenity**.
 
 ## **2. Setting up, getting started**
 
@@ -46,7 +47,7 @@ The Architecture Diagram given in Figure 1 below explains the high-level design 
 
 Component | Description
 ------------ | -------------
-`Main` | Has two classes called `Main` and `MainApp`. It is responsible for: <ul><li>At app launch: Initializes the components in the correct sequence, and connects them up with one another.</li><li> At shut down: Shuts down the components and cleanup resources where necessary.</li></ul>
+`Main` | Has two classes called `Main` and `MainApp`. It is responsible for initializing the components in the correct sequence, and connects them up with one another. At shut down, it shuts the components down and cleans up resources where necessary.
 `Commons` | Represents a collection of classes used by multiple different components. |
 `Ui`| Displays the `Ui` of the App to users. Defines its API in the `Ui` interface and exposes its functionality through the `UiManager` class.
 `Logic` | Executes the command that user inputs. Defines its API in the `Logic` interface and exposes its functionality through the `LogicManager` class.
@@ -77,7 +78,7 @@ This segment will explain the structure and responsibilities of the Ui component
 The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
  as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
  
-The `Ui` component uses <span style="color:purple"><i>JavaFX</i></span> UI framework. 
+The `Ui` component uses <span><a href="#appendix-e-glossary" style="color:purple"><i>JavaFX</i></a></span> UI framework. 
 The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder. 
 For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
@@ -85,7 +86,7 @@ For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
 The `Ui` component,
 * Executes user commands using the `Logic` component.
-* Listens for changes to `Model` data so that the <span style="color:purple"><i>GUI</i></span> can be updated with the modified data.
+* Listens for changes to `Model` data so that the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> can be updated with the modified data.
 
 ### **3.3 Logic component**
 
@@ -133,7 +134,7 @@ This segment will explain the structure and responsibilities of the Model compon
 
 The `UserPrefs` class represents the user’s preference.
 
-The `ObservableList` interface is exposed by the `Model` component for the `Ui` component to observe and automatically update the <span style="color:purple"><i>GUI</i></span> when data in the `Model` component changes.
+The `ObservableList` interface is exposed by the `Model` component for the `Ui` component to observe and automatically update the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> when data in the `Model` component changes.
 
 The `XYZManager` is a generic name given to the following managers, these managers supports each feature of Serenity :
 
@@ -160,7 +161,7 @@ The `Model` component,
 * Represents data of different features of **Serenity**.
 * Stores these data in-memory when the App is running.
 * Does not depend on the `Ui`, `Logic` and `Storage` components.
-* Contains observable data so that the <span style="color:purple"><i>GUI</i></span> can automatically update upon data changes.
+* Contains observable data so that the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> can automatically update upon data changes.
 
 ### **3.5 Storage Component**
 
@@ -195,7 +196,38 @@ Classes used by multiple other components are in the `team.serenity.commons pack
 
 ## **4. Implementation** 
 
+(contributed by Lim Chun Yong)
+
+This section describes some noteworthy details on how certain features are implemented.
+
+
 ### **4.1 Feature Managers**
+
+**Serenity** provides support for tutors to manage their classes in the following aspects:
+
+* Tutorial groups
+* Tutorial lessons
+* Students in each tutorial group
+* Participation grades and Attendance
+* Questions
+
+These individual features are supported by an individual Manager 
+
+ * `GroupManager`
+ * `LessonManager`
+ * `StudentManager`
+ * `StudentInfoManager`
+ * `QuestionManager`
+
+When describing some common features across all managers, a typical manager shall be referred to as `XYZManager`
+
+#### **4.1.1 Rationale**
+
+These five main XYZManagers provide a way for tutors to manage the different aspects of teaching a class, 
+so as to facilitate teaching a class more effectively.   
+
+#### **4.1.2 Current Implementation**
+
 
 ### **4.2 Group Manager**
 
@@ -438,7 +470,7 @@ Extensions:
 
 ## **Appendix D: Non Functional Requirements**
 
-1. Should work on any <span style="color:purple"><i>mainstream OS</i></span> as long as it has Java 11 or above installed.
+1. Should work on any <span><a href="#appendix-e-glossary" style="color:purple"><i>mainstream OS</i></a></span> as long as it has Java 11 or above installed.
 2. Should be able to hold up to 30 students per tutorial group and up 10 tutorial groups without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -474,14 +506,14 @@ Given below are instructions to test the app manually.
 Add a new tutorial group in Serenity.
  1. Prerequisites: XLSX file must be in the same folder as `Serenity`
  1. Test case: `addgrp grp grp/<NAME OF TUTORIAL GROUP> path/<NAME OF FILE>.xlsx`
-    1. Expected: Tutorial group created, <span style="color:purple"><i>GUI</i></span> updates to show the tutorial lessons specified in the XLSX file.
+    1. Expected: Tutorial group created, <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
  1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<NAME OF TUTORIAL GROUP>`, `addgrp path/<NAME OF FILE>.csv`
     1. Expected: Error message shown.
  
 Adding Lesson to a Group
 1. Prerequisites: Tutorial group is already set up, lesson name to be added does not already exist in the group.
 1. Test case: `addlsn grp/<NAME OF TUTORIAL GROUP> lsn/<LESSON NAME TO ADD>`
-    1. Expected: Tutorial lesson added, <span style="color:purple"><i>GUI</i></span> updates to show the new tutorial lesson created.
+    1. Expected: Tutorial lesson added, <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the new tutorial lesson created.
  1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<NAME OF TUTORIAL GROUP>`, `addlsn lsn/<LESSON NAME TO ADD>`
     1. Expected: Error message shown.
  
