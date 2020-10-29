@@ -252,7 +252,6 @@ such as `GroupManager` and `QuestionManager`, while others store multiple `Uniqu
 a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for the `HashMap`. 
 This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
 
-
 <p align="center">
 <img src="images/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
 
@@ -283,7 +282,8 @@ The following steps describe the execution of `DelGrpCommand` in detail, assumin
 
 The sequence diagram below documents the execution.
 
-![Figure 9. Sequence diagram detailing execution of DelGrpCommand](images/GroupManagerSequenceDiagram.png)
+<p align="center">
+<img src="images/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
 
 <p align="center"><i>Figure 9. Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
