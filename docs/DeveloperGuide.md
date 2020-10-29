@@ -43,6 +43,70 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### **4.5 StudentInfo Manager**
 
+(contributed by Xin Yee)
+
+Serenity allows users to keep track of the attendance and participation of students from his/her tutorial lessons. 
+
+The StudentInfo manager is one of the `Feature Manager`s (See [Feature-Manager](#41-feature-managers)). 
+The StudentInfoManager helps to collate all the information related to the student, consisting of the student’s 
+attendance as well as participation score for each lesson. 
+It contains a UniqueStudentInfoList which contains all the studentInfo of every student for each lesson.
+
+#### **4.5.1. Rationale**
+
+The studentInfo manager is an important feature to have because a tutor has to keep track of both the attendance 
+as well as participation of every student. By putting the things to track under studentInfo, it will be much 
+easier for the teacher to track and is much more organised.
+
+#### **4.5.2. Current Implementation**
+The StudentInfo Manager contains a HashMap whose key is a GroupLessonKey and value is a UniqueList. 
+The following Class Diagram describes the structure of StudentInfoManager and its relevant classes.
+
+![Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes](./images/developerGuide/Simplified StudentInfo ManagerClassDiagram.png)
+<p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
+
+From the diagram above, we can see that StudentInfoManager can contain multiple GroupLessonKey as well as 
+UniqueStudentInfoList for each GroupLessonKey. The table below shows the commands managed by the StudentInfoManager.
+
+Commands | Purpose
+-------|--------
+markpresent / markabsent | Mark student present / absent during a lesson
+flagatt / unflagatt | Flag the attendance of a student for special scenarios
+setscore | Set the participation score of a student for a lesson 
+ 
+In this section, we will outline the `markpresent` command handled by the StudentInfoManager which is summarised by the Activity Diagram below. 
+We will be using the index version of the markpresent command.
+
+![Figure 4.5.2.2 Activity Diagram of a markpresent command (by INDEX)](./images/developerGuide/MarkPresentSequenceDiagram.png)
+<p align="center"><i>Figure 4.5.2.2 Activity Diagram of a <code>markpresent</code> command by index</i></p>
+
+When the user enters the `markpresent` command followed by an index to mark a student in a lesson present, 
+the user input command undergoes the parsing to retrieve the index. 
+The following steps will describe the execution of the MarkPresentCommand by INDEX,  assuming that no error is encountered.
+
+1. When the `execute()` method of the `MarkPresentCommand` is called, the `GroupLessonKey` is retrieved to obtain the 
+`UniqueStudentInfoList` from the HashMap. 
+2. The `StudentInfoManager` then checks whether the index is valid and marks the student present if it is valid.
+3. Afterwards, the `StudentInfoManager` will update the `UniqueStudentInfoList`.
+4. The `Ui` component will detect this change and update the GUI.
+5. If the above steps are all successful, a successful message will be displayed on the GUI.
+
+*If the index is not valid, an error will be thrown to prompt the user to choose another index.
+
+#### **4.5.3. Design Consideration**
+**Aspect:** Deciding between retrieving StudentInfo through deep nesting methods or using HashMap to retrieve studentInfo with GroupLessonKey.
+
+|   |**Pros**|**Cons**|
+|---|---|---|
+| **Option 1**<br>Reach into Group, followed by Lesson to retrieve StudentInfo. | More intuitive. | Nesting of data makes it harder to test. 
+| **Option 2 (current)**<br>Store and retrieve StudentInfo from a HashMap with Group and Lesson name making up the key. | Easier to retrieve data. <br> <br> Less nesting of data allows testing to be done more easily. | Need to put in more thought into coming up with the Manager structures to prevent cyclic dependencies. |
+
+**Reasons for choosing option 2:**
+
+* We originally used Option 1. However, deep nesting of data is a very worrying problem as it makes it hard to test the code and increases the chances of
+the code breaking if any intermediate classes are not functioning properly. 
+* Option 2, despite being more complicated, solves our problem without adding much overhead. Thus, we decided option 2 is better.
+
 ### **4.6 Question Manager**
 
 Serenity allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
