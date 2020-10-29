@@ -256,7 +256,7 @@ This enables retrieval of a specific `UniqueList` of `Student` items in a tutori
 <p align="center">
 <img src="images/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
 
-<p align="center"><i>Figure 4.1.2.1: Structure of <code></code>GroupManager</code>, an example of 
+<p align="center"><i>Figure 4.1.2.1: Structure of <code>GroupManager</code>, an example of 
 a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
 
 ### **4.2 Group Manager**
