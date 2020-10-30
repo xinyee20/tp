@@ -294,6 +294,37 @@ by ensuring that all logic and functionality related to a Tutorial group is enca
 
 ### **4.3 Lesson Manager**
 
+The `LessonManager` is responsible for storing lessons in a tutorial group
+
+#### **4.3.1 Rationale**
+
+Having a `LessonManager` allows for easy retrieval, viewing and updating of the lessons in a particular Tutorial Group.
+
+#### **4.3.2. Current Implementation**
+
+The `LessonManager` contains a `HashMap` whose key is a Group and value is a UniqueList.
+In this section, we detail the workflow of adding a lesson to an existing tutorial group through the `addlsn` command.
+
+<p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
+<p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
+
+The following steps describe the execution of `addlsn` in detail, assuming that no error is encountered.
+
+1. When the execute method of `AddLsnCommand` is called, a `StudentInfo` object is created for every student in the tutorial group.
+2. A new `UniqueList` is created and the `StudentInfo` objects are added to the list.
+3. A new `Lesson` object is created with the new UniqueList.
+4. The ModelManager’s `updateLessonList` method is called.
+5. The ModelManager then calls the method ``setListOfLessonsToGroup` of `LessonManager`.
+
+#### **4.3.3. Design Consideration**
+
+**Aspect:** Number of UniqueLists to hold
+
+|   |**Pros**|**Cons**|
+|---|---|---|
+| **Option 1: **More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
+| **Option 2 (current)**<br>One | Easy to implement, easier to retrieve all lessons taught by a single tutor | More difficult to retrieve lessons tied to a specific group |
+
 ### **4.4 Student Manager**
 
 ### **4.5 StudentInfo Manager**
