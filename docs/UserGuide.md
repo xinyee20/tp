@@ -40,7 +40,9 @@ To get started with using **Serenity**, you can follow these steps:
 
 4. Double-click the file to start the app. The _GUI_ similar to the image below should appear in a few seconds.
 
-   ![Ui](images/Ui.png)
+   <p align="center"><img src="images/Ui.png" alt="Layout of GUI"></p>
+   
+   <p align="center"><i>Figure 2.1 Welcome screen.</i></p>
 
 5. Type the command in the _Command Box_ and press `Enter` to execute it. 
 
@@ -73,9 +75,74 @@ User Guide.
 The following figure shows the _GUI_ of **Serenity**.
 It is annotated with the name of the _GUI_ components.
 
-![Ui](images/Ui_annotated.png)
+<p align="center"><img src="images/Ui_annotated.png" alt="Layout of GUI"></p>
 
-#### 3.2.2. General symbols and syntax
+<p align="center"><i>Figure 3.2.1.1 layout of GUI.</i></p>
+
+#### 3.2.2. Layout of the _GUI_
+
+**Serenity** is divided into four main tabs:
+
+* Flagged attendance tab
+* Questions tab
+* Group tab
+* Lesson tab
+
+##### **Flagged attendance tab** 
+
+This is the main tab of the application, and is the default page when the app is started. It contains 
+the names of students whose attendance have been flagged using the `flagatt` command. Flagging a student's
+attendance serves as a reminder on the first page of the app for you to check on the student and perform
+any follow-up actions, if necessary. 
+
+> :bulb: TIP: Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and 
+>proceed with teaching. With the flag attendance tab, you will be reminded to check again after class.
+
+<p align="center"><img src="images/flaggedatt.png" alt="Picture of flag attendance GUI"></p>
+
+<p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab</i></p>
+
+
+
+##### **Questions tab**
+
+This tab shows the questions asked across all your tutorial groups, providing a convenient place for you
+to keep track of all the questions asked by students across your tutorial groups and lessons.
+
+<p align="center"><img src="images/questionsGUI.png" alt="Picture of questions GUI"></p>
+
+<p align="center"><i>Figure 3.2.2.2 User interface showing the layout of the questions tab</i></p>
+
+##### **Group tab**
+
+This tab shows the information related to a tutorial group that you are teaching. 
+There are four sub-tabs at the top which allows you to view the number of lessons scheduled
+for this group, the list of students in the group, 
+their attendance records and participation grades respectively. Toggle between them with the 
+horizontal row of tabs at the top.
+
+<p align="center"><img src="images/viewgrpGUI.png" alt="Picture of group GUI"></p>
+
+<p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the group tab</i></p>
+
+##### **Lesson tab**
+
+This tab shows the records for a specific lesson. 
+
+> :memo: This tab is accessible through the `viewlsn` command
+
+In this tab, you are able to:
+* Assign and change the [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades
+* Flag a student's attendance
+* Add a [question](#44-question-addressing) that is asked during this lesson
+* View the attendance and participation grades for this lesson
+* View the questions asked during this tutorial lesson
+
+<p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
+
+<p align="center"><i>Figure 3.2.2.4 User interface showing the layout of the lesson tab</i></p>
+
+#### 3.2.3. General symbols and syntax
 
 The table below explains the general symbols and syntax used throughout the document.
 
@@ -87,7 +154,7 @@ _GUI_ | This indicates a graphical component, such as a button, layout format an
 :bulb: | This indicates a tip.
 :warning: | This indicates a warning.
 
-#### 3.2.3. Command syntax and usage
+#### 3.2.4. Command syntax and usage
 
 The table below explains some important technical terms.
 
@@ -99,7 +166,7 @@ Parameter | The word or phrase following the command word that provides further 
 Prefix | The letter that is placed at the start of each parameter to distinguish one parameter from another.
 XLSX | File format for all excel files.
 
-#### 3.2.4. Command format
+#### 3.2.5. Command format
 
 You can use commands to tell **Serenity** to perform a specific task.
 
@@ -150,6 +217,7 @@ Follow the instructions below to set up your new classes, and watch **Serenity**
 You can use this command to add a new tutorial group automatically from XLSX data.
 
 > :memo: **Notes regarding the `addgrp` command:**
+> * A sample XLSX file can be found [here](https://github.com/AY2021S1-CS2103T-W12-4/tp/blob/master/CS2101_G04.xlsx)
 > * The XLSX file should store a list of students.
 > * The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS.
 > * To obtain the PATH_TO_XLSX, either:<br>
@@ -182,6 +250,14 @@ Outcome:
 2. At the same time, a new button named `G04` will be created in the _Side Bar_.
 3. **Serenity** will switch to tutorial group `G04` page.
 4. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
+
+<p align="center"><img src="images/addgroup/addgrpcommand.png" alt="Command box for addgrp command"></p>
+
+<p align="center"><i>Figure 4.1.1.1 Command for <code>addgrp</code> command.</i></p>
+
+<p align="center"><img src="images/addgroup/addgrpresult.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.1.1.2 Screen displayed when the command is successfully executed.</i></p>
 
 ####  4.1.2. Delete an existing tutorial group: `delgrp`
 
@@ -220,18 +296,26 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 
 **Example:**
 
-You want to create a new tutorial lesson called `1-2` for tutorial group `G04`.
+You want to create a new tutorial lesson called `4-2` (week 4, lesson 2) for tutorial group `G04`.
 
 Adding a tutorial lesson to a tutorial group:
 
-1. Type `addlsn grp/G04 lsn/1-2` into the _Command Box_.
+1. Type `addlsn grp/G04 lsn/4-2` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. **Serenity** will display tutorial lesson `1-2` page.
-3. You can now see that tutorial lesson `1-2` has been added to tutorial group `G04`.
+2. **Serenity** will display tutorial lesson `4-2` page.
+3. You can now see that tutorial lesson `4-2` has been added to tutorial group `G04`.
+
+<p align="center"><img src="images/addlsn/addlsncommand.png" alt="Command box for addlsn command"></p>
+
+<p align="center"><i>Figure 4.1.3.1 Command for <code>addlsn</code> command.</i></p>
+
+<p align="center"><img src="images/addlsn/addlsnresult.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.1.3.2 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.1.4. Delete an existing tutorial lesson: `dellsn`
 
@@ -310,6 +394,16 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. `Aaron Tan` will no longer be in the list of students in tutorial group `G04`.
 
+<p align="center"><img src="images/delstudent/delstudent_command.png" 
+alt="Command box for delstudent command"></p>
+
+<p align="center"><i>Figure 4.1.6.1 Command for <code>delstudent</code> command</i></p>
+
+<p align="center"><img src="images/delstudent/delstudent_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.1.6.2 Screen displayed when the command is successfully executed.</i></p>
+
+
 ### 4.2. Attendance taking
 
 Need to mark attendance of your students at the start of each lesson quickly?
@@ -343,7 +437,13 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-![Figure 4.2.1. Outcome of a successful mark all students present command](images/ui/markpresent_all.png)
+<p align="center"><img src="images/attendance/markpresent_all_command.png" alt="Command box for markpresent command"></p>
+
+<p align="center"><i>Figure 4.2.1.1 Command for <code>markpresent all</code> command.</i></p>
+
+<p align="center"><img src="images/attendance/markpresent_all_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.2.1.2 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.2.2. Mark a student as present: `markpresent`
 
@@ -379,8 +479,6 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
-
 #### 4.2.2. Mark a student as absent: `markabsent`
 
 You can use this command to mark a specific student as absent for a tutorial lesson.
@@ -413,7 +511,14 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png) 
+<p align="center"><img src="images/attendance/markabsent_command.png" 
+alt="Command box for delstudent command"></p>
+
+<p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command.</i></p>
+
+<p align="center"><img src="images/attendance/markabsent_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.2.2.2 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.2.3. Mark all students as absent: `markabsent all`
 
@@ -536,6 +641,14 @@ Outcome:
 2. The attendance sheet of tutorial group `G04` will be saved as `G04_attendance.xlsx`.
 You can find the XLSX file at the location where your **Serenity** application is located.
 
+<p align="center"><img src="images/export/exportatt_command.png" alt="Command box for exportatt command"></p>
+
+<p align="center"><i>Figure 4.2.5.1 Command for <code>exportatt</code> command.</i></p>
+
+<p align="center"><img src="images/export/exportatt_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.2.5.2 Contents of excel file generated.</i></p>
+
 ### 4.3. Participation marking
 
 Need to keep track of all your students' participation during lessons quickly? This feature allows you to key in a 
@@ -581,6 +694,15 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
+<p align="center"><img src="images/participation/setscore_command.png" 
+alt="Command box for delstudent command"></p>
+
+<p align="center"><i>Figure 4.3.1.1 Command for <code>setscore</code> command.</i></p>
+
+<p align="center"><img src="images/participation/setscore_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.3.1.2 Screen displayed when the command is successfully executed.</i></p>
+
 #### 4.3.2. Add participation score of a student: `addscore`
 
 You can use this command to increase the participation score of a specific student for a tutorial lesson.
@@ -590,8 +712,8 @@ You can use this command to increase the participation score of a specific stude
 > The maximum score is 5
 
 **Format:**
-<br>`addscore name/NAME matric/STUDENT_NUMBER add/SCORE_TO_ADD`
-<br>`addscore INDEX add/SCORE_TO_ADD`
+<br>`addscore name/NAME matric/STUDENT_NUMBER score/SCORE_TO_ADD`
+<br>`addscore INDEX score/SCORE_TO_ADD`
 
 **Example:**
 
@@ -604,14 +726,14 @@ is the first person on the student list so his `index` number is 1.
 Adding participation score of a student in a tutorial lesson by `name` and `student number`:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `addscore name/AARON TAN matric/A0123456U add/1` into the _Command Box_.
+2. Type `addscore name/AARON TAN matric/A0123456U score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Adding participation score of a student in a tutorial lesson by `index`number:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `addscore 1 add/1` into the _Command Box_.
+2. Type `addscore 1 score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -629,8 +751,8 @@ You can use this command to decrease the participation score of a specific stude
 
 **Format:**
 
-<br>`subscore name/NAME matric/STUDENT_NUMBER sub/SCORE`
-<br>`subscore INDEX sub/SCORE`
+<br>`subscore name/NAME matric/STUDENT_NUMBER score/SCORE`
+<br>`subscore INDEX score/SCORE`
 
 **Example:**
 
@@ -643,14 +765,14 @@ is the first person on the student list so his `index` number is 1.
 Subtracting participation score of a student in a tutorial lesson by `name` and `student number`:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `subscore name/AARON TAN matric/A0123456U sub/1` into the _Command Box_.
+2. Type `subscore name/AARON TAN matric/A0123456U score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Subtracting participation score of a student in a tutorial lesson:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `subscore 1 sub/1` into the _Command Box_.
+2. Type `subscore 1 score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -702,19 +824,29 @@ in the future.
 
 **Example:**
 
-A student asked you, "`What is the deadline for the report?`" in a tutorial lesson.
+A student asked you, "`What is the deadline for the report?`" during the lesson `1-1` in group `G04`.
 As the deadline of the report has changed, you want to note this question down, check the new deadline and
 address the question in the future. 
 
 Adding a question:
 
+1. Navigate to view group `G04` lesson `1-1` via [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 1. Type `addqn qn/What is the deadline for the report?` into the _Command Box_.
-2. Press `Enter` to execute.
+1. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The question will be added to the list of questions.
+
+<p align="center"><img src="images/addqn/addqn_command.png" 
+alt="Command box for addqn command"></p>
+
+<p align="center">Figure 4.4.1.1 Command for <code>addqn</code> command</p>
+
+<p align="center"><img src="images/addqn/addqn_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.4.1.2 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.4.2. Delete an existing question: `delqn`
 
@@ -832,6 +964,11 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the information for tutorial group `G04`.
 
+<p align="center"><img src="images/view/viewgrp.png" 
+alt="User interface for viewing tutorial group"></p>
+
+<p align="center"><i>Figure 4.5.1.1 User interface for viewing tutorial group.</i></p>
+
 #### 4.5.2. View a tutorial lesson: `viewlsn`
 
 You can use this command to view and modify the attendance and participation scores of 
@@ -854,6 +991,11 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the students' information for tutorial lesson `1-2` of tutorial group `G04`.
+
+<p align="center"><img src="images/view/viewlsn.png" 
+alt="User interface for viewing tutorial lesson"></p>
+
+<p align="center"><i>Figure 4.5.2.1 User interface for viewing tutorial lesson.</i></p>
 
 #### 4.5.3. View attendance sheet of a tutorial group: `viewatt`
 
@@ -883,6 +1025,11 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the attendance sheet of tutorial group `G04`.
 
+<p align="center"><img src="images/view/viewatt.png" 
+alt="User interface for viewing tutorial attendance"></p>
+
+<p align="center"><i>Figure 4.5.3.1 User interface for viewing tutorial attendance.</i></p>
+
 #### 4.5.4. View participation score sheet of a tutorial group: `viewscore`
 
 You can use this command to view the participation score sheet of the students in a tutorial group
@@ -910,6 +1057,11 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the participation score sheet of tutorial group `G04`.
+
+<p align="center"><img src="images/view/viewscore.png" 
+alt="User interface for viewing tutorial participation score sheet"></p>
+
+<p align="center"><i>Figure 4.5.4.1 User interface for viewing tutorial participation score sheet.</i></p>
 
 #### 4.5.5. View flagged attendance: `viewflag`
 
@@ -966,6 +1118,11 @@ Outcome:
 
 
 
+<p align="center"><img src="images/view/viewqn.png" 
+alt="User interface for viewing questions"></p>
+
+<p align="center"><i>Figure 4.5.5.1 User interface for viewing questions.</i></p>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **5. FAQ**
@@ -1012,8 +1169,8 @@ Command | Example
 Command | Example
 ------------ | -------------
 **Set participation score** <br> - `setscore name/NAME matric/STUDENT_NUMBER score/SCORE` <br> - `setscore INDEX score/SCORE` | <br>- `setscore name/AARON TAN matric/A0123456U score/3` <br> - `setscore 1 score/3`
-**Add participation score** <br> - `addscore name/NAME matric/STUDENT_NUMBER add/SCORE`<br> - `addscore INDEX add/SCORE` | <br>- `addscore name/AARON TAN matric/A0123456U add/3` <br> - `addscore 1 add/3`
-**Subtract participation score** <br> - `subscore name/NAME matric/STUDENT_NUMBER sub/SCORE` <br> - `subscore INDEX sub/SCORE` | <br>- `subscore name/AARON TAN matric/A0123456U sub/3` <br> - `subscore 1 sub/3`
+**Add participation score** <br> - `addscore name/NAME matric/STUDENT_NUMBER score/SCORE`<br> - `addscore INDEX score/SCORE` | <br>- `addscore name/AARON TAN matric/A0123456U score/3` <br> - `addscore 1 score/3`
+**Subtract participation score** <br> - `subscore name/NAME matric/STUDENT_NUMBER score/SCORE` <br> - `subscore INDEX score/SCORE` | <br>- `subscore name/AARON TAN matric/A0123456U score/3` <br> - `subscore 1 score/3`
 **Export participation scores** <br> `exportscore grp/GROUP_NAME` | <br>`exportscore grp/G07`
 
 
