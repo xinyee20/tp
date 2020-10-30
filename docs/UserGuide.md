@@ -81,19 +81,27 @@ It is annotated with the name of the _GUI_ components.
 
 #### 3.2.2. Layout of the _GUI_
 
-**Serenity** is divided into four main tabs:
+**Serenity** is divided into three pages. Under each page, there are a few tabs:
 
-* Flagged attendance tab
-* Questions tab
-* Group tab
-* Lesson tab
+* Home page
+    * Flagged attendance tab
+    * Pending questions tab
+* Tutorial group page
+    * Lessons tab
+    * Students tab
+    * Attendance tab
+    * Participation tab
+* Tutorial lesson page
+    * Lesson tab
+    * Questions tab
 
-##### **Flagged attendance tab** 
+##### **Home page** 
 
-This is the main tab of the application, and is the default page when the app is started. It contains 
-the names of students whose attendance have been flagged using the `flagatt` command. Flagging a student's
-attendance serves as a reminder on the first page of the app for you to check on the student and perform
-any follow-up actions, if necessary. 
+This is the default page shown when the app is started.
+
+The flagged attendance tab contains the names of students whose attendance have been flagged with the `flagatt` command.
+Flagging a student's attendance serves as a reminder on the first page of the app for you
+to check on the student and perform any follow-up actions, if necessary. 
 
 > :bulb: TIP: Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and 
 >proceed with teaching. With the flag attendance tab, you will be reminded to check again after class.
@@ -102,41 +110,46 @@ any follow-up actions, if necessary.
 
 <p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab</i></p>
 
-
-
-##### **Questions tab**
-
-This tab shows the questions asked across all your tutorial groups, providing a convenient place for you
-to keep track of all the questions asked by students across your tutorial groups and lessons.
+The pending questions tab shows the questions asked across all your tutorial groups,
+providing a convenient place for you to keep track of all the questions asked by students
+across your tutorial groups and lessons.
 
 <p align="center"><img src="images/questionsGUI.png" alt="Picture of questions GUI"></p>
 
 <p align="center"><i>Figure 3.2.2.2 User interface showing the layout of the questions tab</i></p>
 
-##### **Group tab**
+##### **Tutorial group page**
 
-This tab shows the information related to a tutorial group that you are teaching. 
-There are four sub-tabs at the top which allows you to view the number of lessons scheduled
-for this group, the list of students in the group, 
-their attendance records and participation grades respectively. Toggle between them with the 
-horizontal row of tabs at the top.
+This page shows the information related to a tutorial group that you are teaching. 
+
+The lessons tab allows you to view the list of lessons scheduled for this group.
+
+The students tab displays the list of students belonging in this group. You may modify this list,
+especially at the start of each semester where there will be students entering the module,
+appealing into the module, switching between tutorial groups, and even dropping the module.
+
+The attendance tab shows the attendance sheet of the students. You may view the attendance records
+of all the students in the tutorial group across all the tutorial lessons.
+
+The participation tab shows the participation score sheet of the students. Similarly, you may view
+the class participation grades of all the students in the tutorial group across all the tutorial lessons.
 
 <p align="center"><img src="images/viewgrpGUI.png" alt="Picture of group GUI"></p>
 
 <p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the group tab</i></p>
 
-##### **Lesson tab**
+##### **Tutorial lesson page**
 
-This tab shows the records for a specific lesson. 
+This page shows the records for a specific lesson. 
 
-> :memo: This tab is accessible through the `viewlsn` command
+> :memo: This page is accessible using the `viewlsn` command
 
-In this tab, you are able to:
-* Assign and change the [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades
-* Flag a student's attendance
-* Add a [question](#44-question-addressing) that is asked during this lesson
-* View the attendance and participation grades for this lesson
-* View the questions asked during this tutorial lesson
+The lesson tab contains the list of students in the tutorial group. For each student, you may
+view and change the student's [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades.
+You may also flag the student's attendance if necessary.
+
+The questions tab contains the list of questions that were asked during this tutorial lesson. In this tab, you may
+add, edit, find or delete a [question](#44-question-addressing) that was asked during this tutorial lesson.
 
 <p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
 
@@ -1068,7 +1081,12 @@ alt="User interface for viewing tutorial participation score sheet"></p>
 You can use this command to view students with their attendance marked as flagged across all tutorial lessons.
 
 > :bulb: **Tip for the `viewflag` command:**
-> You can view students with flagged attendance for a specific tutorial lesson by
+> You can easily navigate to the flagged attendance list by pressing the "Flag" button in the Side_Bar as well!
+> Pressing the button equals to typing this command.
+
+> :bulb: **Tip for the `viewflag` command:**
+> Instead of viewing flagged attendance across all tutorial lessons,
+> you can view flagged attendance for a specific tutorial lesson by
 > entering the tutorial lesson page using `viewlsn` and scrolling through the "Lesson" tab in the page.
 
 **Format:**
@@ -1089,13 +1107,22 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the list of students with flagged attendance across all tutorial lessons.
 
+<p align="center"><img src="images/flaggedatt2.png" alt="User interface for viewing flagged attendance."></p>
+
+<p align="center"><i>Figure 4.5.5.1 User interface showing the layout of the flagged attendance tab</i></p>
+
 #### 4.5.6. View pending questions: `viewqn`
 
 You can use this command to view questions that were asked across all tutorial lessons
 and have yet to be addressed.
 
 > :bulb: **Tip for the `viewqn` command:**
-> You can view questions that were asked in a specific tutorial lesson by
+> You can easily navigate to the pending questions list by pressing the "Qns" button in the Side_Bar as well!
+> Pressing the button equals to typing this command.
+
+> :bulb: **Tip for the `viewqn` command:**
+> Instead of viewing pending questions across all tutorial lessons,
+> You can view questions for a specific tutorial lesson by
 > entering the tutorial lesson page using `viewlsn` and pressing the "Questions" tab in the page.
 
 **Format:**
