@@ -75,7 +75,68 @@ It is annotated with the name of the _GUI_ components.
 
 ![Ui](images/Ui_annotated.png)
 
-#### 3.2.2. General symbols and syntax
+#### 3.2.2. Layout of the _GUI_
+
+**Serenity** is divided into four main tabs:
+
+* Flagged attendance tab
+* Questions tab
+* Group tab
+* Lesson tab
+
+##### **Flagged attendance tab** 
+
+This is the main tab of the application, and is the default page when the app is started. It contains 
+the names of students whose attendance have been flagged using the `flagatt` command. Flagging a student's
+attendance serves as a reminder on the first page of the app for you to check on the student and perform
+any follow-up actions, if necessary. 
+
+<p align="center"><img src="images/flaggedatt.png" alt="Picture of flag attendance GUI"></p>
+
+<p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab</i></p>
+
+> :bulb: Tip: Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and 
+>proceed with teaching. With the flag attendance tab, you will be reminded to check again after class.
+
+##### **Questions tab**
+
+This tab shows the questions asked across all your tutorial groups, providing a convenient place for you
+to keep track of all the questions asked by students across your tutorial groups and lessons.
+
+<p align="center"><img src="images/questionsGUI.png" alt="Picture of questions GUI"></p>
+
+<p align="center"><i>Figure 3.2.2.2 User interface showing the layout of the questions tab</i></p>
+
+##### **Group tab**
+
+This tab shows the information related to a tutorial group that you are teaching. 
+There are four sub-tabs at the top which allows you to view the number of lessons scheduled
+for this group, the list of students in the group, 
+their attendance records and participation grades respectively. Toggle between them with the 
+horizontal row of tabs at the top.
+
+<p align="center"><img src="images/viewgrpGUI.png" alt="Picture of group GUI"></p>
+
+<p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the group tab</i></p>
+
+##### **Lesson tab**
+
+This tab shows the records for a specific lesson. 
+
+In this tab, you are able to:
+* Assign and change the attendance and participation grades
+* Flag a student's attendance
+* Add a question that is asked during this lesson
+* View the attendance and participation grades for this lesson
+* View the questions asked during this tutorial lesson
+
+<p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
+
+<p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the lesson tab</i></p>
+
+> :memo: This tab is accessible through the `viewlsn` command
+
+#### 3.2.3. General symbols and syntax
 
 The table below explains the general symbols and syntax used throughout the document.
 
@@ -87,7 +148,7 @@ _GUI_ | This indicates a graphical component, such as a button, layout format an
 :bulb: | This indicates a tip.
 :warning: | This indicates a warning.
 
-#### 3.2.3. Command syntax and usage
+#### 3.2.4. Command syntax and usage
 
 The table below explains some important technical terms.
 
@@ -99,7 +160,7 @@ Parameter | The word or phrase following the command word that provides further 
 Prefix | The letter that is placed at the start of each parameter to distinguish one parameter from another.
 XLSX | File format for all excel files.
 
-#### 3.2.4. Command format
+#### 3.2.5. Command format
 
 You can use commands to tell **Serenity** to perform a specific task.
 
