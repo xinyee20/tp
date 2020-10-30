@@ -158,6 +158,10 @@ You can use this command to add a new tutorial group automatically from XLSX dat
 >    ◦ Copy and paste the XLSX file into the same folder as your **Serenity** application, then type the name of the XLSX file.<br>
 >      e.g. `addgrp grp/G04 path/CS2101_G04.xlsx`
 
+> :bulb: **Tip for the `addgrp` command:**
+> After adding a tutorial group, a button will be created. It allows you to easily navigate to the group in the future,
+> as pressing the button equals to typing the `viewgrp grp/GROUP_NAME` command.
+
 **Format:**
 
 `addgrp grp/GROUP_NAME path/PATH_TO_XLSX`
@@ -175,12 +179,16 @@ Adding a new tutorial group:
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. **Serenity** will switch to tutorial group `G04` page.
-3. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
+2. At the same time, a new button named `G04` will be created in the _Side Bar_.
+3. **Serenity** will switch to tutorial group `G04` page.
+4. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
 
 ####  4.1.2. Delete an existing tutorial group: `delgrp`
 
 You can use this command to delete an existing tutorial group.
+
+> :memo: **Notes regarding the `delgrp` command:**
+> After deleting a tutorial group, the button named after the tutorial group will be deleted as well.
 
 **Format:**
 
@@ -198,6 +206,7 @@ Deleting an existing tutorial group:
 Outcome:
 
 1. The _Result Display_ will show a success message.
+2. The button named `G04` will be removed from the _Side_Bar_.
 2. **Serenity** will exit tutorial group `G04` page.
 3. You can now see that tutorial group `G04` no longer exists.
 
@@ -793,6 +802,10 @@ The following commands allow you to navigate between different views.
 You can use this command to view the list of students and tutorial lessons of a tutorial group.
 You will also be able to execute tutorial group-related commands.
 
+> :bulb: **Tip for the `viewgrp` command:**
+> You can easily navigate to the tutorial group by pressing its button in the Side_Bar as well!
+> Pressing the tutorial group's button equals to typing this command.
+
 **Format:**
 
 `viewgrp grp/GROUP_NAME`
@@ -801,10 +814,18 @@ You will also be able to execute tutorial group-related commands.
 
 You want to view the details of tutorial group `G04`.
 
-Viewing a tutorial group:
+<ins>Method 1</ins> <br>
+
+Viewing a tutorial group by typing the following command:
 
 1. Type `viewgrp grp/G04` into the _Command Box_.
 2. Press `Enter` to execute.
+
+<ins>Method 2</ins> <br>
+
+Viewing a tutorial group by pressing the group button:
+
+1. Press the button named `G04` in the Side_Bar.
 
 Outcome:
 
@@ -868,8 +889,7 @@ You can use this command to view the participation score sheet of the students i
 across all tutorial lessons. The participation score sheet will be displayed in table form.
 
 > ℹ **Note regarding the `viewscore` command:**
-> In a similar way to the `viewatt` command,
-> you can view the participation score of all your students in the tutorial group at one glance.
+> You can view the participation score of all your students in the tutorial group at one glance.
 > You can also preview the XLSX file that you can generate with the `exportscore` command,
 > before generating the actual XLSX file.
 
@@ -891,9 +911,40 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the participation score sheet of tutorial group `G04`.
 
-#### 4.5.5. View all pending questions: `viewqn`
+#### 4.5.5. View flagged attendance: `viewflag`
 
-You can use this command to view all questions that have yet to be addressed.
+You can use this command to view students with their attendance marked as flagged across all tutorial lessons.
+
+> :bulb: **Tip for the `viewflag` command:**
+> You can view students with flagged attendance for a specific tutorial lesson by
+> entering the tutorial lesson page using `viewlsn` and scrolling through the "Lesson" tab in the page.
+
+**Format:**
+
+`viewflag`
+
+**Example:**
+
+You want to view all flagged attendance.
+
+Viewing flagged attendance:
+
+1. Type `viewflag` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the list of students with flagged attendance across all tutorial lessons.
+
+#### 4.5.6. View pending questions: `viewqn`
+
+You can use this command to view questions that were asked across all tutorial lessons
+and have yet to be addressed.
+
+> :bulb: **Tip for the `viewqn` command:**
+> You can view questions that were asked in a specific tutorial lesson by
+> entering the tutorial lesson page using `viewlsn` and pressing the "Questions" tab in the page.
 
 **Format:**
 
@@ -903,7 +954,7 @@ You can use this command to view all questions that have yet to be addressed.
 
 You want to view all pending questions.
 
-Viewing all pending questions:
+Viewing pending questions:
 
 1. Type `viewqn` into the _Command Box_.
 2. Press `Enter` to execute.
@@ -911,7 +962,9 @@ Viewing all pending questions:
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. The _Data Display_ will update and display the list of pending questions.
+2. The _Data Display_ will update and display the list of pending questions asked across all tutorial lessons.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -980,5 +1033,6 @@ Command | Example
 **View tutorial group** <br> `viewgrp grp/GROUP_NAME` | `viewgrp grp/G04`
 **View tutorial lesson** <br> `viewlsn grp/GROUP_NAME lsn/LESSON_NAME` | `viewlsn grp/G04 lsn/1-2`
 **View attendance** <br> `viewatt grp/GROUP_NAME` | `viewatt grp/G04`
-**VIew participation score** <br> `viewscore grp/GROUP_NAME` | `viewscore grp/G04`
+**View participation score** <br> `viewscore grp/GROUP_NAME` | `viewscore grp/G04`
+**View flag** <br> `viewflag` | `viewflag`
 **View questions** <br> `viewqn` | `viewqn`
