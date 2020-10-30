@@ -379,6 +379,16 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. `Aaron Tan` will no longer be in the list of students in tutorial group `G04`.
 
+<p align="center"><img src="images/delstudent/delstudent_command.png" 
+alt="Command box for delstudent command"></p>
+
+<p align="center">Figure 4.1.6.1 Command for <code>delstudent</code> command</p>
+
+<p align="center"><img src="images/delstudent/delstudent_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.1.6.2 Screen displayed when the command is successfully executed.</i></p>
+
+
 ### 4.2. Attendance taking
 
 Need to mark attendance of your students at the start of each lesson quickly?
@@ -485,6 +495,15 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
+
+<p align="center"><img src="images/attendance/markabsent_command.png" 
+alt="Command box for delstudent command"></p>
+
+<p align="center">Figure 4.2.2.1 Command for <code>markabsent</code> command</p>
+
+<p align="center"><img src="images/attendance/markabsent_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.2.2.2 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.2.3. Mark all students as absent: `markabsent all`
 
@@ -660,6 +679,15 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
+<p align="center"><img src="images/participation/setscore_command.png" 
+alt="Command box for delstudent command"></p>
+
+<p align="center">Figure 4.3.1.1 Command for <code>setscore</code> command</p>
+
+<p align="center"><img src="images/participation/setscore_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.3.1.2 Screen displayed when the command is successfully executed.</i></p>
+
 #### 4.3.2. Add participation score of a student: `addscore`
 
 You can use this command to increase the participation score of a specific student for a tutorial lesson.
@@ -669,8 +697,8 @@ You can use this command to increase the participation score of a specific stude
 > The maximum score is 5
 
 **Format:**
-<br>`addscore name/NAME matric/STUDENT_NUMBER add/SCORE_TO_ADD`
-<br>`addscore INDEX add/SCORE_TO_ADD`
+<br>`addscore name/NAME matric/STUDENT_NUMBER score/SCORE_TO_ADD`
+<br>`addscore INDEX score/SCORE_TO_ADD`
 
 **Example:**
 
@@ -683,14 +711,14 @@ is the first person on the student list so his `index` number is 1.
 Adding participation score of a student in a tutorial lesson by `name` and `student number`:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `addscore name/AARON TAN matric/A0123456U add/1` into the _Command Box_.
+2. Type `addscore name/AARON TAN matric/A0123456U score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Adding participation score of a student in a tutorial lesson by `index`number:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `addscore 1 add/1` into the _Command Box_.
+2. Type `addscore 1 score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -708,8 +736,8 @@ You can use this command to decrease the participation score of a specific stude
 
 **Format:**
 
-<br>`subscore name/NAME matric/STUDENT_NUMBER sub/SCORE`
-<br>`subscore INDEX sub/SCORE`
+<br>`subscore name/NAME matric/STUDENT_NUMBER score/SCORE`
+<br>`subscore INDEX score/SCORE`
 
 **Example:**
 
@@ -722,14 +750,14 @@ is the first person on the student list so his `index` number is 1.
 Subtracting participation score of a student in a tutorial lesson by `name` and `student number`:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `subscore name/AARON TAN matric/A0123456U sub/1` into the _Command Box_.
+2. Type `subscore name/AARON TAN matric/A0123456U score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 <ins>Method 2</ins> <br>
 Subtracting participation score of a student in a tutorial lesson:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G04` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `subscore 1 sub/1` into the _Command Box_.
+2. Type `subscore 1 score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
 Outcome:
@@ -1047,8 +1075,8 @@ Command | Example
 Command | Example
 ------------ | -------------
 **Set participation score** <br> - `setscore name/NAME matric/STUDENT_NUMBER score/SCORE` <br> - `setscore INDEX score/SCORE` | <br>- `setscore name/AARON TAN matric/A0123456U score/3` <br> - `setscore 1 score/3`
-**Add participation score** <br> - `addscore name/NAME matric/STUDENT_NUMBER add/SCORE`<br> - `addscore INDEX add/SCORE` | <br>- `addscore name/AARON TAN matric/A0123456U add/3` <br> - `addscore 1 add/3`
-**Subtract participation score** <br> - `subscore name/NAME matric/STUDENT_NUMBER sub/SCORE` <br> - `subscore INDEX sub/SCORE` | <br>- `subscore name/AARON TAN matric/A0123456U sub/3` <br> - `subscore 1 sub/3`
+**Add participation score** <br> - `addscore name/NAME matric/STUDENT_NUMBER score/SCORE`<br> - `addscore INDEX score/SCORE` | <br>- `addscore name/AARON TAN matric/A0123456U score/3` <br> - `addscore 1 score/3`
+**Subtract participation score** <br> - `subscore name/NAME matric/STUDENT_NUMBER score/SCORE` <br> - `subscore INDEX score/SCORE` | <br>- `subscore name/AARON TAN matric/A0123456U score/3` <br> - `subscore 1 score/3`
 **Export participation scores** <br> `exportscore grp/GROUP_NAME` | <br>`exportscore grp/G07`
 
 
