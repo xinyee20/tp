@@ -124,9 +124,9 @@ horizontal row of tabs at the top.
 This tab shows the records for a specific lesson. 
 
 In this tab, you are able to:
-* Assign and change the attendance and participation grades
+* Assign and change the [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades
 * Flag a student's attendance
-* Add a question that is asked during this lesson
+* Add a [question](#44-question-addressing) that is asked during this lesson
 * View the attendance and participation grades for this lesson
 * View the questions asked during this tutorial lesson
 
@@ -239,6 +239,14 @@ Outcome:
 2. **Serenity** will switch to tutorial group `G04` page.
 3. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
 
+<p align="center"><img src="images/addgroup/addgrpcommand.png" alt="Command box for addgrp command"></p>
+
+<p align="center">Figure 4.1.1.1 Command for <code>addgrp</code> command</p>
+
+<p align="center"><img src="images/addgroup/addgrpresult.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.1.1.2 Screen displayed when the command is successfully executed.</i></p>
+
 ####  4.1.2. Delete an existing tutorial group: `delgrp`
 
 You can use this command to delete an existing tutorial group.
@@ -284,6 +292,14 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. **Serenity** will display tutorial lesson `1-2` page.
 3. You can now see that tutorial lesson `1-2` has been added to tutorial group `G04`.
+
+<p align="center"><img src="images/addlsn/addlsncommand.png" alt="Command box for addlsn command"></p>
+
+<p align="center">Figure 4.1.3.1 Command for <code>addlsn</code> command</p>
+
+<p align="center"><img src="images/addlsn/addlsnresult.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.1.3.2 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.1.4. Delete an existing tutorial lesson: `dellsn`
 
@@ -395,7 +411,13 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-![Figure 4.2.1. Outcome of a successful mark all students present command](images/ui/markpresent_all.png)
+<p align="center"><img src="images/attendance/markpresent_all_command.png" alt="Command box for markpresent command"></p>
+
+<p align="center">Figure 4.2.1.1 Command for <code>markpresent all</code> command</p>
+
+<p align="center"><img src="images/addgroup/markpresent_all_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.2.1.2 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.2.2. Mark a student as present: `markpresent`
 
@@ -431,8 +453,6 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-![Figure X. Outcome of a successful mark a student present command](images/ui/markpresent_student.png)
-
 #### 4.2.2. Mark a student as absent: `markabsent`
 
 You can use this command to mark a specific student as absent for a tutorial lesson.
@@ -464,8 +484,6 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
-
-![Figure X. Outcome of a successful mark a student absent command](images/ui/markabsent_student.png) 
 
 #### 4.2.3. Mark all students as absent: `markabsent all`
 
@@ -587,6 +605,14 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The attendance sheet of tutorial group `G04` will be saved as `G04_attendance.xlsx`.
 You can find the XLSX file at the location where your **Serenity** application is located.
+
+<p align="center"><img src="images/export/exportatt_command.png" alt="Command box for exportatt command"></p>
+
+<p align="center">Figure 4.2.5.1 Command for <code>exportatt</code> command</p>
+
+<p align="center"><img src="images/export/exportatt_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.2.5.2 Contents of excel file generated.</i></p>
 
 ### 4.3. Participation marking
 
