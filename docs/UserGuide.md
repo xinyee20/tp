@@ -40,7 +40,9 @@ To get started with using **Serenity**, you can follow these steps:
 
 4. Double-click the file to start the app. The _GUI_ similar to the image below should appear in a few seconds.
 
-   ![Ui](images/Ui.png)
+   <p align="center"><img src="images/Ui.png" alt="Layout of GUI"></p>
+   
+   <p align="center"><i>Figure 2.1 Welcome screen.</i></p>
 
 5. Type the command in the _Command Box_ and press `Enter` to execute it. 
 
@@ -73,7 +75,9 @@ User Guide.
 The following figure shows the _GUI_ of **Serenity**.
 It is annotated with the name of the _GUI_ components.
 
-![Ui](images/Ui_annotated.png)
+<p align="center"><img src="images/Ui_annotated.png" alt="Layout of GUI"></p>
+
+<p align="center"><i>Figure 3.2.1.1 layout of GUI.</i></p>
 
 #### 3.2.2. Layout of the _GUI_
 
