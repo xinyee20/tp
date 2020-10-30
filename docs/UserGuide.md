@@ -829,7 +829,7 @@ alt="Command box for addqn command"></p>
 
 <p align="center">Figure 4.4.1.1 Command for <code>addqn</code> command</p>
 
-<p align="center"><img src="images/participation/addqn_result.png" alt="Result upon successful execution of command"></p>
+<p align="center"><img src="images/addqn/addqn_result.png" alt="Result upon successful execution of command"></p>
 
 <p align="center"><i>Figure 4.4.1.2 Screen displayed when the command is successfully executed.</i></p>
 
