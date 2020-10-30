@@ -123,6 +123,8 @@ horizontal row of tabs at the top.
 
 This tab shows the records for a specific lesson. 
 
+> :memo: This tab is accessible through the `viewlsn` command
+
 In this tab, you are able to:
 * Assign and change the [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades
 * Flag a student's attendance
@@ -133,8 +135,6 @@ In this tab, you are able to:
 <p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
 
 <p align="center"><i>Figure 3.2.2.4 User interface showing the layout of the lesson tab</i></p>
-
-> :memo: This tab is accessible through the `viewlsn` command
 
 #### 3.2.3. General symbols and syntax
 
