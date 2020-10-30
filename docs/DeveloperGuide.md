@@ -296,6 +296,29 @@ by ensuring that all logic and functionality related to a Tutorial group is enca
 
 ### **4.4 Student Manager**
 
+**Serenity** helps the users handle many students from groups. The `StudentManager` is in 
+charge of adding the students to the
+group and ensuring that updates are done to the right student.
+ It contains a `UniqueStudentList` which contains all the students in each group.
+
+#### **4.4.1. Rationale**
+The `StudentManager` is an important feature to have because a tutor will have many groups of students to handle. 
+Students will need to be allocated to the unique groups for lessons.
+ Hence, it is necessary to have a student manager who will be in charge of doing that. 
+The student manager will also be the one responsible for ensuring that actions done on a 
+group level can only be done on students belonging to that group.
+
+#### **4.4.2. Current Implementation**
+The `StudentManager` contains a `HashMap` whose key is a `Group` and value is a `UniqueList`. 
+The following Class Diagram describes the structure of StudentManager and its relevant classes.
+
+<p align="center"><img src="images/StudentManager.png" alt="class diagram for StudentManager"></p>
+
+<p align="center"><i>Figure 4.4.2.1 Structure of the <code>StudentManager</code> and its relevant classes</i></p>
+
+As seen from the diagram, 
+`StudentManager` can contain multiple groups and a `UniqueStudentList` for each group.
+
 ### **4.5 StudentInfo Manager**
 
 (contributed by Xin Yee)
