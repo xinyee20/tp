@@ -242,7 +242,7 @@ Outcome:
 
 <p align="center"><img src="images/addgroup/addgrpcommand.png" alt="Command box for addgrp command"></p>
 
-<p align="center">Figure 4.1.1.1 Command for <code>addgrp</code> command</p>
+<p align="center"><i>Figure 4.1.1.1 Command for <code>addgrp</code> command.</i></p>
 
 <p align="center"><img src="images/addgroup/addgrpresult.png" alt="Result upon successful execution of command"></p>
 
@@ -281,22 +281,22 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 
 **Example:**
 
-You want to create a new tutorial lesson called `1-2` for tutorial group `G04`.
+You want to create a new tutorial lesson called `4-2` (week 4, lesson 2) for tutorial group `G04`.
 
 Adding a tutorial lesson to a tutorial group:
 
-1. Type `addlsn grp/G04 lsn/1-2` into the _Command Box_.
+1. Type `addlsn grp/G04 lsn/4-2` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. **Serenity** will display tutorial lesson `1-2` page.
-3. You can now see that tutorial lesson `1-2` has been added to tutorial group `G04`.
+2. **Serenity** will display tutorial lesson `4-2` page.
+3. You can now see that tutorial lesson `4-2` has been added to tutorial group `G04`.
 
 <p align="center"><img src="images/addlsn/addlsncommand.png" alt="Command box for addlsn command"></p>
 
-<p align="center">Figure 4.1.3.1 Command for <code>addlsn</code> command</p>
+<p align="center"><i>Figure 4.1.3.1 Command for <code>addlsn</code> command.</i></p>
 
 <p align="center"><img src="images/addlsn/addlsnresult.png" alt="Result upon successful execution of command"></p>
 
@@ -382,7 +382,7 @@ Outcome:
 <p align="center"><img src="images/delstudent/delstudent_command.png" 
 alt="Command box for delstudent command"></p>
 
-<p align="center">Figure 4.1.6.1 Command for <code>delstudent</code> command</p>
+<p align="center"><i>Figure 4.1.6.1 Command for <code>delstudent</code> command</i></p>
 
 <p align="center"><img src="images/delstudent/delstudent_result.png" alt="Result upon successful execution of command"></p>
 
@@ -424,7 +424,7 @@ Outcome:
 
 <p align="center"><img src="images/attendance/markpresent_all_command.png" alt="Command box for markpresent command"></p>
 
-<p align="center">Figure 4.2.1.1 Command for <code>markpresent all</code> command</p>
+<p align="center"><i>Figure 4.2.1.1 Command for <code>markpresent all</code> command.</i></p>
 
 <p align="center"><img src="images/attendance/markpresent_all_result.png" alt="Result upon successful execution of command"></p>
 
@@ -499,7 +499,7 @@ Outcome:
 <p align="center"><img src="images/attendance/markabsent_command.png" 
 alt="Command box for delstudent command"></p>
 
-<p align="center">Figure 4.2.2.1 Command for <code>markabsent</code> command</p>
+<p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command.</i></p>
 
 <p align="center"><img src="images/attendance/markabsent_result.png" alt="Result upon successful execution of command"></p>
 
@@ -628,7 +628,7 @@ You can find the XLSX file at the location where your **Serenity** application i
 
 <p align="center"><img src="images/export/exportatt_command.png" alt="Command box for exportatt command"></p>
 
-<p align="center">Figure 4.2.5.1 Command for <code>exportatt</code> command</p>
+<p align="center"><i>Figure 4.2.5.1 Command for <code>exportatt</code> command.</i></p>
 
 <p align="center"><img src="images/export/exportatt_result.png" alt="Result upon successful execution of command"></p>
 
@@ -682,7 +682,7 @@ Outcome:
 <p align="center"><img src="images/participation/setscore_command.png" 
 alt="Command box for delstudent command"></p>
 
-<p align="center">Figure 4.3.1.1 Command for <code>setscore</code> command</p>
+<p align="center"><i>Figure 4.3.1.1 Command for <code>setscore</code> command.</i></p>
 
 <p align="center"><img src="images/participation/setscore_result.png" alt="Result upon successful execution of command"></p>
 
@@ -809,19 +809,29 @@ in the future.
 
 **Example:**
 
-A student asked you, "`What is the deadline for the report?`" in a tutorial lesson.
+A student asked you, "`What is the deadline for the report?`" during the lesson `1-1` in group `G04`.
 As the deadline of the report has changed, you want to note this question down, check the new deadline and
 address the question in the future. 
 
 Adding a question:
 
+1. Navigate to view group `G04` lesson `1-1` via [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 1. Type `addqn qn/What is the deadline for the report?` into the _Command Box_.
-2. Press `Enter` to execute.
+1. Press `Enter` to execute.
 
 Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The question will be added to the list of questions.
+
+<p align="center"><img src="images/addqn/addqn_command.png" 
+alt="Command box for addqn command"></p>
+
+<p align="center">Figure 4.4.1.1 Command for <code>addqn</code> command</p>
+
+<p align="center"><img src="images/participation/addqn_result.png" alt="Result upon successful execution of command"></p>
+
+<p align="center"><i>Figure 4.4.1.2 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.4.2. Delete an existing question: `delqn`
 
