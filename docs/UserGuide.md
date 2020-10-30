@@ -937,6 +937,11 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the information for tutorial group `G04`.
 
+<p align="center"><img src="images/view/viewgrp.png" 
+alt="User interface for viewing tutorial group"></p>
+
+<p align="center"><i>Figure 4.5.1.1 User interface for viewing tutorial group.</i></p>
+
 #### 4.5.2. View a tutorial lesson: `viewlsn`
 
 You can use this command to view and modify the attendance and participation scores of 
@@ -959,6 +964,11 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the students' information for tutorial lesson `1-2` of tutorial group `G04`.
+
+<p align="center"><img src="images/view/viewlsn.png" 
+alt="User interface for viewing tutorial lesson"></p>
+
+<p align="center"><i>Figure 4.5.2.1 User interface for viewing tutorial lesson.</i></p>
 
 #### 4.5.3. View attendance sheet of a tutorial group: `viewatt`
 
@@ -987,6 +997,11 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the attendance sheet of tutorial group `G04`.
+
+<p align="center"><img src="images/view/viewatt.png" 
+alt="User interface for viewing tutorial attendance"></p>
+
+<p align="center"><i>Figure 4.5.3.1 User interface for viewing tutorial attendance.</i></p>
 
 #### 4.5.4. View participation score sheet of a tutorial group: `viewscore`
 
@@ -1017,6 +1032,11 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the participation score sheet of tutorial group `G04`.
 
+<p align="center"><img src="images/view/viewscore.png" 
+alt="User interface for viewing tutorial participation score sheet"></p>
+
+<p align="center"><i>Figure 4.5.4.1 User interface for viewing tutorial participation score sheet.</i></p>
+
 #### 4.5.5. View all pending questions: `viewqn`
 
 You can use this command to view all questions that have yet to be addressed.
@@ -1038,6 +1058,11 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the list of pending questions.
+
+<p align="center"><img src="images/view/viewqn.png" 
+alt="User interface for viewing questions"></p>
+
+<p align="center"><i>Figure 4.5.5.1 User interface for viewing questions.</i></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
