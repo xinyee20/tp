@@ -211,6 +211,7 @@ Follow the instructions below to set up your new classes, and watch **Serenity**
 You can use this command to add a new tutorial group automatically from XLSX data.
 
 > :memo: **Notes regarding the `addgrp` command:**
+> * A sample XLSX file can be found [here](https://github.com/AY2021S1-CS2103T-W12-4/tp/blob/master/CS2101_G04.xlsx)
 > * The XLSX file should store a list of students.
 > * The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS.
 > * To obtain the PATH_TO_XLSX, either:<br>
