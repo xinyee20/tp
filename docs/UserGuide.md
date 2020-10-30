@@ -95,12 +95,14 @@ the names of students whose attendance have been flagged using the `flagatt` com
 attendance serves as a reminder on the first page of the app for you to check on the student and perform
 any follow-up actions, if necessary. 
 
+> :bulb: TIP: Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and 
+>proceed with teaching. With the flag attendance tab, you will be reminded to check again after class.
+
 <p align="center"><img src="images/flaggedatt.png" alt="Picture of flag attendance GUI"></p>
 
 <p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab</i></p>
 
-> :bulb: Tip: Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and 
->proceed with teaching. With the flag attendance tab, you will be reminded to check again after class.
+
 
 ##### **Questions tab**
 
