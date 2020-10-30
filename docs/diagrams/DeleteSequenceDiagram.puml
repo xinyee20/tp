@@ -3,67 +3,73 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":SerenityParser" as SerenityParser LOGIC_COLOR
+participant ":DelGrpCommandParser" as DelGrpCommandParser LOGIC_COLOR
+participant "command:DelGrpCommand" as DelGrpCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delgrp grp/G04")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> SerenityParser : parseCommand("delgrp grp/G04")
+activate SerenityParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DelGrpCommandParser
+SerenityParser -> DelGrpCommandParser
+activate DelGrpCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+DelGrpCommandParser --> SerenityParser
+deactivate DelGrpCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+SerenityParser -> DelGrpCommandParser : parse(" grp/G04")
+activate DelGrpCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DelGrpCommand
+DelGrpCommandParser -> DelGrpCommand
+activate DelGrpCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DelGrpCommand --> DelGrpCommandParser : command
+deactivate DelGrpCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+DelGrpCommandParser --> SerenityParser : command
+deactivate DelGrpCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+DelGrpCommandParser -[hidden]-> SerenityParser
+destroy DelGrpCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+SerenityParser --> LogicManager : command
+deactivate SerenityParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DelGrpCommand : execute()
+activate DelGrpCommand
 
-DeleteCommand -> Model : deletePerson(1)
+note left of Model
+""toDel"" = the group to be deleted
+end note
+
+DelGrpCommand -> Model : deleteGroup(toDel)
 activate Model
 
-Model --> DeleteCommand
+Model --> DelGrpCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DelGrpCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DelGrpCommand: result
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DelGrpCommand --> LogicManager : result
+deactivate DelGrpCommand
+DelGrpCommand -[hidden]-> SerenityParser
+destroy DelGrpCommand
 
-[<--LogicManager
+[<--LogicManager: result
 deactivate LogicManager
 @enduml
