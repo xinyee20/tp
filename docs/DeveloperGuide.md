@@ -294,8 +294,7 @@ by ensuring that all logic and functionality related to a Tutorial group is enca
 
 ### **4.3 Lesson Manager**
 
-
-The LessonManager is responsible for storing lessons in a tutorial group.
+The `LessonManager` is responsible for storing lessons in a tutorial group.
 
 #### **4.3.1. Rationale**
 Having a `LessonManager` allows for easy retrieval, viewing and updating of the lessons in a particular tutorial `Group`.
