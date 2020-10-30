@@ -310,7 +310,7 @@ In this section, we detail the workflow of adding a lesson to an existing tutori
 
 The following steps describe the execution of `addlsn` in detail, assuming that no error is encountered.
 
-When the `execut`e method of` AddLsnCommand` is called, a `StudentInfo` object is created for every student in the tutorial group.
+When the `execute` method of` AddLsnCommand` is called, a `StudentInfo` object is created for every student in the tutorial group.
 
 1. A new `UniqueList` is created and the `StudentInfo` objects are added to the list.
 1. A new `Lesson` object is created with the new `UniqueList`.
