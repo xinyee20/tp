@@ -294,6 +294,29 @@ by ensuring that all logic and functionality related to a Tutorial group is enca
 
 ### **4.3 Lesson Manager**
 
+The `LessonManager` is responsible for storing lessons in a tutorial group.
+
+#### **4.3.1. Rationale**
+Having a `LessonManager` allows for easy retrieval, viewing and updating of the lessons in a particular tutorial `Group`.
+
+#### **4.3.2. Current Implementation**
+ The `LessonManager` contains a `HashMap` whose key is a `Group` and value is a `UniqueList`.
+In this section, we detail the workflow of adding a lesson to an existing tutorial group through the `addlsn`  command.
+
+<p align="center"><img src="images/addlsndiagram.png" alt="class diagram for LessonManager"></p>
+
+<p align="center"><i>Figure 4.3.2.1 Activity diagram detailing workflow of <code>addlsn</code> command.</i></p>
+
+The following steps describe the execution of `addlsn` in detail, assuming that no error is encountered.
+
+When the `execute` method of` AddLsnCommand` is called, a `StudentInfo` object is created for every student in the tutorial group.
+
+1. A new `UniqueList` is created and the `StudentInfo` objects are added to the list.
+1. A new `Lesson` object is created with the new `UniqueList`.
+1. The `ModelManager`’s `updateLessonList` method is called.
+1. The `ModelManager` then calls the method `setListOfLessonsToGroup` of `LessonManager`.
+
+
 ### **4.4 Student Manager**
 
 **Serenity** helps the users handle many students from groups. The `StudentManager` is in 
