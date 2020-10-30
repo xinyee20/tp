@@ -81,19 +81,27 @@ It is annotated with the name of the _GUI_ components.
 
 #### 3.2.2. Layout of the _GUI_
 
-**Serenity** is divided into four main tabs:
+**Serenity** is divided into three pages. Under each page, there are a few tabs:
 
-* Flagged attendance tab
-* Questions tab
-* Group tab
-* Lesson tab
+* Home page
+    * Flagged attendance tab
+    * Pending questions tab
+* Tutorial group page
+    * Lessons tab
+    * Students tab
+    * Attendance tab
+    * Participation tab
+* Tutorial lesson page
+    * Lesson tab
+    * Questions tab
 
-##### **Flagged attendance tab** 
+##### **Home page** 
 
-This is the main tab of the application, and is the default page when the app is started. It contains 
-the names of students whose attendance have been flagged using the `flagatt` command. Flagging a student's
-attendance serves as a reminder on the first page of the app for you to check on the student and perform
-any follow-up actions, if necessary. 
+This is the default page shown when the app is started.
+
+The flagged attendance tab contains the names of students whose attendance have been flagged with the `flagatt` command.
+Flagging a student's attendance serves as a reminder on the first page of the app for you
+to check on the student and perform any follow-up actions, if necessary. 
 
 > :bulb: TIP: Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and 
 >proceed with teaching. With the flag attendance tab, you will be reminded to check again after class.
@@ -102,41 +110,46 @@ any follow-up actions, if necessary.
 
 <p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab</i></p>
 
-
-
-##### **Questions tab**
-
-This tab shows the questions asked across all your tutorial groups, providing a convenient place for you
-to keep track of all the questions asked by students across your tutorial groups and lessons.
+The pending questions tab shows the questions asked across all your tutorial groups,
+providing a convenient place for you to keep track of all the questions asked by students
+across your tutorial groups and lessons.
 
 <p align="center"><img src="images/questionsGUI.png" alt="Picture of questions GUI"></p>
 
 <p align="center"><i>Figure 3.2.2.2 User interface showing the layout of the questions tab</i></p>
 
-##### **Group tab**
+##### **Tutorial group page**
 
-This tab shows the information related to a tutorial group that you are teaching. 
-There are four sub-tabs at the top which allows you to view the number of lessons scheduled
-for this group, the list of students in the group, 
-their attendance records and participation grades respectively. Toggle between them with the 
-horizontal row of tabs at the top.
+This page shows the information related to a tutorial group that you are teaching. 
+
+The lessons tab allows you to view the list of lessons scheduled for this group.
+
+The students tab displays the list of students belonging in this group. You may modify this list,
+especially at the start of each semester where there will be students entering the module,
+appealing into the module, switching between tutorial groups, and even dropping the module.
+
+The attendance tab shows the attendance sheet of the students. You may view the attendance records
+of all the students in the tutorial group across all the tutorial lessons.
+
+The participation tab shows the participation score sheet of the students. Similarly, you may view
+the class participation grades of all the students in the tutorial group across all the tutorial lessons.
 
 <p align="center"><img src="images/viewgrpGUI.png" alt="Picture of group GUI"></p>
 
 <p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the group tab</i></p>
 
-##### **Lesson tab**
+##### **Tutorial lesson page**
 
-This tab shows the records for a specific lesson. 
+This page shows the records for a specific lesson. 
 
-> :memo: This tab is accessible through the `viewlsn` command
+> :memo: This page is accessible using the `viewlsn` command
 
-In this tab, you are able to:
-* Assign and change the [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades
-* Flag a student's attendance
-* Add a [question](#44-question-addressing) that is asked during this lesson
-* View the attendance and participation grades for this lesson
-* View the questions asked during this tutorial lesson
+The lesson tab contains the list of students in the tutorial group. For each student, you may
+view and change the student's [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades.
+You may also flag the student's attendance if necessary.
+
+The questions tab contains the list of questions that were asked during this tutorial lesson. In this tab, you may
+add, edit, find or delete a [question](#44-question-addressing) that was asked during this tutorial lesson.
 
 <p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
 
@@ -226,6 +239,10 @@ You can use this command to add a new tutorial group automatically from XLSX dat
 >    ◦ Copy and paste the XLSX file into the same folder as your **Serenity** application, then type the name of the XLSX file.<br>
 >      e.g. `addgrp grp/G04 path/CS2101_G04.xlsx`
 
+> :bulb: **Tip for the `addgrp` command:**
+> After adding a tutorial group, a button will be created. It allows you to easily navigate to the group in the future,
+> as pressing the button equals to typing the `viewgrp grp/GROUP_NAME` command.
+
 **Format:**
 
 `addgrp grp/GROUP_NAME path/PATH_TO_XLSX`
@@ -243,8 +260,9 @@ Adding a new tutorial group:
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. **Serenity** will switch to tutorial group `G04` page.
-3. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
+2. At the same time, a new button named `G04` will be created in the _Side Bar_.
+3. **Serenity** will switch to tutorial group `G04` page.
+4. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
 
 <p align="center"><img src="images/addgroup/addgrpcommand.png" alt="Command box for addgrp command"></p>
 
@@ -257,6 +275,9 @@ Outcome:
 ####  4.1.2. Delete an existing tutorial group: `delgrp`
 
 You can use this command to delete an existing tutorial group.
+
+> :memo: **Notes regarding the `delgrp` command:**
+> After deleting a tutorial group, the button named after the tutorial group will be deleted as well.
 
 **Format:**
 
@@ -274,6 +295,7 @@ Deleting an existing tutorial group:
 Outcome:
 
 1. The _Result Display_ will show a success message.
+2. The button named `G04` will be removed from the _Side_Bar_.
 2. **Serenity** will exit tutorial group `G04` page.
 3. You can now see that tutorial group `G04` no longer exists.
 
@@ -925,6 +947,10 @@ The following commands allow you to navigate between different views.
 You can use this command to view the list of students and tutorial lessons of a tutorial group.
 You will also be able to execute tutorial group-related commands.
 
+> :bulb: **Tip for the `viewgrp` command:**
+> You can easily navigate to the tutorial group by pressing its button in the Side_Bar as well!
+> Pressing the tutorial group's button equals to typing this command.
+
 **Format:**
 
 `viewgrp grp/GROUP_NAME`
@@ -933,10 +959,18 @@ You will also be able to execute tutorial group-related commands.
 
 You want to view the details of tutorial group `G04`.
 
-Viewing a tutorial group:
+<ins>Method 1</ins> <br>
+
+Viewing a tutorial group by typing the following command:
 
 1. Type `viewgrp grp/G04` into the _Command Box_.
 2. Press `Enter` to execute.
+
+<ins>Method 2</ins> <br>
+
+Viewing a tutorial group by pressing the group button:
+
+1. Press the button named `G04` in the Side_Bar.
 
 Outcome:
 
@@ -1015,8 +1049,7 @@ You can use this command to view the participation score sheet of the students i
 across all tutorial lessons. The participation score sheet will be displayed in table form.
 
 > ℹ **Note regarding the `viewscore` command:**
-> In a similar way to the `viewatt` command,
-> you can view the participation score of all your students in the tutorial group at one glance.
+> You can view the participation score of all your students in the tutorial group at one glance.
 > You can also preview the XLSX file that you can generate with the `exportscore` command,
 > before generating the actual XLSX file.
 
@@ -1043,9 +1076,54 @@ alt="User interface for viewing tutorial participation score sheet"></p>
 
 <p align="center"><i>Figure 4.5.4.1 User interface for viewing tutorial participation score sheet.</i></p>
 
-#### 4.5.5. View all pending questions: `viewqn`
+#### 4.5.5. View flagged attendance: `viewflag`
 
-You can use this command to view all questions that have yet to be addressed.
+You can use this command to view students with their attendance marked as flagged across all tutorial lessons.
+
+> :bulb: **Tip for the `viewflag` command:**
+> You can easily navigate to the flagged attendance list by pressing the "Flag" button in the Side_Bar as well!
+> Pressing the button equals to typing this command.
+
+> :bulb: **Tip for the `viewflag` command:**
+> Instead of viewing flagged attendance across all tutorial lessons,
+> you can view flagged attendance for a specific tutorial lesson by
+> entering the tutorial lesson page using `viewlsn` and scrolling through the "Lesson" tab in the page.
+
+**Format:**
+
+`viewflag`
+
+**Example:**
+
+You want to view all flagged attendance.
+
+Viewing flagged attendance:
+
+1. Type `viewflag` into the _Command Box_.
+2. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. The _Data Display_ will update and display the list of students with flagged attendance across all tutorial lessons.
+
+<p align="center"><img src="images/flaggedatt2.png" alt="User interface for viewing flagged attendance."></p>
+
+<p align="center"><i>Figure 4.5.5.1 User interface showing the layout of the flagged attendance tab</i></p>
+
+#### 4.5.6. View pending questions: `viewqn`
+
+You can use this command to view questions that were asked across all tutorial lessons
+and have yet to be addressed.
+
+> :bulb: **Tip for the `viewqn` command:**
+> You can easily navigate to the pending questions list by pressing the "Qns" button in the Side_Bar as well!
+> Pressing the button equals to typing this command.
+
+> :bulb: **Tip for the `viewqn` command:**
+> Instead of viewing pending questions across all tutorial lessons,
+> You can view questions for a specific tutorial lesson by
+> entering the tutorial lesson page using `viewlsn` and pressing the "Questions" tab in the page.
 
 **Format:**
 
@@ -1055,7 +1133,7 @@ You can use this command to view all questions that have yet to be addressed.
 
 You want to view all pending questions.
 
-Viewing all pending questions:
+Viewing pending questions:
 
 1. Type `viewqn` into the _Command Box_.
 2. Press `Enter` to execute.
@@ -1063,7 +1141,9 @@ Viewing all pending questions:
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. The _Data Display_ will update and display the list of pending questions.
+2. The _Data Display_ will update and display the list of pending questions asked across all tutorial lessons.
+
+
 
 <p align="center"><img src="images/view/viewqn.png" 
 alt="User interface for viewing questions"></p>
@@ -1137,5 +1217,6 @@ Command | Example
 **View tutorial group** <br> `viewgrp grp/GROUP_NAME` | `viewgrp grp/G04`
 **View tutorial lesson** <br> `viewlsn grp/GROUP_NAME lsn/LESSON_NAME` | `viewlsn grp/G04 lsn/1-2`
 **View attendance** <br> `viewatt grp/GROUP_NAME` | `viewatt grp/G04`
-**VIew participation score** <br> `viewscore grp/GROUP_NAME` | `viewscore grp/G04`
+**View participation score** <br> `viewscore grp/GROUP_NAME` | `viewscore grp/G04`
+**View flag** <br> `viewflag` | `viewflag`
 **View questions** <br> `viewqn` | `viewqn`
