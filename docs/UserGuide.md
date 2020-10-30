@@ -132,7 +132,7 @@ In this tab, you are able to:
 
 <p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
 
-<p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the lesson tab</i></p>
+<p align="center"><i>Figure 3.2.2.4 User interface showing the layout of the lesson tab</i></p>
 
 > :memo: This tab is accessible through the `viewlsn` command
 
@@ -416,7 +416,7 @@ Outcome:
 
 <p align="center">Figure 4.2.1.1 Command for <code>markpresent all</code> command</p>
 
-<p align="center"><img src="images/addgroup/markpresent_all_result.png" alt="Result upon successful execution of command"></p>
+<p align="center"><img src="images/attendance/markpresent_all_result.png" alt="Result upon successful execution of command"></p>
 
 <p align="center"><i>Figure 4.2.1.2 Screen displayed when the command is successfully executed.</i></p>
 
