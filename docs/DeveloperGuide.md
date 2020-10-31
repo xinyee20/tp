@@ -39,9 +39,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The Architecture Diagram given in Figure 3.1.1 below explains the high-level design of Serenity.
 
-![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
+<p align="center">
+<img alt="Figure 3.1.1 Architecture Diagram of Serenity" src="images/ArchitectureDiagram.png" ></p>
 
-<p align="center">Figure 3.1.1 Architecture Diagram of Serenity</p>
+<p align="center"><i>Figure 3.1.1 Architecture Diagram of Serenity.</i></p>
 
 > :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder. 
 
@@ -60,7 +61,8 @@ Component | Description
 **How the architecture components interact with each other**
 The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
 
-![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
+<p align="center">
+<img alt="Figure 3.1.2 Sequence Diagram of the architecture of Serenity" src="images/ArchitectureSequenceDiagram.png" ></p>
 
 <p align="center"><i>Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
@@ -76,7 +78,8 @@ This segment will explain the structure and responsibilities of the Ui component
 
 The Class Diagram given in Figure 3.2.1.1 below describes the structure of the Ui-related classes.
 
-![Figure 3.2.1.1](images/UiClassDiagram2.png)
+<p align="center">
+<img alt="Figure 3.2.1.1 Class Diagram of Ui component" src="images/UiClassDiagram2.png" ></p>
 
 <p align="center"><i>Figure 3.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
@@ -103,9 +106,11 @@ This segment will explain the structure and responsibilities of the `Logic`compo
 
 The Class Diagram given in Figure 3.3.1.1 below describes the structure of Logic-related classes.
 
-![Figure 3.3.1.1](images/LogicClassDiagram2.png)
+<p align="center">
+<img alt="Figure 3.3.1.1 Class Diagram of Logic component" src="images/LogicClassDiagram2.png" ></p>
 
 <p align="center"><i>Figure 3.3.1.1 Structure of the <code>Logic</code> component.</i></p>
+
 
 From the diagram above, you can see that the `Logic` component is split into 2 groups, one for command and another for command parsing. 
 As Serenity follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class. 
@@ -125,9 +130,10 @@ The steps described above will be the standard command parsing and execution of 
 To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command delgrp grp/G04 is shown below. 
 The diagram starts with the `execute("delgrp grp/G04")` API call.
 
-![Figure 3.3.2.1](images/DeleteSequenceDiagram.png)
+<p align="center">
+<img alt="Figure 3.3.2.1 Sequence Diagram detailing execution of DelGrpCommand" src="images/LogicClassDiagram2.png" ></p>
 
-<p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the `delgrp grp/G04` command.</i></p>
+<p align="center"><i>Figure 3.3.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
 > :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 
@@ -139,9 +145,10 @@ This segment will explain the structure and responsibilities of the Model compon
 
 #### **3.4.1 Structure**
 
-![Figure 3.4.1.1 Simplified Class Diagram of `model` component ](images/ModelClassDiagram.png)
+<p align="center">
+<img alt="Figure 3.4.1.1 Class Diagram of Model component" src="images/ModelClassDiagram.png" ></p>
 
-<p align="center"><i>Figure 3.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
+<p align="center"><i>Figure 3.4.1.1 Class Diagram of <code>Model</code> component.</i></p>
 
 The `UserPrefs` class represents the user’s preference.
 
