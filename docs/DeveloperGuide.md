@@ -336,6 +336,8 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 ### **4.4 Student Manager**
 
+(Contributed by Neo Rui En)
+
 **Serenity** is responsible for storing students in tutorial groups.
 
 #### **4.4.1. Rationale**
