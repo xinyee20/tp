@@ -1,4 +1,5 @@
 @startuml
+skinparam linetype ortho
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
@@ -36,9 +37,9 @@ HiddenOutside ..> Logic
 
 LogicManager .up.|> Logic
 LogicManager -->"1" SerenityParser
-SerenityParser .left.> XYZCommandParser: creates >
+SerenityParser ..> XYZCommandParser: creates >
 
-XYZCommandParser ..> XYZCommand : creates >
+XYZCommandParser .right.> XYZCommand : creates >
 XYZCommandParser ..|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
@@ -49,9 +50,9 @@ XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+LogicManager .right.> Command : executes >
 
-LogicManager --> Model
+LogicManager -left-> Model
 Command .right.> Model
 note right of XYZCommand: XYZCommand = AddGrpCommand, \nMarkPresentCommand, etc
 
