@@ -16,6 +16,9 @@ Class CommandBox
 Class SideBar
 Class HelpWindow
 Class DataPanel
+}
+
+package ui.datapanel {
 Class SerenityDataPanel
 Class GroupDataPanel
 Class LessonDataPanel
@@ -25,7 +28,12 @@ Class StudentInfoCard
 Class QuestionCard
 }
 
-package Logic {}
+package Logic {
+Class HiddenLogic #white
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ui
 
 UiManager .right.|> Ui
 UiManager -down-> MainWindow
@@ -59,7 +67,9 @@ LessonCard -down-|> UiPart
 StudentInfoCard -down-|> UiPart
 QuestionCard -down-|> UiPart
 
-UiManager -right-> Logic
-MainWindow -right-> Logic
+HiddenLogic -down[hidden]-> SerenityDataPanel
+
+UiManager --> Logic
+MainWindow ---> Logic
 
 @enduml

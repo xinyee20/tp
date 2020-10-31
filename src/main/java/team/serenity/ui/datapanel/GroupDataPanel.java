@@ -1,4 +1,4 @@
-package team.serenity.ui;
+package team.serenity.ui.datapanel;
 
 import java.util.ArrayList;
 import java.util.List;
