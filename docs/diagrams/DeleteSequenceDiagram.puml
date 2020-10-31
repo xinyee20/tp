@@ -1,16 +1,16 @@
 @startuml
 !include style.puml
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":SerenityParser" as SerenityParser LOGIC_COLOR
-participant ":DelGrpCommandParser" as DelGrpCommandParser LOGIC_COLOR
-participant "command:DelGrpCommand" as DelGrpCommand LOGIC_COLOR
-participant "result:CommandResult" as CommandResult LOGIC_COLOR
+box Logic LOGIC_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR_T1
+participant ":SerenityParser" as SerenityParser LOGIC_COLOR_T1
+participant ":DelGrpCommandParser" as DelGrpCommandParser LOGIC_COLOR_T1
+participant "command:DelGrpCommand" as DelGrpCommand LOGIC_COLOR_T1
+participant "result:CommandResult" as CommandResult LOGIC_COLOR_T1
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+box Model MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR_T1
 end box
 
 [-> LogicManager : execute("delgrp grp/G04")

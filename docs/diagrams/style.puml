@@ -20,55 +20,56 @@
 !define LOGIC_COLOR_T4 #101086
 
 !define MODEL_COLOR #F7CECC
-!define MODEL_COLOR_T1 #A98784
+!define MODEL_COLOR_T1 #E47772
 !define MODEL_COLOR_T2 #E41F36
 !define MODEL_COLOR_T3 #7B000E
 !define MODEL_COLOR_T4 #51000A
 
-!define STORAGE_COLOR #FFF2CD
-!define STORAGE_COLOR_T1 #E3C572
+!define STORAGE_COLOR #FDE8AB
+!define STORAGE_COLOR_T1 #F9C93C
 !define STORAGE_COLOR_T2 #EDC520
 !define STORAGE_COLOR_T3 #806600
 !define STORAGE_COLOR_T2 #544400
 
-!define MAIN_COLOR #F7CCE3
-!define MAIN_COLOR_T1 #EC8BBF
+!define MAIN_COLOR #FAAED7
 
 !define COMMONS_COLOR #DCBEE5
 
-!define USER_COLOR #000000
+!define USER_COLOR #black
 
-!define ORANGE_COLOR #F7DFCC
-!define ORANGE_COLOR_T1 #FFC08F
+!define ORANGE_COLOR #FFC08F
 
 skinparam BackgroundColor #FFFFFFF
 
 skinparam Shadowing false
 
 skinparam Class {
-    FontColor #FFFFFF
+    FontColor #black
     BorderThickness 1
     BorderColor #FFFFFF
-    StereotypeFontColor #FFFFFF
+    StereotypeFontColor #black
     FontName Arial
 }
 
 skinparam Actor {
+    FontColor #black
     BorderColor USER_COLOR
     Color USER_COLOR
     FontName Arial
 }
 
 skinparam Sequence {
+    FontColor #black
     MessageAlign center
     BoxFontSize 15
     BoxPadding 0
-    BoxFontColor #FFFFFF
+    BoxFontColor #black
     FontName Arial
 }
 
 skinparam Participant {
-    FontColor #FFFFFFF
+    FontColor #black
+    FontColor #black
     Padding 20
 }
 
