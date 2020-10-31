@@ -1,48 +1,61 @@
 @startuml
+skinparam linetype ortho
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
-package UI <<Rectangle>>{
+package Ui <<Rectangle>>{
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
+Class TitleDisplay
 Class ResultDisplay
 Class CommandBox
-Class ButtonBar
+Class SideBar
+Class HelpWindow
 Class DataPanel
 }
 
-package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+package ui.serenitydata {
+}
+
+package ui.groupdata {
+}
+
+package ui.lessondata {
+}
+
+package Logic {
+Class Hidden #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
-UiManager .left.|> Ui
+UiManager .right.|> Ui
 UiManager -down-> MainWindow
-MainWindow *-down-> HelpWindow
-MainWindow *-down-> CommandBox
+MainWindow *-down-> TitleDisplay
 MainWindow *-down-> ResultDisplay
-MainWindow *-down-> ButtonBar
+MainWindow *-down-> CommandBox
+MainWindow *-down-> SideBar
+MainWindow *-down-> HelpWindow
 MainWindow *-down-> DataPanel
 
-MainWindow -left-|> UiPart
+MainWindow -down-|> UiPart
+TitleDisplay --|> UiPart
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
+SideBar -down-|> UiPart
 HelpWindow -down-|> UiPart
-ButtonBar -down-|> UiPart
 DataPanel -down-|> UiPart
 
+DataPanel <|-right- ui.serenitydata
+DataPanel <|-- ui.groupdata
+DataPanel <|-down- ui.lessondata
+
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-
-MainWindow -[hidden]-|> UiPart
 @enduml

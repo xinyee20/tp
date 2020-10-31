@@ -1,0 +1,37 @@
+@startuml
+skinparam linetype ortho
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package ui.serenitydata {
+Class SerenityDataPanel
+}
+
+package ui.groupdata {
+Class GroupDataPanel
+Class LessonCard
+Class StudentCard
+}
+
+package ui.lessondata {
+Class LessonDataPanel
+Class StudentInfoCard
+Class QuestionCard
+}
+
+Class HiddenOutside1 #FFFFFF
+Class HiddenOutside2 #FFFFFF
+Class HiddenOutside3 #FFFFFF
+
+HiddenOutside1 <|-- SerenityDataPanel
+HiddenOutside2 <|-- GroupDataPanel
+HiddenOutside3 <|-- LessonDataPanel
+
+GroupDataPanel --> LessonCard
+GroupDataPanel --> StudentCard
+LessonDataPanel --> StudentInfoCard
+LessonDataPanel --> QuestionCard
+
+@enduml
