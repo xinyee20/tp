@@ -37,13 +37,16 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 (Contributed by Neo Rui En)
 
-The Architecture Diagram given in Figure 1 below explains the high-level design of Serenity.
+The Architecture Diagram given in Figure 3.1.1 below explains the high-level design of Serenity.
 
 ![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
 
 <p align="center">Figure 3.1.1 Architecture Diagram of Serenity</p>
 
 > :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder. 
+
+The following table gives a quick overview of each component of Serenity.
+More details about the components can be found in the following subsections.
 
 Component | Description
 ------------ | -------------
@@ -55,7 +58,7 @@ Component | Description
 `Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the `Storage` interface and exposes its functionality through the `StorageManager` class.
 
 **How the architecture components interact with each other**
-The Sequence Diagram in Figure 2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
+The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
 
 ![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
 
@@ -71,9 +74,11 @@ This segment will explain the structure and responsibilities of the Ui component
 
 #### **3.2.1. Structure**
 
-![Figure 3.2.1](images/UiClassDiagram.png)
+The Class Diagram given in Figure 3.2.1.1 below describes the structure of the Ui-related classes.
 
-<p align="center"><i>Figure 3.2.1 Structure of the <code>Ui</code> component.</i></p>
+![Figure 3.2.1.1](images/UiClassDiagram (whitespace).png)
+
+<p align="center"><i>Figure 3.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
 The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
  as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
@@ -96,11 +101,11 @@ This segment will explain the structure and responsibilities of the `Logic`compo
 
 #### **3.3.1 Structure**
 
-<p align="center">
-<img src="images/LogicClassDiagram.png" alt="Class diagram of Logic component">
-</p>
+The Class Diagram given in Figure 3.3.1.1 below describes the structure of Logic-related classes.
 
-<p align="center"><i>Figure 3.3.1 Structure of <code>Logic</code> component.</i></p>
+![Figure 3.3.1.1](images/LogicClassDiagram (whitespace).png)
+
+<p align="center"><i>Figure 3.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
 From the diagram above, you can see that the `Logic` component is split into 2 groups, one for command and another for command parsing. 
 As Serenity follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class. 
@@ -119,6 +124,10 @@ The `Logic` component is in charge of command parsing from the commands given by
 The steps described above will be the standard command parsing and execution of every command in **Serenity**. 
 To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command delgrp grp/G04 is shown below. 
 The diagram starts with the `execute("delgrp grp/G04")` API call.
+
+![Figure 3.3.2.1](images/DeleteSequenceDiagram.png)
+
+<p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the `delgrp grp/G04` command.</i></p>
 
 > :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 
