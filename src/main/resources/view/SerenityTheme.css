@@ -314,53 +314,41 @@
     -fx-font-size: 11;
 }
 
-//Style of entire tableView
 .table-view{
     /*-fx-background-color: transparent;*/
  }
 
-
-//Style of each column header in the tableView
 .table-view .column-header {
      -fx-background-color: transparent;
 }
 
-//Style of each column header's background in the tableView
 .table-view .column-header-background{
     -fx-background-color: -color-blue3;
 }
 
- //Style of each column header's label  in the tableView
 .table-view .column-header-background .label{
      -fx-background-color: transparent;
     -fx-font-weight:bold;
     -fx-text-fill: white;
 }
 
-//Style of each column in the tableView
 .table-view .table-column{
     -fx-alignment:center;
 }
 
- //Style of each table cell
 .table-view .table-cell{
     -fx-font-weight:bold;
     -fx-font-size:15px;
 
 }
 
-
-//Style for each < non odd> row of table view
-/* .table-row-cell{
-    -fx-background-color: white;
-    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
-    -fx-padding: 0.0em;
+.menu-bar {
+    -fx-background-color: #F4F4F4;
 }
 
-//Style for each <odd> row of table view
-.table-row-cell:odd{
-    -fx-background-color: orange;
-    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
-    -fx-padding: 0.0em;
+.menu-bar > .container > .menu-button > .label {
+    -fx-text-fill: -color-black;
 }
-*/
+.menu-item .label{
+    -fx-text-fill: -color-black;
+}
