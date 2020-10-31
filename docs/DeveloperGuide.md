@@ -76,7 +76,7 @@ This segment will explain the structure and responsibilities of the Ui component
 
 The Class Diagram given in Figure 3.2.1.1 below describes the structure of the Ui-related classes.
 
-![Figure 3.2.1.1](images/UiClassDiagram (whitespace).png)
+![Figure 3.2.1.1](images/UiClassDiagram2.png)
 
 <p align="center"><i>Figure 3.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
@@ -103,7 +103,7 @@ This segment will explain the structure and responsibilities of the `Logic`compo
 
 The Class Diagram given in Figure 3.3.1.1 below describes the structure of Logic-related classes.
 
-![Figure 3.3.1.1](images/LogicClassDiagram (whitespace).png)
+![Figure 3.3.1.1](images/LogicClassDiagram2.png)
 
 <p align="center"><i>Figure 3.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
