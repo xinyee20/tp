@@ -25,9 +25,6 @@ import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
-import team.serenity.ui.groupdata.GroupDataPanel;
-import team.serenity.ui.lessondata.LessonDataPanel;
-import team.serenity.ui.serenitydata.SerenityDataPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements

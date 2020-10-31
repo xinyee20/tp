@@ -16,44 +16,48 @@ Class CommandBox
 Class SideBar
 Class HelpWindow
 Class DataPanel
+Class SerenityDataPanel
+Class GroupDataPanel
+Class LessonDataPanel
+Class LessonCard
+Class StudentCard
+Class StudentInfoCard
+Class QuestionCard
 }
 
-package ui.serenitydata {
-}
-
-package ui.groupdata {
-}
-
-package ui.lessondata {
-}
-
-package Logic {
-Class Hidden #FFFFFF
-}
-
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+package Logic {}
 
 UiManager .right.|> Ui
 UiManager -down-> MainWindow
+MainWindow *-right-> DataPanel
 MainWindow *-down-> TitleDisplay
 MainWindow *-down-> ResultDisplay
 MainWindow *-down-> CommandBox
 MainWindow *-down-> SideBar
 MainWindow *-down-> HelpWindow
-MainWindow *-down-> DataPanel
 
-MainWindow -down-|> UiPart
-TitleDisplay --|> UiPart
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-SideBar -down-|> UiPart
-HelpWindow -down-|> UiPart
-DataPanel -down-|> UiPart
+MainWindow --down--|> UiPart
+TitleDisplay --down--|> UiPart
+ResultDisplay --down--|> UiPart
+CommandBox --down-|> UiPart
+SideBar --down--|> UiPart
+HelpWindow --down--|> UiPart
+DataPanel --down--|> UiPart
 
-DataPanel <|-right- ui.serenitydata
-DataPanel <|-- ui.groupdata
-DataPanel <|-down- ui.lessondata
+DataPanel <|-- SerenityDataPanel
+DataPanel <|-- GroupDataPanel
+DataPanel <|-- LessonDataPanel
+
+SerenityDataPanel -down-> QuestionCard
+GroupDataPanel -down-> LessonCard
+GroupDataPanel -down-> StudentCard
+LessonDataPanel -down-> StudentInfoCard
+LessonDataPanel -down-> QuestionCard
+
+StudentCard -down-|> UiPart
+LessonCard -down-|> UiPart
+StudentInfoCard -down-|> UiPart
+QuestionCard -down-|> UiPart
 
 UiManager -right-> Logic
 MainWindow -right-> Logic

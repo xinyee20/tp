@@ -1,4 +1,4 @@
-package team.serenity.ui.serenitydata;
+package team.serenity.ui;
 
 import java.util.logging.Logger;
 
@@ -14,9 +14,7 @@ import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.core.Messages;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
-import team.serenity.ui.DataPanel;
-import team.serenity.ui.lessondata.LessonDataPanel.StudentInfoListViewCell;
-import team.serenity.ui.lessondata.QuestionCard;
+import team.serenity.ui.LessonDataPanel.StudentInfoListViewCell;
 
 public class SerenityDataPanel extends DataPanel {
 

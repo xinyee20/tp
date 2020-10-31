@@ -1,11 +1,10 @@
-package team.serenity.ui.lessondata;
+package team.serenity.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import team.serenity.model.group.question.Question;
-import team.serenity.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Question}.
