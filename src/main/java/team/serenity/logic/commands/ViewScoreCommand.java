@@ -39,7 +39,7 @@ public class ViewScoreCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
-        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, false, true);
+        return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_SCORE);
     }
 
     @Override

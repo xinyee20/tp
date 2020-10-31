@@ -6,7 +6,6 @@
     -color-blue4: #73A5C6;
     -color-white: #f8f8ff;
     -color-black: #000000;
-    -color-pink: #c6738c;
     -color-red: #B41900;
     -fx-text-fill: -color-white;
 }
@@ -18,7 +17,7 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-opacity: 0.9;
+    -fx-text-fill: -color-white;
 }
 
 .label-bright {
@@ -54,12 +53,12 @@
 }
 
 .tab-pane .tab {
-    -fx-background-color: -color-blue2;
+    -fx-background-color: transparent;
     -fx-border-insets: 0;
 }
 
 .tab-pane .tab:selected {
-    -fx-background-color: -color-blue3;
+    -fx-background-color: -color-blue2;
     -fx-border-insets: 0;
 }
 
@@ -115,10 +114,6 @@
     -fx-text-fill: -color-white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
 }
 
 .split-pane:horizontal .split-pane-divider {
@@ -209,7 +204,7 @@
 }
 
 .button-selected {
-    -fx-background-color: -color-pink;
+    -fx-background-color: transparent
 }
 
 .dialog-pane {
@@ -324,12 +319,6 @@
     /*-fx-background-color: transparent;*/
  }
 
- //Style of entire tableView when is getting focused
-.table-view:focused{
-    /*-fx-background-color: transparent;*/
-}
-
-
 
 //Style of each column header in the tableView
 .table-view .column-header {
@@ -338,7 +327,7 @@
 
 //Style of each column header's background in the tableView
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(#131313 0.0%, #424141 100.0%);
+    -fx-background-color: -color-blue3;
 }
 
  //Style of each column header's label  in the tableView
@@ -356,8 +345,7 @@
  //Style of each table cell
 .table-view .table-cell{
     -fx-font-weight:bold;
-    -fx-font-size:15px;           //the font size you asked in the comments below
-    /* -fx-text-fill:orange; */
+    -fx-font-size:15px;
 
 }
 
@@ -376,20 +364,3 @@
     -fx-padding: 0.0em;
 }
 */
-
-//Style of each entire row in the table view
-.table-row-cell:selected {
-   /* -fx-border-color:transparent firebrick transparent firebrick  ;
-    -fx-border-width:2.0; */
-}
-
-
-//Style of each entire row in the table view when is hovered
-.table-row-cell:hover {
-    -fx-background-color:orange;
-}
-
-//Style of each entire row in the table view when is getting focused
-.table-row-cell:focused {
-    -fx-background-color:purple;
-}

@@ -1,0 +1,35 @@
+@startuml
+
+!include ../style.puml
+
+title Finding a Question
+
+start
+
+:Receives a ""findqn"" command;
+
+if () then ([valid command])
+
+    :Parses the
+    ""findqn"" command
+    and the keywords;
+
+    :Search for all questions
+    with matching keywords;
+
+    :Shows all the found
+    questions to the user;
+
+    :Shows a success message;
+
+
+else ([else])
+
+    :Shows an
+    invalid command
+    error message;
+endif
+
+stop
+
+@enduml

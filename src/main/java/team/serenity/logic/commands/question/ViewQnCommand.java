@@ -20,10 +20,8 @@ public class ViewQnCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         model.updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
-        // TODO: Ryan/Ruien to add the viewQn boolean to CommandResult constructor to switch to view question tab
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CommandResult.UiAction.VIEW_QN);
     }
 
 }

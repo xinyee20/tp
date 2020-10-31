@@ -17,6 +17,7 @@ import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
+import team.serenity.model.group.Group;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Attendance;
@@ -34,16 +35,16 @@ public class SubScoreCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Decrease the participation score of a specific student for a lesson.\n"
             + "Parameters: "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER "
-            + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT "
-            + "or INDEX " + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER "
+            + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT "
+            + "or INDEX " + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456B "
-            + PREFIX_SUBTRACT_SCORE + " 2\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456B "
+            + PREFIX_SUBTRACT_SCORE + "2\n"
             + "or " + COMMAND_WORD + " 2"
-            + PREFIX_SUBTRACT_SCORE + " 2\n";
+            + PREFIX_SUBTRACT_SCORE + "2\n";
 
     private Optional<Student> toSubScore;
     private Optional<Index> index;
@@ -90,8 +91,10 @@ public class SubScoreCommand extends Command {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
         }
 
+        Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        UniqueList<StudentInfo> uniqueStudentInfoList =
+                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
         int newScore = 0;
 
@@ -129,6 +132,7 @@ public class SubScoreCommand extends Command {
 
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toSubScore = Optional.ofNullable(studentInfo.getStudent());
+            this.score = studentInfo.getParticipation().getScore();
             Attendance currentAttendance = studentInfo.getAttendance();
             if (!currentAttendance.isPresent()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));

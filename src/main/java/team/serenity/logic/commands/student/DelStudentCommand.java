@@ -8,6 +8,7 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -36,12 +37,12 @@ public class DelStudentCommand extends Command {
         + PREFIX_NAME + "Ryan "
         + PREFIX_MATRIC + "A1234567U\n"
         + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_GRP + "G04";
+        + PREFIX_GRP + "G04";
 
-    private String studentName;
-    private String studentId;
-    private Student toDelete;
-    private Index index;
+    private Optional<String> studentName;
+    private Optional<String> studentId;
+    private Optional<Student> toDelete;
+    private Optional<Index> index;
     private boolean isByIndex;
     private final Predicate<Group> predicate;
 
@@ -53,9 +54,10 @@ public class DelStudentCommand extends Command {
      */
     public DelStudentCommand(String studentName, String studentId, Predicate<Group> predicate) {
         requireAllNonNull(studentName, studentId, predicate);
-        this.studentName = studentName;
-        this.studentId = studentId;
+        this.studentName = Optional.ofNullable(studentName);
+        this.studentId = Optional.ofNullable(studentId);
         this.predicate = predicate;
+        this.index = Optional.empty();
         this.isByIndex = false;
     }
 
@@ -66,9 +68,11 @@ public class DelStudentCommand extends Command {
      */
     public DelStudentCommand(Index index, Predicate<Group> predicate) {
         requireAllNonNull(index, predicate);
-        this.index = index;
+        this.index = Optional.ofNullable(index);
         this.predicate = predicate;
         this.isByIndex = true;
+        this.studentId = Optional.empty();
+        this.studentName = Optional.empty();
     }
 
     @Override
@@ -84,28 +88,32 @@ public class DelStudentCommand extends Command {
         UniqueList<Student> uniqueStudentList = groups.get(0).getStudents();
 
         if (!isByIndex) {
-            toDelete = new Student(this.studentName, this.studentId);
-            if (!groups.get(0).getStudents().contains(toDelete)) {
+            toDelete = Optional.ofNullable(new Student(this.studentName.get(), this.studentId.get()));
+            if (!groups.get(0).getStudents().contains(toDelete.get())) {
                 //student does not exist
                 throw new CommandException(MESSAGE_STUDENT_EMPTY);
             }
         } else {
-            if (index.getZeroBased() > uniqueStudentList.size()) {
-                throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased()));
+            if (index.get().getZeroBased() > uniqueStudentList.size()) {
+                throw new CommandException(
+                        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.get().getOneBased()));
             }
 
-            toDelete = uniqueStudentList.getList().get(index.getZeroBased());
-            if (!uniqueStudentList.contains(toDelete)) {
+            toDelete = Optional.ofNullable(uniqueStudentList.getList().get(index.get().getZeroBased()));
+            if (!uniqueStudentList.contains(toDelete.get())) {
                 //student does not exist
                 throw new CommandException(MESSAGE_STUDENT_EMPTY);
             }
         }
 
-        model.deleteStudentFromGroup(toDelete, this.predicate);
+        model.deleteStudentFromGroup(toDelete.get(), this.predicate);
         model.updateFilteredGroupList(this.predicate);
         return new CommandResult(
-            String.format(MESSAGE_SUCCESS, this.studentName, this.studentId,
-            model.getFilteredGroupList().get(0).getGroupName()));
+            String.format(MESSAGE_SUCCESS, toDelete.get().getStudentName().fullName,
+                toDelete.get().getStudentNo().studentNumber,
+                model.getFilteredGroupList().get(0).getGroupName()),
+            CommandResult.UiAction.REFRESH_TABLE
+        );
     }
 
     @Override
@@ -121,6 +129,7 @@ public class DelStudentCommand extends Command {
         DelStudentCommand other = (DelStudentCommand) obj;
         return this.studentName.equals(other.studentName)
                 && this.studentId.equals(other.studentId)
+                && this.index.equals(other.index)
                 && this.predicate.equals(other.predicate);
     }
 

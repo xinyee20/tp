@@ -9,7 +9,7 @@ import team.serenity.model.Model;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
 /**
- * Finds and lists all students and lessons in the group specifeied. Keyword matching is case insensitive.
+ * Finds and lists all students and lessons in the group specified. Keyword matching is case insensitive.
  */
 public class ViewGrpCommand extends Command {
 
@@ -20,7 +20,7 @@ public class ViewGrpCommand extends Command {
         + "Parameters: "
         + PREFIX_GRP + "GROUP\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + " G04\n";
+        + PREFIX_GRP + "G04\n";
 
     private final GroupContainsKeywordPredicate predicate;
 
@@ -38,7 +38,7 @@ public class ViewGrpCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
-        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, false, false);
+        return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_GRP);
     }
 
     @Override

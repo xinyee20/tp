@@ -39,7 +39,7 @@ public class ViewAttCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
-        return new CommandResult(this.getMessage(model), false, false, false, true, false, false, true, false);
+        return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_ATT);
     }
 
     @Override

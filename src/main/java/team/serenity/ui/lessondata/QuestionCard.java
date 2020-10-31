@@ -27,9 +27,11 @@ public class QuestionCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label questionDescription;
     @FXML
-    private Label id;
+    private Label questionDetails;
 
     /**
      * Creates a {@code QuestionCard} with the given {@code Question} and index to display.
@@ -39,6 +41,8 @@ public class QuestionCard extends UiPart<Region> {
         this.question = question;
         this.id.setText(displayedIndex + ". ");
         this.questionDescription.setText(question.getDescription().description);
+        this.questionDetails.setText(String.format("Asked in tutorial lesson %s %s",
+            question.getGroupName(), question.getLessonName()));
     }
 
     @Override

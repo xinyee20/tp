@@ -16,6 +16,7 @@ import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
+import team.serenity.model.group.Group;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Attendance;
@@ -32,12 +33,12 @@ public class MarkAbsentCommand extends Command {
             + ": Marks a specific student or all students absent from a lesson.\n"
             + "Parameters: "
             + "all or "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX\n"
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456U\n"
             + "or " + COMMAND_WORD + " 2";
 
     private Optional<Student> toMarkAbsent;
@@ -92,8 +93,10 @@ public class MarkAbsentCommand extends Command {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
         }
 
+        Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        UniqueList<StudentInfo> uniqueStudentInfoList =
+                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
 
         if (!this.isWholeClass) {

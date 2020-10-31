@@ -31,7 +31,9 @@ public class ViewAttCommandParser implements Parser<ViewAttCommand> {
             throw this.viewAttCommandParserException;
         }
 
-        return new ViewAttCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));
+        String groupName = SerenityParserUtil.parseGroupName(grpKeyword[0]).toString();
+
+        return new ViewAttCommand(new GroupContainsKeywordPredicate(groupName));
     }
 
     /**

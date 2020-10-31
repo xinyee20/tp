@@ -12,6 +12,7 @@ import team.serenity.logic.commands.DelGrpCommand;
 import team.serenity.logic.commands.ExitCommand;
 import team.serenity.logic.commands.HelpCommand;
 import team.serenity.logic.commands.ViewAttCommand;
+import team.serenity.logic.commands.ViewFlagCommand;
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.logic.commands.ViewScoreCommand;
 import team.serenity.logic.commands.lesson.AddLsnCommand;
@@ -19,11 +20,14 @@ import team.serenity.logic.commands.lesson.DelLsnCommand;
 import team.serenity.logic.commands.lesson.ViewLsnCommand;
 import team.serenity.logic.commands.question.AddQnCommand;
 import team.serenity.logic.commands.question.DelQnCommand;
+import team.serenity.logic.commands.question.EditQnCommand;
 import team.serenity.logic.commands.question.FindQnCommand;
 import team.serenity.logic.commands.question.ViewQnCommand;
 import team.serenity.logic.commands.student.AddStudentCommand;
 import team.serenity.logic.commands.student.DelStudentCommand;
 import team.serenity.logic.commands.studentinfo.AddScoreCommand;
+import team.serenity.logic.commands.studentinfo.ExportAttCommand;
+import team.serenity.logic.commands.studentinfo.ExportScoreCommand;
 import team.serenity.logic.commands.studentinfo.FlagAttCommand;
 import team.serenity.logic.commands.studentinfo.MarkAbsentCommand;
 import team.serenity.logic.commands.studentinfo.MarkPresentCommand;
@@ -36,10 +40,13 @@ import team.serenity.logic.parser.lesson.DelLsnCommandParser;
 import team.serenity.logic.parser.lesson.ViewLsnCommandParser;
 import team.serenity.logic.parser.question.AddQnCommandParser;
 import team.serenity.logic.parser.question.DelQnCommandParser;
+import team.serenity.logic.parser.question.EditQnCommandParser;
 import team.serenity.logic.parser.question.FindQnCommandParser;
 import team.serenity.logic.parser.student.AddStudentCommandParser;
 import team.serenity.logic.parser.student.DelStudentCommandParser;
 import team.serenity.logic.parser.studentinfo.AddScoreCommandParser;
+import team.serenity.logic.parser.studentinfo.ExportAttCommandParser;
+import team.serenity.logic.parser.studentinfo.ExportScoreCommandParser;
 import team.serenity.logic.parser.studentinfo.FlagAttCommandParser;
 import team.serenity.logic.parser.studentinfo.MarkAbsentCommandParser;
 import team.serenity.logic.parser.studentinfo.MarkPresentCommandParser;
@@ -109,11 +116,17 @@ public class SerenityParser {
         case UnflagAttCommand.COMMAND_WORD:
             return new UnflagAttCommandParser().parse(arguments);
 
+        case ExportAttCommand.COMMAND_WORD:
+            return new ExportAttCommandParser().parse(arguments);
+
         case SetScoreCommand.COMMAND_WORD:
             return new SetScoreCommandParser().parse(arguments);
 
         case SubScoreCommand.COMMAND_WORD:
             return new SubScoreCommandParser().parse(arguments);
+
+        case ExportScoreCommand.COMMAND_WORD:
+            return new ExportScoreCommandParser().parse(arguments);
 
         case ViewGrpCommand.COMMAND_WORD:
             return new ViewGrpCommandParser().parse(arguments);
@@ -127,6 +140,9 @@ public class SerenityParser {
         case ViewScoreCommand.COMMAND_WORD:
             return new ViewScoreCommandParser().parse(arguments);
 
+        case ViewFlagCommand.COMMAND_WORD:
+            return new ViewFlagCommandParser().parse(arguments);
+
         // ========================== Question Commands =========================
 
         case AddQnCommand.COMMAND_WORD:
@@ -134,6 +150,9 @@ public class SerenityParser {
 
         case DelQnCommand.COMMAND_WORD:
             return new DelQnCommandParser().parse(arguments);
+
+        case EditQnCommand.COMMAND_WORD:
+            return new EditQnCommandParser().parse(arguments);
 
         case FindQnCommand.COMMAND_WORD:
             return new FindQnCommandParser().parse(arguments);

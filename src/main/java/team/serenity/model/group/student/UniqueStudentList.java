@@ -47,7 +47,7 @@ public class UniqueStudentList implements UniqueList<Student> {
     @Override
     public boolean contains(Student toCheck) {
         requireNonNull(toCheck);
-        return this.internalList.stream().anyMatch(toCheck::equals);
+        return this.internalList.stream().anyMatch(toCheck::isSameStudent);
     }
 
     /**

@@ -17,6 +17,7 @@ import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
+import team.serenity.model.group.Group;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Attendance;
@@ -34,16 +35,16 @@ public class AddScoreCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Increase the participation score of a specific student for a lesson.\n"
             + "Parameters: "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER "
-            + PREFIX_ADD_SCORE + " SCORE_TO_ADD "
-            + "or INDEX " + PREFIX_ADD_SCORE + " SCORE_TO_ADD\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER "
+            + PREFIX_ADD_SCORE + "SCORE_TO_ADD "
+            + "or INDEX " + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U "
-            + PREFIX_ADD_SCORE + " 2\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456U "
+            + PREFIX_ADD_SCORE + "2\n"
             + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_ADD_SCORE + " 2\n";
+            + PREFIX_ADD_SCORE + "2\n";
 
     private Optional<Student> toAddScore;
     private Optional<Index> index;
@@ -90,8 +91,10 @@ public class AddScoreCommand extends Command {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
         }
 
+        Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
+        UniqueList<StudentInfo> uniqueStudentInfoList =
+                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
         ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
         int newScore = 0;
 
@@ -129,6 +132,7 @@ public class AddScoreCommand extends Command {
 
             StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
             toAddScore = Optional.ofNullable(studentInfo.getStudent());
+            this.score = studentInfo.getParticipation().getScore();
             Attendance currentAttendance = studentInfo.getAttendance();
             if (!currentAttendance.isPresent()) {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));

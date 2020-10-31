@@ -1,20 +1,75 @@
 package team.serenity.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
+
+import java.io.IOException;
+
+import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.commons.util.StringUtil;
+import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Participation;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class SerenityParserUtil {
+
+    /**
+     * Parses a {@code String groupName} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedGroupName = groupName.trim();
+        if (!GroupName.isValidName(trimmedGroupName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupName(trimmedGroupName);
+    }
+
+    /**
+     * Parses a {@code String filePath} into a {@code XlsxUtil} object.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filePath} is invalid.
+     */
+    public static XlsxUtil parseFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(trimmedFilePath);
+            return new XlsxUtil(trimmedFilePath, workbook);
+        } catch (InvalidOperationException | IOException e) {
+            throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+        }
+    }
+
+    /**
+     * Parses a {@code String lessonName} into a {@code LessonName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lessonName} is invalid.
+     */
+    public static LessonName parseLessonName(String lessonName) throws ParseException {
+        requireNonNull(lessonName);
+        String trimmedLessonName = lessonName.trim();
+        if (!LessonName.isValidName(trimmedLessonName)) {
+            throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonName(trimmedLessonName);
+    }
 
     /**
      * Parses a {@code String studentName} into a {@code String}. Leading and trailing whitespaces will be trimmed.

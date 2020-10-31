@@ -49,6 +49,14 @@ public class Attendance {
         return Boolean.toString(this.isPresent);
     }
 
+    public int getIntegerAttendance() {
+        if (this.isPresent) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     public boolean isPresent() {
         return this.isPresent;
     }
