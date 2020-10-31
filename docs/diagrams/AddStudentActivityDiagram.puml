@@ -1,0 +1,48 @@
+@startuml
+
+!include ../style.puml
+
+title Adding a Student
+
+start
+
+:Receives an ""addstudent"" command;
+
+:User inputs the ""addstudent"" command;
+
+:Parses the ""addstudent"" command
+and the keywords;
+
+if () then ([valid command])
+
+    :Creates a new ""Student""
+    object containing the specified
+    name and student number;
+
+    :Finds the specified tutorial group
+    using the groups' ""GroupName"";
+
+    :Accesses the list of students
+    of the specified tutorial group;
+
+    :Adds the newly created
+    student to the list of students
+    in the tutorial group;
+
+    :Updates the list of students
+    displayed in the UI;
+
+    :Shows a success message;
+
+
+else ([else])
+
+    :Shows an
+    invalid command
+    error message;
+
+endif
+
+stop
+
+@enduml
