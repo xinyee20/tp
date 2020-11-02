@@ -6,7 +6,7 @@ import static team.serenity.commons.util.AppUtil.checkArgument;
 public class GroupName {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Group name must follow the format 'X-YY' where X is an upperchase character and Y is a digit from 0 to 9.";
+        "Group name must follow the format 'XYY' where X is an alphabetical character and Y is a digit from 0 to 9.";
 
     /*
      * Must contain one upper case letter followed by 2 digits.

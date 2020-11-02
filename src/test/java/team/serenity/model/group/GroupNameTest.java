@@ -28,7 +28,6 @@ public class GroupNameTest {
         assertFalse(GroupName.isValidName("g001"));
         assertFalse(GroupName.isValidName("G0"));
         assertFalse(GroupName.isValidName("G001"));
-
         // valid name
         assertTrue(GroupName.isValidName("G03"));
     }
