@@ -374,7 +374,10 @@ public class ModelManager implements Model {
             Group currentGroup = this.filteredGroups.get(0);
             Lesson currentLesson = this.filteredLessons.get(0);
             GroupLessonKey key = new GroupLessonKey(currentGroup.getGroupName(), currentLesson.getLessonName());
-            this.studentsInfo.setAll(this.studentInfoManager.getObservableListOfStudentsInfoFromKey(key));
+            ObservableList<StudentInfo> studentsInfoList = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
+            UniqueList<StudentInfo> uniqueStudentInfoList = currentLesson.getStudentsInfo();
+            this.studentsInfo.setAll(studentsInfoList);
+            this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, uniqueStudentInfoList);
         }
     }
 

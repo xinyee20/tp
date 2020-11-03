@@ -44,7 +44,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
             throw addStudentCommandParserException;
         }
 
-        String studentName = String.join(" ", studentNameArray);
+        String studentName = String.join(" ", studentNameArray).toUpperCase();
         String studentId = studentIdArray[0];
         String grpName = grpKeywordArray[0];
 
