@@ -1,7 +1,6 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NUMBER;
@@ -14,7 +13,6 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.logic.commands.student.DelStudentCommand;
 import team.serenity.logic.commands.studentinfo.FlagAttCommand;
 import team.serenity.model.group.student.Student;
 import team.serenity.testutil.StudentBuilder;
@@ -48,9 +46,9 @@ class FlagAttCommandParserTest {
 
     @Test
     public void parse_studentAndIndex_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelStudentCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC + GRP_DESC_GROUP_A , expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC , expectedMessage);
     }
 
     @Test
