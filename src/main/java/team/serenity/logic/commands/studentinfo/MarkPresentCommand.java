@@ -115,27 +115,42 @@ public class MarkPresentCommand extends Command {
         return executeMarkOneStudent(model, key, uniqueLesson, currentStudentInfoList, targetStudentInfo);
     }
 
+    /**
+     * Executes the mark all student present command and returns the result message.
+     */
     private CommandResult executeMarkAll(Model model, GroupLessonKey key, Lesson lesson,
                                          ObservableList<StudentInfo> currentStudentInfoList) {
+        // Gets the updated StudentInfoList with all the updated StudentsInfo
         UniqueList<StudentInfo> updatedListForMarkAll = getUpdatedListForMarkAll(currentStudentInfoList);
+
+        // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkAll);
         lesson.setStudentsInfo(updatedListForMarkAll);
         model.updateStudentsInfoList();
         return new CommandResult(MESSAGE_ALL_SUCCESS);
     }
 
+    /**
+     * Executes the mark one student present command and returns the result message.
+     */
     private CommandResult executeMarkOneStudent(Model model, GroupLessonKey key, Lesson lesson,
                                                 ObservableList<StudentInfo> currentStudentInfoList,
                                                 StudentInfo targetStudentInfo) {
+        // Gets the updated StudentInfoList with the updated targetStudentInfo
         UniqueList<StudentInfo> updatedListForMarkOneStudent =
                 getUpdatedListForMarkOneStudent(currentStudentInfoList, targetStudentInfo);
+
+        // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkOneStudent);
         lesson.setStudentsInfo(updatedListForMarkOneStudent);
         model.updateStudentsInfoList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent()));
     }
 
-    private StudentInfo getTargetStudentInfo(ObservableList<StudentInfo> uniqueStudentInfoList)
+    /**
+     * Returns the {@code targetStudentInfo} object in the {@code currentStudentInfoList}.
+     */
+    private StudentInfo getTargetStudentInfo(ObservableList<StudentInfo> currentStudentInfoList)
             throws CommandException {
         if (this.isByIndex) {
             // Mark present StudentInfo by index
@@ -143,19 +158,20 @@ public class MarkPresentCommand extends Command {
             Index targetIndex = this.index.get();
 
             // Return error message if index is out of range
-            if (targetIndex.getZeroBased() >= uniqueStudentInfoList.size()) {
+            if (targetIndex.getZeroBased() >= currentStudentInfoList.size()) {
                 throw new CommandException(
                         String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, targetIndex.getOneBased()));
             }
-            return uniqueStudentInfoList.get(targetIndex.getZeroBased());
+            return currentStudentInfoList.get(targetIndex.getZeroBased());
         }
 
         // Since it is not mark all or mark by index, there should be a student
         assert this.toMarkPresent.isPresent();
         Student student = this.toMarkPresent.get();
 
+        // Filter studentInfoList via Student and get the first object in the filtered stream (if any)
         Optional<StudentInfo> optionalStudentInfo =
-                uniqueStudentInfoList.stream().filter(s -> s.containsStudent(student)).findFirst();
+                currentStudentInfoList.stream().filter(s -> s.containsStudent(student)).findFirst();
 
         // Return error message if Student not found in StudentInfoList
         if (optionalStudentInfo.isEmpty()) {
@@ -164,9 +180,16 @@ public class MarkPresentCommand extends Command {
         return optionalStudentInfo.get();
     }
 
-    private UniqueList<StudentInfo> getUpdatedListForMarkAll(ObservableList<StudentInfo> currentList) {
+    /**
+     * Sets all {@code StudentInfo}'s {@code Attendance}'s {@code isPresent} field
+     * in the {@code currentStudentInfoList} to {@code true}.
+     * Returns the {@code updatedStudentInfoList}.
+     *
+     * @param currentStudentInfoList the current student info list.
+     */
+    private UniqueList<StudentInfo> getUpdatedListForMarkAll(ObservableList<StudentInfo> currentStudentInfoList) {
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
-        updatedList.setElementsWithList(currentList);
+        updatedList.setElementsWithList(currentStudentInfoList);
         List<StudentInfo> updatedStudentInfo = updatedList.stream()
                 .map(s -> new StudentInfo(s.getStudent(), s.getParticipation(), new Attendance(true)))
                 .collect(Collectors.toList());
@@ -174,10 +197,18 @@ public class MarkPresentCommand extends Command {
         return updatedList;
     }
 
-    private UniqueList<StudentInfo> getUpdatedListForMarkOneStudent(ObservableList<StudentInfo> currentList,
+    /**
+     * Sets the given {@code targetStudentInfo}'s {@code Attendance}'s {@code isPresent} field
+     * in the {@code currentStudentInfoList} to {@code true}.
+     * Returns the {@code updatedStudentInfoList}.
+     *
+     * @param currentStudentInfoList the current student info list.
+     * @param targetStudentInfo the target student info to mark present.
+     */
+    private UniqueList<StudentInfo> getUpdatedListForMarkOneStudent(ObservableList<StudentInfo> currentStudentInfoList,
                                                                     StudentInfo targetStudentInfo) {
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
-        updatedList.setElementsWithList(currentList);
+        updatedList.setElementsWithList(currentStudentInfoList);
         StudentInfo updatedStudentInfo = new StudentInfo(targetStudentInfo.getStudent(),
                 targetStudentInfo.getParticipation(), new Attendance(true));
         updatedList.setElement(targetStudentInfo, updatedStudentInfo);
