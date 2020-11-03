@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.exceptions.GroupLessonPairNotFoundException;
@@ -117,6 +118,19 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
         } else {
             throw new GroupLessonPairNotFoundException();
         }
+    }
+
+    /**
+     * Returns the list of student info at {@code key} as an unmodifiable list.
+     * @param key the given group and lesson key.
+     */
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key)
+            throws GroupLessonPairNotFoundException {
+        requireNonNull(key);
+        if (!this.mapToListOfStudentsInfo.containsKey(key)) {
+            throw new GroupLessonPairNotFoundException();
+        }
+        return this.mapToListOfStudentsInfo.get(key).asUnmodifiableObservableList();
     }
 
     /**
