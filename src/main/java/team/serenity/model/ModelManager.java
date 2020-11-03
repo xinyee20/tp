@@ -312,6 +312,7 @@ public class ModelManager implements Model {
             Group currentGroup = this.filteredGroups.get(0);
             this.groupManager.deleteStudentFromGroup(currentGroup, student);
         }
+        updateStudentsInfoList();
     }
 
     @Override
