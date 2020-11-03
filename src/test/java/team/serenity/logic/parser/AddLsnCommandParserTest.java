@@ -28,7 +28,7 @@ public class AddLsnCommandParserTest {
 
     @Test
     public void parse_success() {
-        AddLsnCommand expected = new AddLsnCommand(VALID_LESSON_NAME_ONE,
+        AddLsnCommand expected = new AddLsnCommand(new LessonName(VALID_LESSON_NAME_ONE),
             new GroupContainsKeywordPredicate(VALID_GROUP_NAME_A));
         assertParseSuccess(parser, GRP_DESC_GROUP_A + LESSON_DESC_LESSON_ONE, expected);
     }

@@ -77,7 +77,7 @@ public class DelStudentCommandTest {
         DelStudentCommand command = new DelStudentCommand("Freddie", "A0000000U", pred);
         CommandResult result = command.execute(modelStub);
         CommandResult expectedResult = new CommandResult(
-            String.format(MESSAGE_SUCCESS, "Freddie", "A0000000U", "G07"), CommandResult.UiAction.REFRESH_TABLE
+            String.format(MESSAGE_SUCCESS, "FREDDIE", "A0000000U", "G07"), CommandResult.UiAction.REFRESH_TABLE
         );
         assertTrue(result.equals(expectedResult));
     }

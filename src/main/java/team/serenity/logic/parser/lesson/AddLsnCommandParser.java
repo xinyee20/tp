@@ -11,6 +11,7 @@ import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.Prefix;
+import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
@@ -34,17 +35,10 @@ public class AddLsnCommandParser implements Parser<AddLsnCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLsnCommand.MESSAGE_USAGE));
         }
 
-        String grpName = argMultimap.getValue(PREFIX_GRP).get();
-        String lsnName = argMultimap.getValue(PREFIX_LSN).get();
+        GroupName groupName = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
+        LessonName lessonName = SerenityParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LSN).get());
 
-        if (!LessonName.isValidName(lsnName)) {
-            throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
-        }
-        if (!GroupName.isValidName(grpName)) {
-            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
-        }
-
-        return new AddLsnCommand(lsnName, new GroupContainsKeywordPredicate(grpName));
+        return new AddLsnCommand(lessonName, new GroupContainsKeywordPredicate(groupName.groupName));
     }
 
     /**

@@ -26,7 +26,7 @@ class StudentTest {
 
     @Test
     public void test_getStudentName() {
-        assertTrue(new Student("John", "A1234567U").getStudentName().toString().equals("John"));
+        assertTrue(new Student("John", "A1234567U").getStudentName().toString().equals("JOHN"));
     }
 
     @Test
@@ -36,7 +36,7 @@ class StudentTest {
 
     @Test
     public void test_toString() {
-        assertTrue(new Student("John", "A1234567U").toString().equals("John A1234567U"));
+        assertTrue(new Student("John", "A1234567U").toString().equals("JOHN A1234567U"));
     }
 
     @Test
