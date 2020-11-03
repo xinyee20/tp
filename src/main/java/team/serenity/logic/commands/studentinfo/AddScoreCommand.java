@@ -38,7 +38,7 @@ public class AddScoreCommand extends Command {
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_MATRIC + "STUDENT_NUMBER "
             + PREFIX_ADD_SCORE + "SCORE_TO_ADD "
-            + "or INDEX " + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
+            + "or INDEX(starting from 1) " + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aaron Tan "
             + PREFIX_MATRIC + "A0123456U "
@@ -125,7 +125,7 @@ public class AddScoreCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toAddScore.get()));
             }
         } else {
-            if (index.get().getZeroBased() > studentsInfo.size()) {
+            if (index.get().getZeroBased() >= studentsInfo.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                         index.get().getOneBased()));
             }

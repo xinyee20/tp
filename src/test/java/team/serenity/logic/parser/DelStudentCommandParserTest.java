@@ -1,11 +1,14 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
+import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_INDEX;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
+import static team.serenity.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
@@ -32,6 +35,13 @@ public class DelStudentCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, doubleGroup, expectedMessage);
         CommandParserTestUtil.assertParseFailure(parser, doubleId, expectedMessage);
         CommandParserTestUtil.assertParseFailure(parser, INVALID_INDEX, expectedMessage);
+    }
+
+    @Test
+    public void parse_studentAndIndex_throwsParseException() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelStudentCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC + GRP_DESC_GROUP_A , expectedMessage);
     }
 
     @Test

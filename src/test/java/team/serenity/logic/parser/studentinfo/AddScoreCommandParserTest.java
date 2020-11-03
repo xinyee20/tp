@@ -76,6 +76,13 @@ class AddScoreCommandParserTest {
     }
 
     @Test
+    public void parse_studentAndIndex_throwsParseException() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC + ADD_SCORE_DESC , expectedMessage);
+    }
+
+    @Test
     public void parse_validIndexParameter_returnsAddScoreCommand() {
         Index index = Index.fromOneBased(Integer.parseInt(VALID_INDEX));
         int score = Integer.parseInt(VALID_SCORE);

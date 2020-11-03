@@ -39,7 +39,7 @@ public class SetScoreCommand extends Command {
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_MATRIC + "STUDENT_NUMBER "
             + PREFIX_SET_SCORE + "SCORE "
-            + "or INDEX " + PREFIX_SET_SCORE + " SCORE\n"
+            + "or INDEX(starting from 1) " + PREFIX_SET_SCORE + " SCORE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aaron Tan "
             + PREFIX_MATRIC + "A0123456U "
@@ -125,7 +125,7 @@ public class SetScoreCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore.get()));
             }
         } else {
-            if (index.get().getZeroBased() > studentsInfo.size()) {
+            if (index.get().getZeroBased() >= studentsInfo.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                         index.get().getOneBased()));
             }
