@@ -39,8 +39,8 @@ public class AddStudentCommandParserTest {
         String studentId = "A0123456S";
         String groupName = "G04";
         String args = " " + PREFIX_GRP + groupName + " " + PREFIX_NAME
-            + studentName + " " + PREFIX_MATRIC + studentId;
-        AddStudentCommand result = new AddStudentCommand(studentName, studentId,
+            + studentName.toUpperCase() + " " + PREFIX_MATRIC + studentId;
+        AddStudentCommand result = new AddStudentCommand(studentName.toUpperCase(), studentId,
             new GroupContainsKeywordPredicate(groupName));
         assertParseSuccess(parser, args, result);
     }

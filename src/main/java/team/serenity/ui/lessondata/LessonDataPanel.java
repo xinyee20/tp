@@ -35,8 +35,6 @@ public class LessonDataPanel extends DataPanel {
     public LessonDataPanel(ObservableList<StudentInfo> studentInfoList, ObservableList<Question> questionList,
         String groupName, String lessonName) {
         super(FXML);
-        questionList = questionList.filtered(qn -> qn.getGroupName().toString().equals(groupName)
-            && qn.getLessonName().toString().equals(lessonName));
         this.studentInfoListView.setItems(studentInfoList);
         this.studentInfoListView.setCellFactory(listView -> new StudentInfoListViewCell());
         this.studentInfoListView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));

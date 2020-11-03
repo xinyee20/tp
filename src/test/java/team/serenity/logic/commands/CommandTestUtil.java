@@ -3,6 +3,7 @@ package team.serenity.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
@@ -29,6 +30,7 @@ public class CommandTestUtil {
 
     // Valid descriptions for Serenity
     public static final String VALID_GROUP_NAME_A = "G04";
+    public static final String VALID_LESSON_NAME_ONE = "1-1";
     public static final String VALID_GROUP_NAME_B = "G05";
     public static final String VALID_PATH_A = "CS2101_G04.xlsx";
     public static final String VALID_PATH_B = "CS2101_G05.xlsx";
@@ -45,6 +47,7 @@ public class CommandTestUtil {
 
     public static final String GRP_DESC_GROUP_A = " " + PREFIX_GRP + VALID_GROUP_NAME_A;
     public static final String GRP_DESC_GROUP_B = " " + PREFIX_GRP + VALID_GROUP_NAME_B;
+    public static final String LESSON_DESC_LESSON_ONE = " " + PREFIX_LSN + VALID_LESSON_NAME_ONE;
     public static final String PATH_DESC_GROUP_A = " " + PREFIX_PATH + VALID_PATH_A;
     public static final String PATH_DESC_GROUP_B = " " + PREFIX_PATH + VALID_PATH_B;
     public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;
@@ -57,6 +60,8 @@ public class CommandTestUtil {
 
     // Invalid descriptions for Serenity
     public static final String INVALID_GROUP_NAME_LOWERCASE = " " + PREFIX_GRP + "g07";
+    public static final String INVALID_GROUP_NAME_DASH = " " + PREFIX_GRP + "G-07";
+    public static final String INVALID_LESSON_NAME_TEN = " " + PREFIX_LSN + "1-10";
     public static final String INVALID_GROUP_NAME_NON_DIGITS = " " + PREFIX_GRP + "Gxx";
     public static final String INVALID_PATH = " " + PREFIX_PATH + "this is an invalid path";
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions

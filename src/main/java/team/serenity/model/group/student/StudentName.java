@@ -29,7 +29,7 @@ public class StudentName {
     public StudentName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        this.fullName = name;
+        this.fullName = name.toUpperCase();
     }
 
     /**
