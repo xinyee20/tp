@@ -94,7 +94,7 @@ public class DelStudentCommand extends Command {
                 throw new CommandException(MESSAGE_STUDENT_EMPTY);
             }
         } else {
-            if (index.get().getZeroBased() > uniqueStudentList.size()) {
+            if (index.get().getZeroBased() >= uniqueStudentList.size()) {
                 throw new CommandException(
                         String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.get().getOneBased()));
             }
