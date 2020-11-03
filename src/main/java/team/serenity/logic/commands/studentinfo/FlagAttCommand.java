@@ -104,6 +104,7 @@ public class FlagAttCommand extends Command {
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
                     model.updateStudentsInfoList();
+                    uniqueLesson.setStudentsInfo(uniqueStudentInfoList);
                     break;
                 }
             }
@@ -128,6 +129,7 @@ public class FlagAttCommand extends Command {
             uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
             model.updateLessonList();
             model.updateStudentsInfoList();
+            uniqueLesson.setStudentsInfo(uniqueStudentInfoList);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toFlagAtt.get()));
     }
