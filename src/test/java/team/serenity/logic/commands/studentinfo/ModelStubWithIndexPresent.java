@@ -13,6 +13,7 @@ import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Attendance;
+import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
@@ -43,7 +44,7 @@ class ModelStubWithIndexPresent extends ModelStub {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
-                .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U")))
+                .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U"), new Participation(0), new Attendance(true)))
                 .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
@@ -56,15 +57,21 @@ class ModelStubWithIndexPresent extends ModelStub {
         GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
         GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
         Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
-        UniqueList<StudentInfo> studentInfoList = uniqueLesson.getStudentsInfo();
-        ObservableList<StudentInfo> observableStudentInfo = studentInfoList.asUnmodifiableObservableList();
-        for (int i = 0; i < studentInfoList.size(); i++) {
-            StudentInfo studentInfo = observableStudentInfo.get(i);
-            Attendance updatedAttendance = studentInfo.getAttendance().setNewAttendance(true);
-            studentInfo.updateAttendance(updatedAttendance);
-        }
         uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
         return uniqueStudentInfoList.get(key);
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key) {
+        GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
+        uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
+        return uniqueStudentInfoList.get(key).asUnmodifiableObservableList();
+    }
+
+    @Override
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                      UniqueList<StudentInfo> newListOfStudentsInfo) {
     }
 
     @Override

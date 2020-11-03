@@ -70,8 +70,8 @@ public class AddStudentCommand extends Command {
             return new CommandResult(
                 String.format(MESSAGE_SUCCESS, studentName, studentId,
                     model.getFilteredGroupList().get(0).getGroupName()),
-                false, false, false, true,
-                false, false, false, false, false, false);
+                CommandResult.UiAction.REFRESH_TABLE
+            );
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());
         }
