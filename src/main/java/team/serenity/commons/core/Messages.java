@@ -10,10 +10,21 @@ public class Messages {
         + " the file path, type the 'help' command to refer to our user guide.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
-    public static final String MESSAGE_GROUP_LISTED_OVERVIEW = "You are in tutorial group %1$s.";
+    public static final String MESSAGE_GROUP_LISTED_OVERVIEW = "You are in tutorial group %1$s.\n"
+        + "You can view the summary of every"
+        + " lesson in this group here, or view individual lessons with the viewlsn command!";
     public static final String MESSAGE_GROUP_EMPTY = "No such group!";
 
-    public static final String MESSAGE_LESSON_LISTED_OVERVIEW = "You are in tutorial group %1$s, lesson %2$s.";
+    public static final String MESSAGE_ATTENDANCE_LISTED_OVERVIEW = "These are "
+        + "the attendance records for tutorial group %1$s.";
+
+    public static final String MESSAGE_SCORE_LISTED_OVERVIEW = "These are the "
+        + "participation scores for tutorial group %1$s.";
+
+    public static final String MESSAGE_LESSON_LISTED_OVERVIEW = "You are in "
+        + "tutorial group %1$s, lesson %2$s.\n"
+        + "You can view the lesson, "
+        + "mark attendance, assign participation scores and add questions asked in this lesson.";
     public static final String MESSAGE_LESSON_EMPTY = "no such lesson!";
 
     public static final String MESSAGE_STUDENT_EMPTY = "No such student!";
