@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.exceptions.GroupLessonPairNotFoundException;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 
@@ -162,6 +163,15 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
                 iterator.remove();
             }
         } ;
+    }
+
+    /**
+     * Delete all students info from group's lesson.
+     */
+    public void deleteAllStudentsInfoFromGroupLesson(Group group, Lesson lesson) {
+        requireAllNonNull(group, lesson);
+        GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+        this.mapToListOfStudentsInfo.remove(key);
     }
 
     //util methods

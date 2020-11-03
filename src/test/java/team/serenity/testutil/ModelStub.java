@@ -137,6 +137,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deleteLesson(Group targetGroup, Lesson targetLesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void updateLessonList() {
         throw new AssertionError("This method should not be called.");
     }
