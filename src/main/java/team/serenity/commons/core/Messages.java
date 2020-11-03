@@ -25,7 +25,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     public static final String MESSAGE_NOT_VIEWING_A_GROUP = "Group not specified.";
-    public static final String MESSAGE_NOT_VIEWING_A_LESSON = "Lesson not specified.";
+    public static final String MESSAGE_NOT_VIEWING_A_LESSON = "Not viewing a specific lesson, please use the viewlsn command first.";
 
     public static final String MESSAGE_QUESTIONS_LISTED_OVERVIEW = "%1$d %2$s listed!";
     public static final String MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX = "The question index provided is invalid.";
