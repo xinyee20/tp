@@ -49,16 +49,13 @@ public class LogicManager implements Logic {
         Command command = this.serenityParser.parseCommand(commandText);
         commandResult = command.execute(this.model);
 
-        //Write to storage, if group exists
-        boolean dataExists = !this.model.isEmpty();
-        if (dataExists) {
-            try {
-                this.storage.saveSerenity(this.model.getGroupStream());
-                this.storage.saveQuestionManager(this.model.getQuestionManager());
-            } catch (IOException e) {
-                throw new CommandException(FILE_OPS_ERROR_MESSAGE + e, e);
-            }
+        try {
+            this.storage.saveSerenity(this.model.getGroupManager());
+            this.storage.saveQuestionManager(this.model.getQuestionManager());
+        } catch (IOException e) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + e, e);
         }
+
         return commandResult;
     }
 
