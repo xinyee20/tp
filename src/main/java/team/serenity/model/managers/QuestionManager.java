@@ -131,7 +131,7 @@ public class QuestionManager implements ReadOnlyQuestionManager {
         List<Question> newListOfQuestions = this.listOfQuestions.stream()
                 .filter(qn -> {
                     return !qn.getGroupName().equals(group.getGroupName())
-                        || (qn.getLessonName().equals(group.getGroupName())
+                        || (qn.getGroupName().equals(group.getGroupName())
                         && !qn.getLessonName().equals(lesson.getLessonName()));
                 }).collect(Collectors.toList());
         this.setQuestions(newListOfQuestions);
