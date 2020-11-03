@@ -12,29 +12,12 @@ import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
 import static team.serenity.testutil.TypicalStudent.JOHN;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
-import team.serenity.model.group.Group;
-import team.serenity.model.group.GroupLessonKey;
-import team.serenity.model.group.UniqueGroupList;
-import team.serenity.model.group.lesson.Lesson;
-import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;
-import team.serenity.model.group.studentinfo.Attendance;
-import team.serenity.model.group.studentinfo.StudentInfo;
-import team.serenity.model.util.UniqueList;
-import team.serenity.testutil.GroupBuilder;
-import team.serenity.testutil.LessonBuilder;
-import team.serenity.testutil.ModelStub;
 
 class MarkAbsentCommandTest {
 
@@ -113,7 +96,7 @@ class MarkAbsentCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(wrongIndex);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> markAbsentCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> markAbsentCommand.execute(modelStub));
     }
 
     @Test

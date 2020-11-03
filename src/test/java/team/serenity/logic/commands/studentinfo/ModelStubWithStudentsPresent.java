@@ -11,7 +11,6 @@ import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
-import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
@@ -51,15 +50,21 @@ class ModelStubWithStudentsPresent extends ModelStub {
         GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
         GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
         Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
-        UniqueList<StudentInfo> studentInfoList = uniqueLesson.getStudentsInfo();
-        ObservableList<StudentInfo> observableStudentInfo = studentInfoList.asUnmodifiableObservableList();
-        for (int i = 0; i < studentInfoList.size(); i++) {
-            StudentInfo studentInfo = observableStudentInfo.get(i);
-            Attendance updatedAttendance = studentInfo.getAttendance().setNewAttendance(true);
-            studentInfo.updateAttendance(updatedAttendance);
-        }
         uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
         return uniqueStudentInfoList.get(key);
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key) {
+        GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
+        uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
+        return uniqueStudentInfoList.get(key).asUnmodifiableObservableList();
+    }
+
+    @Override
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                      UniqueList<StudentInfo> newListOfStudentsInfo) {
     }
 
     @Override
