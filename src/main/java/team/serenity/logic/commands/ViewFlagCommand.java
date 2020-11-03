@@ -16,7 +16,7 @@ public class ViewFlagCommand extends Command {
         + "and display them as a list.\n"
         + "Example: " + COMMAND_WORD;
 
-    public static final String SUCCESS_MESSAGE = "Viewing students with flagged attendance.";
+    public static final String SUCCESS_MESSAGE = "These are the flagged attendance records.";
 
     @Override
     public CommandResult execute(Model model) {

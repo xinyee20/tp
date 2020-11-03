@@ -1,8 +1,8 @@
 package team.serenity.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_ATTENDANCE_LISTED_OVERVIEW;
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
-import static team.serenity.commons.core.Messages.MESSAGE_GROUP_LISTED_OVERVIEW;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
 import team.serenity.model.Model;
@@ -32,7 +32,7 @@ public class ViewAttCommand extends Command {
     private String getMessage(Model model) {
         return model.getFilteredGroupList().isEmpty()
             ? MESSAGE_GROUP_EMPTY
-            : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
+            : String.format(MESSAGE_ATTENDANCE_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
     }
 
     @Override
