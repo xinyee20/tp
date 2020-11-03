@@ -2,7 +2,7 @@ package team.serenity.logic.parser.student;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_ID;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
@@ -25,16 +25,16 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
 
     @Override
     public AddStudentCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_NAME, PREFIX_ID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_NAME, PREFIX_MATRIC);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_NAME, PREFIX_ID)
+        if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_NAME, PREFIX_MATRIC)
             || !argMultimap.getPreamble().isEmpty()) {
             throw addStudentCommandParserException;
         }
 
         String[] grpKeywordArray = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
         String[] studentNameArray = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-        String[] studentIdArray = argMultimap.getValue(PREFIX_ID).get().split("\\s+");
+        String[] studentIdArray = argMultimap.getValue(PREFIX_MATRIC).get().split("\\s+");
 
         //if id or group keyword is more than 1, or if student name has more than 10 letters, throw exception
         boolean matchesGrp = grpKeywordArray.length == 1;
@@ -44,7 +44,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
             throw addStudentCommandParserException;
         }
 
-        String studentName = String.join(" ", studentNameArray);
+        String studentName = String.join(" ", studentNameArray).toUpperCase();
         String studentId = studentIdArray[0];
         String grpName = grpKeywordArray[0];
 

@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import team.serenity.commons.exceptions.DataConversionException;
+import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.userprefs.UserPrefs;
@@ -28,9 +29,6 @@ public interface Storage extends UserPrefsStorage, SerenityStorage, QuestionStor
     Path getSerenityFilePath();
 
     @Override
-    Optional<ReadOnlySerenity> readSerenity() throws DataConversionException, IOException;
-
-    @Override
-    void saveSerenity(ReadOnlySerenity serenity) throws IOException;
+    Optional<ReadOnlySerenity> readSerenity() throws IllegalValueException, DataConversionException;
 
 }

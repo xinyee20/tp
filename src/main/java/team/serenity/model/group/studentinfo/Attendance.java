@@ -1,9 +1,13 @@
 package team.serenity.model.group.studentinfo;
 
+import static team.serenity.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a {@code Student} attendance in a Lesson.
  */
 public class Attendance {
+
+    public static final String MESSAGE_CONSTRAINTS = "Cannot be present and flagged at the same time.";
 
     private final boolean isPresent;
     private final boolean isFlagged;
@@ -30,12 +34,14 @@ public class Attendance {
      * @param isPresent True if student is present and false if student is absent
      * @param isFlagged True to flag student and false to unflag student
      */
-    public Attendance(boolean isPresent, boolean isFlagged) throws IllegalArgumentException {
-        if (isPresent && isFlagged) {
-            throw new IllegalArgumentException("Student should be absent to be flagged");
-        }
+    public Attendance(boolean isPresent, boolean isFlagged) {
+        checkArgument(isValidAttendance(isPresent, isFlagged), MESSAGE_CONSTRAINTS);
         this.isPresent = isPresent;
         this.isFlagged = isFlagged;
+    }
+
+    public static boolean isValidAttendance(boolean isPresent, boolean isFlagged) {
+        return !(isPresent && isFlagged);
     }
 
     @Override
@@ -43,7 +49,15 @@ public class Attendance {
         return Boolean.toString(this.isPresent);
     }
 
-    public boolean getAttendance() {
+    public int getIntegerAttendance() {
+        if (this.isPresent) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean isPresent() {
         return this.isPresent;
     }
 
@@ -52,13 +66,13 @@ public class Attendance {
         return updatedAttendance;
     }
 
-    public boolean getFlagged() {
+    public boolean isFlagged() {
         return this.isFlagged;
     }
 
     @Override
     public boolean equals(Object obj) {
         Attendance other = (Attendance) obj;
-        return other.getAttendance() == getAttendance() && other.getFlagged() == getFlagged();
+        return other.isPresent() == isPresent() && other.isFlagged() == isFlagged();
     }
 }

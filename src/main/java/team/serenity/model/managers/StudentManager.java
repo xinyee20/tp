@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.exceptions.GroupNotFoundException;
 import team.serenity.model.group.student.Student;
@@ -85,6 +86,14 @@ public class StudentManager implements ReadOnlyStudentManager {
     }
 
     /**
+     * Returns true if the student manager contains an equivalent student as the given argument.
+     */
+    public boolean hasStudent(Student toCheck) {
+        requireNonNull(toCheck);
+        return this.mapToListOfStudents.values().stream().anyMatch(students -> students.contains(toCheck));
+    }
+
+    /**
      * Checks if the specified {@code Student} exists in the {@code Group}.
      * @param group
      * @param student
@@ -139,6 +148,14 @@ public class StudentManager implements ReadOnlyStudentManager {
         } else {
             throw new GroupNotFoundException();
         }
+    }
+
+    /**
+     * Delete all students in the group.
+     */
+    public void deleteAllStudentsFromGroup(Group group) {
+        requireNonNull(group);
+        this.mapToListOfStudents.remove(group.getGroupName());
     }
 
     //util methods

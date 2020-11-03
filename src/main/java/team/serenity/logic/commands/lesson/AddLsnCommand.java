@@ -2,7 +2,7 @@ package team.serenity.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
 
 import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.CommandResult;
@@ -12,6 +12,7 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.LessonContainsKeywordPredicate;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
@@ -21,25 +22,29 @@ public class AddLsnCommand extends Command {
 
     public static final String COMMAND_WORD = "addlsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a new lesson to a specified tutorial group. "
+        + ": Adds a new lesson to a specified tutorial group. \n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
-        + PREFIX_PATH + "PATH ";
+        + PREFIX_LSN + "LESSON \n"
+        + "Example: "
+        + COMMAND_WORD + " "
+        + PREFIX_GRP + "G04 "
+        + PREFIX_LSN + "5-1";
 
     public static final String MESSAGE_SUCCESS = "New lesson for tutorial group %2$s added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson for tutorial group %1$s already exists.";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "Specified Tutorial Group does not exist!";
 
     private final GroupContainsKeywordPredicate targetGrpPredicate;
-    private final String toAdd;
+    private final LessonName toAdd;
 
     /**
      * Creates an AddLsnCommand to add the specified lesson.
      */
-    public AddLsnCommand(String lesson, GroupContainsKeywordPredicate target) {
-        requireNonNull(lesson);
+    public AddLsnCommand(LessonName lessonName, GroupContainsKeywordPredicate target) {
+        requireNonNull(lessonName);
         this.targetGrpPredicate = target;
-        this.toAdd = lesson;
+        this.toAdd = lessonName;
     }
 
     @Override
@@ -66,10 +71,9 @@ public class AddLsnCommand extends Command {
         targetGrp.getLessons().add(toAdd);
 
         model.updateLessonList();
-        model.updateFilteredLessonList(new LessonContainsKeywordPredicate(this.toAdd));
+        model.updateFilteredLessonList(new LessonContainsKeywordPredicate(this.toAdd.lessonName));
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, targetGrp),
-            false, false, true, false, false, false);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, targetGrp), CommandResult.UiAction.VIEW_LSN);
     }
 
     @Override

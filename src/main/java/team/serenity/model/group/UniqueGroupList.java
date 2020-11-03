@@ -44,7 +44,6 @@ public class UniqueGroupList implements UniqueList<Group> {
 
     /**
      * Converts to stream
-     * @return
      */
     @Override
     public Stream<Group> stream() {
@@ -66,6 +65,8 @@ public class UniqueGroupList implements UniqueList<Group> {
 
     /**
      * Adds a group to the list. The group must not already exist in the list.
+     *
+     * @throws DuplicateException if the group already exists.
      */
     @Override
     public void add(Group toAdd) throws DuplicateException {

@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
+import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.exceptions.GroupLessonPairNotFoundException;
 import team.serenity.model.group.studentinfo.StudentInfo;
@@ -34,7 +37,7 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
     // Methods that overrides the whole StudentInfo Map
 
     /**
-     * Replaces the contentws of the studentInfo map with {@code newStudentInfoMap}.
+     * Replaces the contents of the studentInfo map with {@code newStudentInfoMap}.
      * {@code newStudentInfoMap} must not contain duplicate students.
      */
     public void setStudentInfo(Map<GroupLessonKey, UniqueList<StudentInfo>> newStudentInfoMap) {
@@ -118,6 +121,19 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
     }
 
     /**
+     * Returns the list of student info at {@code key} as an unmodifiable list.
+     * @param key the given group and lesson key.
+     */
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key)
+            throws GroupLessonPairNotFoundException {
+        requireNonNull(key);
+        if (!this.mapToListOfStudentsInfo.containsKey(key)) {
+            throw new GroupLessonPairNotFoundException();
+        }
+        return this.mapToListOfStudentsInfo.get(key).asUnmodifiableObservableList();
+    }
+
+    /**
      * @param key
      * @param studentInfo
      * @throws GroupLessonPairNotFoundException
@@ -131,6 +147,21 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
         } else {
             throw new GroupLessonPairNotFoundException();
         }
+    }
+
+    /**
+     * Delete all student infos from group.
+     */
+    public void deleteAllStudentInfosFromGroup(Group group) {
+        requireNonNull(group);
+        Iterator<Map.Entry<GroupLessonKey, UniqueList<StudentInfo>>> iterator =
+            mapToListOfStudentsInfo.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<GroupLessonKey, UniqueList<StudentInfo>> entry = iterator.next();
+            if (entry.getKey().getGroupName().equals(group.getGroupName())) {
+                iterator.remove();
+            }
+        } ;
     }
 
     //util methods
