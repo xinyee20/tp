@@ -593,7 +593,8 @@ Outcome:
 #### 4.2.4. Unflag attendance of a student: `unflagatt`
 
 You can use this command to unflag attendance of a specific student that was flagged after you have checked whether the 
-student attended a replacement class.
+student attended a replacement class. If you accidentally flagged the wrong student, the action can also be easily undone 
+using `unflagatt` command.
 
 **Format:**
 <br>`unflagatt name/NAME matric/STUDENT_NUMBER`
@@ -669,7 +670,7 @@ student's participation score easily with a scale for reference.
 
 #### 4.3.1. Award participation score for a student: `setscore`
 
-You can use this command to add the participation score for a specific student in a tutorial lesson.
+You can use this command to award a participation score for a specific student in a tutorial lesson.
 
 With a scale from 1 to 5:
 
@@ -684,9 +685,9 @@ With a scale from 1 to 5:
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you noticed that your student named `Aaron Tan` with student number `A0123456U` often participated in class discussions.
-You decided to give him `3` marks for his participation score for this tutorial lesson. `Aaron Tan` is the first person on 
-the student list so his `index` number is 1.
+you noticed that your student named `Aaron Tan` with student number `A0123456U` participated actively in class 
+discussions for the lesson. You decided to give him `3` marks for his participation score for this tutorial lesson. 
+`Aaron Tan` is the first person on the student list so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
 Set participation score of a student in a tutorial lesson by `name` and `student number`:
@@ -731,7 +732,7 @@ You can use this command to increase the participation score of a specific stude
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student number `A0123456U` provided some good insights during lessons. 
+you felt that your student named `Aaron Tan` with student number `A0123456U` provided some good insights during the lesson. 
 You decided to add `1` mark to his participation score for this tutorial lesson. `Aaron Tan` 
 is the first person on the student list so his `index` number is 1.
 
@@ -770,8 +771,8 @@ You can use this command to decrease the participation score of a specific stude
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student number `A0123456U` did not provide insightful responses 
-to some questions. You decided to subtract `1` mark from his participation score for this tutorial lesson. `Aaron Tan` 
+you felt that your student named `Aaron Tan` with student number `A0123456U` responses were actually not very insightful 
+on second thoughts. You decided to subtract `1` mark from his participation score for this tutorial lesson. `Aaron Tan` 
 is the first person on the student list so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
