@@ -31,7 +31,9 @@ public class ViewGrpCommandParser implements Parser<ViewGrpCommand> {
             throw this.viewGrpCommandParserException;
         }
 
-        return new ViewGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));
+        String groupName = SerenityParserUtil.parseGroupName(grpKeyword[0]).toString();
+
+        return new ViewGrpCommand(new GroupContainsKeywordPredicate(groupName));
     }
 
     /**

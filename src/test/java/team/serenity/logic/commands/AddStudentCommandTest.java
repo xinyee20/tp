@@ -78,9 +78,8 @@ public class AddStudentCommandTest {
         Predicate<Group> pred = new GroupPredicateStub();
         AddStudentCommand command = new AddStudentCommand("John", "A1234567U", pred);
         CommandResult result = command.execute(modelStub);
-        CommandResult expectedResult = new CommandResult(
-            String.format(MESSAGE_SUCCESS, "John", "A1234567U",
-               "G07"), false, false, false, true, false, false, false, false, false, false);
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_SUCCESS, "John", "A1234567U", "G07"),
+                CommandResult.UiAction.REFRESH_TABLE);
         assertTrue(result.equals(expectedResult));
     }
 

@@ -131,9 +131,7 @@ public class CommandTestUtil {
      */
     public static void assertQuestionViewsQuestionTabCommandSuccess(Command command, Model actualModel,
                                                                     String expectedMessage, Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false,
-                false, false, false, false, false,
-                false, false, true);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandResult.UiAction.VIEW_QN);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

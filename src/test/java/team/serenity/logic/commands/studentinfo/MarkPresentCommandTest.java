@@ -112,7 +112,7 @@ class MarkPresentCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongIndex);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> markPresentCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> markPresentCommand.execute(modelStub));
     }
 
     @Test

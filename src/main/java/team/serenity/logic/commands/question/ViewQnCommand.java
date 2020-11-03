@@ -21,8 +21,7 @@ public class ViewQnCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
-        return new CommandResult(MESSAGE_SUCCESS, false, false,
-            false, false, false, false, false, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, CommandResult.UiAction.VIEW_QN);
     }
 
 }

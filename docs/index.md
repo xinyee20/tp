@@ -6,7 +6,7 @@ title: Serenity
 [![CI Status](https://github.com/AY2021S1-CS2103T-W12-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2021S1-CS2103T-W12-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2021S1-CS2103T-W12-4/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2021S1-CS2103T-W12-4/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/UiWithData.png)
 
 **Serenity is a desktop application for managing your tutorial groups and lessons.** While it has a *GUI*, most of the user interactions happen using a *CLI* (Command Line Interface).
 
