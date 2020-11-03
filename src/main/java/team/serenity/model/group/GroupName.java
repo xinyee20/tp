@@ -11,12 +11,12 @@ public class GroupName {
     /*
      * Must contain one upper case letter followed by 2 digits.
      */
-    public static final String VALIDATION_REGEX = "[a-zA-Z]{1}[0-9]{2}";
+    public static final String VALIDATION_REGEX = "[A-Z][0-9]{2}";
 
     public final String groupName;
 
     /**
-     * Constructs a {@code StudentName}.
+     * Constructs a {@code GroupName}.
      *
      * @param name A valid name.
      */
@@ -33,7 +33,6 @@ public class GroupName {
         requireNonNull(test);
         return test.matches(VALIDATION_REGEX);
     }
-
 
     @Override
     public String toString() {
