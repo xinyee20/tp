@@ -1,8 +1,8 @@
 package team.serenity.model.managers;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.exceptions.DuplicateQuestionException;
 import team.serenity.model.group.exceptions.QuestionNotFoundException;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.question.UniqueQuestionList;
 import team.serenity.model.util.UniqueList;
@@ -113,17 +114,27 @@ public class QuestionManager implements ReadOnlyQuestionManager {
     }
 
     /**
-     * Delete all questions from group.
+     * Deletes the all questions with the given {@code group} from this {@code QuestionManager}.
      */
     public void deleteAllQuestionsFromGroup(Group group) {
         requireNonNull(group);
-        Iterator<Question> iterator = listOfQuestions.iterator();
-        while (iterator.hasNext()) {
-            Question question = iterator.next();
-            if (question.getGroupName().toString().equals(group.getGroupName().toString())) {
-                iterator.remove();
-            }
-        }
+        List<Question> newListOfQuestions = this.listOfQuestions.stream()
+                .filter(qn -> !qn.getGroupName().equals(group.getGroupName())).collect(Collectors.toList());
+        this.setQuestions(newListOfQuestions);
+    }
+
+    /**
+     * Deletes the all questions with the given {@code group} and {@code lesson} from this {@code QuestionManager}.
+     */
+    public void deleteAllQuestionsFromGroupLesson(Group group, Lesson lesson) {
+        requireAllNonNull(group, lesson);
+        List<Question> newListOfQuestions = this.listOfQuestions.stream()
+                .filter(qn -> {
+                    return !qn.getGroupName().equals(group.getGroupName())
+                        || (qn.getLessonName().equals(group.getGroupName())
+                        && !qn.getLessonName().equals(lesson.getLessonName()));
+                }).collect(Collectors.toList());
+        this.setQuestions(newListOfQuestions);
     }
 
     // Util Methods

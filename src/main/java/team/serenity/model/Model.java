@@ -166,6 +166,11 @@ public interface Model {
     boolean ifTargetGroupHasLessonName(GroupName groupName, LessonName lessonName);
 
     /**
+     * Deletes the given group's lesson. The group's lesson must exist in serenity.
+     */
+    void deleteLesson(Group targetGroup, Lesson targetLesson);
+
+    /**
      * Updates the lesson list to filter when changing to another group of interest.
      */
     void updateLessonList();

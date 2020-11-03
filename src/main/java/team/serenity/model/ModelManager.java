@@ -269,6 +269,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteLesson(Group group, Lesson lesson) {
+        this.studentInfoManager.deleteAllStudentsInfoFromGroupLesson(group, lesson);
+        this.lessonManager.deleteLessonFromGroup(group.getGroupName(), lesson);
+        this.questionManager.deleteAllQuestionsFromGroupLesson(group, lesson);
+        this.lessons.removeAll(lesson);
+        this.studentsInfo.clear();
+    }
+
+    @Override
     public void updateLessonList() {
         if (this.filteredGroups.size() == 1) {
             Group currentGroup = this.filteredGroups.get(0);
