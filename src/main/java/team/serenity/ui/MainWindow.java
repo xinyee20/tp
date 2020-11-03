@@ -399,10 +399,14 @@ public class MainWindow extends UiPart<Stage> {
                 break;
 
             case VIEW_ATT:
+                groupName = getGroupName(commandText);
+                handleViewGrp(groupName);
                 handleViewAtt();
                 break;
 
             case VIEW_SCORE:
+                groupName = getGroupName(commandText);
+                handleViewGrp(groupName);
                 handleViewScore();
                 break;
 
