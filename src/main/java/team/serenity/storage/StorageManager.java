@@ -17,7 +17,7 @@ import team.serenity.storage.question.QuestionStorage;
 import team.serenity.storage.userprefs.UserPrefsStorage;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Serenity data in local storage.
  */
 public class StorageManager implements Storage {
 
