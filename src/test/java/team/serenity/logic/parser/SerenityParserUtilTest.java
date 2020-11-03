@@ -56,7 +56,6 @@ public class SerenityParserUtilTest {
 
     @Test
     public void parseGroupName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> SerenityParserUtil.parseGroupName(INVALID_GROUP_NAME_LOWERCASE));
         assertThrows(ParseException.class, () -> SerenityParserUtil.parseGroupName(INVALID_GROUP_NAME_NON_DIGIT));
     }
 
