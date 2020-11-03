@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.LessonName;
@@ -187,6 +188,17 @@ public class ModelStub implements Model {
 
     @Override
     public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                      UniqueList<StudentInfo> newListOfStudentsInfo) {
         throw new AssertionError("This method should not be called.");
     }
 
