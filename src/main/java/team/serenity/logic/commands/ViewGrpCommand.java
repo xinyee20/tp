@@ -38,6 +38,7 @@ public class ViewGrpCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_GRP);
     }
 
