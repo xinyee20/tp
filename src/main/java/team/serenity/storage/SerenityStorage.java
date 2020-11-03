@@ -3,11 +3,10 @@ package team.serenity.storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import team.serenity.commons.exceptions.DataConversionException;
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.group.Group;
+import team.serenity.model.managers.ReadOnlyGroupManager;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.managers.Serenity;
 
@@ -20,6 +19,7 @@ public interface SerenityStorage {
     /**
      * Returns the file path of the data file.
      */
+
     Path getSerenityFilePath();
 
     /**
@@ -38,18 +38,9 @@ public interface SerenityStorage {
         throws IllegalValueException, DataConversionException;
 
     /**
-     * Saves the given {@link ReadOnlySerenity} to the storage.
-     *
-     * @param serenity cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     * Saves Serenity with the given {@code ReadOnlyGroupManager}
      */
-    void saveSerenity(ReadOnlySerenity serenity) throws IOException;
+    void saveSerenity(ReadOnlyGroupManager manager) throws IOException;
 
-    void saveSerenity(Stream<Group> groups) throws IOException;
-
-    /**
-     * @see #saveSerenity(ReadOnlySerenity)
-     */
-    void saveSerenity(ReadOnlySerenity serenity, Path filePath) throws IOException;
 
 }

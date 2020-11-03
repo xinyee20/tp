@@ -17,6 +17,8 @@ import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 import team.serenity.model.group.studentinfo.Participation;
 
 /**
@@ -80,7 +82,7 @@ public class SerenityParserUtil {
         requireNonNull(studentName);
         String trimmedName = studentName.trim();
         if (!Student.isValidName(trimmedName)) {
-            throw new ParseException(Student.STUDENT_NAME_ERROR);
+            throw new ParseException(StudentName.MESSAGE_CONSTRAINTS);
         }
         return trimmedName;
     }
@@ -94,7 +96,7 @@ public class SerenityParserUtil {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
         if (!Student.isValidStudentId(trimmedId)) {
-            throw new ParseException(Student.STUDENT_ID_ERROR);
+            throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
         return trimmedId;
     }

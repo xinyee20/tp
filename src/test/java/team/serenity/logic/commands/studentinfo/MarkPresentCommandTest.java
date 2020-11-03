@@ -102,7 +102,7 @@ class MarkPresentCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongIndex);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> markPresentCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> markPresentCommand.execute(modelStub));
     }
 
     @Test
@@ -179,6 +179,19 @@ class ModelStubWithStudentsAbsent extends ModelStub {
     }
 
     @Override
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key) {
+        GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
+        uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
+        return uniqueStudentInfoList.get(key).asUnmodifiableObservableList();
+    }
+
+    @Override
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                      UniqueList<StudentInfo> newListOfStudentsInfo) {
+    }
+
+    @Override
     public void updateStudentsInfoList() {
         return;
     }
@@ -229,6 +242,19 @@ class ModelStubWithIndexAbsent extends ModelStub {
         Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
         uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
         return uniqueStudentInfoList.get(key);
+    }
+
+    @Override
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key) {
+        GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
+        uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
+        return uniqueStudentInfoList.get(key).asUnmodifiableObservableList();
+    }
+
+    @Override
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                      UniqueList<StudentInfo> newListOfStudentsInfo) {
     }
 
     @Override

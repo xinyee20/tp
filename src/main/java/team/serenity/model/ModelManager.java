@@ -356,15 +356,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key) {
+        return this.studentInfoManager.getObservableListOfStudentsInfoFromKey(key);
+    }
+
+    @Override
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                         UniqueList<StudentInfo> newListOfStudentsInfo) {
+        requireAllNonNull(key, newListOfStudentsInfo);
+        this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, newListOfStudentsInfo);
+    }
+
+    @Override
     public void updateStudentsInfoList() {
         if (!this.filteredGroups.isEmpty() && !this.filteredLessons.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
             Lesson currentLesson = this.filteredLessons.get(0);
             GroupLessonKey key = new GroupLessonKey(currentGroup.getGroupName(), currentLesson.getLessonName());
-            ObservableList<StudentInfo> studentInfos = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
-            UniqueList<StudentInfo> uniqueStudentInfoList = currentLesson.getStudentsInfo();
-            this.studentsInfo.setAll(studentInfos);
-            this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, uniqueStudentInfoList);
+            this.studentsInfo.setAll(this.studentInfoManager.getObservableListOfStudentsInfoFromKey(key));
         }
     }
 

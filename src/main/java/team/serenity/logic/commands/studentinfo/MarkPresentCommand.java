@@ -8,7 +8,9 @@ import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
@@ -17,10 +19,12 @@ import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -48,10 +52,9 @@ public class MarkPresentCommand extends Command {
     private Optional<Index> index;
     private boolean isByIndex;
     private boolean isWholeClass;
-    private boolean isCorrectStudent;
 
     /**
-     * Creates an MarkPresentCommand to mark all {@code Student} present.
+     * Creates an MarkPresentCommand to mark all {@code Student}s present.
      */
     public MarkPresentCommand() {
         // Mark all students present
@@ -99,59 +102,117 @@ public class MarkPresentCommand extends Command {
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<StudentInfo> uniqueStudentInfoList =
-                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
-        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
+        GroupLessonKey key = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        ObservableList<StudentInfo> currentStudentInfoList = model.getObservableListOfStudentsInfoFromKey(key);
 
-        if (!this.isWholeClass) {
-
-            if (!isByIndex) {
-
-                // Mark single student present
-                for (int i = 0; i < studentsInfo.size(); i++) {
-                    StudentInfo studentInfo = studentsInfo.get(i);
-                    this.isCorrectStudent = studentInfo.containsStudent(this.toMarkPresent.get());
-                    if (this.isCorrectStudent) {
-                        Attendance update = studentInfo.getAttendance().setNewAttendance(true);
-                        StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                        uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-                        model.updateLessonList();
-                        model.updateStudentsInfoList();
-                        break;
-                    }
-                }
-
-                if (!this.isCorrectStudent) {
-                    throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toMarkPresent.get()));
-                }
-            } else {
-                if (index.get().getZeroBased() > studentsInfo.size()) {
-                    throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                            index.get().getOneBased()));
-                }
-
-                StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
-                toMarkPresent = Optional.ofNullable(studentInfo.getStudent());
-                Attendance update = studentInfo.getAttendance().setNewAttendance(true);
-                StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-                uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-                model.updateLessonList();
-                model.updateStudentsInfoList();
-            }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, this.toMarkPresent.get()));
-        } else {
-
-            // Mark whole class present
-            for (StudentInfo each : studentsInfo) {
-                Attendance update = each.getAttendance().setNewAttendance(true);
-                StudentInfo updatedStudentInfo = each.updateAttendance(update);
-                uniqueStudentInfoList.setElement(each, updatedStudentInfo);
-                model.updateLessonList();
-                model.updateStudentsInfoList();
-            }
-
-            return new CommandResult(String.format(MESSAGE_ALL_SUCCESS));
+        // Mark all students present
+        if (this.isWholeClass) {
+            return executeMarkAll(model, key, uniqueLesson, currentStudentInfoList);
         }
+
+        // Mark one student present
+        StudentInfo targetStudentInfo = getTargetStudentInfo(currentStudentInfoList);
+        return executeMarkOneStudent(model, key, uniqueLesson, currentStudentInfoList, targetStudentInfo);
+    }
+
+    /**
+     * Executes the mark all student present command and returns the result message.
+     */
+    private CommandResult executeMarkAll(Model model, GroupLessonKey key, Lesson lesson,
+                                         ObservableList<StudentInfo> currentStudentInfoList) {
+        // Gets the updated StudentInfoList with all the updated StudentsInfo
+        UniqueList<StudentInfo> updatedListForMarkAll = getUpdatedListForMarkAll(currentStudentInfoList);
+
+        // Updates the modelManager and lesson object with the new StudentInfoList
+        model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkAll);
+        lesson.setStudentsInfo(updatedListForMarkAll);
+        model.updateStudentsInfoList();
+        return new CommandResult(MESSAGE_ALL_SUCCESS);
+    }
+
+    /**
+     * Executes the mark one student present command and returns the result message.
+     */
+    private CommandResult executeMarkOneStudent(Model model, GroupLessonKey key, Lesson lesson,
+                                                ObservableList<StudentInfo> currentStudentInfoList,
+                                                StudentInfo targetStudentInfo) {
+        // Gets the updated StudentInfoList with the updated targetStudentInfo
+        UniqueList<StudentInfo> updatedListForMarkOneStudent =
+                getUpdatedListForMarkOneStudent(currentStudentInfoList, targetStudentInfo);
+
+        // Updates the modelManager and lesson object with the new StudentInfoList
+        model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkOneStudent);
+        lesson.setStudentsInfo(updatedListForMarkOneStudent);
+        model.updateStudentsInfoList();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent()));
+    }
+
+    /**
+     * Returns the {@code targetStudentInfo} object in the {@code currentStudentInfoList}.
+     */
+    private StudentInfo getTargetStudentInfo(ObservableList<StudentInfo> currentStudentInfoList)
+            throws CommandException {
+        if (this.isByIndex) {
+            // Mark present StudentInfo by index
+            assert this.index.isPresent();
+            Index targetIndex = this.index.get();
+
+            // Return error message if index is out of range
+            if (targetIndex.getZeroBased() >= currentStudentInfoList.size()) {
+                throw new CommandException(
+                        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, targetIndex.getOneBased()));
+            }
+            return currentStudentInfoList.get(targetIndex.getZeroBased());
+        }
+
+        // Since it is not mark all or mark by index, there should be a student
+        assert this.toMarkPresent.isPresent();
+        Student student = this.toMarkPresent.get();
+
+        // Filter studentInfoList via Student and get the first object in the filtered stream (if any)
+        Optional<StudentInfo> optionalStudentInfo =
+                currentStudentInfoList.stream().filter(s -> s.containsStudent(student)).findFirst();
+
+        // Return error message if Student not found in StudentInfoList
+        if (optionalStudentInfo.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, student));
+        }
+        return optionalStudentInfo.get();
+    }
+
+    /**
+     * Sets all {@code StudentInfo}'s {@code Attendance}'s {@code isPresent} field
+     * in the {@code currentStudentInfoList} to {@code true}.
+     * Returns the {@code updatedStudentInfoList}.
+     *
+     * @param currentStudentInfoList the current student info list.
+     */
+    private UniqueList<StudentInfo> getUpdatedListForMarkAll(ObservableList<StudentInfo> currentStudentInfoList) {
+        UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
+        updatedList.setElementsWithList(currentStudentInfoList);
+        List<StudentInfo> updatedStudentInfo = updatedList.stream()
+                .map(s -> new StudentInfo(s.getStudent(), s.getParticipation(), new Attendance(true)))
+                .collect(Collectors.toList());
+        updatedList.setElementsWithList(updatedStudentInfo);
+        return updatedList;
+    }
+
+    /**
+     * Sets the given {@code targetStudentInfo}'s {@code Attendance}'s {@code isPresent} field
+     * in the {@code currentStudentInfoList} to {@code true}.
+     * Returns the {@code updatedStudentInfoList}.
+     *
+     * @param currentStudentInfoList the current student info list.
+     * @param targetStudentInfo the target student info to mark present.
+     */
+    private UniqueList<StudentInfo> getUpdatedListForMarkOneStudent(ObservableList<StudentInfo> currentStudentInfoList,
+                                                                    StudentInfo targetStudentInfo) {
+        UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
+        updatedList.setElementsWithList(currentStudentInfoList);
+        StudentInfo updatedStudentInfo = new StudentInfo(targetStudentInfo.getStudent(),
+                targetStudentInfo.getParticipation(), new Attendance(true));
+        updatedList.setElement(targetStudentInfo, updatedStudentInfo);
+        return updatedList;
     }
 
     @Override

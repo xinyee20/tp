@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.LessonName;
@@ -225,6 +226,18 @@ public interface Model {
     ObservableList<StudentInfo> getStudentsInfoList();
 
     UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
+
+    /**
+     * Returns an unmodifiable view of the student info list from the specified {@code GroupLessonKey}.
+     */
+    ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key);
+
+    /**
+     * Replaces listOfStudentsInfo stored at {@code key} with {@code newListOfStudentsInfo}.
+     * @param key the given target key.
+     * @param newListOfStudentsInfo the given edited list of studentInfo.
+     */
+    void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key, UniqueList<StudentInfo> newListOfStudentsInfo);
 
     /**
      * Updates the student info list to filter when changing to another lesson of interest.

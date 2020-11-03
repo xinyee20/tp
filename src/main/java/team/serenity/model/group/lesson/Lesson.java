@@ -71,6 +71,10 @@ public class Lesson {
         return this.studentsInfo;
     }
 
+    public void setStudentsInfo(UniqueList<StudentInfo> newStudentInfo) {
+        this.studentsInfo.setElementsWithUniqueList(newStudentInfo);
+    }
+
     public ObservableList<StudentInfo> getStudentsInfoAsUnmodifiableObservableList() {
         return this.studentsInfo.asUnmodifiableObservableList();
     }
