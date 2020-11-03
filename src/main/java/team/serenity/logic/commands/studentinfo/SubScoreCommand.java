@@ -125,7 +125,7 @@ public class SubScoreCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSubScore.get()));
             }
         } else {
-            if (index.get().getZeroBased() > studentsInfo.size()) {
+            if (index.get().getZeroBased() >= studentsInfo.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                         index.get().getOneBased()));
             }
