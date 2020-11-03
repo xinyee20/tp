@@ -7,8 +7,10 @@ import java.util.stream.Stream;
 import javafx.collections.ObservableList;
 import team.serenity.commons.core.GuiSettings;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
@@ -27,6 +29,11 @@ public interface Model {
      * {@code Predicate} that always evaluate to true.
      */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true.
+     */
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
 
     /**
      * {@code Predicate} that always evaluate to true
@@ -91,7 +98,7 @@ public interface Model {
      * Returns true if at least one group exists in serenity.
      * @return whether any group exists
      */
-    boolean hasAGroup();
+    boolean isEmpty();
 
     /**
      * Deletes the given group. The group must exist in serenity.
@@ -147,6 +154,16 @@ public interface Model {
     ObservableList<Lesson> getFilteredLessonList();
 
     UniqueList<Lesson> getListOfLessonsFromGroup(Group group);
+
+    /**
+     * Returns true if a lesson with {@code LessonName} in group {@code GroupName}
+     * is the same as {@code lessonName} exists in the LessonManager.
+     *
+     * @param groupName the given group to check against.
+     * @param lessonName the given lesson name to check for.
+     * @return true if the given lesson name already exists in the group in the LessonManager.
+     */
+    boolean ifTargetGroupHasLessonName(GroupName groupName, LessonName lessonName);
 
     /**
      * Updates the lesson list to filter when changing to another group of interest.
@@ -209,6 +226,18 @@ public interface Model {
     ObservableList<StudentInfo> getStudentsInfoList();
 
     UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson);
+
+    /**
+     * Returns an unmodifiable view of the student info list from the specified {@code GroupLessonKey}.
+     */
+    ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key);
+
+    /**
+     * Replaces listOfStudentsInfo stored at {@code key} with {@code newListOfStudentsInfo}.
+     * @param key the given target key.
+     * @param newListOfStudentsInfo the given edited list of studentInfo.
+     */
+    void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key, UniqueList<StudentInfo> newListOfStudentsInfo);
 
     /**
      * Updates the student info list to filter when changing to another lesson of interest.

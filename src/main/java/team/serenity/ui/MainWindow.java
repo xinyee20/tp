@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private TitleDisplay titleDisplay;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private ButtonBar buttonBar;
+    private SideBar sideBar;
 
     // Ui parts relating to serenity
     private DataPanel serenityDataPanel;
@@ -53,25 +54,22 @@ public class MainWindow extends UiPart<Stage> {
     private DataPanel lessonDataPanel;
 
     @FXML
-    private StackPane commandBoxPlaceholder;
-
-    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private ScrollPane sidebarPlaceholder;
 
     @FXML
     private StackPane titleDisplayPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
-
-    @FXML
     private StackPane dataDisplayPlaceholder;
 
     @FXML
-    private VBox buttonPanelPlaceholder;
+    private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane commandBoxPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -106,22 +104,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
-
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
@@ -134,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        toggleSerenityView();
+        toggleHomeView();
 
         this.titleDisplay = new TitleDisplay();
         this.titleDisplayPlaceholder.getChildren().add(this.titleDisplay.getRoot());
@@ -145,8 +127,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         this.commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        this.buttonBar = new ButtonBar();
-        this.buttonPanelPlaceholder.getChildren().add(this.buttonBar);
+        this.sideBar = new SideBar();
+        this.sidebarPlaceholder.setContent(this.sideBar.getRoot());
     }
 
     /**
@@ -201,31 +183,33 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Switch to group data view if in lesson data view.
-     */
-    @FXML
-    private void toggleLsnView() {
-        this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(),
-                this.logic.getFilteredQuestionList());
-        this.dataDisplayPlaceholder.getChildren().clear();
-        this.dataDisplayPlaceholder.getChildren().add(this.lessonDataPanel.getRoot());
-    }
-
-    /**
      * Switch to lesson data view if in group data view.
      */
     @FXML
-    private void toggleGrpView() {
-        this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
+    private void handleViewGrp(String groupName) {
         this.dataDisplayPlaceholder.getChildren().clear();
+        this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
         this.dataDisplayPlaceholder.getChildren().add(this.groupDataPanel.getRoot());
+        this.titleDisplay.setGroupTitle(groupName);
+    }
+
+    /**
+     * Switch to group data view if in lesson data view.
+     */
+    @FXML
+    private void handleViewLsn(String groupName, String lessonName) {
+        this.lessonDataPanel = new LessonDataPanel(this.logic.getStudentInfoList(),
+                this.logic.getFilteredQuestionList(), groupName, lessonName);
+        this.dataDisplayPlaceholder.getChildren().clear();
+        this.dataDisplayPlaceholder.getChildren().add(this.lessonDataPanel.getRoot());
+        this.titleDisplay.setLessonTitle(groupName, lessonName);
     }
 
     /**
      * Switch to serenity data view.
      */
     @FXML
-    private void toggleSerenityView() {
+    private void toggleHomeView() {
         this.serenityDataPanel = new SerenityDataPanel(this.logic.getAllStudentInfo(),
             this.logic.getFilteredQuestionList());
         this.dataDisplayPlaceholder.getChildren().clear();
@@ -245,7 +229,7 @@ public class MainWindow extends UiPart<Stage> {
         button.setLayoutX(20);
         button.setLayoutY(65);
         button.setMnemonicParsing(false);
-        button.setPrefWidth(65);
+        button.setPrefWidth(70);
         button.setId(button.getText());
 
         Image image = new Image(imgUrl);
@@ -256,13 +240,13 @@ public class MainWindow extends UiPart<Stage> {
         imageView.setPreserveRatio(true);
 
         button.setGraphic(imageView);
-        VBox.setMargin(buttonPanelPlaceholder, new Insets(10));
+        VBox.setMargin(sidebarPlaceholder, new Insets(10));
         button.setOnAction(event);
-        buttonBar.addButton(button);
+        sideBar.addButton(button);
     }
 
     public void setUpAttButton() {
-        Button attButton = new Button("Att");
+        Button attButton = new Button("Flags");
         String attImgUrl = "images/flag.png";
         EventHandler<ActionEvent> attEvent = event -> {
             String commandText = "viewflag";
@@ -276,7 +260,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public void setUpQnButton() {
-        Button qnButton = new Button("Qn");
+        Button qnButton = new Button("Qns");
         String qnImgUrl = "images/question.png";
         EventHandler<ActionEvent> qnEvent = event -> {
             String commandText = "viewqn";
@@ -310,9 +294,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDelGrp(String groupName) {
-        for (Node groupButton : buttonBar.getChildren()) {
+        for (Node groupButton : this.sideBar.getButtons()) {
             if (groupButton.getId().equals(groupName)) {
-                buttonBar.deleteButton(groupButton);
+                sideBar.deleteButton(groupButton);
                 break;
             }
         }
@@ -338,17 +322,29 @@ public class MainWindow extends UiPart<Stage> {
      * View all students with flagged attendance.
      */
     private void handleFlagAtt() {
+        toggleHomeView();
         SerenityDataPanel serenityDataPanel = (SerenityDataPanel) this.serenityDataPanel;
         serenityDataPanel.changeFlaggedAttendanceTab();
+        this.titleDisplay.setDefaultTitle();
     }
 
     /**
      * View all pending questions.
      */
     private void handleViewQn() {
+        toggleHomeView();
         SerenityDataPanel serenityDataPanel = (SerenityDataPanel) this.serenityDataPanel;
         serenityDataPanel.changeQuestionTab();
+        this.titleDisplay.setDefaultTitle();
     }
+
+
+    private void refreshTable() {
+        this.dataDisplayPlaceholder.getChildren().clear();
+        this.groupDataPanel = new GroupDataPanel(this.logic.getLessonList(), this.logic.getStudentList());
+        this.dataDisplayPlaceholder.getChildren().add(this.groupDataPanel.getRoot());
+    }
+
 
     private String getGroupName(String commandText) {
         return commandText.split(" ")[1].split("/")[1];
@@ -365,62 +361,69 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            String groupName;
+            String lessonName;
             CommandResult commandResult = this.logic.execute(commandText);
             this.logger.info("Result: " + commandResult.getFeedbackToUser());
             this.resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getUiAction()) {
+            case SHOW_HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.isExit()) {
+            case EXIT:
                 handleExit();
-            }
+                break;
 
-            if (commandResult.isToggleGrpView()) {
-                toggleGrpView();
-                String groupName = getGroupName(commandText);
-                this.titleDisplay.setGroupTitle(groupName);
-            }
+            case VIEW_GRP:
+                groupName = getGroupName(commandText);
+                handleViewGrp(groupName);
+                break;
 
-            if (commandResult.isToggleLsnView()) {
-                toggleLsnView();
-                String groupName = getGroupName(commandText);
-                String lessonName = getLessonName(commandText);
-                this.titleDisplay.setLessonTitle(groupName, lessonName);
-            }
+            case VIEW_LSN:
+                groupName = getGroupName(commandText);
+                lessonName = getLessonName(commandText);
+                handleViewLsn(groupName, lessonName);
+                break;
 
-            if (commandResult.isAddGrp()) {
-                String groupName = getGroupName(commandText);
+            case ADD_GRP:
+                groupName = getGroupName(commandText);
                 handleAddGrp(groupName);
-            }
+                handleViewGrp(groupName);
+                break;
 
-            if (commandResult.isDelGrp()) {
-                String groupName = getGroupName(commandText);
+            case DEL_GRP:
+                groupName = getGroupName(commandText);
                 handleDelGrp(groupName);
-            }
+                break;
 
-            if (commandResult.isViewAtt()) {
+            case VIEW_ATT:
                 handleViewAtt();
-            }
+                break;
 
-            if (commandResult.isViewScore()) {
+            case VIEW_SCORE:
                 handleViewScore();
-            }
+                break;
 
-            if (commandResult.isFlagAtt()) {
-                toggleSerenityView();
+            case FLAG_ATT:
                 handleFlagAtt();
-                this.titleDisplay.setDefaultTitle();
-            }
+                break;
 
-            if (commandResult.isViewQn()) {
-                toggleSerenityView();
+            case VIEW_QN:
                 handleViewQn();
-                this.titleDisplay.setDefaultTitle();
+                break;
+
+            case REFRESH_TABLE:
+                refreshTable();
+                break;
+
+            default:
+
             }
 
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             this.logger.info("Invalid command: " + commandText);
             this.resultDisplay.setFeedbackToUser(e.getMessage());

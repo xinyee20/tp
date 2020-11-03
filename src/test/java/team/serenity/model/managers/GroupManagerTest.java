@@ -57,14 +57,14 @@ class GroupManagerTest {
     }
 
     @Test
-    public void hasAGroup_noGroupsInGroupManager_returnFalse() {
-        assertFalse(this.groupManager.hasAGroup());
+    public void isEmpty_noGroupsInGroupManager_returnFalse() {
+        assertTrue(this.groupManager.isEmpty());
     }
 
     @Test
-    public void hasAGroup_groupsInGroupManager_returnsTrue() {
+    public void isEmpty_groupsInGroupManager_returnsTrue() {
         this.groupManager.addGroup(GROUP_D);
-        assertTrue(this.groupManager.hasAGroup());
+        assertFalse(this.groupManager.isEmpty());
     }
 
     @Test

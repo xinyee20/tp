@@ -14,8 +14,11 @@ import team.serenity.commons.util.StringUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 import team.serenity.model.group.studentinfo.Participation;
 
 /**
@@ -56,6 +59,21 @@ public class SerenityParserUtil {
     }
 
     /**
+     * Parses a {@code String lessonName} into a {@code LessonName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lessonName} is invalid.
+     */
+    public static LessonName parseLessonName(String lessonName) throws ParseException {
+        requireNonNull(lessonName);
+        String trimmedLessonName = lessonName.trim();
+        if (!LessonName.isValidName(trimmedLessonName)) {
+            throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonName(trimmedLessonName);
+    }
+
+    /**
      * Parses a {@code String studentName} into a {@code String}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code student} is invalid.
@@ -64,7 +82,7 @@ public class SerenityParserUtil {
         requireNonNull(studentName);
         String trimmedName = studentName.trim();
         if (!Student.isValidName(trimmedName)) {
-            throw new ParseException(Student.STUDENT_NAME_ERROR);
+            throw new ParseException(StudentName.MESSAGE_CONSTRAINTS);
         }
         return trimmedName;
     }
@@ -78,7 +96,7 @@ public class SerenityParserUtil {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
         if (!Student.isValidStudentId(trimmedId)) {
-            throw new ParseException(Student.STUDENT_ID_ERROR);
+            throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
         return trimmedId;
     }

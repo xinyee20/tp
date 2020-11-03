@@ -6,7 +6,7 @@ import static team.serenity.commons.util.AppUtil.checkArgument;
 public class LessonName {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Lesson name should not be blank and must follow the format 'X-X' or 'X-XX' where X is a digit from 0-9.";
+        "Lesson name should not be blank and must follow the format 'X-X' or 'XX-X' where X is a digit from 0-9.";
 
     /*
      * Must contain 1 or 2 digits, followed by a hypen and 1 digit

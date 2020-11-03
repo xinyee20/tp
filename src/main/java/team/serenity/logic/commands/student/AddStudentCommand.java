@@ -28,7 +28,7 @@ public class AddStudentCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G04 "
         + PREFIX_NAME + "Ryan "
-        + PREFIX_MATRIC + "A01234567\n";
+        + PREFIX_MATRIC + "A0123456U\n";
 
     public static final String MESSAGE_SUCCESS = "You added %s (%s) to tutorial group %s.";
 
@@ -69,7 +69,9 @@ public class AddStudentCommand extends Command {
             model.addStudentToGroup(student, predicate);
             return new CommandResult(
                 String.format(MESSAGE_SUCCESS, studentName, studentId,
-                    model.getFilteredGroupList().get(0).getGroupName()));
+                    model.getFilteredGroupList().get(0).getGroupName()),
+                CommandResult.UiAction.REFRESH_TABLE
+            );
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());
         }

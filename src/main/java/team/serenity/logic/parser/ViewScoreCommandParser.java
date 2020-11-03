@@ -31,7 +31,9 @@ public class ViewScoreCommandParser implements Parser<ViewScoreCommand> {
             throw this.viewScoreCommandParserException;
         }
 
-        return new ViewScoreCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));
+        String groupName = SerenityParserUtil.parseGroupName(grpKeyword[0]).toString();
+
+        return new ViewScoreCommand(new GroupContainsKeywordPredicate(groupName));
     }
 
     /**

@@ -21,6 +21,7 @@ import team.serenity.model.ModelManager;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
 import team.serenity.model.userprefs.UserPrefs;
 import team.serenity.model.util.SampleDataUtil;
@@ -40,8 +41,7 @@ import team.serenity.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 0, true);
-
+    public static final Version VERSION = new Version(1, 3, 1, true);
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
@@ -93,17 +93,17 @@ public class MainApp extends Application {
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty"
                 + " Serenity.");
-            serenityOptional = null;
+            serenityOptional = Optional.of(new Serenity());
         } catch (IllegalValueException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty "
                 + "Serenity.");
-            serenityOptional = null;
+            serenityOptional = Optional.of(new Serenity());
         }
-        if (serenityOptional == null || serenityOptional.isEmpty()) {
+        if (serenityOptional.isEmpty()) {
             logger.info("Data file not found. Will be starting with a sample Serenity.");
             serenity = SampleDataUtil.getSampleSerenity();
             try {
-                storage.saveSerenity(serenity);
+                storage.saveSerenity(serenity.getGroupManager());
             } catch (IOException e) {
                 logger.warning("Data was not saved");
             }

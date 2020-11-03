@@ -1,9 +1,11 @@
 package team.serenity.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_EMPTY;
+import static team.serenity.logic.commands.student.DelStudentCommand.MESSAGE_SUCCESS;
 import static team.serenity.testutil.Assert.assertThrows;
 
 import java.util.function.Predicate;
@@ -44,7 +46,7 @@ public class DelStudentCommandTest {
     }
 
     @Test
-    public void execute_missingStudent() throws Exception {
+    public void execute_missingStudent() {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "A0000000U")
@@ -58,6 +60,42 @@ public class DelStudentCommandTest {
         DelStudentCommand command = new DelStudentCommand("June", "A1234567U", pred);
         assertThrows(CommandException.class,
             MESSAGE_STUDENT_EMPTY, () -> command.execute(modelStub));
+    }
+
+    @Test
+    public void execute_refreshesUi() throws CommandException {
+        Group stubGroup = new GroupBuilder().withName("G07")
+            .withStudents(
+                new Student("Freddie", "A0000000U")
+            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            .build();
+        UniqueList<Group> groupList = new UniqueGroupList();
+        groupList.add(stubGroup);
+        FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
+        ModelStubGroup modelStub = new ModelStubGroup(filteredList);
+        GroupPredicateStub pred = new GroupPredicateStub();
+        DelStudentCommand command = new DelStudentCommand("Freddie", "A0000000U", pred);
+        CommandResult result = command.execute(modelStub);
+        CommandResult expectedResult = new CommandResult(
+            String.format(MESSAGE_SUCCESS, "Freddie", "A0000000U", "G07"), CommandResult.UiAction.REFRESH_TABLE
+        );
+        assertTrue(result.equals(expectedResult));
+    }
+
+    @Test
+    public void execute_sameStudentInCaps() {
+        Group stubGroup = new GroupBuilder().withName("G07")
+            .withStudents(
+                new Student("Freddie", "A0000000U")
+            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            .build();
+        UniqueList<Group> groupList = new UniqueGroupList();
+        groupList.add(stubGroup);
+        FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
+        ModelStubGroup modelStub = new ModelStubGroup(filteredList);
+        GroupPredicateStub pred = new GroupPredicateStub();
+        DelStudentCommand command = new DelStudentCommand("FREDDIE", "A0000000U", pred);
+        assertDoesNotThrow(() -> command.execute(modelStub));
     }
 
     @Test
@@ -116,6 +154,11 @@ class ModelStubGroup extends ModelStub {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
+    }
+
+    @Override
+    public void deleteStudentFromGroup(Student student, Predicate<Group> predicate) {
+        return;
     }
 }
 

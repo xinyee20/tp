@@ -6,12 +6,12 @@ import static team.serenity.commons.util.AppUtil.checkArgument;
 public class GroupName {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Group name must follow the format 'X-YY' where X is an upperchase character and Y is a digit from 0 to 9.";
+        "Group name must follow the format 'XYY' where X is an alphabetical character and Y is a digit from 0 to 9.";
 
     /*
      * Must contain one upper case letter followed by 2 digits.
      */
-    public static final String VALIDATION_REGEX = "[A-Z]{1}[0-9]{2}";
+    public static final String VALIDATION_REGEX = "[a-zA-Z]{1}[0-9]{2}";
 
     public final String groupName;
 
@@ -23,7 +23,7 @@ public class GroupName {
     public GroupName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        this.groupName = name;
+        this.groupName = name.toUpperCase();
     }
 
     /**

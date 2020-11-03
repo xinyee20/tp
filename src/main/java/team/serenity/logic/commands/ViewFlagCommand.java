@@ -21,8 +21,7 @@ public class ViewFlagCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(SUCCESS_MESSAGE, false, false,
-            false, false, false, false, false, false, true, false);
+        return new CommandResult(SUCCESS_MESSAGE, CommandResult.UiAction.FLAG_ATT);
     }
 
 }

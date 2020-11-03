@@ -13,7 +13,7 @@ public class GroupNameTest {
     }
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "g01";
+        String invalidName = " ";
         assertThrows(IllegalArgumentException.class, () -> new GroupName(invalidName));
     }
 
@@ -24,13 +24,12 @@ public class GroupNameTest {
         assertFalse(GroupName.isValidName(" "));
         assertFalse(GroupName.isValidName("11"));
         assertFalse(GroupName.isValidName("1"));
-        assertFalse(GroupName.isValidName("g01"));
         assertFalse(GroupName.isValidName("g001"));
         assertFalse(GroupName.isValidName("G0"));
         assertFalse(GroupName.isValidName("G001"));
-
         // valid name
         assertTrue(GroupName.isValidName("G03"));
+        assertTrue(GroupName.isValidName("g03"));
     }
 
     @Test

@@ -31,7 +31,4 @@ public interface Storage extends UserPrefsStorage, SerenityStorage, QuestionStor
     @Override
     Optional<ReadOnlySerenity> readSerenity() throws IllegalValueException, DataConversionException;
 
-    @Override
-    void saveSerenity(ReadOnlySerenity serenity) throws IOException;
-
 }
