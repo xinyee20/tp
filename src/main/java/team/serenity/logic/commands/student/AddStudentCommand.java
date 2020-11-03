@@ -28,7 +28,7 @@ public class AddStudentCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G04 "
         + PREFIX_NAME + "Ryan "
-        + PREFIX_MATRIC + "A01234567\n";
+        + PREFIX_MATRIC + "A0123456U\n";
 
     public static final String MESSAGE_SUCCESS = "You added %s (%s) to tutorial group %s.";
 

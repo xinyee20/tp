@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.exceptions.DataConversionException;
 import team.serenity.commons.exceptions.IllegalValueException;
-import team.serenity.model.group.Group;
+import team.serenity.model.managers.ReadOnlyGroupManager;
 import team.serenity.model.managers.ReadOnlyQuestionManager;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.userprefs.ReadOnlyUserPrefs;
@@ -18,7 +17,7 @@ import team.serenity.storage.question.QuestionStorage;
 import team.serenity.storage.userprefs.UserPrefsStorage;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Serenity data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -81,18 +80,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveSerenity(ReadOnlySerenity serenity) throws IOException {
-        saveSerenity(serenity, this.serenityStorage.getSerenityFilePath());
-    }
-
-    public void saveSerenity(Stream<Group> groups) throws IOException {
-        this.serenityStorage.saveSerenity(groups);
-    }
-
-    @Override
-    public void saveSerenity(ReadOnlySerenity serenity, Path filePath) throws IOException {
-        this.logger.fine("Attempting to write to data file: " + filePath);
-        this.serenityStorage.saveSerenity(serenity, filePath);
+    public void saveSerenity(ReadOnlyGroupManager manager) throws IOException {
+        this.serenityStorage.saveSerenity(manager);
     }
 
     // ================ Question Manager methods ==============================

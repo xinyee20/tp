@@ -2,7 +2,7 @@ package team.serenity.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
-import static team.serenity.commons.core.Messages.MESSAGE_GROUP_LISTED_OVERVIEW;
+import static team.serenity.commons.core.Messages.MESSAGE_SCORE_LISTED_OVERVIEW;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
 import team.serenity.model.Model;
@@ -32,13 +32,14 @@ public class ViewScoreCommand extends Command {
     private String getMessage(Model model) {
         return model.getFilteredGroupList().isEmpty()
             ? MESSAGE_GROUP_EMPTY
-            : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
+            : String.format(MESSAGE_SCORE_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_SCORE);
     }
 
