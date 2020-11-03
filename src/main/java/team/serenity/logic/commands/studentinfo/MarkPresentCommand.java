@@ -41,7 +41,7 @@ public class MarkPresentCommand extends Command {
             + "Parameters: "
             + "all or "
             + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
             + PREFIX_NAME + " Aaron Tan "
@@ -126,7 +126,6 @@ public class MarkPresentCommand extends Command {
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkAll);
         lesson.setStudentsInfo(updatedListForMarkAll);
-        model.updateStudentsInfoList();
         return new CommandResult(MESSAGE_ALL_SUCCESS);
     }
 
@@ -143,7 +142,6 @@ public class MarkPresentCommand extends Command {
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkOneStudent);
         lesson.setStudentsInfo(updatedListForMarkOneStudent);
-        model.updateStudentsInfoList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent()));
     }
 

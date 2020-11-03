@@ -31,7 +31,7 @@ public class DelStudentCommand extends Command {
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
         + PREFIX_NAME + "STUDENT_NAME "
-        + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX\n"
+        + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G04 "
         + PREFIX_NAME + "Ryan "

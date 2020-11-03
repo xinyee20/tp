@@ -3,6 +3,7 @@ package team.serenity.logic.parser.studentinfo;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.ADD_SCORE_DESC;
+import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_ADD_SCORE;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NAME;
@@ -73,6 +74,13 @@ class AddScoreCommandParserTest {
         String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + ADD_SCORE_DESC;
 
         assertParseSuccess(parser, userInput, new AddScoreCommand(student, score));
+    }
+
+    @Test
+    public void parse_studentAndIndex_throwsParseException() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC + GRP_DESC_GROUP_A , expectedMessage);
     }
 
     @Test

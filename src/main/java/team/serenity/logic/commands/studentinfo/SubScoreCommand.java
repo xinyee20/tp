@@ -38,7 +38,7 @@ public class SubScoreCommand extends Command {
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_MATRIC + "STUDENT_NUMBER "
             + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT "
-            + "or INDEX " + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT\n"
+            + "or INDEX(starting from 1) " + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aaron Tan "
             + PREFIX_MATRIC + "A0123456B "

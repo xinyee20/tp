@@ -36,7 +36,7 @@ public class FlagAttCommand extends Command {
             + ": Flags the attendance of a specific student for a lesson. \n"
             + "Parameters: "
             + PREFIX_NAME + "STUDENT_NAME "
-            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX\n"
+            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aaron Tan "
             + PREFIX_MATRIC + "A0123456U\n"

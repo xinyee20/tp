@@ -38,7 +38,7 @@ public class AddScoreCommand extends Command {
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_MATRIC + "STUDENT_NUMBER "
             + PREFIX_ADD_SCORE + "SCORE_TO_ADD "
-            + "or INDEX " + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
+            + "or INDEX(starting from 1) " + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aaron Tan "
             + PREFIX_MATRIC + "A0123456U "
