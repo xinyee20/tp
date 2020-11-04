@@ -52,16 +52,16 @@ public class UnflagAttCommandParser implements Parser<UnflagAttCommand> {
         }
 
         try {
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
-            student = Optional.ofNullable(new Student(studentName, studentNumber));
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
+                student = Optional.ofNullable(new Student(studentName, studentNumber));
 
-            return new UnflagAttCommand(student.get());
-        } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            return new UnflagAttCommand(index);
-        }
+                return new UnflagAttCommand(student.get());
+            } else {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                return new UnflagAttCommand(index);
+            }
         } catch (Exception e) {
             if (e instanceof ParseException) {
                 throw e;

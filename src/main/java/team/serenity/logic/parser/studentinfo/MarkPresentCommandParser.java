@@ -79,7 +79,8 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
             if (e instanceof ParseException) {
                 throw e;
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MarkPresentCommand.MESSAGE_USAGE));
             }
         }
     }

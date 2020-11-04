@@ -1,7 +1,6 @@
 package team.serenity.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -29,13 +28,13 @@ public class SerenityParserUtilTest {
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex("10 a"));
+        assertThrows(NumberFormatException.class, () -> SerenityParserUtil.parseIndex("10 a"));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> SerenityParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, () -> SerenityParserUtil
+                .parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test

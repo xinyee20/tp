@@ -1,6 +1,8 @@
 package team.serenity.logic.commands.studentinfo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
@@ -26,7 +28,7 @@ class UnflagAttCommandTest {
     }
 
     @Test
-    public void execute_UnflagStudent_success() throws CommandException {
+    public void execute_unflagStudent_success() throws CommandException {
         ModelStubWithStudentsFlagged modelStub = new ModelStubWithStudentsFlagged();
         Student toUnflagAtt = new Student("Aaron Tan", "A0123456U");
 
@@ -53,10 +55,10 @@ class UnflagAttCommandTest {
     public void execute_wrongStudentNumber_throwsCommandException() {
         ModelStubWithStudentsFlagged modelStub = new ModelStubWithStudentsFlagged();
         Student wrongNumber = new Student("Aaron Tan", "A0000000U");
-        UnflagAttCommand UnflagAttCommand = new UnflagAttCommand(wrongNumber);
+        UnflagAttCommand unflagAttCommand = new UnflagAttCommand(wrongNumber);
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_STUDENT_NOT_FOUND, wrongNumber), () -> UnflagAttCommand.execute(modelStub));
+                String.format(MESSAGE_STUDENT_NOT_FOUND, wrongNumber), () -> unflagAttCommand.execute(modelStub));
     }
 
     @Test

@@ -90,52 +90,6 @@ public class UnflagAttCommand extends Command {
 
         return executeUnflagOneStudent(model, key, uniqueLesson, currentStudentInfoList, targetStudentInfo);
     }
-//        UniqueList<StudentInfo> uniqueStudentInfoList =
-//                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
-//        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
-//
-//        if (!isByIndex) {
-//
-//            // Unflag a student's attendance
-//            for (int i = 0; i < studentsInfo.size(); i++) {
-//                StudentInfo studentInfo = studentsInfo.get(i);
-//                Attendance current = studentInfo.getAttendance();
-//                this.isCorrectStudent = studentInfo.containsStudent(this.toUnflagAtt.get());
-//                if (this.isCorrectStudent) {
-//                    if (!current.isFlagged()) {
-//                        throw new CommandException(MESSAGE_FAILURE);
-//                    }
-//                    Attendance update = new Attendance(current.isPresent(), false);
-//                    StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-//                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-//                    model.updateLessonList();
-//                    model.updateStudentsInfoList();
-//                    break;
-//                }
-//            }
-//
-//            if (!this.isCorrectStudent) {
-//                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toUnflagAtt.get()));
-//            }
-//        } else {
-//            if (index.get().getZeroBased() >= studentsInfo.size()) {
-//                throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-//                        index.get().getOneBased()));
-//            }
-//
-//            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
-//            Attendance current = studentInfo.getAttendance();
-//            toUnflagAtt = Optional.ofNullable(studentInfo.getStudent());
-//            if (!current.isFlagged()) {
-//                throw new CommandException(MESSAGE_FAILURE);
-//            }
-//            Attendance update = new Attendance(current.isPresent(), false);
-//            StudentInfo updatedStudentInfo = studentInfo.updateAttendance(update);
-//            uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-//            model.updateLessonList();
-//            model.updateStudentsInfoList();
-//        }
-//        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toUnflagAtt.get()));
 
     /**
      * Executes the unflag one student attendance command and returns the result message.
@@ -195,8 +149,8 @@ public class UnflagAttCommand extends Command {
      * @param currentStudentInfoList the current student info list.
      * @param targetStudentInfo the target student info to unflag attendance.
      */
-    private UniqueList<StudentInfo> getUpdatedListForUnflagOneStudent(ObservableList<StudentInfo> currentStudentInfoList,
-                                                                    StudentInfo targetStudentInfo) {
+    private UniqueList<StudentInfo> getUpdatedListForUnflagOneStudent(
+            ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) {
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
         updatedList.setElementsWithList(currentStudentInfoList);
         StudentInfo updatedStudentInfo = new StudentInfo(targetStudentInfo.getStudent(),

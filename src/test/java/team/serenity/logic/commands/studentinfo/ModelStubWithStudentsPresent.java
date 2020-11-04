@@ -40,9 +40,9 @@ class ModelStubWithStudentsPresent extends ModelStub {
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         List<Lesson> lsnList = new ArrayList<>();
-        this.uniqueLesson = new LessonBuilder().
-                withName("1-1").
-                withStudentInfos(
+        this.uniqueLesson = new LessonBuilder()
+                .withName("1-1")
+                .withStudentInfos(
                         new StudentInfo(new Student("Aaron Tan", "A0123456U"),
                                 new Participation(0),
                                 new Attendance(true)),
@@ -57,8 +57,8 @@ class ModelStubWithStudentsPresent extends ModelStub {
                                 new Attendance(true)),
                         new StudentInfo(new Student("Eng Wee Kiat", "A0101010E"),
                                 new Participation(0),
-                                new Attendance(true))).
-                build();
+                                new Attendance(true)))
+                .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
         lessonUniqueList.setElementsWithList(lsnList);

@@ -79,7 +79,8 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
             if (e instanceof ParseException) {
                 throw e;
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MarkAbsentCommand.MESSAGE_USAGE));
             }
         }
     }

@@ -69,7 +69,7 @@ public class FlagAttCommandParser implements Parser<FlagAttCommand> {
             if (e instanceof ParseException) {
                 throw e;
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,FlagAttCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
             }
         }
     }
