@@ -58,7 +58,7 @@ Component | Description
 `Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the `Storage` interface and exposes its functionality through the `StorageManager` class.
 
 **How the architecture components interact with each other**
-The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
+The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command `delgrp grp/G04`.
 
 ![Figure 3.1.2](images/developerGuide/ArchitectureSequenceDiagram.png)
 
@@ -235,7 +235,7 @@ When describing some common features across all managers, a typical manager shal
 
 #### **4.1.1 Rationale**
 
-These five main XYZManagers provide a way for tutors to manage the different aspects of teaching a class, 
+These five main `XYZManagers` provide a way for tutors to manage the different aspects of teaching a class, 
 so as to facilitate teaching a class more effectively.   
 
 #### **4.1.2 Current Implementation**
@@ -331,7 +331,7 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 |   |**Pros**|**Cons**|
 |---|---|---|
-| **Option 1: **More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
+| **Option 1:** More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
 | **Option 2 (current)**<br>One | Easy to implement, easier to retrieve all lessons taught by a single tutor | More difficult to retrieve lessons tied to a specific group |
 
 ### **4.4 Student Manager**
@@ -380,8 +380,8 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 
 |   |**Pros**|**Cons**|
 |---|---|---|
-| **Option 1**<br>To store the students inside a `UniqueList<Student> | This is easy and straight-forward to implement. | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved. |
-| **Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>`. | This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name. | This does not allow the order of addition of students to a group to be maintained. |
+| **Option 1**<br>To store the students inside a `UniqueList<Student> |  This is easy and straight-forward to implement. | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved. |
+|  **Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>` |  This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name. | This does not allow the order of addition of students to a group to be maintained. | |
 
 **Reasons for choosing option 2:**
 
