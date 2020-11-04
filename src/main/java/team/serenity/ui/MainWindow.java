@@ -25,9 +25,10 @@ import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
-import team.serenity.ui.groupdata.GroupDataPanel;
-import team.serenity.ui.lessondata.LessonDataPanel;
-import team.serenity.ui.serenitydata.SerenityDataPanel;
+import team.serenity.ui.datapanel.DataPanel;
+import team.serenity.ui.datapanel.GroupDataPanel;
+import team.serenity.ui.datapanel.LessonDataPanel;
+import team.serenity.ui.datapanel.SerenityDataPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -45,8 +46,9 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private TitleDisplay titleDisplay;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private CommandBox commandBox;
     private SideBar sideBar;
+    private HelpWindow helpWindow;
 
     // Ui parts relating to serenity
     private DataPanel serenityDataPanel;
@@ -121,11 +123,11 @@ public class MainWindow extends UiPart<Stage> {
         this.titleDisplay = new TitleDisplay();
         this.titleDisplayPlaceholder.getChildren().add(this.titleDisplay.getRoot());
 
+        this.commandBox = new CommandBox(this::executeCommand);
+        this.commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
         this.resultDisplay = new ResultDisplay();
         this.resultDisplayPlaceholder.getChildren().add(this.resultDisplay.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        this.commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         this.sideBar = new SideBar();
         this.sidebarPlaceholder.setContent(this.sideBar.getRoot());

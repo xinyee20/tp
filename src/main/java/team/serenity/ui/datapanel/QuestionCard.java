@@ -1,4 +1,4 @@
-package team.serenity.ui.lessondata;
+package team.serenity.ui.datapanel;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
