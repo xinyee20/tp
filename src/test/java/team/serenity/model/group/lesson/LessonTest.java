@@ -3,8 +3,8 @@ package team.serenity.model.group.lesson;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
-import static team.serenity.testutil.TypicalStudent.JAMES;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
+import static team.serenity.testutil.TypicalStudent.HELENE;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +30,7 @@ public class LessonTest {
     public void constructor_invalidName_throwsIllegalArgumentException() {
         String invalidName = "";
         UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
-        StudentInfo studentInfo = new StudentInfo(JOHN, new Participation(), new Attendance());
+        StudentInfo studentInfo = new StudentInfo(GEORGE, new Participation(), new Attendance());
         studentsInfo.add(studentInfo);
         assertThrows(IllegalArgumentException.class, () -> new Lesson(invalidName, studentsInfo));
     }
@@ -45,14 +45,14 @@ public class LessonTest {
     @Test
     public void equals() {
         UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
-        StudentInfo studentInfo = new StudentInfo(JOHN);
+        StudentInfo studentInfo = new StudentInfo(GEORGE);
         studentsInfo.add(studentInfo);
         Lesson oneOne = new Lesson("1-1", studentsInfo);
         Lesson oneOneClone = new Lesson("1-1", studentsInfo);
         Lesson classTwoOne = new Lesson("2-1", studentsInfo); //same students, different name
         UniqueList<StudentInfo> newStudentsInfo = new UniqueStudentInfoList();
-        newStudentsInfo.add(new StudentInfo(JOHN));
-        newStudentsInfo.add(new StudentInfo(JAMES));
+        newStudentsInfo.add(new StudentInfo(GEORGE));
+        newStudentsInfo.add(new StudentInfo(HELENE));
         Lesson oneOneWithTwoStudents = new Lesson("1-1", newStudentsInfo);
         Lesson twoOneWithTwoStudents = new Lesson("2-1", newStudentsInfo);
         assertTrue(oneOneClone.equals(oneOne)); //same

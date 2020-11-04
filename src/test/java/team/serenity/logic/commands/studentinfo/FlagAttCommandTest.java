@@ -10,7 +10,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,8 +40,8 @@ class FlagAttCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student wrongNameOne = new Student("Aaron", "A0123456U");
-        Student wrongNameTwo = new Student("Betty Tan", "A0123456U");
+        Student wrongNameOne = new Student("Aaron", "A0123456A");
+        Student wrongNameTwo = new Student("Benjamin Barker", "A0123456B");
         FlagAttCommand flagAttCommandOne = new FlagAttCommand(wrongNameOne);
         FlagAttCommand flagAttCommandTwo = new FlagAttCommand(wrongNameTwo);
 
@@ -64,7 +64,7 @@ class FlagAttCommandTest {
     @Test
     public void execute_notInGroup_throwsCommandException() {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toFlagAtt = new Student("Aaron Tan", "A0123456U");
+        Student toFlagAtt = new Student("Aaron Tan", "A0123456A");
         FlagAttCommand flagAttCommand = new FlagAttCommand(toFlagAtt);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> flagAttCommand.execute(modelStub));
@@ -103,7 +103,7 @@ class FlagAttCommandTest {
     public void equals() {
         FlagAttCommand flagStudentCommandA = new FlagAttCommand(AARON);
         FlagAttCommand copyFlagStudentCommandA = new FlagAttCommand(AARON);
-        FlagAttCommand flagStudentCommandB = new FlagAttCommand(JOHN);
+        FlagAttCommand flagStudentCommandB = new FlagAttCommand(GEORGE);
         FlagAttCommand flagIndexCommandA = new FlagAttCommand(INDEX_FIRST);
         FlagAttCommand copyFlagIndexCommandA = new FlagAttCommand(INDEX_FIRST);
         FlagAttCommand flagIndexCommandB = new FlagAttCommand(INDEX_SECOND);

@@ -1,9 +1,9 @@
 package team.serenity.testutil;
 
-import static team.serenity.testutil.TypicalStudent.JAMES;
-import static team.serenity.testutil.TypicalStudent.JANE;
-import static team.serenity.testutil.TypicalStudent.JOHN;
-import static team.serenity.testutil.TypicalStudent.JUNE;
+import static team.serenity.testutil.TypicalStudent.BENJAMIN;
+import static team.serenity.testutil.TypicalStudent.CATHERINE;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
+import static team.serenity.testutil.TypicalStudent.HELENE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,32 +15,24 @@ import team.serenity.model.util.UniqueList;
 
 public class TypicalStudentInfo {
 
-    public static final StudentInfo JAMES_INFO = new StudentInfoBuilder().withStudent(JAMES)
-            .withAttendance(false)
-            .withParticipation(0)
-            .build();
+    public static final StudentInfo BENJAMIN_INFO = new StudentInfoBuilder().withStudent(BENJAMIN)
+            .withAttendance(false).withParticipation(0).build();
 
-    public static final StudentInfo JOHN_INFO = new StudentInfoBuilder().withStudent(JOHN)
-            .withAttendance(false)
-            .withParticipation(0)
-            .build();
+    public static final StudentInfo CATHERINE_INFO = new StudentInfoBuilder().withStudent(CATHERINE)
+            .withAttendance(false).withParticipation(0).build();
 
-    public static final StudentInfo JUNE_INFO = new StudentInfoBuilder().withStudent(JUNE)
-            .withAttendance(false)
-            .withParticipation(0)
-            .build();
+    public static final StudentInfo GEORGE_INFO = new StudentInfoBuilder().withStudent(GEORGE)
+            .withAttendance(false).withParticipation(0).build();
 
-    public static final StudentInfo JANE_INFO = new StudentInfoBuilder().withStudent(JANE)
-            .withAttendance(false)
-            .withParticipation(0)
-            .build();
+    public static final StudentInfo HELENE_INFO = new StudentInfoBuilder().withStudent(HELENE)
+            .withAttendance(false).withParticipation(0).build();
 
     public TypicalStudentInfo() {
     } //prevents instantiation
 
     public static UniqueList<StudentInfo> getTypicalStudentInfo() {
         UniqueList<StudentInfo> list = new UniqueStudentInfoList();
-        list.setElementsWithList(new ArrayList<>(Arrays.asList(JAMES_INFO, JOHN_INFO)));
+        list.setElementsWithList(new ArrayList<>(Arrays.asList(HELENE_INFO, GEORGE_INFO)));
         return list;
     }
 

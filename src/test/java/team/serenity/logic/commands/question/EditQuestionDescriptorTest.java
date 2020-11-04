@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.logic.commands.CommandTestUtil.EDITED_QN_A;
 import static team.serenity.logic.commands.CommandTestUtil.EDITED_QN_B;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_B;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_LSN_B;
+import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_G05;
+import static team.serenity.logic.commands.CommandTestUtil.VALID_LSN_1_2;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_QN_DESC_B;
 
 import org.junit.jupiter.api.Test;
@@ -35,12 +35,12 @@ public class EditQuestionDescriptorTest {
 
         // different group name -> returns false
         EditQuestionDescriptor editedQuestion =
-                new EditQuestionDescriptorBuilder(EDITED_QN_A).withGroupName(VALID_GROUP_NAME_B).build();
+                new EditQuestionDescriptorBuilder(EDITED_QN_A).withGroupName(VALID_GROUP_NAME_G05).build();
         assertFalse(EDITED_QN_A.equals(editedQuestion));
 
         // different lesson name -> returns false
         editedQuestion =
-                new EditQuestionDescriptorBuilder(EDITED_QN_A).withLessonName(VALID_LSN_B).build();
+                new EditQuestionDescriptorBuilder(EDITED_QN_A).withLessonName(VALID_LSN_1_2).build();
         assertFalse(EDITED_QN_A.equals(editedQuestion));
 
         // different description -> returns false

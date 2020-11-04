@@ -10,7 +10,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,7 +64,7 @@ class MarkPresentCommandTest {
     @Test
     public void execute_notInGroup_throwsCommandException() {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkPresent = new Student("Aaron Tan", "A0123456A");
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(toMarkPresent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> markPresentCommand.execute(modelStub));
@@ -73,7 +73,7 @@ class MarkPresentCommandTest {
     @Test
     public void execute_notInLesson_throwsCommandException() {
         ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
-        Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkPresent = new Student("Aaron Tan", "A0123456A");
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(toMarkPresent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_LESSON, () -> markPresentCommand.execute(modelStub));
@@ -112,7 +112,7 @@ class MarkPresentCommandTest {
         MarkPresentCommand markAllPresentCommandA = new MarkPresentCommand();
         MarkPresentCommand markStudentPresentCommandA = new MarkPresentCommand(AARON);
         MarkPresentCommand copyMarkStudentPresentCommandA = new MarkPresentCommand(AARON);
-        MarkPresentCommand markStudentPresentCommandB = new MarkPresentCommand(JOHN);
+        MarkPresentCommand markStudentPresentCommandB = new MarkPresentCommand(GEORGE);
         MarkPresentCommand markIndexPresentCommandA = new MarkPresentCommand(INDEX_FIRST);
         MarkPresentCommand copyMarkIndexPresentCommandA = new MarkPresentCommand(INDEX_FIRST);
         MarkPresentCommand markIndexPresentCommandB = new MarkPresentCommand(INDEX_SECOND);

@@ -10,7 +10,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,7 +64,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_notInGroup_throwsCommandException() {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toMarkAbsent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkAbsent = new Student("Aaron Tan", "A0123456A");
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(toMarkAbsent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> markAbsentCommand.execute(modelStub));
@@ -112,7 +112,7 @@ class MarkAbsentCommandTest {
         MarkAbsentCommand markAllAbsentCommandA = new MarkAbsentCommand();
         MarkAbsentCommand markStudentAbsentCommandA = new MarkAbsentCommand(AARON);
         MarkAbsentCommand copyMarkStudentAbsentCommandA = new MarkAbsentCommand(AARON);
-        MarkAbsentCommand markStudentAbsentCommandB = new MarkAbsentCommand(JOHN);
+        MarkAbsentCommand markStudentAbsentCommandB = new MarkAbsentCommand(GEORGE);
         MarkAbsentCommand markIndexAbsentCommandA = new MarkAbsentCommand(INDEX_FIRST);
         MarkAbsentCommand copyMarkIndexAbsentCommandA = new MarkAbsentCommand(INDEX_FIRST);
         MarkAbsentCommand markIndexAbsentCommandB = new MarkAbsentCommand(INDEX_SECOND);
