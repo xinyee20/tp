@@ -28,8 +28,8 @@ public class ViewLsnCommand extends Command {
         + PREFIX_GRP + "GROUP "
         + PREFIX_LSN + "LESSON\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + "G04 "
-        + PREFIX_LSN + "2-2\n";
+        + PREFIX_GRP + "G01 "
+        + PREFIX_LSN + "1-1\n";
 
     public static final String GROUP_DOES_NOT_EXIST_MESSAGE = "The specified group does not exist!";
     public static final String LESSON_DOES_NOT_EXIST_MESSAGE = "The specified lesson does not exist!";

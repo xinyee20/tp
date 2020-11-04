@@ -21,7 +21,7 @@ public class ViewAttCommand extends Command {
         + "Parameters: "
         + PREFIX_GRP + "GROUP\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + " G04\n";
+        + PREFIX_GRP + " G01\n";
 
     private final GroupContainsKeywordPredicate predicate;
 

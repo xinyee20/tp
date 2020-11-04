@@ -14,7 +14,7 @@ public class AddGrpCommand extends Command {
 
     public static final String COMMAND_WORD = "addgrp";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a new tutorial group. "
+        + ": Adds a new tutorial group.\n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
         + PREFIX_PATH + "PATH\n"

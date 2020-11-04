@@ -37,15 +37,15 @@ public class MarkPresentCommand extends Command {
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked present!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks a specific student or all students present from a lesson. \n"
+            + ": Marks a specific student or all students present from a lesson.\n"
             + "Parameters: "
             + "all or "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
+            + PREFIX_NAME + "STUDENT_NAME "
+            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
             + "Example: " + COMMAND_WORD + " " + "all\n"
             + "or " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U\n"
+            + PREFIX_NAME + "Aaron Tan "
+            + PREFIX_MATRIC + "A0123456A\n"
             + "or " + COMMAND_WORD + " 2";
 
     private Optional<Student> toMarkPresent;

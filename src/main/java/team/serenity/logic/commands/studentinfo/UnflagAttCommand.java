@@ -32,13 +32,13 @@ public class UnflagAttCommand extends Command {
     public static final String MESSAGE_FAILURE = "Student has not been flagged.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unflags the attendance of a specific student for a lesson. \n"
+            + ": Unflags the attendance of a specific student for a lesson.\n"
             + "Parameters: "
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456U\n"
+            + PREFIX_MATRIC + "A0123456A\n"
             + "or " + COMMAND_WORD + " 2";
 
     private Optional<Student> toUnflagAtt;

@@ -39,11 +39,12 @@ public class SetScoreCommand extends Command {
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_MATRIC + "STUDENT_NUMBER "
             + PREFIX_SET_SCORE + "SCORE "
-            + "or INDEX(starting from 1) " + PREFIX_SET_SCORE + " SCORE\n"
+            + "or INDEX(starting from 1) "
+            + PREFIX_SET_SCORE + "SCORE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456U "
-            + PREFIX_SET_SCORE + " 2\n"
+            + PREFIX_MATRIC + "A0123456A "
+            + PREFIX_SET_SCORE + "2\n"
             + "or " + COMMAND_WORD + " 2 "
             + PREFIX_SET_SCORE + "2\n";
 

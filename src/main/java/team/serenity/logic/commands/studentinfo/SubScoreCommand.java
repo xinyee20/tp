@@ -41,9 +41,9 @@ public class SubScoreCommand extends Command {
             + "or INDEX(starting from 1) " + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456B "
+            + PREFIX_MATRIC + "A0123456A "
             + PREFIX_SUBTRACT_SCORE + "2\n"
-            + "or " + COMMAND_WORD + " 2"
+            + "or " + COMMAND_WORD + " 2 "
             + PREFIX_SUBTRACT_SCORE + "2\n";
 
     private Optional<Student> toSubScore;

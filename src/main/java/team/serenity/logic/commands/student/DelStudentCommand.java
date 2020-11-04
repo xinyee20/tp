@@ -33,11 +33,11 @@ public class DelStudentCommand extends Command {
         + PREFIX_NAME + "STUDENT_NAME "
         + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + "G04 "
-        + PREFIX_NAME + "Ryan "
-        + PREFIX_MATRIC + "A1234567U\n"
-        + "or " + COMMAND_WORD + " 2 "
-        + PREFIX_GRP + "G04";
+        + PREFIX_GRP + "G01 "
+        + PREFIX_NAME + "Aaron Tan "
+        + PREFIX_MATRIC + "A0123456A\n"
+        + "or " + COMMAND_WORD + " 1 "
+        + PREFIX_GRP + "G01";
 
     private Optional<String> studentName;
     private Optional<String> studentId;
