@@ -12,6 +12,7 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.LessonContainsKeywordPredicate;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
@@ -35,15 +36,15 @@ public class AddLsnCommand extends Command {
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "Specified Tutorial Group does not exist!";
 
     private final GroupContainsKeywordPredicate targetGrpPredicate;
-    private final String toAdd;
+    private final LessonName toAdd;
 
     /**
      * Creates an AddLsnCommand to add the specified lesson.
      */
-    public AddLsnCommand(String lesson, GroupContainsKeywordPredicate target) {
-        requireNonNull(lesson);
+    public AddLsnCommand(LessonName lessonName, GroupContainsKeywordPredicate target) {
+        requireNonNull(lessonName);
         this.targetGrpPredicate = target;
-        this.toAdd = lesson;
+        this.toAdd = lessonName;
     }
 
     @Override
@@ -70,7 +71,7 @@ public class AddLsnCommand extends Command {
         targetGrp.getLessons().add(toAdd);
 
         model.updateLessonList();
-        model.updateFilteredLessonList(new LessonContainsKeywordPredicate(this.toAdd));
+        model.updateFilteredLessonList(new LessonContainsKeywordPredicate(this.toAdd.lessonName));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, targetGrp), CommandResult.UiAction.VIEW_LSN);
     }

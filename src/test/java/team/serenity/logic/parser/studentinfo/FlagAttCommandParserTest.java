@@ -45,6 +45,13 @@ class FlagAttCommandParserTest {
     }
 
     @Test
+    public void parse_studentAndIndex_throwsParseException() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC , expectedMessage);
+    }
+
+    @Test
     public void parse_validStudentAndNumberParameter_returnsFlagAttCommand() {
         Student student = new StudentBuilder().build();
 

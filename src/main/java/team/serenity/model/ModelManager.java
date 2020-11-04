@@ -269,6 +269,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteLesson(Group group, Lesson lesson) {
+        this.studentInfoManager.deleteAllStudentsInfoFromGroupLesson(group, lesson);
+        this.lessonManager.deleteLessonFromGroup(group.getGroupName(), lesson);
+        this.questionManager.deleteAllQuestionsFromGroupLesson(group, lesson);
+        this.lessons.removeAll(lesson);
+        this.studentsInfo.clear();
+    }
+
+    @Override
     public void updateLessonList() {
         if (this.filteredGroups.size() == 1) {
             Group currentGroup = this.filteredGroups.get(0);
@@ -312,6 +321,7 @@ public class ModelManager implements Model {
             Group currentGroup = this.filteredGroups.get(0);
             this.groupManager.deleteStudentFromGroup(currentGroup, student);
         }
+        updateStudentsInfoList();
     }
 
     @Override
@@ -356,14 +366,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key) {
+        return this.studentInfoManager.getObservableListOfStudentsInfoFromKey(key);
+    }
+
+    @Override
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                         UniqueList<StudentInfo> newListOfStudentsInfo) {
+        requireAllNonNull(key, newListOfStudentsInfo);
+        this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, newListOfStudentsInfo);
+    }
+
+    @Override
     public void updateStudentsInfoList() {
         if (!this.filteredGroups.isEmpty() && !this.filteredLessons.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
             Lesson currentLesson = this.filteredLessons.get(0);
             GroupLessonKey key = new GroupLessonKey(currentGroup.getGroupName(), currentLesson.getLessonName());
-            ObservableList<StudentInfo> studentInfos = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
+            ObservableList<StudentInfo> studentsInfoList = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
             UniqueList<StudentInfo> uniqueStudentInfoList = currentLesson.getStudentsInfo();
-            this.studentsInfo.setAll(studentInfos);
+            this.studentsInfo.setAll(studentsInfoList);
             this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, uniqueStudentInfoList);
         }
     }

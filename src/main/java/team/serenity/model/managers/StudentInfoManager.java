@@ -8,9 +8,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.exceptions.GroupLessonPairNotFoundException;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 
@@ -120,6 +122,19 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
     }
 
     /**
+     * Returns the list of student info at {@code key} as an unmodifiable list.
+     * @param key the given group and lesson key.
+     */
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key)
+            throws GroupLessonPairNotFoundException {
+        requireNonNull(key);
+        if (!this.mapToListOfStudentsInfo.containsKey(key)) {
+            throw new GroupLessonPairNotFoundException();
+        }
+        return this.mapToListOfStudentsInfo.get(key).asUnmodifiableObservableList();
+    }
+
+    /**
      * @param key
      * @param studentInfo
      * @throws GroupLessonPairNotFoundException
@@ -148,6 +163,15 @@ public class StudentInfoManager implements ReadOnlyStudentInfoManager {
                 iterator.remove();
             }
         } ;
+    }
+
+    /**
+     * Delete all students info from group's lesson.
+     */
+    public void deleteAllStudentsInfoFromGroupLesson(Group group, Lesson lesson) {
+        requireAllNonNull(group, lesson);
+        GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
+        this.mapToListOfStudentsInfo.remove(key);
     }
 
     //util methods

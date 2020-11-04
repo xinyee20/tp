@@ -12,30 +12,20 @@ import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
 import static team.serenity.testutil.TypicalStudent.JOHN;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
-import team.serenity.model.group.Group;
-import team.serenity.model.group.GroupLessonKey;
-import team.serenity.model.group.UniqueGroupList;
-import team.serenity.model.group.lesson.Lesson;
-import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;
-import team.serenity.model.group.studentinfo.StudentInfo;
-import team.serenity.model.util.UniqueList;
-import team.serenity.testutil.GroupBuilder;
-import team.serenity.testutil.LessonBuilder;
-import team.serenity.testutil.ModelStub;
 
 class MarkPresentCommandTest {
+
+    @Test
+    public void constructor_nullParameter_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new MarkPresentCommand((Index) null));
+        assertThrows(NullPointerException.class, () -> new MarkPresentCommand((Student) null));
+    }
 
     @Test
     public void execute_markStudent_success() throws CommandException {
@@ -50,11 +40,15 @@ class MarkPresentCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student wrongName = new Student("Aaron", "A0123456U");
-        MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongName);
+        Student wrongNameOne = new Student("Aaron", "A0123456U");
+        Student wrongNameTwo = new Student("Betty Tan", "A0123456U");
+        MarkPresentCommand markPresentCommandOne = new MarkPresentCommand(wrongNameOne);
+        MarkPresentCommand markPresentCommandTwo = new MarkPresentCommand(wrongNameTwo);
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_STUDENT_NOT_FOUND, wrongName), () -> markPresentCommand.execute(modelStub));
+                String.format(MESSAGE_STUDENT_NOT_FOUND, wrongNameOne), () -> markPresentCommandOne.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_STUDENT_NOT_FOUND, wrongNameTwo), () -> markPresentCommandTwo.execute(modelStub));
     }
 
     @Test
@@ -102,7 +96,7 @@ class MarkPresentCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongIndex);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> markPresentCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> markPresentCommand.execute(modelStub));
     }
 
     @Test
@@ -141,143 +135,3 @@ class MarkPresentCommandTest {
     }
 }
 
-/**
- * A Model stub containing absent students
- */
-class ModelStubWithStudentsAbsent extends ModelStub {
-    private Group uniqueGroup;
-    private Lesson uniqueLesson;
-
-
-    @Override
-    public ObservableList<Group> getFilteredGroupList() {
-        List<Group> grpList = new ArrayList<>();
-        this.uniqueGroup = new GroupBuilder().build();
-        grpList.add(uniqueGroup);
-        UniqueList<Group> groupUniqueList = new UniqueGroupList();
-        groupUniqueList.setElementsWithList(grpList);
-        return groupUniqueList.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Lesson> getFilteredLessonList() {
-        List<Lesson> lsnList = new ArrayList<>();
-        this.uniqueLesson = new LessonBuilder().build();
-        lsnList.add(uniqueLesson);
-        UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
-        lessonUniqueList.setElementsWithList(lsnList);
-        return lessonUniqueList.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
-        GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
-        GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
-        Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
-        uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
-        return uniqueStudentInfoList.get(key);
-    }
-
-    @Override
-    public void updateStudentsInfoList() {
-        return;
-    }
-
-    @Override
-    public void updateLessonList() {
-        return;
-    }
-
-}
-
-/**
- * A Model stub containing an absent student
- */
-class ModelStubWithIndexAbsent extends ModelStub {
-    private Group uniqueGroup;
-    private Lesson uniqueLesson;
-
-    @Override
-    public ObservableList<Group> getFilteredGroupList() {
-        List<Group> grpList = new ArrayList<>();
-        this.uniqueGroup = new GroupBuilder().withName("G01")
-                .withStudents(new Student("Aaron Tan", "A0123456U"))
-                .withClasses("1-1").build();
-        grpList.add(uniqueGroup);
-        UniqueList<Group> groupUniqueList = new UniqueGroupList();
-        groupUniqueList.setElementsWithList(grpList);
-        return groupUniqueList.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Lesson> getFilteredLessonList() {
-        List<Lesson> lsnList = new ArrayList<>();
-        this.uniqueLesson = new LessonBuilder()
-                .withName("1-1")
-                .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U")))
-                .build();
-        lsnList.add(uniqueLesson);
-        UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
-        lessonUniqueList.setElementsWithList(lsnList);
-        return lessonUniqueList.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public UniqueList<StudentInfo> getListOfStudentsInfoFromGroupAndLesson(Group group, Lesson lesson) {
-        GroupLessonKey key = new GroupLessonKey(group.getGroupName(), lesson.getLessonName());
-        GroupLessonKey mapKey = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
-        Map<GroupLessonKey, UniqueList<StudentInfo>> uniqueStudentInfoList = new HashMap<>();
-        uniqueStudentInfoList.put(mapKey, uniqueLesson.getStudentsInfo());
-        return uniqueStudentInfoList.get(key);
-    }
-
-    @Override
-    public void updateLessonList() {
-        return;
-    }
-
-    @Override
-    public void updateStudentsInfoList() {
-        return;
-    }
-
-}
-
-/**
- * A Model stub containing no group
- */
-class ModelStubWithNoGroup extends ModelStub {
-
-    @Override
-    public ObservableList<Group> getFilteredGroupList() {
-        List<Group> grpList = new ArrayList<>();
-        UniqueList<Group> groupUniqueList = new UniqueGroupList();
-        groupUniqueList.setElementsWithList(grpList);
-        return groupUniqueList.asUnmodifiableObservableList();
-    }
-}
-
-/**
- * A Model stub containing no lesson
- */
-class ModelStubWithNoLesson extends ModelStub {
-    private Group uniqueGroup;
-
-    @Override
-    public ObservableList<Group> getFilteredGroupList() {
-        List<Group> grpList = new ArrayList<>();
-        this.uniqueGroup = new GroupBuilder().build();
-        grpList.add(uniqueGroup);
-        UniqueList<Group> groupUniqueList = new UniqueGroupList();
-        groupUniqueList.setElementsWithList(grpList);
-        return groupUniqueList.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Lesson> getFilteredLessonList() {
-        List<Lesson> lsnList = new ArrayList<>();
-        UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
-        lessonUniqueList.setElementsWithList(lsnList);
-        return lessonUniqueList.asUnmodifiableObservableList();
-    }
-}

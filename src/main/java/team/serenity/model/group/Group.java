@@ -137,9 +137,13 @@ public class Group {
      * @param student Student to be added
      */
     public void deleteStudentFromGroup(Student student) {
+        deleteFromStudentList(student);
         deleteStudentFromStudentListInLessons(student);
     }
 
+    private void deleteFromStudentList(Student student) {
+        this.students.remove(student);
+    }
 
     private void addToStudentList(Student student) {
         this.students.add(student);

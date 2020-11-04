@@ -3,7 +3,6 @@ package team.serenity.logic.parser;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
-import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_LOWERCASE;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_NON_DIGITS;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_PATH;
 import static team.serenity.logic.commands.CommandTestUtil.PATH_DESC_GROUP_A;
@@ -59,8 +58,6 @@ public class AddGrpCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid group names
-        assertParseFailure(parser, INVALID_GROUP_NAME_LOWERCASE + PATH_DESC_GROUP_A,
-            GroupName.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, INVALID_GROUP_NAME_NON_DIGITS + PATH_DESC_GROUP_A,
             GroupName.MESSAGE_CONSTRAINTS);
 

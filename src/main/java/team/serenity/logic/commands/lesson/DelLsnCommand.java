@@ -62,8 +62,7 @@ public class DelLsnCommand extends Command {
         Group trgtGrp = model.getFilteredGroupList().get(0);
         Lesson lessonToDel = model.getFilteredLessonList().get(0);
 
-        trgtGrp.getLessons().remove(lessonToDel);
-        model.getLessonList().remove(lessonToDel);
+        model.deleteLesson(trgtGrp, lessonToDel);
 
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 

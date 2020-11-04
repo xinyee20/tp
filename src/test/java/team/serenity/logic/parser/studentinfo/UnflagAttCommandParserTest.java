@@ -45,6 +45,13 @@ class UnflagAttCommandParserTest {
     }
 
     @Test
+    public void parse_studentAndIndex_throwsParseException() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnflagAttCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC, expectedMessage);
+    }
+
+    @Test
     public void parse_validStudentAndNumberParameter_returnsUnflagAttCommand() {
         Student student = new StudentBuilder().build();
 

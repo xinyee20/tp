@@ -42,6 +42,11 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
         Optional<Student> student;
         Optional<String> keyToAll = Optional.ofNullable(argMultimap.getPreamble());
 
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()
+                && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
+        }
+
         try {
             if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
 

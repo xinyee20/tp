@@ -349,7 +349,7 @@ public class MainWindow extends UiPart<Stage> {
 
 
     private String getGroupName(String commandText) {
-        return commandText.split(" ")[1].split("/")[1];
+        return commandText.split(" ")[1].split("/")[1].toUpperCase();
     }
 
     private String getLessonName(String commandText) {
@@ -401,10 +401,14 @@ public class MainWindow extends UiPart<Stage> {
                 break;
 
             case VIEW_ATT:
+                groupName = getGroupName(commandText);
+                handleViewGrp(groupName);
                 handleViewAtt();
                 break;
 
             case VIEW_SCORE:
+                groupName = getGroupName(commandText);
+                handleViewGrp(groupName);
                 handleViewScore();
                 break;
 
