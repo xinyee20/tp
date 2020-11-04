@@ -34,18 +34,14 @@ public class AddScoreCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Increase the participation score of a specific student for a lesson.\n"
-            + "Parameters: "
-            + PREFIX_NAME + "STUDENT_NAME "
-            + PREFIX_MATRIC + "STUDENT_NUMBER "
-            + PREFIX_ADD_SCORE + "SCORE_TO_ADD "
-            + "or INDEX(starting from 1) "
-            + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456A "
+            + "Parameters (2 methods):\n"
+            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER "
+                    + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
+            + "2. INDEX (starting from 1) " + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
+            + "Examples:\n"
+                    + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A "
             + PREFIX_ADD_SCORE + "2\n"
-            + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_ADD_SCORE + "2\n";
+            + "2. " + COMMAND_WORD + " 2 " + PREFIX_ADD_SCORE + "2\n";
 
     private Optional<Student> toAddScore;
     private Optional<Index> index;

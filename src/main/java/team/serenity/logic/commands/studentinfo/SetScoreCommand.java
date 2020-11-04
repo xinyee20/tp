@@ -35,18 +35,13 @@ public class SetScoreCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Awards a specific student a participation score for a lesson.\n"
-            + "Parameters: "
-            + PREFIX_NAME + "STUDENT_NAME "
-            + PREFIX_MATRIC + "STUDENT_NUMBER "
-            + PREFIX_SET_SCORE + "SCORE "
-            + "or INDEX(starting from 1) "
-            + PREFIX_SET_SCORE + "SCORE\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456A "
-            + PREFIX_SET_SCORE + "2\n"
-            + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_SET_SCORE + "2\n";
+            + "Parameters (2 methods):\n"
+            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER " + PREFIX_SET_SCORE + "SCORE\n"
+            + "2. INDEX (starting from 1) " + PREFIX_SET_SCORE + "SCORE\n"
+            + "Examples:\n"
+            + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A "
+                    + PREFIX_SET_SCORE + "2\n"
+            + "2. " + COMMAND_WORD + " 2 " + PREFIX_SET_SCORE + "2\n";
 
     private Optional<Student> toSetScore;
     private Optional<Index> index;
