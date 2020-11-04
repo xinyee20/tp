@@ -18,10 +18,8 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
@@ -96,6 +94,10 @@ public class XlsxUtil {
         }
     }
 
+    /**
+     * Checks the validity of the XLSX file.
+     * @throws ParseException
+     */
     public void checkValidityOfXlsx() throws ParseException {
         if (sheet.getLastRowNum() == -1) {
             throw new ParseException("The .xlsx file is empty.");

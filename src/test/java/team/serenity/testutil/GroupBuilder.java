@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import team.serenity.commons.util.CsvUtil;
 import team.serenity.commons.util.XlsxUtil;
+import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
@@ -92,7 +93,7 @@ public class GroupBuilder {
         try {
             students.setElementsWithList(new ArrayList<>(new XlsxUtil(filePath,
                 new XSSFWorkbook(filePath)).readStudentsFromXlsx()));
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         return this;
