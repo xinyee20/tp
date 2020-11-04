@@ -386,7 +386,7 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 **Reasons for choosing option 2:**
 
 * As we often need to access the list of students, we cannot afford the greater overhead involved in Option 1. Thus, we decided to opt for the option with greater efficiency.
-* As we will sort the list of students of a group after a student is added, qe do not require the order of addition of students to be maintained.
+* As we will sort the list of students of a group after a student is added, we do not require the order of addition of students to be maintained.
 
 ### **4.5 StudentInfo Manager**
 
