@@ -103,7 +103,7 @@ This segment will explain the structure and responsibilities of the `Logic`compo
 
 The Class Diagram given in Figure 3.3.1.1 below describes the structure of Logic-related classes.
 
-![Figure 3.3.1.1](images/LogicClassDiagram2.png)
+![Figure 3.3.1.1](images/developerGuide/LogicClassDiagram2.png)
 
 <p align="center"><i>Figure 3.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
@@ -125,7 +125,7 @@ The steps described above will be the standard command parsing and execution of 
 To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command delgrp grp/G04 is shown below. 
 The diagram starts with the `execute("delgrp grp/G04")` API call.
 
-![Figure 3.3.2.1](images/DeleteSequenceDiagram.png)
+![Figure 3.3.2.1](images/developerGuide/DeleteSequenceDiagram.png)
 
 <p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the `delgrp grp/G04` command.</i></p>
 
@@ -183,7 +183,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 #### **3.5.1 Structure**
 
 <p align="center">
-<img alt="Class diagram of Storage component" src="images/StorageClassDiagram.png" ></p>
+<img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png" ></p>
 
 <p align="center"><i>Figure 3.5.1 Class diagram of <code>Storage</code> component.</i></p>
 
@@ -262,7 +262,7 @@ a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for 
 This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
 
 <p align="center">
-<img src="images/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
+<img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
 
 <p align="center"><i>Figure 4.1.2.1: Structure of <code>GroupManager</code>, an example of 
 a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
@@ -292,7 +292,7 @@ The following steps describe the execution of `DelGrpCommand` in detail, assumin
 The sequence diagram below documents the execution.
 
 <p align="center">
-<img src="images/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
+<img src="images/developerGuide/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
 
 <p align="center"><i>Figure 4.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
@@ -359,7 +359,7 @@ The `StudentManager` contains a `HashMap` which key is a `GroupName` and value i
 In this section, we will detail the workflow of adding a new student to an existing tutorial group
 using the `addstudent` command. The workflow is shown in the Activity Diagram below.
 
-<p align="center"><img src="images/AddStudentActivityDiagram.png" alt="Figure 4.4.2.1 Activity diagram of `addstudent` command"></p>
+<p align="center"><img src="images/developerGuide/AddStudentActivityDiagram.png" alt="Figure 4.4.2.1 Activity diagram of `addstudent` command"></p>
 <p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
 
 The following steps describe the workflow of `addstudent` in detail, assuming that no error is encountered.
