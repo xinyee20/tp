@@ -1,4 +1,4 @@
-package team.serenity.ui.groupdata;
+package team.serenity.ui.datapanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,6 @@ import team.serenity.commons.core.Messages;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
-import team.serenity.ui.DataPanel;
 
 public class GroupDataPanel extends DataPanel {
     private static final String FXML = "GroupDataPanel.fxml";

@@ -37,13 +37,16 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 (Contributed by Neo Rui En)
 
-The Architecture Diagram given in Figure 1 below explains the high-level design of Serenity.
+The Architecture Diagram given in Figure 3.1.1 below explains the high-level design of Serenity.
 
 ![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
 
 <p align="center">Figure 3.1.1 Architecture Diagram of Serenity</p>
 
 > :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder. 
+
+The following table gives a quick overview of each component of Serenity.
+More details about the components can be found in the following subsections.
 
 Component | Description
 ------------ | -------------
@@ -55,7 +58,7 @@ Component | Description
 `Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the `Storage` interface and exposes its functionality through the `StorageManager` class.
 
 **How the architecture components interact with each other**
-The Sequence Diagram in Figure 2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
+The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
 
 ![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
 
@@ -71,9 +74,11 @@ This segment will explain the structure and responsibilities of the Ui component
 
 #### **3.2.1. Structure**
 
-![Figure 3.2.1](images/UiClassDiagram.png)
+The Class Diagram given in Figure 3.2.1.1 below describes the structure of the Ui-related classes.
 
-<p align="center"><i>Figure 3.2.1 Structure of the <code>Ui</code> component.</i></p>
+![Figure 3.2.1.1](images/UiClassDiagram2.png)
+
+<p align="center"><i>Figure 3.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
 The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
  as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
@@ -96,11 +101,11 @@ This segment will explain the structure and responsibilities of the `Logic`compo
 
 #### **3.3.1 Structure**
 
-<p align="center">
-<img src="images/LogicClassDiagram.png" alt="Class diagram of Logic component">
-</p>
+The Class Diagram given in Figure 3.3.1.1 below describes the structure of Logic-related classes.
 
-<p align="center"><i>Figure 3.3.1 Structure of <code>Logic</code> component.</i></p>
+![Figure 3.3.1.1](images/LogicClassDiagram2.png)
+
+<p align="center"><i>Figure 3.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
 From the diagram above, you can see that the `Logic` component is split into 2 groups, one for command and another for command parsing. 
 As Serenity follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class. 
@@ -119,6 +124,10 @@ The `Logic` component is in charge of command parsing from the commands given by
 The steps described above will be the standard command parsing and execution of every command in **Serenity**. 
 To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command delgrp grp/G04 is shown below. 
 The diagram starts with the `execute("delgrp grp/G04")` API call.
+
+![Figure 3.3.2.1](images/DeleteSequenceDiagram.png)
+
+<p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the `delgrp grp/G04` command.</i></p>
 
 > :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 
@@ -327,28 +336,57 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 ### **4.4 Student Manager**
 
-**Serenity** helps the users handle many students from groups. The `StudentManager` is in 
-charge of adding the students to the
-group and ensuring that updates are done to the right student.
- It contains a `UniqueStudentList` which contains all the students in each group.
+(Contributed by Neo Rui En)
+
+**Serenity** is responsible for storing students in tutorial groups.
 
 #### **4.4.1. Rationale**
-The `StudentManager` is an important feature to have because a tutor will have many groups of students to handle. 
-Students will need to be allocated to the unique groups for lessons.
- Hence, it is necessary to have a student manager who will be in charge of doing that. 
-The student manager will also be the one responsible for ensuring that actions done on a 
-group level can only be done on students belonging to that group.
+
+Tutors have to manage many students.
+At the start of the semester, many students may appeal to enter the tutorial group, swap tutorial groups
+or even drop out of the module. These changes may give tutors administrative burden as the tutors
+may have to spend extra effort to keep track of the student intake changes relating to their tutorial groups.
+Importantly, students will need to be allocated to unique tutorial groups; no student can be enrolled into
+more than one tutorial group for the semester. Hence, it is necessary to have `StudentManager` to
+be in charge of doing that.
+
+The `StudentManager` will also be in charge of ensuring that the actions done on a tutorial group level
+are correctly applied to the students belonging to the specified tutorial group.
 
 #### **4.4.2. Current Implementation**
-The `StudentManager` contains a `HashMap` whose key is a `Group` and value is a `UniqueList`. 
-The following Class Diagram describes the structure of StudentManager and its relevant classes.
 
-<p align="center"><img src="images/StudentManager.png" alt="class diagram for StudentManager"></p>
+The `StudentManager` contains a `HashMap` which key is a `GroupName` and value is a `UniqueList<Student>`.
+In this section, we will detail the workflow of adding a new student to an existing tutorial group
+using the `addstudent` command. The workflow is shown in the Activity Diagram below.
 
-<p align="center"><i>Figure 4.4.2.1 Structure of the <code>StudentManager</code> and its relevant classes</i></p>
+<p align="center"><img src="images/AddStudentActivityDiagram.png" alt="Figure 4.4.2.1 Activity diagram of `addstudent` command"></p>
+<p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
 
-As seen from the diagram, 
-`StudentManager` can contain multiple groups and a `UniqueStudentList` for each group.
+The following steps describe the workflow of `addstudent` in detail, assuming that no error is encountered.
+
+1. When the execute method of `AddStudentCommand` is called,
+the `ModelManager`'s `updateFilteredGroupList` method is called.
+1. The `ModelManager` updates its filtered list of `Group`s to contain only the specified `Group`.
+1. A new `Student` object is created and added to the `UniqueList<Student>` of the tutorial group.
+1. The `ModelManager`'s `updateStudentsInfoList` method is called.
+1. The `ModelManager` adds the newly created `Student` object to its `ObservableList<Student>`.
+1. The `Ui` component detects this change and updates the <span style="color:purple"><i>GUI</i></span>.
+1. The `AddStudentCommand` creates `CommandResult` object and returns the result.
+
+#### **4.4.3. Design Consideration**
+
+**Aspect:** Deciding whether the students should be stored inside a `UniqueList<Students>` or
+a `HashMap<GroupName, UniqueList<Student>>`.
+
+|   |**Pros**|**Cons**|
+|---|---|---|
+| **Option 1**<br>To store the students inside a `UniqueList<Student> | This is easy and straight-forward to implement. | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved. |
+| **Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>`. | This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name. | This does not allow the order of addition of students to a group to be maintained. |
+
+**Reasons for choosing option 2:**
+
+* As we often need to access the list of students, we cannot afford the greater overhead involved in Option 1. Thus, we decided to opt for the option with greater efficiency.
+* As we will sort the list of students of a group after a student is added, we do not require the order of addition of students to be maintained.
 
 ### **4.5 StudentInfo Manager**
 

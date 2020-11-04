@@ -1,13 +1,13 @@
 @startuml
 !include ../style.puml
 
-Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":AddressBookParser" as abp LOGIC_COLOR
-Participant ":EditCommandParser" as ecp LOGIC_COLOR
-Participant "command:EditCommand" as ec LOGIC_COLOR
+Participant ":LogicManager" as logic LOGIC_COLOR_T1
+Participant ":AddressBookParser" as abp LOGIC_COLOR_T1
+Participant ":EditCommandParser" as ecp LOGIC_COLOR_T1
+Participant "command:EditCommand" as ec LOGIC_COLOR_T1
 
 [-> logic : execute
-activate logic
+activate logic LOGIC_COLOR_T1
 logic -> abp ++: parseCommand(commandText)
 create ecp
 abp -> ecp
