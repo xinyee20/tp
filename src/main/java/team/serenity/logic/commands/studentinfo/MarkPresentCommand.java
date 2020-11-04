@@ -126,6 +126,8 @@ public class MarkPresentCommand extends Command {
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkAll);
         lesson.setStudentsInfo(updatedListForMarkAll);
+        model.updateLessonList();
+        model.updateStudentsInfoList();
         return new CommandResult(MESSAGE_ALL_SUCCESS);
     }
 
@@ -142,6 +144,8 @@ public class MarkPresentCommand extends Command {
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkOneStudent);
         lesson.setStudentsInfo(updatedListForMarkOneStudent);
+        model.updateLessonList();
+        model.updateStudentsInfoList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent()));
     }
 
@@ -151,12 +155,12 @@ public class MarkPresentCommand extends Command {
     private StudentInfo getTargetStudentInfo(ObservableList<StudentInfo> currentStudentInfoList)
             throws CommandException {
         if (this.isByIndex) {
-            // Mark present StudentInfo by index
+            // Mark present by index
             assert this.index.isPresent();
             Index targetIndex = this.index.get();
 
             // Return error message if index is out of range
-            if (targetIndex.getZeroBased() >= currentStudentInfoList.size()) {
+            if (targetIndex.getZeroBased() >= currentStudentInfoList.size() || index.get().getOneBased() == 0) {
                 throw new CommandException(
                         String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, targetIndex.getOneBased()));
             }

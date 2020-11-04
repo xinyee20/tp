@@ -118,7 +118,6 @@ public class AddScoreCommand extends Command {
                     uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
                     model.updateLessonList();
                     model.updateStudentsInfoList();
-                    uniqueLesson.setStudentsInfo(uniqueStudentInfoList);
                     break;
                 }
             }
@@ -126,7 +125,7 @@ public class AddScoreCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toAddScore.get()));
             }
         } else {
-            if (index.get().getZeroBased() >= studentsInfo.size()) {
+            if (index.get().getZeroBased() >= studentsInfo.size() || index.get().getOneBased() == 0) {
                 throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                         index.get().getOneBased()));
             }
@@ -147,7 +146,6 @@ public class AddScoreCommand extends Command {
             uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
             model.updateLessonList();
             model.updateStudentsInfoList();
-            uniqueLesson.setStudentsInfo(uniqueStudentInfoList);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toAddScore.get(), newScore));
     }

@@ -43,19 +43,15 @@ public class UnflagAttCommandParser implements Parser<UnflagAttCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnflagAttCommand.MESSAGE_USAGE));
         }
 
-        try {
-            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
-                student = Optional.ofNullable(new Student(studentName, studentNumber));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
+            student = Optional.ofNullable(new Student(studentName, studentNumber));
 
-                return new UnflagAttCommand(student.get());
-            } else {
-                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-                return new UnflagAttCommand(index);
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnflagAttCommand.MESSAGE_USAGE));
+            return new UnflagAttCommand(student.get());
+        } else {
+            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+            return new UnflagAttCommand(index);
         }
     }
 }
