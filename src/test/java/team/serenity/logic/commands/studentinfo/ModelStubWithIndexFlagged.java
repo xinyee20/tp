@@ -21,16 +21,18 @@ import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
 
 /**
- * A Model stub containing present students
+ * A Model stub containing a flagged student
  */
-class ModelStubWithStudentsPresent extends ModelStub {
+public class ModelStubWithIndexFlagged extends ModelStub {
     private Group uniqueGroup;
     private Lesson uniqueLesson;
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         List<Group> grpList = new ArrayList<>();
-        this.uniqueGroup = new GroupBuilder().build();
+        this.uniqueGroup = new GroupBuilder().withName("G01")
+                .withStudents(new Student("Aaron Tan", "A0123456U"))
+                .withClasses("1-1").build();
         grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
@@ -40,25 +42,12 @@ class ModelStubWithStudentsPresent extends ModelStub {
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         List<Lesson> lsnList = new ArrayList<>();
-        this.uniqueLesson = new LessonBuilder().
-                withName("1-1").
-                withStudentInfos(
-                        new StudentInfo(new Student("Aaron Tan", "A0123456U"),
-                                new Participation(0),
-                                new Attendance(true)),
-                        new StudentInfo(new Student("Baron Wong", "A0654321C"),
-                                new Participation(0),
-                                new Attendance(true)),
-                        new StudentInfo(new Student("Cherry Lee", "A0135791B"),
-                                new Participation(0),
-                                new Attendance(true)),
-                        new StudentInfo(new Student("Dickson Low", "A0246810D"),
-                                new Participation(0),
-                                new Attendance(true)),
-                        new StudentInfo(new Student("Eng Wee Kiat", "A0101010E"),
-                                new Participation(0),
-                                new Attendance(true))).
-                build();
+        this.uniqueLesson = new LessonBuilder()
+                .withName("1-1")
+                .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U"),
+                        new Participation(0),
+                        new Attendance(false, true)))
+                .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
         lessonUniqueList.setElementsWithList(lsnList);
@@ -88,12 +77,12 @@ class ModelStubWithStudentsPresent extends ModelStub {
     }
 
     @Override
-    public void updateStudentsInfoList() {
+    public void updateLessonList() {
         return;
     }
 
     @Override
-    public void updateLessonList() {
+    public void updateStudentsInfoList() {
         return;
     }
 

@@ -45,16 +45,32 @@ public class FlagAttCommandParser implements Parser<FlagAttCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
-            student = Optional.ofNullable(new Student(studentName, studentNumber));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
+        }
 
-            return new FlagAttCommand(student.get());
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
+        }
 
-        } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            return new FlagAttCommand(index);
+        try {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
+                student = Optional.ofNullable(new Student(studentName, studentNumber));
+
+                return new FlagAttCommand(student.get());
+
+            } else {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                return new FlagAttCommand(index);
+            }
+        } catch (Exception e) {
+            if (e instanceof ParseException) {
+                throw e;
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,FlagAttCommand.MESSAGE_USAGE));
+            }
         }
     }
 }

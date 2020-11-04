@@ -21,11 +21,12 @@ import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
 
 /**
- * A Model stub containing present students
+ * A Model stub containing students who are flagged
  */
-class ModelStubWithStudentsPresent extends ModelStub {
+public class ModelStubWithStudentsFlagged extends ModelStub {
     private Group uniqueGroup;
     private Lesson uniqueLesson;
+
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
@@ -45,19 +46,19 @@ class ModelStubWithStudentsPresent extends ModelStub {
                 withStudentInfos(
                         new StudentInfo(new Student("Aaron Tan", "A0123456U"),
                                 new Participation(0),
-                                new Attendance(true)),
+                                new Attendance(false, true)),
                         new StudentInfo(new Student("Baron Wong", "A0654321C"),
                                 new Participation(0),
-                                new Attendance(true)),
+                                new Attendance(false, true)),
                         new StudentInfo(new Student("Cherry Lee", "A0135791B"),
                                 new Participation(0),
-                                new Attendance(true)),
+                                new Attendance(false, true)),
                         new StudentInfo(new Student("Dickson Low", "A0246810D"),
                                 new Participation(0),
-                                new Attendance(true)),
+                                new Attendance(false, true)),
                         new StudentInfo(new Student("Eng Wee Kiat", "A0101010E"),
                                 new Participation(0),
-                                new Attendance(true))).
+                                new Attendance(false, true))).
                 build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
