@@ -2,6 +2,7 @@ package team.serenity.testutil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -72,6 +73,7 @@ public class LessonBuilder {
     }
 
     public Lesson build() {
+        this.studentInfos.sort(Comparator.comparing(x -> x.getStudent().getStudentName().toString()));
         return new Lesson(this.name, this.studentInfos);
     }
 }
