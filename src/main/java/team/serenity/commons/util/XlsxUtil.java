@@ -16,9 +16,11 @@ import java.util.Set;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
@@ -34,8 +36,8 @@ import team.serenity.model.util.UniqueList;
 public class XlsxUtil {
 
     private String filePath;
-    private XSSFWorkbook workbook;
-    private XSSFSheet sheet;
+    private Workbook workbook;
+    private Sheet sheet;
 
     private DataFormatter formatter = new DataFormatter();
 
@@ -66,7 +68,7 @@ public class XlsxUtil {
      *
      * @param workbook The workbook of the XLSX file.
      */
-    public XlsxUtil(String filePath, XSSFWorkbook workbook) {
+    public XlsxUtil(String filePath, Workbook workbook) {
         this.filePath = filePath;
         this.workbook = workbook;
         this.sheet = this.workbook.getSheetAt(0);
@@ -78,28 +80,63 @@ public class XlsxUtil {
      *
      * @return a set of students.
      */
-    public Set<Student> readStudentsFromXlsx() {
-        Set<Student> students = new HashSet<>();
+    public Set<Student> readStudentsFromXlsx() throws ParseException {
+        try {
+            Set<Student> students = new HashSet<>();
+            Iterator<Row> rowIterator = this.sheet.iterator();
+            skipRowsToHeaderRow(rowIterator);
+            readDetailsOfStudents(rowIterator, students);
+            List<Student> studentList = new ArrayList<>(students);
+            studentList.sort(new StudentSorter());
+            return new LinkedHashSet<>(studentList);
+        } catch (Exception e) {
+            throw new ParseException("An error has occurred while reading the file.");
+        }
+    }
+
+    /**
+     * Checks the validity of the XLSX file.
+     * @throws ParseException
+     */
+    public void checkValidityOfXlsx() throws ParseException {
+        if (sheet.getLastRowNum() == -1) {
+            throw new ParseException("The .xlsx file is empty.");
+        }
         Iterator<Row> rowIterator = this.sheet.iterator();
-        skipRowsToHeaderRow(rowIterator);
-        readDetailsOfStudents(rowIterator, students);
-        List<Student> studentList = new ArrayList<>(students);
-        studentList.sort(new StudentSorter());
-        return new LinkedHashSet<>(studentList);
+        Row headerRow = skipRowsToHeaderRow(rowIterator);
+        if (headerRow == null) {
+            throw new ParseException("The .xlsx file is either missing the Photo, Name and Student Number "
+                + "header columns, or these columns are placed in a wrong order.");
+        }
+        if (!rowIterator.hasNext()) {
+            throw new ParseException("The .xlsx file is missing a list of students.");
+        }
     }
 
     private Row skipRowsToHeaderRow(Iterator<Row> rowIterator) {
         Row row = null;
         while (rowIterator.hasNext()) {
             row = rowIterator.next();
-
-            if (this.formatter.formatCellValue(row.getCell(0)).equals("Photo")
-                && this.formatter.formatCellValue(row.getCell(1)).equals("Name")
-                && this.formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
+            if (isHeaderRow(row)) {
                 break;
             }
         }
-        return row;
+
+        if (isHeaderRow(row)) {
+            return row;
+        } else {
+            return null;
+        }
+    }
+
+    private boolean isHeaderRow(Row row) {
+        if (this.formatter.formatCellValue(row.getCell(0)).equals("Photo")
+            && this.formatter.formatCellValue(row.getCell(1)).equals("Name")
+            && this.formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void readDetailsOfStudents(Iterator<Row> rowIterator,
