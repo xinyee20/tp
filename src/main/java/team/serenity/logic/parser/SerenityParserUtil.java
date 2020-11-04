@@ -7,6 +7,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import java.io.IOException;
 
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import team.serenity.commons.core.index.Index;
@@ -50,8 +51,11 @@ public class SerenityParserUtil {
     public static XlsxUtil parseFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
+        if (!filePath.trim().endsWith(".xlsx")) {
+            throw new ParseException("The file used is not of .xlsx file type.");
+        }
         try {
-            XSSFWorkbook workbook = new XSSFWorkbook(trimmedFilePath);
+            Workbook workbook = new XSSFWorkbook(trimmedFilePath);
             return new XlsxUtil(trimmedFilePath, workbook);
         } catch (InvalidOperationException | IOException e) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);

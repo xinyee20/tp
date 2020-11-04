@@ -16,9 +16,13 @@ import java.util.Set;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.logic.commands.exceptions.CommandException;
+import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
@@ -34,8 +38,8 @@ import team.serenity.model.util.UniqueList;
 public class XlsxUtil {
 
     private String filePath;
-    private XSSFWorkbook workbook;
-    private XSSFSheet sheet;
+    private Workbook workbook;
+    private Sheet sheet;
 
     private DataFormatter formatter = new DataFormatter();
 
@@ -66,7 +70,7 @@ public class XlsxUtil {
      *
      * @param workbook The workbook of the XLSX file.
      */
-    public XlsxUtil(String filePath, XSSFWorkbook workbook) {
+    public XlsxUtil(String filePath, Workbook workbook) {
         this.filePath = filePath;
         this.workbook = workbook;
         this.sheet = this.workbook.getSheetAt(0);
@@ -78,14 +82,33 @@ public class XlsxUtil {
      *
      * @return a set of students.
      */
-    public Set<Student> readStudentsFromXlsx() {
-        Set<Student> students = new HashSet<>();
-        Iterator<Row> rowIterator = this.sheet.iterator();
-        skipRowsToHeaderRow(rowIterator);
-        readDetailsOfStudents(rowIterator, students);
-        List<Student> studentList = new ArrayList<>(students);
-        studentList.sort(new StudentSorter());
-        return new LinkedHashSet<>(studentList);
+    public Set<Student> readStudentsFromXlsx() throws ParseException {
+        try {
+            Set<Student> students = new HashSet<>();
+            Iterator<Row> rowIterator = this.sheet.iterator();
+            skipRowsToHeaderRow(rowIterator);
+            readDetailsOfStudents(rowIterator, students);
+            List<Student> studentList = new ArrayList<>(students);
+            studentList.sort(new StudentSorter());
+            return new LinkedHashSet<>(studentList);
+        } catch (Exception e) {
+            throw new ParseException("An error has occurred while reading the file.");
+        }
+    }
+
+    public void checkValidityOfXlsx() throws ParseException {
+        if (sheet.getLastRowNum() == -1) {
+            throw new ParseException("The .xlsx file is empty.");
+        }
+        if (sheet.getLastRowNum() <= 4) {
+            throw new ParseException("The .xlsx file is either missing the header columns or student information.");
+        }
+        Row headerRow = sheet.getRow(4);
+        if (!this.formatter.formatCellValue(headerRow.getCell(0)).equals("Photo")
+            || !this.formatter.formatCellValue(headerRow.getCell(1)).equals("Name")
+            || !this.formatter.formatCellValue(headerRow.getCell(2)).equals("Student Number")) {
+            throw new ParseException("The .xlsx file is missing the Photo, Name and Student Number header columns.");
+        }
     }
 
     private Row skipRowsToHeaderRow(Iterator<Row> rowIterator) {
