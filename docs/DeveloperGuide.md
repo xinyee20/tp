@@ -440,7 +440,7 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 5. If the above steps are all successful, a successful message will be displayed on the
 <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
 
-*If the index is not valid, an error will be thrown to prompt the user to choose another index.
+> :warning: If the index is not valid, an error will be thrown to prompt the user to choose another index.
 
 #### **4.5.3. Design Consideration**
 **Aspect:** Deciding between retrieving `StudentInfo` through deep nesting methods or using `HashMap` to retrieve `StudentInfo` with `GroupLessonKey`.
