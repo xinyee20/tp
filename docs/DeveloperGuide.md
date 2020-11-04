@@ -422,7 +422,7 @@ Commands | Purpose
 `setscore` / `addscore` / `subscore` | Set / add / subtract the participation score of a student for a lesson 
  
 In this section, we will outline the `markpresent` command handled by the `StudentInfoManager` which is summarised by the Activity Diagram below. 
-We will be using the index version of the markpresent command.
+We will be using the index version of the `markpresent` command.
 
 <p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 4.5.2.2 Activity Diagram of a markpresent command by index"></p>
 <p align="center"><i>Figure 4.5.2.2 Activity Diagram of a <code>markpresent</code> command by index</i></p>
