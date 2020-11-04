@@ -143,7 +143,6 @@ public class MarkAbsentCommand extends Command {
         lesson.setStudentsInfo(updatedListForMarkOneStudent);
         model.updateLessonList();
         model.updateStudentsInfoList();
-        lesson.setStudentsInfo(updatedListForMarkOneStudent);
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent()));
     }
 
