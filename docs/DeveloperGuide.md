@@ -314,8 +314,8 @@ Having a `LessonManager` allows for easy retrieval, viewing and updating of the 
 The `LessonManager` contains a `HashMap` whose key is a Group and value is a UniqueList.
 In this section, we detail the workflow of adding a lesson to an existing tutorial group through the `addlsn` command.
 
-<p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
-<p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
+<p align="center"><img src="images/developerGuide/AddLsnDiagram.png" alt="Figure 4.5.2.1 Activity diagram detailing execution of <code>addlsn</code> command"></p>
+<p align="center"><i>Figure 4.3.2.1. Activity diagram detailing execution of <code>addlsn</code> command.</i></p>
 
 The following steps describe the execution of `addlsn` in detail, assuming that no error is encountered.
 
