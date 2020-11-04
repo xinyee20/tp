@@ -39,7 +39,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The Architecture Diagram given in Figure 3.1.1 below explains the high-level design of Serenity.
 
-![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
+![Figure 3.1.1 Architecture Diagram of Serenity](images/developerGuide/ArchitectureDiagram.png)
 
 <p align="center">Figure 3.1.1 Architecture Diagram of Serenity</p>
 
@@ -60,7 +60,7 @@ Component | Description
 **How the architecture components interact with each other**
 The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
 
-![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
+![Figure 3.1.2](images/developerGuide/ArchitectureSequenceDiagram.png)
 
 <p align="center"><i>Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
@@ -76,7 +76,7 @@ This segment will explain the structure and responsibilities of the Ui component
 
 The Class Diagram given in Figure 3.2.1.1 below describes the structure of the Ui-related classes.
 
-![Figure 3.2.1.1](images/UiClassDiagram2.png)
+![Figure 3.2.1.1](images/developerGuide/UiClassDiagram2.png)
 
 <p align="center"><i>Figure 3.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
@@ -139,7 +139,7 @@ This segment will explain the structure and responsibilities of the Model compon
 
 #### **3.4.1 Structure**
 
-![Figure 3.4.1.1 Simplified Class Diagram of `model` component ](images/ModelClassDiagram.png)
+![Figure 3.4.1.1 Simplified Class Diagram of `model` component ](images/developerGuide/ModelClassDiagram.png)
 
 <p align="center"><i>Figure 3.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
 
