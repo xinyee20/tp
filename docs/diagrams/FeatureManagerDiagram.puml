@@ -1,0 +1,16 @@
+@startuml
+skinparam class {
+ArrowColor SeaGreen
+BackgroundColor LightSkyBlue
+BorderColor DodgerBlue
+}
+hide members
+hide circle
+
+skinparam shadowing false
+
+ReadOnlyGroupManager <|.. GroupManager
+GroupManager -> "*" UniqueList
+UniqueList <|.. UniqueGroupList
+UniqueGroupList -> "*" Group
+@enduml
