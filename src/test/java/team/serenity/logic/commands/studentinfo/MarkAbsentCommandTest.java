@@ -18,6 +18,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.student.Student;
+import team.serenity.testutil.StudentBuilder;
 
 class MarkAbsentCommandTest {
 
@@ -30,7 +31,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_unmarkStudent_success() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student toMarkAbsent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkAbsent = new StudentBuilder(AARON).build();
 
         CommandResult commandResult = new MarkAbsentCommand(toMarkAbsent).execute(modelStub);
         assertEquals(String.format(MarkAbsentCommand.MESSAGE_SUCCESS, toMarkAbsent),
@@ -40,8 +41,8 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student wrongNameOne = new Student("Aaron", "A0123456U");
-        Student wrongNameTwo = new Student("Betty Tan", "A0123456U");
+        Student wrongNameOne = new StudentBuilder().withName("Aaron").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Ben").build();
         MarkAbsentCommand markAbsentCommandOne = new MarkAbsentCommand(wrongNameOne);
         MarkAbsentCommand markAbsentCommandTwo = new MarkAbsentCommand(wrongNameTwo);
 
@@ -54,7 +55,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student wrongNumber = new Student("Aaron Tan", "A0000000U");
+        Student wrongNumber = new StudentBuilder(AARON).withId("A0000000U").build();
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(wrongNumber);
 
         assertThrows(CommandException.class,
@@ -64,7 +65,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_notInGroup_throwsCommandException() {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toMarkAbsent = new Student("Aaron Tan", "A0123456A");
+        Student toMarkAbsent = new StudentBuilder(AARON).build();
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(toMarkAbsent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> markAbsentCommand.execute(modelStub));
@@ -73,7 +74,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_notInLesson_throwsCommandException() {
         ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
-        Student toMarkAbsent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkAbsent = new StudentBuilder(AARON).build();
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(toMarkAbsent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_LESSON, () -> markAbsentCommand.execute(modelStub));

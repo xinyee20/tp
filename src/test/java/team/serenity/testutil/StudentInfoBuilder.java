@@ -8,8 +8,8 @@ import team.serenity.model.group.studentinfo.StudentInfo;
 public class StudentInfoBuilder {
 
     public static final Student DEFAULT_STUDENT = TypicalStudent.AARON;
-    public static final Attendance DEFAULT_ATTENDANCE = new Attendance();
-    public static final Participation DEFAULT_PARTICIPATION = new Participation();
+    public static final Attendance DEFAULT_ATTENDANCE = new Attendance(false);
+    public static final Participation DEFAULT_PARTICIPATION = new Participation(0);
 
     private Student student;
     private Attendance attendance;

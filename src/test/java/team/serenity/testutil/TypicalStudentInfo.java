@@ -1,7 +1,10 @@
 package team.serenity.testutil;
 
+import static team.serenity.testutil.TypicalStudent.AARON;
 import static team.serenity.testutil.TypicalStudent.BENJAMIN;
 import static team.serenity.testutil.TypicalStudent.CATHERINE;
+import static team.serenity.testutil.TypicalStudent.DAVID;
+import static team.serenity.testutil.TypicalStudent.ELFIE;
 import static team.serenity.testutil.TypicalStudent.GEORGE;
 import static team.serenity.testutil.TypicalStudent.HELENE;
 
@@ -15,10 +18,19 @@ import team.serenity.model.util.UniqueList;
 
 public class TypicalStudentInfo {
 
+    public static final StudentInfo AARON_INFO = new StudentInfoBuilder().withStudent(AARON)
+            .withAttendance(false).withParticipation(0).build();
+
     public static final StudentInfo BENJAMIN_INFO = new StudentInfoBuilder().withStudent(BENJAMIN)
             .withAttendance(false).withParticipation(0).build();
 
     public static final StudentInfo CATHERINE_INFO = new StudentInfoBuilder().withStudent(CATHERINE)
+            .withAttendance(false).withParticipation(0).build();
+
+    public static final StudentInfo DAVID_INFO = new StudentInfoBuilder().withStudent(DAVID)
+            .withAttendance(false).withParticipation(0).build();
+
+    public static final StudentInfo ELFIE_INFO = new StudentInfoBuilder().withStudent(ELFIE)
             .withAttendance(false).withParticipation(0).build();
 
     public static final StudentInfo GEORGE_INFO = new StudentInfoBuilder().withStudent(GEORGE)
