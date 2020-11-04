@@ -100,14 +100,14 @@ public class XlsxUtil {
         if (sheet.getLastRowNum() == -1) {
             throw new ParseException("The .xlsx file is empty.");
         }
-        if (sheet.getLastRowNum() <= 4) {
-            throw new ParseException("The .xlsx file is either missing the header columns or student information.");
+        Iterator<Row> rowIterator = this.sheet.iterator();
+        Row headerRow = skipRowsToHeaderRow(rowIterator);
+        if (headerRow == null) {
+            throw new ParseException("The .xlsx file is either missing the Photo, Name and Student Number "
+                + "header columns, or these columns are placed in a wrong order.");
         }
-        Row headerRow = sheet.getRow(4);
-        if (!this.formatter.formatCellValue(headerRow.getCell(0)).equals("Photo")
-            || !this.formatter.formatCellValue(headerRow.getCell(1)).equals("Name")
-            || !this.formatter.formatCellValue(headerRow.getCell(2)).equals("Student Number")) {
-            throw new ParseException("The .xlsx file is missing the Photo, Name and Student Number header columns.");
+        if (!rowIterator.hasNext()) {
+            throw new ParseException("The .xlsx file is missing a list of students.");
         }
     }
 
@@ -115,14 +115,26 @@ public class XlsxUtil {
         Row row = null;
         while (rowIterator.hasNext()) {
             row = rowIterator.next();
-
-            if (this.formatter.formatCellValue(row.getCell(0)).equals("Photo")
-                && this.formatter.formatCellValue(row.getCell(1)).equals("Name")
-                && this.formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
+            if (isHeaderRow(row)) {
                 break;
             }
         }
-        return row;
+
+        if (isHeaderRow(row)) {
+            return row;
+        } else {
+            return null;
+        }
+    }
+
+    private boolean isHeaderRow(Row row) {
+        if (this.formatter.formatCellValue(row.getCell(0)).equals("Photo")
+            && this.formatter.formatCellValue(row.getCell(1)).equals("Name")
+            && this.formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void readDetailsOfStudents(Iterator<Row> rowIterator,
