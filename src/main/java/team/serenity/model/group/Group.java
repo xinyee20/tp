@@ -91,6 +91,20 @@ public class Group {
         this.lessons = lessons;
     }
 
+    /**
+     * Constructs a {@code Group}.
+     *
+     * @param groupName A valid name.
+     * @param students A list of students.
+     * @param lessons A list of tutorial lessons.
+     */
+    public Group(GroupName groupName, UniqueList<Student> students, UniqueList<Lesson> lessons) {
+        requireAllNonNull(groupName, students, lessons);
+        this.groupName = groupName;
+        this.students = students;
+        this.lessons = lessons;
+    }
+
     public GroupName getGroupName() {
         return this.groupName;
     }

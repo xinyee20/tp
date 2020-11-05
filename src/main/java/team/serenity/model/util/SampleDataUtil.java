@@ -35,6 +35,8 @@ public class SampleDataUtil {
     private static final LessonName LESSON_1_1 = new LessonName("1-1");
     private static final LessonName LESSON_1_2 = new LessonName("1-2");
 
+    private static final GroupName GROUP_G01 = new GroupName("G01");
+
     public static Group[] getSampleGroups() {
         Set<StudentInfo> studentsInfo = getStudentInfoSet(STUDENT_AARON, STUDENT_BENJAMIN, STUDENT_CATHERINE);
         UniqueList<StudentInfo> studentsInfoList = new UniqueStudentInfoList();
@@ -50,7 +52,7 @@ public class SampleDataUtil {
         UniqueList<Lesson> lessonsList = new UniqueLessonList();
         lessonsList.add(new Lesson(LESSON_1_1, studentsInfoList));
         lessonsList.add(new Lesson(LESSON_1_2, studentsInfoList));
-        return new Group[] {new Group("G01", studentsList, lessonsList)};
+        return new Group[] {new Group(GROUP_G01, studentsList, lessonsList)};
     }
 
     public static ReadOnlySerenity getSampleSerenity() {
@@ -79,9 +81,9 @@ public class SampleDataUtil {
 
     public static Question[] getSampleQuestion() {
         return new Question[]{
-            new Question(new GroupName("G01"), LESSON_1_1,
+            new Question(GROUP_G01, LESSON_1_1,
                 new Description("What is the deadline for the report?")),
-            new Question(new GroupName("G01"), LESSON_1_2,
+            new Question(GROUP_G01, LESSON_1_2,
                 new Description("When is the consultation held?"))
         };
     }
