@@ -1,13 +1,18 @@
 package team.serenity.logic.parser;
 
-import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
+import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_DASH;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_EMPTY;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_INVALID_CHARS;
+import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_MULTIPLE;
+import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_NON_ALPHABET;
+import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_NON_DIGITS;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_A;
+import static team.serenity.logic.commands.CommandTestUtil.VALID_PATH_A;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -39,8 +44,32 @@ public class DelGrpCommandParserTest {
 
     @Test
     public void parse_invalidGroupNameInvalidChars_throwsParseException() {
-        String expectedMessage = MESSAGE_GROUP_EMPTY;
+        String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
         String userInput = INVALID_GROUP_NAME_INVALID_CHARS;
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidGroupNameNonAlphabet_throwsParseException() {
+        String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
+        String userInput = INVALID_GROUP_NAME_NON_ALPHABET;
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidGroupNameNonDigits_throwsParseException() {
+        String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
+        String userInput = INVALID_GROUP_NAME_NON_DIGITS;
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidFilePathDash_throwsParseException() {
+        String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
+        String userInput = INVALID_GROUP_NAME_DASH;
 
         assertParseFailure(parser, userInput, expectedMessage);
     }
@@ -49,6 +78,14 @@ public class DelGrpCommandParserTest {
     public void parse_invalidGroupNameEmpty_throwsParseException() {
         String expectedMessage = GroupName.MESSAGE_GROUP_NAME_EMPTY;
         String userInput = INVALID_GROUP_NAME_EMPTY;
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidGroupNameMultiple_throwsParseException() {
+        String expectedMessage = GroupName.MESSAGE_GROUP_NAME_MULTIPLE;
+        String userInput = INVALID_GROUP_NAME_MULTIPLE + " " + PREFIX_PATH + VALID_PATH_A;
 
         assertParseFailure(parser, userInput, expectedMessage);
     }

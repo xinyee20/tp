@@ -11,6 +11,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.commons.core.Messages;
 import team.serenity.commons.core.index.Index;
 import team.serenity.commons.util.StringUtil;
 import team.serenity.commons.util.XlsxUtil;
@@ -39,6 +40,8 @@ public class SerenityParserUtil {
         String trimmedGroupName = groupName.trim().toUpperCase();
         if (trimmedGroupName.isEmpty()) {
             throw new ParseException(GroupName.MESSAGE_GROUP_NAME_EMPTY);
+        } else if (trimmedGroupName.split(" ").length > 1) {
+            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_MULTIPLE);
         } else if (!GroupName.isValidName(trimmedGroupName)) {
             throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
         }
@@ -54,7 +57,9 @@ public class SerenityParserUtil {
     public static XlsxUtil parseFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
-        if (!filePath.trim().endsWith(".xlsx")) {
+        if (trimmedFilePath.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_FILE_PATH_EMPTY);
+        } else if (!filePath.trim().endsWith(".xlsx")) {
             throw new ParseException(MESSAGE_INVALID_FILE_NON_XLSX);
         }
         try {
