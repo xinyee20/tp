@@ -72,6 +72,9 @@ public class LessonBuilder {
         return this;
     }
 
+    /**
+     * builds the lesson
+     */
     public Lesson build() {
         this.studentInfos.sort(Comparator.comparing(x -> x.getStudent().getStudentName().toString()));
         return new Lesson(this.name, this.studentInfos);

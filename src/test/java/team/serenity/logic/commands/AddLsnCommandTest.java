@@ -1,12 +1,6 @@
 package team.serenity.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.serenity.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
-import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
-import static team.serenity.logic.commands.student.AddStudentCommand.MESSAGE_SUCCESS;
 import static team.serenity.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
@@ -54,7 +48,7 @@ class AddLsnCommandTest {
                     result.getFeedbackToUser()
             );
             assertEquals(validLesson, actual.getFilteredLessonList().get(0));
-        } catch (CommandException e){
+        } catch (CommandException e) {
             throw new AssertionError("Execution of command should not fail.", e);
         }
 
@@ -63,11 +57,11 @@ class AddLsnCommandTest {
 
     private class ModelStubWithGroupList extends ModelStub {
 
-        ObservableList<Group> list = FXCollections.observableList(Arrays.asList(
+        private ObservableList<Group> list = FXCollections.observableList(Arrays.asList(
                 new GroupBuilder().withName("G02").withClasses("1-1").build())
         );
-        FilteredList<Group> filteredList = new FilteredList<>(this.list);
-        FilteredList<Lesson> filteredLessonList =
+        private FilteredList<Group> filteredList = new FilteredList<>(this.list);
+        private FilteredList<Lesson> filteredLessonList =
                 new FilteredList<>(this.list.get(0).getLessonsAsUnmodifiableObservableList());
 
         @Override
