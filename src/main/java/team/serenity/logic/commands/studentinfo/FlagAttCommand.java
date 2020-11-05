@@ -33,14 +33,13 @@ public class FlagAttCommand extends Command {
     public static final String MESSAGE_FAILURE = "Student should be absent to be flagged!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Flags the attendance of a specific student for a lesson. \n"
-            + "Parameters: "
-            + PREFIX_NAME + "STUDENT_NAME "
-            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456U\n"
-            + "or " + COMMAND_WORD + " 2";
+            + ": Flags the attendance of the specific student for a tutorial lesson.\n"
+            + "Parameters (2 methods):\n"
+            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER\n"
+            + "2. INDEX (must be a positive integer)\n"
+            + "Examples:\n"
+            + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A\n"
+            + "2. " + COMMAND_WORD + " 1";
 
 
     private Optional<Student> toFlagAtt;

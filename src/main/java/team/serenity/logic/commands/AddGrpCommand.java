@@ -14,10 +14,10 @@ public class AddGrpCommand extends Command {
 
     public static final String COMMAND_WORD = "addgrp";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a new tutorial group. "
+        + ": Adds a new tutorial group.\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP "
-        + PREFIX_PATH + "PATH\n"
+        + PREFIX_GRP + "GROUP_NAME "
+        + PREFIX_PATH + "PATH_TO_XLSX\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G04 "
         + PREFIX_PATH + "CS2101_G04.xlsx\n";

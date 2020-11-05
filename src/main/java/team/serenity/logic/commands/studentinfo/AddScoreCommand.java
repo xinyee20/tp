@@ -28,23 +28,21 @@ import team.serenity.model.util.UniqueList;
 public class AddScoreCommand extends Command {
     public static final String COMMAND_WORD = "addscore";
     public static final String MESSAGE_SUCCESS = "%s: \nUpdated Participation Score: %d";
-    public static final String MESSAGE_STUDENT_NOT_PRESENT =
-            "%s is not present. \nPlease ensure student is present before adding score!";
+    public static final String MESSAGE_STUDENT_NOT_PRESENT = "%s is not present.\n"
+            + "Please ensure student is present before adding score!";
     public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Increase the participation score of a specific student for a lesson.\n"
-            + "Parameters: "
-            + PREFIX_NAME + "STUDENT_NAME "
-            + PREFIX_MATRIC + "STUDENT_NUMBER "
-            + PREFIX_ADD_SCORE + "SCORE_TO_ADD "
-            + "or INDEX(starting from 1) " + PREFIX_ADD_SCORE + "SCORE_TO_ADD\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456U "
-            + PREFIX_ADD_SCORE + "2\n"
-            + "or " + COMMAND_WORD + " 2 "
-            + PREFIX_ADD_SCORE + "2\n";
+            + ": Increase the participation score of the specific student for a tutorial lesson.\n"
+            + "Parameters (2 methods):\n"
+            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER "
+                    + PREFIX_ADD_SCORE + "SCORE_TO_ADD (must be an integer from 0 to 5)\n"
+            + "2. INDEX (must be a positive integer) "
+                    + PREFIX_ADD_SCORE + "SCORE_TO_ADD (must be an integer from 0 to 5)\n"
+            + "Examples:\n"
+            + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A "
+                    + PREFIX_ADD_SCORE + "2\n"
+            + "2. " + COMMAND_WORD + " 1 " + PREFIX_ADD_SCORE + "2\n";
 
     private Optional<Student> toAddScore;
     private Optional<Index> index;

@@ -30,7 +30,7 @@ class ViewGrpCommandTest {
     @Test
     void execute_containsGroup() {
         ModelStubWithGroup modelStub = new ModelStubWithGroup();
-        ViewGrpCommand test = new ViewGrpCommand(new GroupContainsKeywordPredicate("G04"));
+        ViewGrpCommand test = new ViewGrpCommand(new GroupContainsKeywordPredicate("G01"));
         CommandResult actual = test.execute(modelStub);
         assertEquals(
                 String.format(MESSAGE_GROUP_LISTED_OVERVIEW, modelStub.getFilteredGroupList().get(0).getGroupName()),

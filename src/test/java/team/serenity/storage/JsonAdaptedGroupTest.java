@@ -1,22 +1,23 @@
 package team.serenity.storage;
 
-import static team.serenity.testutil.TypicalGroups.GROUP_A;
+import static team.serenity.testutil.TypicalGroups.GROUP_G04;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 class JsonAdaptedGroupTest {
 
-    private static final String VALID_NAME = GROUP_A.getGroupName().toString();
-    private static final List<JsonAdaptedStudent> VALID_STUDENTS = GROUP_A.getStudents().asUnmodifiableObservableList()
+    private static final String VALID_NAME = GROUP_G04.getGroupName().toString();
+    private static final List<JsonAdaptedStudent> VALID_STUDENTS = GROUP_G04.getStudents()
+            .asUnmodifiableObservableList()
             .stream()
-        .map(JsonAdaptedStudent::new)
-        .collect(Collectors.toList());
-    private static final List<JsonAdaptedLesson> VALID_CLASSES = GROUP_A.getLessons().asUnmodifiableObservableList()
+            .map(JsonAdaptedStudent::new)
+            .collect(Collectors.toList());
+    private static final List<JsonAdaptedLesson> VALID_CLASSES = GROUP_G04.getLessons()
+            .asUnmodifiableObservableList()
             .stream()
-        .map(JsonAdaptedLesson::new)
-        .collect(Collectors.toList());
-
+            .map(JsonAdaptedLesson::new)
+            .collect(Collectors.toList());
 
     /*
 

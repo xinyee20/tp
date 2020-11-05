@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.serenity.testutil.TypicalStudent.JAMES;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
+import static team.serenity.testutil.TypicalStudent.HELENE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,25 +27,25 @@ class UniqueStudentListTest {
 
     @Test
     public void contains_studentNotInList_returnsFalse() {
-        assertFalse(uniqueStudentList.contains(JAMES));
+        assertFalse(uniqueStudentList.contains(HELENE));
     }
 
     @Test
     public void contains_studentNotInList_returnsFalse2() {
-        uniqueStudentList.add(JOHN);
-        assertFalse(uniqueStudentList.contains(JAMES));
+        uniqueStudentList.add(GEORGE);
+        assertFalse(uniqueStudentList.contains(HELENE));
     }
 
     @Test
     public void contains_studentInList_returnsTrue() {
-        uniqueStudentList.add(JAMES);
-        assertTrue(uniqueStudentList.contains(JAMES));
+        uniqueStudentList.add(HELENE);
+        assertTrue(uniqueStudentList.contains(HELENE));
     }
 
     @Test
     public void contains_studentInList_returnsTrue2() {
-        uniqueStudentList.add(JOHN);
-        assertTrue(uniqueStudentList.contains(JOHN));
+        uniqueStudentList.add(GEORGE);
+        assertTrue(uniqueStudentList.contains(GEORGE));
     }
 
     @Test
@@ -55,63 +55,63 @@ class UniqueStudentListTest {
 
     @Test
     public void add_testCorrectness() {
-        uniqueStudentList.add(JOHN);
-        assertTrue(uniqueStudentList.contains(JOHN));
+        uniqueStudentList.add(GEORGE);
+        assertTrue(uniqueStudentList.contains(GEORGE));
     }
 
     @Test
     public void add_testCorrectness2() {
-        uniqueStudentList.add(JAMES);
-        assertTrue(uniqueStudentList.contains(JAMES));
+        uniqueStudentList.add(HELENE);
+        assertTrue(uniqueStudentList.contains(HELENE));
     }
 
     @Test
     public void add_duplicateStudent_throwsDuplicateStudentException() {
-        uniqueStudentList.add(JAMES);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(JAMES));
+        uniqueStudentList.add(HELENE);
+        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(HELENE));
     }
 
     @Test
     public void add_duplicateStudent_throwsDuplicateStudentException2() {
-        uniqueStudentList.add(JOHN);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(JOHN));
+        uniqueStudentList.add(GEORGE);
+        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(GEORGE));
     }
 
     @Test
     public void setStudent_nullEditedQuestion_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setElement(JAMES, null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setElement(HELENE, null));
     }
 
     @Test
     public void setStudent_targetStudentNotInList_throwsStudentNotFound() {
-        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setElement(JAMES, JAMES));
+        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setElement(HELENE, HELENE));
     }
 
     @Test
     public void setStudent_editedStudentIsSameStudent_success() {
-        uniqueStudentList.add(JOHN);
-        uniqueStudentList.setElement(JOHN, JOHN);
+        uniqueStudentList.add(GEORGE);
+        uniqueStudentList.setElement(GEORGE, GEORGE);
         UniqueStudentList expected = new UniqueStudentList();
-        expected.add(JOHN);
+        expected.add(GEORGE);
         assertEquals(expected, uniqueStudentList);
     }
 
     @Test
     public void setStudent_editedStudentHasNonUniqueIdentity_throwsDuplicateStudentException() {
-        uniqueStudentList.add(JOHN);
-        uniqueStudentList.add(JAMES);
-        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setElement(JAMES, JOHN));
+        uniqueStudentList.add(GEORGE);
+        uniqueStudentList.add(HELENE);
+        assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setElement(HELENE, GEORGE));
     }
 
     @Test
     public void remove_nullStudent_throwsStudentNotFound() {
-        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.remove(JOHN));
+        assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.remove(GEORGE));
     }
 
     @Test
     public void remove_existingQuestion() {
-        uniqueStudentList.add(JOHN);
-        uniqueStudentList.remove(JOHN);
+        uniqueStudentList.add(GEORGE);
+        uniqueStudentList.remove(GEORGE);
         UniqueStudentList expected = new UniqueStudentList();
         assertEquals(expected, uniqueStudentList);
     }
@@ -123,18 +123,18 @@ class UniqueStudentListTest {
 
     @Test
     void setStudents_testCorrectness() {
-        List<Student> listOfStudents = Arrays.asList(JOHN, JAMES);
+        List<Student> listOfStudents = Arrays.asList(GEORGE, HELENE);
         uniqueStudentList.setElementsWithList(listOfStudents);
         UniqueStudentList expected = new UniqueStudentList();
-        expected.add(JOHN);
-        expected.add(JAMES);
+        expected.add(GEORGE);
+        expected.add(HELENE);
         assertEquals(expected, uniqueStudentList);
 
     }
 
     @Test
     void setStudents_listWithDuplicateStudents_throwsDuplicateStudentException() {
-        List<Student> listWithDuplicateStudents = Arrays.asList(JOHN, JOHN);
+        List<Student> listWithDuplicateStudents = Arrays.asList(GEORGE, GEORGE);
         assertThrows(DuplicateStudentException.class, () -> uniqueStudentList
             .setElementsWithList(listWithDuplicateStudents));
     }

@@ -14,8 +14,10 @@ import team.serenity.model.Model;
 public class ViewQnCommand extends Command {
 
     public static final String COMMAND_WORD = "viewqn";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all questions.";
-    public static final String MESSAGE_SUCCESS = "These are all the questions asked by students across all lessons.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+        + ": Displays all questions from all tutorial groups and tutorial lessons as a list with index numbers.";
+    public static final String MESSAGE_SUCCESS =
+            "These are all the questions asked by students across all groups and lessons.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
