@@ -72,7 +72,7 @@ public class LessonBuilder {
     }
 
     /**
-     * builds the lesson
+     * Builds the lesson.
      */
     public Lesson build() {
         this.studentsInfo.sort(Comparator.comparing(x -> x.getStudent().getStudentName().toString()));
