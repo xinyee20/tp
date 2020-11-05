@@ -3,9 +3,11 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
+import static team.serenity.logic.commands.studentinfo.FlagAttCommand.MESSAGE_FAILURE;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
@@ -35,6 +37,16 @@ class FlagAttCommandTest {
         CommandResult commandResult = new FlagAttCommand(toFlagAtt).execute(modelStub);
         assertEquals(String.format(FlagAttCommand.MESSAGE_SUCCESS, toFlagAtt),
                 commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_studentPresent_throwsCommandException() throws CommandException {
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
+        Student toFlagAtt = new Student("Aaron Tan", "A0123456U");
+        FlagAttCommand flagAttCommand = new FlagAttCommand(toFlagAtt);
+
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_FAILURE), () -> flagAttCommand.execute(modelStub));
     }
 
     @Test
@@ -96,7 +108,7 @@ class FlagAttCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         FlagAttCommand flagAttCommand = new FlagAttCommand(wrongIndex);
 
-        assertThrows(CommandException.class, () -> flagAttCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, wrongIndex.getOneBased()), () -> flagAttCommand.execute(modelStub));
     }
 
     @Test

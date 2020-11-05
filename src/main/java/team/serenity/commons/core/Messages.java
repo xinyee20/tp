@@ -48,4 +48,5 @@ public class Messages {
         "There are no students in this group. You may use addstudent command to add a student.";
     public static final String MESSAGE_NO_LESSONS =
         "There are no lessons in this group. Yoo may use addlsn command to add a lesson.";
+    public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
 }

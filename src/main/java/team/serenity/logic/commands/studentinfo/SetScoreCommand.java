@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
+import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
@@ -18,11 +19,12 @@ import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
-import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
 public class SetScoreCommand extends Command {
@@ -31,7 +33,6 @@ public class SetScoreCommand extends Command {
     public static final String MESSAGE_SUCCESS = "%s: \nUpdated Participation Score: %d";
     public static final String MESSAGE_STUDENT_NOT_PRESENT =
             "%s is not present. \nPlease ensure student is present before giving a score!";
-    public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Awards a specific student a participation score for a lesson.\n"
@@ -94,58 +95,137 @@ public class SetScoreCommand extends Command {
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<StudentInfo> uniqueStudentInfoList =
-                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
-        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
+        GroupLessonKey key = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        ObservableList<StudentInfo> currentStudentInfoList = model.getObservableListOfStudentsInfoFromKey(key);
+        StudentInfo targetStudentInfo = getTargetStudentInfo(currentStudentInfoList);
 
-        if (!isByIndex) {
+        return executeSetScoreOneStudent(model, key, uniqueLesson, currentStudentInfoList, targetStudentInfo);
+//        UniqueList<StudentInfo> uniqueStudentInfoList =
+//                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
+//        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
+//
+//        if (!isByIndex) {
+//
+//            // Update single student participation score
+//            for (int i = 0; i < studentsInfo.size(); i++) {
+//                StudentInfo studentInfo = studentsInfo.get(i);
+//                this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore.get());
+//                if (this.isCorrectStudent) {
+//                    Attendance currentAttendance = studentInfo.getAttendance();
+//                    if (!currentAttendance.isPresent()) {
+//                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
+//                    }
+//                    if (scoreToSet > 5 || scoreToSet < 0) {
+//                        throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+//                    }
+//                    Participation update = studentInfo.getParticipation().setNewScore(scoreToSet);
+//                    StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
+//                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
+//                    model.updateLessonList();
+//                    model.updateStudentsInfoList();
+//                    break;
+//                }
+//            }
+//
+//            if (!this.isCorrectStudent) {
+//                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore.get()));
+//            }
+//        } else {
+//            if (index.get().getZeroBased() >= studentsInfo.size() || index.get().getOneBased() == 0) {
+//                throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+//                        index.get().getOneBased()));
+//            }
+//
+//            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
+//            toSetScore = Optional.ofNullable(studentInfo.getStudent());
+//            Attendance currentAttendance = studentInfo.getAttendance();
+//            if (!currentAttendance.isPresent()) {
+//                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
+//            }
+//            if (scoreToSet > 5 || scoreToSet < 0) {
+//                throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+//            }
+//            Participation update = studentInfo.getParticipation().setNewScore(scoreToSet);
+//            StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
+//            uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
+//            model.updateLessonList();
+//            model.updateStudentsInfoList();
+//        }
+//        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSetScore.get(), scoreToSet));
+    }
 
-            // Update single student participation score
-            for (int i = 0; i < studentsInfo.size(); i++) {
-                StudentInfo studentInfo = studentsInfo.get(i);
-                this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore.get());
-                if (this.isCorrectStudent) {
-                    Attendance currentAttendance = studentInfo.getAttendance();
-                    if (!currentAttendance.isPresent()) {
-                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
-                    }
-                    if (scoreToSet > 5 || scoreToSet < 0) {
-                        throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
-                    }
-                    Participation update = studentInfo.getParticipation().setNewScore(scoreToSet);
-                    StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-                    model.updateLessonList();
-                    model.updateStudentsInfoList();
-                    break;
-                }
-            }
+    /**
+     * Executes the flag one student attendance command and returns the result message.
+     */
+    private CommandResult executeSetScoreOneStudent(Model model, GroupLessonKey key, Lesson lesson,
+                                                ObservableList<StudentInfo> currentStudentInfoList,
+                                                StudentInfo targetStudentInfo) throws CommandException {
+        // Gets the updated StudentInfoList with the updated targetStudentInfo
+        UniqueList<StudentInfo> updatedListForSetScoreOneStudent =
+                getUpdatedListForSetScoreOneStudent(currentStudentInfoList, targetStudentInfo);
 
-            if (!this.isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore.get()));
-            }
-        } else {
-            if (index.get().getZeroBased() >= studentsInfo.size() || index.get().getOneBased() == 0) {
-                throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        index.get().getOneBased()));
-            }
+        // Updates the modelManager and lesson object with the new StudentInfoList
+        model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForSetScoreOneStudent);
+        lesson.setStudentsInfo(updatedListForSetScoreOneStudent);
+        model.updateLessonList();
+        model.updateStudentsInfoList();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent(), scoreToSet));
+    }
 
-            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
-            toSetScore = Optional.ofNullable(studentInfo.getStudent());
-            Attendance currentAttendance = studentInfo.getAttendance();
-            if (!currentAttendance.isPresent()) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
+    /**
+     * Returns the {@code targetStudentInfo} object in the {@code currentStudentInfoList}.
+     */
+    private StudentInfo getTargetStudentInfo(ObservableList<StudentInfo> currentStudentInfoList)
+            throws CommandException {
+        if (this.isByIndex) {
+            // Set Score by index
+            assert this.index.isPresent();
+            Index targetIndex = this.index.get();
+
+            // Return error message if index is out of range
+            if (targetIndex.getZeroBased() >= currentStudentInfoList.size() || index.get().getOneBased() == 0) {
+                throw new CommandException(
+                        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, targetIndex.getOneBased()));
             }
-            if (scoreToSet > 5 || scoreToSet < 0) {
-                throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
-            }
-            Participation update = studentInfo.getParticipation().setNewScore(scoreToSet);
-            StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-            uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-            model.updateLessonList();
-            model.updateStudentsInfoList();
+            return currentStudentInfoList.get(targetIndex.getZeroBased());
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSetScore.get(), scoreToSet));
+
+        assert this.toSetScore.isPresent();
+        Student student = this.toSetScore.get();
+
+        // Filter studentInfoList via Student and get the first object in the filtered stream (if any)
+        Optional<StudentInfo> optionalStudentInfo =
+                currentStudentInfoList.stream().filter(s -> s.containsStudent(student)).findFirst();
+
+        // Return error message if Student not found in StudentInfoList
+        if (optionalStudentInfo.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, student));
+        }
+        return optionalStudentInfo.get();
+    }
+
+    /**
+     * Sets the given {@code targetStudentInfo}'s {@code Participation} field
+     * in the {@code currentStudentInfoList} with a score.
+     * Returns the {@code updatedStudentInfoList}.
+     *
+     * @param currentStudentInfoList the current student info list.
+     * @param targetStudentInfo the target student info to set score.
+     */
+    private UniqueList<StudentInfo> getUpdatedListForSetScoreOneStudent(ObservableList<StudentInfo> currentStudentInfoList,
+                                                                    StudentInfo targetStudentInfo) throws CommandException {
+        if (!targetStudentInfo.getAttendance().isPresent()) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
+        }
+        if (scoreToSet > 5 || scoreToSet < 0) {
+            throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+        }
+        UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
+        updatedList.setElementsWithList(currentStudentInfoList);
+        StudentInfo updatedStudentInfo = new StudentInfo(targetStudentInfo.getStudent(),
+                new Participation().setNewScore(scoreToSet), targetStudentInfo.getAttendance());
+        updatedList.setElement(targetStudentInfo, updatedStudentInfo);
+        return updatedList;
     }
 
     @Override

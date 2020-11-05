@@ -98,7 +98,7 @@ public class FlagAttCommand extends Command {
      */
     private CommandResult executeFlagOneStudent(Model model, GroupLessonKey key, Lesson lesson,
                                                 ObservableList<StudentInfo> currentStudentInfoList,
-                                                StudentInfo targetStudentInfo) {
+                                                StudentInfo targetStudentInfo) throws CommandException {
         // Gets the updated StudentInfoList with the updated targetStudentInfo
         UniqueList<StudentInfo> updatedListForFlagOneStudent =
                 getUpdatedListForFlagOneStudent(currentStudentInfoList, targetStudentInfo);
@@ -152,7 +152,10 @@ public class FlagAttCommand extends Command {
      * @param targetStudentInfo the target student info to flag attendance.
      */
     private UniqueList<StudentInfo> getUpdatedListForFlagOneStudent(ObservableList<StudentInfo> currentStudentInfoList,
-                                                                    StudentInfo targetStudentInfo) {
+                                                                    StudentInfo targetStudentInfo) throws CommandException {
+        if (targetStudentInfo.getAttendance().isPresent()) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
         updatedList.setElementsWithList(currentStudentInfoList);
         StudentInfo updatedStudentInfo = new StudentInfo(targetStudentInfo.getStudent(),
