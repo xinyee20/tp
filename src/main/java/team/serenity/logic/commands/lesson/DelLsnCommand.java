@@ -19,7 +19,7 @@ import team.serenity.model.group.lesson.LessonName;
 public class DelLsnCommand extends Command {
     public static final String COMMAND_WORD = "dellsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes a specified lesson from a specified tutorial group.\n"
+        + ": Deletes an existing tutorial lesson from the specified tutorial group.\n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
         + PREFIX_LSN + "LESSON\n"

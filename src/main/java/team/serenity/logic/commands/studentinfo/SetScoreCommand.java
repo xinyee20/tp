@@ -34,14 +34,17 @@ public class SetScoreCommand extends Command {
     public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Awards a specific student a participation score for a lesson.\n"
+            + ": Edits the score of the specified student for a tutorial lesson. "
+            + "Existing score will be overwritten by the input score.\n"
             + "Parameters (2 methods):\n"
-            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER " + PREFIX_SET_SCORE + "SCORE\n"
-            + "2. INDEX (starting from 1) " + PREFIX_SET_SCORE + "SCORE\n"
+            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER "
+                    + PREFIX_SET_SCORE + "SCORE (must be an integer from 0 to 5)\n"
+            + "2. INDEX (must be a positive integer) "
+                    + PREFIX_SET_SCORE + "SCORE (must be an integer from 0 to 5)\n"
             + "Examples:\n"
             + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A "
                     + PREFIX_SET_SCORE + "2\n"
-            + "2. " + COMMAND_WORD + " 2 " + PREFIX_SET_SCORE + "2\n";
+            + "2. " + COMMAND_WORD + " 1 " + PREFIX_SET_SCORE + "2\n";
 
     private Optional<Student> toSetScore;
     private Optional<Index> index;

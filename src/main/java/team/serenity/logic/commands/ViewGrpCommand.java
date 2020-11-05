@@ -15,8 +15,8 @@ public class ViewGrpCommand extends Command {
 
     public static final String COMMAND_WORD = "viewgrp";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
-        + ": Finds all students who are part of the specified group (case-insensitive) "
-        + "and displays them as a list with index numbers.\n"
+        + ": Displays the details of the specified tutorial group (case-insensitive) which includes "
+        + "the lists of lessons and students, and the sheets of attendance and participation scores.\n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP\n"
         + "Example: " + COMMAND_WORD + " "

@@ -21,9 +21,8 @@ public class ViewLsnCommand extends Command {
 
     public static final String COMMAND_WORD = "viewlsn";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
-        + ": Finds the attendance and class participation of all students "
-        + "from the specified lesson of a specific group (case-insensitive) and "
-        + "displays them as a list with index numbers.\n"
+        + ": Displays the details of the specified tutorial lesson of a specified tutorial group (case-insensitive) "
+        + "which includes the lists of questions, attendance and participation scores of students.\n"
         + "Parameters: "
         + PREFIX_GRP + "GROUP "
         + PREFIX_LSN + "LESSON\n"
