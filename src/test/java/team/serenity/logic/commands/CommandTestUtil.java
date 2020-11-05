@@ -59,10 +59,18 @@ public class CommandTestUtil {
     public static final String SUB_SCORE_DESC = " " + PREFIX_SUBTRACT_SCORE + VALID_SUB;
 
     // Invalid descriptions for Serenity
-    public static final String INVALID_GROUP_NAME_LOWERCASE = " " + PREFIX_GRP + "g07";
-    public static final String INVALID_GROUP_NAME_DASH = " " + PREFIX_GRP + "G-07";
-    public static final String INVALID_LESSON_NAME_TEN = " " + PREFIX_LSN + "1-10";
+    public static final String INVALID_GROUP_WITHOUT_NAME = " " + PREFIX_PATH + VALID_PATH_A;
+    public static final String INVALID_GROUP_WITHOUT_PATH = " " + PREFIX_GRP + VALID_GROUP_NAME_A;
+    public static final String INVALID_GROUP_NAME_TOO_MANY_CHARS = " " + PREFIX_GRP + "G044";
+    public static final String INVALID_GROUP_NAME_TOO_LESS_CHARS = " " + PREFIX_GRP + "G";
+    public static final String INVALID_GROUP_NAME_INVALID_CHARS = " " + PREFIX_GRP + "!!!";
+    public static final String INVALID_GROUP_NAME_NON_ALPHABET = " " + PREFIX_GRP + "004";
     public static final String INVALID_GROUP_NAME_NON_DIGITS = " " + PREFIX_GRP + "Gxx";
+    public static final String INVALID_GROUP_NAME_EMPTY = " " + PREFIX_GRP + "";
+    public static final String INVALID_GROUP_NAME_DASH = " " + PREFIX_GRP + "G-04";
+    public static final String VALID_GROUP_NAME_LOWERCASE = " " + PREFIX_GRP + "g07";
+
+    public static final String INVALID_LESSON_NAME_TEN = " " + PREFIX_LSN + "1-10";
     public static final String INVALID_PATH = " " + PREFIX_PATH + "this is an invalid path";
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
     public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;

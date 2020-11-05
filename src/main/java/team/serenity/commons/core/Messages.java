@@ -16,7 +16,6 @@ public class Messages {
         + "Photo, Name and Student Number header columns, or these columns are placed in a wrong order.";
     public static final String MESSAGE_NO_STUDENT_LIST = "The .xlsx file is missing a list of students.";
 
-
     public static final String MESSAGE_GROUP_LISTED_OVERVIEW = "You are in tutorial group %1$s.\n"
         + "You can view the summary of every"
         + " lesson in this group here, or view individual lessons with the viewlsn command!";

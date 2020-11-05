@@ -36,7 +36,7 @@ public class GroupBuilder {
         new Student("Eng Wee Kiat", "A0101010E")
 
     ));
-    public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>(Arrays.asList(
+    public static final Set<Lesson> DEFAULT_LESSONS = new HashSet<>(Arrays.asList(
     ));
 
     private GroupName name;
@@ -49,7 +49,7 @@ public class GroupBuilder {
     public GroupBuilder() {
         name = new GroupName(DEFAULT_NAME);
         students.setElementsWithList(new ArrayList<>(DEFAULT_STUDENTS));
-        lessons.setElementsWithList(new ArrayList<>(DEFAULT_CLASSES));
+        lessons.setElementsWithList(new ArrayList<>(DEFAULT_LESSONS));
     }
 
     /**
@@ -100,16 +100,16 @@ public class GroupBuilder {
     }
 
     /**
-     * Creates and parses the {@code classes} into a {@code Set<Class>} and set it to the {@code Group} that we are
+     * Creates and parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Group} that we are
      * building.
      */
-    public GroupBuilder withClasses(String... classes) {
+    public GroupBuilder withLessons(String... lessons) {
         UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
         for (Student student : students) {
             studentsInfo.add(new StudentInfo(student));
         }
-        for (String className : classes) {
-            this.lessons.add(new Lesson(className, studentsInfo));
+        for (String lessonName : lessons) {
+            this.lessons.add(new Lesson(lessonName, studentsInfo));
         }
         return this;
     }

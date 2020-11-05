@@ -32,7 +32,7 @@ class ModelStubWithIndexPresent extends ModelStub {
         List<Group> grpList = new ArrayList<>();
         this.uniqueGroup = new GroupBuilder().withName("G01")
                 .withStudents(new Student("Aaron Tan", "A0123456U"))
-                .withClasses("1-1").build();
+                .withLessons("1-1").build();
         grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
