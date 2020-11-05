@@ -1,12 +1,15 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
 import java.util.stream.Stream;
 
+import team.serenity.logic.commands.ViewAttCommand;
 import team.serenity.logic.commands.ViewScoreCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.GroupName;
 
 /**
  * Parses input arguments and creates a new ViewScoreCommand object.
@@ -25,15 +28,9 @@ public class ViewScoreCommandParser implements Parser<ViewScoreCommand> {
             throw this.viewScoreCommandParserException;
         }
 
-        String[] grpKeyword = argMultimap.getValue(CliSyntax.PREFIX_GRP).get().split("\\s+");
+        GroupName groupName = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
 
-        if (grpKeyword.length > 1) {
-            throw this.viewScoreCommandParserException;
-        }
-
-        String groupName = SerenityParserUtil.parseGroupName(grpKeyword[0]).toString();
-
-        return new ViewScoreCommand(new GroupContainsKeywordPredicate(groupName));
+        return new ViewScoreCommand(new GroupContainsKeywordPredicate(groupName.toString().toUpperCase()));
     }
 
     /**
