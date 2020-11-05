@@ -97,7 +97,9 @@ class MarkPresentCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongIndex);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, wrongIndex.getOneBased()), () -> markPresentCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        wrongIndex.getOneBased()), () -> markPresentCommand.execute(modelStub));
     }
 
     @Test

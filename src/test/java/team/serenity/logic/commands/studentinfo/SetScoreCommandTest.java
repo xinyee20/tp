@@ -57,7 +57,9 @@ class SetScoreCommandTest {
         int validScore = 1;
         SetScoreCommand setScoreCommand = new SetScoreCommand(toSetScore, validScore);
 
-        assertThrows(CommandException.class, String.format(SetScoreCommand.MESSAGE_STUDENT_NOT_PRESENT, toSetScore), () -> setScoreCommand.execute(modelStub));;
+        assertThrows(CommandException.class,
+                String.format(SetScoreCommand.MESSAGE_STUDENT_NOT_PRESENT,
+                        toSetScore), () -> setScoreCommand.execute(modelStub));;
     }
 
     @Test

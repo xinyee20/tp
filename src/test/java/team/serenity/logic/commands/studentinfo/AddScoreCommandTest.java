@@ -58,7 +58,8 @@ class AddScoreCommandTest {
         int validAddScore = 1;
         AddScoreCommand addScoreCommand = new AddScoreCommand(toAddScore, validAddScore);
 
-        assertThrows(CommandException.class, String.format(AddScoreCommand.MESSAGE_STUDENT_NOT_PRESENT, toAddScore), () -> addScoreCommand.execute(modelStub));;
+        assertThrows(CommandException.class, String.format(
+                AddScoreCommand.MESSAGE_STUDENT_NOT_PRESENT, toAddScore), () -> addScoreCommand.execute(modelStub));
     }
 
     @Test

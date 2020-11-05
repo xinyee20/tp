@@ -151,8 +151,8 @@ public class FlagAttCommand extends Command {
      * @param currentStudentInfoList the current student info list.
      * @param targetStudentInfo the target student info to flag attendance.
      */
-    private UniqueList<StudentInfo> getUpdatedListForFlagOneStudent(ObservableList<StudentInfo> currentStudentInfoList,
-                                                                    StudentInfo targetStudentInfo) throws CommandException {
+    private UniqueList<StudentInfo> getUpdatedListForFlagOneStudent(
+            ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
         if (targetStudentInfo.getAttendance().isPresent()) {
             throw new CommandException(MESSAGE_FAILURE);
         }

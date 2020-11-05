@@ -108,7 +108,9 @@ class FlagAttCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         FlagAttCommand flagAttCommand = new FlagAttCommand(wrongIndex);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, wrongIndex.getOneBased()), () -> flagAttCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        wrongIndex.getOneBased()), () -> flagAttCommand.execute(modelStub));
     }
 
     @Test

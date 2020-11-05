@@ -99,61 +99,6 @@ public class SubScoreCommand extends Command {
         StudentInfo targetStudentInfo = getTargetStudentInfo(currentStudentInfoList);
 
         return executeSubScoreOneStudent(model, key, uniqueLesson, currentStudentInfoList, targetStudentInfo);
-//        UniqueList<StudentInfo> uniqueStudentInfoList =
-//                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
-//        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
-//        int newScore = 0;
-//
-//        if (!isByIndex) {
-//            // Update single student participation score
-//            for (int i = 0; i < studentsInfo.size(); i++) {
-//                StudentInfo studentInfo = studentsInfo.get(i);
-//                this.score = studentInfo.getParticipation().getScore();
-//                this.isCorrectStudent = studentInfo.containsStudent(this.toSubScore.get());
-//                if (this.isCorrectStudent) {
-//                    Attendance currentAttendance = studentInfo.getAttendance();
-//                    if (!currentAttendance.isPresent()) {
-//                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
-//                    }
-//                    newScore = score - scoreToSub;
-//                    if (newScore > 5 || newScore < 0) {
-//                        throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
-//                    }
-//                    Participation update = studentInfo.getParticipation().setNewScore(newScore);
-//                    StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-//                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-//                    model.updateLessonList();
-//                    model.updateStudentsInfoList();
-//                    break;
-//                }
-//            }
-//            if (!this.isCorrectStudent) {
-//                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSubScore.get()));
-//            }
-//        } else {
-//            if (index.get().getZeroBased() >= studentsInfo.size() || index.get().getOneBased() == 0) {
-//                throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-//                        index.get().getOneBased()));
-//            }
-//
-//            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
-//            toSubScore = Optional.ofNullable(studentInfo.getStudent());
-//            this.score = studentInfo.getParticipation().getScore();
-//            Attendance currentAttendance = studentInfo.getAttendance();
-//            if (!currentAttendance.isPresent()) {
-//                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
-//            }
-//            newScore = score - scoreToSub;
-//            if (newScore > 5 || newScore < 0) {
-//                throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
-//            }
-//            Participation update = studentInfo.getParticipation().setNewScore(newScore);
-//            StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-//            uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-//            model.updateLessonList();
-//            model.updateStudentsInfoList();
-//        }
-//        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSubScore.get(), newScore));
     }
 
     /**
@@ -182,8 +127,8 @@ public class SubScoreCommand extends Command {
      * @param currentStudentInfoList the current student info list.
      * @param targetStudentInfo the target student info to add score.
      */
-    private UniqueList<StudentInfo> getUpdatedListForSubScoreOneStudent(ObservableList<StudentInfo> currentStudentInfoList,
-                                                                        StudentInfo targetStudentInfo) throws CommandException {
+    private UniqueList<StudentInfo> getUpdatedListForSubScoreOneStudent(
+            ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
         if (!targetStudentInfo.getAttendance().isPresent()) {
             throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
         }

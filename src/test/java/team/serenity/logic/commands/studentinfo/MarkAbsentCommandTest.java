@@ -97,7 +97,9 @@ class MarkAbsentCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(wrongIndex);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, wrongIndex.getOneBased()), () -> markAbsentCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        wrongIndex.getOneBased()), () -> markAbsentCommand.execute(modelStub));
     }
 
     @Test

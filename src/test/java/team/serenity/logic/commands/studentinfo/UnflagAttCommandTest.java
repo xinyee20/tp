@@ -97,7 +97,9 @@ class UnflagAttCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         UnflagAttCommand unflagAttCommand = new UnflagAttCommand(wrongIndex);
 
-        assertThrows(CommandException.class,String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, wrongIndex.getOneBased()), () -> unflagAttCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(
+                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                wrongIndex.getOneBased()), () -> unflagAttCommand.execute(modelStub));
     }
 
     @Test

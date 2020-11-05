@@ -159,8 +159,8 @@ public class AddScoreCommand extends Command {
      * @param currentStudentInfoList the current student info list.
      * @param targetStudentInfo the target student info to add score.
      */
-    private UniqueList<StudentInfo> getUpdatedListForAddScoreOneStudent(ObservableList<StudentInfo> currentStudentInfoList,
-                                                                        StudentInfo targetStudentInfo) throws CommandException {
+    private UniqueList<StudentInfo> getUpdatedListForAddScoreOneStudent(
+            ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
         if (!targetStudentInfo.getAttendance().isPresent()) {
             throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
         }

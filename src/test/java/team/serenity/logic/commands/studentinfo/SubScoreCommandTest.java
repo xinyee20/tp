@@ -1,6 +1,8 @@
 package team.serenity.logic.commands.studentinfo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
@@ -56,7 +58,8 @@ class SubScoreCommandTest {
         int validSubScore = 1;
         SubScoreCommand subScoreCommand = new SubScoreCommand(toSubScore, validSubScore);
 
-        assertThrows(CommandException.class, String.format(SubScoreCommand.MESSAGE_STUDENT_NOT_PRESENT, toSubScore), () -> subScoreCommand.execute(modelStub));;
+        assertThrows(CommandException.class, String.format(
+                SubScoreCommand.MESSAGE_STUDENT_NOT_PRESENT, toSubScore), () -> subScoreCommand.execute(modelStub));;
     }
 
     @Test
