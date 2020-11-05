@@ -37,7 +37,9 @@ public class SerenityParserUtil {
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim().toUpperCase();
-        if (!GroupName.isValidName(trimmedGroupName)) {
+        if (trimmedGroupName.isEmpty()) {
+            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_EMPTY);
+        } else if (!GroupName.isValidName(trimmedGroupName)) {
             throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
         }
         return new GroupName(trimmedGroupName);

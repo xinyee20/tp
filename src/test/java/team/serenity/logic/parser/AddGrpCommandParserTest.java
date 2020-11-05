@@ -99,7 +99,7 @@ public class AddGrpCommandParserTest {
 
     @Test
     public void parse_invalidGroupNameEmpty_throwsParseException() {
-        String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
+        String expectedMessage = GroupName.MESSAGE_GROUP_NAME_EMPTY;
         String userInput = INVALID_GROUP_NAME_EMPTY + " " + PREFIX_PATH + VALID_PATH_A;
 
         assertParseFailure(parser, userInput, expectedMessage);

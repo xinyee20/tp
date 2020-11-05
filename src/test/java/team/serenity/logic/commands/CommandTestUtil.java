@@ -82,7 +82,6 @@ public class CommandTestUtil {
     public static final String INVALID_SUB_SCORE = " " + PREFIX_SUBTRACT_SCORE + "A";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_A;
     public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_B;
