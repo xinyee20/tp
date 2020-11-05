@@ -29,13 +29,13 @@ import team.serenity.testutil.question.EditQuestionDescriptorBuilder;
 public class CommandTestUtil {
 
     // Valid descriptions for Serenity
+    public static final String VALID_GROUP_NAME_G01 = "G01";
     public static final String VALID_GROUP_NAME_G04 = "G04";
-    public static final String VALID_LESSON_NAME_1_1 = "1-1";
     public static final String VALID_GROUP_NAME_G05 = "G05";
+    public static final String VALID_LESSON_NAME_1_1 = "1-1";
+    public static final String VALID_LESSON_NAME_1_2 = "1-2";
     public static final String VALID_PATH_G04 = "CS2101_G04.xlsx";
     public static final String VALID_PATH_G05 = "CS2101_G05.xlsx";
-    public static final String VALID_LSN_1_1 = "1-1";
-    public static final String VALID_LSN_1_2 = "1-2";
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
     public static final String VALID_QN_DESC_B = "When is the consultation held?";
     public static final String VALID_STUDENT_NAME_AARON = "Aaron Tan";
@@ -80,9 +80,9 @@ public class CommandTestUtil {
 
     static {
         EDITED_QN_A = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_G04)
-                .withLessonName(VALID_LSN_1_1).withDescription(VALID_QN_DESC_A).build();
+                .withLessonName(VALID_LESSON_NAME_1_1).withDescription(VALID_QN_DESC_A).build();
         EDITED_QN_B = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_G05)
-                .withLessonName(VALID_LSN_1_2).withDescription(VALID_QN_DESC_B).build();
+                .withLessonName(VALID_LESSON_NAME_1_2).withDescription(VALID_QN_DESC_B).build();
     }
 
     /**

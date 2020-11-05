@@ -56,7 +56,7 @@ public class TypicalGroups {
     }
 
     public static List<Group> getTypicalGroups() {
-        return new ArrayList<>(Arrays.asList(GROUP_G04, GROUP_G01, GROUP_G02));
+        return new ArrayList<>(Arrays.asList(GROUP_G01, GROUP_G02, GROUP_G04));
     }
 
     public static GroupManager getTypicalGroupManager() {
