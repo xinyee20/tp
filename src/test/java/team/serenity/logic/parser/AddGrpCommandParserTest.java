@@ -1,6 +1,8 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_NON_XLSX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_EMPTY;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_INVALID_CHARS;
@@ -10,38 +12,34 @@ import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_TO
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_TOO_MANY_CHARS;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_WITHOUT_PATH;
-import static team.serenity.logic.commands.CommandTestUtil.LESSON_DESC_LESSON_ONE;
+import static team.serenity.logic.commands.CommandTestUtil.INVALID_PATH;
+import static team.serenity.logic.commands.CommandTestUtil.INVALID_PATH_NON_XLSX;
 import static team.serenity.logic.commands.CommandTestUtil.PATH_DESC_GROUP_A;
-import static team.serenity.logic.commands.CommandTestUtil.PATH_DESC_GROUP_B;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_A;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_LOWERCASE;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_LESSON_NAME_ONE;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_PATH_A;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_PATH_B;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static team.serenity.model.group.GroupName.MESSAGE_CONSTRAINTS;
 
-import java.io.IOException;
-
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.Test;
 
-import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.commands.AddGrpCommand;
-import team.serenity.logic.commands.lesson.AddLsnCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
-import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
-import team.serenity.model.group.lesson.LessonName;
-import team.serenity.testutil.GroupBuilder;
 
 public class AddGrpCommandParserTest {
 
     private AddGrpCommandParser parser = new AddGrpCommandParser();
+
+    @Test
+    public void parse_validGroupNameAndFilePath_returnsAddGrpCommand() throws ParseException {
+        AddGrpCommand expectedCommand = new AddGrpCommand(new Group(VALID_GROUP_NAME_A, VALID_PATH_A));
+        String userInput = GRP_DESC_GROUP_A + PATH_DESC_GROUP_A;
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 
     @Test
     public void parse_missingGroupName_throwsParseException() {
@@ -107,15 +105,20 @@ public class AddGrpCommandParserTest {
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
-    /*
     @Test
-    public void parse_validGroupName_returnsAddGrpCommand() {
-        String expectedMessage = String.format(AddGrpCommand.MESSAGE_SUCCESS, VALID_GROUP_NAME_A);
-        String userInput = GRP_DESC_GROUP_A + PATH_DESC_GROUP_A;
+    public void parse_invalidFilePath_throwsParseException() {
+        String expectedMessage = MESSAGE_INVALID_FILE_PATH;
+        String userInput = GRP_DESC_GROUP_A + " " + PREFIX_PATH + INVALID_PATH;
 
-        assertParseSuccess(parser, userInput, expectedMessage);
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
-     */
+    @Test
+    public void parse_invalidFilePathNonXlsx_throwsParseException() {
+        String expectedMessage = MESSAGE_INVALID_FILE_NON_XLSX;
+        String userInput = GRP_DESC_GROUP_A + " " + PREFIX_PATH + INVALID_PATH_NON_XLSX;
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
 
 }

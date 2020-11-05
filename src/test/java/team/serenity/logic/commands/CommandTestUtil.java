@@ -68,10 +68,11 @@ public class CommandTestUtil {
     public static final String INVALID_GROUP_NAME_NON_DIGITS = " " + PREFIX_GRP + "Gxx";
     public static final String INVALID_GROUP_NAME_EMPTY = " " + PREFIX_GRP + "";
     public static final String INVALID_GROUP_NAME_DASH = " " + PREFIX_GRP + "G-04";
-    public static final String VALID_GROUP_NAME_LOWERCASE = " " + PREFIX_GRP + "g07";
+
+    public static final String INVALID_PATH_NON_XLSX = " " + PREFIX_PATH + "CS2101_G04.xls";
+    public static final String INVALID_PATH = " " + PREFIX_PATH + "invalid.xlsx";
 
     public static final String INVALID_LESSON_NAME_TEN = " " + PREFIX_LSN + "1-10";
-    public static final String INVALID_PATH = " " + PREFIX_PATH + "this is an invalid path";
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
     public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
     public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME_A;

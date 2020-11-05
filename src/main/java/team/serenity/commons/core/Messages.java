@@ -11,6 +11,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
     public static final String MESSAGE_INVALID_FILE = "An error has occurred while reading the file.";
+    public static final String MESSAGE_INVALID_FILE_NON_XLSX = "The file used is not of .xlsx file type.";
     public static final String MESSAGE_FILE_EMPTY = "The .xlsx file is empty.";
     public static final String MESSAGE_INVALID_HEADER_COLUMNS = "The .xlsx file is either missing the "
         + "Photo, Name and Student Number header columns, or these columns are placed in a wrong order.";

@@ -1,6 +1,7 @@
 package team.serenity.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_NON_XLSX;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
@@ -52,7 +53,7 @@ public class SerenityParserUtil {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
         if (!filePath.trim().endsWith(".xlsx")) {
-            throw new ParseException("The file used is not of .xlsx file type.");
+            throw new ParseException(MESSAGE_INVALID_FILE_NON_XLSX);
         }
         try {
             Workbook workbook = new XSSFWorkbook(trimmedFilePath);
