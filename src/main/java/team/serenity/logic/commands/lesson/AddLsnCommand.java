@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
 
+import java.util.Comparator;
+
 import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
@@ -62,6 +64,7 @@ public class AddLsnCommand extends Command {
         for (Student student : students) {
             studentsInfo.add(new StudentInfo(student));
         }
+        studentsInfo.sort(Comparator.comparing(x -> x.getStudent().getStudentName().toString()));
         Lesson toAdd = new Lesson(this.toAdd, studentsInfo);
 
         if (targetGrp.getLessons().contains(toAdd)) {
