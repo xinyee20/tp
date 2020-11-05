@@ -57,8 +57,8 @@ class DelLsnCommandTest {
 
 
     private class ModelStubWithGroupAndLesson extends ModelStub {
-        Group group = new GroupBuilder().withClasses("1-1","1-2").build();
-        FilteredList<Lesson> list = new FilteredList<>(this.group.getLessonsAsUnmodifiableObservableList());
+        private Group group = new GroupBuilder().withClasses("1-1", "1-2").build();
+        private FilteredList<Lesson> list = new FilteredList<>(this.group.getLessonsAsUnmodifiableObservableList());
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {

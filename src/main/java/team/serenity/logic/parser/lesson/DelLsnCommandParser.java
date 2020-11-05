@@ -6,7 +6,6 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
 
 import java.util.stream.Stream;
 
-import team.serenity.logic.commands.lesson.AddLsnCommand;
 import team.serenity.logic.commands.lesson.DelLsnCommand;
 import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
