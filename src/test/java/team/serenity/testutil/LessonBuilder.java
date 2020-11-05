@@ -6,6 +6,7 @@ import static team.serenity.testutil.TypicalStudentInfo.CATHERINE_INFO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -70,7 +71,11 @@ public class LessonBuilder {
         return this;
     }
 
+    /**
+     * Builds the lesson.
+     */
     public Lesson build() {
+        this.studentsInfo.sort(Comparator.comparing(x -> x.getStudent().getStudentName().toString()));
         return new Lesson(this.name, this.studentsInfo);
     }
 }
