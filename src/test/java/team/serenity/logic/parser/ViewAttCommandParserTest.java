@@ -11,24 +11,22 @@ import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_NO
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_A;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_PATH_A;
-import static team.serenity.logic.parser.CliSyntax.PREFIX_PATH;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import team.serenity.logic.commands.DelGrpCommand;
+import team.serenity.logic.commands.ViewAttCommand;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
 
-public class DelGrpCommandParserTest {
+public class ViewAttCommandParserTest {
 
-    private DelGrpCommandParser parser = new DelGrpCommandParser();
+    private ViewAttCommandParser parser = new ViewAttCommandParser();
 
     @Test
-    public void parse_validGroupName_returnsDelGrpCommand() {
-        DelGrpCommand expectedCommand = new DelGrpCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_A));
+    public void parse_validGroupName_returnsViewAttCommand() {
+        ViewAttCommand expectedCommand = new ViewAttCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_A));
         String userInput = GRP_DESC_GROUP_A;
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -36,7 +34,7 @@ public class DelGrpCommandParserTest {
 
     @Test
     public void parse_missingGroupName_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelGrpCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAttCommand.MESSAGE_USAGE);
         String userInput = PREAMBLE_WHITESPACE + INVALID_GROUP_WITHOUT_NAME;
 
         assertParseFailure(parser, userInput, expectedMessage);
