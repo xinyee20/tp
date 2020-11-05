@@ -1,5 +1,10 @@
 package team.serenity.commons.util;
 
+import static team.serenity.commons.core.Messages.MESSAGE_FILE_EMPTY;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_HEADER_COLUMNS;
+import static team.serenity.commons.core.Messages.MESSAGE_NO_STUDENT_LIST;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -90,7 +95,7 @@ public class XlsxUtil {
             studentList.sort(new StudentSorter());
             return new LinkedHashSet<>(studentList);
         } catch (Exception e) {
-            throw new ParseException("An error has occurred while reading the file.");
+            throw new ParseException(MESSAGE_INVALID_FILE);
         }
     }
 
@@ -100,16 +105,15 @@ public class XlsxUtil {
      */
     public void checkValidityOfXlsx() throws ParseException {
         if (sheet.getLastRowNum() == -1) {
-            throw new ParseException("The .xlsx file is empty.");
+            throw new ParseException(MESSAGE_FILE_EMPTY);
         }
         Iterator<Row> rowIterator = this.sheet.iterator();
         Row headerRow = skipRowsToHeaderRow(rowIterator);
         if (headerRow == null) {
-            throw new ParseException("The .xlsx file is either missing the Photo, Name and Student Number "
-                + "header columns, or these columns are placed in a wrong order.");
+            throw new ParseException(MESSAGE_INVALID_HEADER_COLUMNS);
         }
         if (!rowIterator.hasNext()) {
-            throw new ParseException("The .xlsx file is missing a list of students.");
+            throw new ParseException(MESSAGE_NO_STUDENT_LIST);
         }
     }
 

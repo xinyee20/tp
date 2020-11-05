@@ -10,6 +10,13 @@ public class Messages {
         + " the file path, type the 'help' command to refer to our user guide.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
 
+    public static final String MESSAGE_INVALID_FILE = "An error has occurred while reading the file.";
+    public static final String MESSAGE_FILE_EMPTY = "The .xlsx file is empty.";
+    public static final String MESSAGE_INVALID_HEADER_COLUMNS = "The .xlsx file is either missing the "
+        + "Photo, Name and Student Number header columns, or these columns are placed in a wrong order.";
+    public static final String MESSAGE_NO_STUDENT_LIST = "The .xlsx file is missing a list of students.";
+
+
     public static final String MESSAGE_GROUP_LISTED_OVERVIEW = "You are in tutorial group %1$s.\n"
         + "You can view the summary of every"
         + " lesson in this group here, or view individual lessons with the viewlsn command!";
