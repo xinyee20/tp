@@ -29,8 +29,8 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_setScoreOutOfRange_failure() throws CommandException {
-        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
+    public void execute_addScoreOutOfRange_failure() throws CommandException {
+        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
         Student toAddScore = new Student("Aaron Tan", "A0123456U");
         int scoreOutOfRange = 6;
         AddScoreCommand addScoreCommand = new AddScoreCommand(toAddScore, scoreOutOfRange);
@@ -39,12 +39,12 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_setScore_success() throws CommandException {
+    public void execute_addScore_success() throws CommandException {
         ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
         Student toAddScore = new Student("Aaron Tan", "A0123456U");
         int validAddScore = 1;
         int originalScore = 3;
-        int expectedScore = validAddScore + originalScore;
+        int expectedScore = originalScore + validAddScore;
 
         CommandResult commandResult = new AddScoreCommand(toAddScore, validAddScore).execute(modelStub);
         assertEquals(String.format(AddScoreCommand.MESSAGE_SUCCESS, toAddScore, expectedScore),
@@ -114,7 +114,7 @@ class AddScoreCommandTest {
         Student toSetScore = new Student("Aaron Tan", "A0123456U");
         int validAddScore = 1;
         int originalScore = 3;
-        int expectedScore = validAddScore + originalScore;
+        int expectedScore = originalScore + validAddScore;
 
         CommandResult commandResult = new AddScoreCommand(validIndex, validAddScore).execute(modelStub);
         assertEquals(String.format(AddScoreCommand.MESSAGE_SUCCESS, toSetScore, expectedScore),

@@ -102,7 +102,7 @@ public class AddScoreCommand extends Command {
     }
 
     /**
-     * Executes the  set one student's participation command and returns the result message.
+     * Executes the  add one student's participation score command and returns the result message.
      */
     private CommandResult executeAddScoreOneStudent(Model model, GroupLessonKey key, Lesson lesson,
                                                     ObservableList<StudentInfo> currentStudentInfoList,

@@ -60,16 +60,32 @@ public class SubScoreCommandParser implements Parser<SubScoreCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
-            student = Optional.ofNullable(new Student(studentName, studentNumber));
-            scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
-            return new SubScoreCommand(student.get(), scoreToSub);
-        } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
-            return new SubScoreCommand(index, scoreToSub);
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
+                student = Optional.ofNullable(new Student(studentName, studentNumber));
+                scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
+                return new SubScoreCommand(student.get(), scoreToSub);
+            } else {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
+                return new SubScoreCommand(index, scoreToSub);
+            }
+        } catch (Exception e) {
+            if (e instanceof ParseException) {
+                throw e;
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
+            }
         }
     }
 
