@@ -7,7 +7,6 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import team.serenity.logic.commands.lesson.DelLsnCommand;
-import team.serenity.logic.commands.lesson.ViewLsnCommand;
 import team.serenity.logic.parser.lesson.DelLsnCommandParser;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonName;
