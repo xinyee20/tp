@@ -25,7 +25,7 @@ public class ViewGrpCommandParser implements Parser<ViewGrpCommand> {
             throw this.viewGrpCommandParserException;
         }
 
-        String[] grpKeyword = argMultimap.getValue(CliSyntax.PREFIX_GRP).get().split("\\s+");
+        String[] grpKeyword = argMultimap.getValue(CliSyntax.PREFIX_GRP).get().split("\\s");
 
         if (grpKeyword.length > 1) {
             throw this.viewGrpCommandParserException;
