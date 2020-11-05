@@ -80,14 +80,14 @@ class SetScoreCommandParserTest {
     public void parse_studentNameAndIndex_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, VALID_INDEX + STUDENT_NAME_DESC , expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + STUDENT_NAME_DESC + SET_SCORE_DESC, expectedMessage);
     }
 
     @Test
     public void parse_studentNumberAndIndex_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, VALID_INDEX + STUDENT_NUMBER_DESC , expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + STUDENT_NUMBER_DESC + SET_SCORE_DESC, expectedMessage);
     }
 
     @Test

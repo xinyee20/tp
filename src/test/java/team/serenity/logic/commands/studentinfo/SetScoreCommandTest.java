@@ -8,7 +8,6 @@ import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
-import static team.serenity.logic.commands.studentinfo.SetScoreCommand.MESSAGE_STUDENT_NOT_PRESENT;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
@@ -58,7 +57,7 @@ class SetScoreCommandTest {
         int validScore = 1;
         SetScoreCommand setScoreCommand = new SetScoreCommand(toSetScore, validScore);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_STUDENT_NOT_PRESENT, toSetScore), () -> setScoreCommand.execute(modelStub));;
+        assertThrows(CommandException.class, String.format(SetScoreCommand.MESSAGE_STUDENT_NOT_PRESENT, toSetScore), () -> setScoreCommand.execute(modelStub));;
     }
 
     @Test

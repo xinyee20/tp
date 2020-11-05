@@ -52,7 +52,6 @@ public class SetScoreCommand extends Command {
     private Optional<Index> index;
     private boolean isByIndex;
     private int scoreToSet;
-    private boolean isCorrectStudent;
 
     /**
      * Creates an SetScoreCommand to set the specified {@code Student}'s participation score.
@@ -100,62 +99,10 @@ public class SetScoreCommand extends Command {
         StudentInfo targetStudentInfo = getTargetStudentInfo(currentStudentInfoList);
 
         return executeSetScoreOneStudent(model, key, uniqueLesson, currentStudentInfoList, targetStudentInfo);
-//        UniqueList<StudentInfo> uniqueStudentInfoList =
-//                model.getListOfStudentsInfoFromGroupAndLesson(uniqueGroup, uniqueLesson);
-//        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
-//
-//        if (!isByIndex) {
-//
-//            // Update single student participation score
-//            for (int i = 0; i < studentsInfo.size(); i++) {
-//                StudentInfo studentInfo = studentsInfo.get(i);
-//                this.isCorrectStudent = studentInfo.containsStudent(this.toSetScore.get());
-//                if (this.isCorrectStudent) {
-//                    Attendance currentAttendance = studentInfo.getAttendance();
-//                    if (!currentAttendance.isPresent()) {
-//                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
-//                    }
-//                    if (scoreToSet > 5 || scoreToSet < 0) {
-//                        throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
-//                    }
-//                    Participation update = studentInfo.getParticipation().setNewScore(scoreToSet);
-//                    StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-//                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-//                    model.updateLessonList();
-//                    model.updateStudentsInfoList();
-//                    break;
-//                }
-//            }
-//
-//            if (!this.isCorrectStudent) {
-//                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSetScore.get()));
-//            }
-//        } else {
-//            if (index.get().getZeroBased() >= studentsInfo.size() || index.get().getOneBased() == 0) {
-//                throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-//                        index.get().getOneBased()));
-//            }
-//
-//            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
-//            toSetScore = Optional.ofNullable(studentInfo.getStudent());
-//            Attendance currentAttendance = studentInfo.getAttendance();
-//            if (!currentAttendance.isPresent()) {
-//                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
-//            }
-//            if (scoreToSet > 5 || scoreToSet < 0) {
-//                throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
-//            }
-//            Participation update = studentInfo.getParticipation().setNewScore(scoreToSet);
-//            StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-//            uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-//            model.updateLessonList();
-//            model.updateStudentsInfoList();
-//        }
-//        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSetScore.get(), scoreToSet));
     }
 
     /**
-     * Executes the flag one student attendance command and returns the result message.
+     * Executes the set one student's score command and returns the result message.
      */
     private CommandResult executeSetScoreOneStudent(Model model, GroupLessonKey key, Lesson lesson,
                                                 ObservableList<StudentInfo> currentStudentInfoList,

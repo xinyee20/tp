@@ -21,18 +21,16 @@ import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
 
 /**
- * A Model stub containing a present student
+ * A Model stub containing present students with scores
  */
-class ModelStubWithIndexPresent extends ModelStub {
+public class ModelStubWithStudentsWithScores extends ModelStub {
     private Group uniqueGroup;
     private Lesson uniqueLesson;
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         List<Group> grpList = new ArrayList<>();
-        this.uniqueGroup = new GroupBuilder().withName("G01")
-                .withStudents(new Student("Aaron Tan", "A0123456U"))
-                .withClasses("1-1").build();
+        this.uniqueGroup = new GroupBuilder().build();
         grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
@@ -44,9 +42,22 @@ class ModelStubWithIndexPresent extends ModelStub {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
-                .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U"),
-                        new Participation(0),
-                        new Attendance(true)))
+                .withStudentInfos(
+                        new StudentInfo(new Student("Aaron Tan", "A0123456U"),
+                                new Participation(3),
+                                new Attendance(true)),
+                        new StudentInfo(new Student("Baron Wong", "A0654321C"),
+                                new Participation(3),
+                                new Attendance(true)),
+                        new StudentInfo(new Student("Cherry Lee", "A0135791B"),
+                                new Participation(3),
+                                new Attendance(true)),
+                        new StudentInfo(new Student("Dickson Low", "A0246810D"),
+                                new Participation(3),
+                                new Attendance(true)),
+                        new StudentInfo(new Student("Eng Wee Kiat", "A0101010E"),
+                                new Participation(3),
+                                new Attendance(true)))
                 .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
@@ -77,13 +88,12 @@ class ModelStubWithIndexPresent extends ModelStub {
     }
 
     @Override
-    public void updateLessonList() {
-        return;
-    }
-
-    @Override
     public void updateStudentsInfoList() {
         return;
     }
 
+    @Override
+    public void updateLessonList() {
+        return;
+    }
 }

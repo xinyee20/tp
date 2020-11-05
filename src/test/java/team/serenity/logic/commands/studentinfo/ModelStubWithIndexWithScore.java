@@ -21,9 +21,9 @@ import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
 
 /**
- * A Model stub containing a present student
+ * A Model stub containing a present student with score
  */
-class ModelStubWithIndexPresent extends ModelStub {
+public class ModelStubWithIndexWithScore extends ModelStub {
     private Group uniqueGroup;
     private Lesson uniqueLesson;
 
@@ -45,7 +45,7 @@ class ModelStubWithIndexPresent extends ModelStub {
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
                 .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U"),
-                        new Participation(0),
+                        new Participation(3),
                         new Attendance(true)))
                 .build();
         lsnList.add(uniqueLesson);
@@ -85,5 +85,4 @@ class ModelStubWithIndexPresent extends ModelStub {
     public void updateStudentsInfoList() {
         return;
     }
-
 }
