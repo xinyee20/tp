@@ -6,15 +6,16 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.exceptions.DataConversionException;
+import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.commons.util.FileUtil;
 import team.serenity.commons.util.JsonUtil;
-import team.serenity.model.group.Group;
 import team.serenity.model.group.exceptions.DuplicateException;
+import team.serenity.model.managers.ReadOnlyGroupManager;
 import team.serenity.model.managers.ReadOnlySerenity;
+import team.serenity.model.managers.Serenity;
 
 
 /**
@@ -35,7 +36,7 @@ public class JsonSerenityStorage implements SerenityStorage {
     }
 
     @Override
-    public Optional<ReadOnlySerenity> readSerenity() throws DataConversionException {
+    public Optional<ReadOnlySerenity> readSerenity() throws IllegalValueException, DataConversionException {
         return readSerenity(this.filePath);
     }
 
@@ -45,7 +46,8 @@ public class JsonSerenityStorage implements SerenityStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlySerenity> readSerenity(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlySerenity> readSerenity(Path filePath)
+        throws IllegalValueException, DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableSerenity> jsonSerenity = JsonUtil.readJsonFile(
@@ -55,7 +57,8 @@ public class JsonSerenityStorage implements SerenityStorage {
         }
 
         try {
-            return Optional.of(jsonSerenity.get().toModelType());
+            Serenity fromData = jsonSerenity.get().toModelType();
+            return Optional.of(fromData);
         } catch (DuplicateException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -64,42 +67,24 @@ public class JsonSerenityStorage implements SerenityStorage {
         }
     }
 
-    @Override
-    public void saveSerenity(ReadOnlySerenity serenity) throws IOException {
-        saveSerenity(serenity, this.filePath);
-    }
+
 
     @Override
-    public void saveSerenity(Stream<Group> groups) throws IOException {
-        this.saveSerenity(groups, this.filePath);
+    public void saveSerenity(ReadOnlyGroupManager groupManager) throws IOException {
+        this.saveSerenity(groupManager, this.filePath);
     }
 
 
-
-    /**
-     * Similar to {@link #saveSerenity(ReadOnlySerenity)}.
-     *
-     * @param filePath location of the data. Cannot be null.
-     */
-    public void saveSerenity(ReadOnlySerenity serenity, Path filePath) throws IOException {
-        requireNonNull(serenity);
-        requireNonNull(filePath);
-
-        FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableSerenity(serenity), filePath);
-    }
 
     /**
      * Saves group to storage
-     * @param groups
-     * @param filePath
      * @throws IOException
      */
-    public void saveSerenity(Stream<Group> groups, Path filePath) throws IOException {
-        requireNonNull(groups);
+    public void saveSerenity(ReadOnlyGroupManager groupManager, Path filePath) throws IOException {
+        requireNonNull(groupManager);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableSerenity(groups), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableSerenity(groupManager), filePath);
     }
 }

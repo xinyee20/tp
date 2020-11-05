@@ -11,6 +11,7 @@ import team.serenity.commons.core.Config;
 import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.core.Version;
 import team.serenity.commons.exceptions.DataConversionException;
+import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.commons.util.ConfigUtil;
 import team.serenity.commons.util.StringUtil;
 import team.serenity.logic.Logic;
@@ -40,8 +41,7 @@ import team.serenity.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 0, true);
-
+    public static final Version VERSION = new Version(1, 3, 1, true);
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
@@ -86,24 +86,31 @@ public class MainApp extends Application {
     }
 
     private ReadOnlySerenity initSerenity(Storage storage) {
+        Optional<ReadOnlySerenity> serenityOptional = null;
         ReadOnlySerenity serenity;
         try {
-            Optional<ReadOnlySerenity> serenityOptional = storage.readSerenity();
-            if (serenityOptional.isEmpty()) {
-                logger.info("Data file not found. Will be starting with a sample Serenity.");
-            }
-            serenity =
-                serenityOptional.orElseGet(SampleDataUtil::getSampleSerenity);
+            serenityOptional = storage.readSerenity();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty"
                 + " Serenity.");
-            serenity = new Serenity();
-        } catch (IOException e) {
+            serenityOptional = Optional.of(new Serenity());
+        } catch (IllegalValueException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty "
                 + "Serenity.");
-            serenity = new Serenity();
+            serenityOptional = Optional.of(new Serenity());
         }
-        return serenity;
+        if (serenityOptional.isEmpty()) {
+            logger.info("Data file not found. Will be starting with a sample Serenity.");
+            serenity = SampleDataUtil.getSampleSerenity();
+            try {
+                storage.saveSerenity(serenity.getGroupManager());
+            } catch (IOException e) {
+                logger.warning("Data was not saved");
+            }
+            return serenity;
+        } else {
+            return serenityOptional.get();
+        }
     }
 
     /**

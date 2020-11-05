@@ -7,9 +7,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.lesson.UniqueLessonList;
+import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.student.UniqueStudentList;
@@ -21,24 +24,25 @@ import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.managers.Serenity;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Serenity} with sample data.
  */
 public class SampleDataUtil {
 
     public static Group[] getSampleGroups() {
-        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("John", "A0123456R"),
-            new Student("James", "A6543210R"));
+        Set<StudentInfo> studentsInfo = getStudentInfoSet(new Student("Aaron Tan", "A0000000A"),
+            new Student("John Doe", "A0000001M"));
         UniqueList<StudentInfo> studentsInfoList = new UniqueStudentInfoList();
         studentsInfoList.setElementsWithList(new ArrayList<>(studentsInfo));
 
-        Set<Student> students = getStudentSet(new Student("John", "A0123456R"),
-            new Student("James", "A6543210R"));
+        Set<Student> students = getStudentSet(new Student("Aaron Tan", "A0000000U"),
+            new Student("John Doe", "A0000001M"));
+
         UniqueList<Student> studentsList = new UniqueStudentList();
         studentsList.setElementsWithList(new ArrayList<>(students));
 
         UniqueList<Lesson> lessonsList = new UniqueLessonList();
         lessonsList.add(new Lesson("1-1", studentsInfoList));
-        return new Group[] {new Group("G04", studentsList, lessonsList)};
+        return new Group[] {new Group("G01", studentsList, lessonsList)};
     }
 
     public static ReadOnlySerenity getSampleSerenity() {
@@ -75,8 +79,10 @@ public class SampleDataUtil {
 
     public static Question[] getSampleQuestion() {
         return new Question[]{
-            new Question("G04", "2-2", "What is the deadline for the report?"),
-            new Question("G05", "3-1", "When is the consultation held?")
+            new Question(new GroupName("G01"), new LessonName("1-1"),
+                new Description("What is the deadline for the report?")),
+            new Question(new GroupName("G01"), new LessonName("1-1"),
+                new Description("When is the consultation held?"))
         };
     }
 

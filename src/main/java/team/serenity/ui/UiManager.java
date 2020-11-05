@@ -44,6 +44,9 @@ public class UiManager implements Ui {
             this.mainWindow = new MainWindow(primaryStage, this.logic);
             this.mainWindow.show(); //This should be called before creating other UI parts
             this.mainWindow.fillInnerParts();
+            this.mainWindow.setUpAttButton();
+            this.mainWindow.setUpQnButton();
+            this.mainWindow.loadGroupButtons();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -68,7 +71,7 @@ public class UiManager implements Ui {
         String headerText,
         String contentText) {
         final Alert alert = new Alert(type);
-        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
+        alert.getDialogPane().getStylesheets().add("view/Serenity.css");
         alert.initOwner(owner);
         alert.setTitle(title);
         alert.setHeaderText(headerText);

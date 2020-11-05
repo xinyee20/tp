@@ -29,7 +29,7 @@ public class StudentName {
     public StudentName(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        this.fullName = name;
+        this.fullName = name.toUpperCase();
     }
 
     /**
@@ -50,7 +50,7 @@ public class StudentName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof StudentName // instanceof handles nulls
-            && fullName.equals(((StudentName) other).fullName)); // state check
+            && fullName.toUpperCase().equals(((StudentName) other).fullName.toUpperCase())); // state check
     }
 
     @Override

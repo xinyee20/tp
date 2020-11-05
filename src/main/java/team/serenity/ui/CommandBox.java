@@ -1,6 +1,5 @@
 package team.serenity.ui;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -14,10 +13,12 @@ import team.serenity.logic.parser.exceptions.ParseException;
  */
 public class CommandBox extends UiPart<Region> {
 
-    public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+
+    private String defaultColor = "F8F8FF";
+    private String errorColor = "#FFC107";
 
     @FXML
     private TextField commandTextField;
@@ -49,20 +50,16 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
-        this.commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        String textFillDefaultColor = String.format("-fx-text-fill: %s;", defaultColor);
+        this.commandTextField.setStyle(textFillDefaultColor);
     }
 
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = this.commandTextField.getStyleClass();
-
-        if (styleClass.contains(ERROR_STYLE_CLASS)) {
-            return;
-        }
-
-        styleClass.add(ERROR_STYLE_CLASS);
+        String textFillErrorColor = String.format("-fx-text-fill: %s;", errorColor);
+        this.commandTextField.setStyle(textFillErrorColor);
     }
 
     /**
