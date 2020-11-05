@@ -24,8 +24,8 @@ public class ViewLsnCommand extends Command {
         + ": Displays the details of the specified tutorial lesson of a specified tutorial group (case-insensitive) "
         + "which includes the lists of questions, attendance and participation scores of students.\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP "
-        + PREFIX_LSN + "LESSON\n"
+        + PREFIX_GRP + "GROUP_NAME "
+        + PREFIX_LSN + "LESSON_NAME\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G01 "
         + PREFIX_LSN + "1-1\n";

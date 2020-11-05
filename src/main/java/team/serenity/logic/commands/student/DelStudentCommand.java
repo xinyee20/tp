@@ -29,8 +29,8 @@ public class DelStudentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Deletes an existing student from the specified tutorial group. \n"
         + "Parameters (2 methods):\n"
-        + "1. " + PREFIX_GRP + "GROUP " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER\n"
-        + "2. INDEX (must be a positive integer) " + PREFIX_GRP + "GROUP "
+        + "1. " + PREFIX_GRP + "GROUP_NAME " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER\n"
+        + "2. INDEX (must be a positive integer) " + PREFIX_GRP + "GROUP_NAME "
         + "Examples:\n"
         + "1. " + COMMAND_WORD + " " + PREFIX_GRP + "G01 " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A\n"
         + "2. " + COMMAND_WORD + " 1 " + PREFIX_GRP + "G01";

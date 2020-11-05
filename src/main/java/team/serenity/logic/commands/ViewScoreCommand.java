@@ -19,7 +19,7 @@ public class ViewScoreCommand extends Command {
         + ": Displays the participation score sheet of all students in "
         + "the specified tutorial group (case-insensitive).\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP\n"
+        + PREFIX_GRP + "GROUP_NAME\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G01\n";
 

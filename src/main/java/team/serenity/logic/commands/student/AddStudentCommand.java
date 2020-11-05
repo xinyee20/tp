@@ -22,7 +22,7 @@ public class AddStudentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Adds a new student to a specified tutorial group.\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP "
+        + PREFIX_GRP + "GROUP_NAME "
         + PREFIX_NAME + "STUDENT_NAME "
         + PREFIX_MATRIC + "STUDENT_NUMBER\n"
         + "Example: " + COMMAND_WORD + " "

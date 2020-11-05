@@ -15,7 +15,7 @@ public class DelGrpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Deletes an existing tutorial group.\n"
         + "Parameter: "
-        + PREFIX_GRP + "GROUP\n"
+        + PREFIX_GRP + "GROUP_NAME\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G01\n";
 

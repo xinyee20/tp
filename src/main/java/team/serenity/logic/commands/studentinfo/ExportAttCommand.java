@@ -19,7 +19,7 @@ public class ExportAttCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Exports the attendance sheet of the specified tutorial group as a new excel file.\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP\n"
+        + PREFIX_GRP + "GROUP_NAME\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G01";
 

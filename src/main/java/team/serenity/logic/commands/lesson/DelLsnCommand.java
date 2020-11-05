@@ -21,8 +21,8 @@ public class DelLsnCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Deletes an existing tutorial lesson from the specified tutorial group.\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP "
-        + PREFIX_LSN + "LESSON\n"
+        + PREFIX_GRP + "GROUP_NAME "
+        + PREFIX_LSN + "LESSON_NAME\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GRP + "G01 "
         + PREFIX_LSN + "1-1";
