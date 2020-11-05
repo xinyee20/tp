@@ -27,7 +27,7 @@ class ViewGrpCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsViewGrpCommand() {
-        ViewGrpCommand expected = new ViewGrpCommand(new GroupContainsKeywordPredicate("g04"));
+        ViewGrpCommand expected = new ViewGrpCommand(new GroupContainsKeywordPredicate("G04"));
         assertParseSuccess(parser, " grp/ g04", expected);
         assertParseSuccess(parser, " grp/g04", expected);
     }

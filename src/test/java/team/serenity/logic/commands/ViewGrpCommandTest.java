@@ -39,8 +39,9 @@ class ViewGrpCommandTest {
     }
 
     private class ModelStubWithGroup extends ModelStub {
-        ObservableList<Group> groupList = FXCollections.observableList(Arrays.asList(new GroupBuilder().build()));
-        FilteredList<Group> filteredGroupList = new FilteredList<Group>(groupList);
+        private ObservableList<Group> groupList =
+                FXCollections.observableList(Arrays.asList(new GroupBuilder().build()));
+        private FilteredList<Group> filteredGroupList = new FilteredList<Group>(groupList);
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
@@ -54,13 +55,13 @@ class ViewGrpCommandTest {
 
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {
-            return ;
+            return;
         }
     }
 
     private class ModelStubWithNoGroup extends ModelStub {
-        ObservableList<Group> groupList = FXCollections.observableList(Arrays.asList());
-        FilteredList<Group> filteredGroupList = new FilteredList<Group>(groupList);
+        private ObservableList<Group> groupList = FXCollections.observableList(Arrays.asList());
+        private FilteredList<Group> filteredGroupList = new FilteredList<Group>(groupList);
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
@@ -74,7 +75,7 @@ class ViewGrpCommandTest {
 
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {
-            return ;
+            return;
         }
     }
 }
