@@ -787,7 +787,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-#### 4.3.3. Export participation scores as XLSX file: `exportscore`
+#### 4.3.4. Export participation scores as XLSX file: `exportscore`
 
 You can use this command to export the participation score sheet of a specific tutorial group as a new Excel file.
 
