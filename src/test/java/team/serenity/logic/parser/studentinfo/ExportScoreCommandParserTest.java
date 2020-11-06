@@ -1,4 +1,4 @@
-package team.serenity.logic.parser;
+package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
@@ -16,17 +16,17 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import team.serenity.logic.commands.DelGrpCommand;
+import team.serenity.logic.commands.studentinfo.ExportScoreCommand;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
 
-public class DelGrpCommandParserTest {
+public class ExportScoreCommandParserTest {
 
-    private DelGrpCommandParser parser = new DelGrpCommandParser();
+    private ExportScoreCommandParser parser = new ExportScoreCommandParser();
 
     @Test
-    public void parse_validGroupName_returnsDelGrpCommand() {
-        DelGrpCommand expectedCommand = new DelGrpCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_A));
+    public void parse_validGroupName_returnsExportScoreCommand() {
+        ExportScoreCommand expectedCommand = new ExportScoreCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_A));
         String userInput = GRP_DESC_GROUP_A;
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -34,7 +34,7 @@ public class DelGrpCommandParserTest {
 
     @Test
     public void parse_missingGroupName_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelGrpCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportScoreCommand.MESSAGE_USAGE);
         String userInput = PREAMBLE_WHITESPACE + INVALID_GROUP_WITHOUT_NAME;
 
         assertParseFailure(parser, userInput, expectedMessage);
