@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.logic.commands.studentinfo.SetScoreCommand;
+import team.serenity.logic.commands.studentinfo.EditScoreCommand;
 import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
@@ -19,21 +19,21 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
 
 /**
- * Parses input arguments and creates a new SetScoreCommand object.
+ * Parses input arguments and creates a new EditScoreCommand object.
  * Current support:
  * setscore name/NAME id/STUDENT_NUMBER score/SCORE
  * setscore INDEX score/SCORE
  */
-public class SetScoreCommandParser implements Parser<SetScoreCommand> {
+public class EditScoreCommandParser implements Parser<EditScoreCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SetScoreCommand and
-     * returns a SetScoreCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditScoreCommand and
+     * returns a EditScoreCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public SetScoreCommand parse(String userInput) throws ParseException {
+    public EditScoreCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
                 PREFIX_NAME, PREFIX_MATRIC, PREFIX_SET_SCORE);
 
@@ -44,20 +44,20 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
         int score;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_SET_SCORE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && !argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
         }
 
         if (!argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()
                 && argMultimap.getPreamble().length() != 0) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
@@ -65,11 +65,11 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
             studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
             score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
-            return new SetScoreCommand(student.get(), score);
+            return new EditScoreCommand(student.get(), score);
         } else {
             index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
             score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
-            return new SetScoreCommand(index, score);
+            return new EditScoreCommand(index, score);
         }
     }
 
