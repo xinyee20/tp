@@ -26,12 +26,12 @@ import team.serenity.logic.commands.question.ViewQnCommand;
 import team.serenity.logic.commands.student.AddStudentCommand;
 import team.serenity.logic.commands.student.DelStudentCommand;
 import team.serenity.logic.commands.studentinfo.AddScoreCommand;
+import team.serenity.logic.commands.studentinfo.EditScoreCommand;
 import team.serenity.logic.commands.studentinfo.ExportAttCommand;
 import team.serenity.logic.commands.studentinfo.ExportScoreCommand;
 import team.serenity.logic.commands.studentinfo.FlagAttCommand;
 import team.serenity.logic.commands.studentinfo.MarkAbsentCommand;
 import team.serenity.logic.commands.studentinfo.MarkPresentCommand;
-import team.serenity.logic.commands.studentinfo.SetScoreCommand;
 import team.serenity.logic.commands.studentinfo.SubScoreCommand;
 import team.serenity.logic.commands.studentinfo.UnflagAttCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
@@ -45,12 +45,12 @@ import team.serenity.logic.parser.question.FindQnCommandParser;
 import team.serenity.logic.parser.student.AddStudentCommandParser;
 import team.serenity.logic.parser.student.DelStudentCommandParser;
 import team.serenity.logic.parser.studentinfo.AddScoreCommandParser;
+import team.serenity.logic.parser.studentinfo.EditScoreCommandParser;
 import team.serenity.logic.parser.studentinfo.ExportAttCommandParser;
 import team.serenity.logic.parser.studentinfo.ExportScoreCommandParser;
 import team.serenity.logic.parser.studentinfo.FlagAttCommandParser;
 import team.serenity.logic.parser.studentinfo.MarkAbsentCommandParser;
 import team.serenity.logic.parser.studentinfo.MarkPresentCommandParser;
-import team.serenity.logic.parser.studentinfo.SetScoreCommandParser;
 import team.serenity.logic.parser.studentinfo.SubScoreCommandParser;
 import team.serenity.logic.parser.studentinfo.UnflagAttCommandParser;
 
@@ -119,8 +119,8 @@ public class SerenityParser {
         case ExportAttCommand.COMMAND_WORD:
             return new ExportAttCommandParser().parse(arguments);
 
-        case SetScoreCommand.COMMAND_WORD:
-            return new SetScoreCommandParser().parse(arguments);
+        case EditScoreCommand.COMMAND_WORD:
+            return new EditScoreCommandParser().parse(arguments);
 
         case SubScoreCommand.COMMAND_WORD:
             return new SubScoreCommandParser().parse(arguments);

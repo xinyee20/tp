@@ -1,24 +1,38 @@
 @startuml
 !include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor STORAGE_COLOR
-skinparam classBackgroundColor STORAGE_COLOR
 
-Interface Storage <<Interface>>
-Interface UserPrefsStorage <<Interface>>
-Interface AddressBookStorage <<Interface>>
+hide member
 
+skinparam {
+arrowThickness 1.1
+arrowColor MediumAquaMarine
+classBackgroundColor #adcdff
+classBorderColor DeepSkyBlue
+classBackgroundColor<<HiddenOutside>> #FFFFFF
+classBorderColor<<HiddenOutside>> #FFFFFF
+classFontColor<<HiddenOutside>> #FFFFFF
+classStereotypeFontColor<<HiddenOutside>> #FFFFFF
+}
+
+Class hideOutside <<HiddenOutside>>
+
+Package "Storage\t\t\t" <<Rectangle>>  {
 Class StorageManager
+Interface Storage <<Interface>>
+Interface SerenityStorage <<Interface>>
+Interface UserPrefStorage <<Interface>>
+Interface QuestionStorage <<Interface>>
 Class JsonUserPrefsStorage
-Class JsonAddressBookStorage
+Class JsonSerenityStorage
+Class JsonQuestionStorage
+}
 
-StorageManager .left.|> Storage
-StorageManager o-right-> UserPrefsStorage
-StorageManager o--> AddressBookStorage
-
-JsonUserPrefsStorage .left.|> UserPrefsStorage
-JsonAddressBookStorage .left.|> AddressBookStorage
-JsonAddressBookStorage .down.> JsonSerializableAddressBookStorage
-JsonSerializableAddressBookStorage .right.> JsonSerializablePerson
-JsonSerializablePerson .right.> JsonAdaptedTag
+hideOutside  ..> Storage
+StorageManager .u.|> Storage
+StorageManager o-r-> SerenityStorage
+StorageManager o-l-> UserPrefStorage
+StorageManager o-d-> QuestionStorage
+JsonUserPrefsStorage .u.|> UserPrefStorage
+JsonSerenityStorage .u.|> SerenityStorage
+JsonQuestionStorage .u.|> QuestionStorage
 @enduml

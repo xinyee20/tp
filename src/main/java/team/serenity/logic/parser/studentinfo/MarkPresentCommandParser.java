@@ -14,6 +14,8 @@ import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new MarkPresentCommand object.
@@ -37,8 +39,8 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_MATRIC);
 
         Index index;
-        String studentName;
-        String studentNumber;
+        StudentName studentName;
+        StudentNumber studentNumber;
         Optional<Student> student;
         Optional<String> keyToAll = Optional.ofNullable(argMultimap.getPreamble());
 
@@ -47,12 +49,20 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+        }
+
         try {
             if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
 
                 // If single student specified, get student
                 studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
+                studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
                 student = Optional.ofNullable(new Student(studentName, studentNumber));
 
                 return new MarkPresentCommand(student.get());
@@ -65,12 +75,16 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
             } else {
                 index = SerenityParserUtil.parseIndex(keyToAll.get());
                 return new MarkPresentCommand(index);
+
             }
-
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+        } catch (Exception e) {
+            if (e instanceof ParseException) {
+                throw e;
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MarkPresentCommand.MESSAGE_USAGE));
+            }
         }
-
     }
 
 }

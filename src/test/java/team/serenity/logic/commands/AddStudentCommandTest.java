@@ -20,6 +20,8 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
 import team.serenity.testutil.GroupPredicateStub;
@@ -29,9 +31,10 @@ public class AddStudentCommandTest {
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand("", "", null));
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null, "", new GroupPredicateStub()));
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand("", null, new GroupPredicateStub()));
+        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null,
+            new StudentNumber("A1234567A"), new GroupPredicateStub()));
+        assertThrows(NullPointerException.class, () -> new AddStudentCommand(new StudentName("John"),
+            null, new GroupPredicateStub()));
         assertThrows(NullPointerException.class, () -> new AddStudentCommand(null, null, null));
     }
 
@@ -39,7 +42,7 @@ public class AddStudentCommandTest {
     public void execute_missingGroup() throws Exception {
         ModelStubWithoutGroup modelStub = new ModelStubWithoutGroup();
         Predicate<Group> pred = new GroupPredicateStub();
-        AddStudentCommand command = new AddStudentCommand("Jon", "A1234567U", pred);
+        AddStudentCommand command = new AddStudentCommand(new StudentName("Jon"), new StudentNumber("A1234567U"), pred);
 
         assertThrows(CommandException.class,
             MESSAGE_GROUP_EMPTY, () -> command.execute(modelStub));
@@ -58,7 +61,8 @@ public class AddStudentCommandTest {
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
         Predicate<Group> pred = new GroupPredicateStub();
-        AddStudentCommand command = new AddStudentCommand("Freddie", "A0000000U", pred);
+        AddStudentCommand command = new AddStudentCommand(new StudentName("Freddie"),
+            new StudentNumber("A0000000U"), pred);
         assertThrows(CommandException.class,
             MESSAGE_DUPLICATE_STUDENT, () -> command.execute(modelStub));
     }
@@ -71,14 +75,16 @@ public class AddStudentCommandTest {
                 new Student("June", "A0101011U")
             ).withClasses("4-2", "5-1", "5-2", "6-1")
             .build();
+        StudentName john = new StudentName("John");
+        StudentNumber matric = new StudentNumber("A1234567U");
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
         Predicate<Group> pred = new GroupPredicateStub();
-        AddStudentCommand command = new AddStudentCommand("John", "A1234567U", pred);
+        AddStudentCommand command = new AddStudentCommand(john, matric, pred);
         CommandResult result = command.execute(modelStub);
-        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_SUCCESS, "John", "A1234567U", "G07"),
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_SUCCESS, john, matric, "G07"),
                 CommandResult.UiAction.REFRESH_TABLE);
         assertTrue(result.equals(expectedResult));
     }
@@ -96,20 +102,21 @@ public class AddStudentCommandTest {
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubWithGroup modelStub = new ModelStubWithGroup(filteredList);
         Predicate<Group> pred = new GroupPredicateStub();
-        AddStudentCommand command = new AddStudentCommand("Freddie", "A1234567U", pred);
+        AddStudentCommand command = new AddStudentCommand(new StudentName("Freddie"),
+            new StudentNumber("A1234567U"), pred);
         assertDoesNotThrow(() -> command.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        String studentName = "John";
-        String studentId = "e1234567";
+        StudentName studentName = new StudentName("John");
+        StudentNumber studentId = new StudentNumber("A1234567A");
         Predicate<Group> pred = new GroupPredicateStubWithGroupName("G04");
         AddStudentCommand first = new AddStudentCommand(studentName, studentId, pred);
         AddStudentCommand second = new AddStudentCommand(studentName,
             studentId, pred);
-        AddStudentCommand differentStudentName = new AddStudentCommand("J", studentId, pred);
-        AddStudentCommand differentStudentId = new AddStudentCommand(studentName, "e111", pred);
+        AddStudentCommand differentStudentName = new AddStudentCommand(new StudentName("Wayne"), studentId, pred);
+        AddStudentCommand differentStudentId = new AddStudentCommand(studentName, new StudentNumber("A1234567B"), pred);
         AddStudentCommand differentPredicate = new AddStudentCommand(studentName, studentId,
             new GroupPredicateStubWithGroupName("G05"));
         // same object -> returns true

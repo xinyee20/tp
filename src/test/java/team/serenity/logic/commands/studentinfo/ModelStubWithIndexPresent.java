@@ -1,5 +1,8 @@
 package team.serenity.logic.commands.studentinfo;
 
+import static team.serenity.testutil.TypicalStudent.AARON;
+import static team.serenity.testutil.TypicalStudentInfo.AARON_PRESENT_INFO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +14,6 @@ import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
-import team.serenity.model.group.student.Student;
-import team.serenity.model.group.studentinfo.Attendance;
-import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
@@ -21,7 +21,7 @@ import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
 
 /**
- * A Model stub containing an absent student
+ * A Model stub containing a present student
  */
 class ModelStubWithIndexPresent extends ModelStub {
     private Group uniqueGroup;
@@ -31,7 +31,7 @@ class ModelStubWithIndexPresent extends ModelStub {
     public ObservableList<Group> getFilteredGroupList() {
         List<Group> grpList = new ArrayList<>();
         this.uniqueGroup = new GroupBuilder().withName("G01")
-                .withStudents(new Student("Aaron Tan", "A0123456U"))
+                .withStudents(AARON)
                 .withClasses("1-1").build();
         grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
@@ -44,9 +44,7 @@ class ModelStubWithIndexPresent extends ModelStub {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
-                .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U"),
-                        new Participation(0),
-                        new Attendance(true)))
+                .withStudentInfos(AARON_PRESENT_INFO)
                 .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();

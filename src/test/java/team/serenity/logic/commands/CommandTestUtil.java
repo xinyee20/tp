@@ -49,6 +49,9 @@ public class CommandTestUtil {
     public static final String VALID_ADD = "1";
     public static final String VALID_SUB = "1";
 
+    public static final String NON_INTEGER = "A";
+    public static final String NEGATIVE_INTEGER = "-1";
+
     public static final String GRP_DESC_GROUP_G01 = " " + PREFIX_GRP + VALID_GROUP_NAME_G01;
     public static final String GRP_DESC_GROUP_G02 = " " + PREFIX_GRP + VALID_GROUP_NAME_G02;
     public static final String GRP_DESC_GROUP_G04 = " " + PREFIX_GRP + VALID_GROUP_NAME_G04;
@@ -61,6 +64,8 @@ public class CommandTestUtil {
     public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_DESC_B;
     public static final String STUDENT_DESC_AARON =
             " " + PREFIX_NAME + VALID_STUDENT_NAME_AARON + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_AARON;
+    public static final String STUDENT_NAME_DESC = " " + PREFIX_NAME + VALID_STUDENT_NAME_AARON;
+    public static final String STUDENT_NUMBER_DESC = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_AARON;
     public static final String SET_SCORE_DESC = " " + PREFIX_SET_SCORE + VALID_SCORE;
     public static final String ADD_SCORE_DESC = " " + PREFIX_ADD_SCORE + VALID_ADD;
     public static final String SUB_SCORE_DESC = " " + PREFIX_SUBTRACT_SCORE + VALID_SUB;
@@ -78,12 +83,16 @@ public class CommandTestUtil {
     public static final String INVALID_INDEX = "A";
     public static final String INVALID_INDEX_NEGATIVE = "-1";
     public static final String INVALID_INDEX_ZERO = "0";
-    public static final String INVALID_SET_SCORE = " " + PREFIX_SET_SCORE + "A";
-    public static final String INVALID_ADD_SCORE = " " + PREFIX_ADD_SCORE + "A";
-    public static final String INVALID_SUB_SCORE = " " + PREFIX_SUBTRACT_SCORE + "A";
+    public static final String NON_INTEGER_SET_SCORE = " " + PREFIX_SET_SCORE + NON_INTEGER;
+    public static final String NEG_NUMBER_SET_SCORE = " " + PREFIX_SET_SCORE + NEGATIVE_INTEGER;
+    public static final String NON_INTEGER_ADD_SCORE = " " + PREFIX_ADD_SCORE + "A";
+    public static final String NEG_NUMBER_ADD_SCORE = " " + PREFIX_ADD_SCORE + NEGATIVE_INTEGER;
+    public static final String NON_INTEGER_SUB_SCORE = " " + PREFIX_SUBTRACT_SCORE + "A";
+    public static final String NEG_NUMBER_SUB_SCORE = " " + PREFIX_SUBTRACT_SCORE + NEGATIVE_INTEGER;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String EMPTY_PREAMBLE = "";
 
     public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_A;
     public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_B;

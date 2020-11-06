@@ -3,7 +3,6 @@ package team.serenity.commons.util;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -20,6 +19,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.commons.core.sorter.LessonSorter;
+import team.serenity.commons.core.sorter.StudentInfoSorter;
+import team.serenity.commons.core.sorter.StudentSorter;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
@@ -208,84 +210,6 @@ public class XlsxUtil {
         List<StudentInfo> studentInfoList = new ArrayList<>(studentsInfo);
         studentInfoList.sort(new StudentInfoSorter());
         return new LinkedHashSet<>(studentInfoList);
-    }
-
-    private static class LessonSorter implements Comparator<Lesson> {
-
-        @Override
-        public int compare(Lesson lessonOne, Lesson lessonTwo) {
-            String lesOne = lessonOne.getLessonName().lessonName;
-            int lesOneLen = lesOne.length();
-            String lesTwo = lessonTwo.getLessonName().lessonName;
-            int lesTwoLen = lesTwo.length();
-            int minLength = Math.min(lesOneLen, lesTwoLen);
-            for (int i = 0; i < minLength; i++) {
-                int lesOneChar = lesOne.charAt(i);
-                int lesTwoChar = lesTwo.charAt(i);
-
-                if (lesOneChar != lesTwoChar) {
-                    return lesOneChar - lesTwoChar;
-                }
-            }
-
-            if (lesOneLen != lesTwoLen) {
-                return lesOneLen - lesTwoLen;
-            } else {
-                return 0;
-            }
-        }
-    }
-
-    private static class StudentSorter implements Comparator<Student> {
-
-        @Override
-        public int compare(Student studentOne, Student studentTwo) {
-            String sOne = studentOne.getStudentName().fullName;
-            int sOneLen = sOne.length();
-            String sTwo = studentTwo.getStudentName().fullName;
-            int sTwoLen = sTwo.length();
-            int minLength = Math.min(sOneLen, sTwoLen);
-            for (int i = 0; i < minLength; i++) {
-                int lesOneChar = sOne.charAt(i);
-                int lesTwoChar = sTwo.charAt(i);
-
-                if (lesOneChar != lesTwoChar) {
-                    return lesOneChar - lesTwoChar;
-                }
-            }
-
-            if (sOneLen != sTwoLen) {
-                return sOneLen - sTwoLen;
-            } else {
-                return 0;
-            }
-        }
-    }
-
-    private static class StudentInfoSorter implements Comparator<StudentInfo> {
-
-        @Override
-        public int compare(StudentInfo studentInfoOne, StudentInfo studentInfoTwo) {
-            String infoOne = studentInfoOne.getStudent().getStudentName().fullName;
-            int infoOneLen = infoOne.length();
-            String infoTwo = studentInfoTwo.getStudent().getStudentName().fullName;
-            int infoTwoLen = infoTwo.length();
-            int minLength = Math.min(infoOneLen, infoTwoLen);
-            for (int i = 0; i < minLength; i++) {
-                int infoOneChar = infoOne.charAt(i);
-                int infoTwoChar = infoTwo.charAt(i);
-
-                if (infoOneChar != infoTwoChar) {
-                    return infoOneChar - infoTwoChar;
-                }
-            }
-
-            if (infoOneLen != infoTwoLen) {
-                return infoOneLen - infoTwoLen;
-            } else {
-                return 0;
-            }
-        }
     }
 
     /**

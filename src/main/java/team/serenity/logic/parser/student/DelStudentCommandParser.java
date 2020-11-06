@@ -16,6 +16,8 @@ import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new DelStudentCommand object.
@@ -53,14 +55,13 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
             String[] studentNameArray = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
             String[] studentIdArray = argMultimap.getValue(PREFIX_MATRIC).get().split("\\s+");
 
-            String studentName = String.join(" ", studentNameArray);
-            String studentId = studentIdArray[0];
+            String name = String.join(" ", studentNameArray);
+            String matric = studentIdArray[0];
             String grpName = grpKeywordArray[0];
 
-            studentName = SerenityParserUtil.parseStudentName(studentName);
-            studentId = SerenityParserUtil.parseStudentID(studentId);
+            StudentName studentName = SerenityParserUtil.parseStudentName(name);
+            StudentNumber studentId = SerenityParserUtil.parseStudentNumber(matric);
             grpName = SerenityParserUtil.parseGroupName(grpName).toString();
-
             return new DelStudentCommand(studentName, studentId, new GroupContainsKeywordPredicate(grpName));
 
         } else {
