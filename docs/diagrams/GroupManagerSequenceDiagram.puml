@@ -1,0 +1,36 @@
+@startuml
+skinparam sequence {
+ArrowColor DeepSkyBlue
+ParticipantBorderColor DeepSkyBlue
+ParticipantBackgroundColor DodgerBlue
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+}
+hide members
+hide circle
+skinparam shadowing false
+
+participant ":DelGrpCommand" as DelGrpCommand #adcdff
+participant ":ModelManager" as ModelManager #adcdff
+participant ":GroupManager" as GroupManager #adcdff
+participant ":CommandResult" as CommandResult #adcdff
+
+
+-> DelGrpCommand: execute(m)
+activate DelGrpCommand
+DelGrpCommand -> ModelManager : deleteGroup(group)
+activate ModelManager
+ModelManager -> GroupManager : deleteGroup(group)
+activate GroupManager #FFBBBB
+return
+return
+DelGrpCommand -> CommandResult
+activate CommandResult
+return
+return
+deactivate GroupManager
+deactivate ModelManager
+
+deactivate DelGrpCommand
+@enduml
