@@ -74,6 +74,7 @@ public class CommandTestUtil {
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
     public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_AARON;
     public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME_AARON;
+    public static final String INVALID_PREFIX = "a/";
     public static final String INVALID_INDEX = "A";
     public static final String INVALID_INDEX_NEGATIVE = "-1";
     public static final String INVALID_INDEX_ZERO = "0";
@@ -143,19 +144,9 @@ public class CommandTestUtil {
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
      * {@code expectedMessage}.
      */
-    public static void assertQuestionViewsQuestionTabCommandSuccess(Command command, Model actualModel,
-                                                                    String expectedMessage, Model expectedModel) {
+    public static void assertQuestionCommandSuccess(Command command, Model actualModel,
+                                                    String expectedMessage, Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandResult.UiAction.VIEW_QN);
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
-    }
-
-    /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
-     * {@code expectedMessage}.
-     */
-    public static void assertQuestionCommandSuccess(Command command, Model actualModel, String expectedMessage,
-                                                    Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -165,22 +156,6 @@ public class CommandTestUtil {
      * selected question in {@code actualModel} remain unchanged
      */
     public static void assertQuestionCommandFailure(Command command, Model actualModel, String expectedMessage) {
-        // we are unable to defensively copy the model for comparison later, so we can
-        // only do so by copying its components.
-        QuestionManager expectedQuestionManager = new QuestionManager(actualModel.getQuestionManager());
-        List<Question> expectedFilteredList = new ArrayList<>(actualModel.getFilteredQuestionList());
-
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedQuestionManager, actualModel.getQuestionManager());
-        assertEquals(expectedFilteredList, actualModel.getFilteredQuestionList());
-    }
-
-    /**
-     * Executes the given {@code command}, confirms that <br> - a {@code CommandException} is thrown <br> - the
-     * CommandException message matches {@code expectedMessage} <br> - the question manager, filtered question list and
-     * selected question in {@code actualModel} remain unchanged
-     */
-    public static void assertDelQnCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         QuestionManager expectedQuestionManager = new QuestionManager(actualModel.getQuestionManager());

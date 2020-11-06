@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import team.serenity.model.group.GroupName;
-import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
@@ -28,10 +26,9 @@ public class TypicalQuestion {
     // Details for edit question command
     public static final String VALID_QUESTION_GROUP = "G02";
     public static final String VALID_QUESTION_LESSON = "1-2";
-    public static final String VALID_QUESTION_DESC = "Where to upload the submissions?";
-    public static final Question QUESTION_EDIT = new Question(new GroupName(VALID_QUESTION_GROUP),
-            new LessonName(VALID_QUESTION_LESSON),
-            new Description(VALID_QUESTION_DESC));
+    public static final String VALID_QUESTION_DESC = "Where do we upload the submissions?";
+    public static final Question QUESTION_EDIT = new QuestionBuilder().withGroupName(VALID_QUESTION_GROUP)
+        .withLessonName(VALID_QUESTION_LESSON).withDescription(VALID_QUESTION_DESC).build();
 
     private TypicalQuestion() {
     } // prevents instantiation

@@ -8,9 +8,11 @@ import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX_NEGATIVE;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX_ZERO;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_LESSON_NAME_TEN;
+import static team.serenity.logic.commands.CommandTestUtil.INVALID_PREFIX;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_QN_DESC;
 import static team.serenity.logic.commands.CommandTestUtil.LESSON_DESC_LESSON_1_1;
 import static team.serenity.logic.commands.CommandTestUtil.LESSON_DESC_LESSON_1_2;
+import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static team.serenity.logic.commands.CommandTestUtil.QN_DESC_GROUP_A;
 import static team.serenity.logic.commands.CommandTestUtil.QN_DESC_GROUP_B;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_G01;
@@ -66,10 +68,10 @@ class EditQnCommandParserTest {
         assertParseFailure(parser, INVALID_INDEX_ZERO + QN_DESC_GROUP_A, expectedMessage);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, VALID_INDEX + " some random string", expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + PREAMBLE_NON_EMPTY, expectedMessage);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, VALID_INDEX + " i/ string", expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + INVALID_PREFIX + VALID_QN_DESC_A, expectedMessage);
     }
 
     @Test
@@ -185,6 +187,5 @@ class EditQnCommandParserTest {
         expectedCommand = new EditQnCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
 
 }

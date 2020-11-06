@@ -5,10 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import team.serenity.commons.core.index.Index;
-import team.serenity.model.Model;
-import team.serenity.model.group.question.Question;
-
 /**
  * A utility class for test cases.
  */
@@ -32,24 +28,4 @@ public class TestUtil {
         return SANDBOX_FOLDER.resolve(fileName);
     }
 
-    /**
-     * Returns the middle index of the question in the {@code model}'s question list.
-     */
-    public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredQuestionList().size() / 2);
-    }
-
-    /**
-     * Returns the last index of the question in the {@code model}'s question list.
-     */
-    public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredQuestionList().size());
-    }
-
-    /**
-     * Returns the question in the {@code model}'s question list at {@code index}.
-     */
-    public static Question getQuestion(Model model, Index index) {
-        return model.getFilteredQuestionList().get(index.getZeroBased());
-    }
 }
