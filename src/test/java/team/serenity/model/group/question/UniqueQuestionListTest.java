@@ -1,5 +1,6 @@
 package team.serenity.model.group.question;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -7,10 +8,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_C;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +28,53 @@ import team.serenity.model.util.UniqueList;
 class UniqueQuestionListTest {
 
     private final UniqueList<Question> uniqueQuestionList = new UniqueQuestionList();
+
+    @Test
+    public void test_stream() {
+        Stream<Question> expected = Stream.empty();
+        assertArrayEquals(expected.toArray(), this.uniqueQuestionList.stream().toArray());
+    }
+
+    @Test
+    public void test_sort() {
+        Comparator<Question> questionComparator = new Comparator<Question>() {
+            @Override
+            public int compare(Question o1, Question o2) {
+                return o1.getDescription().description.compareTo(o2.getDescription().description);
+            }
+        };
+        List<Question> questionList = Arrays.asList(QUESTION_A, QUESTION_B, QUESTION_C);
+        List<Question> expectedList = Arrays.asList(QUESTION_C, QUESTION_B, QUESTION_A);
+        this.uniqueQuestionList.setElementsWithList(questionList);
+        this.uniqueQuestionList.sort(questionComparator);
+        assertArrayEquals(expectedList.toArray(), this.uniqueQuestionList.getList().toArray());
+    }
+
+    public static boolean equalIterators(Iterator i1, Iterator i2) {
+        if (i1 == i2) {
+            return true;
+        }
+        while (i1.hasNext()) {
+            if (!i2.hasNext()) {
+                return false;
+            }
+            if (!Objects.equals(i1.next(), i2.next())) {
+                return false;
+            }
+        }
+        if (i2.hasNext()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Test
+    public void test_iterator() {
+        Iterator<Question> expectedIterator = Arrays.asList(QUESTION_A, QUESTION_B).iterator();
+        List<Question> questionList = Arrays.asList(QUESTION_A, QUESTION_B);
+        this.uniqueQuestionList.setElementsWithList(questionList);
+        assertTrue(equalIterators(expectedIterator, this.uniqueQuestionList.iterator()));
+    }
 
     @Test
     public void contains_nullQuestion_throwsNullPointerException() {
@@ -148,7 +202,6 @@ class UniqueQuestionListTest {
         expectedUniqueQuestionList.add(QUESTION_A);
         this.uniqueQuestionList.add(QUESTION_A);
         assertEquals(uniqueQuestionList, expectedUniqueQuestionList);
-
     }
 
     @Test

@@ -2,8 +2,12 @@ package team.serenity.testutil.question;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.managers.QuestionManager;
@@ -22,6 +26,14 @@ public class TypicalQuestion {
 
     public static final Question QUESTION_C = new QuestionBuilder().withGroupName("G01")
         .withLessonName("1-2").withDescription("How is the grading criteria like?").build();
+
+    // Details for edit question command
+    public static final String VALID_QUESTION_GROUP = "G02";
+    public static final String VALID_QUESTION_LESSON = "1-2";
+    public static final String VALID_QUESTION_DESC = "Where to upload the submissions?";
+    public static final Question QUESTION_EDIT = new Question(new GroupName(VALID_QUESTION_GROUP),
+            new LessonName(VALID_QUESTION_LESSON),
+            new Description(VALID_QUESTION_DESC));
 
     private TypicalQuestion() {
     } // prevents instantiation

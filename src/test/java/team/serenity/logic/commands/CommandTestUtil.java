@@ -1,6 +1,7 @@
 package team.serenity.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
@@ -13,6 +14,7 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
 import static team.serenity.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import team.serenity.commons.core.index.Index;
@@ -20,6 +22,7 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.commands.question.EditQnCommand;
 import team.serenity.model.Model;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.question.QuestionContainsKeywordPredicate;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.testutil.question.EditQuestionDescriptorBuilder;
 
@@ -30,6 +33,7 @@ public class CommandTestUtil {
 
     // Valid descriptions for Serenity
     public static final String VALID_GROUP_NAME_G01 = "G01";
+    public static final String VALID_GROUP_NAME_G02 = "G02";
     public static final String VALID_GROUP_NAME_G04 = "G04";
     public static final String VALID_GROUP_NAME_G05 = "G05";
     public static final String VALID_LESSON_NAME_1_1 = "1-1";
@@ -187,17 +191,15 @@ public class CommandTestUtil {
      * in the {@code model}'s question list.
      */
     public static void showQuestionAtIndex(Model model, Index targetIndex) {
-        // TODO: Wen Jin to complete when implementing view/find question
-        /*
-        FOR REFERENCE (AB3)
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredQuestionList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Question question = model.getFilteredQuestionList().get(targetIndex.getZeroBased());
+        final String[] splitWord = question.getDescription().description.split("\\s+");
+        QuestionContainsKeywordPredicate predicate =
+                new QuestionContainsKeywordPredicate(Arrays.asList(splitWord[splitWord.length - 1]));
+        model.updateFilteredQuestionList(predicate);
 
-        assertEquals(1, model.getFilteredPersonList().size());
-         */
+        assertEquals(1, model.getFilteredQuestionList().size());
     }
 
 }
