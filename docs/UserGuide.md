@@ -726,8 +726,6 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-<p align="center"><i>Figure 4.3.2.1 Command for <code>editscore</code> command.</i></p>
-
 <p align="center"><img src="images/participation/editscore_result.png" alt="Result upon successful execution of command"></p>
 
 <p align="center"><i>Figure 4.3.2.1 Screen displayed when the command is successfully executed.</i></p>
@@ -830,7 +828,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The question will be added to the list of questions.
 
-<p align="center"><img src="images/addqn/addqn_result.png" alt="Result upon successful execution of command"></p>
+<p align="center"><img src="images/addqn/addqn_result.png" alt="List of questions after command is executed."></p>
 
 <p align="center"><i>Figure 4.4.1.1 Screen displayed when the command is successfully executed.</i></p>
 
@@ -1082,7 +1080,7 @@ Outcome:
 
 <p align="center"><img src="images/flaggedatt2.png" alt="User interface for viewing flagged attendance."></p>
 
-<p align="center"><i>Figure 4.5.5.1 User interface showing the layout of the flagged attendance tab</i></p>
+<p align="center"><i>Figure 4.5.5.1 User interface showing the layout of the flagged attendance tab.</i></p>
 
 #### 4.5.6. View pending questions: `viewqn`
 
