@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static team.serenity.logic.commands.CommandTestUtil.assertDelQnCommandFailure;
+import static team.serenity.logic.commands.CommandTestUtil.assertQuestionCommandFailure;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -53,7 +53,7 @@ class DelQnCommandTest {
         DelQnCommand delQnCommand = new DelQnCommand(outOfBoundIndex);
         String expectedMessage = MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX;
 
-        assertDelQnCommandFailure(delQnCommand, model, expectedMessage);
+        assertQuestionCommandFailure(delQnCommand, model, expectedMessage);
     }
 
     @Test

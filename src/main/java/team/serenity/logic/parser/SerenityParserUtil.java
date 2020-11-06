@@ -3,7 +3,6 @@ package team.serenity.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 
 import java.io.IOException;
 
@@ -12,7 +11,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.commons.util.StringUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupName;
@@ -148,14 +146,9 @@ public class SerenityParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         Integer index = Integer.parseInt(trimmedIndex);
-        try {
-            index = Integer.parseInt(trimmedIndex);
-            if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-                throw new ParseException(MESSAGE_INVALID_INDEX);
-            }
-            return Index.fromOneBased(index);
-        } catch (Exception e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, index));
+        if (index < 1) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
         }
+        return Index.fromOneBased(index);
     }
 }
