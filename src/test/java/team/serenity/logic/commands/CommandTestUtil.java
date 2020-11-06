@@ -75,6 +75,8 @@ public class CommandTestUtil {
     public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_AARON;
     public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME_AARON;
     public static final String INVALID_INDEX = "A";
+    public static final String INVALID_INDEX_NEGATIVE = "-1";
+    public static final String INVALID_INDEX_ZERO = "0";
     public static final String INVALID_SET_SCORE = " " + PREFIX_SET_SCORE + "A";
     public static final String INVALID_ADD_SCORE = " " + PREFIX_ADD_SCORE + "A";
     public static final String INVALID_SUB_SCORE = " " + PREFIX_SUBTRACT_SCORE + "A";
