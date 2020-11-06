@@ -18,18 +18,18 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.logic.commands.studentinfo.SetScoreCommand;
+import team.serenity.logic.commands.studentinfo.EditScoreCommand;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.testutil.StudentBuilder;
 
-class SetScoreCommandParserTest {
+class EditScoreCommandParserTest {
 
-    private SetScoreCommandParser parser = new SetScoreCommandParser();
+    private EditScoreCommandParser parser = new EditScoreCommandParser();
 
     @Test
     public void parse_missingStudentName_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE);
         String userInput = PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NAME + " " + SET_SCORE_DESC;
 
         assertParseFailure(parser, userInput, expectedMessage);
@@ -37,7 +37,7 @@ class SetScoreCommandParserTest {
 
     @Test
     public void parse_missingStudentId_throwsCommandException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE);
         String userInput = PREAMBLE_WHITESPACE + INVALID_STUDENT_WITHOUT_NUMBER + " " + SET_SCORE_DESC;
 
         assertParseFailure(parser, userInput, expectedMessage);
@@ -45,7 +45,7 @@ class SetScoreCommandParserTest {
 
     @Test
     public void parse_missingScore_throwsCommandException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC_AARON, expectedMessage);
     }
@@ -72,7 +72,7 @@ class SetScoreCommandParserTest {
 
     @Test
     public void parse_studentAndIndex_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, VALID_INDEX + STUDENT_DESC_AARON + SET_SCORE_DESC , expectedMessage);
     }
@@ -97,7 +97,7 @@ class SetScoreCommandParserTest {
         int score = Integer.parseInt(VALID_SCORE);
         String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + SET_SCORE_DESC;
 
-        assertParseSuccess(parser, userInput, new SetScoreCommand(student, score));
+        assertParseSuccess(parser, userInput, new EditScoreCommand(student, score));
     }
 
     @Test
@@ -105,6 +105,6 @@ class SetScoreCommandParserTest {
         Index index = Index.fromOneBased(Integer.parseInt(VALID_INDEX));
         int score = Integer.parseInt(VALID_SCORE);
 
-        assertParseSuccess(parser, VALID_INDEX + " " + SET_SCORE_DESC, new SetScoreCommand(index, score));
+        assertParseSuccess(parser, VALID_INDEX + " " + SET_SCORE_DESC, new EditScoreCommand(index, score));
     }
 }

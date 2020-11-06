@@ -17,6 +17,8 @@ import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new SubScoreCommand object.
@@ -38,8 +40,8 @@ public class SubScoreCommandParser implements Parser<SubScoreCommand> {
                 PREFIX_NAME, PREFIX_MATRIC, PREFIX_SUBTRACT_SCORE);
 
         Index index;
-        String studentName;
-        String studentNumber;
+        StudentName studentName;
+        StudentNumber studentNumber;
         Optional<Student> student;
         int scoreToSub;
 
@@ -71,7 +73,7 @@ public class SubScoreCommandParser implements Parser<SubScoreCommand> {
         try {
             if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
                 studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-                studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
+                studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
                 student = Optional.ofNullable(new Student(studentName, studentNumber));
                 scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
                 return new SubScoreCommand(student.get(), scoreToSub);

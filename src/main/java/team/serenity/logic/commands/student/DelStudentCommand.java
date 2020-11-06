@@ -19,6 +19,8 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 import team.serenity.model.util.UniqueList;
 
 public class DelStudentCommand extends Command {
@@ -35,8 +37,8 @@ public class DelStudentCommand extends Command {
         + "1. " + COMMAND_WORD + " " + PREFIX_GRP + "G01 " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A\n"
         + "2. " + COMMAND_WORD + " 1 " + PREFIX_GRP + "G01";
 
-    private Optional<String> studentName;
-    private Optional<String> studentId;
+    private Optional<StudentName> studentName;
+    private Optional<StudentNumber> studentNumber;
     private Optional<Student> toDelete;
     private Optional<Index> index;
     private boolean isByIndex;
@@ -45,13 +47,13 @@ public class DelStudentCommand extends Command {
     /**
      * Creates a DelStudentCommand to remove the specified {@code Student}.
      * @param studentName Name of Student
-     * @param studentId Id of Student
+     * @param studentNumber Id of Student
      * @param predicate Group predicate
      */
-    public DelStudentCommand(String studentName, String studentId, Predicate<Group> predicate) {
-        requireAllNonNull(studentName, studentId, predicate);
+    public DelStudentCommand(StudentName studentName, StudentNumber studentNumber, Predicate<Group> predicate) {
+        requireAllNonNull(studentName, studentNumber, predicate);
         this.studentName = Optional.ofNullable(studentName);
-        this.studentId = Optional.ofNullable(studentId);
+        this.studentNumber = Optional.ofNullable(studentNumber);
         this.predicate = predicate;
         this.index = Optional.empty();
         this.isByIndex = false;
@@ -67,7 +69,7 @@ public class DelStudentCommand extends Command {
         this.index = Optional.ofNullable(index);
         this.predicate = predicate;
         this.isByIndex = true;
-        this.studentId = Optional.empty();
+        this.studentNumber = Optional.empty();
         this.studentName = Optional.empty();
     }
 
@@ -84,7 +86,7 @@ public class DelStudentCommand extends Command {
         UniqueList<Student> uniqueStudentList = groups.get(0).getStudents();
 
         if (!isByIndex) {
-            toDelete = Optional.ofNullable(new Student(this.studentName.get(), this.studentId.get()));
+            toDelete = Optional.ofNullable(new Student(this.studentName.get(), this.studentNumber.get()));
             if (!groups.get(0).getStudents().contains(toDelete.get())) {
                 //student does not exist
                 throw new CommandException(MESSAGE_STUDENT_EMPTY);
@@ -105,8 +107,8 @@ public class DelStudentCommand extends Command {
         model.deleteStudentFromGroup(toDelete.get(), this.predicate);
         model.updateFilteredGroupList(this.predicate);
         return new CommandResult(
-            String.format(MESSAGE_SUCCESS, toDelete.get().getStudentName().fullName,
-                toDelete.get().getStudentNo().studentNumber,
+            String.format(MESSAGE_SUCCESS, toDelete.get().getStudentName(),
+                toDelete.get().getStudentNo(),
                 model.getFilteredGroupList().get(0).getGroupName()),
             CommandResult.UiAction.REFRESH_TABLE
         );
@@ -124,7 +126,7 @@ public class DelStudentCommand extends Command {
 
         DelStudentCommand other = (DelStudentCommand) obj;
         return this.studentName.equals(other.studentName)
-                && this.studentId.equals(other.studentId)
+                && this.studentNumber.equals(other.studentNumber)
                 && this.index.equals(other.index)
                 && this.predicate.equals(other.predicate);
     }

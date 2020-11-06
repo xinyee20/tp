@@ -27,9 +27,9 @@ import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
-public class SetScoreCommand extends Command {
+public class EditScoreCommand extends Command {
 
-    public static final String COMMAND_WORD = "setscore";
+    public static final String COMMAND_WORD = "editscore";
     public static final String MESSAGE_SUCCESS = "%s: \nUpdated Participation Score: %d";
     public static final String MESSAGE_STUDENT_NOT_PRESENT =
             "%s is not present. \nPlease ensure student is present before giving a score!";
@@ -55,7 +55,7 @@ public class SetScoreCommand extends Command {
     /**
      * Creates an SetScoreCommand to set the specified {@code Student}'s participation score.
      */
-    public SetScoreCommand(Student student, int scoreToSet) {
+    public EditScoreCommand(Student student, int scoreToSet) {
         requireNonNull(student);
         requireNonNull(scoreToSet);
         // Specified student to set participation score
@@ -68,7 +68,7 @@ public class SetScoreCommand extends Command {
     /**
      * Creates an SetScoreCommand to set the specified {@code Student}'s participation score by index.
      */
-    public SetScoreCommand(Index index, int scoreToSet) {
+    public EditScoreCommand(Index index, int scoreToSet) {
         requireNonNull(index);
         requireNonNull(scoreToSet);
         // Specified index of student to set participation score
@@ -177,11 +177,11 @@ public class SetScoreCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SetScoreCommand // instanceof handles nulls
-                && this.scoreToSet == ((SetScoreCommand) other).scoreToSet)
-                && this.toSetScore.equals(((SetScoreCommand) other).toSetScore)
-                && this.index.equals(((SetScoreCommand) other).index)
-                && this.isByIndex == (((SetScoreCommand) other).isByIndex);
+                || (other instanceof EditScoreCommand // instanceof handles nulls
+                && this.scoreToSet == ((EditScoreCommand) other).scoreToSet)
+                && this.toSetScore.equals(((EditScoreCommand) other).toSetScore)
+                && this.index.equals(((EditScoreCommand) other).index)
+                && this.isByIndex == (((EditScoreCommand) other).isByIndex);
     }
 
 }
