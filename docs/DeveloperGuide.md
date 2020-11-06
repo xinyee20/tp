@@ -127,7 +127,7 @@ The diagram starts with the `execute("delgrp grp/G04")` API call.
 
 ![Figure 3.3.2.1](images/developerGuide/DeleteSequenceDiagram.png)
 
-<p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the `delgrp grp/G04` command.</i></p>
+<p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the <code>delgrp grp/G04`</code> command.</i></p>
 
 > :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 

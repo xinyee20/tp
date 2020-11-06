@@ -1,11 +1,19 @@
 @startuml
 !include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+skinparam {
+arrowThickness 1.1
+arrowColor MediumAquaMarine
+classBackgroundColor #adcdff
+classBorderColor DeepSkyBlue
+classBackgroundColor<<HiddenOutside>> #FFFFFF
+classBorderColor<<HiddenOutside>> #FFFFFF
+classFontColor<<HiddenOutside>> #FFFFFF
+classStereotypeFontColor<<HiddenOutside>> #FFFFFF
+}
+
+Class hideOutside <<HiddenOutside>>
 
 Package Model <<Rectangle>>{
-
 Interface ObservableList <<Interface>>
 Interface Model <<Interface>>
 Class ReadOnlyUserPrefs <<Interface>>
@@ -14,12 +22,10 @@ Class ModelManager
 Class UserPrefs
 Class UniqueXYZList
 Class XYZManager
-
 }
 
-Class " " #FFFFFF
 Model .left.> ObservableList : \t
-" " ..> Model :\t
+hideOutside ..> Model :\t
 ModelManager o-down-> XYZManager : \t
 ModelManager o-right-> UserPrefs : \t
 XYZManager o-left->"0..*"UniqueXYZList :\t

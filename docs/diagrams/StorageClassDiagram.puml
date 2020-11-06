@@ -1,8 +1,20 @@
 @startuml
 !include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor STORAGE_COLOR
-skinparam classBackgroundColor STORAGE_COLOR
+
+hide member
+
+skinparam {
+arrowThickness 1.1
+arrowColor MediumAquaMarine
+classBackgroundColor #adcdff
+classBorderColor DeepSkyBlue
+classBackgroundColor<<HiddenOutside>> #FFFFFF
+classBorderColor<<HiddenOutside>> #FFFFFF
+classFontColor<<HiddenOutside>> #FFFFFF
+classStereotypeFontColor<<HiddenOutside>> #FFFFFF
+}
+
+Class hideOutside <<HiddenOutside>>
 
 Package "Storage\t\t\t" <<Rectangle>>  {
 Class StorageManager
@@ -15,9 +27,7 @@ Class JsonSerenityStorage
 Class JsonQuestionStorage
 }
 
-
-class "  " #FFFFFF
-"  " ..> Storage
+hideOutside  ..> Storage
 StorageManager .u.|> Storage
 StorageManager o-r-> SerenityStorage
 StorageManager o-l-> UserPrefStorage
@@ -25,5 +35,4 @@ StorageManager o-d-> QuestionStorage
 JsonUserPrefsStorage .u.|> UserPrefStorage
 JsonSerenityStorage .u.|> SerenityStorage
 JsonQuestionStorage .u.|> QuestionStorage
-
 @enduml
