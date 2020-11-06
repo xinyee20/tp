@@ -11,7 +11,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,8 +42,8 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student wrongNameOne = new StudentBuilder().withName("Aaron").withId("A0123456U").build();
-        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").withId("A0123456U").build();
+        Student wrongNameOne = new StudentBuilder().withName("Aaron").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").build();
         MarkAbsentCommand markAbsentCommandOne = new MarkAbsentCommand(wrongNameOne);
         MarkAbsentCommand markAbsentCommandTwo = new MarkAbsentCommand(wrongNameTwo);
 
@@ -56,7 +56,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student wrongNumber = new StudentBuilder().withName("Aaron Tan").withId("A0000000U").build();
+        Student wrongNumber = new StudentBuilder().withId("A0000000U").build();
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(wrongNumber);
 
         assertThrows(CommandException.class,
@@ -116,7 +116,7 @@ class MarkAbsentCommandTest {
         MarkAbsentCommand markAllAbsentCommandA = new MarkAbsentCommand();
         MarkAbsentCommand markStudentAbsentCommandA = new MarkAbsentCommand(AARON);
         MarkAbsentCommand copyMarkStudentAbsentCommandA = new MarkAbsentCommand(AARON);
-        MarkAbsentCommand markStudentAbsentCommandB = new MarkAbsentCommand(JOHN);
+        MarkAbsentCommand markStudentAbsentCommandB = new MarkAbsentCommand(GEORGE);
         MarkAbsentCommand markIndexAbsentCommandA = new MarkAbsentCommand(INDEX_FIRST);
         MarkAbsentCommand copyMarkIndexAbsentCommandA = new MarkAbsentCommand(INDEX_FIRST);
         MarkAbsentCommand markIndexAbsentCommandB = new MarkAbsentCommand(INDEX_SECOND);

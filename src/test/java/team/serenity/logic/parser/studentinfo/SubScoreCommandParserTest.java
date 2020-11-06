@@ -6,7 +6,7 @@ import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHO
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NUMBER;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_SUB_SCORE;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC;
+import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC_AARON;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_NAME_DESC;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC;
 import static team.serenity.logic.commands.CommandTestUtil.SUB_SCORE_DESC;
@@ -48,7 +48,7 @@ class SubScoreCommandParserTest {
     public void parse_missingScore_throwsCommandException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC, expectedMessage);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC_AARON, expectedMessage);
     }
 
     @Test
@@ -64,7 +64,7 @@ class SubScoreCommandParserTest {
     public void parse_invalidScore_throwsCommandException() {
         String expectedMessage = String.format(Participation.MESSAGE_CONSTRAINTS);
         String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SUB_SCORE;
-        String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_SUB_SCORE;
+        String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + INVALID_SUB_SCORE;
 
         //TODO: Add more non-integer and 0/negative integer as invalid subscore
         assertParseFailure(parser, userInputOne, expectedMessage);
@@ -75,7 +75,7 @@ class SubScoreCommandParserTest {
     public void parse_studentAndIndex_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC + SUB_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC_AARON + SUB_SCORE_DESC, expectedMessage);
     }
 
     @Test
@@ -96,7 +96,7 @@ class SubScoreCommandParserTest {
     public void parse_validStudentAndNumberParameter_returnsSubScoreCommand() throws CommandException {
         Student student = new StudentBuilder().build();
         int score = Integer.parseInt(VALID_SCORE);
-        String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + SUB_SCORE_DESC;
+        String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + SUB_SCORE_DESC;
 
         assertParseSuccess(parser, userInput, new SubScoreCommand(student, score));
     }

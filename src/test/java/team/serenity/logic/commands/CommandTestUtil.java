@@ -29,33 +29,33 @@ import team.serenity.testutil.question.EditQuestionDescriptorBuilder;
 public class CommandTestUtil {
 
     // Valid descriptions for Serenity
-    public static final String VALID_GROUP_NAME_A = "G04";
-    public static final String VALID_LESSON_NAME_ONE = "1-1";
-    public static final String VALID_GROUP_NAME_B = "G05";
-    public static final String VALID_PATH_A = "CS2101_G04.xlsx";
-    public static final String VALID_PATH_B = "CS2101_G05.xlsx";
-    public static final String VALID_LSN_A = "1-1";
-    public static final String VALID_LSN_B = "1-2";
+    public static final String VALID_GROUP_NAME_G01 = "G01";
+    public static final String VALID_GROUP_NAME_G04 = "G04";
+    public static final String VALID_GROUP_NAME_G05 = "G05";
+    public static final String VALID_LESSON_NAME_1_1 = "1-1";
+    public static final String VALID_LESSON_NAME_1_2 = "1-2";
+    public static final String VALID_PATH_G04 = "CS2101_G04.xlsx";
+    public static final String VALID_PATH_G05 = "CS2101_G05.xlsx";
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
     public static final String VALID_QN_DESC_B = "When is the consultation held?";
-    public static final String VALID_STUDENT_NAME_A = "Aaron Tan";
-    public static final String VALID_STUDENT_NUMBER_A = "A0123456U";
+    public static final String VALID_STUDENT_NAME_AARON = "Aaron Tan";
+    public static final String VALID_STUDENT_NUMBER_AARON = "A0123456A";
     public static final String VALID_INDEX = "1";
     public static final String VALID_SCORE = "1";
     public static final String VALID_ADD = "1";
     public static final String VALID_SUB = "1";
 
-    public static final String GRP_DESC_GROUP_A = " " + PREFIX_GRP + VALID_GROUP_NAME_A;
-    public static final String GRP_DESC_GROUP_B = " " + PREFIX_GRP + VALID_GROUP_NAME_B;
-    public static final String LESSON_DESC_LESSON_ONE = " " + PREFIX_LSN + VALID_LESSON_NAME_ONE;
-    public static final String PATH_DESC_GROUP_A = " " + PREFIX_PATH + VALID_PATH_A;
-    public static final String PATH_DESC_GROUP_B = " " + PREFIX_PATH + VALID_PATH_B;
+    public static final String GRP_DESC_GROUP_G04 = " " + PREFIX_GRP + VALID_GROUP_NAME_G04;
+    public static final String GRP_DESC_GROUP_G05 = " " + PREFIX_GRP + VALID_GROUP_NAME_G05;
+    public static final String LESSON_DESC_LESSON_1_1 = " " + PREFIX_LSN + VALID_LESSON_NAME_1_1;
+    public static final String PATH_DESC_GROUP_G04 = " " + PREFIX_PATH + VALID_PATH_G04;
+    public static final String PATH_DESC_GROUP_G05 = " " + PREFIX_PATH + VALID_PATH_G05;
     public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;
     public static final String QN_DESC_GROUP_B = " " + PREFIX_QN + VALID_QN_DESC_B;
-    public static final String STUDENT_DESC = " " + PREFIX_NAME + VALID_STUDENT_NAME_A
-            + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
-    public static final String STUDENT_NAME_DESC = " " + PREFIX_NAME + VALID_STUDENT_NAME_A;
-    public static final String STUDENT_NUMBER_DESC = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
+    public static final String STUDENT_DESC_AARON =
+            " " + PREFIX_NAME + VALID_STUDENT_NAME_AARON + " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_AARON;
+    public static final String STUDENT_NAME_DESC = " " + PREFIX_NAME + VALID_STUDENT_NAME_AARON;
+    public static final String STUDENT_NUMBER_DESC = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_AARON;
     public static final String SET_SCORE_DESC = " " + PREFIX_SET_SCORE + VALID_SCORE;
     public static final String ADD_SCORE_DESC = " " + PREFIX_ADD_SCORE + VALID_ADD;
     public static final String SUB_SCORE_DESC = " " + PREFIX_SUBTRACT_SCORE + VALID_SUB;
@@ -67,8 +67,8 @@ public class CommandTestUtil {
     public static final String INVALID_GROUP_NAME_NON_DIGITS = " " + PREFIX_GRP + "Gxx";
     public static final String INVALID_PATH = " " + PREFIX_PATH + "this is an invalid path";
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
-    public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_A;
-    public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME_A;
+    public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_AARON;
+    public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME_AARON;
     public static final String INVALID_INDEX = "A";
     public static final String INVALID_SET_SCORE = " " + PREFIX_SET_SCORE + "A";
     public static final String INVALID_ADD_SCORE = " " + PREFIX_ADD_SCORE + "A";
@@ -81,10 +81,10 @@ public class CommandTestUtil {
     public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_B;
 
     static {
-        EDITED_QN_A = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_A)
-                .withLessonName(VALID_LSN_A).withDescription(VALID_QN_DESC_A).build();
-        EDITED_QN_B = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_B)
-                .withLessonName(VALID_LSN_B).withDescription(VALID_QN_DESC_B).build();
+        EDITED_QN_A = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_G04)
+                .withLessonName(VALID_LESSON_NAME_1_1).withDescription(VALID_QN_DESC_A).build();
+        EDITED_QN_B = new EditQuestionDescriptorBuilder().withGroupName(VALID_GROUP_NAME_G05)
+                .withLessonName(VALID_LESSON_NAME_1_2).withDescription(VALID_QN_DESC_B).build();
     }
 
     /**

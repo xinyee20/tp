@@ -5,7 +5,7 @@ import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NUMBER;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC;
+import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC_AARON;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_NAME_DESC;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_INDEX;
@@ -50,7 +50,7 @@ class MarkAbsentCommandParserTest {
     public void parse_studentAndIndex_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC, expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC_AARON, expectedMessage);
     }
 
     @Test
@@ -71,7 +71,7 @@ class MarkAbsentCommandParserTest {
     public void parse_validStudentAndNumberParameter_returnsMarkAbsentCommand() {
         Student student = new StudentBuilder().build();
 
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_DESC, new MarkAbsentCommand(student));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_DESC_AARON, new MarkAbsentCommand(student));
     }
 
     @Test

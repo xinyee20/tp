@@ -35,18 +35,16 @@ public class SubScoreCommand extends Command {
             "%s is not present. \nPlease ensure student is present before subtracting score!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Decrease the participation score of a specific student for a lesson.\n"
-            + "Parameters: "
-            + PREFIX_NAME + "STUDENT_NAME "
-            + PREFIX_MATRIC + "STUDENT_NUMBER "
-            + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT "
-            + "or INDEX(starting from 1) " + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456B "
-            + PREFIX_SUBTRACT_SCORE + "2\n"
-            + "or " + COMMAND_WORD + " 2"
-            + PREFIX_SUBTRACT_SCORE + "2\n";
+            + ": Decrease the participation score of the specific student for a tutorial lesson.\n"
+            + "Parameters (2 methods):\n"
+            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER "
+                    + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT (must be an integer from 0 to 5)\n"
+            + "2. INDEX (must be a positive integer) "
+                    + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT (must be an integer from 0 to 5)\n"
+            + "Examples:\n"
+            + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A "
+                    + PREFIX_SUBTRACT_SCORE + "2\n"
+            + "2. " + COMMAND_WORD + " 1 " + PREFIX_SUBTRACT_SCORE + "2\n";
 
     private Optional<Student> toSubScore;
     private Optional<Index> index;

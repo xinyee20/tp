@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.util.XlsxUtil;
+import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;
@@ -34,7 +35,7 @@ public class Group {
      * @param groupName A valid name.
      * @param filePath A valid filePath.
      */
-    public Group(String groupName, String filePath) {
+    public Group(String groupName, String filePath) throws ParseException {
         requireAllNonNull(groupName, filePath);
         this.groupName = new GroupName(groupName);
         XlsxUtil util = new XlsxUtil(filePath);
@@ -52,7 +53,7 @@ public class Group {
      * @param groupName A valid group name.
      * @param grpExcelData A valid group excel data.
      */
-    public Group(GroupName groupName, XlsxUtil grpExcelData) {
+    public Group(GroupName groupName, XlsxUtil grpExcelData) throws ParseException {
         requireAllNonNull(groupName, grpExcelData);
         this.groupName = groupName;
         this.students = new UniqueStudentList();
@@ -86,6 +87,20 @@ public class Group {
     public Group(String groupName, UniqueList<Student> students, UniqueList<Lesson> lessons) {
         requireAllNonNull(groupName, students, lessons);
         this.groupName = new GroupName(groupName);
+        this.students = students;
+        this.lessons = lessons;
+    }
+
+    /**
+     * Constructs a {@code Group}.
+     *
+     * @param groupName A valid name.
+     * @param students A list of students.
+     * @param lessons A list of tutorial lessons.
+     */
+    public Group(GroupName groupName, UniqueList<Student> students, UniqueList<Lesson> lessons) {
+        requireAllNonNull(groupName, students, lessons);
+        this.groupName = groupName;
         this.students = students;
         this.lessons = lessons;
     }

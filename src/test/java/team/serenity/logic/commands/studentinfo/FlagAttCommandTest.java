@@ -12,7 +12,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,8 +53,8 @@ class FlagAttCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student wrongNameOne = new StudentBuilder().withName("Aaron").withId("A0123456U").build();
-        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").withId("A0123456U").build();
+        Student wrongNameOne = new StudentBuilder().withName("Aaron").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").build();
         FlagAttCommand flagAttCommandOne = new FlagAttCommand(wrongNameOne);
         FlagAttCommand flagAttCommandTwo = new FlagAttCommand(wrongNameTwo);
 
@@ -67,7 +67,7 @@ class FlagAttCommandTest {
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student wrongNumber = new StudentBuilder().withName("Aaron Tan").withId("A0000000U").build();
+        Student wrongNumber = new StudentBuilder().withId("A0000000U").build();
         FlagAttCommand flagAttCommand = new FlagAttCommand(wrongNumber);
 
         assertThrows(CommandException.class,
@@ -95,10 +95,9 @@ class FlagAttCommandTest {
     @Test
     public void execute_markIndex_success() throws CommandException {
         ModelStubWithIndexAbsent modelStub = new ModelStubWithIndexAbsent();
-        Index validIndex = Index.fromOneBased(Integer.parseInt("1"));
         Student toFlagAtt = new StudentBuilder().build();
 
-        CommandResult commandResult = new FlagAttCommand(validIndex).execute(modelStub);
+        CommandResult commandResult = new FlagAttCommand(INDEX_FIRST).execute(modelStub);
         assertEquals(String.format(FlagAttCommand.MESSAGE_SUCCESS, toFlagAtt),
                 commandResult.getFeedbackToUser());
     }
@@ -118,7 +117,7 @@ class FlagAttCommandTest {
     public void equals() {
         FlagAttCommand flagStudentCommandA = new FlagAttCommand(AARON);
         FlagAttCommand copyFlagStudentCommandA = new FlagAttCommand(AARON);
-        FlagAttCommand flagStudentCommandB = new FlagAttCommand(JOHN);
+        FlagAttCommand flagStudentCommandB = new FlagAttCommand(GEORGE);
         FlagAttCommand flagIndexCommandA = new FlagAttCommand(INDEX_FIRST);
         FlagAttCommand copyFlagIndexCommandA = new FlagAttCommand(INDEX_FIRST);
         FlagAttCommand flagIndexCommandB = new FlagAttCommand(INDEX_SECOND);

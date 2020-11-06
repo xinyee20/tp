@@ -7,60 +7,69 @@
 
 'T1 through T4 are shades of the original color from lightest to darkest
 
-!define UI_COLOR #1D8900
-!define UI_COLOR_T1 #83E769
+!define UI_COLOR #C5EED1
+!define UI_COLOR_T1 #78C890
 !define UI_COLOR_T2 #3FC71B
 !define UI_COLOR_T3 #166800
 !define UI_COLOR_T4 #0E4100
 
-!define LOGIC_COLOR #3333C4
-!define LOGIC_COLOR_T1 #C8C8FA
+!define LOGIC_COLOR #87CEFA
+!define LOGIC_COLOR_T1 #359DFD
 !define LOGIC_COLOR_T2 #6A6ADC
 !define LOGIC_COLOR_T3 #1616B0
 !define LOGIC_COLOR_T4 #101086
 
-!define MODEL_COLOR #9D0012
-!define MODEL_COLOR_T1 #F97181
+!define MODEL_COLOR #F7CECC
+!define MODEL_COLOR_T1 #E47772
 !define MODEL_COLOR_T2 #E41F36
 !define MODEL_COLOR_T3 #7B000E
 !define MODEL_COLOR_T4 #51000A
 
-!define STORAGE_COLOR #A38300
-!define STORAGE_COLOR_T1 #FFE374
+!define STORAGE_COLOR #FDE8AB
+!define STORAGE_COLOR_T1 #F9C93C
 !define STORAGE_COLOR_T2 #EDC520
 !define STORAGE_COLOR_T3 #806600
 !define STORAGE_COLOR_T2 #544400
 
-!define USER_COLOR #000000
+!define MAIN_COLOR #FAAED7
+
+!define COMMONS_COLOR #DCBEE5
+
+!define USER_COLOR #black
+
+!define ORANGE_COLOR #FFC08F
 
 skinparam BackgroundColor #FFFFFFF
 
 skinparam Shadowing false
 
 skinparam Class {
-    FontColor #FFFFFF
+    FontColor #black
     BorderThickness 1
     BorderColor #FFFFFF
-    StereotypeFontColor #FFFFFF
+    StereotypeFontColor #black
     FontName Arial
 }
 
 skinparam Actor {
+    FontColor #black
     BorderColor USER_COLOR
     Color USER_COLOR
     FontName Arial
 }
 
 skinparam Sequence {
+    FontColor #black
     MessageAlign center
     BoxFontSize 15
     BoxPadding 0
-    BoxFontColor #FFFFFF
+    BoxFontColor #black
     FontName Arial
 }
 
 skinparam Participant {
-    FontColor #FFFFFFF
+    FontColor #black
+    FontColor #black
     Padding 20
 }
 

@@ -8,7 +8,7 @@ import team.serenity.model.group.student.StudentNumber;
 public class StudentBuilder {
 
     public static final StudentName DEFAULT_NAME = new StudentName("Aaron Tan");
-    public static final StudentNumber DEFAULT_STUDENT_NUMBER = new StudentNumber("A0123456U");
+    public static final StudentNumber DEFAULT_STUDENT_NUMBER = new StudentNumber("A0123456A");
 
     private StudentName name;
     private StudentNumber studentNumber;
@@ -34,6 +34,7 @@ public class StudentBuilder {
      */
     public StudentBuilder withName(String name) {
         this.name = new StudentName(name);
+        this.studentNumber = DEFAULT_STUDENT_NUMBER;
         return this;
     }
 
@@ -42,6 +43,7 @@ public class StudentBuilder {
      */
     public StudentBuilder withId(String id) {
         this.studentNumber = new StudentNumber(id);
+        this.name = DEFAULT_NAME;
         return this;
     }
 

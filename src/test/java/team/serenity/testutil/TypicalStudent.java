@@ -1,7 +1,7 @@
 package team.serenity.testutil;
 
-import static team.serenity.testutil.TypicalGroups.GROUP_C;
-import static team.serenity.testutil.TypicalGroups.GROUP_D;
+import static team.serenity.testutil.TypicalGroups.GROUP_G01;
+import static team.serenity.testutil.TypicalGroups.GROUP_G02;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,29 +13,30 @@ import team.serenity.model.util.UniqueList;
 
 public class TypicalStudent {
 
-    public static final Student AARON = new StudentBuilder().withName("Aaron Tan").withId("A0123456U").build();
-    public static final Student JOHN = new StudentBuilder().withName("John").withId("A0000001U").build();
-    public static final Student JAMES = new StudentBuilder().withName("James").withId("A0000002U").build();
-    public static final Student JEFFERY = new StudentBuilder().withName("Jeffery").withId("A0000003U").build();
-    public static final Student LUNA = new StudentBuilder().withName("Luna").withId("A0000004U").build();
-    public static final Student QUEENIE = new StudentBuilder().withName("Queenie").withId("A0000005U").build();
-    public static final Student FREDDIE = new StudentBuilder().withName("Freddie").withId("A0000006U").build();
-    public static final Student JUNE = new StudentBuilder().withName("June").withId("A0000007U").build();
-    public static final Student JANE = new Student("JANE", "A0000008U");
+    public static final Student AARON = new StudentBuilder().withName("Aaron Tan").withId("A0123456A").build();
+    public static final Student BENJAMIN = new Student("Benjamin Barker", "A0123456B");
+    public static final Student CATHERINE = new StudentBuilder().withName("Catherine Teo").withId("A0123456C").build();
+    public static final Student DAVID = new StudentBuilder().withName("David Chong").withId("A0123456D").build();
+    public static final Student ELFIE = new StudentBuilder().withName("Elfie Ang").withId("A0123456E").build();
+    public static final Student FREDDIE = new StudentBuilder().withName("Freddie Lim").withId("A0123456F").build();
+    public static final Student GEORGE = new StudentBuilder().withName("George").withId("A0123456G").build();
+    public static final Student HELENE = new StudentBuilder().withName("Helene Ong").withId("A0123456H").build();
+    public static final Student IRENE = new StudentBuilder().withName("Irene").withId("A0123456I").build();
+    public static final Student JEFFERY = new StudentBuilder().withName("Jeffery").withId("A0123456J").build();
 
     private TypicalStudent() {
     } // prevent instantiation
 
     public static UniqueList<Student> getTypicalStudents() {
         UniqueList<Student> list = new UniqueStudentList();
-        list.setElementsWithList(new ArrayList<>(Arrays.asList(JEFFERY, LUNA, QUEENIE)));
+        list.setElementsWithList(new ArrayList<>(Arrays.asList(JEFFERY, IRENE, ELFIE)));
         return list;
     }
 
     public static StudentManager getTypicalStudentManager() {
         StudentManager studentManager = new StudentManager();
-        studentManager.setListOfStudentsToGroup(GROUP_C.getGroupName(), GROUP_C.getStudents());
-        studentManager.setListOfStudentsToGroup(GROUP_D.getGroupName(), GROUP_D.getStudents());
+        studentManager.setListOfStudentsToGroup(GROUP_G01.getGroupName(), GROUP_G01.getStudents());
+        studentManager.setListOfStudentsToGroup(GROUP_G02.getGroupName(), GROUP_G02.getStudents());
         return studentManager;
     }
 }

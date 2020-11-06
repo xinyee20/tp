@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
-import static team.serenity.testutil.TypicalGroups.GROUP_C;
-import static team.serenity.testutil.TypicalGroups.GROUP_D;
-import static team.serenity.testutil.TypicalStudent.JAMES;
+import static team.serenity.testutil.TypicalGroups.GROUP_G01;
+import static team.serenity.testutil.TypicalGroups.GROUP_G02;
+import static team.serenity.testutil.TypicalStudent.AARON;
+import static team.serenity.testutil.TypicalStudent.DAVID;
+import static team.serenity.testutil.TypicalStudent.HELENE;
 import static team.serenity.testutil.TypicalStudent.JEFFERY;
-import static team.serenity.testutil.TypicalStudent.JUNE;
 import static team.serenity.testutil.TypicalStudent.getTypicalStudentManager;
 import static team.serenity.testutil.TypicalStudent.getTypicalStudents;
 
@@ -54,30 +55,30 @@ class StudentManagerTest {
         assertThrows(NullPointerException.class, () -> this.studentManager
             .addStudentToGroup(null, null));
         assertThrows(NullPointerException.class, () -> this.studentManager
-            .addStudentToGroup(GROUP_C.getGroupName(), null));
+            .addStudentToGroup(GROUP_G01.getGroupName(), null));
         assertThrows(NullPointerException.class, () -> this.studentManager
-            .addStudentToGroup(null, JAMES));
+            .addStudentToGroup(null, HELENE));
     }
 
     @Test
     public void addStudentToGroup_targetGroupDoesNotExist_throwGroupNotFoundException() {
         assertThrows(GroupNotFoundException.class, () -> this.studentManager
-            .addStudentToGroup(GROUP_C.getGroupName(), JAMES));
+            .addStudentToGroup(GROUP_G01.getGroupName(), HELENE));
     }
 
     @Test
     public void addStudentToGroup_duplicateStudent_throwDuplicateLessonException() {
         this.studentManager.resetData(getTypicalStudentManager());
         assertThrows(DuplicateStudentException.class, () ->
-            this.studentManager.addStudentToGroup(GROUP_C.getGroupName(), JEFFERY));
+            this.studentManager.addStudentToGroup(GROUP_G01.getGroupName(), AARON));
     }
 
     @Test
     public void addStudentToGroup_validStudent() {
         this.studentManager.resetData(getTypicalStudentManager());
-        assertFalse(this.studentManager.checkIfStudentExistsInGroup(GROUP_C.getGroupName(), JAMES));
-        this.studentManager.addStudentToGroup(GROUP_C.getGroupName(), JAMES);
-        assertTrue(this.studentManager.checkIfStudentExistsInGroup(GROUP_C.getGroupName(), JAMES));
+        assertFalse(this.studentManager.checkIfStudentExistsInGroup(GROUP_G01.getGroupName(), HELENE));
+        this.studentManager.addStudentToGroup(GROUP_G01.getGroupName(), HELENE);
+        assertTrue(this.studentManager.checkIfStudentExistsInGroup(GROUP_G01.getGroupName(), HELENE));
     }
 
     @Test
@@ -85,7 +86,7 @@ class StudentManagerTest {
         assertThrows(NullPointerException.class, () ->
                 this.studentManager.addListOfStudentsToGroup(null, null));
         assertThrows(NullPointerException.class, () ->
-                this.studentManager.addListOfStudentsToGroup(GROUP_C.getGroupName(), null));
+                this.studentManager.addListOfStudentsToGroup(GROUP_G01.getGroupName(), null));
         assertThrows(NullPointerException.class, () ->
                 this.studentManager.addListOfStudentsToGroup(null, getTypicalStudents()));
     }
@@ -95,27 +96,27 @@ class StudentManagerTest {
         assertThrows(NullPointerException.class, () ->
                 this.studentManager.checkIfStudentExistsInGroup(null, null));
         assertThrows(NullPointerException.class, () ->
-                this.studentManager.checkIfStudentExistsInGroup(GROUP_C.getGroupName(), null));
+                this.studentManager.checkIfStudentExistsInGroup(GROUP_G01.getGroupName(), null));
         assertThrows(NullPointerException.class, () ->
-                this.studentManager.checkIfStudentExistsInGroup(null, JAMES));
+                this.studentManager.checkIfStudentExistsInGroup(null, HELENE));
     }
 
     @Test
     public void checkIfStudentExistsInGroup_targetGroupDoesNotExist_throwGroupNotFoundException() {
         assertThrows(GroupNotFoundException.class, () ->
-                this.studentManager.checkIfStudentExistsInGroup(GROUP_C.getGroupName(), JAMES));
+                this.studentManager.checkIfStudentExistsInGroup(GROUP_G01.getGroupName(), HELENE));
     }
 
     @Test
     public void checkIfStudentExistsInGroup_targetStudentExist_returnTrue() {
         StudentManager studentManager = getTypicalStudentManager();
-        assertTrue(studentManager.checkIfStudentExistsInGroup(GROUP_C.getGroupName(), JEFFERY));
+        assertTrue(studentManager.checkIfStudentExistsInGroup(GROUP_G01.getGroupName(), AARON));
     }
 
     @Test
     public void checkIfStudentExistsInGroup_targetStudentDoesNotExist_returnFalse() {
         StudentManager studentManager = getTypicalStudentManager();
-        assertFalse(studentManager.checkIfStudentExistsInGroup(GROUP_D.getGroupName(), JEFFERY));
+        assertFalse(studentManager.checkIfStudentExistsInGroup(GROUP_G02.getGroupName(), JEFFERY));
     }
 
     @Test
@@ -126,13 +127,13 @@ class StudentManagerTest {
     @Test
     public void getListOfStudentsFromGroup_targetGroupDoesNotExist_throwsGroupNotFoundException() {
         assertThrows(GroupNotFoundException.class, () ->
-            this.studentManager.getListOfStudentsFromGroup(GROUP_C.getGroupName()));
+            this.studentManager.getListOfStudentsFromGroup(GROUP_G01.getGroupName()));
     }
 
     @Test
     public void getListOfStudentsFromGroup_validGroup() {
         this.studentManager.resetData(getTypicalStudentManager());
-        assertDoesNotThrow(() -> this.studentManager.getListOfStudentsFromGroup(GROUP_C.getGroupName()));
+        assertDoesNotThrow(() -> this.studentManager.getListOfStudentsFromGroup(GROUP_G01.getGroupName()));
     }
 
     @Test
@@ -140,7 +141,7 @@ class StudentManagerTest {
         assertThrows(NullPointerException.class, () ->
                 this.studentManager.setListOfStudentsToGroup(null, null));
         assertThrows(NullPointerException.class, () ->
-                this.studentManager.setListOfStudentsToGroup(GROUP_C.getGroupName(), null));
+                this.studentManager.setListOfStudentsToGroup(GROUP_G01.getGroupName(), null));
         assertThrows(NullPointerException.class, () ->
                 this.studentManager.setListOfStudentsToGroup(null, getTypicalStudents()));
     }
@@ -150,29 +151,29 @@ class StudentManagerTest {
         assertThrows(NullPointerException.class, () ->
             this.studentManager.deleteStudentFromGroup(null, null));
         assertThrows(NullPointerException.class, () ->
-            this.studentManager.deleteStudentFromGroup(GROUP_D.getGroupName(), null));
+            this.studentManager.deleteStudentFromGroup(GROUP_G02.getGroupName(), null));
         assertThrows(NullPointerException.class, () ->
-            this.studentManager.deleteStudentFromGroup(null, JAMES));
+            this.studentManager.deleteStudentFromGroup(null, HELENE));
     }
 
     @Test
     public void deleteStudentFromGroup_targetGroupDoesNotExist_throwsGroupNotFoundException() {
         assertThrows(GroupNotFoundException.class, () ->
-            this.studentManager.deleteStudentFromGroup(GROUP_D.getGroupName(), JAMES));
+            this.studentManager.deleteStudentFromGroup(GROUP_G02.getGroupName(), HELENE));
     }
 
     @Test
     public void deleteStudentFromGroup_studentDoesNotExist_throwsStudentNotFoundException() {
         this.studentManager.resetData(getTypicalStudentManager());
         assertThrows(StudentNotFoundException.class, () -> this.studentManager
-                .deleteStudentFromGroup(GROUP_D.getGroupName(), JAMES));
+                .deleteStudentFromGroup(GROUP_G02.getGroupName(), HELENE));
     }
 
     @Test
     public void deleteStudentFromGroup_validStudent() {
         this.studentManager.resetData(getTypicalStudentManager());
-        assertTrue(this.studentManager.checkIfStudentExistsInGroup(GROUP_D.getGroupName(), JUNE));
-        this.studentManager.deleteStudentFromGroup(GROUP_D.getGroupName(), JUNE);
-        assertFalse(this.studentManager.checkIfStudentExistsInGroup(GROUP_D.getGroupName(), JUNE));
+        assertTrue(this.studentManager.checkIfStudentExistsInGroup(GROUP_G02.getGroupName(), DAVID));
+        this.studentManager.deleteStudentFromGroup(GROUP_G02.getGroupName(), DAVID);
+        assertFalse(this.studentManager.checkIfStudentExistsInGroup(GROUP_G02.getGroupName(), DAVID));
     }
 }

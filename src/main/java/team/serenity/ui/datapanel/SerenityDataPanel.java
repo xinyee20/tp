@@ -1,10 +1,11 @@
-package team.serenity.ui.serenitydata;
+package team.serenity.ui.datapanel;
 
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
@@ -13,8 +14,7 @@ import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.core.Messages;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
-import team.serenity.ui.DataPanel;
-import team.serenity.ui.lessondata.LessonDataPanel.StudentInfoListViewCell;
+import team.serenity.ui.datapanel.LessonDataPanel.StudentInfoListViewCell;
 
 public class SerenityDataPanel extends DataPanel {
 
@@ -58,6 +58,21 @@ public class SerenityDataPanel extends DataPanel {
      */
     public void changeQuestionTab() {
         selectionModel.select(1);
+    }
+
+    public static class QuestionListViewCell extends ListCell<Question> {
+
+        @Override
+        protected void updateItem(Question question, boolean empty) {
+            super.updateItem(question, empty);
+
+            if (empty || question == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new QuestionCard(question, getIndex() + 1).getRoot());
+            }
+        }
     }
 
 }

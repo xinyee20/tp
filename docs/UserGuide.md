@@ -81,27 +81,19 @@ It is annotated with the name of the _GUI_ components.
 
 #### 3.2.2. Layout of the _GUI_
 
-**Serenity** is divided into three pages. Under each page, there are a few tabs:
+**Serenity** is divided into these three pages:
 
 * Home page
-    * Flagged attendance tab
-    * Pending questions tab
 * Tutorial group page
-    * Lessons tab
-    * Students tab
-    * Attendance tab
-    * Participation tab
 * Tutorial lesson page
-    * Lesson tab
-    * Questions tab
 
 ##### **Home page** 
 
-This is the default page shown when the app is started.
+This is the default page shown when the app is started. This page consists of:
 
-The flagged attendance tab contains the names of students whose attendance have been flagged with the `flagatt` command.
-Flagging a student's attendance serves as a reminder on the first page of the app for you
-to check on the student and perform any follow-up actions, if necessary. 
+* Flagged attendance tab: this tab contains the names of students whose attendance have been flagged with
+the `flagatt` command. Flagging a student's attendance serves as a reminder on the first page of the app
+for you to check on the student and perform any follow-up actions, if necessary. 
 
 > :bulb: TIP: Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and 
 >proceed with teaching. With the flag attendance tab, you will be reminded to check again after class.
@@ -110,7 +102,7 @@ to check on the student and perform any follow-up actions, if necessary.
 
 <p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab</i></p>
 
-The pending questions tab shows the questions asked across all your tutorial groups,
+* Pending questions tab: this tab shows the questions asked by students across all your tutorial groups,
 providing a convenient place for you to keep track of all the questions asked by students
 across your tutorial groups and lessons.
 
@@ -120,18 +112,18 @@ across your tutorial groups and lessons.
 
 ##### **Tutorial group page**
 
-This page shows the information related to a tutorial group that you are teaching. 
+This page shows the information related to a tutorial group that you are teaching. This page consists of: 
 
-The lessons tab allows you to view the list of lessons scheduled for this group.
+* Lessons tab: this tab allows you to view the list of lessons scheduled for this group.
 
-The students tab displays the list of students belonging in this group. You may modify this list,
+* Students tab: this tab displays the list of students belonging in this group. You may modify this list,
 especially at the start of each semester where there will be students entering the module,
 appealing into the module, switching between tutorial groups, and even dropping the module.
 
-The attendance tab shows the attendance sheet of the students. You may view the attendance records
+* Attendance tab: this tab shows the attendance sheet of the students. You may view the attendance records
 of all the students in the tutorial group across all the tutorial lessons.
 
-The participation tab shows the participation score sheet of the students. Similarly, you may view
+* Participation tab: this tab shows the participation score sheet of the students. Similarly, you may view
 the class participation grades of all the students in the tutorial group across all the tutorial lessons.
 
 <p align="center"><img src="images/viewgrpGUI.png" alt="Picture of group GUI"></p>
@@ -140,16 +132,16 @@ the class participation grades of all the students in the tutorial group across 
 
 ##### **Tutorial lesson page**
 
-This page shows the records for a specific lesson. 
+This page shows the records for a specific lesson. This page consists of:
 
 > :memo: This page is accessible using the `viewlsn` command
 
-The lesson tab contains the list of students in the tutorial group. For each student, you may
+* Lesson tab: this tab contains the list of students in the tutorial group. For each student, you may
 view and change the student's [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades.
 You may also flag the student's attendance if necessary.
 
-The questions tab contains the list of questions that were asked during this tutorial lesson. In this tab, you may
-add, edit, find or delete a [question](#44-question-addressing) that was asked during this tutorial lesson.
+* Questions tab: this tab contains the list of questions that were asked during this tutorial lesson. In this tab,
+you may add, edit, find or delete a [question](#44-question-addressing) that was asked during this tutorial lesson.
 
 <p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
 
@@ -593,7 +585,8 @@ Outcome:
 #### 4.2.4. Unflag attendance of a student: `unflagatt`
 
 You can use this command to unflag attendance of a specific student that was flagged after you have checked whether the 
-student attended a replacement class.
+student attended a replacement class. If you accidentally flagged the wrong student, the action can also be easily undone 
+using `unflagatt` command.
 
 **Format:**
 <br>`unflagatt name/NAME matric/STUDENT_NUMBER`
@@ -669,7 +662,7 @@ student's participation score easily with a scale for reference.
 
 #### 4.3.1. Award participation score for a student: `setscore`
 
-You can use this command to add the participation score for a specific student in a tutorial lesson.
+You can use this command to award a participation score for a specific student in a tutorial lesson.
 
 With a scale from 1 to 5:
 
@@ -684,9 +677,9 @@ With a scale from 1 to 5:
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you noticed that your student named `Aaron Tan` with student number `A0123456U` often participated in class discussions.
-You decided to give him `3` marks for his participation score for this tutorial lesson. `Aaron Tan` is the first person on 
-the student list so his `index` number is 1.
+you noticed that your student named `Aaron Tan` with student number `A0123456U` participated actively in class 
+discussions for the lesson. You decided to give him `3` marks for his participation score for this tutorial lesson. 
+`Aaron Tan` is the first person on the student list so his `index` number is 1.
 
 <ins>Method 1</ins> <br>
 Set participation score of a student in a tutorial lesson by `name` and `student number`:
@@ -731,7 +724,7 @@ You can use this command to increase the participation score of a specific stude
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student number `A0123456U` provided some good insights during lessons. 
+you felt that your student named `Aaron Tan` with student number `A0123456U` provided some good insights during the lesson. 
 You decided to add `1` mark to his participation score for this tutorial lesson. `Aaron Tan` 
 is the first person on the student list so his `index` number is 1.
 
@@ -770,8 +763,8 @@ You can use this command to decrease the participation score of a specific stude
 **Example:**
 
 In tutorial lesson `1-2` of tutorial group `G04`,
-you felt that your student named `Aaron Tan` with student number `A0123456U` did not provide insightful responses 
-to some questions. You decided to subtract `1` mark from his participation score for this tutorial lesson. `Aaron Tan` 
+you felt that your student named `Aaron Tan` with student number `A0123456U` responses were actually not very insightful 
+on second thoughts. You decided to subtract `1` mark from his participation score for this tutorial lesson. `Aaron Tan` 
 is the first person on the student list so his `index` number is 1.
 
 <ins>Method 1</ins> <br>

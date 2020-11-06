@@ -7,7 +7,7 @@ import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NUMBER;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC;
+import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC_AARON;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_NAME_DESC;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_INDEX;
@@ -47,7 +47,7 @@ class AddScoreCommandParserTest {
     public void parse_missingScore_throwsCommandException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC, expectedMessage);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC_AARON, expectedMessage);
     }
 
     @Test
@@ -64,14 +64,14 @@ class AddScoreCommandParserTest {
         String expectedMessage = String.format(Participation.MESSAGE_CONSTRAINTS);
 
         assertParseFailure(parser, PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_ADD_SCORE, expectedMessage);
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_ADD_SCORE, expectedMessage);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + INVALID_ADD_SCORE, expectedMessage);
     }
 
     @Test
     public void parse_validStudentAndNumberParameter_returnsAddScoreCommand() {
         Student student = new StudentBuilder().build();
         int score = Integer.parseInt(VALID_SCORE);
-        String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + ADD_SCORE_DESC;
+        String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + ADD_SCORE_DESC;
 
         assertParseSuccess(parser, userInput, new AddScoreCommand(student, score));
     }
@@ -80,7 +80,7 @@ class AddScoreCommandParserTest {
     public void parse_studentAndIndex_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC + ADD_SCORE_DESC , expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC_AARON + ADD_SCORE_DESC , expectedMessage);
     }
 
     @Test

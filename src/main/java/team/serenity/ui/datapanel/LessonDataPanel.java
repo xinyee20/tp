@@ -1,4 +1,4 @@
-package team.serenity.ui.lessondata;
+package team.serenity.ui.datapanel;
 
 import java.util.logging.Logger;
 
@@ -12,9 +12,7 @@ import team.serenity.commons.core.LogsCenter;
 import team.serenity.commons.core.Messages;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.studentinfo.StudentInfo;
-import team.serenity.ui.DataPanel;
-import team.serenity.ui.groupdata.GroupDataPanel;
-import team.serenity.ui.serenitydata.QuestionListViewCell;
+import team.serenity.ui.datapanel.SerenityDataPanel.QuestionListViewCell;
 
 public class LessonDataPanel extends DataPanel {
     private static final String FXML = "LessonDataPanel.fxml";
