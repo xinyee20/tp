@@ -1,6 +1,7 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -16,7 +17,7 @@ class DelLsnCommandParserTest {
     @Test
     void parse_emptyInput_throwParseException() {
         DelLsnCommandParser parser = new DelLsnCommandParser();
-        assertParseFailure(parser, "     ",
+        assertParseFailure(parser, PREAMBLE_WHITESPACE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelLsnCommand.MESSAGE_USAGE));
     }
 
