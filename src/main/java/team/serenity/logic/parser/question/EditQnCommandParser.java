@@ -37,6 +37,9 @@ public class EditQnCommandParser implements Parser<EditQnCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditQnCommand.MESSAGE_USAGE), pe);
+        } catch (NumberFormatException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditQnCommand.MESSAGE_USAGE), pe);
         }
 
         EditQuestionDescriptor editQuestionDescriptor = new EditQnCommand.EditQuestionDescriptor();
