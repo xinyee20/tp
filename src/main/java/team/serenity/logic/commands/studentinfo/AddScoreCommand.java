@@ -1,7 +1,7 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static java.util.Objects.requireNonNull;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
@@ -132,7 +132,7 @@ public class AddScoreCommand extends Command {
             // Return error message if index is out of range
             if (targetIndex.getZeroBased() >= currentStudentInfoList.size() || index.get().getOneBased() == 0) {
                 throw new CommandException(
-                        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, targetIndex.getOneBased()));
+                        String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, targetIndex.getOneBased()));
             }
             return currentStudentInfoList.get(targetIndex.getZeroBased());
         }

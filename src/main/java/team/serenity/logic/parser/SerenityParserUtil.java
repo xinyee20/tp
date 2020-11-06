@@ -3,7 +3,7 @@ package team.serenity.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 
 import java.io.IOException;
 
@@ -151,7 +151,7 @@ public class SerenityParserUtil {
             }
             return Index.fromOneBased(index);
         } catch (Exception e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index));
+            throw new ParseException(String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, index));
         }
     }
 }

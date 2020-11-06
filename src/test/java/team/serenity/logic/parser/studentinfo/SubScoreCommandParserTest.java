@@ -18,6 +18,7 @@ import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import team.serenity.commons.core.index.Index;
+import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.commands.studentinfo.SubScoreCommand;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Participation;
@@ -65,6 +66,7 @@ class SubScoreCommandParserTest {
         String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SUB_SCORE;
         String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + INVALID_SUB_SCORE;
 
+        //TODO: Add more non-integer and 0/negative integer as invalid subscore
         assertParseFailure(parser, userInputOne, expectedMessage);
         assertParseFailure(parser, userInputTwo, expectedMessage);
     }
@@ -91,7 +93,7 @@ class SubScoreCommandParserTest {
     }
 
     @Test
-    public void parse_validStudentAndNumberParameter_returnsSubScoreCommand() {
+    public void parse_validStudentAndNumberParameter_returnsSubScoreCommand() throws CommandException {
         Student student = new StudentBuilder().build();
         int score = Integer.parseInt(VALID_SCORE);
         String userInput = PREAMBLE_WHITESPACE + STUDENT_DESC + " " + SUB_SCORE_DESC;
@@ -100,7 +102,7 @@ class SubScoreCommandParserTest {
     }
 
     @Test
-    public void parse_validIndexParameter_returnsSubScoreCommand() {
+    public void parse_validIndexParameter_returnsSubScoreCommand() throws CommandException {
         Index index = Index.fromOneBased(Integer.parseInt(VALID_INDEX));
         int score = Integer.parseInt(VALID_SCORE);
 
