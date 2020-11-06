@@ -1,9 +1,9 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NUMBER;
+import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC_AARON;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_NAME_DESC;
