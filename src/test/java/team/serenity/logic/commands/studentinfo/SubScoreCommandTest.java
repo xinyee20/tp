@@ -3,7 +3,7 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
@@ -20,6 +20,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.student.Student;
+import team.serenity.testutil.StudentBuilder;
 
 class SubScoreCommandTest {
     @Test
@@ -29,9 +30,9 @@ class SubScoreCommandTest {
     }
 
     @Test
-    public void execute_subScoreOutOfRange_failure() throws CommandException {
+    public void execute_subScoreOutOfRange_throwCommandException() throws CommandException {
         ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
-        Student toSubScore = new Student("Aaron Tan", "A0123456U");
+        Student toSubScore = new StudentBuilder().build();
         int subScoreOutOfRange = 4;
         SubScoreCommand subScoreCommand = new SubScoreCommand(toSubScore, subScoreOutOfRange);
 
@@ -41,7 +42,7 @@ class SubScoreCommandTest {
     @Test
     public void execute_subScore_success() throws CommandException {
         ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
-        Student toSubScore = new Student("Aaron Tan", "A0123456U");
+        Student toSubScore = new StudentBuilder().build();
         int validSubScore = 1;
         int originalScore = 3;
         int expectedScore = originalScore - validSubScore;
@@ -54,7 +55,7 @@ class SubScoreCommandTest {
     @Test
     public void execute_studentAbsent_throwCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student toSubScore = new Student("Aaron Tan", "A0123456U");
+        Student toSubScore = new StudentBuilder().build();
         int validSubScore = 1;
         SubScoreCommand subScoreCommand = new SubScoreCommand(toSubScore, validSubScore);
 
@@ -63,10 +64,10 @@ class SubScoreCommandTest {
     }
 
     @Test
-    public void execute_wrongName_throwsCommandException() {
+    public void execute_wrongName_throwsCommandException() throws CommandException {
         ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
-        Student wrongNameOne = new Student("Aaron", "A0123456U");
-        Student wrongNameTwo = new Student("Betty Tan", "A0123456U");
+        Student wrongNameOne = new StudentBuilder().withName("Aaron").withId("A0123456U").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").withId("A0123456U").build();
         int validScore = 1;
         SubScoreCommand subScoreCommandOne = new SubScoreCommand(wrongNameOne, validScore);
         SubScoreCommand subScoreCommandTwo = new SubScoreCommand(wrongNameTwo, validScore);
@@ -78,9 +79,9 @@ class SubScoreCommandTest {
     }
 
     @Test
-    public void execute_wrongStudentNumber_throwsCommandException() {
+    public void execute_wrongStudentNumber_throwsCommandException() throws CommandException {
         ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
-        Student wrongNumber = new Student("Aaron Tan", "A0000000U");
+        Student wrongNumber = new StudentBuilder().withName("Aaron Tan").withId("A0000000U").build();
         int validScore = 1;
         SubScoreCommand subScoreCommand = new SubScoreCommand(wrongNumber, validScore);
 
@@ -89,9 +90,9 @@ class SubScoreCommandTest {
     }
 
     @Test
-    public void execute_notInGroup_throwsCommandException() {
+    public void execute_notInGroup_throwsCommandException() throws CommandException {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toSubScore = new Student("Aaron Tan", "A0123456U");
+        Student toSubScore = new StudentBuilder().build();
         int validScore = 1;
         SubScoreCommand subScoreCommand = new SubScoreCommand(toSubScore, validScore);
 
@@ -99,9 +100,9 @@ class SubScoreCommandTest {
     }
 
     @Test
-    public void execute_notInLesson_throwsCommandException() {
+    public void execute_notInLesson_throwsCommandException() throws CommandException {
         ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
-        Student toSubScore = new Student("Aaron Tan", "A0123456U");
+        Student toSubScore = new StudentBuilder().build();
         int validScore = 1;
         SubScoreCommand subScoreCommand = new SubScoreCommand(toSubScore, validScore);
 
@@ -112,7 +113,7 @@ class SubScoreCommandTest {
     public void execute_markIndex_success() throws CommandException {
         ModelStubWithIndexWithScore modelStub = new ModelStubWithIndexWithScore();
         Index validIndex = Index.fromOneBased(Integer.parseInt("1"));
-        Student toSubScore = new Student("Aaron Tan", "A0123456U");
+        Student toSubScore = new StudentBuilder().build();
         int validSubScore = 1;
         int originalScore = 3;
         int expectedScore = originalScore - validSubScore;
@@ -123,18 +124,18 @@ class SubScoreCommandTest {
     }
 
     @Test
-    public void execute_wrongIndex_throwsCommandException() {
+    public void execute_wrongIndex_throwsCommandException() throws CommandException {
         ModelStubWithIndexWithScore modelStub = new ModelStubWithIndexWithScore();
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         int validScore = 1;
         SubScoreCommand subScoreCommand = new SubScoreCommand(wrongIndex, validScore);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
                 wrongIndex.getOneBased()), () -> subScoreCommand.execute(modelStub));
     }
 
     @Test
-    public void equals() {
+    public void equals() throws CommandException {
         int validSubScore = 1;
         SubScoreCommand subScoreStudentCommandA = new SubScoreCommand(AARON, validSubScore);
         SubScoreCommand copySubScoreStudentCommandA = new SubScoreCommand(AARON, validSubScore);

@@ -3,7 +3,7 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
@@ -20,6 +20,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.student.Student;
+import team.serenity.testutil.StudentBuilder;
 
 class FlagAttCommandTest {
 
@@ -32,7 +33,7 @@ class FlagAttCommandTest {
     @Test
     public void execute_flagStudent_success() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student toFlagAtt = new Student("Aaron Tan", "A0123456U");
+        Student toFlagAtt = new StudentBuilder().build();
 
         CommandResult commandResult = new FlagAttCommand(toFlagAtt).execute(modelStub);
         assertEquals(String.format(FlagAttCommand.MESSAGE_SUCCESS, toFlagAtt),
@@ -42,7 +43,7 @@ class FlagAttCommandTest {
     @Test
     public void execute_studentPresent_throwsCommandException() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student toFlagAtt = new Student("Aaron Tan", "A0123456U");
+        Student toFlagAtt = new StudentBuilder().build();
         FlagAttCommand flagAttCommand = new FlagAttCommand(toFlagAtt);
 
         assertThrows(CommandException.class,
@@ -52,8 +53,8 @@ class FlagAttCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student wrongNameOne = new Student("Aaron", "A0123456U");
-        Student wrongNameTwo = new Student("Betty Tan", "A0123456U");
+        Student wrongNameOne = new StudentBuilder().withName("Aaron").withId("A0123456U").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").withId("A0123456U").build();
         FlagAttCommand flagAttCommandOne = new FlagAttCommand(wrongNameOne);
         FlagAttCommand flagAttCommandTwo = new FlagAttCommand(wrongNameTwo);
 
@@ -66,7 +67,7 @@ class FlagAttCommandTest {
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student wrongNumber = new Student("Aaron Tan", "A0000000U");
+        Student wrongNumber = new StudentBuilder().withName("Aaron Tan").withId("A0000000U").build();
         FlagAttCommand flagAttCommand = new FlagAttCommand(wrongNumber);
 
         assertThrows(CommandException.class,
@@ -76,7 +77,7 @@ class FlagAttCommandTest {
     @Test
     public void execute_notInGroup_throwsCommandException() {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toFlagAtt = new Student("Aaron Tan", "A0123456U");
+        Student toFlagAtt = new StudentBuilder().build();
         FlagAttCommand flagAttCommand = new FlagAttCommand(toFlagAtt);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> flagAttCommand.execute(modelStub));
@@ -85,7 +86,7 @@ class FlagAttCommandTest {
     @Test
     public void execute_notInLesson_throwsCommandException() {
         ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
-        Student toFlagAtt = new Student("Aaron Tan", "A0123456U");
+        Student toFlagAtt = new StudentBuilder().build();
         FlagAttCommand flagAttCommand = new FlagAttCommand(toFlagAtt);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_LESSON, () -> flagAttCommand.execute(modelStub));
@@ -95,7 +96,7 @@ class FlagAttCommandTest {
     public void execute_markIndex_success() throws CommandException {
         ModelStubWithIndexAbsent modelStub = new ModelStubWithIndexAbsent();
         Index validIndex = Index.fromOneBased(Integer.parseInt("1"));
-        Student toFlagAtt = new Student("Aaron Tan", "A0123456U");
+        Student toFlagAtt = new StudentBuilder().build();
 
         CommandResult commandResult = new FlagAttCommand(validIndex).execute(modelStub);
         assertEquals(String.format(FlagAttCommand.MESSAGE_SUCCESS, toFlagAtt),
@@ -109,7 +110,7 @@ class FlagAttCommandTest {
         FlagAttCommand flagAttCommand = new FlagAttCommand(wrongIndex);
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
                         wrongIndex.getOneBased()), () -> flagAttCommand.execute(modelStub));
     }
 

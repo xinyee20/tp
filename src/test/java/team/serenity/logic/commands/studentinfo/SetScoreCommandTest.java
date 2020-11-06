@@ -3,7 +3,7 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
@@ -20,6 +20,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.student.Student;
+import team.serenity.testutil.StudentBuilder;
 
 class SetScoreCommandTest {
 
@@ -30,9 +31,9 @@ class SetScoreCommandTest {
     }
 
     @Test
-    public void execute_setScoreOutOfRange_failure() throws CommandException {
+    public void execute_setScoreOutOfRange_throwCommandException() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student toSetScore = new Student("Aaron Tan", "A0123456U");
+        Student toSetScore = new StudentBuilder().build();
         int scoreOutOfRange = 6;
         SetScoreCommand setScoreCommand = new SetScoreCommand(toSetScore, scoreOutOfRange);
 
@@ -42,7 +43,7 @@ class SetScoreCommandTest {
     @Test
     public void execute_setScore_success() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student toSetScore = new Student("Aaron Tan", "A0123456U");
+        Student toSetScore = new StudentBuilder().build();
         int validScore = 1;
 
         CommandResult commandResult = new SetScoreCommand(toSetScore, validScore).execute(modelStub);
@@ -53,7 +54,7 @@ class SetScoreCommandTest {
     @Test
     public void execute_studentAbsent_throwCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student toSetScore = new Student("Aaron Tan", "A0123456U");
+        Student toSetScore = new StudentBuilder().build();
         int validScore = 1;
         SetScoreCommand setScoreCommand = new SetScoreCommand(toSetScore, validScore);
 
@@ -65,8 +66,8 @@ class SetScoreCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student wrongNameOne = new Student("Aaron", "A0123456U");
-        Student wrongNameTwo = new Student("Betty Tan", "A0123456U");
+        Student wrongNameOne = new StudentBuilder().withName("Aaron").withId("A0123456U").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").withId("A0123456U").build();
         int validScore = 1;
         SetScoreCommand setScoreCommandOne = new SetScoreCommand(wrongNameOne, validScore);
         SetScoreCommand setScoreCommandTwo = new SetScoreCommand(wrongNameTwo, validScore);
@@ -80,7 +81,7 @@ class SetScoreCommandTest {
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student wrongNumber = new Student("Aaron Tan", "A0000000U");
+        Student wrongNumber = new StudentBuilder().withName("Aaron Tan").withId("A0000000U").build();
         int validScore = 1;
         SetScoreCommand setScoreCommand = new SetScoreCommand(wrongNumber, validScore);
 
@@ -91,7 +92,7 @@ class SetScoreCommandTest {
     @Test
     public void execute_notInGroup_throwsCommandException() {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toSetScore = new Student("Aaron Tan", "A0123456U");
+        Student toSetScore = new StudentBuilder().build();
         int validScore = 1;
         SetScoreCommand setScoreCommand = new SetScoreCommand(toSetScore, validScore);
 
@@ -101,7 +102,7 @@ class SetScoreCommandTest {
     @Test
     public void execute_notInLesson_throwsCommandException() {
         ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
-        Student toSetScore = new Student("Aaron Tan", "A0123456U");
+        Student toSetScore = new StudentBuilder().build();
         int validScore = 1;
         SetScoreCommand setScoreCommand = new SetScoreCommand(toSetScore, validScore);
 
@@ -112,7 +113,7 @@ class SetScoreCommandTest {
     public void execute_markIndex_success() throws CommandException {
         ModelStubWithIndexPresent modelStub = new ModelStubWithIndexPresent();
         Index validIndex = Index.fromOneBased(Integer.parseInt("1"));
-        Student toSetScore = new Student("Aaron Tan", "A0123456U");
+        Student toSetScore = new StudentBuilder().build();
         int validScore = 1;
 
         CommandResult commandResult = new SetScoreCommand(validIndex, validScore).execute(modelStub);
@@ -127,7 +128,7 @@ class SetScoreCommandTest {
         int validScore = 1;
         SetScoreCommand setScoreCommand = new SetScoreCommand(wrongIndex, validScore);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
                 wrongIndex.getOneBased()), () -> setScoreCommand.execute(modelStub));
     }
 
