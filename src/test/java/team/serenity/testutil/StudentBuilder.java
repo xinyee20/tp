@@ -34,7 +34,6 @@ public class StudentBuilder {
      */
     public StudentBuilder withName(String name) {
         this.name = new StudentName(name);
-        this.studentNumber = DEFAULT_STUDENT_NUMBER;
         return this;
     }
 
@@ -43,7 +42,6 @@ public class StudentBuilder {
      */
     public StudentBuilder withId(String id) {
         this.studentNumber = new StudentNumber(id);
-        this.name = DEFAULT_NAME;
         return this;
     }
 

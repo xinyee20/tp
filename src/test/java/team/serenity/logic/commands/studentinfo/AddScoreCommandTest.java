@@ -12,7 +12,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.BENJAMIN;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ class AddScoreCommandTest {
 
     @Test
     public void execute_addScoreOutOfRange_throwCommandException() throws CommandException {
-        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student toAddScore = new StudentBuilder().build();
         int scoreOutOfRange = 6;
         AddScoreCommand addScoreCommand = new AddScoreCommand(toAddScore, scoreOutOfRange);
@@ -41,7 +41,7 @@ class AddScoreCommandTest {
 
     @Test
     public void execute_addScore_success() throws CommandException {
-        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student toAddScore = new StudentBuilder().build();
         int validAddScore = 1;
         int originalScore = 3;
@@ -65,7 +65,7 @@ class AddScoreCommandTest {
 
     @Test
     public void execute_wrongName_throwsCommandException() {
-        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student wrongNameOne = new StudentBuilder().withName("Aaron").withId("A0123456U").build();
         Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").withId("A0123456U").build();
         int validScore = 1;
@@ -80,7 +80,7 @@ class AddScoreCommandTest {
 
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() {
-        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student wrongNumber = new StudentBuilder().withName("Aaron Tan").withId("A0000000U").build();
         int validScore = 1;
         AddScoreCommand addScoreCommand = new AddScoreCommand(wrongNumber, validScore);
@@ -111,7 +111,7 @@ class AddScoreCommandTest {
 
     @Test
     public void execute_markIndex_success() throws CommandException {
-        ModelStubWithIndexWithScore modelStub = new ModelStubWithIndexWithScore();
+        ModelStubWithIndexPresent modelStub = new ModelStubWithIndexPresent();
         Index validIndex = Index.fromOneBased(Integer.parseInt("1"));
         Student toSetScore = new StudentBuilder().build();
         int validAddScore = 1;
@@ -125,7 +125,7 @@ class AddScoreCommandTest {
 
     @Test
     public void execute_wrongIndex_throwsCommandException() {
-        ModelStubWithIndexWithScore modelStub = new ModelStubWithIndexWithScore();
+        ModelStubWithIndexPresent modelStub = new ModelStubWithIndexPresent();
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         int validScore = 1;
         AddScoreCommand addScoreCommand = new AddScoreCommand(wrongIndex, validScore);
@@ -139,7 +139,7 @@ class AddScoreCommandTest {
         int validAddScore = 1;
         AddScoreCommand addScoreStudentCommandA = new AddScoreCommand(AARON, validAddScore);
         AddScoreCommand copyAddScoreStudentCommandA = new AddScoreCommand(AARON, validAddScore);
-        AddScoreCommand addScoreStudentCommandB = new AddScoreCommand(JOHN, validAddScore);
+        AddScoreCommand addScoreStudentCommandB = new AddScoreCommand(BENJAMIN, validAddScore);
         AddScoreCommand addScoreIndexCommandA = new AddScoreCommand(INDEX_FIRST, validAddScore);
         AddScoreCommand copyAddScoreIndexCommandA = new AddScoreCommand(INDEX_FIRST, validAddScore);
         AddScoreCommand addScoreIndexCommandB = new AddScoreCommand(INDEX_SECOND, validAddScore);

@@ -98,7 +98,7 @@ class MarkPresentCommandTest {
 
         assertThrows(CommandException.class,
                 String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
-                        INDEX_FIRST.getOneBased()), () -> markPresentCommand.execute(modelStub));
+                        INDEX_SECOND.getOneBased()), () -> markPresentCommand.execute(modelStub));
     }
 
     @Test

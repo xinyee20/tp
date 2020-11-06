@@ -1,8 +1,8 @@
 package team.serenity.testutil;
 
-import static team.serenity.testutil.TypicalStudentInfo.AARON_INFO;
-import static team.serenity.testutil.TypicalStudentInfo.BENJAMIN_INFO;
-import static team.serenity.testutil.TypicalStudentInfo.CATHERINE_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.AARON_ABSENT_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.BENJAMIN_ABSENT_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.CATHERINE_ABSENT_INFO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import team.serenity.commons.core.sorter.StudentInfoSorter;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
@@ -20,7 +21,7 @@ import team.serenity.model.util.UniqueList;
 public class LessonBuilder {
     public static final String DEFAULT_NAME = "1-1";
     public static final Set<StudentInfo> DEFAULT_STUDENT_INFO =
-            new HashSet<>(Arrays.asList(AARON_INFO, BENJAMIN_INFO, CATHERINE_INFO));
+            new HashSet<>(Arrays.asList(AARON_ABSENT_INFO, BENJAMIN_ABSENT_INFO, CATHERINE_ABSENT_INFO));
 
     private String name;
     private UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
@@ -32,6 +33,7 @@ public class LessonBuilder {
     public LessonBuilder() {
         this.name = DEFAULT_NAME;
         this.studentsInfo.setElementsWithList(new ArrayList<>(DEFAULT_STUDENT_INFO));
+        this.studentsInfo.sort(new StudentInfoSorter());
     }
 
     /**
@@ -57,6 +59,7 @@ public class LessonBuilder {
      */
     public LessonBuilder withStudentInfos(StudentInfo... studentInfos) {
         this.studentsInfo.setElementsWithList(Arrays.asList(studentInfos));
+        this.studentsInfo.sort(new StudentInfoSorter());
         return this;
     }
 
@@ -68,6 +71,7 @@ public class LessonBuilder {
         this.studentsInfo.setElementsWithList(
                 Arrays.stream(student).map(StudentInfo::new).collect(Collectors.toList())
         );
+        this.studentsInfo.sort(new StudentInfoSorter());
         return this;
     }
 

@@ -11,7 +11,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.BENJAMIN;
 
 import org.junit.jupiter.api.Test;
 
@@ -107,7 +107,7 @@ class UnflagAttCommandTest {
     public void equals() {
         UnflagAttCommand unflagStudentCommandA = new UnflagAttCommand(AARON);
         UnflagAttCommand copyUnflagStudentCommandA = new UnflagAttCommand(AARON);
-        UnflagAttCommand unflagStudentCommandB = new UnflagAttCommand(JOHN);
+        UnflagAttCommand unflagStudentCommandB = new UnflagAttCommand(BENJAMIN);
         UnflagAttCommand unflagIndexCommandA = new UnflagAttCommand(INDEX_FIRST);
         UnflagAttCommand copyUnflagIndexCommandA = new UnflagAttCommand(INDEX_FIRST);
         UnflagAttCommand unflagIndexCommandB = new UnflagAttCommand(INDEX_SECOND);

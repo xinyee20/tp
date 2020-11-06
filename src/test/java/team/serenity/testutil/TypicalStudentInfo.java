@@ -11,6 +11,7 @@ import static team.serenity.testutil.TypicalStudent.HELENE;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.managers.StudentInfoManager;
@@ -18,14 +19,32 @@ import team.serenity.model.util.UniqueList;
 
 public class TypicalStudentInfo {
 
-    public static final StudentInfo AARON_INFO = new StudentInfoBuilder().withStudent(AARON)
+    public static final StudentInfo AARON_ABSENT_INFO = new StudentInfoBuilder().withStudent(AARON)
             .withAttendance(false).withParticipation(0).build();
 
-    public static final StudentInfo BENJAMIN_INFO = new StudentInfoBuilder().withStudent(BENJAMIN)
+    public static final StudentInfo AARON_PRESENT_INFO = new StudentInfoBuilder().withStudent(AARON)
+            .withAttendance(true).withParticipation(3).build();
+
+    public static final StudentInfo AARON_FLAGGED_INFO = new StudentInfoBuilder().withStudent(AARON)
+            .withAttendance(new Attendance(false, true)).withParticipation(0).build();
+
+    public static final StudentInfo BENJAMIN_ABSENT_INFO = new StudentInfoBuilder().withStudent(BENJAMIN)
             .withAttendance(false).withParticipation(0).build();
 
-    public static final StudentInfo CATHERINE_INFO = new StudentInfoBuilder().withStudent(CATHERINE)
+    public static final StudentInfo BENJAMIN_PRESENT_INFO = new StudentInfoBuilder().withStudent(BENJAMIN)
+            .withAttendance(true).withParticipation(3).build();
+
+    public static final StudentInfo BENJAMIN_FLAGGED_INFO = new StudentInfoBuilder().withStudent(BENJAMIN)
+            .withAttendance(new Attendance(false, true)).withParticipation(0).build();
+
+    public static final StudentInfo CATHERINE_ABSENT_INFO = new StudentInfoBuilder().withStudent(CATHERINE)
             .withAttendance(false).withParticipation(0).build();
+
+    public static final StudentInfo CATHERINE_PRESENT_INFO = new StudentInfoBuilder().withStudent(CATHERINE)
+            .withAttendance(true).withParticipation(3).build();
+
+    public static final StudentInfo CATHERINE_FLAGGED_INFO = new StudentInfoBuilder().withStudent(CATHERINE)
+            .withAttendance(new Attendance(false, true)).withParticipation(0).build();
 
     public static final StudentInfo DAVID_INFO = new StudentInfoBuilder().withStudent(DAVID)
             .withAttendance(false).withParticipation(0).build();

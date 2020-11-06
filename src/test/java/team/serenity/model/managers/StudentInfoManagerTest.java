@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
-import static team.serenity.testutil.TypicalStudentInfo.CATHERINE_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.CATHERINE_ABSENT_INFO;
 import static team.serenity.testutil.TypicalStudentInfo.GEORGE_INFO;
 import static team.serenity.testutil.TypicalStudentInfo.HELENE_INFO;
 import static team.serenity.testutil.TypicalStudentInfo.getTypicalStudentInfoManager;
@@ -52,13 +52,14 @@ public class StudentInfoManagerTest {
         assertThrows(NullPointerException.class, () ->
                 this.studentInfoManager.checkIfStudentInfoExist(null, null));
         assertThrows(NullPointerException.class, () ->
-                this.studentInfoManager.checkIfStudentInfoExist(null, CATHERINE_INFO));
+                this.studentInfoManager.checkIfStudentInfoExist(null, CATHERINE_ABSENT_INFO));
     }
 
     @Test
     public void checkIfStudentInfoExist_groupLessonKeyDoesNotExist_throwGroupLessonPairNotFoundException() {
         assertThrows(GroupLessonPairNotFoundException.class, () ->
-                this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), CATHERINE_INFO));
+                this.studentInfoManager.checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(),
+                        CATHERINE_ABSENT_INFO));
 
     }
 
@@ -72,7 +73,7 @@ public class StudentInfoManagerTest {
     public void checkIfStudentInfoExist_targetStudentInfoDoesNotExist_returnFalse() {
         this.studentInfoManager.resetData(getTypicalStudentInfoManager());
         assertFalse(this.studentInfoManager
-                .checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), CATHERINE_INFO));
+                .checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), CATHERINE_ABSENT_INFO));
     }
 
     @Test
@@ -102,10 +103,10 @@ public class StudentInfoManagerTest {
     public void addStudentInfoToKey_validStudentInfo() {
         this.studentInfoManager.resetData(getTypicalStudentInfoManager());
         assertFalse(this.studentInfoManager
-                .checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), CATHERINE_INFO));
-        this.studentInfoManager.addStudentInfoToKey(new GroupLessonKeyBuilder().build(), CATHERINE_INFO);
+                .checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), CATHERINE_ABSENT_INFO));
+        this.studentInfoManager.addStudentInfoToKey(new GroupLessonKeyBuilder().build(), CATHERINE_ABSENT_INFO);
         assertTrue(this.studentInfoManager
-                .checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), CATHERINE_INFO));
+                .checkIfStudentInfoExist(new GroupLessonKeyBuilder().build(), CATHERINE_ABSENT_INFO));
     }
 
     @Test
@@ -148,7 +149,7 @@ public class StudentInfoManagerTest {
     public void deleteStudentInfoFromGroupLessonKey_studentInfoDoesNotExist_throwStudentInfoNotFoundException() {
         this.studentInfoManager.resetData(getTypicalStudentInfoManager());
         assertThrows(StudentInfoNotFoundException.class, () -> this.studentInfoManager
-                .deleteStudentInfoFromGroupLessonKey(new GroupLessonKeyBuilder().build(), CATHERINE_INFO));
+                .deleteStudentInfoFromGroupLessonKey(new GroupLessonKeyBuilder().build(), CATHERINE_ABSENT_INFO));
     }
 
     @Test

@@ -12,7 +12,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.BENJAMIN;
 
 import org.junit.jupiter.api.Test;
 
@@ -137,7 +137,7 @@ class SetScoreCommandTest {
         int validScore = 1;
         SetScoreCommand setScoreStudentCommandA = new SetScoreCommand(AARON, validScore);
         SetScoreCommand copySetScoreStudentCommandA = new SetScoreCommand(AARON, validScore);
-        SetScoreCommand setScoreStudentCommandB = new SetScoreCommand(JOHN, validScore);
+        SetScoreCommand setScoreStudentCommandB = new SetScoreCommand(BENJAMIN, validScore);
         SetScoreCommand setScoreIndexCommandA = new SetScoreCommand(INDEX_FIRST, validScore);
         SetScoreCommand copySetScoreIndexCommandA = new SetScoreCommand(INDEX_FIRST, validScore);
         SetScoreCommand setScoreIndexCommandB = new SetScoreCommand(INDEX_SECOND, validScore);

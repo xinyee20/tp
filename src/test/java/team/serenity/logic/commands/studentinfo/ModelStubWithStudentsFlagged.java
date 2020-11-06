@@ -1,5 +1,9 @@
 package team.serenity.logic.commands.studentinfo;
 
+import static team.serenity.testutil.TypicalStudentInfo.AARON_FLAGGED_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.BENJAMIN_FLAGGED_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.CATHERINE_FLAGGED_INFO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +15,6 @@ import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
-import team.serenity.model.group.student.Student;
-import team.serenity.model.group.studentinfo.Attendance;
-import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
@@ -43,22 +44,7 @@ public class ModelStubWithStudentsFlagged extends ModelStub {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
-                .withStudentInfos(
-                        new StudentInfo(new Student("Aaron Tan", "A0123456U"),
-                                new Participation(0),
-                                new Attendance(false, true)),
-                        new StudentInfo(new Student("Baron Wong", "A0654321C"),
-                                new Participation(0),
-                                new Attendance(false, true)),
-                        new StudentInfo(new Student("Cherry Lee", "A0135791B"),
-                                new Participation(0),
-                                new Attendance(false, true)),
-                        new StudentInfo(new Student("Dickson Low", "A0246810D"),
-                                new Participation(0),
-                                new Attendance(false, true)),
-                        new StudentInfo(new Student("Eng Wee Kiat", "A0101010E"),
-                                new Participation(0),
-                                new Attendance(false, true)))
+                .withStudentInfos(AARON_FLAGGED_INFO, BENJAMIN_FLAGGED_INFO, CATHERINE_FLAGGED_INFO)
                 .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();

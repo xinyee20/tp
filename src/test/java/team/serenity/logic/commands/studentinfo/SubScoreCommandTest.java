@@ -12,7 +12,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.BENJAMIN;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ class SubScoreCommandTest {
 
     @Test
     public void execute_subScoreOutOfRange_throwCommandException() throws CommandException {
-        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student toSubScore = new StudentBuilder().build();
         int subScoreOutOfRange = 4;
         SubScoreCommand subScoreCommand = new SubScoreCommand(toSubScore, subScoreOutOfRange);
@@ -41,7 +41,7 @@ class SubScoreCommandTest {
 
     @Test
     public void execute_subScore_success() throws CommandException {
-        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student toSubScore = new StudentBuilder().build();
         int validSubScore = 1;
         int originalScore = 3;
@@ -65,7 +65,7 @@ class SubScoreCommandTest {
 
     @Test
     public void execute_wrongName_throwsCommandException() throws CommandException {
-        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student wrongNameOne = new StudentBuilder().withName("Aaron").withId("A0123456U").build();
         Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").withId("A0123456U").build();
         int validScore = 1;
@@ -80,7 +80,7 @@ class SubScoreCommandTest {
 
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() throws CommandException {
-        ModelStubWithStudentsWithScores modelStub = new ModelStubWithStudentsWithScores();
+        ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student wrongNumber = new StudentBuilder().withName("Aaron Tan").withId("A0000000U").build();
         int validScore = 1;
         SubScoreCommand subScoreCommand = new SubScoreCommand(wrongNumber, validScore);
@@ -111,7 +111,7 @@ class SubScoreCommandTest {
 
     @Test
     public void execute_markIndex_success() throws CommandException {
-        ModelStubWithIndexWithScore modelStub = new ModelStubWithIndexWithScore();
+        ModelStubWithIndexPresent modelStub = new ModelStubWithIndexPresent();
         Index validIndex = Index.fromOneBased(Integer.parseInt("1"));
         Student toSubScore = new StudentBuilder().build();
         int validSubScore = 1;
@@ -125,7 +125,7 @@ class SubScoreCommandTest {
 
     @Test
     public void execute_wrongIndex_throwsCommandException() throws CommandException {
-        ModelStubWithIndexWithScore modelStub = new ModelStubWithIndexWithScore();
+        ModelStubWithIndexPresent modelStub = new ModelStubWithIndexPresent();
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         int validScore = 1;
         SubScoreCommand subScoreCommand = new SubScoreCommand(wrongIndex, validScore);
@@ -139,7 +139,7 @@ class SubScoreCommandTest {
         int validSubScore = 1;
         SubScoreCommand subScoreStudentCommandA = new SubScoreCommand(AARON, validSubScore);
         SubScoreCommand copySubScoreStudentCommandA = new SubScoreCommand(AARON, validSubScore);
-        SubScoreCommand subScoreStudentCommandB = new SubScoreCommand(JOHN, validSubScore);
+        SubScoreCommand subScoreStudentCommandB = new SubScoreCommand(BENJAMIN, validSubScore);
         SubScoreCommand subScoreIndexCommandA = new SubScoreCommand(INDEX_FIRST, validSubScore);
         SubScoreCommand copySubScoreIndexCommandA = new SubScoreCommand(INDEX_FIRST, validSubScore);
         SubScoreCommand subScoreIndexCommandB = new SubScoreCommand(INDEX_SECOND, validSubScore);
