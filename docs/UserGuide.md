@@ -180,7 +180,7 @@ You can use commands to tell **Serenity** to perform a specific task.
 `COMMAND_WORD prefix/PARAMETER`
 
 > :memo: **Notes regarding the command format:**
->* Words in upper case are the parameters to be supplied by you.<br>e.g. in `viewgrp grp/GROUP_NAME`, `GROUP_NAME` is a parameter which can be used as `viewgrp grp/G04`
+>* Words in upper case are the parameters to be supplied by you.<br>e.g. in `viewgrp grp/GROUP_NAME`, `GROUP_NAME` is a parameter which can be used as `viewgrp grp/G01`
 >* Parameters have to be in the specified order.<br>e.g. if the command specifies `grp/GROUP_NAME lsn/LESSON_NAME`, `lsn/LESSON_NAME grp/GROUP_NAME` is not acceptable.
 
 **Example:**
@@ -610,7 +610,7 @@ Unflagging a student's attendance for a tutorial lesson by his `name` and `stude
 <ins>Method 2</ins><br>
 Unflagging a student's attendance for a tutorial lesson by his `index` number:
 
-1. Navigate to view group `G04` lesson `1-2` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
+1. Navigate to view group `G01` lesson `1-2` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `unflagatt 1` into the _Command Box_.
 3. Press `Enter` to execute.
 
@@ -637,15 +637,15 @@ You can use this command to export the attendance sheet of a specific tutorial g
 
 **Example**:
 
-You want to export the attendance sheet of tutorial group `G04`.
+You want to export the attendance sheet of tutorial group `G01`.
 
 Exporting attendance sheet of a tutorial group:
-1. Type `exportatt grp/G04` into the _Command Box_.
+1. Type `exportatt grp/G01` into the _Command Box_.
 2. Press `Enter` to execute.
 
 Outcome:
 1. The _Result Display_ will show a success message.
-2. The attendance sheet of tutorial group `G04` will be saved as `G04_attendance.xlsx`.
+2. The attendance sheet of tutorial group `G01` will be saved as `G01_attendance.xlsx`.
 You can find the XLSX file at the location where your **Serenity** application is located.
 
 <p align="center"><img src="images/export/exportatt_command.png" alt="Command box for exportatt command"></p>
@@ -837,7 +837,7 @@ address the question in the future.
 
 Adding a question:
 
-1. Navigate to view group `G04` lesson `1-1` via [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
+1. Navigate to view group `G01` lesson `1-1` via [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 1. Type `addqn qn/What is the deadline for the report?` into the _Command Box_.
 1. Press `Enter` to execute.
 
@@ -969,7 +969,7 @@ Viewing a tutorial group by pressing the group button:
 Outcome:
 
 1. The _Result Display_ will show a success message.
-2. The _Data Display_ will update and display the information for tutorial group `G04`.
+2. The _Data Display_ will update and display the information for tutorial group `G01`.
 
 <p align="center"><img src="images/view/viewgrp.png" 
 alt="User interface for viewing tutorial group"></p>
