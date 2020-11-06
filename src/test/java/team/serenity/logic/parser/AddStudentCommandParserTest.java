@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import team.serenity.logic.commands.student.AddStudentCommand;
 import team.serenity.logic.parser.student.AddStudentCommandParser;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 
 public class AddStudentCommandParserTest {
@@ -34,13 +36,34 @@ public class AddStudentCommandParserTest {
     }
 
     @Test
+    public void parse_invalidStudentName() {
+        String studentName = "Wayne Wayne Wayne Wayne Wayne Wayne Wayne Wayne Wayne Wayne";
+        String studentId = "A0123456S";
+        String groupName = "G04";
+        String nameLengthExceeded = " " + PREFIX_GRP + groupName + " " + PREFIX_NAME
+            + studentName + " " + PREFIX_MATRIC + studentId;
+        assertParseFailure(parser, nameLengthExceeded, StudentName.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidStudentNumber() {
+        String studentName = "Wayne";
+        String studentId = "A01234567S";
+        String groupName = "G04";
+        String nameLengthExceeded = " " + PREFIX_GRP + groupName + " " + PREFIX_NAME
+            + studentName + " " + PREFIX_MATRIC + studentId;
+        assertParseFailure(parser, nameLengthExceeded, StudentNumber.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void parse_successfulArguments() {
         String studentName = "John";
         String studentId = "A0123456S";
         String groupName = "G04";
         String args = " " + PREFIX_GRP + groupName + " " + PREFIX_NAME
-            + studentName.toUpperCase() + " " + PREFIX_MATRIC + studentId;
-        AddStudentCommand result = new AddStudentCommand(studentName.toUpperCase(), studentId,
+            + studentName + " " + PREFIX_MATRIC + studentId;
+        AddStudentCommand result = new AddStudentCommand(new StudentName(studentName),
+            new StudentNumber(studentId),
             new GroupContainsKeywordPredicate(groupName));
         assertParseSuccess(parser, args, result);
     }

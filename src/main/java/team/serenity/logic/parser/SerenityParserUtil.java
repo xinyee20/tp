@@ -3,6 +3,7 @@ package team.serenity.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 
 import java.io.IOException;
 
@@ -82,13 +83,13 @@ public class SerenityParserUtil {
      *
      * @throws ParseException if the given {@code student} is invalid.
      */
-    public static String parseStudentName(String studentName) throws ParseException {
+    public static StudentName parseStudentName(String studentName) throws ParseException {
         requireNonNull(studentName);
         String trimmedName = studentName.trim();
         if (!Student.isValidName(trimmedName)) {
             throw new ParseException(StudentName.MESSAGE_CONSTRAINTS);
         }
-        return trimmedName;
+        return new StudentName(trimmedName);
     }
 
     /**
@@ -96,13 +97,13 @@ public class SerenityParserUtil {
      *
      * @throws ParseException if the given {@code studentId} is invalid.
      */
-    public static String parseStudentID(String studentId) throws ParseException {
+    public static StudentNumber parseStudentNumber(String studentId) throws ParseException {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
         if (!Student.isValidStudentId(trimmedId)) {
             throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
-        return trimmedId;
+        return new StudentNumber(trimmedId);
     }
 
     /**
@@ -146,10 +147,15 @@ public class SerenityParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+        Integer index = Integer.parseInt(trimmedIndex);
+        try {
+            index = Integer.parseInt(trimmedIndex);
+            if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            return Index.fromOneBased(index);
+        } catch (Exception e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, index));
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
-
 }

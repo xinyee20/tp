@@ -1,7 +1,7 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudentInfo.AARON_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.AARON_ABSENT_INFO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +44,7 @@ class ModelStubWithIndexAbsent extends ModelStub {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
-                .withStudentInfos(AARON_INFO)
+                .withStudentInfos(AARON_ABSENT_INFO)
                 .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();

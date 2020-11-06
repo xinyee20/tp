@@ -17,12 +17,14 @@ import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new EditScoreCommand object.
  * Current support:
- * setscore name/NAME id/STUDENT_NUMBER score/SCORE
- * setscore INDEX score/SCORE
+ * editscore name/NAME id/STUDENT_NUMBER score/SCORE
+ * editscore INDEX score/SCORE
  */
 public class EditScoreCommandParser implements Parser<EditScoreCommand> {
 
@@ -38,8 +40,8 @@ public class EditScoreCommandParser implements Parser<EditScoreCommand> {
                 PREFIX_NAME, PREFIX_MATRIC, PREFIX_SET_SCORE);
 
         Index index;
-        String studentName;
-        String studentNumber;
+        StudentName studentName;
+        StudentNumber studentNumber;
         Optional<Student> student;
         int score;
 
@@ -60,16 +62,32 @@ public class EditScoreCommandParser implements Parser<EditScoreCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
-            student = Optional.ofNullable(new Student(studentName, studentNumber));
-            score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
-            return new EditScoreCommand(student.get(), score);
-        } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
-            return new EditScoreCommand(index, score);
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+                studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
+                student = Optional.ofNullable(new Student(studentName, studentNumber));
+                score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
+                return new EditScoreCommand(student.get(), score);
+            } else {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
+                return new EditScoreCommand(index, score);
+            }
+        } catch (Exception e) {
+            if (e instanceof ParseException) {
+                throw new ParseException(e.getMessage());
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
+            }
         }
     }
 

@@ -1,7 +1,8 @@
 package team.serenity.logic.commands.studentinfo;
 
-import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudentInfo.AARON_PRESENT_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.AARON_FLAGGED_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.BENJAMIN_FLAGGED_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.CATHERINE_FLAGGED_INFO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,18 +22,17 @@ import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
 
 /**
- * A Model stub containing a present student
+ * A Model stub containing students who are flagged
  */
-class ModelStubWithIndexPresent extends ModelStub {
+public class ModelStubWithStudentsFlagged extends ModelStub {
     private Group uniqueGroup;
     private Lesson uniqueLesson;
+
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         List<Group> grpList = new ArrayList<>();
-        this.uniqueGroup = new GroupBuilder().withName("G01")
-                .withStudents(AARON)
-                .withClasses("1-1").build();
+        this.uniqueGroup = new GroupBuilder().build();
         grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
@@ -44,7 +44,7 @@ class ModelStubWithIndexPresent extends ModelStub {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
-                .withStudentInfos(AARON_PRESENT_INFO)
+                .withStudentInfos(AARON_FLAGGED_INFO, BENJAMIN_FLAGGED_INFO, CATHERINE_FLAGGED_INFO)
                 .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
@@ -75,12 +75,12 @@ class ModelStubWithIndexPresent extends ModelStub {
     }
 
     @Override
-    public void updateLessonList() {
+    public void updateStudentsInfoList() {
         return;
     }
 
     @Override
-    public void updateStudentsInfoList() {
+    public void updateLessonList() {
         return;
     }
 

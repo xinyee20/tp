@@ -32,7 +32,7 @@ public class Messages {
             "%s is not found. \nPlease ensure the name & student id is correct!";
     public static final String MESSAGE_DUPLICATE_STUDENT = "Student already exists!";
 
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "Index %d is invalid.";
+    public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "Index %d is invalid.";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     public static final String MESSAGE_NOT_VIEWING_A_GROUP = "Group not specified.";
@@ -48,4 +48,7 @@ public class Messages {
         "There are no students in this group. You may use addstudent command to add a student.";
     public static final String MESSAGE_NO_LESSONS =
         "There are no lessons in this group. Yoo may use addlsn command to add a lesson.";
+    public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
+    public static final String MESSAGE_SCORE_TO_ADD = "Score to add should be a positive number greater than 0";
+    public static final String MESSAGE_SCORE_TO_SUB = "Score to subtract should be a positive number greater than 0";
 }

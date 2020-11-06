@@ -1,7 +1,7 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudentInfo.AARON_PRESENT_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.AARON_FLAGGED_INFO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,9 +21,9 @@ import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
 
 /**
- * A Model stub containing a present student
+ * A Model stub containing a flagged student
  */
-class ModelStubWithIndexPresent extends ModelStub {
+public class ModelStubWithIndexFlagged extends ModelStub {
     private Group uniqueGroup;
     private Lesson uniqueLesson;
 
@@ -44,7 +44,7 @@ class ModelStubWithIndexPresent extends ModelStub {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
-                .withStudentInfos(AARON_PRESENT_INFO)
+                .withStudentInfos(AARON_FLAGGED_INFO)
                 .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();

@@ -1,5 +1,9 @@
 package team.serenity.logic.commands.studentinfo;
 
+import static team.serenity.testutil.TypicalStudentInfo.AARON_PRESENT_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.BENJAMIN_PRESENT_INFO;
+import static team.serenity.testutil.TypicalStudentInfo.CATHERINE_PRESENT_INFO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,12 +22,11 @@ import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
 
 /**
- * A Model stub containing absent students
+ * A Model stub containing present students
  */
 class ModelStubWithStudentsPresent extends ModelStub {
     private Group uniqueGroup;
     private Lesson uniqueLesson;
-
 
     @Override
     public ObservableList<Group> getFilteredGroupList() {
@@ -38,7 +41,10 @@ class ModelStubWithStudentsPresent extends ModelStub {
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         List<Lesson> lsnList = new ArrayList<>();
-        this.uniqueLesson = new LessonBuilder().build();
+        this.uniqueLesson = new LessonBuilder()
+                .withName("1-1")
+                .withStudentInfos(AARON_PRESENT_INFO, BENJAMIN_PRESENT_INFO, CATHERINE_PRESENT_INFO)
+                .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
         lessonUniqueList.setElementsWithList(lsnList);
