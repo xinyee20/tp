@@ -361,7 +361,7 @@ In this section, we will detail the workflow of adding a new student to an exist
 using the `addstudent` command. The workflow is shown in the Activity Diagram below.
 
 <p align="center"><img src="images/developerGuide/AddStudentActivityDiagram.png" alt="Figure 4.4.2.1 Activity diagram of `addstudent` command" width="317px" height="709px"></p>
-<p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
+<p align="center"><i>Figure 4.4.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
 
 The following steps describe the workflow of `addstudent` in detail, assuming that no error is encountered.
 
