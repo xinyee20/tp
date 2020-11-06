@@ -49,9 +49,12 @@ public class CommandTestUtil {
     public static final String VALID_ADD = "1";
     public static final String VALID_SUB = "1";
 
+    public static final String GRP_DESC_GROUP_G01 = " " + PREFIX_GRP + VALID_GROUP_NAME_G01;
+    public static final String GRP_DESC_GROUP_G02 = " " + PREFIX_GRP + VALID_GROUP_NAME_G02;
     public static final String GRP_DESC_GROUP_G04 = " " + PREFIX_GRP + VALID_GROUP_NAME_G04;
     public static final String GRP_DESC_GROUP_G05 = " " + PREFIX_GRP + VALID_GROUP_NAME_G05;
     public static final String LESSON_DESC_LESSON_1_1 = " " + PREFIX_LSN + VALID_LESSON_NAME_1_1;
+    public static final String LESSON_DESC_LESSON_1_2 = " " + PREFIX_LSN + VALID_LESSON_NAME_1_2;
     public static final String PATH_DESC_GROUP_G04 = " " + PREFIX_PATH + VALID_PATH_G04;
     public static final String PATH_DESC_GROUP_G05 = " " + PREFIX_PATH + VALID_PATH_G05;
     public static final String QN_DESC_GROUP_A = " " + PREFIX_QN + VALID_QN_DESC_A;

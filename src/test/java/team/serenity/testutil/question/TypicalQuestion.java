@@ -2,9 +2,7 @@ package team.serenity.testutil.question;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonName;

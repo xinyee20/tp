@@ -8,13 +8,12 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_QN;
 
 import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.question.EditQnCommand;
+import team.serenity.logic.commands.question.EditQnCommand.EditQuestionDescriptor;
 import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.GroupName;
-import team.serenity.model.group.lesson.LessonName;
 
 /**
  * Parses input arguments and creates a new EditQnCommand.
@@ -40,13 +39,15 @@ public class EditQnCommandParser implements Parser<EditQnCommand> {
                     EditQnCommand.MESSAGE_USAGE), pe);
         }
 
-        EditQnCommand.EditQuestionDescriptor editQuestionDescriptor = new EditQnCommand.EditQuestionDescriptor();
+        EditQuestionDescriptor editQuestionDescriptor = new EditQnCommand.EditQuestionDescriptor();
 
         if (argMultimap.getValue(PREFIX_GRP).isPresent()) {
-            editQuestionDescriptor.setGroupName(new GroupName(argMultimap.getValue(PREFIX_GRP).get()));
+            editQuestionDescriptor.setGroupName(SerenityParserUtil
+                    .parseGroupName(argMultimap.getValue(PREFIX_GRP).get()));
         }
         if (argMultimap.getValue(PREFIX_LSN).isPresent()) {
-            editQuestionDescriptor.setLessonName(new LessonName(argMultimap.getValue(PREFIX_LSN).get()));
+            editQuestionDescriptor.setLessonName(SerenityParserUtil
+                    .parseLessonName(argMultimap.getValue(PREFIX_LSN).get()));
         }
         if (argMultimap.getValue(PREFIX_QN).isPresent()) {
             editQuestionDescriptor.setDescription(SerenityParserUtil

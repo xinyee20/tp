@@ -10,7 +10,6 @@ import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_C;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
