@@ -17,6 +17,8 @@ import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new EditScoreCommand object.
@@ -38,8 +40,8 @@ public class EditScoreCommandParser implements Parser<EditScoreCommand> {
                 PREFIX_NAME, PREFIX_MATRIC, PREFIX_SET_SCORE);
 
         Index index;
-        String studentName;
-        String studentNumber;
+        StudentName studentName;
+        StudentNumber studentNumber;
         Optional<Student> student;
         int score;
 
@@ -62,7 +64,7 @@ public class EditScoreCommandParser implements Parser<EditScoreCommand> {
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
+            studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
             score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
             return new EditScoreCommand(student.get(), score);
