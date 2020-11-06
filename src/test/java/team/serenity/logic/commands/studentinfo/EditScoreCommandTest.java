@@ -2,7 +2,7 @@ package team.serenity.logic.commands.studentinfo;
 
 import org.junit.jupiter.api.Test;
 
-class SetScoreCommandTest {
+class EditScoreCommandTest {
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
