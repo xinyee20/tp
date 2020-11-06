@@ -39,7 +39,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The Architecture Diagram given in Figure 3.1.1 below explains the high-level design of Serenity.
 
-![Figure 3.1.1 Architecture Diagram of Serenity](images/ArchitectureDiagram.png)
+![Figure 3.1.1 Architecture Diagram of Serenity](images/developerGuide/ArchitectureDiagram.png)
 
 <p align="center">Figure 3.1.1 Architecture Diagram of Serenity</p>
 
@@ -58,9 +58,9 @@ Component | Description
 `Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the `Storage` interface and exposes its functionality through the `StorageManager` class.
 
 **How the architecture components interact with each other**
-The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command delete 1.
+The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command `delgrp grp/G04`.
 
-![Figure 3.1.2](images/ArchitectureSequenceDiagram.png)
+![Figure 3.1.2](images/developerGuide/ArchitectureSequenceDiagram.png)
 
 <p align="center"><i>Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
@@ -76,7 +76,7 @@ This segment will explain the structure and responsibilities of the Ui component
 
 The Class Diagram given in Figure 3.2.1.1 below describes the structure of the Ui-related classes.
 
-![Figure 3.2.1.1](images/UiClassDiagram2.png)
+![Figure 3.2.1.1](images/developerGuide/UiClassDiagram2.png)
 
 <p align="center"><i>Figure 3.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
@@ -103,7 +103,7 @@ This segment will explain the structure and responsibilities of the `Logic`compo
 
 The Class Diagram given in Figure 3.3.1.1 below describes the structure of Logic-related classes.
 
-![Figure 3.3.1.1](images/LogicClassDiagram2.png)
+![Figure 3.3.1.1](images/developerGuide/LogicClassDiagram2.png)
 
 <p align="center"><i>Figure 3.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
@@ -125,7 +125,7 @@ The steps described above will be the standard command parsing and execution of 
 To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command delgrp grp/G04 is shown below. 
 The diagram starts with the `execute("delgrp grp/G04")` API call.
 
-![Figure 3.3.2.1](images/DeleteSequenceDiagram.png)
+![Figure 3.3.2.1](images/developerGuide/DeleteSequenceDiagram.png)
 
 <p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the `delgrp grp/G04` command.</i></p>
 
@@ -139,7 +139,7 @@ This segment will explain the structure and responsibilities of the Model compon
 
 #### **3.4.1 Structure**
 
-![Figure 3.4.1.1 Simplified Class Diagram of `model` component ](images/ModelClassDiagram.png)
+![Figure 3.4.1.1 Simplified Class Diagram of `model` component ](images/developerGuide/ModelClassDiagram.png)
 
 <p align="center"><i>Figure 3.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
 
@@ -183,7 +183,7 @@ This segment will explain the structure and responsibilities of the Storage comp
 #### **3.5.1 Structure**
 
 <p align="center">
-<img alt="Class diagram of Storage component" src="images/StorageClassDiagram.png" ></p>
+<img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png" ></p>
 
 <p align="center"><i>Figure 3.5.1 Class diagram of <code>Storage</code> component.</i></p>
 
@@ -235,7 +235,7 @@ When describing some common features across all managers, a typical manager shal
 
 #### **4.1.1 Rationale**
 
-These five main XYZManagers provide a way for tutors to manage the different aspects of teaching a class, 
+These five main `XYZManagers` provide a way for tutors to manage the different aspects of teaching a class, 
 so as to facilitate teaching a class more effectively.   
 
 #### **4.1.2 Current Implementation**
@@ -262,7 +262,7 @@ a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for 
 This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
 
 <p align="center">
-<img src="images/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
+<img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
 
 <p align="center"><i>Figure 4.1.2.1: Structure of <code>GroupManager</code>, an example of 
 a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
@@ -292,7 +292,7 @@ The following steps describe the execution of `DelGrpCommand` in detail, assumin
 The sequence diagram below documents the execution.
 
 <p align="center">
-<img src="images/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
+<img src="images/developerGuide/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
 
 <p align="center"><i>Figure 4.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
@@ -314,8 +314,8 @@ Having a `LessonManager` allows for easy retrieval, viewing and updating of the 
 The `LessonManager` contains a `HashMap` whose key is a Group and value is a UniqueList.
 In this section, we detail the workflow of adding a lesson to an existing tutorial group through the `addlsn` command.
 
-<p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
-<p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
+<p align="center"><img src="images/developerGuide/AddLsnDiagram.png" alt="Figure 4.5.2.1 Activity diagram detailing execution of <code>addlsn</code> command"></p>
+<p align="center"><i>Figure 4.3.2.1. Activity diagram detailing execution of <code>addlsn</code> command.</i></p>
 
 The following steps describe the execution of `addlsn` in detail, assuming that no error is encountered.
 
@@ -331,7 +331,7 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 |   |**Pros**|**Cons**|
 |---|---|---|
-| **Option 1: **More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
+| **Option 1:** More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
 | **Option 2 (current)**<br>One | Easy to implement, easier to retrieve all lessons taught by a single tutor | More difficult to retrieve lessons tied to a specific group |
 
 ### **4.4 Student Manager**
@@ -359,7 +359,7 @@ The `StudentManager` contains a `HashMap` which key is a `GroupName` and value i
 In this section, we will detail the workflow of adding a new student to an existing tutorial group
 using the `addstudent` command. The workflow is shown in the Activity Diagram below.
 
-<p align="center"><img src="images/AddStudentActivityDiagram.png" alt="Figure 4.4.2.1 Activity diagram of `addstudent` command"></p>
+<p align="center"><img src="images/developerGuide/AddStudentActivityDiagram.png" alt="Figure 4.4.2.1 Activity diagram of `addstudent` command"></p>
 <p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
 
 The following steps describe the workflow of `addstudent` in detail, assuming that no error is encountered.
@@ -380,8 +380,8 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 
 |   |**Pros**|**Cons**|
 |---|---|---|
-| **Option 1**<br>To store the students inside a `UniqueList<Student> | This is easy and straight-forward to implement. | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved. |
-| **Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>`. | This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name. | This does not allow the order of addition of students to a group to be maintained. |
+| **Option 1**<br>To store the students inside a `UniqueList<Student> |  This is easy and straight-forward to implement. | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved. |
+|  **Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>` |  This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name. | This does not allow the order of addition of students to a group to be maintained. | |
 
 **Reasons for choosing option 2:**
 
@@ -422,7 +422,7 @@ Commands | Purpose
 `setscore` / `addscore` / `subscore` | Set / add / subtract the participation score of a student for a lesson 
  
 In this section, we will outline the `markpresent` command handled by the `StudentInfoManager` which is summarised by the Activity Diagram below. 
-We will be using the index version of the markpresent command.
+We will be using the index version of the `markpresent` command.
 
 <p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 4.5.2.2 Activity Diagram of a markpresent command by index"></p>
 <p align="center"><i>Figure 4.5.2.2 Activity Diagram of a <code>markpresent</code> command by index</i></p>
@@ -440,7 +440,7 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 5. If the above steps are all successful, a successful message will be displayed on the
 <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
 
-*If the index is not valid, an error will be thrown to prompt the user to choose another index.
+> :warning: If the index is not valid, an error will be thrown to prompt the user to choose another index.
 
 #### **4.5.3. Design Consideration**
 **Aspect:** Deciding between retrieving `StudentInfo` through deep nesting methods or using `HashMap` to retrieve `StudentInfo` with `GroupLessonKey`.
