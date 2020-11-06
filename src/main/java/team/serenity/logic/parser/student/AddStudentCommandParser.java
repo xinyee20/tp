@@ -12,8 +12,11 @@ import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.Prefix;
+import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new AddStudentCommand object.
@@ -38,17 +41,19 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
 
         //if id or group keyword is more than 1, or if student name has more than 10 letters, throw exception
         boolean matchesGrp = grpKeywordArray.length == 1;
-        boolean matchesId = studentIdArray.length == 1 && studentIdArray[0].length() == 9;
+        boolean matchesId = studentIdArray.length == 1;
         boolean matchesStudentName = studentNameArray.length <= 10;
         if (!matchesGrp || !matchesId || !matchesStudentName) {
             throw addStudentCommandParserException;
         }
 
-        String studentName = String.join(" ", studentNameArray).toUpperCase();
-        String studentId = studentIdArray[0];
-        String grpName = grpKeywordArray[0];
+        String name = String.join(" ", studentNameArray).toUpperCase();
+        String matric = studentIdArray[0];
 
-        return new AddStudentCommand(studentName, studentId, new GroupContainsKeywordPredicate(grpName));
+        StudentName studentName = SerenityParserUtil.parseStudentName(name);
+        StudentNumber studentNumber = SerenityParserUtil.parseStudentNumber(matric);
+        String grpName = grpKeywordArray[0];
+        return new AddStudentCommand(studentName, studentNumber, new GroupContainsKeywordPredicate(grpName));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

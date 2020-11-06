@@ -15,6 +15,8 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 public class AddStudentCommand extends Command {
 
@@ -32,28 +34,28 @@ public class AddStudentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "You added %s (%s) to tutorial group %s.";
 
-    private final String studentName;
-    private final String studentId;
+    private final StudentName studentName;
+    private final StudentNumber studentNumber;
     private final Predicate<Group> predicate;
 
     /**
      * Creates an AddStudentCommand to add the specified {@code Student}.
      *
      * @param studentName
-     * @param studentId
+     * @param studentNumber
      * @param predicate
      */
-    public AddStudentCommand(String studentName, String studentId, Predicate<Group> predicate) {
-        requireAllNonNull(studentName, studentId, predicate);
+    public AddStudentCommand(StudentName studentName, StudentNumber studentNumber, Predicate<Group> predicate) {
+        requireAllNonNull(studentName, studentNumber, predicate);
         this.studentName = studentName;
-        this.studentId = studentId;
+        this.studentNumber = studentNumber;
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         try {
-            Student student = new Student(studentName, studentId);
+            Student student = new Student(studentName, studentNumber);
             model.updateFilteredGroupList(predicate);
 
             if (model.getFilteredGroupList().isEmpty()) {
@@ -68,7 +70,7 @@ public class AddStudentCommand extends Command {
 
             model.addStudentToGroup(student, predicate);
             return new CommandResult(
-                String.format(MESSAGE_SUCCESS, studentName, studentId,
+                String.format(MESSAGE_SUCCESS, studentName, studentNumber,
                     model.getFilteredGroupList().get(0).getGroupName()),
                 CommandResult.UiAction.REFRESH_TABLE
             );
@@ -89,7 +91,7 @@ public class AddStudentCommand extends Command {
 
         AddStudentCommand other = (AddStudentCommand) obj;
         return this.studentName.equals(other.studentName)
-            && this.studentId.equals(other.studentId)
+            && this.studentNumber.equals(other.studentNumber)
             && this.predicate.equals(other.predicate);
     }
 

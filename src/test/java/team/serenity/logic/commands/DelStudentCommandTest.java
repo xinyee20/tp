@@ -20,6 +20,8 @@ import team.serenity.logic.commands.student.DelStudentCommand;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
 import team.serenity.testutil.GroupPredicateStub;
@@ -29,17 +31,23 @@ public class DelStudentCommandTest {
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DelStudentCommand("", "", null));
-        assertThrows(NullPointerException.class, () -> new DelStudentCommand(null, "", new GroupPredicateStub()));
-        assertThrows(NullPointerException.class, () -> new DelStudentCommand("", null, new GroupPredicateStub()));
-        assertThrows(NullPointerException.class, () -> new DelStudentCommand(null, null, null));
+        StudentName defaultName = new StudentName("John");
+        StudentNumber defaultNumber = new StudentNumber("A0123456A");
+        assertThrows(NullPointerException.class, () ->
+            new DelStudentCommand(defaultName, defaultNumber , null));
+        assertThrows(NullPointerException.class, () ->
+            new DelStudentCommand(null, defaultNumber, new GroupPredicateStub()));
+        assertThrows(NullPointerException.class, () ->
+            new DelStudentCommand(defaultName, null, new GroupPredicateStub()));
+        assertThrows(NullPointerException.class, () ->
+            new DelStudentCommand(null, null, null));
     }
 
     @Test
     public void execute_missingGroup() throws Exception {
         ModelStubWithoutGroup modelStub = new ModelStubWithoutGroup();
         Predicate<Group> pred = new GroupPredicateStub();
-        DelStudentCommand command = new DelStudentCommand("Jon", "A1234567U", pred);
+        DelStudentCommand command = new DelStudentCommand(new StudentName("Jon"), new StudentNumber("A1234567U"), pred);
 
         assertThrows(CommandException.class,
             MESSAGE_GROUP_EMPTY, () -> command.execute(modelStub));
@@ -57,7 +65,8 @@ public class DelStudentCommandTest {
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubGroup modelStub = new ModelStubGroup(filteredList);
         GroupPredicateStub pred = new GroupPredicateStub();
-        DelStudentCommand command = new DelStudentCommand("June", "A1234567U", pred);
+        DelStudentCommand command = new DelStudentCommand(new StudentName("June"),
+            new StudentNumber("A1234567U"), pred);
         assertThrows(CommandException.class,
             MESSAGE_STUDENT_EMPTY, () -> command.execute(modelStub));
     }
@@ -74,7 +83,8 @@ public class DelStudentCommandTest {
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubGroup modelStub = new ModelStubGroup(filteredList);
         GroupPredicateStub pred = new GroupPredicateStub();
-        DelStudentCommand command = new DelStudentCommand("Freddie", "A0000000U", pred);
+        DelStudentCommand command = new DelStudentCommand(new StudentName("Freddie"),
+            new StudentNumber("A0000000U"), pred);
         CommandResult result = command.execute(modelStub);
         CommandResult expectedResult = new CommandResult(
             String.format(MESSAGE_SUCCESS, "FREDDIE", "A0000000U", "G07"), CommandResult.UiAction.REFRESH_TABLE
@@ -94,14 +104,15 @@ public class DelStudentCommandTest {
         FilteredList<Group> filteredList = new FilteredList<>(groupList.asUnmodifiableObservableList());
         ModelStubGroup modelStub = new ModelStubGroup(filteredList);
         GroupPredicateStub pred = new GroupPredicateStub();
-        DelStudentCommand command = new DelStudentCommand("FREDDIE", "A0000000U", pred);
+        DelStudentCommand command = new DelStudentCommand(new StudentName("FREDDIE"),
+            new StudentNumber("A0000000U"), pred);
         assertDoesNotThrow(() -> command.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        String studentName = "John";
-        String studentId = "A1234567U";
+        StudentName studentName = new StudentName("John");
+        StudentNumber studentId = new StudentNumber("A1234567U");
         GroupPredicateStub pred = new GroupPredicateStub();
         Index index = Index.fromOneBased(Integer.parseInt("1"));
 
@@ -109,8 +120,8 @@ public class DelStudentCommandTest {
         DelStudentCommand second = new DelStudentCommand(studentName, studentId, pred);
         DelStudentCommand third = new DelStudentCommand(index, pred);
         DelStudentCommand fourth = new DelStudentCommand(index, pred);
-        DelStudentCommand differentName = new DelStudentCommand("James", studentId, pred);
-        DelStudentCommand differentId = new DelStudentCommand(studentName, "A7654321U", pred);
+        DelStudentCommand differentName = new DelStudentCommand(new StudentName("James"), studentId, pred);
+        DelStudentCommand differentId = new DelStudentCommand(studentName, new StudentNumber("A7654321U"), pred);
         DelStudentCommand differentPred = new DelStudentCommand(studentName, studentId, new GroupPredicateStub());
         DelStudentCommand differentIndex = new DelStudentCommand(Index.fromOneBased(Integer.parseInt("2")), pred);
 
