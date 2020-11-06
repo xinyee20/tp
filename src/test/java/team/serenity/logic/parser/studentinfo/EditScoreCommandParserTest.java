@@ -52,7 +52,7 @@ class EditScoreCommandParserTest {
 
     @Test
     public void parse_invalidIndex_throwsCommandException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE);
         String empty = "";
 
         assertParseFailure(parser, NON_INTEGER + " " + SET_SCORE_DESC, expectedMessage);
@@ -79,14 +79,14 @@ class EditScoreCommandParserTest {
 
     @Test
     public void parse_studentNameAndIndex_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, VALID_INDEX + STUDENT_NAME_DESC + SET_SCORE_DESC, expectedMessage);
     }
 
     @Test
     public void parse_studentNumberAndIndex_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE);
 
         assertParseFailure(parser, VALID_INDEX + STUDENT_NUMBER_DESC + SET_SCORE_DESC, expectedMessage);
     }

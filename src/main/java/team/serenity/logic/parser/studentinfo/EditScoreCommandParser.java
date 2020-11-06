@@ -23,8 +23,8 @@ import team.serenity.model.group.student.StudentNumber;
 /**
  * Parses input arguments and creates a new EditScoreCommand object.
  * Current support:
- * setscore name/NAME id/STUDENT_NUMBER score/SCORE
- * setscore INDEX score/SCORE
+ * editscore name/NAME id/STUDENT_NUMBER score/SCORE
+ * editscore INDEX score/SCORE
  */
 public class EditScoreCommandParser implements Parser<EditScoreCommand> {
 
