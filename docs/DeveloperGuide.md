@@ -139,7 +139,8 @@ This segment will explain the structure and responsibilities of the Model compon
 
 #### **3.4.1 Structure**
 
-![Figure 3.4.1.1 Simplified Class Diagram of `model` component ](images/developerGuide/ModelClassDiagram.png)
+<p align="center">
+<img alt="Class diagram of Model component" src="images/developerGuide/ModelClassDiagram.png" ></p>
 
 <p align="center"><i>Figure 3.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
 
