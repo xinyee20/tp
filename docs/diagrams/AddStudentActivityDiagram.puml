@@ -1,6 +1,6 @@
 @startuml
 
-!include ../style.puml
+!include ./style.puml
 
 title Adding a Student
 
