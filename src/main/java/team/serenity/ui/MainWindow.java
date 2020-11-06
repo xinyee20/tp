@@ -365,7 +365,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             String groupName;
             String lessonName;
-            commandText = commandText.replaceAll("\\s+"," ");
             CommandResult commandResult = this.logic.execute(commandText);
             this.logger.info("Result: " + commandResult.getFeedbackToUser());
             this.resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
