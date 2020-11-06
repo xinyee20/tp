@@ -485,7 +485,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-#### 4.2.2. Mark a student as absent: `markabsent`
+#### 4.2.3. Mark a student as absent: `markabsent`
 
 You can use this command to mark a specific student as absent for a tutorial lesson.
 
@@ -526,7 +526,7 @@ alt="Command box for delstudent command"></p>
 
 <p align="center"><i>Figure 4.2.2.2 Screen displayed when the command is successfully executed.</i></p>
 
-#### 4.2.3. Mark all students as absent: `markabsent all`
+#### 4.2.4. Mark all students as absent: `markabsent all`
 
 Accidentally marked all the students as present and want to make them back absent? You can use this command to mark 
 all students in a tutorial group back as absent for a tutorial lesson.
@@ -549,7 +549,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-#### 4.2.4. Flag attendance of a student: `flagatt`
+#### 4.2.5. Flag attendance of a student: `flagatt`
 
 You can use this command to flag attendance of a specific student so you can remember to check the student's
 attendance at the end of class.
@@ -583,7 +583,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. His attendance will now be flagged for future follow-up actions.
 
-#### 4.2.4. Unflag attendance of a student: `unflagatt`
+#### 4.2.6. Unflag attendance of a student: `unflagatt`
 
 You can use this command to unflag attendance of a specific student that was flagged after you have checked whether the 
 student attended a replacement class. If you accidentally flagged the wrong student, the action can also be easily undone 
@@ -619,7 +619,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. His attendance will now be unflagged.
 
-#### 4.2.5. Export attendance as XLSX file: `exportatt`
+#### 4.2.7. Export attendance as XLSX file: `exportatt`
 
 You can use this command to export the attendance sheet of a specific tutorial group as a new Excel file.
 
