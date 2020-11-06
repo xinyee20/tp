@@ -434,10 +434,6 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-<p align="center"><img src="images/attendance/markpresent_all_command.png" alt="Command box for markpresent command"></p>
-
-<p align="center"><i>Figure 4.2.1.1 Command for <code>markpresent all</code> command.</i></p>
-
 <p align="center"><img src="images/attendance/markpresent_all_result.png" alt="Result upon successful execution of command"></p>
 
 <p align="center"><i>Figure 4.2.1.2 Screen displayed when the command is successfully executed.</i></p>
@@ -511,11 +507,11 @@ Outcome:
 <p align="center"><img src="images/attendance/markabsent_command.png" 
 alt="Command box for delstudent command"></p>
 
-<p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command.</i></p>
+<p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present.</i></p>
 
 <p align="center"><img src="images/attendance/markabsent_result.png" alt="Result upon successful execution of command"></p>
 
-<p align="center"><i>Figure 4.2.2.2 Screen displayed when the command is successfully executed.</i></p>
+<p align="center"><i>Figure 4.2.2.2 Screen displayed when the command is successfully executed. Note how Aaron's attendance is now absent.</i></p>
 
 #### 4.2.4. Mark all students as absent: `markabsent all`
 
@@ -730,12 +726,9 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-<p align="center"><img src="images/participation/setscore_command.png" 
-alt="Command box for delstudent command"></p>
+<p align="center"><i>Figure 4.3.2.1 Command for <code>editscore</code> command.</i></p>
 
-<p align="center"><i>Figure 4.3.2.1 Command for <code>setscore</code> command.</i></p>
-
-<p align="center"><img src="images/participation/setscore_result.png" alt="Result upon successful execution of command"></p>
+<p align="center"><img src="images/participation/editscore_result.png" alt="Result upon successful execution of command"></p>
 
 <p align="center"><i>Figure 4.3.2.2 Screen displayed when the command is successfully executed.</i></p>
 
@@ -836,11 +829,6 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The question will be added to the list of questions.
-
-<p align="center"><img src="images/addqn/addqn_command.png" 
-alt="Command box for addqn command"></p>
-
-<p align="center">Figure 4.4.1.1 Command for <code>addqn</code> command</p>
 
 <p align="center"><img src="images/addqn/addqn_result.png" alt="Result upon successful execution of command"></p>
 
