@@ -315,13 +315,9 @@ Outcome:
 2. **Serenity** will display tutorial lesson `1-3` page.
 3. You can now see that tutorial lesson `1-3` has been added to tutorial group `G01`.
 
-<p align="center"><img src="images/addlsn/addlsncommand.png" alt="Command box for addlsn command"></p>
-
-<p align="center"><i>Figure 4.1.3.1 Command for <code>addlsn</code> command.</i></p>
-
 <p align="center"><img src="images/addlsn/addlsnresult.png" alt="Result upon successful execution of command"></p>
 
-<p align="center"><i>Figure 4.1.3.2 Screen displayed when the command is successfully executed.</i></p>
+<p align="center"><i>Figure 4.1.3.1  Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.1.4. Delete an existing tutorial lesson: `dellsn`
 
@@ -399,11 +395,6 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. `Aaron Tan` will no longer be in the list of students in tutorial group `G01`.
-
-<p align="center"><img src="images/delstudent/delstudent_command.png" 
-alt="Command box for delstudent command"></p>
-
-<p align="center"><i>Figure 4.1.6.1 Command for <code>delstudent</code> command</i></p>
 
 <p align="center"><img src="images/delstudent/delstudent_result.png" alt="Result upon successful execution of command"></p>
 
