@@ -53,7 +53,7 @@ class SubScoreCommandTest {
     }
 
     @Test
-    public void execute_studentAbsent_throwCommandException() throws CommandException {
+    public void execute_studentAbsent_throwsCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
         Student toSubScore = new StudentBuilder().build();
         int validSubScore = 1;

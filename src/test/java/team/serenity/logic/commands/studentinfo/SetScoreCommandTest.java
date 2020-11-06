@@ -31,7 +31,7 @@ class SetScoreCommandTest {
     }
 
     @Test
-    public void execute_setScoreOutOfRange_throwCommandException() throws CommandException {
+    public void execute_setScoreOutOfRange_throwsCommandException() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student toSetScore = new StudentBuilder().build();
         int scoreOutOfRange = 6;
@@ -52,7 +52,7 @@ class SetScoreCommandTest {
     }
 
     @Test
-    public void execute_studentAbsent_throwCommandException() throws CommandException {
+    public void execute_studentAbsent_throwsCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
         Student toSetScore = new StudentBuilder().build();
         int validScore = 1;

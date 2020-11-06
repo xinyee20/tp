@@ -88,6 +88,7 @@ class SubScoreCommandParserTest {
     public void parse_studentNameAndIndex_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE);
 
+
         assertParseFailure(parser, VALID_INDEX + STUDENT_NAME_DESC + SUB_SCORE_DESC, expectedMessage);
     }
 
