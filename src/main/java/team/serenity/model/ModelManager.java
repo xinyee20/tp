@@ -374,6 +374,7 @@ public class ModelManager implements Model {
     public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
                                                          UniqueList<StudentInfo> newListOfStudentsInfo) {
         requireAllNonNull(key, newListOfStudentsInfo);
+        this.studentsInfo.setAll(newListOfStudentsInfo.asUnmodifiableObservableList());
         this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, newListOfStudentsInfo);
     }
 
