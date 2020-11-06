@@ -100,7 +100,7 @@ for you to check on the student and perform any follow-up actions, if necessary.
 
 <p align="center"><img src="images/flaggedatt.png" alt="Picture of flag attendance GUI"></p>
 
-<p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab</i></p>
+<p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab.</i></p>
 
 * Pending questions tab: this tab shows the questions asked by students across all your tutorial groups,
 providing a convenient place for you to keep track of all the questions asked by students
@@ -108,7 +108,7 @@ across your tutorial groups and lessons.
 
 <p align="center"><img src="images/questionsGUI.png" alt="Picture of questions GUI"></p>
 
-<p align="center"><i>Figure 3.2.2.2 User interface showing the layout of the questions tab</i></p>
+<p align="center"><i>Figure 3.2.2.2 User interface showing the layout of the questions tab.</i></p>
 
 ##### **Tutorial group page**
 
@@ -128,7 +128,7 @@ the class participation grades of all the students in the tutorial group across 
 
 <p align="center"><img src="images/viewgrpGUI.png" alt="Picture of group GUI"></p>
 
-<p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the group tab</i></p>
+<p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the group tab.</i></p>
 
 ##### **Tutorial lesson page**
 
@@ -145,7 +145,7 @@ you may add, edit, find or delete a [question](#44-question-addressing) that was
 
 <p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
 
-<p align="center"><i>Figure 3.2.2.4 User interface showing the layout of the lesson tab</i></p>
+<p align="center"><i>Figure 3.2.2.4 User interface showing the layout of the lesson tab.</i></p>
 
 #### 3.2.3. General symbols and syntax
 
@@ -830,7 +830,7 @@ Outcome:
 
 <p align="center"><img src="images/addqn/addqn_result.png" alt="List of questions after command is executed."></p>
 
-<p align="center"><i>Figure 4.4.1.1 Screen displayed when the command is successfully executed.</i></p>
+<p align="center"><i>Figure 4.4.1.1 List of questions after the command is successfully executed.</i></p>
 
 #### 4.4.2. Delete an existing question: `delqn`
 
