@@ -398,7 +398,7 @@ Outcome:
 
 <p align="center"><img src="images/delstudent/delstudent_result.png" alt="Result upon successful execution of command"></p>
 
-<p align="center"><i>Figure 4.1.6.2 Screen displayed when the command is successfully executed.</i></p>
+<p align="center"><i>Figure 4.1.6.1 Screen displayed when the command is successfully executed.</i></p>
 
 
 ### 4.2. Attendance taking
@@ -436,7 +436,7 @@ Outcome:
 
 <p align="center"><img src="images/attendance/markpresent_all_result.png" alt="Result upon successful execution of command"></p>
 
-<p align="center"><i>Figure 4.2.1.2 Screen displayed when the command is successfully executed.</i></p>
+<p align="center"><i>Figure 4.2.1.1 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.2.2. Mark a student as present: `markpresent`
 
@@ -507,7 +507,7 @@ Outcome:
 <p align="center"><img src="images/attendance/markabsent_command.png" 
 alt="Command box for delstudent command"></p>
 
-<p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present.</i></p>
+<p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present initially.</i></p>
 
 <p align="center"><img src="images/attendance/markabsent_result.png" alt="Result upon successful execution of command"></p>
 
@@ -730,7 +730,7 @@ Outcome:
 
 <p align="center"><img src="images/participation/editscore_result.png" alt="Result upon successful execution of command"></p>
 
-<p align="center"><i>Figure 4.3.2.2 Screen displayed when the command is successfully executed.</i></p>
+<p align="center"><i>Figure 4.3.2.1 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.3.3. Subtract participation score of a student: `subscore`
 
@@ -832,7 +832,7 @@ Outcome:
 
 <p align="center"><img src="images/addqn/addqn_result.png" alt="Result upon successful execution of command"></p>
 
-<p align="center"><i>Figure 4.4.1.2 Screen displayed when the command is successfully executed.</i></p>
+<p align="center"><i>Figure 4.4.1.1 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.4.2. Delete an existing question: `delqn`
 
@@ -1121,7 +1121,7 @@ Outcome:
 <p align="center"><img src="images/view/viewqn.png" 
 alt="User interface for viewing questions"></p>
 
-<p align="center"><i>Figure 4.5.5.1 User interface for viewing questions.</i></p>
+<p align="center"><i>Figure 4.5.6.1 User interface for viewing questions.</i></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
