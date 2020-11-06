@@ -284,10 +284,10 @@ We outline the execution of the `DelGrpCommand` as an example of a command that 
 
 The following steps describe the execution of `DelGrpCommand` in detail, assuming that no error is encountered.
 
-1. When the execute method of the DelGrpCommand is called, the ModelManager’s deleteGroup method is called.
-1. The ModelManager then proceeds to call the deleteGroup method of the GroupManager.
-1. The GroupManager will then remove the group from its UniqueList
-1. If the above steps are all successful, the DelGrpCommand will then create a CommandResult object and return the result.
+1. When the `execute` method of the `DelGrpCommand` is called, the `ModelManager`’s `deleteGroup` method is called.
+1. `ModelManager` then proceeds to call the `deleteGroup` method of `GroupManager`.
+1. `GroupManager` will then remove the group from its `UniqueList`.
+1. If the above steps are all successful, `DelGrpCommand` will then create a `CommandResult` object and return the result.
 
 The sequence diagram below documents the execution.
 
@@ -323,7 +323,7 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 2. A new `UniqueList` is created and the `StudentInfo` objects are added to the list.
 3. A new `Lesson` object is created with the new UniqueList.
 4. The ModelManager’s `updateLessonList` method is called.
-5. The ModelManager then calls the method ``setListOfLessonsToGroup` of `LessonManager`.
+5. The ModelManager then calls the method `setListOfLessonsToGroup` of `LessonManager`.
 
 #### **4.3.3. Design Consideration**
 
