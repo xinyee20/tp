@@ -39,7 +39,7 @@ class DelLsnCommandTest {
     @Test
     void testEquals_validGroupAndLesson() {
         ModelStubWithGroupAndLesson actual = new ModelStubWithGroupAndLesson();
-        DelLsnCommand test = new DelLsnCommand(new GroupName("G04"), new LessonName("1-1"));
+        DelLsnCommand test = new DelLsnCommand(new GroupName("G01"), new LessonName("1-1"));
         Group expectedGroup = new GroupBuilder().withClasses("1-2").build();
         try {
             CommandResult result = test.execute(actual);
