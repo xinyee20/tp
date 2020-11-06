@@ -1,9 +1,9 @@
 package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
+import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_G04;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
-import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC;
+import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC_AARON;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_INDEX;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
@@ -41,7 +41,7 @@ public class DelStudentCommandParserTest {
     public void parse_studentAndIndex_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelStudentCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC + GRP_DESC_GROUP_A , expectedMessage);
+        assertParseFailure(parser, VALID_INDEX + STUDENT_DESC_AARON + GRP_DESC_GROUP_G04, expectedMessage);
     }
 
     @Test

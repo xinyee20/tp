@@ -24,14 +24,13 @@ public class AddLsnCommand extends Command {
 
     public static final String COMMAND_WORD = "addlsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a new lesson to a specified tutorial group. \n"
+        + ": Adds a new lesson to the specified tutorial group.\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP "
-        + PREFIX_LSN + "LESSON \n"
-        + "Example: "
-        + COMMAND_WORD + " "
-        + PREFIX_GRP + "G04 "
-        + PREFIX_LSN + "5-1";
+        + PREFIX_GRP + "GROUP_NAME "
+        + PREFIX_LSN + "LESSON_NAME\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GRP + "G01 "
+        + PREFIX_LSN + "1-3";
 
     public static final String MESSAGE_SUCCESS = "New lesson for tutorial group %2$s added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson for tutorial group %1$s already exists.";

@@ -34,16 +34,15 @@ public class MarkAbsentCommand extends Command {
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked absent!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks a specific student or all students absent from a lesson.\n"
-            + "Parameters: "
-            + "all or "
-            + PREFIX_NAME + "STUDENT_NAME "
-            + PREFIX_MATRIC + "STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
-            + "Example: " + COMMAND_WORD + " " + "all\n"
-            + "or " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Aaron Tan "
-            + PREFIX_MATRIC + "A0123456U\n"
-            + "or " + COMMAND_WORD + " 2";
+            + ": Marks the specific student or all students absent from a tutorial lesson.\n"
+            + "Parameters (3 methods):\n"
+            + "1. all\n"
+            + "2. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER\n"
+            + "3. INDEX (must be a positive integer)\n"
+            + "Examples:\n"
+            + "1. " + COMMAND_WORD + " " + "all\n"
+            + "2. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A\n"
+            + "3. " + COMMAND_WORD + " 1";
 
     private Optional<Student> toMarkAbsent;
     private Optional<Index> index;

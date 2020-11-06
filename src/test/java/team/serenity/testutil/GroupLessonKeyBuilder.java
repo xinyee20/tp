@@ -1,6 +1,6 @@
 package team.serenity.testutil;
 
-import static team.serenity.testutil.TypicalGroups.GROUP_D;
+import static team.serenity.testutil.TypicalGroups.GROUP_G02;
 
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupLessonKey;
@@ -8,8 +8,8 @@ import team.serenity.model.group.lesson.Lesson;
 
 public class GroupLessonKeyBuilder {
 
-    public static final Group DEFAULT_GROUP = GROUP_D;
-    public static final Lesson DEFAULT_LESSON = GROUP_D.getLessonsAsUnmodifiableObservableList().get(0);
+    public static final Group DEFAULT_GROUP = GROUP_G02;
+    public static final Lesson DEFAULT_LESSON = GROUP_G02.getLessonsAsUnmodifiableObservableList().get(0);
 
     private Group group;
     private Lesson lesson;

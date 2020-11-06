@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.logic.commands.AddGrpCommand.MESSAGE_DUPLICATE_GROUP_NAME_FORMAT;
 import static team.serenity.logic.commands.AddGrpCommand.MESSAGE_DUPLICATE_STUDENT_FORMAT;
 import static team.serenity.testutil.Assert.assertThrows;
-import static team.serenity.testutil.TypicalStudent.JAMES;
-import static team.serenity.testutil.TypicalStudent.JEFFERY;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.AARON;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
+import static team.serenity.testutil.TypicalStudent.HELENE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,10 +56,10 @@ class AddGrpCommandTest {
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
-        Group validGroup = new GroupBuilder().withName("G01").withStudents(JOHN, JAMES, JEFFERY).build();
+        Group validGroup = new GroupBuilder().withName("G01").withStudents(AARON, GEORGE, HELENE).build();
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
         String expectedMessage = String.format(MESSAGE_DUPLICATE_STUDENT_FORMAT,
-                JOHN.getStudentName(), JOHN.getStudentNo());
+                AARON.getStudentName(), AARON.getStudentNo());
 
         Group invalidGroup = new GroupBuilder(validGroup).withName("G02").build();
         AddGrpCommand addGrpCommand = new AddGrpCommand(invalidGroup);

@@ -1,14 +1,15 @@
 @startuml
+skinparam linetype ortho
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor LOGIC_COLOR_T4
-skinparam classBackgroundColor LOGIC_COLOR
+skinparam arrowColor LOGIC_COLOR_T1
+skinparam classBackgroundColor LOGIC_COLOR_T1
 
 package Logic {
 
 package Parser {
 Interface Parser <<Interface>>
-Class AddressBookParser
+Class SerenityParser
 Class XYZCommandParser
 Class CliSyntax
 Class ParserUtil
@@ -35,10 +36,10 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .up.|> Logic
-LogicManager -->"1" AddressBookParser
-AddressBookParser .left.> XYZCommandParser: creates >
+LogicManager -->"1" SerenityParser
+SerenityParser ..> XYZCommandParser: creates >
 
-XYZCommandParser ..> XYZCommand : creates >
+XYZCommandParser .right.> XYZCommand : creates >
 XYZCommandParser ..|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
@@ -49,11 +50,11 @@ XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+LogicManager .right.> Command : executes >
 
-LogicManager --> Model
+LogicManager -left-> Model
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+note right of XYZCommand: XYZCommand = AddGrpCommand, \nMarkPresentCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult

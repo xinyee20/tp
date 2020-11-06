@@ -1,11 +1,11 @@
 package team.serenity.logic.parser;
 
-import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_A;
+import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_G04;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_DASH;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_LESSON_NAME_TEN;
-import static team.serenity.logic.commands.CommandTestUtil.LESSON_DESC_LESSON_ONE;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_A;
-import static team.serenity.logic.commands.CommandTestUtil.VALID_LESSON_NAME_ONE;
+import static team.serenity.logic.commands.CommandTestUtil.LESSON_DESC_LESSON_1_1;
+import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_G04;
+import static team.serenity.logic.commands.CommandTestUtil.VALID_LESSON_NAME_1_1;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static team.serenity.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -22,15 +22,15 @@ public class AddLsnCommandParserTest {
 
     @Test
     public void parse_invalidGroupName() {
-        assertParseFailure(parser, GRP_DESC_GROUP_A + INVALID_LESSON_NAME_TEN, LessonName.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, INVALID_GROUP_NAME_DASH + LESSON_DESC_LESSON_ONE, GroupName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, GRP_DESC_GROUP_G04 + INVALID_LESSON_NAME_TEN, LessonName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_GROUP_NAME_DASH + LESSON_DESC_LESSON_1_1, GroupName.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_success() {
-        AddLsnCommand expected = new AddLsnCommand(new LessonName(VALID_LESSON_NAME_ONE),
-            new GroupContainsKeywordPredicate(VALID_GROUP_NAME_A));
-        assertParseSuccess(parser, GRP_DESC_GROUP_A + LESSON_DESC_LESSON_ONE, expected);
+        AddLsnCommand expected = new AddLsnCommand(new LessonName(VALID_LESSON_NAME_1_1),
+            new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G04));
+        assertParseSuccess(parser, GRP_DESC_GROUP_G04 + LESSON_DESC_LESSON_1_1, expected);
     }
 
 }
