@@ -59,7 +59,7 @@ public class SubScoreCommand extends Command {
     public SubScoreCommand(Student student, int scoreToSub) throws CommandException {
         requireNonNull(student);
         requireNonNull(scoreToSub);
-        // Specified student to add participation score
+        // Specified student to decrease participation score
         if (scoreToSub <= 0) {
             throw new CommandException(MESSAGE_SCORE_TO_SUB);
         }

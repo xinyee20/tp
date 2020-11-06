@@ -64,7 +64,7 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_wrongName_throwsCommandException() {
+    public void execute_wrongName_throwsCommandException() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student wrongNameOne = new StudentBuilder().withName("Aaron").withId("A0123456U").build();
         Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").withId("A0123456U").build();
@@ -79,7 +79,7 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_wrongStudentNumber_throwsCommandException() {
+    public void execute_wrongStudentNumber_throwsCommandException() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student wrongNumber = new StudentBuilder().withName("Aaron Tan").withId("A0000000U").build();
         int validScore = 1;
@@ -90,7 +90,7 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_notInGroup_throwsCommandException() {
+    public void execute_notInGroup_throwsCommandException() throws CommandException {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
         Student toAddScore = new StudentBuilder().build();
         int validScore = 1;
@@ -100,7 +100,7 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_notInLesson_throwsCommandException() {
+    public void execute_notInLesson_throwsCommandException() throws CommandException {
         ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
         Student toAddScore = new StudentBuilder().build();
         int validScore = 1;
@@ -124,7 +124,7 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_wrongIndex_throwsCommandException() {
+    public void execute_wrongIndex_throwsCommandException() throws CommandException {
         ModelStubWithIndexPresent modelStub = new ModelStubWithIndexPresent();
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         int validScore = 1;
@@ -135,7 +135,7 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws CommandException {
         int validAddScore = 1;
         AddScoreCommand addScoreStudentCommandA = new AddScoreCommand(AARON, validAddScore);
         AddScoreCommand copyAddScoreStudentCommandA = new AddScoreCommand(AARON, validAddScore);

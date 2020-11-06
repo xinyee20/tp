@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
+import static team.serenity.commons.core.Messages.MESSAGE_SCORE_TO_ADD;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
@@ -55,10 +56,13 @@ public class AddScoreCommand extends Command {
     /**
      * Creates an AddScoreCommand to increase the specified {@code Student}'s participation score.
      */
-    public AddScoreCommand(Student student, int scoreToAdd) {
+    public AddScoreCommand(Student student, int scoreToAdd) throws CommandException {
         requireNonNull(student);
         requireNonNull(scoreToAdd);
         // Specified student to add participation score
+        if (scoreToAdd <= 0) {
+            throw new CommandException(MESSAGE_SCORE_TO_ADD);
+        }
         this.toAddScore = Optional.ofNullable(student);
         this.scoreToAdd = scoreToAdd;
         this.index = Optional.empty();
@@ -68,10 +72,13 @@ public class AddScoreCommand extends Command {
     /**
      * Creates an AddScoreCommand to increase the specified {@code Student}'s participation score by index.
      */
-    public AddScoreCommand(Index index, int scoreToAdd) {
+    public AddScoreCommand(Index index, int scoreToAdd) throws CommandException {
         requireNonNull(index);
         requireNonNull(scoreToAdd);
         // Specified index of student to add participation score
+        if (scoreToAdd <= 0) {
+            throw new CommandException(MESSAGE_SCORE_TO_ADD);
+        }
         this.index = Optional.ofNullable(index);
         this.toAddScore = Optional.empty();
         this.scoreToAdd = scoreToAdd;

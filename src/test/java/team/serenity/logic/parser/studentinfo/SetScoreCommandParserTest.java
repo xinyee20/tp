@@ -1,8 +1,8 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
-import static team.serenity.logic.commands.CommandTestUtil.INVALID_SET_SCORE;
+import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER;
+import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER_SET_SCORE;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NUMBER;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -55,15 +55,16 @@ class SetScoreCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE);
         String empty = "";
 
-        assertParseFailure(parser, INVALID_INDEX + " " + SET_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, NON_INTEGER + " " + SET_SCORE_DESC, expectedMessage);
         assertParseFailure(parser, empty + SET_SCORE_DESC, expectedMessage);
     }
 
     @Test
     public void parse_invalidScore_throwsCommandException() {
         String expectedMessage = String.format(Participation.MESSAGE_CONSTRAINTS);
-        String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SET_SCORE;
-        String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + INVALID_SET_SCORE;
+
+        String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + NON_INTEGER_SET_SCORE;
+        String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + NON_INTEGER_SET_SCORE;
 
         assertParseFailure(parser, userInputOne, expectedMessage);
         assertParseFailure(parser, userInputTwo, expectedMessage);

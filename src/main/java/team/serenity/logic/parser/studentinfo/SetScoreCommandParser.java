@@ -82,7 +82,7 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
             }
         } catch (Exception e) {
             if (e instanceof ParseException) {
-                throw e;
+                throw new ParseException(e.getMessage());
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetScoreCommand.MESSAGE_USAGE));
             }

@@ -1,10 +1,12 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
+import static team.serenity.logic.commands.CommandTestUtil.EMPTY_PREAMBLE;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NUMBER;
-import static team.serenity.logic.commands.CommandTestUtil.INVALID_SUB_SCORE;
+import static team.serenity.logic.commands.CommandTestUtil.NEG_NUMBER_SUB_SCORE;
+import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER;
+import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER_SUB_SCORE;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC_AARON;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_NAME_DESC;
@@ -54,21 +56,25 @@ class SubScoreCommandParserTest {
     @Test
     public void parse_invalidIndex_throwsCommandException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE);
-        String empty = "";
 
-        assertParseFailure(parser, INVALID_INDEX + " " + SUB_SCORE_DESC, expectedMessage);
-        assertParseFailure(parser, empty + SUB_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, NON_INTEGER + " " + SUB_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, EMPTY_PREAMBLE + SUB_SCORE_DESC, expectedMessage);
     }
 
     @Test
     public void parse_invalidScore_throwsCommandException() {
-        String expectedMessage = String.format(Participation.MESSAGE_CONSTRAINTS);
-        String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + INVALID_SUB_SCORE;
-        String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + INVALID_SUB_SCORE;
+        String expectedMessageOne = String.format(Participation.MESSAGE_CONSTRAINTS);
+        String expectedMessageTwo = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE);
 
-        //TODO: Add more non-integer and 0/negative integer as invalid subscore
-        assertParseFailure(parser, userInputOne, expectedMessage);
-        assertParseFailure(parser, userInputTwo, expectedMessage);
+        String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + NON_INTEGER_SUB_SCORE;
+        String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + NON_INTEGER_SUB_SCORE;
+        String userInputThree = PREAMBLE_WHITESPACE + VALID_INDEX + " " + NEG_NUMBER_SUB_SCORE;
+        String userInputFour = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + NEG_NUMBER_SUB_SCORE;
+
+        assertParseFailure(parser, userInputOne, expectedMessageOne);
+        assertParseFailure(parser, userInputTwo, expectedMessageOne);
+        assertParseFailure(parser, userInputThree, expectedMessageTwo);
+        assertParseFailure(parser, userInputFour, expectedMessageTwo);
     }
 
     @Test
