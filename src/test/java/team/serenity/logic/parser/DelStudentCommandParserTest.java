@@ -2,7 +2,7 @@ package team.serenity.logic.parser;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.commands.CommandTestUtil.GRP_DESC_GROUP_G04;
-import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
+import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER;
 import static team.serenity.logic.commands.CommandTestUtil.STUDENT_DESC_AARON;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_INDEX;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
@@ -36,7 +36,7 @@ public class DelStudentCommandParserTest {
         CommandParserTestUtil.assertParseFailure(parser, missingId, expectedMessage);
         CommandParserTestUtil.assertParseFailure(parser, doubleGroup, expectedMessage);
         CommandParserTestUtil.assertParseFailure(parser, doubleId, expectedMessage);
-        CommandParserTestUtil.assertParseFailure(parser, INVALID_INDEX, expectedMessage);
+        CommandParserTestUtil.assertParseFailure(parser, NON_INTEGER, expectedMessage);
     }
 
     @Test
