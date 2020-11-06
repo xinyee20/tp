@@ -19,13 +19,13 @@ if () then ([valid command])
             to get group and lesson number;
 
     if () then ([tutorial group exists])
-	
+
 	    if () then ([lesson number does not exist])
             :Create a new set of Attendance
             and Participation records;
 
             :Create the new Lesson with the new records;
-		
+
 	    :Add the new Lesson to the Group;
 
             :Show a success message;

@@ -18,14 +18,14 @@ participant ":CommandResult" as CommandResult #adcdff
 
 
 -> DelGrpCommand: execute(m)
-activate DelGrpCommand 
+activate DelGrpCommand
 DelGrpCommand -> ModelManager : deleteGroup(group)
-activate ModelManager 
+activate ModelManager
 ModelManager -> GroupManager : deleteGroup(group)
 activate GroupManager #FFBBBB
 return
 return
-DelGrpCommand -> CommandResult 
+DelGrpCommand -> CommandResult
 activate CommandResult
 return
 return
