@@ -34,6 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_NAME_B = "G05";
     public static final String VALID_PATH_A = "CS2101_G04.xlsx";
     public static final String VALID_PATH_B = "CS2101_G05.xlsx";
+    public static final String VALID_XLSX_NO_LESSONS =  "CS2101_nolessons.xlsx";
+    public static final String VALID_XLSX_NO_TITLE = "CS2101_notitle.xlsx";
     public static final String VALID_LSN_A = "1-1";
     public static final String VALID_LSN_B = "1-2";
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
@@ -73,6 +75,11 @@ public class CommandTestUtil {
     public static final String INVALID_PATH_NON_XLSX = " " + PREFIX_PATH + "CS2101_G04.xls";
     public static final String INVALID_PATH = " " + PREFIX_PATH + "invalid.xlsx";
     public static final String INVALID_PATH_EMPTY = " " + PREFIX_PATH + "";
+
+    public static final String INVALID_XLSX_EMPTY = "CS2101_empty.xlsx";
+    public static final String INVALID_XLSX_NO_HEADER_COLUMNS = "CS2101_noheadercolumns.xlsx";
+    public static final String INVALID_XLSX_NO_STUDENTS = "CS2101_nostudents.xlsx";
+    public static final String INVALID_XLSX_WRONG_HEADER_COLUMNS = "CS2101_wrongheadercolumns.xlsx";
 
     public static final String INVALID_LESSON_NAME_TEN = " " + PREFIX_LSN + "1-10";
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions

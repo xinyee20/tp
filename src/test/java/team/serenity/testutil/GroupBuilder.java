@@ -93,7 +93,7 @@ public class GroupBuilder {
         try {
             students.setElementsWithList(new ArrayList<>(new XlsxUtil(filePath,
                 new XSSFWorkbook(filePath)).readStudentsFromXlsx()));
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return this;

@@ -1,7 +1,6 @@
 package team.serenity.commons.util;
 
 import static team.serenity.commons.core.Messages.MESSAGE_FILE_EMPTY;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_HEADER_COLUMNS;
 import static team.serenity.commons.core.Messages.MESSAGE_NO_STUDENT_LIST;
 
@@ -15,6 +14,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -68,6 +68,7 @@ public class XlsxUtil {
         workbook = new XSSFWorkbook();
         sheet = workbook.createSheet();
     }
+
     /**
      * Creates a XlsxUtil object that manages XLSX files.
      *
@@ -85,18 +86,14 @@ public class XlsxUtil {
      *
      * @return a set of students.
      */
-    public Set<Student> readStudentsFromXlsx() throws ParseException {
-        try {
-            Set<Student> students = new HashSet<>();
-            Iterator<Row> rowIterator = this.sheet.iterator();
-            skipRowsToHeaderRow(rowIterator);
-            readDetailsOfStudents(rowIterator, students);
-            List<Student> studentList = new ArrayList<>(students);
-            studentList.sort(new StudentSorter());
-            return new LinkedHashSet<>(studentList);
-        } catch (Exception e) {
-            throw new ParseException(MESSAGE_INVALID_FILE);
-        }
+    public Set<Student> readStudentsFromXlsx() {
+        Set<Student> students = new HashSet<>();
+        Iterator<Row> rowIterator = this.sheet.iterator();
+        skipRowsToHeaderRow(rowIterator);
+        readDetailsOfStudents(rowIterator, students);
+        List<Student> studentList = new ArrayList<>(students);
+        studentList.sort(new StudentSorter());
+        return new LinkedHashSet<>(studentList);
     }
 
     /**
@@ -118,29 +115,19 @@ public class XlsxUtil {
     }
 
     private Row skipRowsToHeaderRow(Iterator<Row> rowIterator) {
-        Row row = null;
         while (rowIterator.hasNext()) {
-            row = rowIterator.next();
+            Row row = rowIterator.next();
             if (isHeaderRow(row)) {
-                break;
+                return row;
             }
         }
-
-        if (isHeaderRow(row)) {
-            return row;
-        } else {
-            return null;
-        }
+        return null;
     }
 
     private boolean isHeaderRow(Row row) {
-        if (this.formatter.formatCellValue(row.getCell(0)).equals("Photo")
+        return this.formatter.formatCellValue(row.getCell(0)).equals("Photo")
             && this.formatter.formatCellValue(row.getCell(1)).equals("Name")
-            && this.formatter.formatCellValue(row.getCell(2)).equals("Student Number")) {
-            return true;
-        } else {
-            return false;
-        }
+            && this.formatter.formatCellValue(row.getCell(2)).equals("Student Number");
     }
 
     private void readDetailsOfStudents(Iterator<Row> rowIterator,
@@ -148,9 +135,7 @@ public class XlsxUtil {
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
             Iterator<Cell> cellIterator = row.cellIterator();
-
-            Cell photoCell = cellIterator.next();
-            // Photo
+            cellIterator.next();
 
             Cell nameCell = cellIterator.next();
             String name = this.formatter.formatCellValue(nameCell);
@@ -172,7 +157,7 @@ public class XlsxUtil {
         Set<Lesson> lessons = new HashSet<>();
         Iterator<Row> rowIterator = this.sheet.iterator();
         Row headerRow = skipRowsToHeaderRow(rowIterator);
-        readDetailsOfLessons(headerRow, lessons, studentsInfo);
+        readDetailsOfLessons(Objects.requireNonNull(headerRow), lessons, studentsInfo);
         List<Lesson> lessonList = new ArrayList<>(lessons);
         lessonList.sort(new LessonSorter());
         return new LinkedHashSet<>(lessonList);

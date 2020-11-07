@@ -5,11 +5,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_NON_XLSX;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
-import java.io.IOException;
-
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import team.serenity.commons.core.Messages;
 import team.serenity.commons.core.index.Index;
@@ -63,9 +59,8 @@ public class SerenityParserUtil {
             throw new ParseException(MESSAGE_INVALID_FILE_NON_XLSX);
         }
         try {
-            Workbook workbook = new XSSFWorkbook(trimmedFilePath);
-            return new XlsxUtil(trimmedFilePath, workbook);
-        } catch (InvalidOperationException | IOException e) {
+            return new XlsxUtil(trimmedFilePath);
+        } catch (InvalidOperationException e) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
         }
     }

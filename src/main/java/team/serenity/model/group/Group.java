@@ -35,7 +35,7 @@ public class Group {
      * @param groupName A valid name.
      * @param filePath A valid filePath.
      */
-    public Group(String groupName, String filePath) throws ParseException {
+    public Group(String groupName, String filePath) {
         requireAllNonNull(groupName, filePath);
         this.groupName = new GroupName(groupName);
         XlsxUtil util = new XlsxUtil(filePath);
@@ -53,7 +53,7 @@ public class Group {
      * @param groupName A valid group name.
      * @param grpExcelData A valid group excel data.
      */
-    public Group(GroupName groupName, XlsxUtil grpExcelData) throws ParseException {
+    public Group(GroupName groupName, XlsxUtil grpExcelData) {
         requireAllNonNull(groupName, grpExcelData);
         this.groupName = groupName;
         this.students = new UniqueStudentList();
