@@ -41,7 +41,7 @@ public class Student {
     }
 
     public static boolean isValidName(String s) {
-        return s.length() > 0;
+        return StudentName.isValidName(s);
     }
 
     /**
@@ -50,14 +50,7 @@ public class Student {
      * @return Whether String is valid.
      */
     public static boolean isValidStudentId(String s) {
-        //9 digits long
-        s = s.toUpperCase();
-        boolean matchesLength = s.length() == 9;
-        boolean matchesChar = s.charAt(0) == 'A';
-        if (!matchesChar || !matchesLength) {
-            System.out.println(s);
-        }
-        return s.length() == 9 && s.charAt(0) == 'A';
+        return StudentNumber.isValidName(s);
     }
 
     public StudentName getStudentName() {

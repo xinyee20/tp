@@ -9,7 +9,6 @@ import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 
 import team.serenity.commons.core.Messages;
 import team.serenity.commons.core.index.Index;
-import team.serenity.commons.util.StringUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupName;
@@ -85,13 +84,13 @@ public class SerenityParserUtil {
      *
      * @throws ParseException if the given {@code student} is invalid.
      */
-    public static String parseStudentName(String studentName) throws ParseException {
+    public static StudentName parseStudentName(String studentName) throws ParseException {
         requireNonNull(studentName);
         String trimmedName = studentName.trim();
         if (!Student.isValidName(trimmedName)) {
             throw new ParseException(StudentName.MESSAGE_CONSTRAINTS);
         }
-        return trimmedName;
+        return new StudentName(trimmedName);
     }
 
     /**
@@ -99,13 +98,13 @@ public class SerenityParserUtil {
      *
      * @throws ParseException if the given {@code studentId} is invalid.
      */
-    public static String parseStudentID(String studentId) throws ParseException {
+    public static StudentNumber parseStudentNumber(String studentId) throws ParseException {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
         if (!Student.isValidStudentId(trimmedId)) {
             throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
-        return trimmedId;
+        return new StudentNumber(trimmedId);
     }
 
     /**
@@ -117,12 +116,11 @@ public class SerenityParserUtil {
     public static int parseScore(String inputScore) throws ParseException {
         String trimmedScore = inputScore.trim();
         int score;
-        try {
-            score = Integer.parseInt(trimmedScore);
-            return score;
-        } catch (Exception e) {
+        score = Integer.parseInt(trimmedScore);
+        if (score < 0 || score > 5) {
             throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
         }
+        return score;
     }
 
     /**
@@ -149,10 +147,10 @@ public class SerenityParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        Integer index = Integer.parseInt(trimmedIndex);
+        if (index < 1) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(index);
     }
-
 }

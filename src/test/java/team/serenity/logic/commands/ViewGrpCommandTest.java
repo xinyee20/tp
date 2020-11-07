@@ -42,6 +42,7 @@ public class ViewGrpCommandTest {
             );
         } catch (CommandException e) {
             throw new AssertionError(MESSAGE_ASSERTION_ERROR_METHOD, e);
+
         }
     }
 

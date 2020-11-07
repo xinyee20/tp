@@ -50,6 +50,14 @@ public class StudentInfoBuilder {
     }
 
     /**
+     * Add the {@code attendance} to the {@code studentInfo} that we are building.
+     */
+    public StudentInfoBuilder withAttendance(Attendance attendance) {
+        this.attendance = attendance;
+        return this;
+    }
+
+    /**
      * Parses the {@code attendance} and set it to the {@code studentInfo} that we are building.
      */
     public StudentInfoBuilder withParticipation(int participation) {

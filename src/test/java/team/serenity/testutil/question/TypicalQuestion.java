@@ -23,6 +23,13 @@ public class TypicalQuestion {
     public static final Question QUESTION_C = new QuestionBuilder().withGroupName("G01")
         .withLessonName("1-2").withDescription("How is the grading criteria like?").build();
 
+    // Details for edit question command
+    public static final String VALID_QUESTION_GROUP = "G02";
+    public static final String VALID_QUESTION_LESSON = "1-2";
+    public static final String VALID_QUESTION_DESC = "Where do we upload the submissions?";
+    public static final Question QUESTION_EDIT = new QuestionBuilder().withGroupName(VALID_QUESTION_GROUP)
+        .withLessonName(VALID_QUESTION_LESSON).withDescription(VALID_QUESTION_DESC).build();
+
     private TypicalQuestion() {
     } // prevents instantiation
 

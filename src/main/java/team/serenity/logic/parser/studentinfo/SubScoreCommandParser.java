@@ -1,6 +1,8 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.commons.core.Messages.MESSAGE_SCORE_TO_SUB;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
@@ -17,6 +19,9 @@ import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
+import team.serenity.model.group.studentinfo.Participation;
 
 /**
  * Parses input arguments and creates a new SubScoreCommand object.
@@ -38,8 +43,8 @@ public class SubScoreCommandParser implements Parser<SubScoreCommand> {
                 PREFIX_NAME, PREFIX_MATRIC, PREFIX_SUBTRACT_SCORE);
 
         Index index;
-        String studentName;
-        String studentNumber;
+        StudentName studentName;
+        StudentNumber studentNumber;
         Optional<Student> student;
         int scoreToSub;
 
@@ -60,16 +65,36 @@ public class SubScoreCommandParser implements Parser<SubScoreCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
+        } catch (NumberFormatException e) {
+            throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
+        }
+
+        if (scoreToSub == 0) {
+            throw new ParseException(String.format(MESSAGE_SCORE_TO_SUB));
+        }
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentID(argMultimap.getValue(PREFIX_MATRIC).get());
+            studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
             student = Optional.ofNullable(new Student(studentName, studentNumber));
-            scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
             return new SubScoreCommand(student.get(), scoreToSub);
         } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SUBTRACT_SCORE).get());
-            return new SubScoreCommand(index, scoreToSub);
+            try {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                return new SubScoreCommand(index, scoreToSub);
+            } catch (NumberFormatException e) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
+            }
         }
     }
 

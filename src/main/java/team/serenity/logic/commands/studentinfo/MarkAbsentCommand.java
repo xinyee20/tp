@@ -1,7 +1,7 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static java.util.Objects.requireNonNull;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
@@ -122,6 +122,8 @@ public class MarkAbsentCommand extends Command {
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkAll);
         lesson.setStudentsInfo(updatedListForMarkAll);
+        model.updateLessonList();
+        model.updateStudentsInfoList();
         return new CommandResult(MESSAGE_ALL_SUCCESS);
     }
 
@@ -138,6 +140,8 @@ public class MarkAbsentCommand extends Command {
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkOneStudent);
         lesson.setStudentsInfo(updatedListForMarkOneStudent);
+        model.updateLessonList();
+        model.updateStudentsInfoList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent()));
     }
 
@@ -152,9 +156,9 @@ public class MarkAbsentCommand extends Command {
             Index targetIndex = this.index.get();
 
             // Return error message if index is out of range
-            if (targetIndex.getZeroBased() >= currentStudentInfoList.size()) {
+            if (targetIndex.getZeroBased() >= currentStudentInfoList.size() || targetIndex.getOneBased() == 0) {
                 throw new CommandException(
-                        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, targetIndex.getOneBased()));
+                        String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, targetIndex.getOneBased()));
             }
             return currentStudentInfoList.get(targetIndex.getZeroBased());
         }

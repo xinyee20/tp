@@ -11,7 +11,8 @@ import static team.serenity.commons.util.AppUtil.checkArgument;
 public class StudentName {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Student name should only contain alphanumeric characters and spaces, and it should not be blank";
+        "Student name should only contain alphanumeric characters and spaces, "
+            + "and it should not be blank, or contain more than 50 characters.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -37,7 +38,7 @@ public class StudentName {
      */
     public static boolean isValidName(String test) {
         requireNonNull(test);
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() < 50;
     }
 
 

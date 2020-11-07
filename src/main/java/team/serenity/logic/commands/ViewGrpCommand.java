@@ -29,12 +29,6 @@ public class ViewGrpCommand extends Command {
         this.predicate = predicate;
     }
 
-    private String getMessage(Model model) {
-        return model.getFilteredGroupList().isEmpty()
-                ? MESSAGE_GROUP_EMPTY
-                : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -43,7 +37,10 @@ public class ViewGrpCommand extends Command {
             throw new CommandException(MESSAGE_GROUP_EMPTY);
         }
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
-        return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_GRP);
+        return new CommandResult(
+                String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName()),
+                CommandResult.UiAction.VIEW_GRP
+        );
     }
 
     @Override

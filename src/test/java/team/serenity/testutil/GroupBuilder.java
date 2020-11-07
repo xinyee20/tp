@@ -13,6 +13,8 @@ import java.util.Set;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.commons.core.sorter.LessonSorter;
+import team.serenity.commons.core.sorter.StudentSorter;
 import team.serenity.commons.util.CsvUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.model.group.Group;
@@ -45,6 +47,12 @@ public class GroupBuilder {
     public GroupBuilder() {
         name = new GroupName(DEFAULT_NAME);
         students.setElementsWithList(new ArrayList<>(DEFAULT_STUDENTS));
+<<<<<<< HEAD
+=======
+        students.sort(new StudentSorter());
+        lessons.setElementsWithList(new ArrayList<>(DEFAULT_CLASSES));
+        lessons.sort(new LessonSorter());
+>>>>>>> upstream/master
     }
 
     /**
@@ -62,6 +70,7 @@ public class GroupBuilder {
     public GroupBuilder(String name, Path filePath) {
         this.name = new GroupName(name);
         students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+        students.sort(new StudentSorter());
         lessons.setElementsWithList(new ArrayList<>());
     }
 
@@ -78,6 +87,7 @@ public class GroupBuilder {
      */
     public GroupBuilder withStudents(Student... students) {
         this.students.setElementsWithList(Arrays.asList(students));
+        this.students.sort(new StudentSorter());
         return this;
     }
 
