@@ -5,7 +5,6 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
 import java.util.stream.Stream;
 
-import team.serenity.logic.commands.ViewAttCommand;
 import team.serenity.logic.commands.ViewScoreCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;

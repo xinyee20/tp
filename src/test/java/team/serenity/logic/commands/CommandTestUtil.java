@@ -34,7 +34,7 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_NAME_B = "G05";
     public static final String VALID_PATH_A = "CS2101_G04.xlsx";
     public static final String VALID_PATH_B = "CS2101_G05.xlsx";
-    public static final String VALID_XLSX_NO_LESSONS =  "CS2101_nolessons.xlsx";
+    public static final String VALID_XLSX_NO_LESSONS = "CS2101_nolessons.xlsx";
     public static final String VALID_XLSX_NO_TITLE = "CS2101_notitle.xlsx";
     public static final String VALID_LSN_A = "1-1";
     public static final String VALID_LSN_B = "1-2";

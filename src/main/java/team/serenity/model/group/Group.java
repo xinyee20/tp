@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.util.XlsxUtil;
-import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;

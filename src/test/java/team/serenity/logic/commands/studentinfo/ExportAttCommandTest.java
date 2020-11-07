@@ -1,9 +1,9 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.logic.commands.studentinfo.ExportAttCommand.MESSAGE_GROUP_DOES_NOT_EXIST;
 import static team.serenity.logic.commands.studentinfo.ExportAttCommand.MESSAGE_SUCCESS;
+import static team.serenity.testutil.Assert.assertThrows;
 
 import java.util.Collections;
 import java.util.function.Predicate;
@@ -34,8 +34,8 @@ public class ExportAttCommandTest {
     @Test
     void execute_containsGroup() throws CommandException {
         ModelStub modelStub = new ExportAttCommandTest.ModelStubWithGroup();
-        ExportAttCommand ExportAttCommand = new ExportAttCommand(new GroupContainsKeywordPredicate("G04"));
-        CommandResult actual = ExportAttCommand.execute(modelStub);
+        ExportAttCommand exportAttCommand = new ExportAttCommand(new GroupContainsKeywordPredicate("G04"));
+        CommandResult actual = exportAttCommand.execute(modelStub);
         GroupName groupName = modelStub.getFilteredGroupList().get(0).getGroupName();
         assertEquals(
             String.format(MESSAGE_SUCCESS, groupName, groupName),

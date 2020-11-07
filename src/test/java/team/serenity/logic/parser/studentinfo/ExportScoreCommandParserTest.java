@@ -26,66 +26,52 @@ public class ExportScoreCommandParserTest {
 
     @Test
     public void parse_validGroupName_returnsExportScoreCommand() {
-        ExportScoreCommand expectedCommand = new ExportScoreCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_A));
-        String userInput = GRP_DESC_GROUP_A;
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        ExportScoreCommand expectedCommand =
+            new ExportScoreCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_A));
+        assertParseSuccess(parser, GRP_DESC_GROUP_A, expectedCommand);
     }
 
     @Test
     public void parse_missingGroupName_throwsParseException() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportScoreCommand.MESSAGE_USAGE);
         String userInput = PREAMBLE_WHITESPACE + INVALID_GROUP_WITHOUT_NAME;
-
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_invalidGroupNameInvalidChars_throwsParseException() {
         String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
-        String userInput = INVALID_GROUP_NAME_INVALID_CHARS;
-
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, INVALID_GROUP_NAME_INVALID_CHARS, expectedMessage);
     }
 
     @Test
     public void parse_invalidGroupNameNonAlphabet_throwsParseException() {
         String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
-        String userInput = INVALID_GROUP_NAME_NON_ALPHABET;
-
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, INVALID_GROUP_NAME_NON_ALPHABET, expectedMessage);
     }
 
     @Test
     public void parse_invalidGroupNameNonDigits_throwsParseException() {
         String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
-        String userInput = INVALID_GROUP_NAME_NON_DIGITS;
-
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, INVALID_GROUP_NAME_NON_DIGITS, expectedMessage);
     }
 
     @Test
     public void parse_invalidFilePathDash_throwsParseException() {
         String expectedMessage = GroupName.MESSAGE_CONSTRAINTS;
-        String userInput = INVALID_GROUP_NAME_DASH;
-
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, INVALID_GROUP_NAME_DASH, expectedMessage);
     }
 
     @Test
     public void parse_invalidGroupNameEmpty_throwsParseException() {
         String expectedMessage = GroupName.MESSAGE_GROUP_NAME_EMPTY;
-        String userInput = INVALID_GROUP_NAME_EMPTY;
-
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, INVALID_GROUP_NAME_EMPTY, expectedMessage);
     }
 
     @Test
     public void parse_invalidGroupNameMultiple_throwsParseException() {
         String expectedMessage = GroupName.MESSAGE_GROUP_NAME_MULTIPLE;
-        String userInput = INVALID_GROUP_NAME_MULTIPLE;
-
-        assertParseFailure(parser, userInput, expectedMessage);
+        assertParseFailure(parser, INVALID_GROUP_NAME_MULTIPLE, expectedMessage);
     }
 
 }

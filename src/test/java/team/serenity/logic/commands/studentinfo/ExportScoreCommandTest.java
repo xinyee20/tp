@@ -1,9 +1,9 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.logic.commands.studentinfo.ExportScoreCommand.MESSAGE_GROUP_DOES_NOT_EXIST;
 import static team.serenity.logic.commands.studentinfo.ExportScoreCommand.MESSAGE_SUCCESS;
+import static team.serenity.testutil.Assert.assertThrows;
 
 import java.util.Collections;
 import java.util.function.Predicate;
@@ -27,15 +27,15 @@ public class ExportScoreCommandTest {
     @Test
     void execute_noGroup() {
         ModelStub modelStub = new ExportScoreCommandTest.ModelStubWithNoGroup();
-        ExportScoreCommand ExportScoreCommand = new ExportScoreCommand(new GroupContainsKeywordPredicate("G01"));
-        assertThrows(CommandException.class, MESSAGE_GROUP_DOES_NOT_EXIST, () -> ExportScoreCommand.execute(modelStub));
+        ExportScoreCommand exportScoreCommand = new ExportScoreCommand(new GroupContainsKeywordPredicate("G01"));
+        assertThrows(CommandException.class, MESSAGE_GROUP_DOES_NOT_EXIST, () -> exportScoreCommand.execute(modelStub));
     }
 
     @Test
     void execute_containsGroup() throws CommandException {
         ModelStub modelStub = new ExportScoreCommandTest.ModelStubWithGroup();
-        ExportScoreCommand ExportScoreCommand = new ExportScoreCommand(new GroupContainsKeywordPredicate("G04"));
-        CommandResult actual = ExportScoreCommand.execute(modelStub);
+        ExportScoreCommand exportScoreCommand = new ExportScoreCommand(new GroupContainsKeywordPredicate("G04"));
+        CommandResult actual = exportScoreCommand.execute(modelStub);
         GroupName groupName = modelStub.getFilteredGroupList().get(0).getGroupName();
         assertEquals(
             String.format(MESSAGE_SUCCESS, groupName, groupName),

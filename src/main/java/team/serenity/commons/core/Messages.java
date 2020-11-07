@@ -56,4 +56,6 @@ public class Messages {
         "There are no students in this group. You may use addstudent command to add a student.";
     public static final String MESSAGE_NO_LESSONS =
         "There are no lessons in this group. Yoo may use addlsn command to add a lesson.";
+
+    public static final String MESSAGE_ASSERTION_ERROR_METHOD = "Execution of method should not fail.";
 }

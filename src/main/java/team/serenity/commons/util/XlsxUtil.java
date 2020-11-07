@@ -98,7 +98,7 @@ public class XlsxUtil {
 
     /**
      * Checks the validity of the XLSX file.
-     * @throws ParseException
+     * @throws ParseException a parsing exception
      */
     public void checkValidityOfXlsx() throws ParseException {
         if (sheet.getLastRowNum() == -1) {
