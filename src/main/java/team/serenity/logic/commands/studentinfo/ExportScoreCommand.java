@@ -45,12 +45,10 @@ public class ExportScoreCommand extends Command {
         if (model.getFilteredGroupList().isEmpty()) {
             throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
         }
-
-        Group trgtGrp = model.getFilteredGroupList().get(0);
-
-        model.exportParticipation(trgtGrp);
+        Group toExport = model.getFilteredGroupList().get(0);
+        model.exportParticipation(toExport);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-            trgtGrp.getGroupName().toString(), trgtGrp.getGroupName().toString()));
+            toExport.getGroupName().toString(), toExport.getGroupName().toString()));
     }
 
     @Override
