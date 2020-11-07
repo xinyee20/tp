@@ -34,6 +34,7 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "Index %d is invalid.";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_EMPTY_INDEX = "Index not present!";
 
     public static final String MESSAGE_NOT_VIEWING_A_GROUP = "Group not specified.";
     public static final String MESSAGE_NOT_VIEWING_A_LESSON = "You are trying to use a lesson specific command "

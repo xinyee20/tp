@@ -32,7 +32,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_NAME, PREFIX_MATRIC)
             || !argMultimap.getPreamble().isEmpty()) {
-            throw addStudentCommandParserException;
+            throw this.addStudentCommandParserException;
         }
 
         String[] grpKeywordArray = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
@@ -44,7 +44,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         boolean matchesId = studentIdArray.length == 1;
         boolean matchesStudentName = studentNameArray.length <= 10;
         if (!matchesGrp || !matchesId || !matchesStudentName) {
-            throw addStudentCommandParserException;
+            throw this.addStudentCommandParserException;
         }
 
         String name = String.join(" ", studentNameArray).toUpperCase();

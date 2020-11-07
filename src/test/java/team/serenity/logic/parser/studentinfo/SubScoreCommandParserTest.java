@@ -1,5 +1,6 @@
 package team.serenity.logic.parser.studentinfo;
 
+import static team.serenity.commons.core.Messages.MESSAGE_EMPTY_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
@@ -51,11 +52,10 @@ class SubScoreCommandParserTest {
 
     @Test
     public void parse_invalidIndex_throwsCommandException() {
-        String expectedMessage = MESSAGE_INVALID_INDEX;
         String empty = "";
 
-        assertParseFailure(parser, INVALID_INDEX + " " + SUB_SCORE_DESC, expectedMessage);
-        assertParseFailure(parser, empty + SUB_SCORE_DESC, expectedMessage);
+        assertParseFailure(parser, INVALID_INDEX + " " + SUB_SCORE_DESC, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, empty + SUB_SCORE_DESC, MESSAGE_EMPTY_INDEX);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package team.serenity.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_EMPTY_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
@@ -112,6 +113,7 @@ public class SerenityParserUtil {
      * @throws ParseException if the specified score is invalid.
      */
     public static int parseScore(String inputScore) throws ParseException {
+        requireNonNull(inputScore);
         String trimmedScore = inputScore.trim();
         int score;
         try {
@@ -145,7 +147,11 @@ public class SerenityParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
+        requireNonNull(oneBasedIndex);
         String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.length() == 0) {
+            throw new ParseException(MESSAGE_EMPTY_INDEX);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }

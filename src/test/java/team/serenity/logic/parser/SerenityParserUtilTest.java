@@ -30,6 +30,8 @@ public class SerenityParserUtilTest {
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex(""));
+        assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex(" "));
     }
 
     @Test

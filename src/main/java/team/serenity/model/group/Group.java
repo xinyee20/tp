@@ -41,7 +41,6 @@ public class Group {
         XlsxUtil util = new XlsxUtil(filePath);
         this.students = new UniqueStudentList();
         this.students.setElementsWithList(new ArrayList<>(util.readStudentsFromXlsx()));
-        // TODO: implement scores data
         Set<StudentInfo> studentsInfo = util.readStudentsInfoFromXlsx(util.readStudentsFromXlsx());
         this.lessons = new UniqueLessonList();
         this.lessons.setElementsWithList(new ArrayList<>(util.readLessonsFromXlsx(studentsInfo)));
@@ -58,7 +57,6 @@ public class Group {
         this.groupName = groupName;
         this.students = new UniqueStudentList();
         this.students.setElementsWithList(new ArrayList<>(grpExcelData.readStudentsFromXlsx()));
-        // TODO: implement scores data
         Set<StudentInfo> studentsInfo = grpExcelData.readStudentsInfoFromXlsx(grpExcelData.readStudentsFromXlsx());
         this.lessons = new UniqueLessonList();
         this.lessons.setElementsWithList(new ArrayList<>(grpExcelData.readLessonsFromXlsx(studentsInfo)));
@@ -184,21 +182,6 @@ public class Group {
             Lesson updatedLesson = new Lesson(lesson.getLessonName(), studentInfos);
             this.lessons.setElement(lesson, updatedLesson);
         }
-    }
-
-    /**
-     * Returns true if both groups of the same name have at least one other identity field that is the same. This
-     * defines a weaker notion of equality between two groups.
-     */
-    public boolean isSameGroup(Group otherGroup) {
-        if (otherGroup == this) {
-            return true;
-        }
-
-        return otherGroup != null
-            && otherGroup.getGroupName().equals(getGroupName())
-            && otherGroup.getStudents().equals(getStudents())
-            && otherGroup.getLessons().equals(getLessons());
     }
 
     /**
