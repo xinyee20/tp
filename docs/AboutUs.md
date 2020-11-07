@@ -27,7 +27,9 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/ryanlimjr.md)
 
 * Role: Developer
+* Feature: Data displays, Data managers
 * Responsibilities: UI/UX and Code design
+* Components: Model, UI
 
 ### Lau Xin Yee
 
