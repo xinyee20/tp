@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
-import static team.serenity.testutil.TypicalGroups.GROUP_C;
-import static team.serenity.testutil.TypicalGroups.GROUP_D;
+import static team.serenity.testutil.TypicalGroups.GROUP_G01;
+import static team.serenity.testutil.TypicalGroups.GROUP_G02;
 import static team.serenity.testutil.TypicalGroups.getTypicalGroupManager;
 
 import java.util.Arrays;
@@ -51,25 +51,52 @@ class GroupManagerTest {
 
     @Test
     public void resetData_withDuplicateGroup_throwsDuplicateQuestionException() {
-        List<Group> newGroups = Arrays.asList(GROUP_C, GROUP_C);
+        List<Group> newGroups = Arrays.asList(GROUP_G01, GROUP_G01);
         GroupManagerStub newData = new GroupManagerStub(newGroups);
         assertThrows(DuplicateGroupException.class, () -> this.groupManager.resetData(newData));
     }
 
     @Test
-    public void hasGroup_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> this.groupManager.hasGroup(null));
+    public void isEmpty_noGroupsInGroupManager_returnFalse() {
+        assertTrue(this.groupManager.isEmpty());
     }
 
     @Test
-    public void hasGroup_notInGroupManager_returnFalse() {
-        assertFalse(this.groupManager.hasGroup(GROUP_D));
+    public void isEmpty_groupsInGroupManager_returnsTrue() {
+        this.groupManager.addGroup(GROUP_G02);
+        assertFalse(this.groupManager.isEmpty());
     }
 
     @Test
-    public void hasGroup_groupInGroupManager_returnsTrue() {
-        this.groupManager.addGroup(GROUP_D);
-        assertTrue(this.groupManager.hasGroup(GROUP_D));
+    public void hasGroupName_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.groupManager.hasGroupName(null));
+    }
+
+    @Test
+    public void hasGroupName_notInGroupManager_returnFalse() {
+        assertFalse(this.groupManager.hasGroupName(GROUP_G02.getGroupName()));
+    }
+
+    @Test
+    public void hasGroupName_groupInGroupManager_returnsTrue() {
+        this.groupManager.addGroup(GROUP_G02);
+        assertTrue(this.groupManager.hasGroupName(GROUP_G02.getGroupName()));
+    }
+
+    @Test
+    public void isValidGroupToAdd_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.groupManager.isValidGroupToAdd(null));
+    }
+
+    @Test
+    public void isValidGroupToAdd_notInGroupManager_returnFalse() {
+        assertTrue(this.groupManager.isValidGroupToAdd(GROUP_G02));
+    }
+
+    @Test
+    public void isValidGroupToAdd_groupInGroupManager_returnsTrue() {
+        this.groupManager.addGroup(GROUP_G02);
+        assertFalse(this.groupManager.isValidGroupToAdd(GROUP_G02));
     }
 
     @Test
@@ -79,15 +106,15 @@ class GroupManagerTest {
 
     @Test
     public void deleteGroup_groupNotInGroupManager_throwsGroupNotFoundException() {
-        assertThrows(GroupNotFoundException.class, () -> this.groupManager.deleteGroup(GROUP_D));
+        assertThrows(GroupNotFoundException.class, () -> this.groupManager.deleteGroup(GROUP_G02));
     }
 
     @Test
     public void deleteGroup_groupInGroupManager() {
-        this.groupManager.addGroup(GROUP_D);
-        assertTrue(this.groupManager.hasGroup(GROUP_D));
-        this.groupManager.deleteGroup(GROUP_D);
-        assertFalse(this.groupManager.hasGroup(GROUP_D));
+        this.groupManager.addGroup(GROUP_G02);
+        assertFalse(this.groupManager.isValidGroupToAdd(GROUP_G02));
+        this.groupManager.deleteGroup(GROUP_G02);
+        assertTrue(this.groupManager.isValidGroupToAdd(GROUP_G02));
     }
 
     @Test

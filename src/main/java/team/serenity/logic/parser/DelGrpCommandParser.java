@@ -32,7 +32,7 @@ public class DelGrpCommandParser implements Parser<DelGrpCommand> {
             throw this.delGrpCommandParserException;
         }
 
-        return new DelGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0]));
+        return new DelGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0].toUpperCase()));
     }
 
     /**

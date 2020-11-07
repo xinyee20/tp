@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.util.XlsxUtil;
+import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;
@@ -29,12 +30,12 @@ public class Group {
     private final UniqueList<Lesson> lessons;
 
     /**
-     * Constructs a {@code Group}
+     * Constructs a {@code Group}.
      *
-     * @param groupName     A valid name.
+     * @param groupName A valid name.
      * @param filePath A valid filePath.
      */
-    public Group(String groupName, String filePath) {
+    public Group(String groupName, String filePath) throws ParseException {
         requireAllNonNull(groupName, filePath);
         this.groupName = new GroupName(groupName);
         XlsxUtil util = new XlsxUtil(filePath);
@@ -49,7 +50,24 @@ public class Group {
     /**
      * Constructs a {@code Group}.
      *
-     * @param groupName     A valid name.
+     * @param groupName A valid group name.
+     * @param grpExcelData A valid group excel data.
+     */
+    public Group(GroupName groupName, XlsxUtil grpExcelData) throws ParseException {
+        requireAllNonNull(groupName, grpExcelData);
+        this.groupName = groupName;
+        this.students = new UniqueStudentList();
+        this.students.setElementsWithList(new ArrayList<>(grpExcelData.readStudentsFromXlsx()));
+        // TODO: implement scores data
+        Set<StudentInfo> studentsInfo = grpExcelData.readStudentsInfoFromXlsx(grpExcelData.readStudentsFromXlsx());
+        this.lessons = new UniqueLessonList();
+        this.lessons.setElementsWithList(new ArrayList<>(grpExcelData.readLessonsFromXlsx(studentsInfo)));
+    }
+
+    /**
+     * Constructs a {@code Group}.
+     *
+     * @param groupName A valid name.
      * @param students A list of students.
      */
     public Group(String groupName, UniqueList<Student> students) {
@@ -59,17 +77,30 @@ public class Group {
         this.lessons = new UniqueLessonList();
     }
 
-
     /**
      * Constructs a {@code Group}.
      *
-     * @param groupName     A valid name.
+     * @param groupName A valid name.
      * @param students A list of students.
-     * @param lessons  A list of tutorial lessons.
+     * @param lessons A list of tutorial lessons.
      */
     public Group(String groupName, UniqueList<Student> students, UniqueList<Lesson> lessons) {
         requireAllNonNull(groupName, students, lessons);
         this.groupName = new GroupName(groupName);
+        this.students = students;
+        this.lessons = lessons;
+    }
+
+    /**
+     * Constructs a {@code Group}.
+     *
+     * @param groupName A valid name.
+     * @param students A list of students.
+     * @param lessons A list of tutorial lessons.
+     */
+    public Group(GroupName groupName, UniqueList<Student> students, UniqueList<Lesson> lessons) {
+        requireAllNonNull(groupName, students, lessons);
+        this.groupName = groupName;
         this.students = students;
         this.lessons = lessons;
     }
@@ -94,18 +125,24 @@ public class Group {
         return this.lessons;
     }
 
+    public UniqueList<Student> getSortedStudents() {
+        this.students.sort(Comparator.comparing(x -> x.getStudentName().toString()));
+        return this.students;
+    }
+
     public UniqueList<Lesson> getSortedLessons() {
         this.lessons.sort(Comparator.comparing(x -> x.getLessonName().toString()));
         return this.lessons;
     }
 
     /**
-     * Adds a Student to a Group
+     * Adds a Student to a Group.
      *
      * @param student Student to be added
      */
     public void addStudentToGroup(Student student) {
         addToStudentList(student);
+        this.students.sort(Comparator.comparing(x -> x.getStudentName().toString()));
         addToStudentListInLessons(student);
     }
 
@@ -115,9 +152,13 @@ public class Group {
      * @param student Student to be added
      */
     public void deleteStudentFromGroup(Student student) {
+        deleteFromStudentList(student);
         deleteStudentFromStudentListInLessons(student);
     }
 
+    private void deleteFromStudentList(Student student) {
+        this.students.remove(student);
+    }
 
     private void addToStudentList(Student student) {
         this.students.add(student);
@@ -129,6 +170,7 @@ public class Group {
             StudentInfo newStudent = new StudentInfo(student);
             UniqueList<StudentInfo> studentInfos = lesson.getStudentsInfo();
             studentInfos.add(newStudent);
+            studentInfos.sort(Comparator.comparing(x -> x.getStudent().getStudentName().toString()));
             Lesson updatedLesson = new Lesson(lesson.getLessonName(), studentInfos);
             this.lessons.setElement(lesson, updatedLesson);
         }

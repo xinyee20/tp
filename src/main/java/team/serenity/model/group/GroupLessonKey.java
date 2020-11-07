@@ -23,6 +23,13 @@ public class GroupLessonKey {
     }
 
     /**
+     * Retrieves groupName.
+     */
+    public GroupName getGroupName() {
+        return groupName;
+    }
+
+    /**
      * Generates a hashcode for the object.
      * Since Groups and Lessons are unique,
      * concatenating the group and lesson, then hashing it would give a good hash function.

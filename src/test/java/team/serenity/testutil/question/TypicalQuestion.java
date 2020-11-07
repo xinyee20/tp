@@ -14,14 +14,21 @@ public class TypicalQuestion {
     public static final Description QUESTION_B_DESC = new Description("What do we need to prepare for the lesson?");
     public static final Description QUESTION_C_DESC = new Description("How is the grading criteria like?");
 
-    public static final Question QUESTION_A = new QuestionBuilder().withGroupName("G04")
-        .withLessonName("2-2").withDescription("What is the deadline for the report?").build();
+    public static final Question QUESTION_A = new QuestionBuilder().withGroupName("G01")
+        .withLessonName("1-1").withDescription("What is the deadline for the report?").build();
 
-    public static final Question QUESTION_B = new QuestionBuilder().withGroupName("G05")
-        .withLessonName("3-1").withDescription("What do we need to prepare for tomorrow's lesson?").build();
+    public static final Question QUESTION_B = new QuestionBuilder().withGroupName("G01")
+        .withLessonName("1-2").withDescription("What do we need to prepare for tomorrow's lesson?").build();
 
-    public static final Question QUESTION_C = new QuestionBuilder().withGroupName("G05")
+    public static final Question QUESTION_C = new QuestionBuilder().withGroupName("G01")
         .withLessonName("1-2").withDescription("How is the grading criteria like?").build();
+
+    // Details for edit question command
+    public static final String VALID_QUESTION_GROUP = "G02";
+    public static final String VALID_QUESTION_LESSON = "1-2";
+    public static final String VALID_QUESTION_DESC = "Where do we upload the submissions?";
+    public static final Question QUESTION_EDIT = new QuestionBuilder().withGroupName(VALID_QUESTION_GROUP)
+        .withLessonName(VALID_QUESTION_LESSON).withDescription(VALID_QUESTION_DESC).build();
 
     private TypicalQuestion() {
     } // prevents instantiation

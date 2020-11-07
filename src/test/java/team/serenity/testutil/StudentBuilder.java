@@ -7,8 +7,8 @@ import team.serenity.model.group.student.StudentNumber;
 
 public class StudentBuilder {
 
-    public static final StudentName DEFAULT_NAME = new StudentName("Ryan Lim");
-    public static final StudentNumber DEFAULT_STUDENT_NUMBER = new StudentNumber("A0123456U");
+    public static final StudentName DEFAULT_NAME = new StudentName("Aaron Tan");
+    public static final StudentNumber DEFAULT_STUDENT_NUMBER = new StudentNumber("A0123456A");
 
     private StudentName name;
     private StudentNumber studentNumber;

@@ -1,9 +1,11 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static java.util.Objects.requireNonNull;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
+import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
+import static team.serenity.commons.core.Messages.MESSAGE_SCORE_TO_SUB;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
@@ -17,11 +19,13 @@ import team.serenity.logic.commands.Command;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
+import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.student.Student;
-import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.model.group.studentinfo.StudentInfo;
+import team.serenity.model.group.studentinfo.UniqueStudentInfoList;
 import team.serenity.model.util.UniqueList;
 
 public class SubScoreCommand extends Command {
@@ -29,36 +33,36 @@ public class SubScoreCommand extends Command {
     public static final String MESSAGE_SUCCESS = "%s: \nUpdated Participation Score: %d";
     public static final String MESSAGE_STUDENT_NOT_PRESENT =
             "%s is not present. \nPlease ensure student is present before subtracting score!";
-    public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Decrease the participation score of a specific student for a lesson.\n"
-            + "Parameters: "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER "
-            + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT "
-            + "or INDEX " + PREFIX_SUBTRACT_SCORE + " SCORE_TO_SUBTRACT\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456B "
-            + PREFIX_SUBTRACT_SCORE + " 2\n"
-            + "or " + COMMAND_WORD + " 2"
-            + PREFIX_SUBTRACT_SCORE + " 2\n";
+            + ": Decrease the participation score of the specific student for a tutorial lesson.\n"
+            + "Parameters (2 methods):\n"
+            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER "
+                    + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT (must be an integer from 0 to 5)\n"
+            + "2. INDEX (must be a positive integer) "
+                    + PREFIX_SUBTRACT_SCORE + "SCORE_TO_SUBTRACT (must be an integer from 0 to 5)\n"
+            + "Examples:\n"
+            + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A "
+                    + PREFIX_SUBTRACT_SCORE + "2\n"
+            + "2. " + COMMAND_WORD + " 1 " + PREFIX_SUBTRACT_SCORE + "2\n";
 
     private Optional<Student> toSubScore;
     private Optional<Index> index;
     private boolean isByIndex;
     private int score;
     private int scoreToSub;
-    private boolean isCorrectStudent;
+    private int newScore = 0;
 
     /**
      * Creates an SubScoreCommand to decrease the specified {@code Student}'s participation score.
      */
-    public SubScoreCommand(Student student, int scoreToSub) {
+    public SubScoreCommand(Student student, int scoreToSub) throws CommandException {
         requireNonNull(student);
         requireNonNull(scoreToSub);
-        // Specified student to add participation score
+        // Specified student to decrease participation score
+        if (scoreToSub <= 0) {
+            throw new CommandException(MESSAGE_SCORE_TO_SUB);
+        }
         this.toSubScore = Optional.ofNullable(student);
         this.scoreToSub = scoreToSub;
         this.index = Optional.empty();
@@ -68,10 +72,13 @@ public class SubScoreCommand extends Command {
     /**
      * Creates an SubScoreCommand to decrease the specified {@code Student}'s participation score by index.
      */
-    public SubScoreCommand(Index index, int scoreToSub) {
+    public SubScoreCommand(Index index, int scoreToSub) throws CommandException {
         requireNonNull(index);
         requireNonNull(scoreToSub);
         // Specified index of student to decrease participation score
+        if (scoreToSub <= 0) {
+            throw new CommandException(MESSAGE_SCORE_TO_SUB);
+        }
         this.index = Optional.ofNullable(index);
         this.toSubScore = Optional.empty();
         this.scoreToSub = scoreToSub;
@@ -90,61 +97,89 @@ public class SubScoreCommand extends Command {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
         }
 
+        Group uniqueGroup = model.getFilteredGroupList().get(0);
         Lesson uniqueLesson = model.getFilteredLessonList().get(0);
-        UniqueList<StudentInfo> uniqueStudentInfoList = uniqueLesson.getStudentsInfo();
-        ObservableList<StudentInfo> studentsInfo = uniqueStudentInfoList.asUnmodifiableObservableList();
-        int newScore = 0;
+        GroupLessonKey key = new GroupLessonKey(uniqueGroup.getGroupName(), uniqueLesson.getLessonName());
+        ObservableList<StudentInfo> currentStudentInfoList = model.getObservableListOfStudentsInfoFromKey(key);
+        StudentInfo targetStudentInfo = getTargetStudentInfo(currentStudentInfoList);
 
-        if (!isByIndex) {
-            // Update single student participation score
-            for (int i = 0; i < studentsInfo.size(); i++) {
-                StudentInfo studentInfo = studentsInfo.get(i);
-                this.score = studentInfo.getParticipation().getScore();
-                this.isCorrectStudent = studentInfo.containsStudent(this.toSubScore.get());
-                if (this.isCorrectStudent) {
-                    Attendance currentAttendance = studentInfo.getAttendance();
-                    if (!currentAttendance.getAttendance()) {
-                        throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
-                    }
-                    newScore = score - scoreToSub;
-                    if (newScore > 5 || newScore < 0) {
-                        throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
-                    }
-                    Participation update = studentInfo.getParticipation().setNewScore(newScore);
-                    StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-                    uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-                    model.updateLessonList();
-                    model.updateStudentsInfoList();
-                    break;
-                }
-            }
-            if (!this.isCorrectStudent) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, this.toSubScore.get()));
-            }
-        } else {
-            if (index.get().getZeroBased() > studentsInfo.size()) {
-                throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        index.get().getOneBased()));
-            }
+        return executeSubScoreOneStudent(model, key, uniqueLesson, currentStudentInfoList, targetStudentInfo);
+    }
 
-            StudentInfo studentInfo = studentsInfo.get(index.get().getZeroBased());
-            toSubScore = Optional.ofNullable(studentInfo.getStudent());
-            this.score = studentInfo.getParticipation().getScore();
-            Attendance currentAttendance = studentInfo.getAttendance();
-            if (!currentAttendance.getAttendance()) {
-                throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
-            }
-            newScore = score - scoreToSub;
-            if (newScore > 5 || newScore < 0) {
-                throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
-            }
-            Participation update = studentInfo.getParticipation().setNewScore(newScore);
-            StudentInfo updatedStudentInfo = studentInfo.updateParticipation(update);
-            uniqueStudentInfoList.setElement(studentInfo, updatedStudentInfo);
-            model.updateLessonList();
-            model.updateStudentsInfoList();
+    /**
+     * Executes the  subtract one student's participation score command and returns the result message.
+     */
+    private CommandResult executeSubScoreOneStudent(Model model, GroupLessonKey key, Lesson lesson,
+                                                    ObservableList<StudentInfo> currentStudentInfoList,
+                                                    StudentInfo targetStudentInfo) throws CommandException {
+        // Gets the updated StudentInfoList with the updated targetStudentInfo
+        UniqueList<StudentInfo> updatedListForSubScoreOneStudent =
+                getUpdatedListForSubScoreOneStudent(currentStudentInfoList, targetStudentInfo);
+
+        // Updates the modelManager and lesson object with the new StudentInfoList
+        model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForSubScoreOneStudent);
+        lesson.setStudentsInfo(updatedListForSubScoreOneStudent);
+        model.updateLessonList();
+        model.updateStudentsInfoList();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent(), newScore));
+    }
+
+    /**
+     * Subtract score from the given {@code targetStudentInfo}'s {@code Participation} field
+     * in the {@code currentStudentInfoList}.
+     * Returns the {@code updatedStudentInfoList}.
+     *
+     * @param currentStudentInfoList the current student info list.
+     * @param targetStudentInfo the target student info to add score.
+     */
+    private UniqueList<StudentInfo> getUpdatedListForSubScoreOneStudent(
+            ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
+        if (!targetStudentInfo.getAttendance().isPresent()) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.toSubScore.get(), newScore));
+        this.score = targetStudentInfo.getParticipation().getScore();
+        newScore = score - scoreToSub;
+        if (newScore > 5 || newScore < 0) {
+            throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+        }
+        UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
+        updatedList.setElementsWithList(currentStudentInfoList);
+        StudentInfo updatedStudentInfo = new StudentInfo(targetStudentInfo.getStudent(),
+                new Participation().setNewScore(newScore), targetStudentInfo.getAttendance());
+        updatedList.setElement(targetStudentInfo, updatedStudentInfo);
+        return updatedList;
+    }
+
+    /**
+     * Returns the {@code targetStudentInfo} object in the {@code currentStudentInfoList}.
+     */
+    private StudentInfo getTargetStudentInfo(ObservableList<StudentInfo> currentStudentInfoList)
+            throws CommandException {
+        if (this.isByIndex) {
+            // Sub Score by index
+            assert this.index.isPresent();
+            Index targetIndex = this.index.get();
+
+            // Return error message if index is out of range
+            if (targetIndex.getZeroBased() >= currentStudentInfoList.size() || index.get().getOneBased() == 0) {
+                throw new CommandException(
+                        String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, targetIndex.getOneBased()));
+            }
+            return currentStudentInfoList.get(targetIndex.getZeroBased());
+        }
+
+        assert this.toSubScore.isPresent();
+        Student student = this.toSubScore.get();
+
+        // Filter studentInfoList via Student and get the first object in the filtered stream (if any)
+        Optional<StudentInfo> optionalStudentInfo =
+                currentStudentInfoList.stream().filter(s -> s.containsStudent(student)).findFirst();
+
+        // Return error message if Student not found in StudentInfoList
+        if (optionalStudentInfo.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, student));
+        }
+        return optionalStudentInfo.get();
     }
 
     @Override

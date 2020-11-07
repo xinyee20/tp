@@ -1,60 +1,75 @@
 @startuml
+skinparam linetype ortho
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor UI_COLOR_T4
-skinparam classBackgroundColor UI_COLOR
+skinparam arrowColor UI_COLOR_T1
+skinparam classBackgroundColor UI_COLOR_T1
 
-package UI <<Rectangle>>{
+package Ui <<Rectangle>>{
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
+Class TitleDisplay
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
 Class CommandBox
+Class SideBar
+Class HelpWindow
+Class DataPanel
 }
 
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+package ui.datapanel {
+Class SerenityDataPanel
+Class GroupDataPanel
+Class LessonDataPanel
+Class LessonCard
+Class StudentCard
+Class StudentInfoCard
+Class QuestionCard
 }
 
-package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+package Logic {
+Class HiddenLogic #white
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
-UiManager .left.|> Ui
+UiManager .right.|> Ui
 UiManager -down-> MainWindow
-MainWindow --> HelpWindow
-MainWindow *-down-> CommandBox
+MainWindow *-right-> DataPanel
+MainWindow *-down-> TitleDisplay
 MainWindow *-down-> ResultDisplay
-MainWindow *-down-> PersonListPanel
-MainWindow *-down-> StatusBarFooter
+MainWindow *-down-> CommandBox
+MainWindow *-down-> SideBar
+MainWindow *-down-> HelpWindow
 
-PersonListPanel -down-> PersonCard
+MainWindow --down--|> UiPart
+TitleDisplay --down--|> UiPart
+ResultDisplay --down--|> UiPart
+CommandBox --down-|> UiPart
+SideBar --down--|> UiPart
+HelpWindow --down--|> UiPart
+DataPanel --down--|> UiPart
 
-MainWindow -left-|> UiPart
+DataPanel <|-- SerenityDataPanel
+DataPanel <|-- GroupDataPanel
+DataPanel <|-- LessonDataPanel
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow -down-|> UiPart
+SerenityDataPanel -down-> QuestionCard
+GroupDataPanel -down-> LessonCard
+GroupDataPanel -down-> StudentCard
+LessonDataPanel -down-> StudentInfoCard
+LessonDataPanel -down-> QuestionCard
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+StudentCard -down-|> UiPart
+LessonCard -down-|> UiPart
+StudentInfoCard -down-|> UiPart
+QuestionCard -down-|> UiPart
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+HiddenLogic -down[hidden]-> SerenityDataPanel
 
-MainWindow -[hidden]-|> UiPart
+UiManager --> Logic
+MainWindow ---> Logic
+
 @enduml

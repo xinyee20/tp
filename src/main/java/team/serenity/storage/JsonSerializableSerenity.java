@@ -3,7 +3,6 @@ package team.serenity.storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,6 +12,7 @@ import team.serenity.commons.exceptions.IllegalValueException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.exceptions.DuplicateException;
+import team.serenity.model.managers.ReadOnlyGroupManager;
 import team.serenity.model.managers.ReadOnlySerenity;
 import team.serenity.model.managers.Serenity;
 import team.serenity.model.util.UniqueList;
@@ -46,8 +46,8 @@ class JsonSerializableSerenity {
             source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
-    public JsonSerializableSerenity(Stream<Group> groups) {
-        this.groups.addAll(groups.map(JsonAdaptedGroup::new).collect(Collectors.toList()));
+    public JsonSerializableSerenity(ReadOnlyGroupManager manager) {
+        this.groups.addAll(manager.getListOfGroups().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
     /**

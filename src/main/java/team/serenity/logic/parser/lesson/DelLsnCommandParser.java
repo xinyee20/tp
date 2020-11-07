@@ -6,14 +6,15 @@ import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
 
 import java.util.stream.Stream;
 
-import team.serenity.logic.commands.lesson.AddLsnCommand;
 import team.serenity.logic.commands.lesson.DelLsnCommand;
 import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.Prefix;
+import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
-import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
 
 /**
  * Parses input arguments and creates a new DelLsnCommand object.
@@ -29,13 +30,13 @@ public class DelLsnCommandParser implements Parser<DelLsnCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRP, PREFIX_LSN);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GRP, PREFIX_LSN) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLsnCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelLsnCommand.MESSAGE_USAGE));
         }
 
-        String grpName = argMultimap.getValue(PREFIX_GRP).get();
-        String lsnName = argMultimap.getValue(PREFIX_LSN).get();
+        GroupName groupName = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
+        LessonName lessonName = SerenityParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LSN).get());
 
-        return new DelLsnCommand(lsnName, new GroupContainsKeywordPredicate(grpName));
+        return new DelLsnCommand(groupName, lessonName);
     }
 
     /**

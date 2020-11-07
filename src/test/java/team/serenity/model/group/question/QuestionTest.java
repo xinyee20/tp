@@ -30,13 +30,13 @@ class QuestionTest {
 
     @Test
     public void test_getGroup() {
-        assertEquals(QUESTION_A.getGroupName(), new GroupName("G04"));
-        assertEquals(QUESTION_B.getGroupName(), new GroupName("G05"));
+        assertEquals(QUESTION_A.getGroupName(), new GroupName("G01"));
+        assertEquals(QUESTION_B.getGroupName(), new GroupName("G01"));
     }
     @Test
     public void test_getLesson() {
-        assertEquals(QUESTION_A.getLessonName(), new LessonName("2-2"));
-        assertEquals(QUESTION_B.getLessonName(), new LessonName("3-1"));
+        assertEquals(QUESTION_A.getLessonName(), new LessonName("1-1"));
+        assertEquals(QUESTION_B.getLessonName(), new LessonName("1-2"));
     }
 
     @Test
@@ -48,7 +48,7 @@ class QuestionTest {
     @Test
     public void test_equals() {
         // Same case
-        Question editedQuestion = new QuestionBuilder().withGroupName("G04").withLessonName("2-2")
+        Question editedQuestion = new QuestionBuilder().withGroupName("G01").withLessonName("1-1")
             .withDescription("What is the deadline for the report?").build();
         assertEquals(QUESTION_A, editedQuestion);
 
@@ -59,7 +59,7 @@ class QuestionTest {
     @Test
     public void test_hashCode() {
         // Same case
-        Question editedQuestion = new QuestionBuilder().withGroupName("G04").withLessonName("2-2")
+        Question editedQuestion = new QuestionBuilder().withGroupName("G01").withLessonName("1-1")
             .withDescription("What is the deadline for the report?").build();
         assertEquals(QUESTION_A.hashCode(), editedQuestion.hashCode());
 
@@ -70,7 +70,7 @@ class QuestionTest {
     @Test
     public void test_toString() {
         // Same case
-        Question editedQuestion = new QuestionBuilder().withGroupName("G04").withLessonName("2-2")
+        Question editedQuestion = new QuestionBuilder().withGroupName("G01").withLessonName("1-1")
             .withDescription("What is the deadline for the report?").build();
         assertEquals(QUESTION_A.toString(), editedQuestion.toString());
 

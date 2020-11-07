@@ -4,7 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.serenity.logic.commands.AddGrpCommand.MESSAGE_DUPLICATE_GROUP_NAME_FORMAT;
+import static team.serenity.logic.commands.AddGrpCommand.MESSAGE_DUPLICATE_STUDENT_FORMAT;
 import static team.serenity.testutil.Assert.assertThrows;
+import static team.serenity.testutil.TypicalStudent.AARON;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
+import static team.serenity.testutil.TypicalStudent.HELENE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +19,8 @@ import org.junit.jupiter.api.Test;
 
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.student.Student;
 import team.serenity.testutil.GroupBuilder;
 import team.serenity.testutil.ModelStub;
 
@@ -36,13 +43,28 @@ class AddGrpCommandTest {
     }
 
     @Test
-    public void execute_duplicateGroup_throwsCommandException() {
+    public void execute_duplicateGroupName_throwsCommandException() {
         Group validGroup = new GroupBuilder().build();
-        AddGrpCommand addGrpCommand = new AddGrpCommand(validGroup);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
+        String expectedMessage = String.format(MESSAGE_DUPLICATE_GROUP_NAME_FORMAT,
+                validGroup.getGroupName().groupName);
 
-        assertThrows(CommandException.class,
-            AddGrpCommand.MESSAGE_DUPLICATE_GROUP, () -> addGrpCommand.execute(modelStub));
+        AddGrpCommand addGrpCommand = new AddGrpCommand(validGroup);
+
+        assertThrows(CommandException.class, expectedMessage, () -> addGrpCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateStudent_throwsCommandException() {
+        Group validGroup = new GroupBuilder().withName("G01").withStudents(AARON, GEORGE, HELENE).build();
+        ModelStub modelStub = new ModelStubWithGroup(validGroup);
+        String expectedMessage = String.format(MESSAGE_DUPLICATE_STUDENT_FORMAT,
+                AARON.getStudentName(), AARON.getStudentNo());
+
+        Group invalidGroup = new GroupBuilder(validGroup).withName("G02").build();
+        AddGrpCommand addGrpCommand = new AddGrpCommand(invalidGroup);
+
+        assertThrows(CommandException.class, expectedMessage, () -> addGrpCommand.execute(modelStub));
     }
 
     @Test
@@ -82,10 +104,17 @@ class AddGrpCommandTest {
         }
 
         @Override
-        public boolean hasGroup(Group group) {
-            requireNonNull(group);
-            return this.group.isSameGroup(group);
+        public boolean hasGroupName(GroupName toCheck) {
+            requireNonNull(toCheck);
+            return this.group.getGroupName().equals(toCheck);
         }
+
+        @Override
+        public boolean hasStudent(Student toCheck) {
+            requireNonNull(toCheck);
+            return this.group.getStudents().contains(toCheck);
+        }
+
     }
 
     /**
@@ -96,9 +125,13 @@ class AddGrpCommandTest {
         final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasGroup(Group group) {
-            requireNonNull(group);
-            return groupsAdded.stream().anyMatch(group::isSameGroup);
+        public boolean hasGroupName(GroupName toCheck) {
+            return false;
+        }
+
+        @Override
+        public boolean hasStudent(Student toCheck) {
+            return false;
         }
 
         @Override

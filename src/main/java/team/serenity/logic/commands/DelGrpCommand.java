@@ -13,11 +13,11 @@ public class DelGrpCommand extends Command {
 
     public static final String COMMAND_WORD = "delgrp";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes an existing tutorial group. "
+        + ": Deletes an existing tutorial group.\n"
         + "Parameter: "
-        + PREFIX_GRP + "GROUP\n"
+        + PREFIX_GRP + "GROUP_NAME\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + "G04\n";
+        + PREFIX_GRP + "G01\n";
 
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Tutorial group deleted: %1$s";
 
@@ -51,8 +51,7 @@ public class DelGrpCommand extends Command {
 
         model.deleteGroup(toDel);
         model.updateFilteredGroupList(this.grpPredicate);
-        return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, toDel),
-            false, false, false, false, false, true);
+        return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, toDel), CommandResult.UiAction.DEL_GRP);
     }
 
     @Override

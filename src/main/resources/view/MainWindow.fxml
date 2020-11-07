@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="700" onCloseRequest="#handleExit" title="Serenity" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="800.0" onCloseRequest="#handleExit" title="Serenity" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/serenity_logo.png" />
   </icons>
@@ -26,6 +26,7 @@
          <BorderPane>
             <center>
             <VBox>
+                  <StackPane fx:id="titleDisplayPlaceholder" layoutX="10.0" layoutY="10.0" minWidth="680.0" prefHeight="20.0" prefWidth="200.0" styleClass="pane-with-border" />
                 <StackPane fx:id="dataDisplayPlaceholder" minWidth="680.0" prefHeight="150.0" prefWidth="200.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           </StackPane>
                 <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
@@ -57,15 +58,7 @@
            </MenuBar>
             </top>
             <left>
-               <ScrollPane prefWidth="80.0" BorderPane.alignment="CENTER">
-                 <content>
-                     <VBox fx:id="buttonPanelPlaceholder" alignment="CENTER" fillWidth="false" prefWidth="80.0">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                     </VBox>
-                 </content>
-               </ScrollPane>
+               <ScrollPane fx:id="sidebarPlaceholder" prefWidth="85.0" BorderPane.alignment="CENTER" />
             </left>
          </BorderPane>
     </Scene>

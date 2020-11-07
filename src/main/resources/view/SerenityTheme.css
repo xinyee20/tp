@@ -6,7 +6,6 @@
     -color-blue4: #73A5C6;
     -color-white: #f8f8ff;
     -color-black: #000000;
-    -color-pink: #c6738c;
     -color-red: #B41900;
     -fx-text-fill: -color-white;
 }
@@ -18,7 +17,7 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-opacity: 0.9;
+    -fx-text-fill: -color-white;
 }
 
 .label-bright {
@@ -40,23 +39,48 @@
     -fx-font-family: "Raleway Semibold";
 }
 
+.tab {
+    -fx-background-insets: 0 2 0 2,0,0;
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
 .tab-pane {
-    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 1;
+    -fx-tab-min-width:90px;
 }
 
 .tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-border-insets: 0;
+}
+
+.tab-pane .tab:selected {
     -fx-background-color: -color-blue2;
     -fx-border-insets: 0;
 }
 
-.tab-pane > .tab-header-area > .headers-region > .tab:selected {
-    -fx-background-color: -color-blue3;
+.tab-pane .tab:hover {
+    -fx-background-color: -color-blue4;
     -fx-border-insets: 0;
 }
 
-.tab-pane > .tab-header-area > .headers-region > .tab:hover {
-    -fx-background-color: -color-blue4;
-    -fx-border-insets: 0;
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: -color-blue2;
+    -fx-opacity: 0;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab-content-area  {
+    -fx-background-color: -color-blue1;
 }
 
 .table-view {
@@ -69,7 +93,7 @@
 }
 
 .table-view .column-header-background {
-    -fx-background-color: transparent;
+    -fx-background-color: red;
 }
 
 .table-view .column-header, .table-view .filler {
@@ -85,15 +109,11 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 10pt;
     -fx-font-family: "Raleway Light";
     -fx-text-fill: -color-white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
-}
-
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
 }
 
 .split-pane:horizontal .split-pane-divider {
@@ -117,6 +137,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: -color-blue1;
 }
 
 .list-cell:filled:even {
@@ -125,15 +146,6 @@
 
 .list-cell:filled:odd {
     -fx-background-color: -color-blue1;
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
 }
 
 .list-cell .label {
@@ -173,11 +185,11 @@
 
 .button {
     -fx-border-radius: 2;
-    -fx-padding: 5 0 5 0;
+    -fx-padding: 5 5 5 5;
     -fx-border-color: transparent;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: -color-blue;
+    -fx-background-color: -color-blue3;
     -fx-font-size: 11pt;
     -fx-text-fill: -color-white;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -192,7 +204,7 @@
 }
 
 .button-selected {
-    -fx-background-color: -color-pink;
+    -fx-background-color: transparent
 }
 
 .dialog-pane {
@@ -276,6 +288,18 @@
     -fx-background-radius: 0;
 }
 
+.text-area {
+    -fx-text-fill: -color-white;
+}
+
+.text-area .content {
+    -fx-background-color: -color-blue1;
+}
+
+#titleDisplay *.text {
+    -fx-text-alignment: center;
+}
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
@@ -288,4 +312,43 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.table-view{
+    /*-fx-background-color: transparent;*/
+ }
+
+.table-view .column-header {
+     -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: -color-blue3;
+}
+
+.table-view .column-header-background .label{
+     -fx-background-color: transparent;
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+}
+
+.table-view .table-column{
+    -fx-alignment:center;
+}
+
+.table-view .table-cell{
+    -fx-font-weight:bold;
+    -fx-font-size:15px;
+
+}
+
+.menu-bar {
+    -fx-background-color: #F4F4F4;
+}
+
+.menu-bar > .container > .menu-button > .label {
+    -fx-text-fill: -color-black;
+}
+.menu-item .label{
+    -fx-text-fill: -color-black;
 }

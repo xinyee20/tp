@@ -65,8 +65,27 @@ public interface Logic {
     ObservableList<StudentInfo> getStudentInfoList();
 
     /**
+     * Returns all student info across all tutorial groups.
+     */
+    ObservableList<StudentInfo> getAllStudentInfo();
+
+    /**
      * Returns an unmodifiable view of the list of questions from a group-lesson.
      */
     ObservableList<Question> getFilteredQuestionList();
+
+    /**
+     * Returns true if there is at least 1 existing group. Else returns false.
+     *
+     * @return true if there is at least 1 existing group.
+     */
+    boolean hasGroup();
+
+    /**
+     * Returns a list of existing groups.
+     *
+     * @return a list of existing groups.
+     */
+    ObservableList<Group> getGroups();
 
 }
