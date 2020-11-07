@@ -141,7 +141,7 @@ public class SerenityParser {
             return new ViewScoreCommandParser().parse(arguments);
 
         case ViewFlagCommand.COMMAND_WORD:
-            return new ViewFlagCommandParser().parse(arguments);
+            return new ViewFlagCommand();
 
         // ========================== Question Commands =========================
 

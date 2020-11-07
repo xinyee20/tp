@@ -1,7 +1,7 @@
 package team.serenity.logic.commands.student;
 
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_EMPTY;
 import static team.serenity.commons.util.CollectionUtil.requireAllNonNull;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
@@ -94,7 +94,7 @@ public class DelStudentCommand extends Command {
         } else {
             if (index.get().getZeroBased() >= uniqueStudentList.size()) {
                 throw new CommandException(
-                        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.get().getOneBased()));
+                        String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, index.get().getOneBased()));
             }
 
             toDelete = Optional.ofNullable(uniqueStudentList.getList().get(index.get().getZeroBased()));

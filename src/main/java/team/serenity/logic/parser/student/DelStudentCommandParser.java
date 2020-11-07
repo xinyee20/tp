@@ -68,10 +68,14 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
             return new DelStudentCommand(studentName, studentId, new GroupContainsKeywordPredicate(grpName));
 
         } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+            try {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+
+            } catch (NumberFormatException e) {
+                throw this.deleteStudentCommandParserException;
+            }
             String grpName = grpKeywordArray[0];
             grpName = SerenityParserUtil.parseGroupName(grpName).toString();
-
             return new DelStudentCommand(index, new GroupContainsKeywordPredicate(grpName));
         }
     }

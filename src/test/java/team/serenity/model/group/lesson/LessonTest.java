@@ -55,6 +55,7 @@ public class LessonTest {
         newStudentsInfo.add(new StudentInfo(HELENE));
         Lesson oneOneWithTwoStudents = new Lesson("1-1", newStudentsInfo);
         Lesson twoOneWithTwoStudents = new Lesson("2-1", newStudentsInfo);
+
         assertTrue(oneOneClone.equals(oneOne)); //same
         assertFalse(oneOneWithTwoStudents.equals(oneOne)); //same class name, different students
         assertFalse(classTwoOne.equals(oneOne)); //different class name, same students

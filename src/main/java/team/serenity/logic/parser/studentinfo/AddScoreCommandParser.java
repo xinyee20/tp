@@ -37,7 +37,7 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
     @Override
     public AddScoreCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
-                PREFIX_NAME, PREFIX_MATRIC, PREFIX_ADD_SCORE);
+            PREFIX_NAME, PREFIX_MATRIC, PREFIX_ADD_SCORE);
 
         Index index;
         StudentName studentName;
@@ -58,20 +58,36 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()
-                && argMultimap.getPreamble().length() != 0) {
+            && argMultimap.getPreamble().length() != 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-            studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
-            student = Optional.ofNullable(new Student(studentName, studentNumber));
-            scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
-            return new AddScoreCommand(student.get(), scoreToAdd);
-        } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
-            return new AddScoreCommand(index, scoreToAdd);
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+                studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
+                student = Optional.ofNullable(new Student(studentName, studentNumber));
+                scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
+                return new AddScoreCommand(student.get(), scoreToAdd);
+            } else {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
+                return new AddScoreCommand(index, scoreToAdd);
+            }
+        } catch (Exception e) {
+            if (e instanceof ParseException) {
+                throw new ParseException(e.getMessage());
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+            }
         }
     }
 

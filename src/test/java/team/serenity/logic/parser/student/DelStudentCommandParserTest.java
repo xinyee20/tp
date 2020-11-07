@@ -1,9 +1,9 @@
 package team.serenity.logic.parser.student;
 
-import static team.serenity.commons.core.Messages.MESSAGE_EMPTY_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_INDEX;
+import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_INDEX;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
@@ -32,7 +32,7 @@ public class DelStudentCommandParserTest {
             + PREFIX_NAME + "John" + " " + PREFIX_MATRIC + "A0123456U A0101010B";
         String noIndex = " " + PREFIX_GRP + "G04";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelStudentCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, noIndex, MESSAGE_EMPTY_INDEX);
+        assertParseFailure(parser, noIndex, expectedMessage);
         assertParseFailure(parser, "", expectedMessage);
         assertParseFailure(parser, missingGroup, expectedMessage);
         assertParseFailure(parser, missingStudent, expectedMessage);
@@ -40,6 +40,7 @@ public class DelStudentCommandParserTest {
         assertParseFailure(parser, doubleGroup, expectedMessage);
         assertParseFailure(parser, doubleId, expectedMessage);
         assertParseFailure(parser, INVALID_INDEX, expectedMessage);
+        assertParseFailure(parser, NON_INTEGER, expectedMessage);
     }
 
     @Test

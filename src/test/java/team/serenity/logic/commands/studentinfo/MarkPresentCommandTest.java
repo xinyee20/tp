@@ -3,6 +3,7 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
@@ -31,7 +32,7 @@ class MarkPresentCommandTest {
     @Test
     public void execute_markStudent_success() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student toMarkPresent = new StudentBuilder(AARON).build();
+        Student toMarkPresent = new StudentBuilder().build();
 
         CommandResult commandResult = new MarkPresentCommand(toMarkPresent).execute(modelStub);
         assertEquals(String.format(MarkPresentCommand.MESSAGE_SUCCESS, toMarkPresent),
@@ -42,7 +43,7 @@ class MarkPresentCommandTest {
     public void execute_wrongName_throwsCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
         Student wrongNameOne = new StudentBuilder().withName("Aaron").build();
-        Student wrongNameTwo = new StudentBuilder().withName("Ben").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").build();
         MarkPresentCommand markPresentCommandOne = new MarkPresentCommand(wrongNameOne);
         MarkPresentCommand markPresentCommandTwo = new MarkPresentCommand(wrongNameTwo);
 
@@ -95,7 +96,9 @@ class MarkPresentCommandTest {
         ModelStubWithIndexAbsent modelStub = new ModelStubWithIndexAbsent();
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(INDEX_SECOND);
 
-        assertThrows(CommandException.class, () -> markPresentCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
+                        INDEX_SECOND.getOneBased()), () -> markPresentCommand.execute(modelStub));
     }
 
     @Test

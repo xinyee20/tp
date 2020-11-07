@@ -49,6 +49,14 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+        }
+
         try {
             if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
 
@@ -67,12 +75,16 @@ public class MarkPresentCommandParser implements Parser<MarkPresentCommand> {
             } else {
                 index = SerenityParserUtil.parseIndex(keyToAll.get());
                 return new MarkPresentCommand(index);
+
             }
-
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+        } catch (Exception e) {
+            if (e instanceof ParseException) {
+                throw e;
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MarkPresentCommand.MESSAGE_USAGE));
+            }
         }
-
     }
 
 }

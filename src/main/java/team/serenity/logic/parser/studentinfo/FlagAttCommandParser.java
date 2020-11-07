@@ -43,7 +43,15 @@ public class FlagAttCommandParser implements Parser<FlagAttCommand> {
         Optional<Student> student;
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()
-                && argMultimap.getPreamble().length() != 0) {
+            && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
         }
 
@@ -59,8 +67,12 @@ public class FlagAttCommandParser implements Parser<FlagAttCommand> {
                 index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
                 return new FlagAttCommand(index);
             }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
+        } catch (Exception e) {
+            if (e instanceof ParseException) {
+                throw e;
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 package team.serenity.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static team.serenity.commons.core.Messages.MESSAGE_EMPTY_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
@@ -12,7 +11,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.commons.util.StringUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupName;
@@ -29,8 +27,7 @@ import team.serenity.model.group.studentinfo.Participation;
 public class SerenityParserUtil {
 
     /**
-     * Parses a {@code String groupName} into a {@code GroupName}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String groupName} into a {@code GroupName}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code groupName} is invalid.
      */
@@ -44,8 +41,8 @@ public class SerenityParserUtil {
     }
 
     /**
-     * Parses a {@code String filePath} into a {@code XlsxUtil} object.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String filePath} into a {@code XlsxUtil} object. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code filePath} is invalid.
      */
@@ -64,8 +61,7 @@ public class SerenityParserUtil {
     }
 
     /**
-     * Parses a {@code String lessonName} into a {@code LessonName}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String lessonName} into a {@code LessonName}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code lessonName} is invalid.
      */
@@ -125,8 +121,8 @@ public class SerenityParserUtil {
     }
 
     /**
-     * Parses a {@code String questionDescription} into a {@code String}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String questionDescription} into a {@code String}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @return a Description object with the given {@code questionDescription}.
      * @throws ParseException if the given {@code questionDescription} is invalid.
@@ -149,13 +145,10 @@ public class SerenityParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         requireNonNull(oneBasedIndex);
         String trimmedIndex = oneBasedIndex.trim();
-        if (trimmedIndex.length() == 0) {
-            throw new ParseException(MESSAGE_EMPTY_INDEX);
-        }
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        Integer index = Integer.parseInt(trimmedIndex);
+        if (index < 1) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(index);
     }
-
 }
