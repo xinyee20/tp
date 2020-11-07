@@ -73,7 +73,9 @@ public class SerenityParserUtil {
     public static LessonName parseLessonName(String lessonName) throws ParseException {
         requireNonNull(lessonName);
         String trimmedLessonName = lessonName.trim();
-        if (!LessonName.isValidName(trimmedLessonName)) {
+        if (trimmedLessonName.isEmpty()) {
+            throw new ParseException(LessonName.MESSAGE_LESSON_NAME_EMPTY);
+        } else if (!LessonName.isValidName(trimmedLessonName)) {
             throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
         }
         return new LessonName(trimmedLessonName);
@@ -87,7 +89,9 @@ public class SerenityParserUtil {
     public static StudentName parseStudentName(String studentName) throws ParseException {
         requireNonNull(studentName);
         String trimmedName = studentName.trim();
-        if (!Student.isValidName(trimmedName)) {
+        if (trimmedName.isEmpty()) {
+            throw new ParseException(StudentName.MESSAGE_STUDENT_NAME_EMPTY);
+        } else if (!Student.isValidName(trimmedName)) {
             throw new ParseException(StudentName.MESSAGE_CONSTRAINTS);
         }
         return new StudentName(trimmedName);
@@ -101,7 +105,9 @@ public class SerenityParserUtil {
     public static StudentNumber parseStudentNumber(String studentId) throws ParseException {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
-        if (!Student.isValidStudentId(trimmedId)) {
+        if (trimmedId.isEmpty()) {
+            throw new ParseException(StudentNumber.MESSAGE_STUDENT_NUMBER_EMPTY);
+        } else if (!Student.isValidStudentId(trimmedId)) {
             throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
         return new StudentNumber(trimmedId);
@@ -115,8 +121,7 @@ public class SerenityParserUtil {
      */
     public static int parseScore(String inputScore) throws ParseException {
         String trimmedScore = inputScore.trim();
-        int score;
-        score = Integer.parseInt(trimmedScore);
+        int score = Integer.parseInt(trimmedScore);
         if (score < 0 || score > 5) {
             throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
         }
@@ -133,7 +138,9 @@ public class SerenityParserUtil {
     public static Description parseDescription(String questionDescription) throws ParseException {
         requireNonNull(questionDescription);
         String trimmedQuestionDescription = questionDescription.trim();
-        if (!Description.isValidDescription(trimmedQuestionDescription)) {
+        if (trimmedQuestionDescription.isEmpty()) {
+            throw new ParseException(Description.MESSAGE_GROUP_NAME_EMPTY);
+        } else if (!Description.isValidDescription(trimmedQuestionDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedQuestionDescription);
@@ -147,7 +154,7 @@ public class SerenityParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        Integer index = Integer.parseInt(trimmedIndex);
+        int index = Integer.parseInt(trimmedIndex);
         if (index < 1) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
