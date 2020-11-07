@@ -1,6 +1,7 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SET_SCORE;
@@ -19,6 +20,7 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.student.StudentName;
 import team.serenity.model.group.student.StudentNumber;
+import team.serenity.model.group.studentinfo.Participation;
 
 /**
  * Parses input arguments and creates a new EditScoreCommand object.
@@ -71,21 +73,21 @@ public class EditScoreCommandParser implements Parser<EditScoreCommand> {
         }
 
         try {
-            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-                studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
-                student = Optional.ofNullable(new Student(studentName, studentNumber));
-                score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
-                return new EditScoreCommand(student.get(), score);
-            } else {
+            score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
+        } catch (NumberFormatException e) {
+            throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
+        }
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+            studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
+            student = Optional.ofNullable(new Student(studentName, studentNumber));
+            return new EditScoreCommand(student.get(), score);
+        } else {
+            try {
                 index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-                score = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_SET_SCORE).get());
                 return new EditScoreCommand(index, score);
-            }
-        } catch (Exception e) {
-            if (e instanceof ParseException) {
-                throw new ParseException(e.getMessage());
-            } else {
+            } catch (NumberFormatException e) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
             }
         }

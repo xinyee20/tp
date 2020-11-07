@@ -1,7 +1,6 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static team.serenity.commons.core.Messages.MESSAGE_SCORE_TO_ADD;
 import static team.serenity.commons.core.Messages.MESSAGE_SCORE_TO_SUB;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
@@ -12,8 +11,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import team.serenity.commons.core.index.Index;
-import team.serenity.logic.commands.exceptions.CommandException;
-import team.serenity.logic.commands.studentinfo.AddScoreCommand;
 import team.serenity.logic.commands.studentinfo.SubScoreCommand;
 import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
@@ -24,6 +21,7 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.student.StudentName;
 import team.serenity.model.group.student.StudentNumber;
+import team.serenity.model.group.studentinfo.Participation;
 
 /**
  * Parses input arguments and creates a new SubScoreCommand object.
@@ -78,7 +76,7 @@ public class SubScoreCommandParser implements Parser<SubScoreCommand> {
         try {
             scoreToSub = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
         }
 
         if (scoreToSub == 0) {
@@ -91,8 +89,12 @@ public class SubScoreCommandParser implements Parser<SubScoreCommand> {
             student = Optional.ofNullable(new Student(studentName, studentNumber));
             return new SubScoreCommand(student.get(), scoreToSub);
         } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            return new SubScoreCommand(index, scoreToSub);
+            try {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                return new SubScoreCommand(index, scoreToSub);
+            } catch (NumberFormatException e) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE));
+            }
         }
     }
 

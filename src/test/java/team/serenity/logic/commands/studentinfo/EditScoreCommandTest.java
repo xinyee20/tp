@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
-import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
@@ -20,6 +19,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.Participation;
 import team.serenity.testutil.StudentBuilder;
 
 class EditScoreCommandTest {
@@ -37,7 +37,8 @@ class EditScoreCommandTest {
         int scoreOutOfRange = 6;
         EditScoreCommand setScoreCommand = new EditScoreCommand(toSetScore, scoreOutOfRange);
 
-        assertThrows(CommandException.class, MESSAGE_SCORE_NOT_WITHIN_RANGE, () -> setScoreCommand.execute(modelStub));
+        assertThrows(IllegalArgumentException.class, Participation.MESSAGE_CONSTRAINTS, () ->
+                setScoreCommand.execute(modelStub));
     }
 
     @Test

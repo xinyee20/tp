@@ -20,6 +20,7 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.student.StudentName;
 import team.serenity.model.group.student.StudentNumber;
+import team.serenity.model.group.studentinfo.Participation;
 
 /**
  * Parses input arguments and creates a new AddScoreCommand object.
@@ -74,10 +75,8 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
         try {
             scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
-        }
-
-        if (scoreToAdd == 0) {
+            throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
+        } if (scoreToAdd == 0) {
             throw new ParseException(String.format(MESSAGE_SCORE_TO_ADD));
         }
 
@@ -87,8 +86,12 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
             student = Optional.ofNullable(new Student(studentName, studentNumber));
             return new AddScoreCommand(student.get(), scoreToAdd);
         } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            return new AddScoreCommand(index, scoreToAdd);
+            try {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+                return new AddScoreCommand(index, scoreToAdd);
+            } catch (NumberFormatException e) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
+            }
         }
     }
 

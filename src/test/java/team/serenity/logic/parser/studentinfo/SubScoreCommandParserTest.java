@@ -63,18 +63,17 @@ class SubScoreCommandParserTest {
 
     @Test
     public void parse_invalidScore_throwsCommandException() {
-        String expectedMessageOne = String.format(Participation.MESSAGE_CONSTRAINTS);
-        String expectedMessageTwo = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubScoreCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(Participation.MESSAGE_CONSTRAINTS);
 
         String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + NON_INTEGER_SUB_SCORE;
         String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + NON_INTEGER_SUB_SCORE;
         String userInputThree = PREAMBLE_WHITESPACE + VALID_INDEX + " " + NEG_NUMBER_SUB_SCORE;
         String userInputFour = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + NEG_NUMBER_SUB_SCORE;
 
-        assertParseFailure(parser, userInputOne, expectedMessageOne);
-        assertParseFailure(parser, userInputTwo, expectedMessageOne);
-        assertParseFailure(parser, userInputThree, expectedMessageTwo);
-        assertParseFailure(parser, userInputFour, expectedMessageTwo);
+        assertParseFailure(parser, userInputOne, expectedMessage);
+        assertParseFailure(parser, userInputTwo, expectedMessage);
+        assertParseFailure(parser, userInputThree, expectedMessage);
+        assertParseFailure(parser, userInputFour, expectedMessage);
     }
 
     @Test
