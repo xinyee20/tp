@@ -5,6 +5,7 @@ import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_LISTED_OVERVIEW;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
+import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
@@ -35,9 +36,12 @@ public class ViewGrpCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
+        if (model.getFilteredGroupList().isEmpty()) {
+            throw new CommandException(MESSAGE_GROUP_EMPTY);
+        }
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_GRP);
     }
@@ -45,8 +49,8 @@ public class ViewGrpCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ViewGrpCommand // instanceof handles nulls
-                && this.predicate.equals(((ViewGrpCommand) other).predicate)); // state check
+            || (other instanceof ViewGrpCommand // instanceof handles nulls
+            && this.predicate.equals(((ViewGrpCommand) other).predicate)); // state check
     }
 
 }

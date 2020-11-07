@@ -34,30 +34,20 @@ public class DelGrpCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Group toDel = null;
+        model.updateFilteredGroupList(this.grpPredicate);
 
-        if (!model.getListOfGroups().isEmpty()) {
-            for (Group group : model.getListOfGroups()) {
-                if (group.getGroupName().toString().equals(this.grpPredicate.getKeyword())) {
-                    toDel = group;
-                    break;
-                }
-            }
-        }
-
-        if (toDel == null) {
+        if (model.getFilteredGroupList().isEmpty()) {
             throw new CommandException(MESSAGE_GROUP_EMPTY);
         }
-
+        Group toDel = model.getFilteredGroupList().get(0);
         model.deleteGroup(toDel);
-        model.updateFilteredGroupList(this.grpPredicate);
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, toDel), CommandResult.UiAction.DEL_GRP);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DelGrpCommand // instanceof handles nulls
-                && this.grpPredicate.equals(((DelGrpCommand) other).grpPredicate));
+            || (other instanceof DelGrpCommand // instanceof handles nulls
+            && this.grpPredicate.equals(((DelGrpCommand) other).grpPredicate));
     }
 }

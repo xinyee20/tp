@@ -118,8 +118,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        toggleHomeView();
-
         this.titleDisplay = new TitleDisplay();
         this.titleDisplayPlaceholder.getChildren().add(this.titleDisplay.getRoot());
 
@@ -211,7 +209,8 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to serenity data view.
      */
     @FXML
-    private void toggleHomeView() {
+    public void toggleHomeView() {
+        this.titleDisplay.setDefaultTitle();
         this.serenityDataPanel = new SerenityDataPanel(this.logic.getAllStudentInfo(),
             this.logic.getFilteredQuestionList());
         this.dataDisplayPlaceholder.getChildren().clear();
@@ -296,6 +295,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDelGrp(String groupName) {
+        toggleHomeView();
         for (Node groupButton : this.sideBar.getButtons()) {
             if (groupButton.getId().equals(groupName)) {
                 sideBar.deleteButton(groupButton);
@@ -365,6 +365,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             String groupName;
             String lessonName;
+            commandText = commandText.replaceAll("\\s+", " ");
             CommandResult commandResult = this.logic.execute(commandText);
             this.logger.info("Result: " + commandResult.getFeedbackToUser());
             this.resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

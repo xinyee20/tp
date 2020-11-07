@@ -50,7 +50,7 @@ public class DelStudentCommandTest {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "A0000000U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
@@ -67,7 +67,7 @@ public class DelStudentCommandTest {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "A0000000U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
@@ -87,7 +87,7 @@ public class DelStudentCommandTest {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "A0000000U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);

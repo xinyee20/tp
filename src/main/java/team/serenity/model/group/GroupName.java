@@ -8,6 +8,12 @@ public class GroupName {
     public static final String MESSAGE_CONSTRAINTS =
         "Group name must follow the format 'XYY' where X is an alphabetical character and Y is a digit from 0 to 9.";
 
+    public static final String MESSAGE_GROUP_NAME_EMPTY =
+        "Group name is empty.";
+
+    public static final String MESSAGE_GROUP_NAME_MULTIPLE =
+        "Only 1 group name can be entered.";
+
     /*
      * Must contain one upper case letter followed by 2 digits.
      */
