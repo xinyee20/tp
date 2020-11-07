@@ -1,5 +1,7 @@
 package team.serenity.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,6 +33,7 @@ class JsonAdaptedStudent {
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
+        requireNonNull(source);
         this.name = source.getStudentName().toString();
         this.studentNo = source.getStudentNo().toString();
     }

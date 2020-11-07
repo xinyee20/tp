@@ -1,5 +1,7 @@
 package team.serenity.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +33,7 @@ class JsonAdaptedGroup {
      * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
+        requireNonNull(source);
         this.groupName = source.getGroupName().toString();
         this.students.addAll(source.getStudents().asUnmodifiableObservableList().stream()
             .map(JsonAdaptedStudent::new)

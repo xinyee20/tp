@@ -39,7 +39,7 @@ public class EditScoreCommandParser implements Parser<EditScoreCommand> {
     @Override
     public EditScoreCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
-                PREFIX_NAME, PREFIX_MATRIC, PREFIX_SET_SCORE);
+            PREFIX_NAME, PREFIX_MATRIC, PREFIX_SET_SCORE);
 
         Index index;
         StudentName studentName;
@@ -60,7 +60,7 @@ public class EditScoreCommandParser implements Parser<EditScoreCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()
-                && argMultimap.getPreamble().length() != 0) {
+            && argMultimap.getPreamble().length() != 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditScoreCommand.MESSAGE_USAGE));
         }
 

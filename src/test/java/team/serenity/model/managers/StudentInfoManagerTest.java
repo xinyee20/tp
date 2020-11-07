@@ -30,7 +30,9 @@ public class StudentInfoManagerTest {
 
     @Test
     public void constructor_withParams() {
-        StudentInfoManager actual = new StudentInfoManager(this.studentInfoManager);
+        StudentInfoManager typicalManager = getTypicalStudentInfoManager();
+        StudentInfoManager actual = new StudentInfoManager(typicalManager);
+        assertEquals(typicalManager, actual);
     }
 
     @Test

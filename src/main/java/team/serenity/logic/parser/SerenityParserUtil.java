@@ -25,8 +25,7 @@ import team.serenity.model.group.studentinfo.Participation;
 public class SerenityParserUtil {
 
     /**
-     * Parses a {@code String groupName} into a {@code GroupName}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String groupName} into a {@code GroupName}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code groupName} is invalid.
      */
@@ -44,8 +43,8 @@ public class SerenityParserUtil {
     }
 
     /**
-     * Parses a {@code String filePath} into a {@code XlsxUtil} object.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String filePath} into a {@code XlsxUtil} object. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code filePath} is invalid.
      */
@@ -65,8 +64,7 @@ public class SerenityParserUtil {
     }
 
     /**
-     * Parses a {@code String lessonName} into a {@code LessonName}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String lessonName} into a {@code LessonName}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code lessonName} is invalid.
      */
@@ -120,6 +118,7 @@ public class SerenityParserUtil {
      * @throws ParseException if the specified score is invalid.
      */
     public static int parseScore(String inputScore) throws ParseException {
+        requireNonNull(inputScore);
         String trimmedScore = inputScore.trim();
         int score = Integer.parseInt(trimmedScore);
         if (score < 0 || score > 5) {
@@ -129,8 +128,8 @@ public class SerenityParserUtil {
     }
 
     /**
-     * Parses a {@code String questionDescription} into a {@code String}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String questionDescription} into a {@code String}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @return a Description object with the given {@code questionDescription}.
      * @throws ParseException if the given {@code questionDescription} is invalid.
@@ -151,6 +150,7 @@ public class SerenityParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
+        requireNonNull(oneBasedIndex);
         String trimmedIndex = oneBasedIndex.trim();
         int index = Integer.parseInt(trimmedIndex);
         if (index < 1) {

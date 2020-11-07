@@ -31,20 +31,20 @@ public class AddScoreCommand extends Command {
     public static final String COMMAND_WORD = "addscore";
     public static final String MESSAGE_SUCCESS = "%s: \nUpdated Participation Score: %d";
     public static final String MESSAGE_STUDENT_NOT_PRESENT = "%s is not present.\n"
-            + "Please ensure student is present before adding score!";
+        + "Please ensure student is present before adding score!";
     public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Increase the participation score of the specific student for a tutorial lesson.\n"
-            + "Parameters (2 methods):\n"
-            + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER "
-                    + PREFIX_ADD_SCORE + "SCORE_TO_ADD (must be an integer from 0 to 5)\n"
-            + "2. INDEX (must be a positive integer) "
-                    + PREFIX_ADD_SCORE + "SCORE_TO_ADD (must be an integer from 0 to 5)\n"
-            + "Examples:\n"
-            + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A "
-                    + PREFIX_ADD_SCORE + "2\n"
-            + "2. " + COMMAND_WORD + " 1 " + PREFIX_ADD_SCORE + "2\n";
+        + ": Increase the participation score of the specific student for a tutorial lesson.\n"
+        + "Parameters (2 methods):\n"
+        + "1. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER "
+        + PREFIX_ADD_SCORE + "SCORE_TO_ADD (must be an integer from 0 to 5)\n"
+        + "2. INDEX (must be a positive integer) "
+        + PREFIX_ADD_SCORE + "SCORE_TO_ADD (must be an integer from 0 to 5)\n"
+        + "Examples:\n"
+        + "1. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A "
+        + PREFIX_ADD_SCORE + "2\n"
+        + "2. " + COMMAND_WORD + " 1 " + PREFIX_ADD_SCORE + "2\n";
 
     private Optional<Student> toAddScore;
     private Optional<Index> index;
@@ -104,11 +104,11 @@ public class AddScoreCommand extends Command {
      * Executes the  add one student's participation score command and returns the result message.
      */
     private CommandResult executeAddScoreOneStudent(Model model, GroupLessonKey key, Lesson lesson,
-                                                    ObservableList<StudentInfo> currentStudentInfoList,
-                                                    StudentInfo targetStudentInfo) throws CommandException {
+        ObservableList<StudentInfo> currentStudentInfoList,
+        StudentInfo targetStudentInfo) throws CommandException {
         // Gets the updated StudentInfoList with the updated targetStudentInfo
         UniqueList<StudentInfo> updatedListForAddScoreOneStudent =
-                getUpdatedListForAddScoreOneStudent(currentStudentInfoList, targetStudentInfo);
+            getUpdatedListForAddScoreOneStudent(currentStudentInfoList, targetStudentInfo);
 
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForAddScoreOneStudent);
@@ -122,7 +122,7 @@ public class AddScoreCommand extends Command {
      * Returns the {@code targetStudentInfo} object in the {@code currentStudentInfoList}.
      */
     private StudentInfo getTargetStudentInfo(ObservableList<StudentInfo> currentStudentInfoList)
-            throws CommandException {
+        throws CommandException {
         if (this.isByIndex) {
             // Add Score by index
             assert this.index.isPresent();
@@ -131,7 +131,7 @@ public class AddScoreCommand extends Command {
             // Return error message if index is out of range
             if (targetIndex.getZeroBased() >= currentStudentInfoList.size() || index.get().getOneBased() == 0) {
                 throw new CommandException(
-                        String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, targetIndex.getOneBased()));
+                    String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, targetIndex.getOneBased()));
             }
             return currentStudentInfoList.get(targetIndex.getZeroBased());
         }
@@ -141,7 +141,7 @@ public class AddScoreCommand extends Command {
 
         // Filter studentInfoList via Student and get the first object in the filtered stream (if any)
         Optional<StudentInfo> optionalStudentInfo =
-                currentStudentInfoList.stream().filter(s -> s.containsStudent(student)).findFirst();
+            currentStudentInfoList.stream().filter(s -> s.containsStudent(student)).findFirst();
 
         // Return error message if Student not found in StudentInfoList
         if (optionalStudentInfo.isEmpty()) {
@@ -159,7 +159,7 @@ public class AddScoreCommand extends Command {
      * @param targetStudentInfo the target student info to add score.
      */
     private UniqueList<StudentInfo> getUpdatedListForAddScoreOneStudent(
-            ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
+        ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
         if (!targetStudentInfo.getAttendance().isPresent()) {
             throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, targetStudentInfo.getStudent()));
         }
@@ -171,7 +171,7 @@ public class AddScoreCommand extends Command {
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
         updatedList.setElementsWithList(currentStudentInfoList);
         StudentInfo updatedStudentInfo = new StudentInfo(targetStudentInfo.getStudent(),
-                new Participation().setNewScore(newScore), targetStudentInfo.getAttendance());
+            new Participation().setNewScore(newScore), targetStudentInfo.getAttendance());
         updatedList.setElement(targetStudentInfo, updatedStudentInfo);
         return updatedList;
     }
@@ -183,10 +183,10 @@ public class AddScoreCommand extends Command {
      */
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddScoreCommand // instanceof handles nulls
-                && this.scoreToAdd == ((AddScoreCommand) other).scoreToAdd)
-                && this.toAddScore.equals(((AddScoreCommand) other).toAddScore)
-                && this.index.equals(((AddScoreCommand) other).index)
-                && this.isByIndex == (((AddScoreCommand) other).isByIndex);
+            || (other instanceof AddScoreCommand // instanceof handles nulls
+            && this.scoreToAdd == ((AddScoreCommand) other).scoreToAdd)
+            && this.toAddScore.equals(((AddScoreCommand) other).toAddScore)
+            && this.index.equals(((AddScoreCommand) other).index)
+            && this.isByIndex == (((AddScoreCommand) other).isByIndex);
     }
 }

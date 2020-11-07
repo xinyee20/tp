@@ -18,14 +18,7 @@ import team.serenity.model.util.UniqueList;
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls. A group is considered unique
- * by comparing using {@code Group#isSameGroup(Group)}. As such, adding and updating of groups uses
- * Group#isSameGroup(Group) for equality so as to ensure that the group being added or updated is unique in terms of
- * identity in the UniqueGroupList. However, the removal of a group uses Group#equals(Object) so as to ensure that the
- * group with exactly the same fields will be removed.
- * <p>
- * Supports a minimal set of list operations.
- *
- * @see Group#isSameGroup(Group)
+ * by comparing using {@code Group#equals(Group)}.
  */
 public class UniqueGroupList implements UniqueList<Group> {
 
@@ -39,7 +32,7 @@ public class UniqueGroupList implements UniqueList<Group> {
     @Override
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
-        return this.internalList.stream().anyMatch(toCheck::isSameGroup);
+        return this.internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -90,7 +83,7 @@ public class UniqueGroupList implements UniqueList<Group> {
             throw new GroupNotFoundException();
         }
 
-        if (!target.isSameGroup(editedGroup) && contains(editedGroup)) {
+        if (!target.equals(editedGroup) && contains(editedGroup)) {
             throw new DuplicateGroupException();
         }
 
@@ -162,7 +155,7 @@ public class UniqueGroupList implements UniqueList<Group> {
     public boolean elementsAreUnique(List<Group> groups) {
         for (int i = 0; i < groups.size() - 1; i++) {
             for (int j = i + 1; j < groups.size(); j++) {
-                if (groups.get(i).isSameGroup(groups.get(j))) {
+                if (groups.get(i).equals(groups.get(j))) {
                     return false;
                 }
             }
