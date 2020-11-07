@@ -42,6 +42,13 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
         if (!argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             throw this.deleteStudentCommandParserException;
         }
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw this.deleteStudentCommandParserException;
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw this.deleteStudentCommandParserException;
+        }
 
         Index index;
         String[] grpKeywordArray = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
