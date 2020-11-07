@@ -3,10 +3,10 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.serenity.commons.core.Messages.MESSAGE_ADDED_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
-import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
@@ -30,13 +30,15 @@ class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_addScoreOutOfRange_throwsCommandException() throws CommandException {
+    public void execute_addScoreOutOfRange_throwsIllegalArgumentException() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student toAddScore = new StudentBuilder().build();
         int scoreOutOfRange = 6;
+        int originalScore = 3;
         AddScoreCommand addScoreCommand = new AddScoreCommand(toAddScore, scoreOutOfRange);
-
-        assertThrows(CommandException.class, MESSAGE_SCORE_NOT_WITHIN_RANGE, () -> addScoreCommand.execute(modelStub));
+        String expectedMessage = String.format(MESSAGE_ADDED_SCORE_NOT_WITHIN_RANGE, scoreOutOfRange, originalScore
+                + scoreOutOfRange);
+        assertThrows(CommandException.class, expectedMessage, () -> addScoreCommand.execute(modelStub));
     }
 
     @Test
