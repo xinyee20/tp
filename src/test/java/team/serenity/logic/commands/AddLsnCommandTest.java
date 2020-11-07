@@ -58,7 +58,7 @@ class AddLsnCommandTest {
     private class ModelStubWithGroupList extends ModelStub {
 
         private ObservableList<Group> list = FXCollections.observableList(Arrays.asList(
-                new GroupBuilder().withName("G02").withClasses("1-1").build())
+                new GroupBuilder().withName("G02").withLessons("1-1").build())
         );
         private FilteredList<Group> filteredList = new FilteredList<>(this.list);
         private FilteredList<Lesson> filteredLessonList =

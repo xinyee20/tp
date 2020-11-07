@@ -8,7 +8,15 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_FILE_PATH = "Invalid file path!\nIf you are unsure on how to get"
         + " the file path, type the 'help' command to refer to our user guide.";
+    public static final String MESSAGE_FILE_PATH_EMPTY = "File path is empty.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+
+    public static final String MESSAGE_INVALID_FILE = "An error has occurred while reading the file.";
+    public static final String MESSAGE_INVALID_FILE_NON_XLSX = "The file used is not of .xlsx file type.";
+    public static final String MESSAGE_FILE_EMPTY = "The .xlsx file is empty.";
+    public static final String MESSAGE_INVALID_HEADER_COLUMNS = "The .xlsx file is either missing the "
+        + "Photo, Name and Student Number header columns, or these columns are placed in a wrong order.";
+    public static final String MESSAGE_NO_STUDENT_LIST = "The .xlsx file is missing a list of students.";
 
     public static final String MESSAGE_GROUP_LISTED_OVERVIEW = "You are in tutorial group %1$s.\n"
         + "You can view the summary of every"
@@ -48,6 +56,7 @@ public class Messages {
         "There are no students in this group. You may use addstudent command to add a student.";
     public static final String MESSAGE_NO_LESSONS =
         "There are no lessons in this group. Yoo may use addlsn command to add a lesson.";
+
     public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
     public static final String MESSAGE_ADDED_SCORE_NOT_WITHIN_RANGE = "Adding %1$d to the score would result in %2$d,"
             + " which is out of range (0 - 5), please enter another number";
@@ -55,4 +64,6 @@ public class Messages {
             + "result %2$d, which is out of range (0 - 5), please enter another number";
     public static final String MESSAGE_SCORE_TO_ADD = "Score to add should be a positive number greater than 0";
     public static final String MESSAGE_SCORE_TO_SUB = "Score to subtract should be a positive number greater than 0";
+
+    public static final String MESSAGE_ASSERTION_ERROR_METHOD = "Execution of method should not fail.";
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import team.serenity.logic.commands.ViewGrpCommand;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.GroupName;
 
 class ViewGrpCommandParserTest {
 
@@ -22,7 +23,7 @@ class ViewGrpCommandParserTest {
 
     @Test
     public void parse_tooManyInputs_throwsParseException() {
-        assertParseFailure(parser, " grp/g04 g05 g06",
+        assertParseFailure(parser, GroupName.MESSAGE_GROUP_NAME_MULTIPLE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewGrpCommand.MESSAGE_USAGE));
     }
 

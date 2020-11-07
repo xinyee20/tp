@@ -18,8 +18,6 @@ public class SerenityParserUtilTest {
     private static final String VALID_GROUP_NAME = "G04";
     private static final String VALID_FILE_PATH = "CS2101_G04.xlsx";
     private static final String VALID_QUESTION_DESC = "What is the deadline for the report?";
-
-    private static final String INVALID_GROUP_NAME_LOWERCASE = "g04";
     private static final String INVALID_GROUP_NAME_NON_DIGIT = "Gxx ";
     private static final String INVALID_FILE_PATH = "invalid/path.xlsx";
     private static final String INVALID_QUESTION_DESC = " ";

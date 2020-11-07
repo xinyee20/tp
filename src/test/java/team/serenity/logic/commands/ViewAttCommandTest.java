@@ -2,8 +2,8 @@ package team.serenity.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static team.serenity.commons.core.Messages.MESSAGE_ASSERTION_ERROR_METHOD;
+import static team.serenity.commons.core.Messages.MESSAGE_ATTENDANCE_LISTED_OVERVIEW;
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
-import static team.serenity.commons.core.Messages.MESSAGE_GROUP_LISTED_OVERVIEW;
 import static team.serenity.testutil.Assert.assertThrows;
 
 import java.util.Collections;
@@ -21,34 +21,32 @@ import team.serenity.model.group.lesson.Lesson;
 import team.serenity.testutil.GroupBuilder;
 import team.serenity.testutil.ModelStub;
 
-public class ViewGrpCommandTest {
+public class ViewAttCommandTest {
 
     @Test
     void execute_noGroup_throwsCommandException() {
         ModelStub modelStub = new ModelStubWithNoGroup();
-        ViewGrpCommand viewGrpCommand = new ViewGrpCommand(new GroupContainsKeywordPredicate("G01"));
-        assertThrows(CommandException.class, MESSAGE_GROUP_EMPTY, () -> viewGrpCommand.execute(modelStub));
+        ViewAttCommand viewAttCommand = new ViewAttCommand(new GroupContainsKeywordPredicate("G01"));
+        assertThrows(CommandException.class, MESSAGE_GROUP_EMPTY, () -> viewAttCommand.execute(modelStub));
     }
 
     @Test
     void execute_containsGroup() {
         try {
-            ModelStubWithGroup modelStub = new ModelStubWithGroup();
-            ViewGrpCommand test = new ViewGrpCommand(new GroupContainsKeywordPredicate("G01"));
-            CommandResult actual = test.execute(modelStub);
+            ModelStub modelStub = new ModelStubWithGroup();
+            ViewAttCommand viewAttCommand = new ViewAttCommand(new GroupContainsKeywordPredicate("G01"));
+            CommandResult actual = viewAttCommand.execute(modelStub);
             assertEquals(
-                String.format(MESSAGE_GROUP_LISTED_OVERVIEW, modelStub.getFilteredGroupList().get(0).getGroupName()),
-                actual.getFeedbackToUser()
-            );
+                String.format(MESSAGE_ATTENDANCE_LISTED_OVERVIEW,
+                modelStub.getFilteredGroupList().get(0).getGroupName()), actual.getFeedbackToUser());
         } catch (CommandException e) {
             throw new AssertionError(MESSAGE_ASSERTION_ERROR_METHOD, e);
-
         }
     }
 
     private static class ModelStubWithGroup extends ModelStub {
         private ObservableList<Group> groupList =
-                FXCollections.observableList(Collections.singletonList(new GroupBuilder().build()));
+            FXCollections.observableList(Collections.singletonList(new GroupBuilder().build()));
         private FilteredList<Group> filteredGroupList = new FilteredList<>(groupList);
 
         @Override
@@ -82,4 +80,5 @@ public class ViewGrpCommandTest {
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {}
     }
+
 }

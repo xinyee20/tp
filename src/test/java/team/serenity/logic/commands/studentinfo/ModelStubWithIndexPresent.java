@@ -31,8 +31,8 @@ class ModelStubWithIndexPresent extends ModelStub {
     public ObservableList<Group> getFilteredGroupList() {
         List<Group> grpList = new ArrayList<>();
         this.uniqueGroup = new GroupBuilder().withName("G01")
-                .withStudents(AARON)
-                .withClasses("1-1").build();
+            .withStudents(AARON)
+            .withLessons("1-1").build();
         grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
@@ -43,9 +43,9 @@ class ModelStubWithIndexPresent extends ModelStub {
     public ObservableList<Lesson> getFilteredLessonList() {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
-                .withName("1-1")
-                .withStudentInfos(AARON_PRESENT_INFO)
-                .build();
+            .withName("1-1")
+            .withStudentInfos(AARON_PRESENT_INFO)
+            .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();
         lessonUniqueList.setElementsWithList(lsnList);

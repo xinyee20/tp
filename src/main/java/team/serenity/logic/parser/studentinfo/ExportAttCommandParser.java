@@ -10,8 +10,10 @@ import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.Prefix;
+import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.GroupName;
 
 /**
  * Parses input arguments and creates a new ExportAttCommand object.
@@ -30,9 +32,9 @@ public class ExportAttCommandParser implements Parser<ExportAttCommand> {
             throw this.exportAttCommandParserException;
         }
 
-        String grpName = argMultimap.getValue(PREFIX_GRP).get();
+        GroupName groupName = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
 
-        return new ExportAttCommand(new GroupContainsKeywordPredicate(grpName));
+        return new ExportAttCommand(new GroupContainsKeywordPredicate(groupName.toString()));
     }
 
     /**
