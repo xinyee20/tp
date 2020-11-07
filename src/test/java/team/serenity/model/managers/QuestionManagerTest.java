@@ -5,9 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.testutil.Assert.assertThrows;
+import static team.serenity.testutil.TypicalGroups.GROUP_G01;
+import static team.serenity.testutil.TypicalGroups.GROUP_G02;
+import static team.serenity.testutil.TypicalLesson.LESSON_1_1;
+import static team.serenity.testutil.TypicalLesson.LESSON_1_2;
+import static team.serenity.testutil.TypicalLesson.LESSON_2_1;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_C;
+import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestion;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
 
 import java.util.Arrays;
@@ -22,6 +28,7 @@ import javafx.collections.ObservableList;
 import team.serenity.model.group.exceptions.DuplicateQuestionException;
 import team.serenity.model.group.exceptions.QuestionNotFoundException;
 import team.serenity.model.group.question.Question;
+import team.serenity.testutil.question.QuestionManagerBuilder;
 
 class QuestionManagerTest {
 
@@ -124,7 +131,7 @@ class QuestionManagerTest {
     public void setQuestion_editedQuestionInQuestionManager_throwsDuplicateQuestionException() {
         this.questionManager.addQuestion(QUESTION_A);
         this.questionManager.addQuestion(QUESTION_B);
-        assertThrows(DuplicateQuestionException.class, () -> this.questionManager.setQuestion(QUESTION_A, QUESTION_B));;
+        assertThrows(DuplicateQuestionException.class, () -> this.questionManager.setQuestion(QUESTION_A, QUESTION_B));
     }
 
     @Test
@@ -150,6 +157,66 @@ class QuestionManagerTest {
         this.questionManager.addQuestion(QUESTION_A);
         this.questionManager.deleteQuestion(QUESTION_A);
         assertFalse(this.questionManager.hasQuestion(QUESTION_A));
+    }
+
+    @Test
+    public void deleteAllQuestionsFromGroup_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> this.questionManager.deleteAllQuestionsFromGroup(null));
+    }
+
+    @Test
+    public void deleteAllQuestionsFromGroup_groupNotInQuestionManager_success() {
+        List<Question> questions = getTypicalQuestion();
+        this.questionManager.setQuestions(questions);
+        QuestionManager expectedManager = new QuestionManagerBuilder(this.questionManager).build();
+        this.questionManager.deleteAllQuestionsFromGroup(GROUP_G02);
+        assertTrue(expectedManager.equals(this.questionManager));
+    }
+
+    @Test
+    public void deleteAllQuestionsFromGroup_validGroup_deletesAllQuestionsFromGroup() {
+        List<Question> questions = getTypicalQuestion();
+        this.questionManager.setQuestions(questions);
+        QuestionManager expectedManager = new QuestionManagerBuilder().build();
+        this.questionManager.deleteAllQuestionsFromGroup(GROUP_G01);
+        assertTrue(expectedManager.equals(this.questionManager));
+    }
+
+    @Test
+    public void deleteAllQuestionsFromGroupLesson_nullInputs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                this.questionManager.deleteAllQuestionsFromGroupLesson(null, null));
+        assertThrows(NullPointerException.class, () ->
+                this.questionManager.deleteAllQuestionsFromGroupLesson(GROUP_G01, null));
+        assertThrows(NullPointerException.class, () ->
+                this.questionManager.deleteAllQuestionsFromGroupLesson(null, LESSON_1_1));
+    }
+
+    @Test
+    public void deleteAllQuestionsFromGroupLesson_groupNotInQuestionManager_success() {
+        List<Question> questions = getTypicalQuestion();
+        this.questionManager.setQuestions(questions);
+        QuestionManager expectedManager = new QuestionManagerBuilder(this.questionManager).build();
+        this.questionManager.deleteAllQuestionsFromGroupLesson(GROUP_G02, LESSON_1_1);
+        assertTrue(expectedManager.equals(this.questionManager));
+    }
+
+    @Test
+    public void deleteAllQuestionsFromGroupLesson_lessonNotInQuestionManager_success() {
+        List<Question> questions = getTypicalQuestion();
+        this.questionManager.setQuestions(questions);
+        QuestionManager expectedManager = new QuestionManagerBuilder(this.questionManager).build();
+        this.questionManager.deleteAllQuestionsFromGroupLesson(GROUP_G01, LESSON_2_1);
+        assertTrue(expectedManager.equals(this.questionManager));
+    }
+
+    @Test
+    public void deleteAllQuestionsFromGroup_validGroupAndLesson_deletesAllQuestionsFromGroupLesson() {
+        List<Question> questions = getTypicalQuestion();
+        this.questionManager.setQuestions(questions);
+        QuestionManager expectedManager = new QuestionManagerBuilder().withQuestion(QUESTION_A).build();
+        this.questionManager.deleteAllQuestionsFromGroupLesson(GROUP_G01, LESSON_1_2);
+        assertTrue(expectedManager.equals(this.questionManager));
     }
 
     @Test
