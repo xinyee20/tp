@@ -11,8 +11,6 @@ public class Description {
 
     public static final String MESSAGE_CONSTRAINTS = "Questions can take any values, and it should not be blank";
 
-    public static final String MESSAGE_GROUP_NAME_EMPTY = "Question is empty.";
-
     /*
      * The first character of the question must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.

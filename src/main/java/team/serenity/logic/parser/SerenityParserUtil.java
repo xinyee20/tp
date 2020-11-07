@@ -138,9 +138,7 @@ public class SerenityParserUtil {
     public static Description parseDescription(String questionDescription) throws ParseException {
         requireNonNull(questionDescription);
         String trimmedQuestionDescription = questionDescription.trim();
-        if (trimmedQuestionDescription.isEmpty()) {
-            throw new ParseException(Description.MESSAGE_GROUP_NAME_EMPTY);
-        } else if (!Description.isValidDescription(trimmedQuestionDescription)) {
+        if (!Description.isValidDescription(trimmedQuestionDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedQuestionDescription);
