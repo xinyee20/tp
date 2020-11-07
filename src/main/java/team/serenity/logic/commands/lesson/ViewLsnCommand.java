@@ -1,7 +1,6 @@
 package team.serenity.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static team.serenity.commons.core.Messages.MESSAGE_LESSON_EMPTY;
 import static team.serenity.commons.core.Messages.MESSAGE_LESSON_LISTED_OVERVIEW;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_LSN;
@@ -46,9 +45,7 @@ public class ViewLsnCommand extends Command {
     }
 
     private String getMessage(Model model) {
-        return model.getFilteredGroupList().isEmpty()
-                ? MESSAGE_LESSON_EMPTY
-                : String.format(MESSAGE_LESSON_LISTED_OVERVIEW,
+        return String.format(MESSAGE_LESSON_LISTED_OVERVIEW,
                 model.getFilteredGroupList().get(0).getGroupName(),
                 model.getFilteredLessonList().get(0).getLessonName());
     }
@@ -68,8 +65,7 @@ public class ViewLsnCommand extends Command {
             throw new CommandException(LESSON_DOES_NOT_EXIST_MESSAGE);
         }
 
-        return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_LSN
-        );
+        return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_LSN);
     }
 
     @Override
