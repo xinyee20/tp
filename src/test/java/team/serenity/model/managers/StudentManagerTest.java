@@ -25,7 +25,6 @@ import team.serenity.model.group.exceptions.StudentNotFoundException;
 class StudentManagerTest {
 
     private final StudentManager studentManager = new StudentManager();
-    private final ReadOnlyStudentManager readOnlyStudentManager = new StudentManager();
 
     @Test
     public void constructor_noParams() {

@@ -39,7 +39,7 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
     @Override
     public AddScoreCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
-                PREFIX_NAME, PREFIX_MATRIC, PREFIX_ADD_SCORE);
+            PREFIX_NAME, PREFIX_MATRIC, PREFIX_ADD_SCORE);
 
         Index index;
         StudentName studentName;
@@ -60,7 +60,7 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()
-                && argMultimap.getPreamble().length() != 0) {
+            && argMultimap.getPreamble().length() != 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
         }
 

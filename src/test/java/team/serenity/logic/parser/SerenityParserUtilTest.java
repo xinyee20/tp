@@ -26,14 +26,13 @@ public class SerenityParserUtilTest {
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
+        assertThrows(NumberFormatException.class, () -> SerenityParserUtil.parseIndex("10 a"));
+        assertThrows(NumberFormatException.class, () -> SerenityParserUtil.parseIndex(""));
+        assertThrows(NumberFormatException.class, () -> SerenityParserUtil.parseIndex(" "));
         assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex("0"));
         assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex("-4"));
     }
 
-    @Test
-    public void parseIndex_invalidInput_throwsNumberFormatException() {
-        assertThrows(NumberFormatException.class, () -> SerenityParserUtil.parseIndex("10 a"));
-    }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
