@@ -35,6 +35,7 @@ public class DelGrpCommand extends Command {
         requireNonNull(model);
 
         model.updateFilteredGroupList(this.grpPredicate);
+
         if (model.getFilteredGroupList().isEmpty()) {
             throw new CommandException(MESSAGE_GROUP_EMPTY);
         }
