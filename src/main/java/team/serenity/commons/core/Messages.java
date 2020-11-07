@@ -49,6 +49,10 @@ public class Messages {
     public static final String MESSAGE_NO_LESSONS =
         "There are no lessons in this group. Yoo may use addlsn command to add a lesson.";
     public static final String MESSAGE_SCORE_NOT_WITHIN_RANGE = "Updated score should be within range of 0 to 5";
+    public static final String MESSAGE_ADDED_SCORE_NOT_WITHIN_RANGE = "Adding %1$d to the score would result in %2$d,"
+            + " which is out of range (0 - 5), please enter another number";
+    public static final String MESSAGE_SUBTRACTED_SCORE_NOT_WITHIN_RANGE = "Subtracting %1$d to the score would "
+            + "result %2$d, which is out of range (0 - 5), please enter another number";
     public static final String MESSAGE_SCORE_TO_ADD = "Score to add should be a positive number greater than 0";
     public static final String MESSAGE_SCORE_TO_SUB = "Score to subtract should be a positive number greater than 0";
 }

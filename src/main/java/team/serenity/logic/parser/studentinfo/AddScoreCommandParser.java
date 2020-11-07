@@ -1,6 +1,7 @@
 package team.serenity.logic.parser.studentinfo;
 
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static team.serenity.commons.core.Messages.MESSAGE_SCORE_TO_ADD;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
@@ -19,6 +20,7 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.student.StudentName;
 import team.serenity.model.group.student.StudentNumber;
+import team.serenity.model.group.studentinfo.Participation;
 
 /**
  * Parses input arguments and creates a new AddScoreCommand object.
@@ -71,21 +73,23 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
         }
 
         try {
-            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
-                studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
-                studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
-                student = Optional.ofNullable(new Student(studentName, studentNumber));
-                scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
-                return new AddScoreCommand(student.get(), scoreToAdd);
-            } else {
+            scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
+        } catch (NumberFormatException e) {
+            throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
+        } if (scoreToAdd == 0) {
+            throw new ParseException(String.format(MESSAGE_SCORE_TO_ADD));
+        }
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
+            studentName = SerenityParserUtil.parseStudentName(argMultimap.getValue(PREFIX_NAME).get());
+            studentNumber = SerenityParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_MATRIC).get());
+            student = Optional.ofNullable(new Student(studentName, studentNumber));
+            return new AddScoreCommand(student.get(), scoreToAdd);
+        } else {
+            try {
                 index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-                scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
                 return new AddScoreCommand(index, scoreToAdd);
-            }
-        } catch (Exception e) {
-            if (e instanceof ParseException) {
-                throw new ParseException(e.getMessage());
-            } else {
+            } catch (NumberFormatException e) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
             }
         }
