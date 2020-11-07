@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
-import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
+import static team.serenity.commons.core.Messages.MESSAGE_SUBTRACTED_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
@@ -34,9 +34,11 @@ class SubScoreCommandTest {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
         Student toSubScore = new StudentBuilder().build();
         int subScoreOutOfRange = 4;
+        int originalScore = 3;
         SubScoreCommand subScoreCommand = new SubScoreCommand(toSubScore, subScoreOutOfRange);
-
-        assertThrows(CommandException.class, MESSAGE_SCORE_NOT_WITHIN_RANGE, () -> subScoreCommand.execute(modelStub));
+        String expectedMessage = String.format(MESSAGE_SUBTRACTED_SCORE_NOT_WITHIN_RANGE, subScoreOutOfRange,
+                originalScore - subScoreOutOfRange);
+        assertThrows(CommandException.class, expectedMessage, () -> subScoreCommand.execute(modelStub));
     }
 
     @Test

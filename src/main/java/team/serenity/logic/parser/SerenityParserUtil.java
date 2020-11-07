@@ -112,12 +112,11 @@ public class SerenityParserUtil {
         requireNonNull(inputScore);
         String trimmedScore = inputScore.trim();
         int score;
-        try {
-            score = Integer.parseInt(trimmedScore);
-            return score;
-        } catch (Exception e) {
+        score = Integer.parseInt(trimmedScore);
+        if (score < 0 || score > 5) {
             throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
         }
+        return score;
     }
 
     /**

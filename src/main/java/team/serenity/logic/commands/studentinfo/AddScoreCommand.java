@@ -1,10 +1,10 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_ADDED_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
-import static team.serenity.commons.core.Messages.MESSAGE_SCORE_TO_ADD;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_ADD_SCORE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
@@ -56,13 +56,10 @@ public class AddScoreCommand extends Command {
     /**
      * Creates an AddScoreCommand to increase the specified {@code Student}'s participation score.
      */
-    public AddScoreCommand(Student student, int scoreToAdd) throws CommandException {
+    public AddScoreCommand(Student student, int scoreToAdd) {
         requireNonNull(student);
         requireNonNull(scoreToAdd);
         // Specified student to add participation score
-        if (scoreToAdd <= 0) {
-            throw new CommandException(MESSAGE_SCORE_TO_ADD);
-        }
         this.toAddScore = Optional.ofNullable(student);
         this.scoreToAdd = scoreToAdd;
         this.index = Optional.empty();
@@ -72,13 +69,10 @@ public class AddScoreCommand extends Command {
     /**
      * Creates an AddScoreCommand to increase the specified {@code Student}'s participation score by index.
      */
-    public AddScoreCommand(Index index, int scoreToAdd) throws CommandException {
+    public AddScoreCommand(Index index, int scoreToAdd) {
         requireNonNull(index);
         requireNonNull(scoreToAdd);
         // Specified index of student to add participation score
-        if (scoreToAdd <= 0) {
-            throw new CommandException(MESSAGE_SCORE_TO_ADD);
-        }
         this.index = Optional.ofNullable(index);
         this.toAddScore = Optional.empty();
         this.scoreToAdd = scoreToAdd;
@@ -167,12 +161,12 @@ public class AddScoreCommand extends Command {
     private UniqueList<StudentInfo> getUpdatedListForAddScoreOneStudent(
         ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
         if (!targetStudentInfo.getAttendance().isPresent()) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toAddScore.get()));
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, targetStudentInfo.getStudent()));
         }
         this.score = targetStudentInfo.getParticipation().getScore();
         newScore = score + scoreToAdd;
         if (newScore > 5 || newScore < 0) {
-            throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+            throw new CommandException(String.format(MESSAGE_ADDED_SCORE_NOT_WITHIN_RANGE, scoreToAdd, newScore));
         }
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
         updatedList.setElementsWithList(currentStudentInfoList);

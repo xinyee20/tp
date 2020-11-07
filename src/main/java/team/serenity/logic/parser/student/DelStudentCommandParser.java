@@ -77,7 +77,6 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
         } else {
             try {
                 index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-
             } catch (NumberFormatException e) {
                 throw this.deleteStudentCommandParserException;
             }
