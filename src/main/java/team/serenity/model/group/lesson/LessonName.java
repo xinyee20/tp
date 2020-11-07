@@ -8,6 +8,9 @@ public class LessonName {
     public static final String MESSAGE_CONSTRAINTS =
         "Lesson name should not be blank and must follow the format 'X-X' or 'XX-X' where X is a digit from 0-9.";
 
+    public static final String MESSAGE_LESSON_NAME_EMPTY =
+        "Lesson name is empty.";
+
     /*
      * Must contain 1 or 2 digits, followed by a hypen and 1 digit
      * E.g. 1-1, 10-1 would pass but not 100-1 or 1-10

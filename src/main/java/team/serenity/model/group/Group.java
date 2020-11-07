@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import team.serenity.commons.util.XlsxUtil;
-import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.student.Student;
@@ -35,7 +34,7 @@ public class Group {
      * @param groupName A valid name.
      * @param filePath A valid filePath.
      */
-    public Group(String groupName, String filePath) throws ParseException {
+    public Group(String groupName, String filePath) {
         requireAllNonNull(groupName, filePath);
         this.groupName = new GroupName(groupName);
         XlsxUtil util = new XlsxUtil(filePath);
@@ -52,7 +51,7 @@ public class Group {
      * @param groupName A valid group name.
      * @param grpExcelData A valid group excel data.
      */
-    public Group(GroupName groupName, XlsxUtil grpExcelData) throws ParseException {
+    public Group(GroupName groupName, XlsxUtil grpExcelData) {
         requireAllNonNull(groupName, grpExcelData);
         this.groupName = groupName;
         this.students = new UniqueStudentList();
