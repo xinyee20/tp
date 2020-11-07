@@ -7,6 +7,7 @@ import static team.serenity.logic.commands.CommandTestUtil.EDITED_QN_B;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_GROUP_NAME_G05;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_LESSON_NAME_1_2;
 import static team.serenity.logic.commands.CommandTestUtil.VALID_QN_DESC_B;
+import static team.serenity.testutil.question.TypicalQuestion.QUESTION_EDIT;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,24 @@ import team.serenity.logic.commands.question.EditQnCommand.EditQuestionDescripto
 import team.serenity.testutil.question.EditQuestionDescriptorBuilder;
 
 public class EditQuestionDescriptorTest {
+
+    @Test
+    public void isAnyFieldEdited_allFieldsEdited_returnsTrue() {
+        EditQuestionDescriptor descriptorWithAllFieldsEdited = new EditQuestionDescriptor(EDITED_QN_A);
+        assertTrue(descriptorWithAllFieldsEdited.isAnyFieldEdited());
+    }
+
+    @Test
+    public void isAnyFieldEdited_someFieldsEdited_returnsTrue() {
+        EditQuestionDescriptor descriptorWithSomeFieldsEdited = new EditQuestionDescriptor();
+        descriptorWithSomeFieldsEdited.setDescription(QUESTION_EDIT.getDescription());
+        assertTrue(descriptorWithSomeFieldsEdited.isAnyFieldEdited());
+    }
+
+    @Test
+    public void isAnyFieldEdited_noFieldsEdited_returnsFalse() {
+        assertFalse(new EditQuestionDescriptor().isAnyFieldEdited());
+    }
 
     @Test
     public void equals() {
