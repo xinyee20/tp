@@ -15,13 +15,12 @@ public class ViewFlagCommand extends Command {
         + ": View all students with flagged attendance "
         + "and display them as a list.\n"
         + "Example: " + COMMAND_WORD;
-
-    public static final String SUCCESS_MESSAGE = "These are the flagged attendance records.";
+    public static final String MESSAGE_SUCCESS = "These are the flagged attendance records.";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(SUCCESS_MESSAGE, CommandResult.UiAction.FLAG_ATT);
+        return new CommandResult(MESSAGE_SUCCESS, CommandResult.UiAction.FLAG_ATT);
     }
 
 }
