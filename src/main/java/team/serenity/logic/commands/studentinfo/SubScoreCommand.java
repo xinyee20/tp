@@ -5,8 +5,8 @@ import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLA
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
-import static team.serenity.commons.core.Messages.MESSAGE_SCORE_TO_SUB;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
+import static team.serenity.commons.core.Messages.MESSAGE_SUBTRACTED_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_SUBTRACT_SCORE;
@@ -56,13 +56,10 @@ public class SubScoreCommand extends Command {
     /**
      * Creates an SubScoreCommand to decrease the specified {@code Student}'s participation score.
      */
-    public SubScoreCommand(Student student, int scoreToSub) throws CommandException {
+    public SubScoreCommand(Student student, int scoreToSub) {
         requireNonNull(student);
         requireNonNull(scoreToSub);
         // Specified student to decrease participation score
-        if (scoreToSub <= 0) {
-            throw new CommandException(MESSAGE_SCORE_TO_SUB);
-        }
         this.toSubScore = Optional.ofNullable(student);
         this.scoreToSub = scoreToSub;
         this.index = Optional.empty();
@@ -72,13 +69,10 @@ public class SubScoreCommand extends Command {
     /**
      * Creates an SubScoreCommand to decrease the specified {@code Student}'s participation score by index.
      */
-    public SubScoreCommand(Index index, int scoreToSub) throws CommandException {
+    public SubScoreCommand(Index index, int scoreToSub) {
         requireNonNull(index);
         requireNonNull(scoreToSub);
         // Specified index of student to decrease participation score
-        if (scoreToSub <= 0) {
-            throw new CommandException(MESSAGE_SCORE_TO_SUB);
-        }
         this.index = Optional.ofNullable(index);
         this.toSubScore = Optional.empty();
         this.scoreToSub = scoreToSub;
@@ -135,12 +129,12 @@ public class SubScoreCommand extends Command {
     private UniqueList<StudentInfo> getUpdatedListForSubScoreOneStudent(
             ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
         if (!targetStudentInfo.getAttendance().isPresent()) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSubScore.get()));
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, targetStudentInfo.getStudent()));
         }
         this.score = targetStudentInfo.getParticipation().getScore();
         newScore = score - scoreToSub;
         if (newScore > 5 || newScore < 0) {
-            throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+            throw new CommandException(String.format(MESSAGE_SUBTRACTED_SCORE_NOT_WITHIN_RANGE, scoreToSub, newScore));
         }
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
         updatedList.setElementsWithList(currentStudentInfoList);

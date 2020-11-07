@@ -161,10 +161,7 @@ public class EditScoreCommand extends Command {
     private UniqueList<StudentInfo> getUpdatedListForSetScoreOneStudent(
             ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
         if (!targetStudentInfo.getAttendance().isPresent()) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
-        }
-        if (scoreToSet > 5 || scoreToSet < 0) {
-            throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, targetStudentInfo.getStudent()));
         }
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
         updatedList.setElementsWithList(currentStudentInfoList);
