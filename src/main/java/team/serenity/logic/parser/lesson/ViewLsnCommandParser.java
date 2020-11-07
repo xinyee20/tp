@@ -11,9 +11,12 @@ import team.serenity.logic.parser.ArgumentMultimap;
 import team.serenity.logic.parser.ArgumentTokenizer;
 import team.serenity.logic.parser.Parser;
 import team.serenity.logic.parser.Prefix;
+import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonContainsKeywordPredicate;
+import team.serenity.model.group.lesson.LessonName;
 
 /**
  * Parses input arguments and creates a new ViewLsnCommand object.
@@ -32,15 +35,11 @@ public class ViewLsnCommandParser implements Parser<ViewLsnCommand> {
             throw this.viewLsnCommandParserException;
         }
 
-        String[] grpKeyword = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
-        String[] lsnKeyword = argMultimap.getValue(PREFIX_LSN).get().split("\\s+");
+        GroupName grpKeyword = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
+        LessonName lsnKeyword = SerenityParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LSN).get());
 
-        if (grpKeyword.length > 1 || lsnKeyword.length > 1) {
-            throw this.viewLsnCommandParserException;
-        }
-
-        return new ViewLsnCommand(new GroupContainsKeywordPredicate(grpKeyword[0]),
-                new LessonContainsKeywordPredicate(lsnKeyword[0]));
+        return new ViewLsnCommand(new GroupContainsKeywordPredicate(grpKeyword.groupName),
+                new LessonContainsKeywordPredicate(lsnKeyword.lessonName));
     }
 
     /**
