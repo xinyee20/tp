@@ -76,7 +76,8 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
             scoreToAdd = SerenityParserUtil.parseScore(argMultimap.getValue(PREFIX_ADD_SCORE).get());
         } catch (NumberFormatException e) {
             throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
-        } if (scoreToAdd == 0) {
+        }
+        if (scoreToAdd == 0) {
             throw new ParseException(String.format(MESSAGE_SCORE_TO_ADD));
         }
 

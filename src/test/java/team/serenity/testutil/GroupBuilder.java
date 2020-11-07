@@ -35,7 +35,7 @@ public class GroupBuilder {
     public static final String DEFAULT_NAME = "G01";
     public static final Set<Student> DEFAULT_STUDENTS =
             new HashSet<>(Arrays.asList(AARON, BENJAMIN, CATHERINE));
-    public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>(Arrays.asList());
+    public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>();
 
     private GroupName name;
     private UniqueList<Student> students = new UniqueStudentList();
@@ -47,12 +47,9 @@ public class GroupBuilder {
     public GroupBuilder() {
         name = new GroupName(DEFAULT_NAME);
         students.setElementsWithList(new ArrayList<>(DEFAULT_STUDENTS));
-<<<<<<< HEAD
-=======
         students.sort(new StudentSorter());
         lessons.setElementsWithList(new ArrayList<>(DEFAULT_CLASSES));
         lessons.sort(new LessonSorter());
->>>>>>> upstream/master
     }
 
     /**
