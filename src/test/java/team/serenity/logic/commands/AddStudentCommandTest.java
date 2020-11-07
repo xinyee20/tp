@@ -51,7 +51,7 @@ public class AddStudentCommandTest {
             .withStudents(
                 new Student("Freddie", "A0000000U"),
                 new Student("June", "A0101011U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
@@ -69,7 +69,7 @@ public class AddStudentCommandTest {
             .withStudents(
                 new Student("Freddie", "A0000000U"),
                 new Student("June", "A0101011U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
@@ -89,7 +89,7 @@ public class AddStudentCommandTest {
             .withStudents(
                 new Student("Freddie", "A0000000U"),
                 new Student("June", "A0101011U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);

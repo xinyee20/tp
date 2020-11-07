@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import team.serenity.logic.commands.DelGrpCommand;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.GroupName;
 
 /**
  * Parses input arguments and creates a new DelGrpCommand object.
@@ -26,13 +27,9 @@ public class DelGrpCommandParser implements Parser<DelGrpCommand> {
             throw this.delGrpCommandParserException;
         }
 
-        String[] grpKeyword = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
+        GroupName groupName = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
 
-        if (grpKeyword.length > 1) {
-            throw this.delGrpCommandParserException;
-        }
-
-        return new DelGrpCommand(new GroupContainsKeywordPredicate(grpKeyword[0].toUpperCase()));
+        return new DelGrpCommand(new GroupContainsKeywordPredicate(groupName.toString().toUpperCase()));
     }
 
     /**

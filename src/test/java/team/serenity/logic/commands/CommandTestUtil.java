@@ -36,6 +36,9 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_NAME_1_2 = "1-2";
     public static final String VALID_PATH_G04 = "CS2101_G04.xlsx";
     public static final String VALID_PATH_G05 = "CS2101_G05.xlsx";
+    public static final String VALID_XLSX_NO_LESSONS = "CS2101_nolessons.xlsx";
+    public static final String VALID_XLSX_NO_TITLE = "CS2101_notitle.xlsx";
+
     public static final String VALID_QN_DESC_A = "What is the deadline for the report?";
     public static final String VALID_QN_DESC_B = "When is the consultation held?";
     public static final String VALID_STUDENT_NAME_AARON = "Aaron Tan";
@@ -59,11 +62,27 @@ public class CommandTestUtil {
     public static final String SUB_SCORE_DESC = " " + PREFIX_SUBTRACT_SCORE + VALID_SUB;
 
     // Invalid descriptions for Serenity
-    public static final String INVALID_GROUP_NAME_LOWERCASE = " " + PREFIX_GRP + "g07";
-    public static final String INVALID_GROUP_NAME_DASH = " " + PREFIX_GRP + "G-07";
-    public static final String INVALID_LESSON_NAME_TEN = " " + PREFIX_LSN + "1-10";
+    public static final String INVALID_GROUP_WITHOUT_NAME = " " + PREFIX_PATH + VALID_PATH_G04;
+    public static final String INVALID_GROUP_WITHOUT_PATH = " " + PREFIX_GRP + VALID_GROUP_NAME_G04;
+    public static final String INVALID_GROUP_NAME_TOO_MANY_CHARS = " " + PREFIX_GRP + "G044";
+    public static final String INVALID_GROUP_NAME_TOO_LESS_CHARS = " " + PREFIX_GRP + "G";
+    public static final String INVALID_GROUP_NAME_INVALID_CHARS = " " + PREFIX_GRP + "!!!";
+    public static final String INVALID_GROUP_NAME_NON_ALPHABET = " " + PREFIX_GRP + "004";
     public static final String INVALID_GROUP_NAME_NON_DIGITS = " " + PREFIX_GRP + "Gxx";
-    public static final String INVALID_PATH = " " + PREFIX_PATH + "this is an invalid path";
+    public static final String INVALID_GROUP_NAME_EMPTY = " " + PREFIX_GRP + "";
+    public static final String INVALID_GROUP_NAME_DASH = " " + PREFIX_GRP + "G-04";
+    public static final String INVALID_GROUP_NAME_MULTIPLE = " " + PREFIX_GRP + "G04 G05 G06";
+
+    public static final String INVALID_PATH_NON_XLSX = " " + PREFIX_PATH + "CS2101_G04.xls";
+    public static final String INVALID_PATH = " " + PREFIX_PATH + "invalid.xlsx";
+    public static final String INVALID_PATH_EMPTY = " " + PREFIX_PATH + "";
+
+    public static final String INVALID_XLSX_EMPTY = "CS2101_empty.xlsx";
+    public static final String INVALID_XLSX_NO_HEADER_COLUMNS = "CS2101_noheadercolumns.xlsx";
+    public static final String INVALID_XLSX_NO_STUDENTS = "CS2101_nostudents.xlsx";
+    public static final String INVALID_XLSX_WRONG_HEADER_COLUMNS = "CS2101_wrongheadercolumns.xlsx";
+
+    public static final String INVALID_LESSON_NAME_TEN = " " + PREFIX_LSN + "1-10";
     public static final String INVALID_QN_DESC = " " + PREFIX_QN; // empty string not allowed in questions
     public static final String INVALID_STUDENT_WITHOUT_NAME = " " + PREFIX_MATRIC + VALID_STUDENT_NUMBER_AARON;
     public static final String INVALID_STUDENT_WITHOUT_NUMBER = " " + PREFIX_NAME + VALID_STUDENT_NAME_AARON;
@@ -73,7 +92,6 @@ public class CommandTestUtil {
     public static final String INVALID_SUB_SCORE = " " + PREFIX_SUBTRACT_SCORE + "A";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_A;
     public static final EditQnCommand.EditQuestionDescriptor EDITED_QN_B;
