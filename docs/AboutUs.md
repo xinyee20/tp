@@ -11,7 +11,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Lim Chun Yong
 
-<img src="images/team/chunyongg.png" width="200px"/>
+<img src="images/chunyongg.png" width="200px"/>
 
 [github](https://github.com/chunyongg) |
 [portfolio](team/chunyongg.md)
@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Lim Jia Rui Ryan
 
-<img src="images/team/ryanlimjr.png" width="200px">
+<img src="images/ryanlimjr.png" width="200px">
 
 [github](https://github.com/ryanlimjr) |
 [portfolio](team/ryanlimjr.md)
@@ -35,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Lau Xin Yee
 
-<img src="images/team/xinyee20.png" width="200px">
+<img src="images/xinyee20.png" width="200px">
 
 [github](https://github.com/xinyee20) |
 [portfolio](team/xinyee20.md)
@@ -47,7 +47,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Neo Rui En Maybelline
 
-<img src="images/team/successs404.png" width="200px">
+<img src="images/successs404.png" width="200px">
 
 [github](https://github.com/successs404) |
 [portfolio](team/successs404.md)
@@ -59,7 +59,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Bu Wen Jin
 
-<img src="images/team/nijnxw.png" width="200px">
+<img src="images/nijnxw.png" width="200px">
 
 [github](https://github.com/Nijnxw) |
 [portfolio](team/nijnxw.md)
