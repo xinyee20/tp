@@ -75,11 +75,11 @@ This section describes the details of the components used in **Serenity**.
 
 (Contributed by Neo Rui En)
 
-The Architecture Diagram given in Figure 3.1.1 below explains the high-level design of Serenity.
+The Architecture Diagram given in Figure 4.1.1 below explains the high-level design of Serenity.
 
-![Figure 3.1.1 Architecture Diagram of Serenity](images/developerGuide/ArchitectureDiagram.png)
+![Figure 4.1.1 Architecture Diagram of Serenity](images/developerGuide/ArchitectureDiagram.png)
 
-<p align="center">Figure 3.1.1 Architecture Diagram of Serenity</p>
+<p align="center">Figure 4.1.1 Architecture Diagram of Serenity</p>
 
 > :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder.
 
@@ -97,11 +97,11 @@ Component | Description
 
 **How the architecture components interact with each other**
 
-The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command `delgrp grp/G04`.
+The Sequence Diagram in Figure 4.1.2 below shows how the components interact with each other for the scenario where the user issues the command `delgrp grp/G04`.
 
-![Figure 3.1.2](images/developerGuide/ArchitectureSequenceDiagram.png)
+![Figure 4.1.2](images/developerGuide/ArchitectureSequenceDiagram.png)
 
-<p align="center"><i>Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
+<p align="center"><i>Figure 4.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
 The segments below give more details of each component.
 
@@ -113,11 +113,11 @@ This segment will explain the structure and responsibilities of the Ui component
 
 #### **4.2.1. Structure**
 
-The Class Diagram given in Figure 3.2.1.1 below describes the structure of the Ui-related classes.
+The Class Diagram given in Figure 4.2.1.1 below describes the structure of the Ui-related classes.
 
-![Figure 3.2.1.1](images/developerGuide/UiClassDiagram2.png)
+![Figure 4.2.1.1](images/developerGuide/UiClassDiagram2.png)
 
-<p align="center"><i>Figure 3.2.1.1 Structure of the <code>Ui</code> component.</i></p>
+<p align="center"><i>Figure 4.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
 The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
 as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
@@ -140,11 +140,11 @@ This segment will explain the structure and responsibilities of the `Logic` comp
 
 #### **4.3.1. Structure**
 
-The Class Diagram given in Figure 3.3.1.1 below describes the structure of Logic-related classes.
+The Class Diagram given in Figure 4.3.1.1 below describes the structure of Logic-related classes.
 
-![Figure 3.3.1.1](images/developerGuide/LogicClassDiagram2.png)
+![Figure 4.3.1.1](images/developerGuide/LogicClassDiagram2.png)
 
-<p align="center"><i>Figure 3.3.1.1 Structure of the <code>Logic</code> component.</i></p>
+<p align="center"><i>Figure 4.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
 From the diagram above, you can see that the `Logic` component is split into 2 groups, one for command and another for command parsing.
 As Serenity follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class.
@@ -164,9 +164,9 @@ The steps described above will be the standard command parsing and execution of 
 To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command `delgrp grp/G04` is shown below.
 The diagram starts with the `execute("delgrp grp/G04")` API call.
 
-![Figure 3.3.2.1](images/developerGuide/DeleteSequenceDiagram.png)
+![Figure 4.3.2.1](images/developerGuide/DeleteSequenceDiagram.png)
 
-<p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the <code>delgrp grp/G04</code> command.</i></p>
+<p align="center"><i>Figure 4.3.2.1 Interactions inside the <code>Logic</code> component for the <code>delgrp grp/G04</code> command.</i></p>
 
 > :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 
@@ -181,7 +181,7 @@ This segment will explain the structure and responsibilities of the `Model` comp
 <p align="center">
 <img alt="Class diagram of Model component" src="images/developerGuide/ModelClassDiagram.png" ></p>
 
-<p align="center"><i>Figure 3.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
+<p align="center"><i>Figure 4.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
 
 The `UserPrefs` class represents the user’s preference.
 
@@ -225,7 +225,7 @@ This segment will explain the structure and responsibilities of the `Storage` co
 <p align="center">
 <img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png"/></p>
 
-<p align="center"><i>Figure 3.5.1 Class diagram of <code>Storage</code> component.</i></p>
+<p align="center"><i>Figure 4.5.1.1 Class diagram of <code>Storage</code> component.</i></p>
 
 The `UserPrefStorage` interface, `SerenityStorage` interface, and the `QuestionStorage` interface defines the API
 for reading and saving the Model component’s data from and to the hard disk in JSON format.
@@ -318,7 +318,7 @@ This enables retrieval of a specific `UniqueList` of `Student` items in a tutori
 <p align="center">
 <img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
 
-<p align="center"><i>Figure 4.1.2.1 Structure of <code>GroupManager</code>, an example of
+<p align="center"><i>Figure 5.1.2.1 Structure of <code>GroupManager</code>, an example of
 a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
 
 ### **5.2. Group Manager**
@@ -349,7 +349,7 @@ The sequence diagram below documents the execution.
 <p align="center">
 <img src="images/developerGuide/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
 
-<p align="center"><i>Figure 4.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
+<p align="center"><i>Figure 5.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
 #### **5.2.3. Design Consideration**
 
@@ -371,8 +371,8 @@ Having a `LessonManager` allows for easy retrieval, viewing and updating of the 
 The `LessonManager` contains a `HashMap` whose key is a Group and value is a UniqueList.
 In this section, we detail the workflow of adding a lesson to an existing tutorial group through the `addlsn` command.
 
-<p align="center"><img src="images/developerGuide/AddLsnDiagram.png" alt="Figure 4.5.2.1 Activity diagram detailing execution of <code>addlsn</code> command"></p>
-<p align="center"><i>Figure 4.3.2.1. Activity diagram detailing execution of <code>addlsn</code> command.</i></p>
+<p align="center"><img src="images/developerGuide/AddLsnDiagram.png" alt="Figure 5.3.2.1 Activity diagram detailing execution of <code>addlsn</code> command"></p>
+<p align="center"><i>Figure 5.3.2.1. Activity diagram detailing execution of <code>addlsn</code> command.</i></p>
 
 The following steps describe the execution of `addlsn` in detail, assuming that no error is encountered.
 
@@ -417,8 +417,8 @@ The `StudentManager` contains a `HashMap` which key is a `GroupName` and value i
 In this section, we will detail the workflow of adding a new student to an existing tutorial group
 using the `addstudent` command. The workflow is shown in the Activity Diagram below.
 
-<p align="center"><img src="images/developerGuide/AddStudentActivityDiagram.png" alt="Figure 4.4.2.1 Activity diagram of `addstudent` command" width="317px" height="709px"></p>
-<p align="center"><i>Figure 4.4.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
+<p align="center"><img src="images/developerGuide/AddStudentActivityDiagram.png" alt="Figure 5.4.2.1 Activity diagram of `addstudent` command" width="317px" height="709px"></p>
+<p align="center"><i>Figure 5.4.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
 
 The following steps describe the workflow of `addstudent` in detail, assuming that no error is encountered.
 
@@ -467,8 +467,8 @@ easier for the teacher to track and is much more organised.
 The `StudentInfoManager` contains a `HashMap` whose key is a `GroupLessonKey` and value is a `UniqueList`.
 The following Class Diagram describes the structure of `StudentInfoManager` and its relevant classes.
 
-<p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 4.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
-<p align="center"><i>Figure 4.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
+<p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.png" alt="Figure 5.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
+<p align="center"><i>Figure 5.5.2.1. Simplified class diagram of a StudentInfo Manager and relevant classes</i></p>
 
 From the diagram above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
 `UniqueStudentInfoList` for each `GroupLessonKey`. The table below shows the commands managed by the `StudentInfoManager`.
@@ -482,8 +482,8 @@ Commands | Purpose
 In this section, we will outline the `markpresent` command handled by the `StudentInfoManager` which is summarised by the Activity Diagram below.
 We will be using the index version of the `markpresent` command.
 
-<p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 4.5.2.2 Activity Diagram of a markpresent command by index"></p>
-<p align="center"><i>Figure 4.5.2.2 Activity Diagram of a <code>markpresent</code> command by index</i></p>
+<p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 5.5.2.2 Activity Diagram of a markpresent command by index"></p>
+<p align="center"><i>Figure 5.5.2.2 Activity Diagram of a <code>markpresent</code> command by index</i></p>
 
 When the user enters the `markpresent` command followed by an index to mark a student in a lesson present,
 the user input command undergoes the parsing to retrieve the index.
@@ -540,8 +540,8 @@ of the lessons for each tutorial group. It does not allow the user to add questi
 In this section, we will outline the `findqn` command of the `QuestionManager` which is summarised by the
 Activity Diagram below.
 
-<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 4.6.2.1 Activity diagram of a findqn command" width="392px" height="592px"></p>
-<p align="center"><i>Figure 4.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
+<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 5.6.2.1 Activity diagram of a findqn command" width="392px" height="592px"></p>
+<p align="center"><i>Figure 5.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
 
 When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
 parsing as described in [Design-Logic](#33-logic-component). During the parsing, a predicate is created. This predicate
@@ -557,8 +557,8 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 
 The Sequence Diagram below summarises the aforementioned steps.
 
-<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 4.6.2.2 Sequence diagram detailing execution of FindQnCommand"></p>
-<p align="center"><i>Figure 4.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
+<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 5.6.2.2 Sequence diagram detailing execution of FindQnCommand"></p>
+<p align="center"><i>Figure 5.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
 
 #### **5.6.3. Design Consideration**
 
