@@ -6,8 +6,8 @@ title: User guide
 * Table of Contents
 {:toc}
 
-
 --------------------------------------------------------------------------------------------------------------------
+
 ## **1. Introduction**
 
 ![Serenity Logo](images/logo.png)
@@ -75,9 +75,24 @@ User Guide.
 The following figure shows the _GUI_ of **Serenity**.
 It is annotated with the name of the _GUI_ components.
 
-<p align="center"><img src="images/Ui_annotated.png" alt="Layout of GUI"></p>
+<p align="center"><img src="images/userGuide/GuiAnnotated.png" alt="Layout of GUI" width=""></p>
 
-<p align="center"><i>Figure 3.2.1.1 layout of GUI.</i></p>
+<p align="center"><i>Figure 3.2.1.1 Annotated GUI of Serenity.</i></p>
+
+What the 6 main components of the _GUI_ do:
+
+* _Menu Bar_: This is where you can access our User Guide and exit the application.
+
+* _Side Bar_: This is where you can easily access flagged attendance records, pending questions and 
+existing tutorial groups.
+
+* _Title Display_: This is where **Serenity** displays the title of the page that you are viewing.
+
+* _Data Display_: This is where **Serenity** displays the information of the page that you are viewing.
+
+* _Result Display_: This is where **Serenity** displays guiding messages.
+
+* _Command Box_: This is where you type your commands.
 
 #### 3.2.2. Layout of the _GUI_
 
@@ -399,7 +414,6 @@ Outcome:
 <p align="center"><img src="images/delstudent/delstudent_result.png" alt="Result upon successful execution of command"></p>
 
 <p align="center"><i>Figure 4.1.6.1 Screen displayed when the command is successfully executed.</i></p>
-
 
 ### 4.2. Attendance taking
 
@@ -1114,8 +1128,6 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the list of pending questions asked across all tutorial lessons.
 
-
-
 <p align="center"><img src="images/view/viewqn.png" 
 alt="User interface for viewing questions"></p>
 
@@ -1170,7 +1182,6 @@ Command | Example
 **Edit participation score** <br> - `editscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE` <br> - `editscore INDEX score/SCORE` | <br>- `editscore name/Aaron Tan matric/A0123456A score/2` <br> - `editscore 1 score/2`
 **Subtract participation score** <br> - `subscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE` <br> - `subscore INDEX score/SCORE` | <br>- `subscore name/Aaron Tan matric/A0123456A score/2` <br> - `subscore 1 score/2`
 **Export participation scores** <br> `exportscore grp/GROUP_NAME` | <br>`exportscore grp/G01`
-
 
 ### 6.4. Question addressing commands 
 
