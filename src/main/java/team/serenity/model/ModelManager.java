@@ -293,7 +293,6 @@ public class ModelManager implements Model {
         requireAllNonNull(predicate);
         this.filteredLessons.setPredicate(predicate);
         updateStudentsInfoList();
-        updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
     }
 
     // ========== StudentManager ==========
@@ -432,7 +431,6 @@ public class ModelManager implements Model {
     public void addQuestion(Question toAdd) {
         requireNonNull(toAdd);
         this.questionManager.addQuestion(toAdd);
-        updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
     }
 
     @Override

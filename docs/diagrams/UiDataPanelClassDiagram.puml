@@ -1,0 +1,42 @@
+@startuml
+skinparam linetype ortho
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T1
+skinparam classBackgroundColor UI_COLOR_T1
+
+package ui.datapanel {
+Class DataPanel
+Class SerenityDataPanel
+Class GroupDataPanel
+Class LessonDataPanel
+Class LessonCard
+Class StudentCard
+Class StudentInfoCard
+Class QuestionCard
+}
+
+package Ui {
+Class Hide #white
+}
+
+Class Hidden #white
+Hidden *-down-> DataPanel
+
+DataPanel <|-- SerenityDataPanel
+DataPanel <|-- GroupDataPanel
+DataPanel <|-- LessonDataPanel
+
+SerenityDataPanel --> QuestionCard
+GroupDataPanel --> LessonCard
+GroupDataPanel --> StudentCard
+LessonDataPanel --> StudentInfoCard
+LessonDataPanel --> QuestionCard
+
+DataPanel ---|> Ui
+StudentCard -down-|> Ui
+LessonCard -down-|> Ui
+StudentInfoCard -down-|> Ui
+QuestionCard -down-|> Ui
+
+@enduml
