@@ -2,9 +2,8 @@
 !include style.puml
 skinparam {
 arrowThickness 1.1
-arrowColor MediumAquaMarine
-classBackgroundColor #adcdff
-classBorderColor DeepSkyBlue
+arrowColor MODEL_COLOR_T1
+classBackgroundColor MODEL_COLOR_T1
 classBackgroundColor<<HiddenOutside>> #FFFFFF
 classBorderColor<<HiddenOutside>> #FFFFFF
 classFontColor<<HiddenOutside>> #FFFFFF
