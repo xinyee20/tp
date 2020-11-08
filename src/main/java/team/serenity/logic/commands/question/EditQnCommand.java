@@ -101,9 +101,7 @@ public class EditQnCommand extends Command {
 
         model.setQuestion(questionToEdit, editedQuestion);
         model.updateFilteredQuestionList(Model.PREDICATE_SHOW_ALL_QUESTIONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_QUESTION_SUCCESS, editedQuestion),
-                CommandResult.UiAction.VIEW_QN
-        );
+        return new CommandResult(String.format(MESSAGE_EDIT_QUESTION_SUCCESS, editedQuestion));
     }
 
     /**
