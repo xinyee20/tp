@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.logic.commands.question.AddQnCommand.MESSAGE_DUPLICATE_QUESTION;
 import static team.serenity.testutil.Assert.assertThrows;
@@ -71,12 +70,12 @@ class AddQnCommandTest {
     }
 
     @Test
-    public void execute_notViewingGroup_throwsCommandException() {
+    public void execute_notViewing_throwsCommandException() {
         Question validQuestion = new QuestionBuilder().build();
         AddQnCommand addQnCommand = new AddQnCommand(validQuestion.getDescription());
         ModelStub modelStub = new ModelStubWithMoreThanOneGroup();
 
-        assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> addQnCommand.execute(modelStub));
+        assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_LESSON, () -> addQnCommand.execute(modelStub));
     }
 
     @Test
@@ -216,6 +215,7 @@ class AddQnCommandTest {
             lessonUniqueList.setElementsWithList(lsnList);
             return lessonUniqueList.asUnmodifiableObservableList();
         }
+
     }
 
     /**
@@ -233,6 +233,10 @@ class AddQnCommandTest {
             return groupUniqueList.asUnmodifiableObservableList();
         }
 
+        @Override
+        public ObservableList<Lesson> getFilteredLessonList() {
+            return new UniqueLessonList().asUnmodifiableObservableList();
+        }
     }
 
 }
