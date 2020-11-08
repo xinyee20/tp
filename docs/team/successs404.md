@@ -124,11 +124,15 @@ Given below are my contributions to the project.
     Time was spent to convert the Model components (Group, Lesson, Student) into Jackson-friendly versions to store
     in a JSON file.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=ryanlimjr&tabRepo=AY2021S1-CS2103T-W12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=successs404&tabRepo=AY2021S1-CS2103T-W12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
-    * Brainstormed ideas to improve architecture design (use of individual mangers to handle the data instead of deep nesting)
-    * Contributed to weekly team meetings regrading design details and implementation constraints and possible issues in design alternatives
+    * Modified and commented on parts of the code to improve code quality.
+    * Drafted out all the commands and added extension commands in a Google Document
+    after the User Guide consultation with our Teaching Assistant to standardise the commands.
+    * Drafted out the Ui design in Google Slides to make the development process clearer.
+    * Brainstormed ideas for the different features and the execution of the commands.
+    * Contributed to the minutes during weekly team meetings and consultations for future referencing.
 
 * **Enhancements to existing features**:
     * Detected and fixed bugs for some features. ( Pull request 
