@@ -293,7 +293,6 @@ public class ModelManager implements Model {
         requireAllNonNull(predicate);
         this.filteredLessons.setPredicate(predicate);
         updateStudentsInfoList();
-        updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
     }
 
     // ========== StudentManager ==========
