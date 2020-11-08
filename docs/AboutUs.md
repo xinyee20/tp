@@ -17,7 +17,9 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/chunyongg.md)
 
 * Role: Team Leader
+* Feature: Storage manager
 * Responsibilities: Testing
+* Components: Logic, Storage
 
 ### Lim Jia Rui Ryan
 
@@ -39,7 +41,9 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/xinyee20.md)
 
 * Role: Developer
+* Feature: StudentInfo manager
 * Responsibilities: Deliverables and deadlines
+* Components: Logic, Model
 
 ### Neo Rui En Maybelline
 
