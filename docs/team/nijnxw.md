@@ -7,7 +7,7 @@ title: Wen Jin's Project Portfolio Page
 
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
-It is written in Java, and has about 20k LoC.
+It is written in Java, and has about 25k LoC.
 
 ### About the project
 
@@ -16,10 +16,10 @@ interface (CLI) desktop addressbook application for our Software Engineering pro
 morph it into a CS2101 tutor's lesson management application called Serenity. 
 
 This enhanced application enables CS2101 tutors to:
- * import and export student and lesson data,
- * record students' attendance,
- * grade students' class participation score, and 
- * jot down questions asked by students directly without opening an external note-taking application.
+ * Import and export student and lesson data,
+ * Record students' attendance,
+ * Grade students' class participation score, and 
+ * Jot down questions asked by students directly without opening an external note-taking application.
 
 ### Summary of contributions
 
@@ -131,3 +131,4 @@ Given below are my contributions to the project.
     [5](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/250),
     [6](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/251),
     [7](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/252)) 
+    

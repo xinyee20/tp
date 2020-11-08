@@ -1,6 +1,6 @@
 package team.serenity.logic.commands.question;
 
-import static team.serenity.logic.commands.CommandTestUtil.assertQuestionCommandSuccess;
+import static team.serenity.logic.commands.CommandTestUtil.assertViewQnCommandSuccess;
 import static team.serenity.logic.commands.CommandTestUtil.showQuestionAtIndex;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
@@ -29,14 +29,14 @@ class ViewQnCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertQuestionCommandSuccess(new ViewQnCommand(), this.model,
+        assertViewQnCommandSuccess(new ViewQnCommand(), this.model,
                 ViewQnCommand.MESSAGE_SUCCESS, this.expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showQuestionAtIndex(this.model, INDEX_FIRST);
-        assertQuestionCommandSuccess(new ViewQnCommand(), this.model,
+        assertViewQnCommandSuccess(new ViewQnCommand(), this.model,
                 ViewQnCommand.MESSAGE_SUCCESS, this.expectedModel);
     }
 

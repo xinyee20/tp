@@ -7,7 +7,7 @@ title: Ryan's Project Portfolio Page
 
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
-It is written in Java, and has about 20k LoC.
+It is written in Java, and has about 25k LoC.
 
 ### About the project
 
@@ -16,10 +16,10 @@ interface (CLI) desktop addressbook application for our Software Engineering pro
 morph it into a CS2101 tutor's lesson management application called Serenity. 
 
 This enhanced application enables CS2101 tutors to:
- * import and export student and lesson data,
- * record students' attendance,
- * grade students' class participation score, and 
- * jot down questions asked by students directly without opening an external note-taking application.
+ * Import and export student and lesson data,
+ * Record students' attendance,
+ * Grade students' class participation score, and 
+ * Jot down questions asked by students directly without opening an external note-taking application.
 
 ### Summary of contributions
 
@@ -70,10 +70,10 @@ and ability to view a tutorial group's detail
     * what it does: The respective managers allows users to directly manipulate the data within specific objects.
     
     * Justification: This enhancement is essential as it follows the Law of Demeter, minimizing coupling between
-    classes. This improves the architecture of the model component while also improving testability of our software. It
+    classes. This improves the architecture of the model component while also improving the testability of our software. It
     Also abstracts out the implementation of methods related to the specific objects from the `ModelMManager` to the respective
     managers.
-    
+
     * Highlights: The implementation was challenging and time-consuming as the team and, I needed to do a deep analysis of 
     design and its alternatives, the Model component, Logic component, as well as the Ui Component. We also needed to refactor
     our original architecture design, and it required careful coordination and communication to prevent major conflicts.
@@ -128,4 +128,4 @@ and ability to view a tutorial group's detail
     [1](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/231),
     [2](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/230), 
     [3](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/229),
-    [4](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/228),
+    [4](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/228))

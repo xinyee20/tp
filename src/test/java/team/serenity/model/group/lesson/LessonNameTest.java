@@ -26,6 +26,7 @@ public class LessonNameTest {
         assertFalse(LessonName.isValidName("111-1"));
         assertFalse(LessonName.isValidName("1-111"));
         assertFalse(LessonName.isValidName("1-11"));
+        assertFalse(LessonName.isValidName("1-0"));
         assertFalse(LessonName.isValidName("11")); //missing hyphen
 
         // valid name
