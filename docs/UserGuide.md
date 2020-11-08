@@ -814,7 +814,7 @@ in the future.
 
 `addqn qn/QUESTION`
 
-> :memo: You must navigate to a lesson view through `viewlsn` before this command can be used.
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 **Example:**
 
