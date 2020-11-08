@@ -17,11 +17,11 @@ public class ExportScoreCommand extends Command {
 
     public static final String COMMAND_WORD = "exportscore";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Exports the participation score sheet of a specified tutorial group as a new XLSX file. "
+        + ": Exports the participation score sheet of the specified tutorial group as a new excel file.\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP "
+        + PREFIX_GRP + "GROUP_NAME\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + "G04";
+        + PREFIX_GRP + "G01";
 
     public static final String MESSAGE_SUCCESS =
         "Participation score sheet of tutorial group %s has been exported as %s_participation.xlsx";
@@ -45,12 +45,10 @@ public class ExportScoreCommand extends Command {
         if (model.getFilteredGroupList().isEmpty()) {
             throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
         }
-
-        Group trgtGrp = model.getFilteredGroupList().get(0);
-
-        model.exportParticipation(trgtGrp);
+        Group toExport = model.getFilteredGroupList().get(0);
+        model.exportParticipation(toExport);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-            trgtGrp.getGroupName().toString(), trgtGrp.getGroupName().toString()));
+            toExport.getGroupName().toString(), toExport.getGroupName().toString()));
     }
 
     @Override

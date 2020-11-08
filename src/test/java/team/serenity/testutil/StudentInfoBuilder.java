@@ -1,6 +1,5 @@
 package team.serenity.testutil;
 
-
 import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.Attendance;
 import team.serenity.model.group.studentinfo.Participation;
@@ -8,9 +7,9 @@ import team.serenity.model.group.studentinfo.StudentInfo;
 
 public class StudentInfoBuilder {
 
-    public static final Student DEFAULT_STUDENT = TypicalStudent.JAMES;
-    public static final Attendance DEFAULT_ATTENDANCE = new Attendance();
-    public static final Participation DEFAULT_PARTICIPATION = new Participation();
+    public static final Student DEFAULT_STUDENT = TypicalStudent.AARON;
+    public static final Attendance DEFAULT_ATTENDANCE = new Attendance(false);
+    public static final Participation DEFAULT_PARTICIPATION = new Participation(0);
 
     private Student student;
     private Attendance attendance;
@@ -47,6 +46,14 @@ public class StudentInfoBuilder {
      */
     public StudentInfoBuilder withAttendance(boolean attendance) {
         this.attendance = new Attendance(attendance);
+        return this;
+    }
+
+    /**
+     * Add the {@code attendance} to the {@code studentInfo} that we are building.
+     */
+    public StudentInfoBuilder withAttendance(Attendance attendance) {
+        this.attendance = attendance;
         return this;
     }
 

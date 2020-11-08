@@ -19,6 +19,9 @@ repositories {
 checkstyle {
     toolVersion = '8.29'
 }
+run {
+    enableAssertions = true
+}
 
 test {
     useJUnitPlatform()

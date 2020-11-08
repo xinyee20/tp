@@ -3,7 +3,7 @@ package team.serenity.logic.commands.question;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static team.serenity.commons.core.Messages.MESSAGE_QUESTIONS_LISTED_OVERVIEW;
-import static team.serenity.logic.commands.CommandTestUtil.assertQuestionViewsQuestionTabCommandSuccess;
+import static team.serenity.logic.commands.CommandTestUtil.assertQuestionCommandSuccess;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
 
@@ -67,7 +67,7 @@ class FindQnCommandTest {
         QuestionContainsKeywordPredicate predicate = preparePredicate(" ");
         FindQnCommand command = new FindQnCommand(predicate);
         this.expectedModel.updateFilteredQuestionList(predicate);
-        assertQuestionViewsQuestionTabCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertQuestionCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(Collections.emptyList(), this.model.getFilteredQuestionList());
     }
 
@@ -78,7 +78,7 @@ class FindQnCommandTest {
         QuestionContainsKeywordPredicate predicate = preparePredicate("deadline");
         FindQnCommand command = new FindQnCommand(predicate);
         this.expectedModel.updateFilteredQuestionList(predicate);
-        assertQuestionViewsQuestionTabCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertQuestionCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(Collections.singletonList(QUESTION_A), this.model.getFilteredQuestionList());
     }
 

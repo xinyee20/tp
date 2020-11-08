@@ -1,5 +1,9 @@
 package team.serenity.testutil;
 
+import static team.serenity.testutil.TypicalStudent.AARON;
+import static team.serenity.testutil.TypicalStudent.BENJAMIN;
+import static team.serenity.testutil.TypicalStudent.CATHERINE;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -9,6 +13,8 @@ import java.util.Set;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.commons.core.sorter.LessonSorter;
+import team.serenity.commons.core.sorter.StudentSorter;
 import team.serenity.commons.util.CsvUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.model.group.Group;
@@ -26,17 +32,10 @@ import team.serenity.model.util.UniqueList;
  */
 public class GroupBuilder {
 
-    public static final String DEFAULT_NAME = "G04";
-    public static final Set<Student> DEFAULT_STUDENTS = new HashSet<>(Arrays.asList(
-        new Student("Aaron Tan", "A0123456U"),
-        new Student("Baron Wong", "A0654321C"),
-        new Student("Cherry Lee", "A0135791B"),
-        new Student("Dickson Low", "A0246810D"),
-        new Student("Eng Wee Kiat", "A0101010E")
-
-    ));
-    public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>(Arrays.asList(
-    ));
+    public static final String DEFAULT_NAME = "G01";
+    public static final Set<Student> DEFAULT_STUDENTS =
+            new HashSet<>(Arrays.asList(AARON, BENJAMIN, CATHERINE));
+    public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>();
 
     private GroupName name;
     private UniqueList<Student> students = new UniqueStudentList();
@@ -48,7 +47,9 @@ public class GroupBuilder {
     public GroupBuilder() {
         name = new GroupName(DEFAULT_NAME);
         students.setElementsWithList(new ArrayList<>(DEFAULT_STUDENTS));
+        students.sort(new StudentSorter());
         lessons.setElementsWithList(new ArrayList<>(DEFAULT_CLASSES));
+        lessons.sort(new LessonSorter());
     }
 
     /**
@@ -66,6 +67,7 @@ public class GroupBuilder {
     public GroupBuilder(String name, Path filePath) {
         this.name = new GroupName(name);
         students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
+        students.sort(new StudentSorter());
         lessons.setElementsWithList(new ArrayList<>());
     }
 
@@ -82,6 +84,7 @@ public class GroupBuilder {
      */
     public GroupBuilder withStudents(Student... students) {
         this.students.setElementsWithList(Arrays.asList(students));
+        this.students.sort(new StudentSorter());
         return this;
     }
 
@@ -99,16 +102,16 @@ public class GroupBuilder {
     }
 
     /**
-     * Creates and parses the {@code classes} into a {@code Set<Class>} and set it to the {@code Group} that we are
+     * Creates and parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Group} that we are
      * building.
      */
-    public GroupBuilder withClasses(String... classes) {
+    public GroupBuilder withLessons(String... lessons) {
         UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
         for (Student student : students) {
             studentsInfo.add(new StudentInfo(student));
         }
-        for (String className : classes) {
-            this.lessons.add(new Lesson(className, studentsInfo));
+        for (String lessonName : lessons) {
+            this.lessons.add(new Lesson(lessonName, studentsInfo));
         }
         return this;
     }

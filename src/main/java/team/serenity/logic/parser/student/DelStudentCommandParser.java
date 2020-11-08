@@ -16,6 +16,8 @@ import team.serenity.logic.parser.Prefix;
 import team.serenity.logic.parser.SerenityParserUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new DelStudentCommand object.
@@ -40,37 +42,46 @@ public class DelStudentCommandParser implements Parser<DelStudentCommand> {
         if (!argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             throw this.deleteStudentCommandParserException;
         }
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw this.deleteStudentCommandParserException;
+        }
+
+        if (argMultimap.getValue(PREFIX_MATRIC).isPresent() && argMultimap.getPreamble().length() != 0) {
+            throw this.deleteStudentCommandParserException;
+        }
 
         Index index;
         String[] grpKeywordArray = argMultimap.getValue(PREFIX_GRP).get().split("\\s+");
+
+        if (grpKeywordArray.length != 1) {
+            throw this.deleteStudentCommandParserException;
+        }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()) {
             String[] studentNameArray = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
             String[] studentIdArray = argMultimap.getValue(PREFIX_MATRIC).get().split("\\s+");
 
-            //if id or group keyword is more than 1, or if student name has more than 10 letters, throw exception
-            boolean matchesGrp = grpKeywordArray.length == 1;
-            boolean matchesId = studentIdArray.length == 1 && studentIdArray[0].length() == 8;
-            boolean matchesStudentName = studentNameArray.length <= 10;
-            if (!matchesGrp || !matchesId || !matchesStudentName) {
+            if (studentIdArray.length != 1) {
                 throw this.deleteStudentCommandParserException;
             }
 
-            String studentName = String.join(" ", studentNameArray);
-            String studentId = studentIdArray[0];
+            String name = String.join(" ", studentNameArray);
+            String matric = studentIdArray[0];
             String grpName = grpKeywordArray[0];
 
+            StudentName studentName = SerenityParserUtil.parseStudentName(name);
+            StudentNumber studentId = SerenityParserUtil.parseStudentNumber(matric);
+            grpName = SerenityParserUtil.parseGroupName(grpName).toString();
             return new DelStudentCommand(studentName, studentId, new GroupContainsKeywordPredicate(grpName));
 
         } else {
-            index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
-            String grpName = grpKeywordArray[0];
-
-            boolean matchesGrp = grpKeywordArray.length == 1;
-            if (!matchesGrp) {
+            try {
+                index = SerenityParserUtil.parseIndex(argMultimap.getPreamble());
+            } catch (NumberFormatException e) {
                 throw this.deleteStudentCommandParserException;
             }
-
+            String grpName = grpKeywordArray[0];
+            grpName = SerenityParserUtil.parseGroupName(grpName).toString();
             return new DelStudentCommand(index, new GroupContainsKeywordPredicate(grpName));
         }
     }

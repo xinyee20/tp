@@ -1,22 +1,22 @@
 package team.serenity.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_NON_XLSX;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
-import java.io.IOException;
-
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import team.serenity.commons.core.Messages;
 import team.serenity.commons.core.index.Index;
-import team.serenity.commons.util.StringUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonName;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.student.Student;
+import team.serenity.model.group.student.StudentName;
+import team.serenity.model.group.student.StudentNumber;
 import team.serenity.model.group.studentinfo.Participation;
 
 /**
@@ -25,47 +25,55 @@ import team.serenity.model.group.studentinfo.Participation;
 public class SerenityParserUtil {
 
     /**
-     * Parses a {@code String groupName} into a {@code GroupName}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String groupName} into a {@code GroupName}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code groupName} is invalid.
      */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
-        String trimmedGroupName = groupName.trim();
-        if (!GroupName.isValidName(trimmedGroupName)) {
+        String trimmedGroupName = groupName.trim().toUpperCase();
+        if (trimmedGroupName.isEmpty()) {
+            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_EMPTY);
+        } else if (trimmedGroupName.split(" ").length > 1) {
+            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_MULTIPLE);
+        } else if (!GroupName.isValidName(trimmedGroupName)) {
             throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
         }
         return new GroupName(trimmedGroupName);
     }
 
     /**
-     * Parses a {@code String filePath} into a {@code XlsxUtil} object.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String filePath} into a {@code XlsxUtil} object. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code filePath} is invalid.
      */
     public static XlsxUtil parseFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
+        if (trimmedFilePath.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_FILE_PATH_EMPTY);
+        } else if (!filePath.trim().endsWith(".xlsx")) {
+            throw new ParseException(MESSAGE_INVALID_FILE_NON_XLSX);
+        }
         try {
-            XSSFWorkbook workbook = new XSSFWorkbook(trimmedFilePath);
-            return new XlsxUtil(trimmedFilePath, workbook);
-        } catch (InvalidOperationException | IOException e) {
+            return new XlsxUtil(trimmedFilePath);
+        } catch (InvalidOperationException e) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
         }
     }
 
     /**
-     * Parses a {@code String lessonName} into a {@code LessonName}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String lessonName} into a {@code LessonName}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code lessonName} is invalid.
      */
     public static LessonName parseLessonName(String lessonName) throws ParseException {
         requireNonNull(lessonName);
         String trimmedLessonName = lessonName.trim();
-        if (!LessonName.isValidName(trimmedLessonName)) {
+        if (trimmedLessonName.isEmpty()) {
+            throw new ParseException(LessonName.MESSAGE_LESSON_NAME_EMPTY);
+        } else if (!LessonName.isValidName(trimmedLessonName)) {
             throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
         }
         return new LessonName(trimmedLessonName);
@@ -76,13 +84,15 @@ public class SerenityParserUtil {
      *
      * @throws ParseException if the given {@code student} is invalid.
      */
-    public static String parseStudentName(String studentName) throws ParseException {
+    public static StudentName parseStudentName(String studentName) throws ParseException {
         requireNonNull(studentName);
         String trimmedName = studentName.trim();
-        if (!Student.isValidName(trimmedName)) {
-            throw new ParseException(Student.STUDENT_NAME_ERROR);
+        if (trimmedName.isEmpty()) {
+            throw new ParseException(StudentName.MESSAGE_STUDENT_NAME_EMPTY);
+        } else if (!Student.isValidName(trimmedName)) {
+            throw new ParseException(StudentName.MESSAGE_CONSTRAINTS);
         }
-        return trimmedName;
+        return new StudentName(trimmedName);
     }
 
     /**
@@ -90,13 +100,15 @@ public class SerenityParserUtil {
      *
      * @throws ParseException if the given {@code studentId} is invalid.
      */
-    public static String parseStudentID(String studentId) throws ParseException {
+    public static StudentNumber parseStudentNumber(String studentId) throws ParseException {
         requireNonNull(studentId);
         String trimmedId = studentId.trim();
-        if (!Student.isValidStudentId(trimmedId)) {
-            throw new ParseException(Student.STUDENT_ID_ERROR);
+        if (trimmedId.isEmpty()) {
+            throw new ParseException(StudentNumber.MESSAGE_STUDENT_NUMBER_EMPTY);
+        } else if (!Student.isValidStudentId(trimmedId)) {
+            throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
-        return trimmedId;
+        return new StudentNumber(trimmedId);
     }
 
     /**
@@ -106,19 +118,18 @@ public class SerenityParserUtil {
      * @throws ParseException if the specified score is invalid.
      */
     public static int parseScore(String inputScore) throws ParseException {
+        requireNonNull(inputScore);
         String trimmedScore = inputScore.trim();
-        int score;
-        try {
-            score = Integer.parseInt(trimmedScore);
-            return score;
-        } catch (Exception e) {
+        int score = Integer.parseInt(trimmedScore);
+        if (score < 0 || score > 5) {
             throw new ParseException(Participation.MESSAGE_CONSTRAINTS);
         }
+        return score;
     }
 
     /**
-     * Parses a {@code String questionDescription} into a {@code String}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String questionDescription} into a {@code String}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @return a Description object with the given {@code questionDescription}.
      * @throws ParseException if the given {@code questionDescription} is invalid.
@@ -139,11 +150,12 @@ public class SerenityParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
+        requireNonNull(oneBasedIndex);
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        int index = Integer.parseInt(trimmedIndex);
+        if (index < 1) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(index);
     }
-
 }

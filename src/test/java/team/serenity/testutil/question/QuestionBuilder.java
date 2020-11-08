@@ -10,9 +10,9 @@ import team.serenity.model.group.question.Question;
  */
 public class QuestionBuilder {
 
-    public static final String DEFAULT_GROUP_NAME = "G04";
+    public static final String DEFAULT_GROUP_NAME = "G01";
     public static final String DEFAULT_LESSON_NAME = "1-1";
-    public static final String DEFAULT_DESCRIPTION = "How is the grading criteria like?";
+    public static final String DEFAULT_DESCRIPTION = "What is the deadline for the report?";
 
     private GroupName groupName;
     private LessonName lessonName;

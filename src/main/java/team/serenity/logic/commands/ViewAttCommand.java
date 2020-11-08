@@ -1,10 +1,11 @@
 package team.serenity.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.commons.core.Messages.MESSAGE_ATTENDANCE_LISTED_OVERVIEW;
 import static team.serenity.commons.core.Messages.MESSAGE_GROUP_EMPTY;
-import static team.serenity.commons.core.Messages.MESSAGE_GROUP_LISTED_OVERVIEW;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_GRP;
 
+import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 
@@ -16,12 +17,11 @@ public class ViewAttCommand extends Command {
 
     public static final String COMMAND_WORD = "viewatt";
     public static final Object MESSAGE_USAGE = COMMAND_WORD
-        + ": View attendance sheet of all students in the specified group (case-insensitive) "
-        + "and displays them as a table.\n"
+        + ": Displays the attendance sheet of all students in the specified tutorial group (case-insensitive).\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP\n"
+        + PREFIX_GRP + "GROUP_NAME\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GRP + " G04\n";
+        + PREFIX_GRP + "G01\n";
 
     private final GroupContainsKeywordPredicate predicate;
 
@@ -32,15 +32,18 @@ public class ViewAttCommand extends Command {
     private String getMessage(Model model) {
         return model.getFilteredGroupList().isEmpty()
             ? MESSAGE_GROUP_EMPTY
-            : String.format(MESSAGE_GROUP_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
+            : String.format(MESSAGE_ATTENDANCE_LISTED_OVERVIEW, model.getFilteredGroupList().get(0).getGroupName());
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredGroupList(this.predicate);
-        return new CommandResult(this.getMessage(model), false, false,
-            false, true, false, false, true, false, false, false);
+        if (model.getFilteredGroupList().isEmpty()) {
+            throw new CommandException(MESSAGE_GROUP_EMPTY);
+        }
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
+        return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_ATT);
     }
 
     @Override

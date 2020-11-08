@@ -1,5 +1,7 @@
 package team.serenity.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,6 +25,7 @@ public class JsonAdaptedStudentInfo {
      * @param source
      */
     public JsonAdaptedStudentInfo(StudentInfo source) {
+        requireNonNull(source);
         this.student = new JsonAdaptedStudent(source.getStudent());
         this.isPresent = source.getAttendance().isPresent();
         this.isFlagged = source.getAttendance().isFlagged();

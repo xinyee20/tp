@@ -21,7 +21,7 @@ public class AddQnCommand extends Command {
 
     public static final String COMMAND_WORD = "addqn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a new question to the specific lesson. "
+        + ": Adds a new question to the specific lesson.\n"
         + "Parameters: "
         + PREFIX_QN + "QUESTION\n"
         + "Example: " + COMMAND_WORD + " "

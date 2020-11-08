@@ -1,5 +1,7 @@
 package team.serenity.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +41,7 @@ class JsonAdaptedLesson {
      * Converts a given {@code Lesson} into this Lesson for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
+        requireNonNull(source);
         this.name = source.getLessonName().toString();
         this.studentInfos.addAll(source.getStudentsInfo()
             .asUnmodifiableObservableList().stream()

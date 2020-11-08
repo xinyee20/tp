@@ -19,12 +19,12 @@ import team.serenity.model.group.lesson.LessonName;
 public class DelLsnCommand extends Command {
     public static final String COMMAND_WORD = "dellsn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes a specified lesson from a specified tutorial group. "
+        + ": Deletes an existing tutorial lesson from the specified tutorial group.\n"
         + "Parameters: "
-        + PREFIX_GRP + "GROUP "
-        + PREFIX_LSN + "LESSON\n"
-        + "Example: "
-        + PREFIX_GRP + "G04 "
+        + PREFIX_GRP + "GROUP_NAME "
+        + PREFIX_LSN + "LESSON_NAME\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GRP + "G01 "
         + PREFIX_LSN + "1-1";
 
     public static final String MESSAGE_SUCCESS = "Lesson %1$s for tutorial group %2$s is deleted.";
@@ -62,11 +62,13 @@ public class DelLsnCommand extends Command {
         Group trgtGrp = model.getFilteredGroupList().get(0);
         Lesson lessonToDel = model.getFilteredLessonList().get(0);
 
-        trgtGrp.getLessons().remove(lessonToDel);
+        model.deleteLesson(trgtGrp, lessonToDel);
+
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.toDel, this.targetGroupName),
-            false, false, false, true, false, false, false, false, false, false);
+                CommandResult.UiAction.VIEW_GRP
+        );
     }
 
     @Override

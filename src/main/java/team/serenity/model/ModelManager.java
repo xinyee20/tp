@@ -185,8 +185,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAGroup() {
-        return groupManager.hasAGroup();
+    public boolean isEmpty() {
+        return groupManager.isEmpty();
     }
 
     @Override
@@ -235,7 +235,7 @@ public class ModelManager implements Model {
     public void exportParticipation(Group group) {
         requireNonNull(group);
         XlsxUtil util = new XlsxUtil();
-        util.writeParticipationToXlsx(group, this.studentInfoManager.getStudentInfoMap());
+        util.writeScoreToXlsx(group, this.studentInfoManager.getStudentInfoMap());
     }
 
     @Override
@@ -266,6 +266,15 @@ public class ModelManager implements Model {
     @Override
     public boolean ifTargetGroupHasLessonName(GroupName groupName, LessonName lessonName) {
         return this.lessonManager.ifTargetGroupHasLessonName(groupName, lessonName);
+    }
+
+    @Override
+    public void deleteLesson(Group group, Lesson lesson) {
+        this.studentInfoManager.deleteAllStudentsInfoFromGroupLesson(group, lesson);
+        this.lessonManager.deleteLessonFromGroup(group.getGroupName(), lesson);
+        this.questionManager.deleteAllQuestionsFromGroupLesson(group, lesson);
+        this.lessons.removeAll(lesson);
+        this.studentsInfo.clear();
     }
 
     @Override
@@ -308,12 +317,11 @@ public class ModelManager implements Model {
     public void deleteStudentFromGroup(Student student, Predicate<Group> predicate) {
         requireAllNonNull(student, predicate);
         updateFilteredGroupList(predicate);
-        UniqueList<Student> students = this.filteredGroups.get(0).getStudents();
-        if (!this.filteredGroups.isEmpty() && students.contains(student)) {
-            students.remove(student);
+        if (!this.filteredGroups.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
-            currentGroup.deleteStudentFromGroup(student);
+            this.groupManager.deleteStudentFromGroup(currentGroup, student);
         }
+        updateStudentsInfoList();
     }
 
     @Override
@@ -358,28 +366,38 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<StudentInfo> getObservableListOfStudentsInfoFromKey(GroupLessonKey key) {
+        return this.studentInfoManager.getObservableListOfStudentsInfoFromKey(key);
+    }
+
+    @Override
+    public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
+                                                         UniqueList<StudentInfo> newListOfStudentsInfo) {
+        requireAllNonNull(key, newListOfStudentsInfo);
+        this.studentsInfo.setAll(newListOfStudentsInfo.asUnmodifiableObservableList());
+        this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, newListOfStudentsInfo);
+    }
+
+    @Override
     public void updateStudentsInfoList() {
         if (!this.filteredGroups.isEmpty() && !this.filteredLessons.isEmpty()) {
             Group currentGroup = this.filteredGroups.get(0);
             Lesson currentLesson = this.filteredLessons.get(0);
             GroupLessonKey key = new GroupLessonKey(currentGroup.getGroupName(), currentLesson.getLessonName());
-            ObservableList<StudentInfo> studentInfos = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
+            ObservableList<StudentInfo> studentsInfoList = currentLesson.getStudentsInfoAsUnmodifiableObservableList();
             UniqueList<StudentInfo> uniqueStudentInfoList = currentLesson.getStudentsInfo();
-            this.studentsInfo.setAll(studentInfos);
+            this.studentsInfo.setAll(studentsInfoList);
             this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, uniqueStudentInfoList);
         }
     }
 
     @Override
     public ObservableList<StudentInfo> getAllStudentInfo() {
-        ObservableList<StudentInfo> studentInfoList = null;
+        ObservableList<StudentInfo> studentInfoList =
+                new ArrayObservableList<>(new UniqueStudentInfoList().asUnmodifiableObservableList());
         for (Group group : getListOfGroups()) {
             for (Lesson lesson : group.getLessons()) {
-                if (studentInfoList == null) {
-                    studentInfoList = new ArrayObservableList<>(lesson.getStudentsInfoAsUnmodifiableObservableList());
-                } else {
-                    studentInfoList.addAll(lesson.getStudentsInfo().getList());
-                }
+                studentInfoList.addAll(lesson.getStudentsInfo().getList());
             }
         }
         return studentInfoList;

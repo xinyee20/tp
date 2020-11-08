@@ -1,56 +1,40 @@
 package team.serenity.testutil;
 
-import static team.serenity.testutil.TypicalGroups.GROUP_C;
-import static team.serenity.testutil.TypicalGroups.GROUP_D;
+import static team.serenity.testutil.TypicalGroups.GROUP_G01;
+import static team.serenity.testutil.TypicalGroups.GROUP_G02;
+import static team.serenity.testutil.TypicalStudent.AARON;
+import static team.serenity.testutil.TypicalStudent.BENJAMIN;
+import static team.serenity.testutil.TypicalStudent.CATHERINE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
-import team.serenity.model.group.student.Student;
 import team.serenity.model.managers.LessonManager;
 import team.serenity.model.util.UniqueList;
 
 
 public class TypicalLesson {
 
-    public static final Lesson LESSON_A = new LessonBuilder().withName("4-2")
-            .withStudents(
-                new Student("Jeffery", "A0000000U"),
-                new Student("Luna", "A0111111U"),
-                new Student("Queenie", "A0222222U")
-            )
+    public static final Lesson LESSON_1_1 = new LessonBuilder().withName("1-1")
+            .withStudents(AARON, BENJAMIN, CATHERINE)
             .build();
 
-    public static final Lesson LESSON_B = new LessonBuilder().withName("5-2")
-            .withStudents(
-                    new Student("Jeffery", "A0000000U"),
-                    new Student("Luna", "A0111111U"),
-                    new Student("Queenie", "A0222222U")
-            )
+    public static final Lesson LESSON_1_2 = new LessonBuilder().withName("1-2")
+            .withStudents(AARON, BENJAMIN, CATHERINE)
             .build();
 
-    public static final Lesson LESSON_C = new LessonBuilder().withName("5-1")
-            .withStudents(
-                new Student("Jeffery", "A0000000U"),
-                new Student("Luna", "A0111111U"),
-                new Student("Queenie", "A0222222U")
-            )
+    public static final Lesson LESSON_2_1 = new LessonBuilder().withName("2-1")
+            .withStudents(AARON, BENJAMIN, CATHERINE)
             .build();
 
-    public static final Lesson LESSON_D = new LessonBuilder().withName("5-1")
-            .withStudents(
-                new Student("Freddie", "A0000000U"),
-                new Student("June", "A0101011U")
-            )
+    public static final Lesson LESSON_2_2 = new LessonBuilder().withName("2-2")
+            .withStudents(AARON, BENJAMIN, CATHERINE)
             .build();
 
-    public static final Lesson LESSON_E = new LessonBuilder().withName("4-1")
-            .withStudents(
-                    new Student("Freddie", "A0000000U"),
-                    new Student("June", "A0101011U")
-            )
+    public static final Lesson LESSON_3_1 = new LessonBuilder().withName("3-1")
+            .withStudents(AARON, BENJAMIN, CATHERINE)
             .build();
 
 
@@ -59,14 +43,14 @@ public class TypicalLesson {
 
     public static UniqueList<Lesson> getTypicalLessons() {
         UniqueList<Lesson> list = new UniqueLessonList();
-        list.setElementsWithList(new ArrayList<>(Arrays.asList(LESSON_A, LESSON_B)));
+        list.setElementsWithList(new ArrayList<>(Arrays.asList(LESSON_1_1, LESSON_1_2)));
         return list;
     }
 
     public static LessonManager getTypicalLessonManager() {
         LessonManager lessonManager = new LessonManager();
-        lessonManager.addNewMapping(GROUP_C.getGroupName(), GROUP_C.getLessons());
-        lessonManager.addNewMapping(GROUP_D.getGroupName(), GROUP_D.getLessons());
+        lessonManager.addNewMapping(GROUP_G01.getGroupName(), GROUP_G01.getLessons());
+        lessonManager.addNewMapping(GROUP_G02.getGroupName(), GROUP_G02.getLessons());
         return lessonManager;
     }
 }

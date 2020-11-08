@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="700" onCloseRequest="#handleExit" title="Serenity" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="800.0" onCloseRequest="#handleExit" title="Serenity" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/serenity_logo.png" />
   </icons>
@@ -58,15 +58,7 @@
            </MenuBar>
             </top>
             <left>
-               <ScrollPane prefWidth="85.0" BorderPane.alignment="CENTER">
-                 <content>
-                     <VBox fx:id="buttonPanelPlaceholder" alignment="CENTER" fillWidth="false" prefWidth="85.0" spacing="10">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                     </VBox>
-                 </content>
-               </ScrollPane>
+               <ScrollPane fx:id="sidebarPlaceholder" prefWidth="85.0" BorderPane.alignment="CENTER" />
             </left>
          </BorderPane>
     </Scene>
