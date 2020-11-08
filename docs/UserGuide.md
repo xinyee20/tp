@@ -665,11 +665,11 @@ You can find the XLSX file at the location where your **Serenity** application i
 
 <p align="center"><img src="images/userGuide/attendanceTaking/exportatt_command.png" 
    alt="Command box for exportatt command"></p>
-<p align="center"><i>Figure 4.2.5.1 Command for <code>exportatt</code> command.</i></p>
+<p align="center"><i>Figure 4.2.7.1 Command for <code>exportatt</code> command.</i></p>
 
 <p align="center"><img src="images/userGuide/attendanceTaking/exportatt_result.png" 
    alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.5.2 Contents of excel file generated.</i></p>
+<p align="center"><i>Figure 4.2.7.2 Contents of excel file generated.</i></p>
 
 ### 4.3. Participation marking
 
