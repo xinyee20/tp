@@ -15,7 +15,7 @@ public class LessonName {
      * Must contain 1 or 2 digits, followed by a hypen and 1 digit
      * E.g. 1-1, 10-1 would pass but not 100-1 or 1-10
      */
-    public static final String VALIDATION_REGEX = "^[0-9]{1,2}[-]{1}[0-9]{1}$";
+    public static final String VALIDATION_REGEX = "^[0-9]{1,2}[-]{1}[1-9]{1}$";
 
     public final String lessonName;
 
