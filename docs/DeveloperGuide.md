@@ -246,7 +246,7 @@ The `Storage` component,
 * Can save the **Serenity** data in a JSON format.
 * Can parse a JSON file in the correct format to get **Serenity** data.
 
-#### **4.6. Common Classes**
+### **4.6. Common Classes**
 
 Classes used by multiple other components are in the `team.serenity.commons` package.
 The package contains three sub-packages: `core`, `exceptions` and `util`.
