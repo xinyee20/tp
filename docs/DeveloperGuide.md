@@ -113,11 +113,15 @@ This segment will explain the structure and responsibilities of the Ui component
 
 #### **4.2.1. Structure**
 
-The Class Diagram given in Figure 4.2.1.1 below describes the structure of the Ui-related classes.
+The Class Diagrams given in Figure 4.2.1.1 and Figure 4.2.1.2 below describe the structure of the Ui-related classes.
 
 ![Figure 4.2.1.1](images/developerGuide/UiClassDiagram2.png)
 
 <p align="center"><i>Figure 4.2.1.1 Structure of the <code>Ui</code> component.</i></p>
+
+![Figure 4.2.1.2](images/developerGuide/UiDataPanelClassDiagram2.png)
+
+<p align="center"><i>Figure 4.2.1.2 Structure of the <code>ui.datapanel</code> component.</i></p>
 
 The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
 as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
