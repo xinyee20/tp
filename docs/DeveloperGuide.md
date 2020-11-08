@@ -388,7 +388,7 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 #### **5.3.3. Design Consideration**
 
-**Aspect:** Number of UniqueLists to hold
+**Aspect:** Number of `UniqueLists` to hold
 
 |   |**Pros**|**Cons**|
 |---|---|---|
@@ -428,7 +428,7 @@ The following steps describe the workflow of `addstudent` in detail, assuming th
 
 1. When the execute method of `AddStudentCommand` is called,
 the `ModelManager`'s `updateFilteredGroupList` method is called.
-1. The `ModelManager` updates its filtered list of `Group`s to contain only the specified `Group`.
+1. The `ModelManager` updates its filtered list of `Groups` to contain only the specified `Group`.
 1. A new `Student` object is created and added to the `UniqueList<Student>` of the tutorial group.
 1. The `ModelManager`'s `updateStudentsInfoList` method is called.
 1. The `ModelManager` adds the newly created `Student` object to its `ObservableList<Student>`.
@@ -456,7 +456,7 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 
 **Serenity** allows users to keep track of the attendance and participation of students from his/her tutorial lessons.
 
-The `StudentInfoManager` is one of the `Feature Manager`s (See [Feature-Managers](#51-feature-managers)).
+The `StudentInfoManager` is one of the `Feature Managers` (See [Feature Managers](#51-feature-managers)).
 The `StudentInfoManager` helps to collate all the information related to the student, consisting of the student’s
 attendance as well as participation score for each lesson.
 It contains a `UniqueStudentInfoList` which contains all the `StudentInfo` of every student for each lesson.
@@ -524,7 +524,7 @@ the code breaking if any intermediate classes are not functioning properly.
 
 **Serenity** allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
 
-The question manager is one of the `Feature Manager`s (See [Feature-Manager](#41-feature-managers)).
+The question manager is one of the `Feature Managers` (See [Feature Manager](#41-feature-managers)).
 On top of the basic operations provided above it also allows the user to find questions by keywords using the `findqn`
 command. The `findqn` command does not restrict users to find via only one keyword. They are able to find via multiple
 keywords, similar to a search bar. E.g. `findqn deadline report` will search and list all question entries with
@@ -919,10 +919,10 @@ The following points highlights the major enhancements that we have incorporated
 tutorial `Lesson` to keep track of the student's `Attendance` and `Participation` score.
 The `Question` class was also designed to handle the questions asked by students in a particular `Lesson` of a `Group`.
 Following the Law of Demeter, the `Group`, `Lesson`, `Student`, `StudentInfo` and `Question` classes were
-further refactored them into [Feature Managers](#51-feature-managers) to minimize coupling between the classes.
+further refactored into [Feature Managers](#51-feature-managers) to minimize coupling between the classes.
 
-* While the `Ui` of *AB3* contains only 1 `ListView`, **Serenity** has 6 `ListView`s and 2 `TableView`s.
-These views were placed in `TabPane`s spread out across 3 pages - the home page, the tutorial group page and
+* While the `Ui` of *AB3* contains only 1 `ListView`, **Serenity** has 6 `ListViews` and 2 `TableViews`.
+These views were placed in `TabPanes` and they were spread out across 3 pages - the home page, the tutorial group page and
 the tutorial lesson page. Furthermore, **Serenity** has additional _TitleDisplay_ and _SideBar_ `Ui` components that
 show the title of the page the user is viewing and the shortcut buttons respectively.
 These changes allowed the `Ui` of **Serenity** to be significantly more appealing than that of **AB3**'s.
