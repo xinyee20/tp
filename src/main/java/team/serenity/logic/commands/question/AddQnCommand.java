@@ -45,12 +45,12 @@ public class AddQnCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.getFilteredGroupList().size() != 1) {
-            throw new CommandException(MESSAGE_NOT_VIEWING_A_GROUP);
-        }
-
         if (model.getFilteredLessonList().size() != 1) {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
+        }
+
+        if (model.getFilteredGroupList().size() != 1) {
+            throw new CommandException(MESSAGE_NOT_VIEWING_A_GROUP);
         }
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);

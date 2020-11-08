@@ -300,6 +300,9 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 
 `addlsn grp/GROUP_NAME lsn/LESSON_NAME`
 
+> :memo: LESSON_NAME follows the format 'X-Y' where X is the week number, and Y is the lesson number. There can be 
+>more than 9 weeks (as in 10-1) but not more than 9 lessons in a week (1-10 would be invalid).
+
 **Example:**
 
 You want to create a new tutorial lesson called `1-3` (week 1, lesson 3) for tutorial group `G01`.
@@ -810,6 +813,8 @@ in the future.
 **Format:**
 
 `addqn qn/QUESTION`
+
+> :memo: You must navigate to a lesson view through `viewlsn` before this command can be used.
 
 **Example:**
 
