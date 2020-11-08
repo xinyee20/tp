@@ -128,4 +128,4 @@ and ability to view a tutorial group's detail
     [1](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/231),
     [2](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/230), 
     [3](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/229),
-    [4](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/228),
+    [4](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/228))
