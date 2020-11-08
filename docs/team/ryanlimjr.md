@@ -70,10 +70,10 @@ and ability to view a tutorial group's detail
     * what it does: The respective managers allows users to directly manipulate the data within specific objects.
     
     * Justification: This enhancement is essential as it follows the Law of Demeter, minimizing coupling between
-    classes. This improves the architecture of the model component while also improving testability of our software. It
+    classes. This improves the architecture of the model component while also improving the testability of our software. It
     Also abstracts out the implementation of methods related to the specific objects from the `ModelMManager` to the respective
     managers.
-    
+
     * Highlights: The implementation was challenging and time-consuming as the team and, I needed to do a deep analysis of 
     design and its alternatives, the Model component, Logic component, as well as the Ui Component. We also needed to refactor
     our original architecture design, and it required careful coordination and communication to prevent major conflicts.

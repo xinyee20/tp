@@ -25,11 +25,16 @@ import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.LessonContainsKeywordPredicate;
+import team.serenity.model.group.lesson.LessonName;
+import team.serenity.model.group.question.Question;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 import team.serenity.testutil.GroupBuilder;
 import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
+import team.serenity.testutil.question.QuestionBuilder;
 
 class ViewLsnCommandTest {
 
@@ -37,7 +42,10 @@ class ViewLsnCommandTest {
     void execute_noGroup_throwsCommandException() {
         ModelStub modelStub = new ModelStubWithNoGroupAndLesson();
         ViewLsnCommand viewLsnCommand = new ViewLsnCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G01),
-                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1));
+                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1),
+                new QuestionFromGroupLessonPredicate(new GroupName(VALID_GROUP_NAME_G01),
+                        new LessonName(VALID_LESSON_NAME_1_1)
+                ));
         assertThrows(CommandException.class, GROUP_DOES_NOT_EXIST_MESSAGE, () -> viewLsnCommand.execute(modelStub));
     }
 
@@ -45,7 +53,10 @@ class ViewLsnCommandTest {
     void execute_noLesson_throwsCommandException() {
         ModelStub modelStub = new ModelStubWithNoLesson();
         ViewLsnCommand viewLsnCommand = new ViewLsnCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G01),
-                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1));
+                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1),
+                new QuestionFromGroupLessonPredicate(new GroupName(VALID_GROUP_NAME_G01),
+                        new LessonName(VALID_LESSON_NAME_1_1)
+                ));
         assertThrows(CommandException.class, LESSON_DOES_NOT_EXIST_MESSAGE, () -> viewLsnCommand.execute(modelStub));
     }
 
@@ -54,7 +65,10 @@ class ViewLsnCommandTest {
         try {
             ModelStubWithGroupAndLesson modelStub = new ModelStubWithGroupAndLesson();
             ViewLsnCommand viewLsnCommand = new ViewLsnCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G01),
-                    new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1));
+                    new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1),
+                    new QuestionFromGroupLessonPredicate(new GroupName(VALID_GROUP_NAME_G01),
+                            new LessonName(VALID_LESSON_NAME_1_1)
+                    ));
             CommandResult actual = viewLsnCommand.execute(modelStub);
             assertEquals(
                     String.format(MESSAGE_LESSON_LISTED_OVERVIEW,
@@ -74,14 +88,18 @@ class ViewLsnCommandTest {
         GroupContainsKeywordPredicate grpPredicateB = new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G02);
         LessonContainsKeywordPredicate lsnPredicateA = new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1);
         LessonContainsKeywordPredicate lsnPredicateB = new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_2);
-        ViewLsnCommand viewLsnCommandA = new ViewLsnCommand(grpPredicateA, lsnPredicateA);
-        ViewLsnCommand viewLsnCommandG = new ViewLsnCommand(grpPredicateB, lsnPredicateB);
+        QuestionFromGroupLessonPredicate qnPredicateA = new QuestionFromGroupLessonPredicate(
+                new GroupName(VALID_GROUP_NAME_G01), new LessonName(VALID_LESSON_NAME_1_1));
+        QuestionFromGroupLessonPredicate qnPredicateB = new QuestionFromGroupLessonPredicate(
+                new GroupName(VALID_GROUP_NAME_G02), new LessonName(VALID_LESSON_NAME_1_2));
+        ViewLsnCommand viewLsnCommandA = new ViewLsnCommand(grpPredicateA, lsnPredicateA, qnPredicateA);
+        ViewLsnCommand viewLsnCommandG = new ViewLsnCommand(grpPredicateB, lsnPredicateB, qnPredicateB);
 
         // same object -> returns true
         assertTrue(viewLsnCommandA.equals(viewLsnCommandA));
 
         // same values -> returns true
-        ViewLsnCommand viewLsnCommandACopy = new ViewLsnCommand(grpPredicateA, lsnPredicateA);
+        ViewLsnCommand viewLsnCommandACopy = new ViewLsnCommand(grpPredicateA, lsnPredicateA, qnPredicateA);
         assertTrue(viewLsnCommandACopy.equals(viewLsnCommandA));
 
         // different types -> returns false
@@ -101,6 +119,10 @@ class ViewLsnCommandTest {
         private ObservableList<Lesson> lessonList =
                 FXCollections.observableList(Collections.singletonList(new LessonBuilder().build()));
         private FilteredList<Lesson> filteredLessonList = new FilteredList<>(lessonList);
+        private ObservableList<Question> questionList =
+                FXCollections.observableList(Collections.singletonList(new QuestionBuilder().build()));
+        private FilteredList<Question> filteredQuestionList = new FilteredList<>(questionList);
+
 
         @Override
         public ObservableList<Group> getFilteredGroupList() {
@@ -120,6 +142,11 @@ class ViewLsnCommandTest {
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {
             this.filteredLessonList.setPredicate(predicate);
+        }
+
+        @Override
+        public void updateFilteredQuestionList(Predicate<Question> predicate) {
+            this.filteredQuestionList.setPredicate(predicate);
         }
     }
 
@@ -139,6 +166,9 @@ class ViewLsnCommandTest {
 
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {}
+
+        @Override
+        public void updateFilteredQuestionList(Predicate<Question> predicate) {}
     }
 
     private static class ModelStubWithNoLesson extends ModelStub {
@@ -147,6 +177,9 @@ class ViewLsnCommandTest {
         private FilteredList<Group> filteredGroupList = new FilteredList<>(groupList);
         private ObservableList<Lesson> lessonList = FXCollections.observableList(Collections.EMPTY_LIST);
         private FilteredList<Lesson> filteredLessonList = new FilteredList<>(lessonList);
+        private ObservableList<Question> questionList =
+                FXCollections.observableList(Collections.singletonList(new QuestionBuilder().build()));
+        private FilteredList<Question> filteredQuestionList = new FilteredList<>(questionList);
 
         @Override
         public ObservableList<Group> getFilteredGroupList() {
@@ -166,6 +199,11 @@ class ViewLsnCommandTest {
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {
             this.filteredLessonList.setPredicate(predicate);
+        }
+
+        @Override
+        public void updateFilteredQuestionList(Predicate<Question> predicate) {
+            this.filteredQuestionList.setPredicate(predicate);
         }
     }
 
