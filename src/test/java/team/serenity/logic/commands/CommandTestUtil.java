@@ -169,11 +169,11 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
-     * {@code expectedMessage}.
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage} to test for viewQnCommand.
      */
-    public static void assertQuestionCommandSuccess(Command command, Model actualModel,
-                                                    String expectedMessage, Model expectedModel) {
+    public static void assertViewQnCommandSuccess(Command command, Model actualModel,
+                                                  String expectedMessage, Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandResult.UiAction.VIEW_QN);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
