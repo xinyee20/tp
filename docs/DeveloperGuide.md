@@ -436,10 +436,10 @@ the `ModelManager`'s `updateFilteredGroupList` method is called.
 **Aspect:** Deciding whether the students should be stored inside a `UniqueList<Students>` or
 a `HashMap<GroupName, UniqueList<Student>>`.
 
-|   |**Pros**|**Cons**|
-|---|---|---|
-| **Option 1**<br>To store the students inside a `UniqueList<Student> | This is easy and straight-forward to implement | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved
-| **Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>` | This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name | This does not allow the order of addition of students to a group to be maintained |
+|   |**Pros**|**Cons**
+---|---|---
+**Option 1**<br>To store the students inside a `UniqueList<Student>` | This is easy and straight-forward to implement | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved
+**Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>` | This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name | This does not allow the order of addition of students to a group to be maintained
 
 **Reasons for choosing option 2:**
 
@@ -864,36 +864,37 @@ Given below are instructions to test the app manually.
     1. Re-launch the app by double-clicking the jar file.
     1. Expected: The most recent window size and location is retained.
 
-### **F.2. Adding Group, lesson and Student**
+### **F.2. Adding Group, Lesson and Student**
 
 1. Adding a Group in **Serenity**.
     1. Prerequisites: XLSX file must be in the same folder as `Serenity`
     1. Test case: `addgrp grp grp/<GROUP_NAME> path/<FILE_NAME>.xlsx`
-        1. Expected: Tutorial group created,
-        <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
+    <br>Expected: Tutorial group created,
+    <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
     1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<GROUP_NAME>`, `addgrp path/<FILE_NAME>.csv`
-        1. Expected: Error message shown.
+    <br>Expected: Error message shown.
 
 1. Adding Lesson to a Group
     1. Prerequisites: Tutorial group is already set up, lesson name to be added does not already exist in the group.
     1. Test case: `addlsn grp/<GROUP_NAME> lsn/<LESSON_NAME>`
-        1. Expected: Tutorial lesson added,
-        <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the student information in the tutorial lesson created.
+    <br>Expected: Tutorial lesson added,
+    <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the student information in the tutorial lesson created.
     1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<GROUP_NAME>`, `addlsn lsn/<LESSON_NAME>`
-        1. Expected: Error message shown.
+    <br>Expected: Error message shown.
 
 1. Adding Student to a Group
     1. Prerequisites: Tutorial group is already set up.
     1. Test case: `addstudent grp/<GROUP_NAME> name/<STUDENT_NAME> matric/<STUDENT_MATRICULATION_NUMBER>`
-        1. Expected: Student added,
-        success message shown: `You added <STUDENT_NAME> (<STUDENT_MATRICULATION_NUMBER>) to tutorial group <GROUP_NAME>.`
-     1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<GROUP_NAME>`, `addstudent name/<STUDENT_NAME>`
-        1. Expected: Error message shown.
+    <br>Expected: Student added,
+    success message shown: `You added <STUDENT_NAME> (<STUDENT_MATRICULATION_NUMBER>) to tutorial group <GROUP_NAME>.`
+    1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<GROUP_NAME>`, `addstudent name/<STUDENT_NAME>`
+    <br>Expected: Error message shown.
 
-### **F.3. Missing data files**
+### **F.3. Missing Data Files**
 
-1. Test case: In the folder where **Serenity** is stored, delete `serenity.json` in `data` folder
-    1. Expected: Tutorial group G01 created,
+1. Missing data files
+    1. Test case: In the folder where **Serenity** is stored, delete `serenity.json` in `data` folder
+    <br>Expected: Tutorial group G01 created,
     tutorial group contains two students, Aaron Tan and John Doe.
 
 ## **Appendix G: Effort**
