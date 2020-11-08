@@ -31,7 +31,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Feature: Data displays, Data managers
 * Responsibilities: UI/UX and Code design
-* Components: Model, UI
+* Components: Model, Ui
 
 ### Lau Xin Yee
 
@@ -53,7 +53,9 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/successs404.md)
 
 * Role: Developer
+* Feature: Student manager
 * Responsibilities: Code quality
+* Components: Logic, Model, Ui
 
 ### Bu Wen Jin
 
