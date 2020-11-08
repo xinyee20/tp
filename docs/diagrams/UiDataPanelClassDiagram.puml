@@ -16,24 +16,27 @@ Class StudentInfoCard
 Class QuestionCard
 }
 
+package Ui {
+Class Hide #white
+}
 
-DataPanel --down--|> UiPart
+Class Hidden #white
+Hidden *-down-> DataPanel
 
 DataPanel <|-- SerenityDataPanel
 DataPanel <|-- GroupDataPanel
 DataPanel <|-- LessonDataPanel
 
-SerenityDataPanel -down-> QuestionCard
-GroupDataPanel -down-> LessonCard
-GroupDataPanel -down-> StudentCard
-LessonDataPanel -down-> StudentInfoCard
-LessonDataPanel -down-> QuestionCard
+SerenityDataPanel --> QuestionCard
+GroupDataPanel --> LessonCard
+GroupDataPanel --> StudentCard
+LessonDataPanel --> StudentInfoCard
+LessonDataPanel --> QuestionCard
 
-StudentCard -down-|> UiPart
-LessonCard -down-|> UiPart
-StudentInfoCard -down-|> UiPart
-QuestionCard -down-|> UiPart
-
-HiddenLogic -down[hidden]-> SerenityDataPanel
+DataPanel ---|> Ui
+StudentCard -down-|> Ui
+LessonCard -down-|> Ui
+StudentInfoCard -down-|> Ui
+QuestionCard -down-|> Ui
 
 @enduml
