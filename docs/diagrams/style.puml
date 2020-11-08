@@ -73,6 +73,11 @@ skinparam Participant {
     Padding 20
 }
 
+skinparam activity {
+    BorderColor #8A7A94
+    BackgroundColor #E2D5E7
+}
+
 skinparam MinClassWidth 50
 skinparam ParticipantPadding 10
 skinparam Shadowing false
