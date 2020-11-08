@@ -392,8 +392,8 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 |   |**Pros**|**Cons**|
 |---|---|---|
-| **Option 1**<br>More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
-| **Option 2 (current)**<br>One | Easy to implement, easier to retrieve all lessons taught by a single tutor | More difficult to retrieve lessons tied to a specific group |
+| **Option 1**<br>More than 1 `UniqueList`. | Easy retrieval of `UniqueList` of Lesson tagged to each `group`. | Greater overhead, more testing and implementation involved.
+| **Option 2 (current)**<br>1 `UniqueList`. | Easy to implement, easier to retrieve all lessons taught by a single tutor. | More difficult to retrieve lessons tied to a specific group. |
 
 ### **5.4. Student Manager**
 
@@ -442,8 +442,8 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 
 |   |**Pros**|**Cons**
 ---|---|---
-**Option 1**<br>To store the students inside a `UniqueList<Student>` | This is easy and straight-forward to implement | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved
-**Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>` | This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name | This does not allow the order of addition of students to a group to be maintained
+**Option 1**<br>To store the students inside a `UniqueList<Student>`. | This is easy and straight-forward to implement. | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved.
+**Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>`. | This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name. | This does not allow the order of addition of students to a group to be maintained.
 
 **Reasons for choosing option 2:**
 
@@ -479,9 +479,9 @@ From the diagram above, we can see that `StudentInfoManager` can contain multipl
 
 Commands | Purpose
 -------|--------
-`markpresent` / `markabsent` | Mark student present / absent during a lesson
-`flagatt` / `unflagatt` | Flag the attendance of a student for special scenarios
-`setscore` / `addscore` / `subscore` | Set / add / subtract the participation score of a student for a lesson
+`markpresent` / `markabsent` | Mark student present / absent during a lesson.
+`flagatt` / `unflagatt` | Flag the attendance of a student for special scenarios.
+`setscore` / `addscore` / `subscore` | Set / add / subtract the participation score of a student for a lesson.
 
 In this section, we will outline the `markpresent` command handled by the `StudentInfoManager` which is summarised by the Activity Diagram below.
 We will be using the index version of the `markpresent` command.
