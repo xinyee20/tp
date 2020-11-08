@@ -80,6 +80,7 @@ Given below are my contributions to the project.
   * Contributed to weekly team meetings regarding design details and implementation constraints
   * Discussed ideas to improve architecture design
   * Used Github Issues Tracker to schedule, track and assign tasks to teammates.
+  * Reviewing and merging of PRs before deadlines
   
 * **Enhancements to existing features**:
     * Improve consistency of error messages. ( Pull requests 

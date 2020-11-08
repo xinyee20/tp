@@ -39,7 +39,9 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/xinyee20.md)
 
 * Role: Developer
+* Feature: StudentInfo manager
 * Responsibilities: Deliverables and deadlines
+* Components: Logic, Model
 
 ### Neo Rui En Maybelline
 
