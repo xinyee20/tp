@@ -17,7 +17,9 @@ We are a team based in the [School of Computing, National University of Singapor
 [portfolio](team/chunyongg.md)
 
 * Role: Team Leader
+* Feature: Storage manager
 * Responsibilities: Testing
+* Components: Logic, Storage
 
 ### Lim Jia Rui Ryan
 
