@@ -105,7 +105,7 @@ public class MainApp extends Application {
             try {
                 storage.saveSerenity(serenity.getGroupManager());
             } catch (IOException e) {
-                logger.warning("Data was not saved");
+                logger.warning("Sample data was not saved");
             }
             return serenity;
         } else {
