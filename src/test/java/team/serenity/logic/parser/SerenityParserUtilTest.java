@@ -1,7 +1,6 @@
 package team.serenity.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -19,8 +18,6 @@ public class SerenityParserUtilTest {
     private static final String VALID_GROUP_NAME = "G04";
     private static final String VALID_FILE_PATH = "CS2101_G04.xlsx";
     private static final String VALID_QUESTION_DESC = "What is the deadline for the report?";
-
-    private static final String INVALID_GROUP_NAME_LOWERCASE = "g04";
     private static final String INVALID_GROUP_NAME_NON_DIGIT = "Gxx ";
     private static final String INVALID_FILE_PATH = "invalid/path.xlsx";
     private static final String INVALID_QUESTION_DESC = " ";
@@ -29,13 +26,18 @@ public class SerenityParserUtilTest {
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex("10 a"));
+        assertThrows(NumberFormatException.class, () -> SerenityParserUtil.parseIndex("10 a"));
+        assertThrows(NumberFormatException.class, () -> SerenityParserUtil.parseIndex(""));
+        assertThrows(NumberFormatException.class, () -> SerenityParserUtil.parseIndex(" "));
+        assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex("0"));
+        assertThrows(ParseException.class, () -> SerenityParserUtil.parseIndex("-4"));
     }
+
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> SerenityParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, () -> SerenityParserUtil
+                .parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test

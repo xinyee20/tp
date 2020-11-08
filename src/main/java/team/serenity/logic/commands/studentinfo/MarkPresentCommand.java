@@ -1,7 +1,7 @@
 package team.serenity.logic.commands.studentinfo;
 
 import static java.util.Objects.requireNonNull;
-import static team.serenity.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
@@ -37,16 +37,15 @@ public class MarkPresentCommand extends Command {
     public static final String MESSAGE_ALL_SUCCESS = "Attendance of all students marked present!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks a specific student or all students present from a lesson. \n"
-            + "Parameters: "
-            + "all or "
-            + PREFIX_NAME + " STUDENT_NAME "
-            + PREFIX_MATRIC + " STUDENT_NUMBER " + "or INDEX(starting from 1)\n"
-            + "Example: " + COMMAND_WORD + " " + "all\n"
-            + "or " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Aaron Tan "
-            + PREFIX_MATRIC + " A0123456U\n"
-            + "or " + COMMAND_WORD + " 2";
+            + ": Marks the specific student or all students present from a tutorial lesson.\n"
+            + "Parameters (3 methods):\n"
+            + "1. all\n"
+            + "2. " + PREFIX_NAME + "STUDENT_NAME " + PREFIX_MATRIC + "STUDENT_NUMBER\n"
+            + "3. INDEX (must be a positive integer)\n"
+            + "Examples:\n"
+            + "1. " + COMMAND_WORD + " " + "all\n"
+            + "2. " + COMMAND_WORD + " " + PREFIX_NAME + "Aaron Tan " + PREFIX_MATRIC + "A0123456A\n"
+            + "3. " + COMMAND_WORD + " 1";
 
     private Optional<Student> toMarkPresent;
     private Optional<Index> index;
@@ -126,6 +125,8 @@ public class MarkPresentCommand extends Command {
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkAll);
         lesson.setStudentsInfo(updatedListForMarkAll);
+        model.updateLessonList();
+        model.updateStudentsInfoList();
         return new CommandResult(MESSAGE_ALL_SUCCESS);
     }
 
@@ -142,6 +143,8 @@ public class MarkPresentCommand extends Command {
         // Updates the modelManager and lesson object with the new StudentInfoList
         model.setListOfStudentsInfoToGroupLessonKey(key, updatedListForMarkOneStudent);
         lesson.setStudentsInfo(updatedListForMarkOneStudent);
+        model.updateLessonList();
+        model.updateStudentsInfoList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudentInfo.getStudent()));
     }
 
@@ -151,14 +154,14 @@ public class MarkPresentCommand extends Command {
     private StudentInfo getTargetStudentInfo(ObservableList<StudentInfo> currentStudentInfoList)
             throws CommandException {
         if (this.isByIndex) {
-            // Mark present StudentInfo by index
+            // Mark present by index
             assert this.index.isPresent();
             Index targetIndex = this.index.get();
 
             // Return error message if index is out of range
-            if (targetIndex.getZeroBased() >= currentStudentInfoList.size()) {
+            if (targetIndex.getZeroBased() >= currentStudentInfoList.size() || index.get().getOneBased() == 0) {
                 throw new CommandException(
-                        String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, targetIndex.getOneBased()));
+                        String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, targetIndex.getOneBased()));
             }
             return currentStudentInfoList.get(targetIndex.getZeroBased());
         }

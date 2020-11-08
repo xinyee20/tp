@@ -33,6 +33,8 @@ public class AddGrpCommandParser implements Parser<AddGrpCommand> {
         GroupName groupName = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
         XlsxUtil grpExcelData = SerenityParserUtil.parseFilePath(argMultimap.getValue(PREFIX_PATH).get());
 
+        grpExcelData.checkValidityOfXlsx();
+
         Group group = new Group(groupName, grpExcelData);
         return new AddGrpCommand(group);
     }

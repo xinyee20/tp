@@ -14,6 +14,9 @@ public class StudentNumber {
         "Student number must be alphanumeric, "
             + "starts with A and is 9 characters long, ending with an uppercase character.";
 
+    public static final String MESSAGE_STUDENT_NUMBER_EMPTY =
+        "Student's matriculation number is empty.";
+
     /*
      * Alphanumeric, no white space
      */

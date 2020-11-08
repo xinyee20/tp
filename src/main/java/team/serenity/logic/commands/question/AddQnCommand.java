@@ -13,6 +13,7 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 
 /**
  * Adds a question to the Question manager.
@@ -21,7 +22,7 @@ public class AddQnCommand extends Command {
 
     public static final String COMMAND_WORD = "addqn";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Adds a new question to the specific lesson. "
+        + ": Adds a new question to the specific lesson.\n"
         + "Parameters: "
         + PREFIX_QN + "QUESTION\n"
         + "Example: " + COMMAND_WORD + " "
@@ -45,12 +46,12 @@ public class AddQnCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.getFilteredGroupList().size() != 1) {
-            throw new CommandException(MESSAGE_NOT_VIEWING_A_GROUP);
-        }
-
         if (model.getFilteredLessonList().size() != 1) {
             throw new CommandException(MESSAGE_NOT_VIEWING_A_LESSON);
+        }
+
+        if (model.getFilteredGroupList().size() != 1) {
+            throw new CommandException(MESSAGE_NOT_VIEWING_A_GROUP);
         }
 
         Group uniqueGroup = model.getFilteredGroupList().get(0);
@@ -62,6 +63,11 @@ public class AddQnCommand extends Command {
         }
 
         model.addQuestion(questionToAdd);
+
+        model.updateFilteredQuestionList(
+                new QuestionFromGroupLessonPredicate(uniqueGroup.getGroupName(), uniqueLesson.getLessonName())
+        );
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, questionToAdd));
 
     }

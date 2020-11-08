@@ -1,60 +1,49 @@
 @startuml
+skinparam linetype ortho
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor UI_COLOR_T4
-skinparam classBackgroundColor UI_COLOR
+skinparam arrowColor UI_COLOR_T1
+skinparam classBackgroundColor UI_COLOR_T1
 
-package UI <<Rectangle>>{
+package Ui <<Rectangle>>{
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
+Class TitleDisplay
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
 Class CommandBox
+Class SideBar
+Class HelpWindow
 }
 
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+package ui.datapanel {
+Class Hidden #whitei
 }
 
-package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+package Logic {
+Class HiddenL #white
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
-
-UiManager .left.|> Ui
+UiManager .right.|> Ui
 UiManager -down-> MainWindow
-MainWindow --> HelpWindow
-MainWindow *-down-> CommandBox
+MainWindow *--> ui.datapanel
+MainWindow *-down-> TitleDisplay
 MainWindow *-down-> ResultDisplay
-MainWindow *-down-> PersonListPanel
-MainWindow *-down-> StatusBarFooter
+MainWindow *-down-> CommandBox
+MainWindow *-down-> SideBar
+MainWindow *-down-> HelpWindow
 
-PersonListPanel -down-> PersonCard
+MainWindow --down-|> UiPart
+TitleDisplay --down-|> UiPart
+ResultDisplay --down-|> UiPart
+CommandBox --down-|> UiPart
+SideBar --down-|> UiPart
+HelpWindow --down-|> UiPart
 
-MainWindow -left-|> UiPart
+ui.datapanel --|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow -down-|> UiPart
+UiManager ---> Logic
+MainWindow -right--> Logic
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
-
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
-
-MainWindow -[hidden]-|> UiPart
 @enduml

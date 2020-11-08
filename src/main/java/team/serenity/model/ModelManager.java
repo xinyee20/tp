@@ -269,6 +269,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteLesson(Group group, Lesson lesson) {
+        this.studentInfoManager.deleteAllStudentsInfoFromGroupLesson(group, lesson);
+        this.lessonManager.deleteLessonFromGroup(group.getGroupName(), lesson);
+        this.questionManager.deleteAllQuestionsFromGroupLesson(group, lesson);
+        this.lessons.removeAll(lesson);
+        this.studentsInfo.clear();
+    }
+
+    @Override
     public void updateLessonList() {
         if (this.filteredGroups.size() == 1) {
             Group currentGroup = this.filteredGroups.get(0);
@@ -284,7 +293,6 @@ public class ModelManager implements Model {
         requireAllNonNull(predicate);
         this.filteredLessons.setPredicate(predicate);
         updateStudentsInfoList();
-        updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
     }
 
     // ========== StudentManager ==========
@@ -365,6 +373,7 @@ public class ModelManager implements Model {
     public void setListOfStudentsInfoToGroupLessonKey(GroupLessonKey key,
                                                          UniqueList<StudentInfo> newListOfStudentsInfo) {
         requireAllNonNull(key, newListOfStudentsInfo);
+        this.studentsInfo.setAll(newListOfStudentsInfo.asUnmodifiableObservableList());
         this.studentInfoManager.setListOfStudentsInfoToGroupLessonKey(key, newListOfStudentsInfo);
     }
 
@@ -422,7 +431,6 @@ public class ModelManager implements Model {
     public void addQuestion(Question toAdd) {
         requireNonNull(toAdd);
         this.questionManager.addQuestion(toAdd);
-        updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
     }
 
     @Override

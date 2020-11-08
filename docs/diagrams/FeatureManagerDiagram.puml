@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam class {
+ArrowColor MODEL_COLOR_T1
+BackgroundColor MODEL_COLOR_T1
+}
+hide members
+hide circle
+
+skinparam shadowing false
+
+ReadOnlyGroupManager <|.. GroupManager
+GroupManager -> "*" UniqueList
+UniqueList <|.. UniqueGroupList
+UniqueGroupList -> "*" Group
+@enduml

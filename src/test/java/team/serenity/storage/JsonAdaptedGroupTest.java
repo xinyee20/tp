@@ -1,53 +1,60 @@
 package team.serenity.storage;
 
-import static team.serenity.testutil.TypicalGroups.GROUP_A;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static team.serenity.testutil.Assert.assertThrows;
+import static team.serenity.testutil.TypicalGroups.GROUP_G04;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.Test;
+
+import team.serenity.commons.exceptions.IllegalValueException;
+import team.serenity.model.group.Group;
+import team.serenity.testutil.GroupBuilder;
+
 class JsonAdaptedGroupTest {
 
-    private static final String VALID_NAME = GROUP_A.getGroupName().toString();
-    private static final List<JsonAdaptedStudent> VALID_STUDENTS = GROUP_A.getStudents().asUnmodifiableObservableList()
+    private static final String VALID_NAME = GROUP_G04.getGroupName().toString();
+    private static final String INVALID_NAME_NOCAPS = "g01";
+    private static final String INVALID_NAME_SPACE = "G 01";
+    private static final String INVALID_NAME_MULTIPLE_STRINGS = "G01 G05";
+    private static final String INVALID_NAME_EXTRA_DIGITS = "G011";
+    private static final List<JsonAdaptedStudent> VALID_STUDENTS = GROUP_G04.getStudents()
+            .asUnmodifiableObservableList()
             .stream()
-        .map(JsonAdaptedStudent::new)
-        .collect(Collectors.toList());
-    private static final List<JsonAdaptedLesson> VALID_CLASSES = GROUP_A.getLessons().asUnmodifiableObservableList()
+            .map(JsonAdaptedStudent::new)
+            .collect(Collectors.toList());
+    private static final List<JsonAdaptedLesson> VALID_CLASSES = GROUP_G04.getLessons()
+            .asUnmodifiableObservableList()
             .stream()
-        .map(JsonAdaptedLesson::new)
-        .collect(Collectors.toList());
-
-
-    /*
-
-   The following testcases failed because the order of the students' names (in the Set) was not the same.
+            .map(JsonAdaptedLesson::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validGroupDetails_returnsGroup() throws Exception {
-        JsonAdaptedGroup group = new JsonAdaptedGroup(GROUP_A);
-        assertEquals(GROUP_A, group.toModelType());
+        Group typicalGroup = new GroupBuilder().build();
+        JsonAdaptedGroup group = new JsonAdaptedGroup(typicalGroup);
+        assertEquals(typicalGroup, group.toModelType());
     }
 
     @Test
-    public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedGroup group = new JsonAdaptedGroup(null, VALID_STUDENTS, VALID_CLASSES);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "name");
-        assertThrows(IllegalValueException.class, expectedMessage, group::toModelType);
+    public void toModelType_null_throwsIllegalValueException() {
+        JsonAdaptedGroup nullGroupName = new JsonAdaptedGroup(null, new ArrayList<>());
+        JsonAdaptedGroup invalidGroup = new JsonAdaptedGroup(INVALID_NAME_NOCAPS, new ArrayList<>());
+        JsonAdaptedGroup invalidGroupTwo = new JsonAdaptedGroup(INVALID_NAME_EXTRA_DIGITS, new ArrayList<>());
+        JsonAdaptedGroup invalidGroupThree = new JsonAdaptedGroup(INVALID_NAME_MULTIPLE_STRINGS, new ArrayList<>());
+        JsonAdaptedGroup invalidGroupFour = new JsonAdaptedGroup(INVALID_NAME_SPACE, new ArrayList<>());
+        assertThrows(IllegalValueException.class, () -> nullGroupName.toModelType());
+        assertThrows(IllegalValueException.class, () -> invalidGroup.toModelType());
+        assertThrows(IllegalValueException.class, () -> invalidGroupTwo.toModelType());
+        assertThrows(IllegalValueException.class, () -> invalidGroupThree.toModelType());
+        assertThrows(IllegalValueException.class, () -> invalidGroupFour.toModelType());
     }
 
     @Test
-    public void toModelType_nullStudents_throwsIllegalValueException() {
-        JsonAdaptedGroup group = new JsonAdaptedGroup(VALID_NAME, null, VALID_CLASSES);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "students");
-        assertThrows(IllegalValueException.class, expectedMessage, group::toModelType);
+    public void toModelType_nullGroup_throwsIllegalValueException() {
+        assertThrows(NullPointerException.class, () -> new JsonAdaptedGroup(null));
     }
-
-    @Test
-    public void toModelType_nullClasses_throwsIllegalValueException() {
-        JsonAdaptedGroup group = new JsonAdaptedGroup(VALID_NAME, VALID_STUDENTS, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "classes");
-        assertThrows(IllegalValueException.class, expectedMessage, group::toModelType);
-    }
-     */
-
 }

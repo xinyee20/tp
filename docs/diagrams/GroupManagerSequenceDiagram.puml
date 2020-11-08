@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+
+hide members
+hide circle
+skinparam shadowing false
+
+participant ":DelGrpCommand" as DelGrpCommand LOGIC_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR_T1
+participant ":GroupManager" as GroupManager MODEL_COLOR_T1
+participant ":CommandResult" as CommandResult LOGIC_COLOR_T1
+
+
+-[#black]> DelGrpCommand: execute(m)
+activate DelGrpCommand LOGIC_COLOR_T1
+DelGrpCommand -[#black]> ModelManager : deleteGroup(group)
+activate ModelManager MODEL_COLOR_T1
+ModelManager -[#black]> GroupManager : deleteGroup(group)
+activate GroupManager MODEL_COLOR_T1
+return
+return
+DelGrpCommand -[#black]> CommandResult
+activate CommandResult LOGIC_COLOR_T1
+return
+return
+deactivate GroupManager
+deactivate ModelManager
+
+deactivate DelGrpCommand
+@enduml

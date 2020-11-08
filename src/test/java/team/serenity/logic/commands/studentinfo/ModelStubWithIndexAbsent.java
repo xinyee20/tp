@@ -1,5 +1,8 @@
 package team.serenity.logic.commands.studentinfo;
 
+import static team.serenity.testutil.TypicalStudent.AARON;
+import static team.serenity.testutil.TypicalStudentInfo.AARON_ABSENT_INFO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +14,6 @@ import team.serenity.model.group.GroupLessonKey;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.UniqueLessonList;
-import team.serenity.model.group.student.Student;
 import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.util.UniqueList;
 import team.serenity.testutil.GroupBuilder;
@@ -29,8 +31,8 @@ class ModelStubWithIndexAbsent extends ModelStub {
     public ObservableList<Group> getFilteredGroupList() {
         List<Group> grpList = new ArrayList<>();
         this.uniqueGroup = new GroupBuilder().withName("G01")
-                .withStudents(new Student("Aaron Tan", "A0123456U"))
-                .withClasses("1-1").build();
+            .withStudents(AARON)
+            .withLessons("1-1").build();
         grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
@@ -42,7 +44,7 @@ class ModelStubWithIndexAbsent extends ModelStub {
         List<Lesson> lsnList = new ArrayList<>();
         this.uniqueLesson = new LessonBuilder()
                 .withName("1-1")
-                .withStudentInfos(new StudentInfo(new Student("Aaron Tan", "A0123456U")))
+                .withStudentInfos(AARON_ABSENT_INFO)
                 .build();
         lsnList.add(uniqueLesson);
         UniqueList<Lesson> lessonUniqueList = new UniqueLessonList();

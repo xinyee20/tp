@@ -29,8 +29,8 @@ public class EditQnCommand extends Command {
 
     public static final String COMMAND_WORD = "editqn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the question identified "
-            + "by the index number used in the displayed list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of the question identified by the index number used in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_GRP + "GROUP_NAME] "
@@ -101,9 +101,7 @@ public class EditQnCommand extends Command {
 
         model.setQuestion(questionToEdit, editedQuestion);
         model.updateFilteredQuestionList(Model.PREDICATE_SHOW_ALL_QUESTIONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_QUESTION_SUCCESS, editedQuestion),
-                CommandResult.UiAction.VIEW_QN
-        );
+        return new CommandResult(String.format(MESSAGE_EDIT_QUESTION_SUCCESS, editedQuestion));
     }
 
     /**

@@ -5,27 +5,27 @@
 !include style.puml
 
 Package " "<<Rectangle>>{
-    Class UI UI_COLOR
-    Class Logic LOGIC_COLOR
-    Class Storage STORAGE_COLOR
-    Class Model MODEL_COLOR
-    Class Main #grey
-    Class Commons LOGIC_COLOR_T2
+    Class UI UI_COLOR_T1
+    Class Logic LOGIC_COLOR_T1
+    Class Storage STORAGE_COLOR_T1
+    Class Model MODEL_COLOR_T1
+    Class Main MAIN_COLOR
+    Class Commons COMMONS_COLOR
 }
 
-Class "<$user>" as User MODEL_COLOR_T2
-Class "<$documents>" as File UI_COLOR_T1
+Class "<$user>" as User ORANGE_COLOR
+Class "<$documents>" as File ORANGE_COLOR
 
 
-UI -[#green]> Logic
-UI -right[#green]-> Model
-Logic -[#blue]-> Storage
-Logic -down[#blue]-> Model
-Main -[#grey]-> UI
-Main -[#grey]-> Logic
-Main -[#grey]-> Storage
-Main -up[#grey]-> Model
+UI -[UI_COLOR_T1]> Logic
+UI -right[UI_COLOR_T1]-> Model
+Logic -[LOGIC_COLOR_T1]-> Storage
+Logic -down[LOGIC_COLOR_T1]-> Model
+Main -[MAIN_COLOR]-> UI
+Main -[MAIN_COLOR]-> Logic
+Main -[MAIN_COLOR]-> Storage
+Main -up[MAIN_COLOR]-> Model
 
-Storage .right[STORAGE_COLOR].>File
-User ..> UI
+Storage .right[STORAGE_COLOR_T1].>File
+User .[ORANGE_COLOR].> UI
 @enduml

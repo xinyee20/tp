@@ -3,6 +3,7 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
@@ -10,7 +11,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.student.Student;
+import team.serenity.testutil.StudentBuilder;
 
 class MarkPresentCommandTest {
 
@@ -30,7 +32,7 @@ class MarkPresentCommandTest {
     @Test
     public void execute_markStudent_success() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkPresent = new StudentBuilder().build();
 
         CommandResult commandResult = new MarkPresentCommand(toMarkPresent).execute(modelStub);
         assertEquals(String.format(MarkPresentCommand.MESSAGE_SUCCESS, toMarkPresent),
@@ -40,8 +42,8 @@ class MarkPresentCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() throws CommandException {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student wrongNameOne = new Student("Aaron", "A0123456U");
-        Student wrongNameTwo = new Student("Betty Tan", "A0123456U");
+        Student wrongNameOne = new StudentBuilder().withName("Aaron").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").build();
         MarkPresentCommand markPresentCommandOne = new MarkPresentCommand(wrongNameOne);
         MarkPresentCommand markPresentCommandTwo = new MarkPresentCommand(wrongNameTwo);
 
@@ -54,7 +56,7 @@ class MarkPresentCommandTest {
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() {
         ModelStubWithStudentsAbsent modelStub = new ModelStubWithStudentsAbsent();
-        Student wrongNumber = new Student("Aaron Tan", "A0000000U");
+        Student wrongNumber = new StudentBuilder().withId("A0000000U").build();
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongNumber);
 
         assertThrows(CommandException.class,
@@ -64,7 +66,7 @@ class MarkPresentCommandTest {
     @Test
     public void execute_notInGroup_throwsCommandException() {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkPresent = new StudentBuilder().build();
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(toMarkPresent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> markPresentCommand.execute(modelStub));
@@ -73,7 +75,7 @@ class MarkPresentCommandTest {
     @Test
     public void execute_notInLesson_throwsCommandException() {
         ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
-        Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkPresent = new StudentBuilder().build();
         MarkPresentCommand markPresentCommand = new MarkPresentCommand(toMarkPresent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_LESSON, () -> markPresentCommand.execute(modelStub));
@@ -82,10 +84,9 @@ class MarkPresentCommandTest {
     @Test
     public void execute_markIndex_success() throws CommandException {
         ModelStubWithIndexAbsent modelStub = new ModelStubWithIndexAbsent();
-        Index validIndex = Index.fromOneBased(Integer.parseInt("1"));
-        Student toMarkPresent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkPresent = new StudentBuilder().build();
 
-        CommandResult commandResult = new MarkPresentCommand(validIndex).execute(modelStub);
+        CommandResult commandResult = new MarkPresentCommand(INDEX_FIRST).execute(modelStub);
         assertEquals(String.format(MarkPresentCommand.MESSAGE_SUCCESS, toMarkPresent),
                 commandResult.getFeedbackToUser());
     }
@@ -93,10 +94,11 @@ class MarkPresentCommandTest {
     @Test
     public void execute_wrongIndex_throwsCommandException() {
         ModelStubWithIndexAbsent modelStub = new ModelStubWithIndexAbsent();
-        Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
-        MarkPresentCommand markPresentCommand = new MarkPresentCommand(wrongIndex);
+        MarkPresentCommand markPresentCommand = new MarkPresentCommand(INDEX_SECOND);
 
-        assertThrows(CommandException.class, () -> markPresentCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
+                        INDEX_SECOND.getOneBased()), () -> markPresentCommand.execute(modelStub));
     }
 
     @Test
@@ -112,7 +114,7 @@ class MarkPresentCommandTest {
         MarkPresentCommand markAllPresentCommandA = new MarkPresentCommand();
         MarkPresentCommand markStudentPresentCommandA = new MarkPresentCommand(AARON);
         MarkPresentCommand copyMarkStudentPresentCommandA = new MarkPresentCommand(AARON);
-        MarkPresentCommand markStudentPresentCommandB = new MarkPresentCommand(JOHN);
+        MarkPresentCommand markStudentPresentCommandB = new MarkPresentCommand(GEORGE);
         MarkPresentCommand markIndexPresentCommandA = new MarkPresentCommand(INDEX_FIRST);
         MarkPresentCommand copyMarkIndexPresentCommandA = new MarkPresentCommand(INDEX_FIRST);
         MarkPresentCommand markIndexPresentCommandB = new MarkPresentCommand(INDEX_SECOND);

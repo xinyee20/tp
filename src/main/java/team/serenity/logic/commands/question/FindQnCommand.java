@@ -17,10 +17,15 @@ public class FindQnCommand extends Command {
 
     public static final String COMMAND_WORD = "findqn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all questions that contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all questions that contain any of the specified keywords (case-insensitive) and "
+            + "displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " deadline criteria";
+            + "Example: " + COMMAND_WORD + " deadline";
+
+    public static final String MESSAGE_TO_VIEW_ALL_QUESTIONS =
+            String.format("\nUse the \"%s\" command to show all questions from all tutorial groups and lessons.",
+                    ViewQnCommand.COMMAND_WORD);
 
     private final QuestionContainsKeywordPredicate predicate;
 
@@ -33,10 +38,7 @@ public class FindQnCommand extends Command {
         requireNonNull(model);
         model.updateFilteredQuestionList(this.predicate);
         return new CommandResult(String.format(MESSAGE_QUESTIONS_LISTED_OVERVIEW,
-            model.getFilteredQuestionList().size(), "questions")
-            + String.format("\nUse the \"%s\" command to show all questions", ViewQnCommand.COMMAND_WORD),
-            CommandResult.UiAction.VIEW_QN
-        );
+                model.getFilteredQuestionList().size(), "questions") + MESSAGE_TO_VIEW_ALL_QUESTIONS);
     }
 
     @Override

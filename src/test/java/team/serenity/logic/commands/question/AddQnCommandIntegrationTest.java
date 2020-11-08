@@ -1,5 +1,6 @@
 package team.serenity.logic.commands.question;
 
+import static team.serenity.logic.commands.CommandTestUtil.VALID_QN_DESC_B;
 import static team.serenity.testutil.TypicalGroups.getTypicalSerenity;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
 
@@ -24,13 +25,13 @@ public class AddQnCommandIntegrationTest {
     @BeforeEach
     public void setUp() {
         this.model = new ModelManager(getTypicalSerenity(), getTypicalQuestionManager(), new UserPrefs());
-        this.model.updateFilteredGroupList(new GroupContainsKeywordPredicate("G04"));
+        this.model.updateFilteredGroupList(new GroupContainsKeywordPredicate("G01"));
         this.model.updateFilteredLessonList(new LessonContainsKeywordPredicate("1-1"));
     }
 
     @Test
     public void execute_newQuestion_success() {
-        Question validQuestion = new QuestionBuilder().build();
+        Question validQuestion = new QuestionBuilder().withDescription(VALID_QN_DESC_B).build();
 
         Model expectedModel = new ModelManager(this.model.getSerenity(),
             this.model.getQuestionManager(), new UserPrefs());

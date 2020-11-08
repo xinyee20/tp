@@ -3,6 +3,7 @@ package team.serenity.logic.commands.studentinfo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
@@ -10,7 +11,7 @@ import static team.serenity.testutil.Assert.assertThrows;
 import static team.serenity.testutil.TypicalIndexes.INDEX_FIRST;
 import static team.serenity.testutil.TypicalIndexes.INDEX_SECOND;
 import static team.serenity.testutil.TypicalStudent.AARON;
-import static team.serenity.testutil.TypicalStudent.JOHN;
+import static team.serenity.testutil.TypicalStudent.GEORGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,7 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.student.Student;
+import team.serenity.testutil.StudentBuilder;
 
 class MarkAbsentCommandTest {
 
@@ -30,7 +32,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_unmarkStudent_success() throws CommandException {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student toMarkAbsent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkAbsent = new StudentBuilder().build();
 
         CommandResult commandResult = new MarkAbsentCommand(toMarkAbsent).execute(modelStub);
         assertEquals(String.format(MarkAbsentCommand.MESSAGE_SUCCESS, toMarkAbsent),
@@ -40,8 +42,8 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_wrongName_throwsCommandException() {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student wrongNameOne = new Student("Aaron", "A0123456U");
-        Student wrongNameTwo = new Student("Betty Tan", "A0123456U");
+        Student wrongNameOne = new StudentBuilder().withName("Aaron").build();
+        Student wrongNameTwo = new StudentBuilder().withName("Betty Tan").build();
         MarkAbsentCommand markAbsentCommandOne = new MarkAbsentCommand(wrongNameOne);
         MarkAbsentCommand markAbsentCommandTwo = new MarkAbsentCommand(wrongNameTwo);
 
@@ -54,7 +56,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_wrongStudentNumber_throwsCommandException() {
         ModelStubWithStudentsPresent modelStub = new ModelStubWithStudentsPresent();
-        Student wrongNumber = new Student("Aaron Tan", "A0000000U");
+        Student wrongNumber = new StudentBuilder().withId("A0000000U").build();
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(wrongNumber);
 
         assertThrows(CommandException.class,
@@ -64,7 +66,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_notInGroup_throwsCommandException() {
         ModelStubWithNoGroup modelStub = new ModelStubWithNoGroup();
-        Student toMarkAbsent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkAbsent = new StudentBuilder().build();
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(toMarkAbsent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_GROUP, () -> markAbsentCommand.execute(modelStub));
@@ -73,7 +75,7 @@ class MarkAbsentCommandTest {
     @Test
     public void execute_notInLesson_throwsCommandException() {
         ModelStubWithNoLesson modelStub = new ModelStubWithNoLesson();
-        Student toMarkAbsent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkAbsent = new StudentBuilder().build();
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(toMarkAbsent);
 
         assertThrows(CommandException.class, MESSAGE_NOT_VIEWING_A_LESSON, () -> markAbsentCommand.execute(modelStub));
@@ -83,7 +85,7 @@ class MarkAbsentCommandTest {
     public void execute_markIndex_success() throws CommandException {
         ModelStubWithIndexPresent modelStub = new ModelStubWithIndexPresent();
         Index validIndex = Index.fromOneBased(Integer.parseInt("1"));
-        Student toMarkAbsent = new Student("Aaron Tan", "A0123456U");
+        Student toMarkAbsent = new StudentBuilder().build();
 
         CommandResult commandResult = new MarkAbsentCommand(validIndex).execute(modelStub);
         assertEquals(String.format(MarkAbsentCommand.MESSAGE_SUCCESS, toMarkAbsent),
@@ -96,7 +98,9 @@ class MarkAbsentCommandTest {
         Index wrongIndex = Index.fromOneBased(Integer.parseInt("2"));
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(wrongIndex);
 
-        assertThrows(CommandException.class, () -> markAbsentCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX,
+                        wrongIndex.getOneBased()), () -> markAbsentCommand.execute(modelStub));
     }
 
     @Test
@@ -112,7 +116,7 @@ class MarkAbsentCommandTest {
         MarkAbsentCommand markAllAbsentCommandA = new MarkAbsentCommand();
         MarkAbsentCommand markStudentAbsentCommandA = new MarkAbsentCommand(AARON);
         MarkAbsentCommand copyMarkStudentAbsentCommandA = new MarkAbsentCommand(AARON);
-        MarkAbsentCommand markStudentAbsentCommandB = new MarkAbsentCommand(JOHN);
+        MarkAbsentCommand markStudentAbsentCommandB = new MarkAbsentCommand(GEORGE);
         MarkAbsentCommand markIndexAbsentCommandA = new MarkAbsentCommand(INDEX_FIRST);
         MarkAbsentCommand copyMarkIndexAbsentCommandA = new MarkAbsentCommand(INDEX_FIRST);
         MarkAbsentCommand markIndexAbsentCommandB = new MarkAbsentCommand(INDEX_SECOND);
