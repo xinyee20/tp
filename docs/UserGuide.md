@@ -435,6 +435,8 @@ You can use this command to mark all students in a tutorial group as present for
 
 `markpresent all`
 
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
 **Example:**
 
 All students in group `G01` are present for your tutorial lesson `1-2` of tutorial group `G01`. 
@@ -462,6 +464,8 @@ You can use this command to mark a specific student as present for a tutorial le
 **Format:**
 <br>`markpresent name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`markpresent INDEX`
+
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 **Example:**
 
@@ -497,6 +501,8 @@ You can use this command to mark a specific student as absent for a tutorial les
 <br>`markabsent name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`markabsent INDEX`
 
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
 **Example:**
 
 A student named `Aaron Tan` with student number `A0123456A` is absent for your tutorial lesson `1-2` of tutorial group `G01`.
@@ -522,7 +528,7 @@ Outcome:
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
 <p align="center"><img src="images/userGuide/attendanceTaking/markabsent_command.png" 
-   alt="Command box for delstudent command" border="1px solid black"></p>
+   alt="Command box for markabsent command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present initially.</i></p>
 
 <p align="center"><img src="images/userGuide/attendanceTaking/markabsent_result.png" 
@@ -536,6 +542,8 @@ all students in a tutorial group back as absent for a tutorial lesson.
 
 **Format:** 
 `markabsent all`
+
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 **Example:**
 
@@ -560,6 +568,8 @@ attendance at the end of class.
 **Format:**
 <br>`flagatt name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`flagatt INDEX`
+
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 **Example:**
 
@@ -594,7 +604,9 @@ using `unflagatt` command.
 
 **Format:**
 <br>`unflagatt name/STUDENT_NAME matric/STUDENT_NUMBER`
-<br>`unflagatt 1`
+<br>`unflagatt INDEX`
+
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 **Example:**
 
@@ -664,17 +676,25 @@ You can find the XLSX file at the location where your **Serenity** application i
 Need to keep track of all your students' participation during lessons quickly? This feature allows you to key in a 
 student's participation score easily with a scale for reference.
 
+Participation score scale from 1 to 5:
+
+ | Score   | 1 | 2 | 3 | 4 | 5 |
+ |---------|---|---|---|---|---|
+ | **Remarks** |Very Poor|Poor|Sufficient|Good|Commendable|
+
 #### 4.3.1. Add participation score of a student: `addscore`
 
 You can use this command to increase the participation score of a specific student for a tutorial lesson.
 
 > :warning: **Warning regarding the `addscore` command:**
 > You cannot increase the participation score of a student such that the final score is more than 5.
-> The maximum score is 5
+> The maximum score is 5.
 
 **Format:**
 <br>`addscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE_TO_ADD`
 <br>`addscore INDEX score/SCORE_TO_ADD`
+
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 **Example:**
 
@@ -706,58 +726,20 @@ Outcome:
    alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.3.1.1 Screen displayed when the command is successfully executed.</i></p>
 
-#### 4.3.2. Award participation score for a student: `setscore`
-
-You can use this command to award a participation score for a specific student in a tutorial lesson.
-
-With a scale from 1 to 5:
-
- | Score   | 1 | 2 | 3 | 4 | 5 |
- |---------|---|---|---|---|---|
- | **Remarks** |Very Poor|Poor|Sufficient|Good|Commendable|
-
-**Format:**
-<br>`setscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE`
-<br>`setscore INDEX score/SCORE`
-
-**Example:**
-
-In tutorial lesson `1-2` of tutorial group `G01`,
-you noticed that your student named `Aaron Tan` with student number `A0123456A` participated actively in class 
-discussions for the lesson. You decided to edit his current score to `3` marks for this lesson. 
-`Aaron Tan` is the first person on the student list so his `index` number is 1.
-
-<ins>Method 1</ins> <br>
-Edit participation score of a student in a tutorial lesson by `name` and `student number`:
-
-1. Navigate to view group `G01` lesson `1-2` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `editscore name/Aaron Tan matric/A0123456A score/3` into the *Command Box*.
-3. Press `Enter` to execute.
-
-<ins>Method 2</ins> <br>
-Edit participation score of a student in a tutorial lesson by `index` number:
-
-1. Navigate to view group `G01` lesson `1-2` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
-2. Type `editscore 1 score/3` into the *Command Box*.
-3. Press `Enter` to execute.
-
-Outcome:
-
-1. The _Result Display_ will show a success message.
-2. You can now see that his score has been updated on the _Student Information Panel_.
-
-#### 4.3.3. Subtract participation score of a student: `subscore`
+#### 4.3.2. Subtract participation score of a student: `subscore`
 
 You can use this command to decrease the participation score of a specific student for a tutorial lesson.
 
 > :warning: **Warning regarding the `subscore` command:**
 > You cannot decrease the participation score of a student such that the final score is less than 0.
-> The maximum score you can subtract is 5.
+> The minimum score is 0.
 
 **Format:**
 
 <br>`subscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE`
 <br>`subscore INDEX score/SCORE`
+
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 **Example:**
 
@@ -778,6 +760,42 @@ Subtracting participation score of a student in a tutorial lesson:
 
 1. Navigate to view tutorial lesson `1-2` of tutorial group `G01` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
 2. Type `subscore 1 score/1` into the _Command Box_.
+3. Press `Enter` to execute.
+
+Outcome:
+
+1. The _Result Display_ will show a success message.
+2. You can now see that his score has been updated on the _Student Information Panel_.
+
+#### 4.3.3. Edit participation score for a student: `editscore`
+
+You can use this command to edit participation score of a specific student in a tutorial lesson.
+
+**Format:**
+<br>`editscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE`
+<br>`editscore INDEX score/SCORE`
+
+> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+**Example:**
+
+In tutorial lesson `1-2` of tutorial group `G01`,
+you noticed that your student named `Aaron Tan` with student number `A0123456A` participated actively in class 
+discussions for the lesson. You decided to edit his current score to `3` marks for this lesson. 
+`Aaron Tan` is the first person on the student list so his `index` number is 1.
+
+<ins>Method 1</ins> <br>
+Edit participation score of a student in a tutorial lesson by `name` and `student number`:
+
+1. Navigate to view group `G01` lesson `1-2` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
+2. Type `editscore name/Aaron Tan matric/A0123456A score/3` into the *Command Box*.
+3. Press `Enter` to execute.
+
+<ins>Method 2</ins> <br>
+Edit participation score of a student in a tutorial lesson by `index` number:
+
+1. Navigate to view group `G01` lesson `1-2` via  [`viewlsn`](#452-view-a-tutorial-lesson-viewlsn) command.
+2. Type `editscore 1 score/3` into the *Command Box*.
 3. Press `Enter` to execute.
 
 Outcome:
