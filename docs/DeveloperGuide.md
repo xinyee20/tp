@@ -14,10 +14,10 @@ title: Developer Guide
 **Serenity** is a desktop lesson management application made for CS2101 tutors who want to manage and reduce administrative work.
 It focuses on the <span><a href="#appendix-e-glossary" style="color:purple"><i>Command Line Interface (CLI)</i></a></span>
 while providing users with a simple and clean <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
-Thus, the main interaction with Serenity will be done through commands.
+Thus, the main interaction with **Serenity** will be done through commands.
 
 **Serenity** allows tutors to keep track of their lessons administrative work in a single,
-simple-to-use platform. The information that can be managed by Serenity includes:
+simple-to-use platform. The information that can be managed by **Serenity** includes:
 
 * Tutorial group details
 * Tutorial lesson details
@@ -147,7 +147,7 @@ The Class Diagram given in Figure 4.3.1.1 below describes the structure of Logic
 <p align="center"><i>Figure 4.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
 From the diagram above, you can see that the `Logic` component is split into 2 groups, one for command and another for command parsing.
-As Serenity follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class.
+As **Serenity** follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class.
 This allows the `LogicManager` to execute these commands without having to know each command type.
 
 #### **4.3.2. Responsibilities**
@@ -187,7 +187,7 @@ The `UserPrefs` class represents the user’s preference.
 
 The `ObservableList` interface is exposed by the `Model` component for the `Ui` component to observe and automatically update the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> when data in the `Model` component changes.
 
-The `XYZManager` is a generic name given to the following managers, these managers supports each feature of Serenity :
+The `XYZManager` is a generic name given to the following managers, these managers supports each feature of **Serenity** :
 
 * `GroupManager`
 * `StudentManager`
@@ -239,7 +239,7 @@ The `Storage` component,
 
 * Can save the `UserPref` object in a JSON format.
 * Can parse a JSON file in the correct format to get the `UserPref` object.
-* Can save the Serenity data in a JSON format.
+* Can save the **Serenity** data in a JSON format.
 * Can parse a JSON file in the correct format to get **Serenity** data.
 
 ### **4.6. Common Classes**
