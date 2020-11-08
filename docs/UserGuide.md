@@ -656,7 +656,7 @@ You can find the XLSX file at the location where your **Serenity** application i
 <p align="center"><i>Figure 4.2.5.1 Command for <code>exportatt</code> command.</i></p>
 
 <p align="center"><img src="images/userGuide/attendanceTaking/exportatt_result.png" 
-   alt="Result upon successful execution of command"></p>
+   alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.2.5.2 Contents of excel file generated.</i></p>
 
 ### 4.3. Participation marking
@@ -702,6 +702,10 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
+<p align="center"><img src="images/userGuide/participationMarking/editscore_result.png" 
+   alt="Result upon successful execution of command" border="1px solid black"></p>
+<p align="center"><i>Figure 4.3.1.1 Screen displayed when the command is successfully executed.</i></p>
+
 #### 4.3.2. Award participation score for a student: `setscore`
 
 You can use this command to award a participation score for a specific student in a tutorial lesson.
@@ -741,10 +745,6 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
-
-<p align="center"><img src="images/participation/editscore_result.png" alt="Result upon successful execution of command"></p>
-
-<p align="center"><i>Figure 4.3.2.1 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.3.3. Subtract participation score of a student: `subscore`
 
