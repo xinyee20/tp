@@ -1,6 +1,9 @@
 package team.serenity.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static team.serenity.model.Model.PREDICATE_SHOW_ALL_GROUPS;
+import static team.serenity.model.Model.PREDICATE_SHOW_ALL_LESSONS;
+import static team.serenity.model.Model.PREDICATE_SHOW_ALL_QUESTIONS;
 
 import team.serenity.model.Model;
 
@@ -18,6 +21,9 @@ public class ViewFlagCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        model.updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
         return new CommandResult(MESSAGE_SUCCESS, CommandResult.UiAction.FLAG_ATT);
     }
 

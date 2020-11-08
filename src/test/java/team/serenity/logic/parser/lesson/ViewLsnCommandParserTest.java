@@ -22,6 +22,7 @@ import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonContainsKeywordPredicate;
 import team.serenity.model.group.lesson.LessonName;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 
 class ViewLsnCommandParserTest {
 
@@ -88,7 +89,10 @@ class ViewLsnCommandParserTest {
     @Test
     public void parse_validArgs_returnsViewLsnCommand() {
         ViewLsnCommand expected = new ViewLsnCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G01),
-                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1));
+                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1),
+                new QuestionFromGroupLessonPredicate(new GroupName(VALID_GROUP_NAME_G01),
+                        new LessonName(VALID_LESSON_NAME_1_1)
+                ));
         assertParseSuccess(parser, " grp/ g01 lsn/ 1-1", expected);
         assertParseSuccess(parser, " grp/ g01 lsn/1-1", expected);
         assertParseSuccess(parser, " grp/g01 lsn/ 1-1", expected);
@@ -101,19 +105,28 @@ class ViewLsnCommandParserTest {
 
         // Multiple groups
         expected = new ViewLsnCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G02),
-                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1));
+                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1),
+                new QuestionFromGroupLessonPredicate(new GroupName(VALID_GROUP_NAME_G02),
+                        new LessonName(VALID_LESSON_NAME_1_1)
+                ));
         assertParseSuccess(parser, GRP_DESC_GROUP_G01 + GRP_DESC_GROUP_G02
                 + LESSON_DESC_LESSON_1_1, expected);
 
         // Multiple lessons
         expected = new ViewLsnCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G01),
-                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_2));
+                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_2),
+                new QuestionFromGroupLessonPredicate(new GroupName(VALID_GROUP_NAME_G01),
+                        new LessonName(VALID_LESSON_NAME_1_2)
+                ));
         assertParseSuccess(parser, GRP_DESC_GROUP_G01 + LESSON_DESC_LESSON_1_1
                 + LESSON_DESC_LESSON_1_2, expected);
 
         // Multiple groups and lessons
         expected = new ViewLsnCommand(new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G02),
-                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_2));
+                new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_2),
+                new QuestionFromGroupLessonPredicate(new GroupName(VALID_GROUP_NAME_G02),
+                        new LessonName(VALID_LESSON_NAME_1_2)
+                ));
         assertParseSuccess(parser, GRP_DESC_GROUP_G01 + GRP_DESC_GROUP_G02
                 + LESSON_DESC_LESSON_1_1 + LESSON_DESC_LESSON_1_2, expected);
     }
@@ -123,21 +136,24 @@ class ViewLsnCommandParserTest {
         String userInput;
         GroupContainsKeywordPredicate grpPredicate = new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G01);
         LessonContainsKeywordPredicate lsnPredicate = new LessonContainsKeywordPredicate(VALID_LESSON_NAME_1_1);
+        QuestionFromGroupLessonPredicate qnPredicate = new QuestionFromGroupLessonPredicate(
+                new GroupName(VALID_GROUP_NAME_G01), new LessonName(VALID_LESSON_NAME_1_1)
+        );
         ViewLsnCommand expectedCommand;
 
         // invalid group then valid group
         userInput = INVALID_GROUP_NAME_DASH + GRP_DESC_GROUP_G01 + LESSON_DESC_LESSON_1_1;
-        expectedCommand = new ViewLsnCommand(grpPredicate, lsnPredicate);
+        expectedCommand = new ViewLsnCommand(grpPredicate, lsnPredicate, qnPredicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // invalid lesson then valid lesson
         userInput = GRP_DESC_GROUP_G01 + INVALID_LESSON_NAME_TEN + LESSON_DESC_LESSON_1_1;
-        expectedCommand = new ViewLsnCommand(grpPredicate, lsnPredicate);
+        expectedCommand = new ViewLsnCommand(grpPredicate, lsnPredicate, qnPredicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // invalid group and lesson then valid group and lesson
         userInput = INVALID_GROUP_NAME_DASH + INVALID_LESSON_NAME_TEN + GRP_DESC_GROUP_G01 + LESSON_DESC_LESSON_1_1;
-        expectedCommand = new ViewLsnCommand(grpPredicate, lsnPredicate);
+        expectedCommand = new ViewLsnCommand(grpPredicate, lsnPredicate, qnPredicate);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

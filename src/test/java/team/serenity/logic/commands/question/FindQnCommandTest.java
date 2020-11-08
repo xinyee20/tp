@@ -3,7 +3,7 @@ package team.serenity.logic.commands.question;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static team.serenity.commons.core.Messages.MESSAGE_QUESTIONS_LISTED_OVERVIEW;
-import static team.serenity.logic.commands.CommandTestUtil.assertQuestionCommandSuccess;
+import static team.serenity.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static team.serenity.testutil.question.TypicalQuestion.QUESTION_A;
 import static team.serenity.testutil.question.TypicalQuestion.getTypicalQuestionManager;
 
@@ -63,22 +63,22 @@ class FindQnCommandTest {
     @Test
     public void execute_zeroKeywords_noQuestionFound() {
         String expectedMessage = String.format(MESSAGE_QUESTIONS_LISTED_OVERVIEW, 0, "questions")
-                + String.format("\nUse the \"%s\" command to show all questions", ViewQnCommand.COMMAND_WORD);
+                + FindQnCommand.MESSAGE_TO_VIEW_ALL_QUESTIONS;
         QuestionContainsKeywordPredicate predicate = preparePredicate(" ");
         FindQnCommand command = new FindQnCommand(predicate);
         this.expectedModel.updateFilteredQuestionList(predicate);
-        assertQuestionCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(Collections.emptyList(), this.model.getFilteredQuestionList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleQuestionsFound() {
         String expectedMessage = String.format(MESSAGE_QUESTIONS_LISTED_OVERVIEW, 1, "questions")
-                + String.format("\nUse the \"%s\" command to show all questions", ViewQnCommand.COMMAND_WORD);
+                + FindQnCommand.MESSAGE_TO_VIEW_ALL_QUESTIONS;
         QuestionContainsKeywordPredicate predicate = preparePredicate("deadline");
         FindQnCommand command = new FindQnCommand(predicate);
         this.expectedModel.updateFilteredQuestionList(predicate);
-        assertQuestionCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(Collections.singletonList(QUESTION_A), this.model.getFilteredQuestionList());
     }
 

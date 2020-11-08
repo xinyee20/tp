@@ -17,6 +17,7 @@ import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonContainsKeywordPredicate;
 import team.serenity.model.group.lesson.LessonName;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 
 /**
  * Parses input arguments and creates a new ViewLsnCommand object.
@@ -38,8 +39,10 @@ public class ViewLsnCommandParser implements Parser<ViewLsnCommand> {
         GroupName grpKeyword = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
         LessonName lsnKeyword = SerenityParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LSN).get());
 
+
         return new ViewLsnCommand(new GroupContainsKeywordPredicate(grpKeyword.groupName),
-                new LessonContainsKeywordPredicate(lsnKeyword.lessonName));
+                new LessonContainsKeywordPredicate(lsnKeyword.lessonName),
+                new QuestionFromGroupLessonPredicate(grpKeyword, lsnKeyword));
     }
 
     /**

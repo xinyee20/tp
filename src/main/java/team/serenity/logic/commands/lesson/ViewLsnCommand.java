@@ -11,6 +11,7 @@ import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.Model;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.lesson.LessonContainsKeywordPredicate;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 
 /**
  * Finds and lists the attendance and class participation of all the students from
@@ -34,14 +35,17 @@ public class ViewLsnCommand extends Command {
 
     private final GroupContainsKeywordPredicate grpPredicate;
     private final LessonContainsKeywordPredicate lsnPredicate;
+    private final QuestionFromGroupLessonPredicate qnPredicate;
 
     /**
      * Creates a ViewLsnCommand to view the specified {@code Lesson}
      */
     public ViewLsnCommand(GroupContainsKeywordPredicate grpPredicate,
-                          LessonContainsKeywordPredicate lsnPredicate) {
+                          LessonContainsKeywordPredicate lsnPredicate,
+                          QuestionFromGroupLessonPredicate qnPredicate) {
         this.grpPredicate = grpPredicate;
         this.lsnPredicate = lsnPredicate;
+        this.qnPredicate = qnPredicate;
     }
 
     private String getMessage(Model model) {
@@ -64,6 +68,8 @@ public class ViewLsnCommand extends Command {
         if (model.getFilteredLessonList().isEmpty()) {
             throw new CommandException(LESSON_DOES_NOT_EXIST_MESSAGE);
         }
+
+        model.updateFilteredQuestionList(this.qnPredicate);
 
         return new CommandResult(this.getMessage(model), CommandResult.UiAction.VIEW_LSN);
     }
