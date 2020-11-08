@@ -451,8 +451,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
-<p align="center"><img src="images/attendance/markpresent_all_result.png" alt="Result upon successful execution of command"></p>
-
+<p align="center"><img src="images/userGuide/attendanceTaking/markpresent_all_result.png" 
+   alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.2.1.1 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.2.2. Mark a student as present: `markpresent`
@@ -521,13 +521,12 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-<p align="center"><img src="images/attendance/markabsent_command.png" 
-alt="Command box for delstudent command"></p>
-
+<p align="center"><img src="images/userGuide/attendanceTaking/markabsent_command.png" 
+   alt="Command box for delstudent command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present initially.</i></p>
 
-<p align="center"><img src="images/attendance/markabsent_result.png" alt="Result upon successful execution of command"></p>
-
+<p align="center"><img src="images/userGuide/attendanceTaking/markabsent_result.png" 
+   alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.2.2.2 Screen displayed when the command is successfully executed. Note how Aaron's attendance is now absent.</i></p>
 
 #### 4.2.4. Mark all students as absent: `markabsent all`
@@ -652,12 +651,12 @@ Outcome:
 2. The attendance sheet of tutorial group `G01` will be saved as `G01_attendance.xlsx`.
 You can find the XLSX file at the location where your **Serenity** application is located.
 
-<p align="center"><img src="images/export/exportatt_command.png" alt="Command box for exportatt command"></p>
-
+<p align="center"><img src="images/userGuide/attendanceTaking/exportatt_command.png" 
+   alt="Command box for exportatt command"></p>
 <p align="center"><i>Figure 4.2.5.1 Command for <code>exportatt</code> command.</i></p>
 
-<p align="center"><img src="images/export/exportatt_result.png" alt="Result upon successful execution of command"></p>
-
+<p align="center"><img src="images/userGuide/attendanceTaking/exportatt_result.png" 
+   alt="Result upon successful execution of command"></p>
 <p align="center"><i>Figure 4.2.5.2 Contents of excel file generated.</i></p>
 
 ### 4.3. Participation marking
