@@ -856,39 +856,39 @@ Given below are instructions to test the app manually.
 
 ### **F.1. Launch and Shutdown**
 
- 1. Initial launch
+1. Initial launch
     1. Download the jar file and copy into an empty folder
     1. Double-click the jar file Expected: Shows the <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span> with a set of sample contacts. The window size may not be optimum.
- 1. Saving window preferences
+1. Saving window preferences
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
     1. Re-launch the app by double-clicking the jar file.
     1. Expected: The most recent window size and location is retained.
 
-### **F.2. Adding Group, lesson and Student*
+### **F.2. Adding Group, lesson and Student**
 
-Adding a Group in **Serenity**.
- 1. Prerequisites: XLSX file must be in the same folder as `Serenity`
- 1. Test case: `addgrp grp grp/<GROUP_NAME> path/<FILE_NAME>.xlsx`
-    1. Expected: Tutorial group created,
-    <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
- 1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<GROUP_NAME>`, `addgrp path/<FILE_NAME>.csv`
-    1. Expected: Error message shown.
+1. Adding a Group in **Serenity**.
+    1. Prerequisites: XLSX file must be in the same folder as `Serenity`
+    1. Test case: `addgrp grp grp/<GROUP_NAME> path/<FILE_NAME>.xlsx`
+        1. Expected: Tutorial group created,
+        <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
+    1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<GROUP_NAME>`, `addgrp path/<FILE_NAME>.csv`
+        1. Expected: Error message shown.
 
-Adding Lesson to a Group
-1. Prerequisites: Tutorial group is already set up, lesson name to be added does not already exist in the group.
-1. Test case: `addlsn grp/<GROUP_NAME> lsn/<LESSON_NAME>`
-    1. Expected: Tutorial lesson added,
-    <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the student information in the tutorial lesson created.
- 1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<GROUP_NAME>`, `addlsn lsn/<LESSON_NAME>`
-    1. Expected: Error message shown.
+1. Adding Lesson to a Group
+    1. Prerequisites: Tutorial group is already set up, lesson name to be added does not already exist in the group.
+    1. Test case: `addlsn grp/<GROUP_NAME> lsn/<LESSON_NAME>`
+        1. Expected: Tutorial lesson added,
+        <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the student information in the tutorial lesson created.
+    1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<GROUP_NAME>`, `addlsn lsn/<LESSON_NAME>`
+        1. Expected: Error message shown.
 
-Adding Student to a Group
-1. Prerequisites: Tutorial group is already set up.
-1. Test case: `addstudent grp/<GROUP_NAME> name/<STUDENT_NAME> matric/<STUDENT_MATRICULATION_NUMBER>`
-    1. Expected: Student added,
-    success message shown: `You added <STUDENT_NAME> (<STUDENT_MATRICULATION_NUMBER>) to tutorial group <GROUP_NAME>.`
- 1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<GROUP_NAME>`, `addstudent name/<STUDENT_NAME>`
-    1. Expected: Error message shown.
+1. Adding Student to a Group
+    1. Prerequisites: Tutorial group is already set up.
+    1. Test case: `addstudent grp/<GROUP_NAME> name/<STUDENT_NAME> matric/<STUDENT_MATRICULATION_NUMBER>`
+        1. Expected: Student added,
+        success message shown: `You added <STUDENT_NAME> (<STUDENT_MATRICULATION_NUMBER>) to tutorial group <GROUP_NAME>.`
+     1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<GROUP_NAME>`, `addstudent name/<STUDENT_NAME>`
+        1. Expected: Error message shown.
 
 ### **F.3. Missing data files**
 
