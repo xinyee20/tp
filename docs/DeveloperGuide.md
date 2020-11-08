@@ -19,25 +19,57 @@ Thus, the main interaction with Serenity will be done through commands.
 **Serenity** allows tutors to keep track of their lessons administrative work in a single,
 simple-to-use platform. The information that can be managed by Serenity includes:
 
-* Tutorial group students information
-* Student attendance for each lesson
-* Student class participation scores for each lesson
-* Questions for each lesson
+* Tutorial group details
+* Tutorial lesson details
+* Student name and matriculation number
+* Student attendance and class participation scores for each lesson
+* Questions asked in each lesson
 
 The purpose of this Developer Guide is to help you understand the design
 and implementation of **Serenity** so that you can get started on your contributions to **Serenity**.
 
 ## **2. Setting Up**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the [_SettingUp_](SettingUp.md) guide.
 
 ## **3. About**
 
+(Contributed by Neo Rui En)
+
+This section elaborates on structure and the symbols and syntax used in this Developer Guide.
+
 ### **3.1. Structure Of This Document**
+
+This Developer Guide has been structured such that you can easily find what you need.
+
+In [Section 3.2](#32-general-symbols-and-syntax), you can find the meaning of the symbols and syntax used
+in this document.
+
+In [Section 4](#4-design), you can find the details of the components used in **Serenity**.
+
+In [Section 5](#5-implementation), you can find the rationale, current implementation and design considerations
+of our code.
+
+From [Section 6](#6-documentation) to [Section 10](#10-dev-ops), you can find the details regarding
+documentation, logging, testing, configuration and dev-ops.
+
+From [Appendix A](#appendix-a-product-scope) to [Appendix G](#appendix-g-effort), you can find the additional
+information relating to **Serenity**.
 
 ### **3.2. General Symbols And Syntax**
 
+The table below explains the general symbols and syntax used throughout the document.
+
+Symbol/syntax | Meaning
+--------|------------------
+`command` | This indicates a technical term.
+_GUI_ | This indicates a graphical component.
+:memo: | This indicates a note.
+:bulb: | This indicates a tip.
+
 ## **4. Design**
+
+This section describes the details of the components used in **Serenity**.
 
 ### **4.1. Architecture**
 
@@ -51,26 +83,27 @@ The Architecture Diagram given in Figure 3.1.1 below explains the high-level des
 
 > :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder.
 
-The following table gives a quick overview of each component of Serenity.
-More details about the components can be found in the following subsections.
+The following table gives a quick overview of each component of **Serenity**.
+More details about the components can be found in the following segments.
 
 Component | Description
 ------------ | -------------
 `Main` | Has two classes called `Main` and `MainApp`. It is responsible for initializing the components in the correct sequence, and connects them up with one another. At shut down, it shuts the components down and cleans up resources where necessary.
-`Commons` | Represents a collection of classes used by multiple different components. |
 `Ui`| Displays the `Ui` of the App to users. Defines its API in the `Ui` interface and exposes its functionality through the `UiManager` class.
 `Logic` | Executes the command that user inputs. Defines its API in the `Logic` interface and exposes its functionality through the `LogicManager` class.
 `Model` | Holds the data of the App in-memory. Defines its API in the `Model` interface and exposes its functionality through the `ModelManager` class.
 `Storage` | Reads data from, and writes data to, the hard disk. Defines its API in the `Storage` interface and exposes its functionality through the `StorageManager` class.
+`Commons` | Represents a collection of classes used by multiple different components. |
 
 **How the architecture components interact with each other**
+
 The Sequence Diagram in Figure 3.1.2 below shows how the components interact with each other for the scenario where the user issues the command `delgrp grp/G04`.
 
 ![Figure 3.1.2](images/developerGuide/ArchitectureSequenceDiagram.png)
 
 <p align="center"><i>Figure 3.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
-The sections below give more details of each component.
+The segments below give more details of each component.
 
 ### **4.2. Ui Component**
 
@@ -87,7 +120,7 @@ The Class Diagram given in Figure 3.2.1.1 below describes the structure of the U
 <p align="center"><i>Figure 3.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
 The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
- as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
+as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
 
 The `Ui` component uses <span><a href="#appendix-e-glossary" style="color:purple"><i>JavaFX</i></a></span> UI framework.
 The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder.
@@ -103,7 +136,7 @@ The `Ui` component,
 
 (Contributed by Neo Rui En)
 
-This segment will explain the structure and responsibilities of the `Logic`component.
+This segment will explain the structure and responsibilities of the `Logic` component.
 
 #### **4.3.1. Structure**
 
@@ -128,12 +161,12 @@ The `Logic` component is in charge of command parsing from the commands given by
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
 The steps described above will be the standard command parsing and execution of every command in **Serenity**.
-To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command delgrp grp/G04 is shown below.
+To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command `delgrp grp/G04` is shown below.
 The diagram starts with the `execute("delgrp grp/G04")` API call.
 
 ![Figure 3.3.2.1](images/developerGuide/DeleteSequenceDiagram.png)
 
-<p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the <code>delgrp grp/G04`</code> command.</i></p>
+<p align="center"><i>Figure 3.3.2.1 Interactions inside the <code>Logic</code> component for the <code>delgrp grp/G04</code> command.</i></p>
 
 > :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 
@@ -141,7 +174,7 @@ The diagram starts with the `execute("delgrp grp/G04")` API call.
 
 (Contributed by Ryan Lim)
 
-This segment will explain the structure and responsibilities of the Model component.
+This segment will explain the structure and responsibilities of the `Model` component.
 
 #### **4.4.1. Structure**
 
@@ -177,7 +210,7 @@ Each unique list implements the `UniqueList` interface.
 The `Model` component,
 
 * Represents data of different features of **Serenity**.
-* Stores these data in-memory when the App is running.
+* Stores these data in-memory when the app is running.
 * Does not depend on the `Ui`, `Logic` and `Storage` components.
 * Contains observable data so that the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> can automatically update upon data changes.
 
@@ -185,7 +218,7 @@ The `Model` component,
 
 (contributed by Ryan Lim)
 
-This segment will explain the structure and responsibilities of the Storage component.
+This segment will explain the structure and responsibilities of the `Storage` component.
 
 #### **4.5.1. Structure**
 
@@ -211,16 +244,30 @@ The `Storage` component,
 
 ### **4.6. Common Classes**
 
-Classes used by multiple other components are in the `team.serenity.commons package` package.
+Classes used by multiple other components are in the `team.serenity.commons` package.
+The package contains three sub-packages: `core`, `exceptions` and `util`.
+
+### **4.6.1. Core Class**
+
+This package contains classes for user configuration, GUI settings, logging manager, guiding messages, index number,
+ `Model` object sorters and version number.
+
+### **4.6.2. Exceptions Class**
+
+This package contains classes for exceptions thrown by **Serenity**.
+
+### **4.6.3. Util Class**
+
+This package contains classes for utility operations like file input and output, Excel XLSX file support,
+JSON functionalities and image processing.
 
 ## **5. Implementation**
 
-(contributed by Lim Chun Yong)
-
 This section describes some noteworthy details on how certain features are implemented.
 
-
 ### **5.1. Feature Managers**
+
+(contributed by Lim Chun Yong)
 
 **Serenity** provides support for tutors to manage their classes in the following aspects:
 
@@ -271,7 +318,7 @@ This enables retrieval of a specific `UniqueList` of `Student` items in a tutori
 <p align="center">
 <img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
 
-<p align="center"><i>Figure 4.1.2.1: Structure of <code>GroupManager</code>, an example of
+<p align="center"><i>Figure 4.1.2.1 Structure of <code>GroupManager</code>, an example of
 a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
 
 ### **5.2. Group Manager**
@@ -281,6 +328,7 @@ a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
 The `GroupManager` is responsible for storing the tutorial groups taught by the Tutor.
 
 #### **5.2.1. Rationale**
+
 A tutor has multiple tutorial groups to teach, hence the implementation requires a way to store multiple tutorial groups.
 
 #### **5.2.2. Current Implementation**
@@ -310,11 +358,13 @@ by ensuring that all logic and functionality related to a Tutorial group is enca
 
 ### **5.3. Lesson Manager**
 
+(Contributed by Ryan Lim)
+
 The `LessonManager` is responsible for storing lessons in a tutorial group
 
 #### **5.3.1. Rationale**
 
-Having a `LessonManager` allows for easy retrieval, viewing and updating of the lessons in a particular Tutorial Group.
+Having a `LessonManager` allows for easy retrieval, viewing and updating of the lessons in a particular tutorial group.
 
 #### **5.3.2. Current Implementation**
 
@@ -338,7 +388,7 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 |   |**Pros**|**Cons**|
 |---|---|---|
-| **Option 1:** More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
+| **Option 1**<br>More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
 | **Option 2 (current)**<br>One | Easy to implement, easier to retrieve all lessons taught by a single tutor | More difficult to retrieve lessons tied to a specific group |
 
 ### **5.4. Student Manager**
@@ -353,7 +403,8 @@ Tutors have to manage many students.
 At the start of the semester, many students may appeal to enter the tutorial group, swap tutorial groups
 or even drop out of the module. These changes may give tutors administrative burden as the tutors
 may have to spend extra effort to keep track of the student intake changes relating to their tutorial groups.
-Importantly, students will need to be allocated to unique tutorial groups; no student can be enrolled into
+
+Importantly, students have to be allocated to unique tutorial groups; no student can be enrolled into
 more than one tutorial group for the semester. Hence, it is necessary to have `StudentManager` to
 be in charge of doing that.
 
@@ -387,8 +438,8 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 
 |   |**Pros**|**Cons**|
 |---|---|---|
-| **Option 1**<br>To store the students inside a `UniqueList<Student> |  This is easy and straight-forward to implement. | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved. |
-|  **Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>` |  This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name. | This does not allow the order of addition of students to a group to be maintained. | |
+| **Option 1**<br>To store the students inside a `UniqueList<Student> | This is easy and straight-forward to implement | This may involve greater overhead when accessing the list of students in a tutorial group, as the specified group may need to be found from a list of groups before the list of students from the specified group is retrieved
+| **Option 2 (Current)**<br>To store the students inside a `HashMap<GroupName, UniqueList<Student>>` | This allows for more efficient retrieval of the list of students from a tutorial group by just inputting the group's name | This does not allow the order of addition of students to a group to be maintained |
 
 **Reasons for choosing option 2:**
 
@@ -397,11 +448,11 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 
 ### **5.5. StudentInfo Manager**
 
-(contributed by Xin Yee)
+(contributed by Lau Xin Yee)
 
 **Serenity** allows users to keep track of the attendance and participation of students from his/her tutorial lessons.
 
-The `StudentInfoManager` is one of the `Feature Manager`s (See [Feature-Manager](#41-feature-managers)).
+The `StudentInfoManager` is one of the `Feature Manager`s (See [Feature-Managers](#51-feature-managers)).
 The `StudentInfoManager` helps to collate all the information related to the student, consisting of the student’s
 attendance as well as participation score for each lesson.
 It contains a `UniqueStudentInfoList` which contains all the `StudentInfo` of every student for each lesson.
@@ -455,7 +506,7 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 |   |**Pros**|**Cons**|
 |---|---|---|
 | **Option 1**<br>Reach into `Group`, followed by `Lesson` to retrieve `StudentInfo`. | More intuitive. | Nesting of data makes it harder to test.
-| **Option 2 (current)**<br>Store and retrieve `StudentInfo` from a `HashMap` with the combination of `Group` name and `Lesson` name forming the key. | Easier to retrieve data. <br> <br> Less nesting of data allows testing to be done more easily. | Need to put in more thought into coming up with the Manager structures to prevent cyclic dependencies. |
+| **Option 2 (Current)**<br>Store and retrieve `StudentInfo` from a `HashMap` with the combination of `Group` name and `Lesson` name forming the key. | Easier to retrieve data. <br> <br> Less nesting of data allows testing to be done more easily. | Need to put in more thought into coming up with the Manager structures to prevent cyclic dependencies. |
 
 **Reasons for choosing option 2:**
 
@@ -464,6 +515,8 @@ the code breaking if any intermediate classes are not functioning properly.
 * Option 2, despite being more complicated, solves our problem without adding much overhead. Thus, we decided option 2 is better.
 
 ### **5.6. Question Manager**
+
+(Contributed by Bu Wen Jin)
 
 **Serenity** allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
 
@@ -523,13 +576,23 @@ The Sequence Diagram below summarises the aforementioned steps.
 
 ## **6. Documentation**
 
+Refer to the [_Documentation_](Documentation.md) guide.
+
 ## **7. Logging**
+
+Refer to the [_Logging_](Logging.md) guide.
 
 ## **8. Testing**
 
+Refer to the [_Testing_](Testing.md) guide.
+
 ## **9. Configuration**
 
+Refer to the [_Configuration_](Configuration.md) guide.
+
 ## **10. Dev Ops**
+
+Refer to the [_DevOps_](DevOps.md) guide.
 
 ## **Appendix A: Product Scope**
 
@@ -765,9 +828,14 @@ Extensions:
 
 ## **Appendix D: Non Functional Requirements**
 
-1. Should work on any <span><a href="#appendix-e-glossary" style="color:purple"><i>mainstream OS</i></a></span> as long as it has Java 11 or above installed.
-2. Should be able to hold up to 30 students per tutorial group and up 10 tutorial groups without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The product should work on any <span><a href="#appendix-e-glossary" style="color:purple"><i>mainstream OS</i></a></span> as long as it has Java 11 or above installed.
+1. The product should be able to hold up to 30 students per tutorial group and up to 10 tutorial groups without a noticeable sluggishness in performance for typical usage.
+1. The product should be for a single user i.e. (not a multi-user product).
+1. The product should not require an online connection.
+1. The product should not depend on a remote server.
+1. The product should work without requiring an installer.
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The data should be stored locally into a human editable text file.
 
 ## **Appendix E: Glossary**
 
@@ -796,39 +864,77 @@ Given below are instructions to test the app manually.
     1. Re-launch the app by double-clicking the jar file.
     1. Expected: The most recent window size and location is retained.
 
-### **F.2. Adding/Setting**
+### **F.2. Adding Group, lesson and Student*
 
-Add a new tutorial group in **Serenity**.
+Adding a Group in **Serenity**.
  1. Prerequisites: XLSX file must be in the same folder as `Serenity`
- 1. Test case: `addgrp grp grp/<NAME OF TUTORIAL GROUP> path/<NAME OF FILE>.xlsx`
-    1. Expected: Tutorial group created, <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
- 1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<NAME OF TUTORIAL GROUP>`, `addgrp path/<NAME OF FILE>.csv`
+ 1. Test case: `addgrp grp grp/<GROUP_NAME> path/<FILE_NAME>.xlsx`
+    1. Expected: Tutorial group created,
+    <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
+ 1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<GROUP_NAME>`, `addgrp path/<FILE_NAME>.csv`
     1. Expected: Error message shown.
 
 Adding Lesson to a Group
 1. Prerequisites: Tutorial group is already set up, lesson name to be added does not already exist in the group.
-1. Test case: `addlsn grp/<NAME OF TUTORIAL GROUP> lsn/<LESSON NAME TO ADD>`
-    1. Expected: Tutorial lesson added, <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the new tutorial lesson created.
- 1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<NAME OF TUTORIAL GROUP>`, `addlsn lsn/<LESSON NAME TO ADD>`
+1. Test case: `addlsn grp/<GROUP_NAME> lsn/<LESSON_NAME>`
+    1. Expected: Tutorial lesson added,
+    <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the student information in the tutorial lesson created.
+ 1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<GROUP_NAME>`, `addlsn lsn/<LESSON_NAME>`
     1. Expected: Error message shown.
 
 Adding Student to a Group
 1. Prerequisites: Tutorial group is already set up.
-1. Test case: `addstudent grp/<NAME OF TUTORIAL GROUP> name/<NAME OF STUDENT TO ADD> matric/<MATRICULATION NUMBER OF STUDENT>`
-    1. Expected: Success message shown: `You added <Student name> to <Tutorial Group>.`
- 1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<NAME OF TUTORIAL GROUP>` `addstudent name/<NAME OF STUDENT>`
+1. Test case: `addstudent grp/<GROUP_NAME> name/<STUDENT_NAME> matric/<STUDENT_MATRICULATION_NUMBER>`
+    1. Expected: Student added,
+    success message shown: `You added <STUDENT_NAME> (<STUDENT_MATRICULATION_NUMBER>) to tutorial group <GROUP_NAME>.`
+ 1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<GROUP_NAME>`, `addstudent name/<STUDENT_NAME>`
     1. Expected: Error message shown.
 
 ### **F.3. Missing data files**
 
 1. Test case: In the folder where **Serenity** is stored, delete `serenity.json` in `data` folder
-    1. Expected: New tutorial group G01 created with two students, Aaron Tan and John Doe.
+    1. Expected: Tutorial group G01 created,
+    tutorial group contains two students, Aaron Tan and John Doe.
 
 ## **Appendix G: Effort**
 
-### **G.1. Major Enhancement**
+Creating **Serenity** was fairly difficult and required much effort from all the team members.
+Cumulatively, the project amassed a great **25,000 lines of code** combined.
+This was achieved from **the meticulous planning, productive weekly team meetings, consistent communication and updates
+from all team members**.
 
-### **G.2. Challenges**
+### **G.1. Major Enhancements**
 
-### **G.3. Conclusion**
+The development of **Serenity** involves huge enhancements from **Address Book 3**.
+The following points highlights the major enhancements that we have incorporated into **Serenity**.
+
+* From just keeping track of different `Person` objects in **AB3** ,
+**Serenity** is a major upgrade as it is an all-in-one application that allows the user to keep track of different
+`Group`, `Lesson`, `Student` objects. The association class `StudentInfo` was created for each `Student` in every
+tutorial `Lesson` to keep track of the student's `Attendance` and `Participation` score.
+The `Question` class was also designed to handle the questions asked by students in a particular `Lesson` of a `Group`.
+Following the Law of Demeter, the `Group`, `Lesson`, `Student`, `StudentInfo` and `Question` classes were
+further refactored them into [Feature Managers](#51-feature-managers) to minimize coupling between the classes.
+
+* While the `Ui` of *AB3* contains only 1 `ListView`, **Serenity** has 6 `ListView`s and 2 `TableView`s.
+These views were placed in `TabPane`s spread out across 3 pages - the home page, the tutorial group page and
+the tutorial lesson page. Furthermore, **Serenity** has additional _TitleDisplay_ and _SideBar_ `Ui` components that
+show the title of the page the user is viewing and the shortcut buttons respectively.
+These changes allowed the `Ui` of **Serenity** to be significantly more appealing than that of **AB3**'s.
+
+* **Serenity** has Excel XLSX support that allows data to be imported and exported.
+Users are able to efficiently add a new tutorial group by importing a XLSX file containing a list of students and
+(optionally) tutorial lessons. The resulting tutorial group will automatically contain the list of students and
+tutorial lessons. Users are also able to conveniently export attendance and participation score sheets of a specified
+tutorial group as XLSX files. The resulting XLSX file will either contain attendance or participation score records of
+each student across all tutorial lessons in the tutorial group. These features were designed with the user's needs in
+mind after surveying all the CS2101 tutors and interviewing a CS2101 tutor.
+
+### **G.2. Conclusion**
+
+Overall, we managed to create an all-in-one CS2101 tutorial group manager that is equipped with
+user-focused features and a neat user interface. Our team put in a huge amount of effort in enhancing our features and
+ensuring that the features work as intended. Throughout the development process, we consistently helped one another
+in identifying and solving implementation and documentation bugs, as well as assisted one another in implementing
+tricky functionalities.
 
