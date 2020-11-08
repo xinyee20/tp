@@ -272,12 +272,12 @@ Outcome:
 3. **Serenity** will switch to tutorial group `G04` page.
 4. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
 
-<p align="center"><img src="images/addgroup/addgrpcommand.png" alt="Command box for addgrp command"></p>
-
+<p align="center"><img src="images/userGuide/settingUp/addgrpCommand.png" 
+   alt="Command box for addgrp command"></p>
 <p align="center"><i>Figure 4.1.1.1 Command for <code>addgrp</code> command.</i></p>
 
-<p align="center"><img src="images/addgroup/addgrpresult.png" alt="Result upon successful execution of command"></p>
-
+<p align="center"><img src="images/userGuide/settingUp/addgrpResult.png" 
+   alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.1.1.2 Screen displayed when the command is successfully executed.</i></p>
 
 ####  4.1.2. Delete an existing tutorial group: `delgrp`
@@ -333,8 +333,8 @@ Outcome:
 2. **Serenity** will display tutorial lesson `1-3` page.
 3. You can now see that tutorial lesson `1-3` has been added to tutorial group `G01`.
 
-<p align="center"><img src="images/addlsn/addlsnresult.png" alt="Result upon successful execution of command"></p>
-
+<p align="center"><img src="images/userGuide/settingUp/addlsnResult.png" 
+   alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.1.3.1  Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.1.4. Delete an existing tutorial lesson: `dellsn`
@@ -414,8 +414,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. `Aaron Tan` will no longer be in the list of students in tutorial group `G01`.
 
-<p align="center"><img src="images/delstudent/delstudent_result.png" alt="Result upon successful execution of command"></p>
-
+<p align="center"><img src="images/userGuide/settingUp/delstudentResult.png" 
+   alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.1.6.1 Screen displayed when the command is successfully executed.</i></p>
 
 ### 4.2. Attendance taking
