@@ -846,8 +846,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The question will be added to the list of questions.
 
-<p align="center"><img src="images/addqn/addqn_result.png" alt="List of questions after command is executed."></p>
-
+<p align="center"><img src="images/userGuide/questionAddressing/addqn_result.png" 
+   alt="List of questions after command is executed." border="1px solid black"></p>
 <p align="center"><i>Figure 4.4.1.1 List of questions after the command is successfully executed.</i></p>
 
 #### 4.4.2. Delete an existing question: `delqn`
