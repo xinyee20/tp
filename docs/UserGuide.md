@@ -529,11 +529,11 @@ Outcome:
 
 <p align="center"><img src="images/userGuide/attendanceTaking/markabsent_command.png" 
    alt="Command box for markabsent command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.2.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present initially.</i></p>
+<p align="center"><i>Figure 4.2.3.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present initially.</i></p>
 
 <p align="center"><img src="images/userGuide/attendanceTaking/markabsent_result.png" 
    alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.2.2 Screen displayed when the command is successfully executed. Note how Aaron's attendance is now absent.</i></p>
+<p align="center"><i>Figure 4.2.3.2 Screen displayed when the command is successfully executed. Note how Aaron's attendance is now absent.</i></p>
 
 #### 4.2.4. Mark all students as absent: `markabsent all`
 
