@@ -26,12 +26,12 @@ public class TypicalGroups {
 
     public static final Group GROUP_G01 = new GroupBuilder().withName("G01")
         .withStudents(AARON, BENJAMIN, CATHERINE)
-        .withClasses("1-1", "1-2")
+        .withLessons("1-1", "1-2")
         .build();
 
     public static final Group GROUP_G02 = new GroupBuilder().withName("G02")
         .withStudents(DAVID, ELFIE, FREDDIE)
-        .withClasses("1-1", "1-2", "2-1", "2-2")
+        .withLessons("1-1", "1-2", "2-1", "2-2")
         .build();
 
     // Manually added - Group's details found in {@code CommandTestUtil}

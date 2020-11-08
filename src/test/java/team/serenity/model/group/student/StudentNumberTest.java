@@ -29,6 +29,7 @@ public class StudentNumberTest {
         assertFalse(StudentNumber.isValidName("a012345678911")); // exceed length
         assertFalse(StudentNumber.isValidName("a0123456R")); //a not capitalized
         assertFalse(StudentNumber.isValidName("A0123456r")); //r not capitalized
+        assertFalse(StudentNumber.isValidName("a1234567r")); //both not capitalized
         assertFalse(StudentNumber.isValidName("B0123456R")); //not A
 
         // valid name

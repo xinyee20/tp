@@ -3,7 +3,7 @@ package team.serenity.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static team.serenity.testutil.Assert.assertThrows;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class DelLsnCommandTest {
     void testEquals_validGroupAndLesson() {
         ModelStubWithGroupAndLesson actual = new ModelStubWithGroupAndLesson();
         DelLsnCommand test = new DelLsnCommand(new GroupName("G01"), new LessonName("1-1"));
-        Group expectedGroup = new GroupBuilder().withClasses("1-2").build();
+        Group expectedGroup = new GroupBuilder().withLessons("1-2").build();
         try {
             CommandResult result = test.execute(actual);
             assertEquals(
@@ -56,14 +56,12 @@ class DelLsnCommandTest {
     }
 
 
-    private class ModelStubWithGroupAndLesson extends ModelStub {
-        private Group group = new GroupBuilder().withClasses("1-1", "1-2").build();
+    private static class ModelStubWithGroupAndLesson extends ModelStub {
+        private Group group = new GroupBuilder().withLessons("1-1", "1-2").build();
         private FilteredList<Lesson> list = new FilteredList<>(this.group.getLessonsAsUnmodifiableObservableList());
 
         @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
-            return;
-        }
+        public void updateFilteredGroupList(Predicate<Group> predicate) {}
 
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {
@@ -72,7 +70,7 @@ class DelLsnCommandTest {
 
         @Override
         public ObservableList<Group> getFilteredGroupList() {
-            return new FilteredList<Group>(FXCollections.observableList(Arrays.asList(this.group)));
+            return new FilteredList<>(FXCollections.observableList(Collections.singletonList(this.group)));
         }
 
         @Override

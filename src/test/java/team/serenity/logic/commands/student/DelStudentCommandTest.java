@@ -1,4 +1,4 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.student;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import team.serenity.commons.core.index.Index;
+import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
-import team.serenity.logic.commands.student.DelStudentCommand;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.UniqueGroupList;
 import team.serenity.model.group.student.Student;
@@ -58,7 +58,7 @@ public class DelStudentCommandTest {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "A0000000U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
@@ -76,7 +76,7 @@ public class DelStudentCommandTest {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "A0000000U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
@@ -97,7 +97,7 @@ public class DelStudentCommandTest {
         Group stubGroup = new GroupBuilder().withName("G07")
             .withStudents(
                 new Student("Freddie", "A0000000U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);

@@ -43,7 +43,7 @@ public class FlagAttCommandParser implements Parser<FlagAttCommand> {
         Optional<Student> student;
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_MATRIC).isPresent()
-                && argMultimap.getPreamble().length() != 0) {
+            && argMultimap.getPreamble().length() != 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagAttCommand.MESSAGE_USAGE));
         }
 

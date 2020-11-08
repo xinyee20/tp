@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_GROUP;
 import static team.serenity.commons.core.Messages.MESSAGE_NOT_VIEWING_A_LESSON;
-import static team.serenity.commons.core.Messages.MESSAGE_SCORE_NOT_WITHIN_RANGE;
 import static team.serenity.commons.core.Messages.MESSAGE_STUDENT_NOT_FOUND;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_MATRIC;
 import static team.serenity.logic.parser.CliSyntax.PREFIX_NAME;
@@ -161,10 +160,7 @@ public class EditScoreCommand extends Command {
     private UniqueList<StudentInfo> getUpdatedListForSetScoreOneStudent(
             ObservableList<StudentInfo> currentStudentInfoList, StudentInfo targetStudentInfo) throws CommandException {
         if (!targetStudentInfo.getAttendance().isPresent()) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, this.toSetScore.get()));
-        }
-        if (scoreToSet > 5 || scoreToSet < 0) {
-            throw new CommandException(MESSAGE_SCORE_NOT_WITHIN_RANGE);
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_PRESENT, targetStudentInfo.getStudent()));
         }
         UniqueList<StudentInfo> updatedList = new UniqueStudentInfoList();
         updatedList.setElementsWithList(currentStudentInfoList);

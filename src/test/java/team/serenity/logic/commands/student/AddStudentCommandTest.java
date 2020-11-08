@@ -1,4 +1,4 @@
-package team.serenity.logic.commands;
+package team.serenity.logic.commands.student;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
-import team.serenity.logic.commands.student.AddStudentCommand;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.UniqueGroupList;
@@ -54,7 +54,7 @@ public class AddStudentCommandTest {
             .withStudents(
                 new Student("Freddie", "A0000000U"),
                 new Student("June", "A0101011U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);
@@ -73,7 +73,7 @@ public class AddStudentCommandTest {
             .withStudents(
                 new Student("Freddie", "A0000000U"),
                 new Student("June", "A0101011U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         StudentName john = new StudentName("John");
         StudentNumber matric = new StudentNumber("A1234567U");
@@ -95,7 +95,7 @@ public class AddStudentCommandTest {
             .withStudents(
                 new Student("Freddie", "A0000000U"),
                 new Student("June", "A0101011U")
-            ).withClasses("4-2", "5-1", "5-2", "6-1")
+            ).withLessons("4-2", "5-1", "5-2", "6-1")
             .build();
         UniqueList<Group> groupList = new UniqueGroupList();
         groupList.add(stubGroup);

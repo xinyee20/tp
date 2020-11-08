@@ -46,8 +46,8 @@ public class ViewGrpCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ViewGrpCommand // instanceof handles nulls
-                && this.predicate.equals(((ViewGrpCommand) other).predicate)); // state check
+            || (other instanceof ViewGrpCommand // instanceof handles nulls
+            && this.predicate.equals(((ViewGrpCommand) other).predicate)); // state check
     }
 
 }

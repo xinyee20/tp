@@ -17,7 +17,6 @@ import team.serenity.commons.core.sorter.LessonSorter;
 import team.serenity.commons.core.sorter.StudentSorter;
 import team.serenity.commons.util.CsvUtil;
 import team.serenity.commons.util.XlsxUtil;
-import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
@@ -36,7 +35,7 @@ public class GroupBuilder {
     public static final String DEFAULT_NAME = "G01";
     public static final Set<Student> DEFAULT_STUDENTS =
             new HashSet<>(Arrays.asList(AARON, BENJAMIN, CATHERINE));
-    public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>(Arrays.asList());
+    public static final Set<Lesson> DEFAULT_CLASSES = new HashSet<>();
 
     private GroupName name;
     private UniqueList<Student> students = new UniqueStudentList();
@@ -96,23 +95,23 @@ public class GroupBuilder {
         try {
             students.setElementsWithList(new ArrayList<>(new XlsxUtil(filePath,
                 new XSSFWorkbook(filePath)).readStudentsFromXlsx()));
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return this;
     }
 
     /**
-     * Creates and parses the {@code classes} into a {@code Set<Class>} and set it to the {@code Group} that we are
+     * Creates and parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Group} that we are
      * building.
      */
-    public GroupBuilder withClasses(String... classes) {
+    public GroupBuilder withLessons(String... lessons) {
         UniqueList<StudentInfo> studentsInfo = new UniqueStudentInfoList();
         for (Student student : students) {
             studentsInfo.add(new StudentInfo(student));
         }
-        for (String className : classes) {
-            this.lessons.add(new Lesson(className, studentsInfo));
+        for (String lessonName : lessons) {
+            this.lessons.add(new Lesson(lessonName, studentsInfo));
         }
         return this;
     }

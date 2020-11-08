@@ -32,7 +32,7 @@ public class ModelStubWithIndexFlagged extends ModelStub {
         List<Group> grpList = new ArrayList<>();
         this.uniqueGroup = new GroupBuilder().withName("G01")
                 .withStudents(AARON)
-                .withClasses("1-1").build();
+                .withLessons("1-1").build();
         grpList.add(uniqueGroup);
         UniqueList<Group> groupUniqueList = new UniqueGroupList();
         groupUniqueList.setElementsWithList(grpList);
