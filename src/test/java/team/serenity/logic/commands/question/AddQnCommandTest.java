@@ -14,10 +14,13 @@ import static team.serenity.testutil.question.TypicalQuestion.QUESTION_B_DESC;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.model.group.Group;
@@ -154,6 +157,9 @@ class AddQnCommandTest {
      */
     private class ModelStubAcceptingQuestionAdded extends ModelStub {
         final ArrayList<Question> questionAdded = new ArrayList<>();
+        final FilteredList<Question> filteredList = new FilteredList<>(
+                FXCollections.observableArrayList(this.questionAdded)
+        );
 
         @Override
         public ObservableList<Group> getFilteredGroupList() {
@@ -189,6 +195,11 @@ class AddQnCommandTest {
         public ReadOnlyQuestionManager getQuestionManager() {
             return new QuestionManager();
         }
+
+        @Override
+        public void updateFilteredQuestionList(Predicate<Question> predicate) {
+            this.filteredList.setPredicate(predicate);
+        }
     }
 
     /**
@@ -216,6 +227,8 @@ class AddQnCommandTest {
             return lessonUniqueList.asUnmodifiableObservableList();
         }
 
+        @Override
+        public void updateFilteredQuestionList(Predicate<Question> predicate) { }
     }
 
     /**
@@ -237,6 +250,9 @@ class AddQnCommandTest {
         public ObservableList<Lesson> getFilteredLessonList() {
             return new UniqueLessonList().asUnmodifiableObservableList();
         }
+
+        @Override
+        public void updateFilteredQuestionList(Predicate<Question> predicate) { }
     }
 
 }
