@@ -27,13 +27,19 @@ simple-to-use platform. The information that can be managed by Serenity includes
 The purpose of this Developer Guide is to help you understand the design
 and implementation of **Serenity** so that you can get started on your contributions to **Serenity**.
 
-## **2. Setting up, getting started**
+## **2. Setting Up**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
-## **3. Design**
+## **3. About**
 
-### **3.1 Architecture**
+### **3.1. Structure Of This Document**
+
+### **3.2. General Symbols And Syntax**
+
+## **4. Design**
+
+### **4.1. Architecture**
 
 (Contributed by Neo Rui En)
 
@@ -66,13 +72,13 @@ The Sequence Diagram in Figure 3.1.2 below shows how the components interact wit
 
 The sections below give more details of each component.
 
-### **3.2 UI Component**
+### **4.2. Ui Component**
 
 (Contributed by Neo Rui En)
 
 This segment will explain the structure and responsibilities of the Ui component.
 
-#### **3.2.1. Structure**
+#### **4.2.1. Structure**
 
 The Class Diagram given in Figure 3.2.1.1 below describes the structure of the Ui-related classes.
 
@@ -87,19 +93,19 @@ The `Ui` component uses <span><a href="#appendix-e-glossary" style="color:purple
 The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder.
 For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
-#### **3.2.2 Responsibilities**
+#### **4.2.2. Responsibilities**
 
 The `Ui` component,
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> can be updated with the modified data.
 
-### **3.3 Logic component**
+### **4.3. Logic Component**
 
 (Contributed by Neo Rui En)
 
 This segment will explain the structure and responsibilities of the `Logic`component.
 
-#### **3.3.1 Structure**
+#### **4.3.1. Structure**
 
 The Class Diagram given in Figure 3.3.1.1 below describes the structure of Logic-related classes.
 
@@ -111,7 +117,7 @@ From the diagram above, you can see that the `Logic` component is split into 2 g
 As Serenity follows a *Command* Pattern, a specific `XYZCommand` class will inherit from the abstract `Command` class.
 This allows the `LogicManager` to execute these commands without having to know each command type.
 
-#### **3.3.2 Responsibilities**
+#### **4.3.2. Responsibilities**
 
 The `Logic` component is in charge of command parsing from the commands given by the user through the `Ui` component. It is also responsible for command execution.
 
@@ -131,13 +137,13 @@ The diagram starts with the `execute("delgrp grp/G04")` API call.
 
 > :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 
-### **3.4 Model Component**
+### **4.4. Model Component**
 
 (Contributed by Ryan Lim)
 
 This segment will explain the structure and responsibilities of the Model component.
 
-#### **3.4.1 Structure**
+#### **4.4.1. Structure**
 
 <p align="center">
 <img alt="Class diagram of Model component" src="images/developerGuide/ModelClassDiagram.png" ></p>
@@ -166,7 +172,7 @@ The `UniqueXYZList` is a generic name given to the following unique list, these 
 
 Each unique list implements the `UniqueList` interface.
 
-#### **3.4.2 Responsibilities**
+#### **4.4.2. Responsibilities**
 
 The `Model` component,
 
@@ -175,13 +181,13 @@ The `Model` component,
 * Does not depend on the `Ui`, `Logic` and `Storage` components.
 * Contains observable data so that the <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> can automatically update upon data changes.
 
-### **3.5 Storage Component**
+### **4.5. Storage Component**
 
 (contributed by Ryan Lim)
 
 This segment will explain the structure and responsibilities of the Storage component.
 
-#### **3.5.1 Structure**
+#### **4.5.1. Structure**
 
 <p align="center">
 <img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png"/></p>
@@ -194,7 +200,7 @@ for reading and saving the Model component’s data from and to the hard disk in
 The `JsonSerenityStorage` is the implementation of the `SerenityStorage` interface
 which supports the storage of data in the application.
 
-#### **3.5.2 Responsibilities**
+#### **4.5.2. Responsibilities**
 
 The `Storage` component,
 
@@ -203,18 +209,18 @@ The `Storage` component,
 * Can save the Serenity data in a JSON format.
 * Can parse a JSON file in the correct format to get **Serenity** data.
 
-### **3.6 Common Classes**
+### **4.6. Common Classes**
 
 Classes used by multiple other components are in the `team.serenity.commons package` package.
 
-## **4. Implementation**
+## **5. Implementation**
 
 (contributed by Lim Chun Yong)
 
 This section describes some noteworthy details on how certain features are implemented.
 
 
-### **4.1 Feature Managers**
+### **5.1. Feature Managers**
 
 **Serenity** provides support for tutors to manage their classes in the following aspects:
 
@@ -234,12 +240,12 @@ These individual features are supported by an individual Manager
 
 When describing some common features across all managers, a typical manager shall be referred to as `XYZManager`.
 
-#### **4.1.1 Rationale**
+#### **5.1.1. Rationale**
 
 These five main `XYZManagers` provide a way for tutors to manage the different aspects of teaching a class,
 so as to facilitate teaching a class more effectively.
 
-#### **4.1.2 Current Implementation**
+#### **5.1.2. Current Implementation**
 
 This section describes the main implementation common across all `XYZManagers`.
 
@@ -268,16 +274,16 @@ This enables retrieval of a specific `UniqueList` of `Student` items in a tutori
 <p align="center"><i>Figure 4.1.2.1: Structure of <code>GroupManager</code>, an example of
 a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
 
-### **4.2 Group Manager**
+### **5.2. Group Manager**
 
 (contributed by Lim Chun Yong)
 
 The `GroupManager` is responsible for storing the tutorial groups taught by the Tutor.
 
-#### **4.2.1. Rationale**
+#### **5.2.1. Rationale**
 A tutor has multiple tutorial groups to teach, hence the implementation requires a way to store multiple tutorial groups.
 
-#### **4.2.2. Current Implementation**
+#### **5.2.2. Current Implementation**
 
 `GroupManager` contains a `UniqueList` that can store multiple unique `Group` items.
 
@@ -297,20 +303,20 @@ The sequence diagram below documents the execution.
 
 <p align="center"><i>Figure 4.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
-#### **4.2.3 Design Consideration**
+#### **5.2.3. Design Consideration**
 
 Encapsulating tutorial groups within a `GroupManager` follows the Separation of Concerns principle,
 by ensuring that all logic and functionality related to a Tutorial group is encapsulated within `GroupManager`.
 
-### **4.3 Lesson Manager**
+### **5.3. Lesson Manager**
 
 The `LessonManager` is responsible for storing lessons in a tutorial group
 
-#### **4.3.1 Rationale**
+#### **5.3.1. Rationale**
 
 Having a `LessonManager` allows for easy retrieval, viewing and updating of the lessons in a particular Tutorial Group.
 
-#### **4.3.2. Current Implementation**
+#### **5.3.2. Current Implementation**
 
 The `LessonManager` contains a `HashMap` whose key is a Group and value is a UniqueList.
 In this section, we detail the workflow of adding a lesson to an existing tutorial group through the `addlsn` command.
@@ -326,7 +332,7 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 4. The ModelManager’s `updateLessonList` method is called.
 5. The ModelManager then calls the method `setListOfLessonsToGroup` of `LessonManager`.
 
-#### **4.3.3. Design Consideration**
+#### **5.3.3. Design Consideration**
 
 **Aspect:** Number of UniqueLists to hold
 
@@ -335,13 +341,13 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 | **Option 1:** More than 1 | Easy retrieval of `UniqueList` of Lesson tagged to each `group` | Greater overhead, more testing and implementation involved
 | **Option 2 (current)**<br>One | Easy to implement, easier to retrieve all lessons taught by a single tutor | More difficult to retrieve lessons tied to a specific group |
 
-### **4.4 Student Manager**
+### **5.4. Student Manager**
 
 (Contributed by Neo Rui En)
 
 **Serenity** is responsible for storing students in tutorial groups.
 
-#### **4.4.1. Rationale**
+#### **5.4.1. Rationale**
 
 Tutors have to manage many students.
 At the start of the semester, many students may appeal to enter the tutorial group, swap tutorial groups
@@ -354,7 +360,7 @@ be in charge of doing that.
 The `StudentManager` will also be in charge of ensuring that the actions done on a tutorial group level
 are correctly applied to the students belonging to the specified tutorial group.
 
-#### **4.4.2. Current Implementation**
+#### **5.4.2. Current Implementation**
 
 The `StudentManager` contains a `HashMap` which key is a `GroupName` and value is a `UniqueList<Student>`.
 In this section, we will detail the workflow of adding a new student to an existing tutorial group
@@ -374,7 +380,7 @@ the `ModelManager`'s `updateFilteredGroupList` method is called.
 1. The `Ui` component detects this change and updates the <span style="color:purple"><i>GUI</i></span>.
 1. The `AddStudentCommand` creates `CommandResult` object and returns the result.
 
-#### **4.4.3. Design Consideration**
+#### **5.4.3. Design Consideration**
 
 **Aspect:** Deciding whether the students should be stored inside a `UniqueList<Students>` or
 a `HashMap<GroupName, UniqueList<Student>>`.
@@ -389,7 +395,7 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 * As we often need to access the list of students, we cannot afford the greater overhead involved in Option 1. Thus, we decided to opt for the option with greater efficiency.
 * As we will sort the list of students of a group after a student is added, we do not require the order of addition of students to be maintained.
 
-### **4.5 StudentInfo Manager**
+### **5.5. StudentInfo Manager**
 
 (contributed by Xin Yee)
 
@@ -400,13 +406,13 @@ The `StudentInfoManager` helps to collate all the information related to the stu
 attendance as well as participation score for each lesson.
 It contains a `UniqueStudentInfoList` which contains all the `StudentInfo` of every student for each lesson.
 
-#### **4.5.1. Rationale**
+#### **5.5.1. Rationale**
 
 The `StudentInfoManager` is an important feature to have because a tutor has to keep track of both the attendance
 as well as participation of every student. By putting the things to track under `StudentInfo`, it will be much
 easier for the teacher to track and is much more organised.
 
-#### **4.5.2. Current Implementation**
+#### **5.5.2. Current Implementation**
 The `StudentInfoManager` contains a `HashMap` whose key is a `GroupLessonKey` and value is a `UniqueList`.
 The following Class Diagram describes the structure of `StudentInfoManager` and its relevant classes.
 
@@ -443,7 +449,7 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 
 > :warning: If the index is not valid, an error will be thrown to prompt the user to choose another index.
 
-#### **4.5.3. Design Consideration**
+#### **5.5.3. Design Consideration**
 **Aspect:** Deciding between retrieving `StudentInfo` through deep nesting methods or using `HashMap` to retrieve `StudentInfo` with `GroupLessonKey`.
 
 |   |**Pros**|**Cons**|
@@ -457,7 +463,7 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 the code breaking if any intermediate classes are not functioning properly.
 * Option 2, despite being more complicated, solves our problem without adding much overhead. Thus, we decided option 2 is better.
 
-### **4.6 Question Manager**
+### **5.6. Question Manager**
 
 **Serenity** allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
 
@@ -467,13 +473,13 @@ command. The `findqn` command does not restrict users to find via only one keywo
 keywords, similar to a search bar. E.g. `findqn deadline report` will search and list all question entries with
 `deadline` and `report` in the `Question`'s description.
 
-#### **4.6.1. Rationale**
+#### **5.6.1. Rationale**
 
 The `QuestionManager` is an important feature to have because in any tutorial lesson, students will be asking tutors
 many questions, verbally or through virtual means such as Whatsapp or Telegram. Thus, we decided to create a question
 manager to manage and track all the questions asked during lessons.
 
-#### **4.6.2. Current Implementation**
+#### **5.6.2. Current Implementation**
 
 The current implementation of the `QuestionManager` only allows the user to keep track of a list of questions for each
 of the lessons for each tutorial group. It does not allow the user to add questions without a tutorial group and lesson.
@@ -501,7 +507,7 @@ The Sequence Diagram below summarises the aforementioned steps.
 <p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 4.6.2.2 Sequence diagram detailing execution of FindQnCommand"></p>
 <p align="center"><i>Figure 4.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
 
-#### **4.6.3. Design Consideration**
+#### **5.6.3. Design Consideration**
 
 **Aspect:** Deciding between storing a question in a global question list and a lesson-specified question list.
 
@@ -515,6 +521,15 @@ The Sequence Diagram below summarises the aforementioned steps.
 * The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
 * Both options have overheads when trying to view all questions and to view an individual lesson’s questions. However, option 2 is more costly and complicated to implement given the time constraints. Thus, we decided option 1 is better.
 
+## **6. Documentation**
+
+## **7. Logging**
+
+## **8. Testing**
+
+## **9. Configuration**
+
+## **10. Dev Ops**
 
 ## **Appendix A: Product Scope**
 
@@ -771,7 +786,8 @@ Given below are instructions to test the app manually.
 > :memo: Note: These instructions only provide a starting point for testers to work on;
 >testers are expected to do more **exploratory** testing.
 
-**Launch and Shutdown**
+### **F.1. Launch and Shutdown**
+
  1. Initial launch
     1. Download the jar file and copy into an empty folder
     1. Double-click the jar file Expected: Shows the <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span> with a set of sample contacts. The window size may not be optimum.
@@ -780,8 +796,7 @@ Given below are instructions to test the app manually.
     1. Re-launch the app by double-clicking the jar file.
     1. Expected: The most recent window size and location is retained.
 
-
-**Adding/Setting**
+### **F.2. Adding/Setting**
 
 Add a new tutorial group in **Serenity**.
  1. Prerequisites: XLSX file must be in the same folder as `Serenity`
@@ -804,13 +819,16 @@ Adding Student to a Group
  1. Other incorrect add group commands to try: `addstudent`, `addstudent grp/<NAME OF TUTORIAL GROUP>` `addstudent name/<NAME OF STUDENT>`
     1. Expected: Error message shown.
 
+### **F.3. Missing data files**
 
-**Data**
-
-Missing data files
 1. Test case: In the folder where **Serenity** is stored, delete `serenity.json` in `data` folder
     1. Expected: New tutorial group G01 created with two students, Aaron Tan and John Doe.
 
-<!-- Editing commented out because there is nothing here -->
+## **Appendix G: Effort**
 
+### **G.1. Major Enhancement**
+
+### **G.2. Challenges**
+
+### **G.3. Conclusion**
 
