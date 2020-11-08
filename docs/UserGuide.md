@@ -966,9 +966,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the information for tutorial group `G01`.
 
-<p align="center"><img src="images/view/viewgrp.png" 
-alt="User interface for viewing tutorial group"></p>
-
+<p align="center"><img src="images/userGuide/utilityViewing/viewgrp.png" 
+   alt="User interface for viewing tutorial group" border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.1.1 User interface for viewing tutorial group.</i></p>
 
 #### 4.5.2. View a tutorial lesson: `viewlsn`
@@ -994,9 +993,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the students' information for tutorial lesson `1-1` of tutorial group `G01`.
 
-<p align="center"><img src="images/view/viewlsn.png" 
-alt="User interface for viewing tutorial lesson"></p>
-
+<p align="center"><img src="images/userGuide/utilityViewing/viewlsn.png" 
+   alt="User interface for viewing tutorial lesson" border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.2.1 User interface for viewing tutorial lesson.</i></p>
 
 #### 4.5.3. View attendance sheet of a tutorial group: `viewatt`
@@ -1027,9 +1025,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the attendance sheet of tutorial group `G01`.
 
-<p align="center"><img src="images/view/viewatt.png" 
-alt="User interface for viewing tutorial attendance"></p>
-
+<p align="center"><img src="images/userGuide/utilityViewing/viewatt.png" 
+   alt="User interface for viewing tutorial attendance" border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.3.1 User interface for viewing tutorial attendance.</i></p>
 
 #### 4.5.4. View participation score sheet of a tutorial group: `viewscore`
@@ -1060,9 +1057,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the participation score sheet of tutorial group `G01`.
 
-<p align="center"><img src="images/view/viewscore.png" 
-alt="User interface for viewing tutorial participation score sheet"></p>
-
+<p align="center"><img src="images/userGuide/utilityViewing/viewscore.png" 
+   alt="User interface for viewing tutorial participation score sheet" border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.4.1 User interface for viewing tutorial participation score sheet.</i></p>
 
 #### 4.5.5. View flagged attendance: `viewflag`
@@ -1096,8 +1092,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the list of students with flagged attendance across all tutorial lessons.
 
-<p align="center"><img src="images/flaggedatt2.png" alt="User interface for viewing flagged attendance."></p>
-
+<p align="center"><img src="images/userGuide/utilityViewing/viewflagatt.png"
+   alt="User interface for viewing flagged attendance." border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.5.1 User interface showing the layout of the flagged attendance tab.</i></p>
 
 #### 4.5.6. View pending questions: `viewqn`
@@ -1132,9 +1128,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the list of pending questions asked across all tutorial lessons.
 
-<p align="center"><img src="images/view/viewqn.png" 
-alt="User interface for viewing questions"></p>
-
+<p align="center"><img src="images/userGuide/utilityViewing/viewqn.png" 
+   alt="User interface for viewing questions" border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.6.1 User interface for viewing questions.</i></p>
 
 --------------------------------------------------------------------------------------------------------------------
