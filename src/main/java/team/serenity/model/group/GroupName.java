@@ -1,6 +1,5 @@
 package team.serenity.model.group;
 
-import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.AppUtil.checkArgument;
 
 public class GroupName {
@@ -27,7 +26,7 @@ public class GroupName {
      * @param name A valid name.
      */
     public GroupName(String name) {
-        requireNonNull(name);
+        assert name != null;
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         this.groupName = name.toUpperCase();
     }
@@ -36,7 +35,7 @@ public class GroupName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        requireNonNull(test);
+        assert test != null;
         return test.matches(VALIDATION_REGEX);
     }
 
