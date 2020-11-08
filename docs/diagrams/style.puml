@@ -74,8 +74,9 @@ skinparam Participant {
 }
 
 skinparam activity {
-    BorderColor #8A7A94
-    BackgroundColor #E2D5E7
+    ArrowColor #FF0000
+    BorderColor #9673A6
+    BackgroundColor #E1D5E7
 }
 
 skinparam MinClassWidth 50
