@@ -702,7 +702,7 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
 
-<p align="center"><img src="images/userGuide/participationMarking/editscore_result.png" 
+<p align="center"><img src="images/userGuide/participationMarking/addscore_result.png" 
    alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.3.1.1 Screen displayed when the command is successfully executed.</i></p>
 
