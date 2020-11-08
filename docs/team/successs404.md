@@ -29,26 +29,26 @@ Given below are my contributions to the project.
 
     * What it does:
     
-       * Added the home page, which contains the tab panes for flagged attendance and pending questions.
+       * Adds the home page, which contains the tab panes for flagged attendance and pending questions.
        This page acts as the basis of Serenity. It is the default page shown when the user first enters Serenity, and
        Serenity transitions to this page after functions like `delgrp` is executed.
        
-       * Added the side bar, which contains buttons for flagged attendance, pending questions and tutorial groups.
+       * Adds the side bar, which contains buttons for flagged attendance, pending questions and tutorial groups.
        Pressing the flagged attendance and pending questions button leads to the respective tabs in the home page.
        Pressing the tutorial group buttons is akin to executing the `viewgrp` command, allowing users to
        conveniently access tutorial groups that were created previously.
        
-       * Modified the tutorial group page UI, such that the data panel for lessons and students are placed in
-       tab panes instead of split panes. Added tab panes for attendance and participation score sheets as well as
+       * Modifies the tutorial group page UI, such that the data panel for lessons and students are placed in
+       tab panes instead of split panes. Adds tab panes for attendance and participation score sheets as well as
        drafted the UI for TableView.
        
-       * Modified the tutorial lesson page UI by improving the layout and design of the lesson tab pane.
-       Added a tab pane for questions asked during the tutorial.
+       * Modifies the tutorial lesson page UI by improving the layout and design of the lesson tab pane.
+       Adds a tab pane for questions asked during the tutorial.
        
-       * Added a title for each page so that users can navigate between the home page, tutorial group page and
+       * Adds a title for each page so that users can navigate between the home page, tutorial group page and
         tutorial lesson page with greater clarity.
        
-       * `viewatt` and `viewscore` - Allow users to view the attendance sheet and participation score sheet
+       * `viewatt` and `viewscore` - Allows users to view the attendance sheet and participation score sheet
        of the specified tutorial group respectively.
        
        * `viewflag` - Allows users to view the flagged attendance records.
@@ -135,35 +135,61 @@ Given below are my contributions to the project.
     * Contributed to the minutes during weekly team meetings and consultations for future referencing.
 
 * **Enhancements to existing features**:
-    * Detected and fixed bugs for some features. ( Pull request 
-    [#269](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/269), 
-    [#271](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/271), 
-    [#277](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/277), 
-    [#300](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/300), 
-    [#301](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/301), 
-    [#319](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/319)) 
-    * Wrote additional tests for existing features to increase test coverage. ( Pull request
-    [#142](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/142), 
-    [#145](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/145),
-    [#146](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/146), 
-    [#148](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/148),
-    [#287](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/287),
-    [#290](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/290),
-    [#293](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/293))
-    * Improve code quality for certain commands to adhere to coding principles. ( Pull request [#199](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/199))
-    * Minor Improvements to UI [#272](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/272)
+    * Detected and fixed bugs for some features. ( Pull requests
+    [#125](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/125),
+    [#185](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/185),
+    [#196](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/196),
+    [#257](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/257),
+    [#282](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/282),
+    [#320](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/320)) 
+    * Wrote additional tests for existing features to increase test coverage. ( Pull requests
+    [#41](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/41),
+    [#320](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/320))
+    * Improve code quality for certain commands to adhere to coding principles. ( Pull requests
+    [#192](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/192),
+    [#320](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/320))
+    * Made improvements to UI. ( Pull requests
+    [#117](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/117),
+    [#160](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/160),
+    [#175](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/175),
+    [#180](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/180),
+    [#192](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/192),
+    [#195](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/195))
     
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `viewgrp`, `addlsn` and `dellsn`. ( Pull request [#119](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/119))
-        * Addressed documentation issues after initial peer review. ( Pull request [#154](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/154))
+        * Improved the Introduction section, added the About section, added documentation for the features
+        `addgrp`, `delgrp`, `exportatt`, `exportscore`
+        edited and standardised the documentation for the other features,
+        separated the Command Summary table into 5 tables where each table covers 1 main feature.
+        ( Pull request [#121](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/121))
+        * Updated the table of contents and fixed a minor UG bug.
+        ( Pull request [#129](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/129))
+        * Added details to the Layout of the GUI section,
+        added documentation for the features `viewatt`, `viewscore`, `viewflag`,
+        edited the other features to encapsulate the GUI changes,
+        updated the Command Summary table.
+        (Pull request [#201](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/201))
     * Developer Guide:
-        * Added implementation details for Lesson Manager. ( Pull request [#204](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/204))
+        * Added details for the Architecture, Ui component, Logic component and Student Manager.
+        ( Pull request [#281](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/281))
 
 * **Community**:
- * Reported bugs and suggestions for other teams in the class (examples: 
-    [1](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/231),
-    [2](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/230), 
-    [3](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/229),
-    [4](https://github.com/AY2021S1-CS2103T-T12-3/tp/issues/228))
+    * PR reviewed (with review comments): 
+    [#291](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/291)
+    * Reported bugs and suggestions for other teams in the class (examples:
+    [1](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/211),
+    [2](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/212), 
+    [3](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/213),
+    [4](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/214),
+    [5](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/215),
+    [6](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/216),
+    [7](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/217),
+    [8](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/218),
+    [9](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/219),
+    [10](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/220),
+    [11](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/221),
+    [12](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/222),
+    [13](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/223),
+    [14](https://github.com/AY2021S1-CS2103T-W13-4/tp/issues/224))
     
