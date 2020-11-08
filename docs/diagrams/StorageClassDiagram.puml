@@ -1,13 +1,13 @@
 @startuml
+skinparam linetype ortho
 !include style.puml
 
 hide member
 
 skinparam {
 arrowThickness 1.1
-arrowColor MediumAquaMarine
-classBackgroundColor #adcdff
-classBorderColor DeepSkyBlue
+arrowColor STORAGE_COLOR_T1
+classBackgroundColor STORAGE_COLOR_T1
 classBackgroundColor<<HiddenOutside>> #FFFFFF
 classBorderColor<<HiddenOutside>> #FFFFFF
 classFontColor<<HiddenOutside>> #FFFFFF

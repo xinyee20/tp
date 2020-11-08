@@ -1,8 +1,8 @@
 @startuml
+!include style.puml
 skinparam class {
-ArrowColor SeaGreen
-BackgroundColor LightSkyBlue
-BorderColor DodgerBlue
+ArrowColor MODEL_COLOR_T1
+BackgroundColor MODEL_COLOR_T1
 }
 hide members
 hide circle
