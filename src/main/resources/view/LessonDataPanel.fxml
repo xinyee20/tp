@@ -12,7 +12,7 @@
     </padding>
    <TabPane fx:id="tabPane" minHeight="-Infinity" minWidth="680.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@SerenityTheme.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
      <tabs>
-       <Tab text="Lesson">
+       <Tab text="Students">
             <content>
                 <ListView fx:id="studentInfoListView" />
             </content>
