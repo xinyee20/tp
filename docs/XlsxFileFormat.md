@@ -96,7 +96,7 @@ Should you try to upload a file with  correct headers but in the wrong order ont
 Students are the cornerstone of every tutorial group, therefore, files with student information missing will be rejected by Serenity, the example below
 is an example of a file without student information compared to a file typically downloaded from LumiNus.
 
-   <p align="center"><img src="images/fileFormats/fileWithoutStudents.png" 
+   <p align="center"><img src="images/fileFormats/fileMissingStudents.png" 
         alt="Comparison in format between a file with missing student information and a typical file downloaded from LumiNUS" border="1px solid black"></p>
    <p align="center"><i>Figure 7. Comparison in format between a file with missing student information and a typical file downloaded from LumiNUS.</i></p>
 
