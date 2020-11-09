@@ -72,7 +72,7 @@ from LumiNUS
 
 Should you try to upload a file without header column onto Serenity, Serenity will display an error message describing the error, an example is shown below
 
-   <p align="center"><img src="images/fileFormats/wrongHeaderColumnError" 
+   <p align="center"><img src="images/fileFormats/wrongHeaderColumnError.png" 
         alt="Serenity showing invalid header error" border="1px solid black"></p>
    <p align="center"><i>Figure 5.1. Serenity showing invalid header error.</i></p>
 
@@ -87,7 +87,7 @@ is an example of a file with correct headers but in the wrong order compared to 
 
 Should you try to upload a file with  correct headers but in the wrong order onto Serenity, Serenity will display an error message describing the error, an example is shown below
 
-   <p align="center"><img src="images/fileFormats/wrongHeaderColumnError" 
+   <p align="center"><img src="images/fileFormats/wrongHeaderColumnError.png" 
         alt="Serenity showing invalid header error" border="1px solid black"></p>
    <p align="center"><i>Figure 6.1. Serenity showing invalid header error.</i></p>
 
@@ -96,12 +96,12 @@ Should you try to upload a file with  correct headers but in the wrong order ont
 Students are the cornerstone of every tutorial group, therefore, files with student information missing will be rejected by Serenity, the example below
 is an example of a file without student information compared to a file typically downloaded from LumiNus.
 
-   <p align="center"><img src="images/fileFormats/fileWithoutStudents.png" 
+   <p align="center"><img src="images/fileFormats/fileMissingStudents.png" 
         alt="Comparison in format between a file with missing student information and a typical file downloaded from LumiNUS" border="1px solid black"></p>
    <p align="center"><i>Figure 7. Comparison in format between a file with missing student information and a typical file downloaded from LumiNUS.</i></p>
 
 Should you try to upload a file with missing student information onto Serenity, Serenity will display an error message describing the error, an example is shown below
 
-   <p align="center"><img src="images/fileFormats/MissingStudentError" 
+   <p align="center"><img src="images/fileFormats/MissingStudentError.png" 
         alt="Serenity showing no student error" border="1px solid black"></p>
    <p align="center"><i>Figure 7.1. Serenity showing no student error.</i></p>
