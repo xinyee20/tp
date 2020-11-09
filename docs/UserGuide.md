@@ -74,6 +74,8 @@ In [Section 4](#4-features), you can find details of the main features of **Sere
 In this subsection, you can find the explanation of the technical terms, symbols and syntax that are used in this
 User Guide.
 
+<div style="page-break-after: always;"></div>
+
 #### 3.2.1. Terminology related to the _GUI_
 
 The following figure shows the _GUI_ of **Serenity**. It is annotated with the name of the _GUI_ components.
@@ -99,6 +101,8 @@ existing tutorial groups.
 * _Result Display_: This is where **Serenity** displays guiding messages.
 
 * _Command Box_: This is where you type your commands.
+
+<div style="page-break-after: always;"></div>
 
 #### 3.2.2. Layout of the _GUI_
 
@@ -127,6 +131,8 @@ across your tutorial groups and lessons.
 
 </p>
 
+<div style="page-break-after: always;"></div>
+
 ##### Tutorial group page
 
 This page shows the information related to a tutorial group you are teaching. This page consists of: 
@@ -150,6 +156,8 @@ the class participation grades of all the students in the tutorial group across 
 
 </p>
 
+<div style="page-break-after: always;"></div>
+
 ##### Tutorial lesson page
 
 This page shows the records for a specific lesson. This page consists of:
@@ -172,9 +180,11 @@ you may add, edit, find or delete a [question](#44-question-addressing) that was
 
 The table below explains the general symbols and syntax used throughout the document.
 
+<div style="page-break-after: always;"></div>
+
 Symbol/syntax | Meaning
 --------|------------------
-`command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#323-command-syntax-and-usage).
+`command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#324-command-syntax-and-usage).
 _GUI_ | This indicates a graphical component, such as a button, layout format and text input box.
 :information_source: | This indicates a note.
 :bulb: | This indicates a tip.
@@ -192,6 +202,8 @@ Parameter | The word or phrase following the command word that provides further 
 Prefix | The letter that is placed at the start of each parameter to distinguish one parameter from another.
 XLSX | The excel file format that **Serenity** handles for imports and exports.
 
+<div style="page-break-after: always;"></div>
+
 #### 3.2.5. Command format
 
 You can use commands to tell **Serenity** to perform a specific task.
@@ -202,12 +214,8 @@ You can use commands to tell **Serenity** to perform a specific task.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: **Notes regarding the command format:**
-
-* Words in upper case are the parameters to be supplied by you.<br>
+:information_source: **Note:** Words in upper case are the parameters to be supplied by you.<br>
   e.g. in `viewgrp grp/GROUP_NAME`, `GROUP_NAME` is a parameter which can be used as `viewgrp grp/G01`
-* Parameters have to be in the specified order.<br>
-  e.g. if the command specifies `grp/GROUP_NAME lsn/LESSON_NAME`, `lsn/LESSON_NAME grp/GROUP_NAME` is not acceptable.
 
 </div>
 
@@ -228,6 +236,8 @@ Analysis:
 * Prefix: `grp/`, `lsn/`
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **4. Features**
 
@@ -339,6 +349,8 @@ After deleting a tutorial group, the button named after the tutorial group will 
 
 You accidentally added the wrong tutorial group `G01` and you decided to remove the tutorial group.
 
+<div style="page-break-after: always;"></div>
+
 Deleting an existing tutorial group:
 
 1. Type `delgrp grp/G01` into the _Command Box_.
@@ -405,6 +417,8 @@ Deleting an existing lesson from a tutorial group:
 
 1. Type `dellsn grp/G01 lsn/1-1` into the _Command Box_.
 2. Press `Enter` to execute.
+
+<div style="page-break-after: always;"></div>
 
 Outcome:
 
@@ -474,6 +488,8 @@ Outcome:
 
 </p>
 
+<div style="page-break-after: always;"></div>
+
 ### 4.2. Attendance taking
 
 Need to mark attendance of your students at the start of each lesson quickly?
@@ -518,6 +534,8 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.2. Mark a student as present: `markpresent`
 
@@ -586,6 +604,8 @@ You can use this command to mark a specific student as absent for a tutorial les
 A student named `Aaron Tan` with student number `A0123456A` is absent for your tutorial lesson `1-2` of tutorial group `G01`.
 `Aaron Tan` is the first person on the student list so his `index` number is 1. 
 
+<div style="page-break-after: always;"></div>
+
 <ins>Method 1</ins> <br>
 Marking a student as absent for a tutorial lesson by `name` and `student number`:
 
@@ -612,6 +632,8 @@ Outcome:
 <i>Figure 4.2.3.1 Screen displayed when the command is successfully executed.</i>
 
 </p>
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.4. Mark all students as absent: `markabsent all`
 
@@ -657,6 +679,8 @@ attendance at the end of class.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example:**
 
 A student named `Aaron Tan` with student number `A0123456A` from your tutorial group `G01` decided to join
@@ -681,6 +705,8 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. His attendance will now be flagged for future follow-up actions.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.6. Unflag attendance of a student: `unflagatt`
 
@@ -723,6 +749,8 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. His attendance will now be unflagged.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.7. Export attendance as XLSX file: `exportatt`
 
@@ -835,6 +863,8 @@ Outcome:
    alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.3.1.1 Screen displayed when the command is successfully executed.</i></p>
 
+<div style="page-break-after: always;"></div>
+
 #### 4.3.2. Subtract participation score of a student: `subscore`
 
 You can use this command to decrease the participation score of a specific student for a tutorial lesson.
@@ -880,6 +910,8 @@ Subtracting participation score of a student in a tutorial lesson:
 2. Type `subscore 1 score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
+<div style="page-break-after: always;"></div>
+
 Outcome:
 
 1. The _Result Display_ will show a success message.
@@ -924,6 +956,8 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.3.4. Export participation scores as XLSX file: `exportscore`
 
@@ -1041,6 +1075,8 @@ You can use this command to edit an existing question that was asked in a tutori
   
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example:**
 
 Suppose you have accidentally made a spelling mistake in the `First` question in the displayed list and 
@@ -1080,6 +1116,8 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the list of questions with the keyword `deadline`.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.5 Utility viewing
 
@@ -1147,6 +1185,8 @@ Viewing a tutorial lesson:
 1. Type `viewlsn grp/G01 lsn/1-1` into the _Command Box_.
 2. Press `Enter` to execute.
 
+<div style="page-break-after: always;"></div>
+
 Outcome:
 
 1. The _Result Display_ will show a success message.
@@ -1171,6 +1211,8 @@ The attendance sheet will be displayed in table form.
     
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Format:**
 
 `viewatt grp/GROUP_NAME`
@@ -1192,6 +1234,8 @@ Outcome:
 <p align="center"><img src="images/userGuide/utilityViewing/viewatt.png" 
    alt="User interface for viewing tutorial attendance" border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.3.1 User interface for viewing tutorial attendance.</i></p>
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.4. View participation score sheet of a tutorial group: `viewscore`
 
@@ -1275,6 +1319,8 @@ Outcome:
    alt="User interface for viewing flagged attendance." border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.5.1 User interface showing the layout of the flagged attendance tab.</i></p>
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.6. View pending questions: `viewqn`
 
 You can use this command to view questions that were asked across all tutorial lessons
@@ -1350,6 +1396,8 @@ Command | Example
 **Add student** <br> `addstudent grp/GROUP_NAME name/STUDENT_NAME matric/STUDENT_NUMBER` | <br>`addstudent grp/G01 name/David Chong matric/A0123456D`
 **Delete student** <br> - `delstudent grp/GROUP_NAME name/STUDENT_NAME matric/STUDENT_NUMBER`<br> - `delstudent INDEX grp/GROUP` | <br> - `delstudent grp/G01 name/Aaron Tan matric/A0123456A` <br> - `delstudent 1 grp/G01`
 
+<div style="page-break-after: always;"></div>
+
 ### 6.2. Attendance taking commands
 
 Command | Example
@@ -1362,6 +1410,8 @@ Command | Example
 **Unflag attendance** <br> - `unflagatt name/STUDENT_NAME matric/STUDENT_NUMBER` <br> - `unflagatt INDEX` | <br> - `unflagatt name/Aaron Tan matric/A0123456A`<br> - `unflagatt 1` 
 **Export attendance** <br> `exportatt grp/GROUP_NAME` | `exportatt grp/G01`
 
+<div style="page-break-after: always;"></div>
+
 ### 6.3. Participation marking commands
 
 Command | Example
@@ -1371,6 +1421,8 @@ Command | Example
 **Subtract participation score** <br> - `subscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE` <br> - `subscore INDEX score/SCORE` | <br>- `subscore name/Aaron Tan matric/A0123456A score/2` <br> - `subscore 1 score/2`
 **Export participation scores** <br> `exportscore grp/GROUP_NAME` | <br>`exportscore grp/G01`
 
+<div style="page-break-after: always;"></div>
+
 ### 6.4. Question addressing commands 
 
 Command | Example
@@ -1379,6 +1431,8 @@ Command | Example
 **Delete question** <br> `delqn INDEX` | `delqn 1`
 **Edit question** <br> `editqn INDEX [grp/GROUP_NAME] [lsn/LESSON_NAME] [qn/QUESTION]` | `editqn 1 qn/Can you repeat the deadlines for all submissions?`
 **Find question** <br> `findqn KEYWORD [MORE_KEYWORDS]...` | `findqn deadline`
+
+<div style="page-break-after: always;"></div>
 
 ### 6.5. Utility viewing commands 
 
