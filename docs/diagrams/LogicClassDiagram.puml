@@ -5,6 +5,13 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T1
 skinparam classBackgroundColor LOGIC_COLOR_T1
 
+skinparam {
+classBackgroundColor<<HiddenOutside>> #FFFFFF
+classBorderColor<<HiddenOutside>> #FFFFFF
+classFontColor<<HiddenOutside>> #FFFFFF
+classStereotypeFontColor<<HiddenOutside>> #FFFFFF
+}
+
 package Logic {
 
 package Parser {
@@ -29,10 +36,10 @@ Class LogicManager
 }
 
 package Model{
-Class HiddenModel #FFFFFF
+Class HiddenModel<<HiddenOutside>> #FFFFFF
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside<<HiddenOutside>> #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .up.|> Logic
@@ -54,9 +61,9 @@ LogicManager .right.> Command : executes >
 
 LogicManager -left-> Model
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddGrpCommand, \nMarkPresentCommand, etc
+note bottom of XYZCommand: XYZCommand =\nAddGrpCommand,\nEditQnCommand, etc
 
-Logic ..> CommandResult
+Logic .> CommandResult
 LogicManager .down.> CommandResult
 Command .up.> CommandResult
 CommandResult -[hidden]-> Parser

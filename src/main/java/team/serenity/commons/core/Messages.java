@@ -52,6 +52,8 @@ public class Messages {
 
     public static final String MESSAGE_NO_FLAGGED_ATTENDANCE = "There is no flagged attendance to follow up with.";
     public static final String MESSAGE_NO_PENDING_QUESTIONS = "There are no pending questions to answer.";
+    public static final String MESSAGE_NO_QUESTIONS =
+        "There are no pending questions to answer in this lesson. You may use addqn command to add a question.";
     public static final String MESSAGE_NO_STUDENTS =
         "There are no students in this group. You may use addstudent command to add a student.";
     public static final String MESSAGE_NO_LESSONS =
