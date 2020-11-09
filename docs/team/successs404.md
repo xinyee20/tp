@@ -17,17 +17,13 @@ Given below are my contributions to the project.
 
     * What it does:
     
-       * Adds the home page and the side bar.
+        * Adds the home page and the side bar. Modifies the tutorial group page UI and tutorial lesson page UI.
+        Adds a title for each page so that users can navigate between the home page, tutorial group page and tutorial lesson page with greater clarity.
        
-       * Modifies the tutorial group page UI and tutorial lesson page UI.
+        * `viewatt` and `viewscore` - Allows users to view the attendance sheet and participation score sheet
+        of the specified tutorial group respectively.
        
-       * Adds a title for each page so that users can navigate between the home page, tutorial group page and
-        tutorial lesson page with greater clarity.
-       
-       * `viewatt` and `viewscore` - Allows users to view the attendance sheet and participation score sheet
-       of the specified tutorial group respectively.
-       
-       * `viewflag` - Allows users to view the flagged attendance records.
+        * `viewflag` - Allows users to view the flagged attendance records.
     
     * Justification: This enhancement allows users to easily navigate within Serenity and enhances the visuals of the
     information presented, improving the user experience. This enhancement also encapsulates more features within the
@@ -37,8 +33,6 @@ Given below are my contributions to the project.
     The implementation was challenging as the information handled by the Model components have to be correctly
     processed to be displayed in the Ui. Some Ui components also involve execution of commands and they require
     modifications to be made to the Logic components.
-    The implementation was time-consuming as well as it requires understanding of how JavaFX displays data.
-    Time was also spent to analyse how the css files affect the display of JavaFX components.
     
 * **New Feature 2**: Incorporated Excel XLSX file support
 
@@ -50,8 +44,7 @@ Given below are my contributions to the project.
         
         * `exportscore` - Allows users to export participation score sheet of a specified tutorial group as a XLSX file.
         
-    * Justification: This implementation improves user experience and differentiates our app from others.
-    The XLSX file support allows users to conveniently create a new tutorial group without having to manually add
+    * Justification: The XLSX file support allows users to conveniently create a new tutorial group without having to manually add
     students into the tutorial group in the app. Furthermore, the XLSX file support helps users who work part-time
     (i.e. part-time CS2101 tutors) to easily export attendance sheet for submission to receive their salary claims.
     Being able to export attendance and participation score sheets also enable users to save the XLSX files for
@@ -61,10 +54,7 @@ Given below are my contributions to the project.
     as well as the APACHE POI library for XLSX file support. Time was spent to think about what makes a XLSX file
     valid for Serenity, i.e. what are the information that must be present in the XLSX file for Serenity to successfully
     read and create a new tutorial group. Consequently, some time was spent to set up a series of error messages to be
-    displayed to the user, should invalid XLSX files be supplied. The implementation of the exporting features was
-    challenging as the information handled by the Model components
-    (Group, Lesson, Student, StudentInfo, Attendance, Participation, etc.) have to be correctly processed and
-    written to the XLSX output file.
+    displayed to the user, should invalid XLSX files be supplied.
     
 * **New Feature 3**: Added the ability to add and delete tutorial groups through commands
 
@@ -80,19 +70,6 @@ Given below are my contributions to the project.
     
     * Highlights: Moderate amount of effort was made as implementation of the commands was rather straightforward.
     Though some time was spent to fix the Ui and Storage bugs concerning the commands.
-
-* **New Feature 4**: Established the initial setup of the Storage components
-
-    * What it does: Stores the tutorial group data in the application as a JSON file.
-    
-    * Justification: This enhancement establishes the foundation of the Storage components of the application.
-    The other group members subsequently added further details to the Storage components, where they allowed
-    more Model components (StudentInfo, Attendance, Participation, etc.) to be stored inside the JSON file and
-    allowed data to be loaded from the previous session.
-    
-    * Highlights: This enhancement requires the analysis of the Storage and Model component.
-    Time was spent to convert the Model components (Group, Lesson, Student) into Jackson-friendly versions to store
-    in a JSON file.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=successs404&tabRepo=AY2021S1-CS2103T-W12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other)
 
