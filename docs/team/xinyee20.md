@@ -20,18 +20,17 @@ Given below are my contributions to the project.
       * `flagatt` - Allows the users to flag attendance of a student when necessary while in lesson view
       * `unflagatt` - Allows the users to un-flag the attendance of a student after settling issue of the flagged 
                       student while in lesson view
-  * Justification: This feature improves the product significantly because it is helps a user to keep track of the 
+  * Justification: This feature improves the product significantly because it helps a user keep track of the 
                    attendance of students during tutorial lessons. The ability to mark attendance quickly increases 
-                   the efficiency of lessons. The ability to flag attendance of students help users keep track of 
+                   the efficiency of lessons. The ability to flag students' attendance allows user to keep track of 
                    the attendance of students in special cases where they have to go for replacement lessons.
-  * Highlights: The implementation of this feature was tricky as students were originally deeply nested within a group. A lot of 
-                discussion and analysis of the structure of the whole project and the relationship between `Group`s, `Lesson`s,
-                `Student`s was done so as to reduce the nesting. Changes had to be made to the implementation of the commands 
+  * Highlights: The implementation of this feature was tricky as students were originally deeply nested within a group. A series of 
+                discussions and analysis of the project structure (Relationship between `Group`, `Lesson`,
+                `Student`) was done so as to reduce the nesting. Changes had to be made to the implementation of the commands 
                 to infuse in the `Manager`s. Another highlight was that the mark attendance commands that are applied to all the
-                students in the class did not run very fast so we had to look into how we can optimise the code to make it run
+                students in the class were slow so we had to look into how we can optimise the code to make it run
                 faster. All these major changes made the implementation of the code very time-consuming and rather challenging.
                 
-
 * **New Feature 2**: Added the ability to award and adjust participation scores of students during lessons
   * What it does: 
     * `editscore` - Allows the users to edit the participation score of a student when viewing a lesson
@@ -41,9 +40,9 @@ Given below are my contributions to the project.
                        keep track of the score of students during tutorial lessons.
   * Highlights: The implementation of this feature required some thinking through at the start as we try to take into 
                 consideration the users' needs without making the command too complicated to use. As this feature has 
-                quite a few restrictions in terms of input of score, quite some time was spent testing the commands and 
+                quite a few restrictions in terms of input of score, considerable amount of time was spent testing the commands and 
                 adjusting the code, making sure that proper messages are shown when different exceptions are thrown, 
-                to guide users who misuse the commands.
+                to guide users who may misuse the commands.
     
 * **New Feature 3**: Added the ability to use indexing to apply commands to existing students. 
   * What it does: Allows users to apply deleting of students when in group view and the marking, flagging attendance 
@@ -54,12 +53,12 @@ Given below are my contributions to the project.
                    increasing the efficiency of lessons.
   * Highlights: The implementation of this feature was rather challenging. The data in our application is obtained 
                 from excel sheets that are imported into the application. I realised that the usage of `Set` to store the 
-                data result in the data list being unordered which is not very desirable for the users if they were to see
+                data result in the data list being unordered which is not desirable for the users if they were to see
                 the list of students in different order every time they open the application. I looked into the usage of 
                 `Comparator` to sort the list and made use of `LinkedHashSet` so that all the `Lesson`s, `Student`s, 
                 `StudentInfo`s are sorted in the list shown in the GUI. Another highlight is that implementing index on top 
-                of name and matriculation made me realise that there are many permutations of the usage of the commands 
-                so more rigorous testing had to be done and more conditions were added to cover the various scenarios.
+                of name and matriculation number made me realise that there are many permutations of the usage of the commands. 
+                More rigorous testing had to be done and more conditions were added to cover the various scenarios.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=xinyee20&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
@@ -71,8 +70,6 @@ Given below are my contributions to the project.
   * Reviewing and merging of PRs before deadlines.
   
 * **Enhancements to existing features**:
-    * Improve consistency of error messages. ( Pull requests 
-    [#172](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/172))
     * Detected and fixed bugs for some features. ( Pull request 
     [#87](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/87),
     [#112](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/112),
@@ -88,7 +85,8 @@ Given below are my contributions to the project.
     [#280](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/280),
     [#291](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/291),
     [#357](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/357))
-    * Improve code quality for certain commands to adhere to coding principles. ( Pull request 
+    * Improve consistency of error message and code quality for certain commands to adhere to coding principles. ( Pull request 
+    [#172](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/172),
     [#188](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/188),
     [#291](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/291))
 
