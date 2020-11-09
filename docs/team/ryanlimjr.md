@@ -6,7 +6,6 @@ title: Ryan's Project Portfolio Page
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
 It is written in Java, and has about 25k LoC.
-e-taking application.
 ### Summary of contributions
 * **New Feature 1**: Implemented UI data panels to display group, lesson and question data respectively 
 and ability to view a tutorial group's detail
