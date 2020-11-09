@@ -913,7 +913,7 @@ from all team members**.
 The development of **Serenity** involves huge enhancements from **Address Book 3**.
 The following points highlights the major enhancements that we have incorporated into **Serenity**.
 
-* From just keeping track of different `Person` objects in **AB3** ,
+* From just keeping track of different `Person` objects in **Address Book 3** ,
 **Serenity** is a major upgrade as it is an all-in-one application that allows the user to keep track of different
 `Group`, `Lesson`, `Student` objects. The association class `StudentInfo` was created for each `Student` in every
 tutorial `Lesson` to keep track of the student's `Attendance` and `Participation` score.
@@ -921,11 +921,11 @@ The `Question` class was also designed to handle the questions asked by students
 Following the Law of Demeter, the `Group`, `Lesson`, `Student`, `StudentInfo` and `Question` classes were
 further refactored into [Feature Managers](#51-feature-managers) to minimize coupling between the classes.
 
-* While the `Ui` of *AB3* contains only 1 `ListView`, **Serenity** has 6 `ListViews` and 2 `TableViews`.
+* While the `Ui` of *Address Book 3* contains only 1 `ListView`, **Serenity** has 6 `ListViews` and 2 `TableViews`.
 These views were placed in `TabPanes` and they were spread out across 3 pages - the home page, the tutorial group page and
 the tutorial lesson page. Furthermore, **Serenity** has additional _TitleDisplay_ and _SideBar_ `Ui` components that
 show the title of the page the user is viewing and the shortcut buttons respectively.
-These changes allowed the `Ui` of **Serenity** to be significantly more appealing than that of **AB3**'s.
+These changes allowed the `Ui` of **Serenity** to be significantly more appealing than that of **Address Book 3**'s.
 
 * **Serenity** has Excel XLSX support that allows data to be imported and exported.
 Users are able to efficiently add a new tutorial group by importing a XLSX file containing a list of students and
