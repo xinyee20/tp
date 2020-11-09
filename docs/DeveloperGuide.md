@@ -259,6 +259,8 @@ The Class Diagram given in Figure 4.5.1.1 below describes the structure of Stora
 
 <p align="center"><i>Figure 4.5.1.1 Class diagram of <code>Storage</code> component.</i></p>
 
+<div style="page-break-after: always;"></div>
+
 The `UserPrefStorage` interface, `SerenityStorage` interface, and the `QuestionStorage` interface defines the API
 for reading and saving the Model component’s data from and to the hard disk in JSON format.
 
@@ -398,7 +400,7 @@ by ensuring that all logic and functionality related to a Tutorial group is enca
 
 (Contributed by Ryan Lim)
 
-The `LessonManager` is responsible for storing lessons in a tutorial group
+The `LessonManager` is responsible for storing lessons in a tutorial group.
 
 #### 5.3.1. Rationale
 
@@ -457,6 +459,8 @@ be in charge of doing that.
 
 The `StudentManager` will also be in charge of ensuring that the actions done on a tutorial group level
 are correctly applied to the students belonging to the specified tutorial group.
+
+<div style="page-break-after: always;"></div>
 
 #### 5.4.2. Current Implementation
 
