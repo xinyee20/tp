@@ -497,7 +497,8 @@ then mark some students as absent afterwards. You can then start your tutorial l
 
 <div markdown="block" class="alert alert-danger">
 
-:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+:warning: **Warning:** 
+You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 </div>
 
@@ -516,10 +517,6 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
-
-<p align="center"><img src="images/userGuide/attendanceTaking/markpresent_all_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.1.1 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.2.2. Mark a student as present: `markpresent`
 
@@ -561,6 +558,13 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
+<p align="center">
+
+<img src="images/userGuide/attendanceTaking/markpresent_result.png" alt="Result upon successful execution of command">
+<i>Figure 4.2.2.1 Screen displayed when the command is successfully executed.</i>
+
+</p>
+
 #### 4.2.3. Mark a student as absent: `markabsent`
 
 You can use this command to mark a specific student as absent for a tutorial lesson.
@@ -599,13 +603,12 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-<p align="center"><img src="images/userGuide/attendanceTaking/markabsent_command.png" 
-   alt="Command box for markabsent command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.3.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present initially.</i></p>
+<p align="center">
 
-<p align="center"><img src="images/userGuide/attendanceTaking/markabsent_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.3.2 Screen displayed when the command is successfully executed. Note how Aaron's attendance is now absent.</i></p>
+<img src="images/userGuide/attendanceTaking/markabsent_result.png" alt="Result upon successful execution of command">
+<i>Figure 4.2.3.1 Screen displayed when the command is successfully executed.</i>
+
+</p>
 
 #### 4.2.4. Mark all students as absent: `markabsent all`
 
