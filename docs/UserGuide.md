@@ -346,7 +346,7 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 `addlsn grp/GROUP_NAME lsn/LESSON_NAME`
 
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** LESSON_NAME follows the format 'X-Y' where X is the week number, and Y is the lesson number. There can be 
 more than 9 weeks (as in 10-1) but not more than 9 lessons in a week (1-10 would be invalid).
@@ -475,7 +475,7 @@ then mark some students as absent afterwards. You can then start your tutorial l
 
 `markpresent all`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -509,7 +509,7 @@ You can use this command to mark a specific student as present for a tutorial le
 <br>`markpresent name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`markpresent INDEX`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -549,7 +549,7 @@ You can use this command to mark a specific student as absent for a tutorial les
 <br>`markabsent name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`markabsent INDEX`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -595,7 +595,7 @@ all students in a tutorial group back as absent for a tutorial lesson.
 **Format:** 
 `markabsent all`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -625,7 +625,7 @@ attendance at the end of class.
 <br>`flagatt name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`flagatt INDEX`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -666,7 +666,7 @@ using `unflagatt` command.
 <br>`unflagatt name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`unflagatt INDEX`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -760,7 +760,7 @@ Participation score scale from 1 to 5:
 
 You can use this command to increase the participation score of a specific student for a tutorial lesson.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning regarding the `addscore` command:**
 
@@ -773,7 +773,7 @@ The maximum score is 5.
 <br>`addscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE_TO_ADD`
 <br>`addscore INDEX score/SCORE_TO_ADD`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -813,7 +813,7 @@ Outcome:
 
 You can use this command to decrease the participation score of a specific student for a tutorial lesson.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning regarding the `subscore` command:**
 
@@ -827,7 +827,7 @@ The minimum score is 0.
 <br>`subscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE`
 <br>`subscore INDEX score/SCORE`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -867,7 +867,7 @@ You can use this command to edit participation score of a specific student in a 
 <br>`editscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE`
 <br>`editscore INDEX score/SCORE`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
@@ -946,7 +946,7 @@ in the future.
 
 `addqn qn/QUESTION`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-danger">
 
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
