@@ -110,8 +110,12 @@ This is the default page shown when the app is started. This page consists of:
 the `flagatt` command. Flagging a student's attendance serves as a reminder on the first page of the app
 for you to check on the student and perform any follow-up actions, if necessary. 
 
-> :bulb: TIP: Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and 
->proceed with teaching. With the flag attendance tab, you will be reminded to check again after class.
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **TIP:** Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and proceed 
+with teaching. With the flag attendance tab, you will be reminded to check again after class.
+
+</div>
 
 <p align="center"><img src="images/userGuide/pages/HomePageFlagAttTab.png" 
    alt="Picture of flag attendance GUI" border="1px solid black"></p>
@@ -247,9 +251,14 @@ You can use this command to add a new tutorial group automatically from XLSX dat
 >    ◦ Copy and paste the XLSX file into the same folder as your **Serenity** application, then type the name of the XLSX file.<br>
 >      e.g. `addgrp grp/G04 path/CS2101_G04.xlsx`
 
-> :bulb: **Tip for the `addgrp` command:**
-> After adding a tutorial group, a button will be created. It allows you to easily navigate to the group in the future,
-> as pressing the button equals to typing the `viewgrp grp/GROUP_NAME` command.
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip for the `addgrp` command:**
+
+After adding a tutorial group, a button will be created. It allows you to easily navigate to the group in the future,
+as pressing the button equals to typing the `viewgrp grp/GROUP_NAME` command.
+
+</div>
 
 **Format:**
 
@@ -427,9 +436,14 @@ This feature allows you to mark attendance of students easily.
 
 You can use this command to mark all students in a tutorial group as present for a tutorial lesson.
 
-> :bulb: **Tip for the `markpresent all` command:**
-> You can conveniently mark all students as present at once in the beginning of the tutorial lesson,
-> then mark some students as absent afterwards. You can then start your tutorial lesson without much hassle.
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip for the `markpresent all` command:**
+
+You can conveniently mark all students as present at once in the beginning of the tutorial lesson,
+then mark some students as absent afterwards. You can then start your tutorial lesson without much hassle.
+
+</div>
 
 **Format:** 
 
@@ -638,9 +652,14 @@ Outcome:
 
 You can use this command to export the attendance sheet of a specific tutorial group as a new Excel file.
 
-> :bulb: **Tip for the `exportatt` command:**
-> You can conveniently obtain the soft copy version of the attendance sheet for
-> attendance list submission as part of NUS Centre for English Language Communication requirements.
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip for the `exportatt` command:**
+
+You can conveniently obtain the soft copy version of the attendance sheet for
+attendance list submission as part of NUS Centre for English Language Communication requirements.
+
+</div>
 
 > :memo: **Note regarding the `exportatt` command:**
 > The attendance sheet will be saved as a XLSX file named after the tutorial group.
@@ -954,9 +973,14 @@ The following commands allow you to navigate between different views.
 You can use this command to view the list of students and tutorial lessons of a tutorial group.
 You will also be able to execute tutorial group-related commands.
 
-> :bulb: **Tip for the `viewgrp` command:**
-> You can easily navigate to the tutorial group by pressing its button in the Side_Bar as well!
-> Pressing the tutorial group's button equals to typing this command.
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip for the `viewgrp` command:**
+
+You can easily navigate to the tutorial group by pressing its button in the Side_Bar as well!
+Pressing the tutorial group's button equals to typing this command.
+    
+</div>
 
 **Format:**
 
@@ -1083,14 +1107,24 @@ Outcome:
 
 You can use this command to view students with their attendance marked as flagged across all tutorial lessons.
 
-> :bulb: **Tip for the `viewflag` command:**
-> You can easily navigate to the flagged attendance list by pressing the "Flag" button in the Side_Bar as well!
-> Pressing the button equals to typing this command.
+<div markdown="block" class="alert alert-primary">
+    
+:bulb: **Tip for the `viewflag` command:**
 
-> :bulb: **Tip for the `viewflag` command:**
-> Instead of viewing flagged attendance across all tutorial lessons,
-> you can view flagged attendance for a specific tutorial lesson by
-> entering the tutorial lesson page using `viewlsn` and scrolling through the "Lesson" tab in the page.
+You can easily navigate to the flagged attendance list by pressing the "Flag" button in the Side_Bar as well!
+Pressing the button equals to typing this command.
+    
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip for the `viewflag` command:**
+
+Instead of viewing flagged attendance across all tutorial lessons,
+you can view flagged attendance for a specific tutorial lesson by
+entering the tutorial lesson page using `viewlsn` and scrolling through the "Lesson" tab in the page.
+
+</div>
 
 **Format:**
 
@@ -1119,14 +1153,24 @@ Outcome:
 You can use this command to view questions that were asked across all tutorial lessons
 and have yet to be addressed.
 
-> :bulb: **Tip for the `viewqn` command:**
-> You can easily navigate to the pending questions list by pressing the "Qns" button in the Side_Bar as well!
-> Pressing the button equals to typing this command.
+<div markdown="block" class="alert alert-primary">
+    
+:bulb: **Tip for the `viewqn` command:**
 
-> :bulb: **Tip for the `viewqn` command:**
-> Instead of viewing pending questions across all tutorial lessons,
-> You can view questions for a specific tutorial lesson by
-> entering the tutorial lesson page using `viewlsn` and pressing the "Questions" tab in the page.
+You can easily navigate to the pending questions list by pressing the "Qns" button in the Side_Bar as well!
+Pressing the button equals to typing this command.
+    
+</div>
+
+<div markdown="block" class="alert alert-primary">
+    
+:bulb: **Tip for the `viewqn` command:**
+
+Instead of viewing pending questions across all tutorial lessons,
+You can view questions for a specific tutorial lesson by
+entering the tutorial lesson page using `viewlsn` and pressing the "Questions" tab in the page.
+    
+</div>
 
 **Format:**
 
