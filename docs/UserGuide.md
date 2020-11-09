@@ -80,7 +80,7 @@ The following figure shows the _GUI_ of **Serenity**. It is annotated with the n
 <p align="center">
 
 <img src="images/userGuide/GuiAnnotated.png" alt="Layout of GUI">
-<i>Figure 3.2.1.1 Annotated GUI of Serenity.</i>
+<i>Figure 3.2.1.1 Annotated GUI of <b>Serenity</b>.</i>
     
 </p>
 
@@ -122,7 +122,7 @@ across your tutorial groups and lessons.
 <p align="center">
 
 <img src="images/userGuide/pages/HomePage.png" alt="Home page of Serenity" border="1px solid black">
-<i>Figure 3.2.2.1 Home page of **Serenity**.</i>
+<i>Figure 3.2.2.1 Home page of <b>Serenity</b>.</i>
 
 </p>
 
@@ -145,7 +145,7 @@ the class participation grades of all the students in the tutorial group across 
 <p align="center">
 
 <img src="images/userGuide/pages/GroupPage.png" alt="Group page of Serenity" border="1px solid black">
-<i>Figure 3.2.2.3 Group page of **Serenity**.</i>
+<i>Figure 3.2.2.3 Group page of <b>Serenity</b>.</i>
 
 </p>
 
@@ -163,7 +163,7 @@ you may add, edit, find or delete a [question](#44-question-addressing) that was
 <p align="center">
 
 <img src="images/userGuide/pages/LessonPage.png" alt="Lesson page of Serenity" border="1px solid black">
-<i>Figure 3.2.2.4 Lesson Page of **Serenity**.</i>
+<i>Figure 3.2.2.4 Lesson Page of <b>Serenity</b>.</i>
 
 </p>
 
