@@ -25,6 +25,8 @@ import team.serenity.logic.commands.CommandResult;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.Group;
+import team.serenity.model.group.GroupName;
+import team.serenity.model.group.lesson.LessonName;
 import team.serenity.ui.datapanel.DataPanel;
 import team.serenity.ui.datapanel.GroupDataPanel;
 import team.serenity.ui.datapanel.LessonDataPanel;
@@ -349,11 +351,19 @@ public class MainWindow extends UiPart<Stage> {
 
 
     private String getGroupName(String commandText) {
-        return commandText.split(" ")[1].split("/")[1].toUpperCase();
+        String returnVal = commandText.split(" ")[1].split("/")[1].toUpperCase();
+        if (!GroupName.isValidName(returnVal)) {
+            returnVal = commandText.split(" ")[2].split("/")[1].toUpperCase();
+        }
+        return returnVal;
     }
 
     private String getLessonName(String commandText) {
-        return commandText.split(" ")[2].split("/")[1];
+        String returnVal = commandText.split(" ")[2].split("/")[1];
+        if (!LessonName.isValidName(returnVal)) {
+            returnVal = commandText.split(" ")[1].split("/")[1];
+        }
+        return returnVal;
     }
 
     /**
