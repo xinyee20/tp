@@ -104,6 +104,5 @@ It is written in Java, and has about 25k LoC.
     [4](https://github.com/AY2021S1-CS2103T-T12-4/tp/issues/146),
     [5](https://github.com/AY2021S1-CS2103T-T12-4/tp/issues/147),
     [6](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/148))
-    
    * Conducted mutual [peer evaluation](https://drive.google.com/file/d/1J_IzzAppl14Rh2lAG7FTBogrdNx0cBiL/view?usp=sharing) 
    with team CS2103T-W12-3.
