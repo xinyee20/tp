@@ -6,39 +6,30 @@ title: Xin Yee's Project Portfolio Page
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
 It is written in Java, and has about 25k LoC
-
 #### Summary of contributions
-
 Given below are my contributions to the project.
-
 * **New Feature 1**: Added the ability to mark and flag attendance of students during lessons through commands
   * What it does: 
       * `markpresent`, `markabsent` - Allows the users to mark a student present/absent when viewing a lesson
       * `flagatt`, `unflagatt` - Allows the users to flag / un-flag attendance of a student when necessary while in lesson view
   * Justification: This feature helps a user keep track of the attendance of students during tutorial lessons which is an essential feature of the product. 
-  * Highlights: Initial deep nesting of `Student` information within `Group` made the implementation of the command tricky. 
-  Analyse and re-adjustment of the project structure was done to reduce nesting and prevent cyclic dependencies. Optimisation of some commands 
-  that were applied to all students were required later on as we found out that they took quite a while to run.
-   All these major changes made the implementation of the code very time-consuming and rather challenging.
-   
+  * Highlights: Initial deep nesting of `Student` information within `Group` required analysis and re-adjustment of the project structure. Optimisation of slow commands 
+  that applies to all students also had to be done. These made the implementation of the feature time-consuming and challenging.
 * **New Feature 2**: Added the ability to award and adjust participation scores of students during lessons
   * What it does: 
-    * `addscore`, `subscore`, `editscore` - Allows the users to increase, decrease, edit the participation score of a student when viewing a lesson
+      * `addscore`, `subscore`, `editscore` - Allows the users to increase / decrease / edit the participation score of a student when viewing a lesson
   * Justification: This feature helps a user to keep track of the score of students during tutorial lessons which is an important aspect of handling a group during lesson.
-  * Highlights: This feature took some time to be implemented as the users' needs had to be taken into consideration (the command should be straightforward). As this feature has 
-                quite a few restrictions in terms of input of score, repeated testing and adjustment of code had to be done to make sure that proper messages are shown when different exceptions are thrown, 
-                to guide users who may misuse the commands.
-   
+  * Highlights: Implementation of feature took time as users' needs had to be taken into consideration (the command should be straightforward). Due to quite a few restrictions 
+  in terms of input of score, repeated testing and adjustment of code had to be done to make sure that proper messages are shown when different exceptions are thrown to guide users.
 * **New Feature 3**: Added the ability to use indexing to apply commands to existing students. 
-  * What it does: Allows users to apply deleting of students when in group view and the marking, flagging attendance 
-                  of students, as well as awarding, adjusting participation score of students using the index of the student 
-                  shown on the list when in lesson view.
+  * What it does: Allows users to apply deleting of students when in group view and the marking, flagging attendance of students, 
+  as well as awarding, adjusting participation score of students using the index of the student shown on the list when in lesson view.
   * Justification: This feature improves the product significantly as it is helps a user to apply commands to students 
-                   without needing to type in their name and matriculation number of students which may be long, increasing the efficiency of lessons.
-  * Highlights: The implementation of this feature was rather challenging. Application data are imported from excel sheets through the usage of `Set`. 
-                This resulted in the data list being unordered.Research on usage of `Comparator` and `LinkedHashSet` was done to sort the various lists (`Lesson`, `Student`, `StudentInfo`) in the GUI.
-                Implementing index on top of name and matriculation number resulted in many permutations of the usage of the commands, 
-                which requires more rigorous testing and conditions to cover the various scenarios.
+  without needing to type in their name and matriculation number of students which may be long, increasing the efficiency of lessons.
+  * Highlights: Implementation of this feature was rather challenging. Usage of `Set` to store imported data resulted in the data list being unordered. 
+  Research on usage of `Comparator` and `LinkedHashSet` was done to sort the various lists (`Lesson`, `Student`, `StudentInfo`) in the GUI. 
+  Implementing index on top of name and matriculation number resulted in many permutations of the usage of the commands, 
+  which required more rigorous testing and conditions to cover the various scenarios.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=xinyee20&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
