@@ -102,6 +102,8 @@ existing tutorial groups.
 
 * _Command Box_: This is where you type your commands.
 
+<div style="page-break-after: always;"></div>
+
 #### 3.2.2. Layout of the _GUI_
 
 **Serenity** is divided into these 3 pages:
@@ -129,6 +131,8 @@ across your tutorial groups and lessons.
 
 </p>
 
+<div style="page-break-after: always;"></div>
+
 ##### Tutorial group page
 
 This page shows the information related to a tutorial group you are teaching. This page consists of: 
@@ -151,6 +155,8 @@ the class participation grades of all the students in the tutorial group across 
 <i>Figure 3.2.2.3 Group page of <b>Serenity</b>.</i>
 
 </p>
+
+<div style="page-break-after: always;"></div>
 
 ##### Tutorial lesson page
 
