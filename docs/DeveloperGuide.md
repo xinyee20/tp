@@ -524,7 +524,7 @@ the code breaking if any intermediate classes are not functioning properly.
 
 **Serenity** allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
 
-The question manager is one of the `Feature Managers` (See [Feature Manager](#41-feature-managers)).
+The question manager is one of the `Feature Managers` (See [Feature Managers](#51-feature-managers)).
 On top of the basic operations provided above it also allows the user to find questions by keywords using the `findqn`
 command. The `findqn` command does not restrict users to find via only one keyword. They are able to find via multiple
 keywords, similar to a search bar. E.g. `findqn deadline report` will search and list all question entries with
@@ -548,7 +548,7 @@ Activity Diagram below.
 <p align="center"><i>Figure 5.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
 
 When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
-parsing as described in [Design-Logic](#33-logic-component). During the parsing, a predicate is created. This predicate
+parsing as described in [Design - Logic Component](#43-logic-component). During the parsing, a predicate is created. This predicate
 checks if a given `Question`'s description contains the user input keywords. The `FindQnCommand` will then receive
 this predicate when it is created.
 
