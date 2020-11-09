@@ -352,6 +352,8 @@ After deleting a tutorial group, the button named after the tutorial group will 
 
 You accidentally added the wrong tutorial group `G01` and you decided to remove the tutorial group.
 
+<div style="page-break-after: always;"></div>
+
 Deleting an existing tutorial group:
 
 1. Type `delgrp grp/G01` into the _Command Box_.
