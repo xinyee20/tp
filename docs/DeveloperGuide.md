@@ -7,7 +7,7 @@ title: Developer Guide
 
 ## **1. Introduction**
 
-![Serenity Logo](images/logo.png)
+<p><img src="images/logo.png" alt="Serenity Logo" width="310"></p>
 
 (Contributed by Bu Wen Jin)
 
