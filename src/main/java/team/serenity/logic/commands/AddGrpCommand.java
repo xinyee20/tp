@@ -24,10 +24,10 @@ public class AddGrpCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New tutorial group added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT_FORMAT =
-            "This student %s [%s] already exists in another group.\n"
+        "This student %s [%s] already exists in another group.\n"
             + "Please try again after removing him/her from the .xlsx file.";
     public static final String MESSAGE_DUPLICATE_GROUP_NAME_FORMAT = "This tutorial group name \"%s\" already exists.\n"
-            + "Please try again with another group name.";
+        + "Please try again with another group name.";
 
     private final Group toAdd;
 
@@ -46,14 +46,14 @@ public class AddGrpCommand extends Command {
         // Check if group name already exists in the group manager
         if (model.hasGroupName(this.toAdd.getGroupName())) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_GROUP_NAME_FORMAT,
-                    this.toAdd.getGroupName().groupName));
+                this.toAdd.getGroupName().groupName));
         }
 
         // Check if students in the new group already exist in the student manager
         for (Student student : this.toAdd.getStudents()) {
             if (model.hasStudent(student)) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT_FORMAT,
-                        student.getStudentName(), student.getStudentNo()));
+                    student.getStudentName(), student.getStudentNo()));
             }
         }
 
