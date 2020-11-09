@@ -26,16 +26,14 @@ Given below are my contributions to the project.
   as well as awarding, adjusting participation score of students using the index of the student shown on the list when in lesson view.
   * Justification: This feature improves the product significantly as it is helps a user to apply commands to students 
   without needing to type in their name and matriculation number of students which may be long, increasing the efficiency of lessons.
-  * Highlights: Implementation of this feature was rather challenging. Usage of `Set` to store imported data resulted in the data list being unordered. 
-  Research on usage of `Comparator` and `LinkedHashSet` was done to sort the various lists (`Lesson`, `Student`, `StudentInfo`) in the GUI. 
-  Implementing index on top of name and matriculation number resulted in many permutations of the usage of the commands, 
-  which required more rigorous testing and conditions to cover the various scenarios.
+  * Highlights: Implementation of this feature was rather challenging. Research on usage of `Comparator` and `LinkedHashSet` was done to 
+  sort the unordered lists (`Lesson`, `Student`, `StudentInfo`) in the GUI. 
+  Implementing index on top of name and matriculation number resulted in many permutations of the usage of commands, which required more rigorous testing and conditions to cover the various scenarios.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=xinyee20&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**: 
-  * Brainstormed ideas for the different features. (How we intend our application to behave etc.)
-  * Contributed to weekly team meetings regarding design details and implementation constraints.
+  * Contributed to weekly team meetings regarding ideas for features, design details and implementation constraints.
   * Used Github Issues Tracker to schedule, track and assign tasks to teammates. Afterwards, review and merge PRs to close issues.
   
 * **Enhancements to existing features**:

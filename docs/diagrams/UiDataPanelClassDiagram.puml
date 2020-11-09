@@ -5,7 +5,11 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T1
 skinparam classBackgroundColor UI_COLOR_T1
 
-package ui.datapanel {
+package Ui {
+Class MainWindow
+Class "{abstract}\nUiPart" as UiPart
+
+package Datapanel {
 Class DataPanel
 Class SerenityDataPanel
 Class GroupDataPanel
@@ -16,12 +20,9 @@ Class StudentInfoCard
 Class QuestionCard
 }
 
-package Ui {
-Class Hide #white
 }
 
-Class Hidden #white
-Hidden *-down-> DataPanel
+MainWindow *-down-> DataPanel
 
 DataPanel <|-- SerenityDataPanel
 DataPanel <|-- GroupDataPanel
@@ -33,10 +34,10 @@ GroupDataPanel --> StudentCard
 LessonDataPanel --> StudentInfoCard
 LessonDataPanel --> QuestionCard
 
-DataPanel ---|> Ui
-StudentCard -down-|> Ui
-LessonCard -down-|> Ui
-StudentInfoCard -down-|> Ui
-QuestionCard -down-|> Ui
+DataPanel ---|> UiPart
+StudentCard -down-|> UiPart
+LessonCard -down-|> UiPart
+StudentInfoCard -down-|> UiPart
+QuestionCard -down-|> UiPart
 
 @enduml
