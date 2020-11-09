@@ -661,7 +661,7 @@ Guarantees:
     - Students are added to the student list in the respective tutorial groups upon successful command.
 
 MSS:
-    1. User chooses an Excel file to upload.
+    1. User chooses an Excel file of type .xlsx to upload.
     2. User adds the Excel file in the same folder as the JAR file.
     3. Serenity reads the Excel file.
     4. Serenity adds the tutorial groups and students to the respective lists.
@@ -950,9 +950,9 @@ We detail some of the challenges faced, and steps we took to solve them.
 
 The first challenge we faced involved the planning stage, where we had to have various
 different entities (tutorial groups, lessons, students and their records) come together.
-Compared to **AddressBook**, which had a single `Person` object in the model, we had to
+Compared to **AddressBook 3**, which had a single `Person` object in the model, we had to
 revamp it to accommodate multiple entities such as `Group`, `Lesson`, `Student` and `StudentInfo`, while
-ensuring we adhere to principles such as Separation of concern 
+ensuring we adhere to principles such as Separation of concerns
 and avoiding deep nesting.
 
 **Our solution to the challenge:**
@@ -971,20 +971,20 @@ that the project's challenges and tasks are clearly identified.
 **Serenity** allows users to view the different aspects of their lessons, 
 such as viewing attendance records, participation records, lesson details and group details. 
 This posed a challenge in implementing an intuitive
-<span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span> that also updated automatically
+<span ><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> that also updated automatically
 whenever data is created, updated or removed.
 
-Starting from **AddressBook**, which had a single Ui panel, we had to overhaul
+Starting from **AddressBook 3**, which had a single Ui panel, we had to overhaul
 and expand it to accommodate multiple different panels, each serving a different purpose
-(`viewgrp`, `viewlsn`, `viewqn`, `viewatt`, `viewscore`), which meant a significant
-portion of time spent on designing the interface to accommodate these different 
-entities.
+such as viewing tutorial groups, to viewing tutorial lessons and viewing attendance records, 
+which meant a significant portion of time spent on 
+designing the interface to accommodate these different entities.
 
 Another significant functionality **Serenity** includes is the ability to import from and
 export data into Excel sheets, which was a feature requested by CS2101 tutors we 
 spoke to. A large amount of time and consideration had to be placed in developing
 these new features to ensure they worked as expected, being a completely new
-function that was not modified from **AddressBook**. That, combined together
+function that was not modified from **AddressBook 3**. That, combined together
 with the number of commands we implemented, **26** compared to AddressBook's
 **7**, meant a significant increase in development time spent implementing
 these new commands.
