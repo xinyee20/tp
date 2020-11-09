@@ -64,7 +64,7 @@ Symbol/syntax | Meaning
 --------|------------------
 `command` | This indicates a technical term.
 _GUI_ | This indicates a graphical component.
-:memo: | This indicates a note.
+:information_source: | This indicates a note.
 :bulb: | This indicates a tip.
 
 ## **4. Design**
@@ -81,7 +81,11 @@ The Architecture Diagram given in Figure 4.1.1 below explains the high-level des
 
 <p align="center">Figure 4.1.1 Architecture Diagram of Serenity</p>
 
-> :bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder.
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **TIP:** The .puml files used to create diagrams in this document can be found in the *diagrams* folder.
+
+</div>
 
 The following table gives a quick overview of each component of **Serenity**.
 More details about the components can be found in the following segments.
@@ -179,7 +183,13 @@ The diagram starts with the `execute("delgrp grp/G04")` API call.
 
 <p align="center"><i>Figure 4.3.2.1 Interactions inside the <code>Logic</code> component for the <code>delgrp grp/G04</code> command.</i></p>
 
-> :memo: The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reached the end of the diagram.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:** The lifelines for the `DelGrpCommandParser` and `DelGrpCommand` should end at the destroy marker (X). However, 
+due to a limitation of PlantUML, the lifelines reached the end of the diagram.
+
+</div>
+
 
 ### **4.4. Model Component**
 
@@ -509,7 +519,11 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 5. If the above steps are all successful, a successful message will be displayed on the
 <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
 
-> :warning: If the index is not valid, an error will be thrown to prompt the user to choose another index.
+<div class="alert alert-danger" markdown="block">
+
+:warning: **Warning:** If the index is not valid, an error will be thrown to prompt the user to choose another index.
+
+</div>
 
 #### **5.5.3. Design Consideration**
 **Aspect:** Deciding between retrieving `StudentInfo` through deep nesting methods or using `HashMap` to retrieve `StudentInfo` with `GroupLessonKey`.
@@ -854,8 +868,15 @@ Extensions:
 ## **Appendix F: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
-> :memo: Note: These instructions only provide a starting point for testers to work on;
->testers are expected to do more **exploratory** testing.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+testers are expected to do more **exploratory** testing.
+
+</div>
+
+
 
 ### **F.1. Launch and Shutdown**
 
