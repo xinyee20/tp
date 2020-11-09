@@ -4,6 +4,17 @@ skinparam linetype ortho
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T1
 skinparam classBackgroundColor UI_COLOR_T1
+skinparam classFontColor<<HiddenOutside>> #FFFFFF
+
+skinparam {
+classBackgroundColor<<HiddenOutside>> #FFFFFF
+classBorderColor<<HiddenOutside>> #FFFFFF
+classFontColor<<HiddenOutside>> #FFFFFF
+classStereotypeFontColor<<HiddenOutside>> #FFFFFF
+}
+
+Class hideOutside <<HiddenOutside>>
+hideOutside ..> Ui
 
 package Ui <<Rectangle>>{
 Interface Ui <<Interface>>
@@ -17,33 +28,25 @@ Class SideBar
 Class HelpWindow
 }
 
-package ui.datapanel {
-Class Hidden #whitei
-}
-
 package Logic {
-Class HiddenL #white
+Class logic <<HiddenOutside>>
 }
 
 UiManager .right.|> Ui
 UiManager -down-> MainWindow
-MainWindow *--> ui.datapanel
 MainWindow *-down-> TitleDisplay
 MainWindow *-down-> ResultDisplay
 MainWindow *-down-> CommandBox
 MainWindow *-down-> SideBar
 MainWindow *-down-> HelpWindow
 
-MainWindow --down-|> UiPart
-TitleDisplay --down-|> UiPart
-ResultDisplay --down-|> UiPart
-CommandBox --down-|> UiPart
-SideBar --down-|> UiPart
-HelpWindow --down-|> UiPart
-
-ui.datapanel --|> UiPart
-
-UiManager ---> Logic
-MainWindow -right--> Logic
+MainWindow -down-|> UiPart
+TitleDisplay -down-|> UiPart
+ResultDisplay -down-|> UiPart
+CommandBox -down-|> UiPart
+SideBar -down-|> UiPart
+HelpWindow -down-|> UiPart
+UiManager -right-> Logic
+MainWindow -right-> Logic
 
 @enduml
