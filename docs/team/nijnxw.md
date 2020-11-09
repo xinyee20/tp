@@ -37,8 +37,7 @@ Given below are my contributions to the project.
 * **New Feature 3**: Added the ability to view all questions and view a lesson's details 
   * What it does: Allows user to switch between views in Serenity
   * Justification: This enhancement improves the product significantly because a user will want to
-    be able to see all the questions that he/she added or see the details of a lesson such as the 
-    attendance list, and the class participation scores of each student in that tutorial group. 
+    be able to switch to different views in Serenity efficiently though typing of commands. 
   * Highlights: This enhancement required the in-depth analysis of the UI and Logic component. 
     The implementation was also challenging as it involved using JavaFX which is a relatively new 
     framework that I needed to pick up quickly. I was not able to see through the implementation for 
