@@ -1049,7 +1049,7 @@ export data into Excel sheets, which was a feature requested by CS2101 tutors we
 spoke to. A large amount of time and consideration had to be placed in developing
 these new features to ensure they worked as expected, being a completely new
 function that was not modified from **AddressBook 3**. That, combined together
-with the number of commands we implemented, **26** compared to **AddressBook 3**'s
+with the number of commands we implemented, **26**, compared to **AddressBook 3**'s
 **7**, meant a significant increase in development time spent implementing
 these new commands.
 
