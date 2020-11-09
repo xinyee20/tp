@@ -2,24 +2,12 @@
 layout: page
 title: Ryan's Project Portfolio Page
 ---
-
 ## Project: Serenity
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
 It is written in Java, and has about 25k LoC.
-### About the project
-My team of 4 software engineering students and I were tasked with enhancing a basic command line 
-interface (CLI) desktop addressbook application for our Software Engineering project. We chose to 
-morph it into a CS2101 tutor's lesson management application called Serenity. 
-
-This enhanced application enables CS2101 tutors to:
- * Import and export student and lesson data,
- * Record students' attendance,
- * Grade students' class participation score, and 
- * Jot down questions asked by students directly without opening an external note-taking application.
+e-taking application.
 ### Summary of contributions
-Given below are my contributions to the project.
-
 * **New Feature 1**: Implemented UI data panels to display group, lesson and question data respectively 
 and ability to view a tutorial group's detail
     * what it does: 
@@ -41,7 +29,6 @@ and ability to view a tutorial group's detail
     * Highlights: Moderate amount of effort was done in as implementation was rather straightforward, faced minor issues with 
     displaying lesson data in the Ui but managed to do a workaround by implementing an `ObservableList` and `FilteredList` 
     meant for lesson data for a specified group
-
 * **New Feature 3**: Improved upon base code of the following managers
     1. `StudentInfoManager`
     2. `GroupManager`
@@ -55,14 +42,6 @@ and ability to view a tutorial group's detail
     * Highlights: The implementation was challenging and time-consuming as the team and, I needed to do a deep analysis of 
     design and its alternatives, the Model component, Logic component, as well as the Ui Component. We also needed to refactor
     our original architecture design, and it required careful coordination and communication to prevent major conflicts.
-
-* **New Feature 4**: did the attendance and participation score table view UI for Serenity.
-    * What it does: provides an overall visual view of the student's attendance and participation across all lessons for a single 
-    tutorial group. 
-    * Justification: This enhancement improves the product as it provides the user a preliminary view of student's information
-    accross all classes before exporting the data into an Excel file
-    * Highlights: This enhancement required some time to understand how to extract the necessary data to be displayed in the table,
-    and understanding of TableView API to populate data in a table format.
     
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=ryanlimjr&tabRepo=AY2021S1-CS2103T-W12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
