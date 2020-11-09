@@ -90,10 +90,10 @@ It is written in Java, and has about 25k LoC.
          (Pull requests [\#184](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/184)) 
          
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): 
-    [\#41](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/41), 
-    [\#174](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/174), 
-    [\#198](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/198)
+  * PRs reviewed (with non-trivial review comments): (Pull requests 
+      [\#41](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/41), 
+      [\#174](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/174), 
+      [\#198](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/198))
   * Reported bugs and suggestions for other teams in the class (examples: 
     [1](https://github.com/AY2021S1-CS2103T-T12-4/tp/issues/143),
     [2](https://github.com/AY2021S1-CS2103T-T12-4/tp/issues/144), 
