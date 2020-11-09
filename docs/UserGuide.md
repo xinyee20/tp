@@ -166,8 +166,8 @@ You may also flag the student's attendance if necessary.
 * Questions tab: this tab contains the list of questions that were asked during this tutorial lesson. In this tab,
 you may add, edit, find or delete a [question](#44-question-addressing) that was asked during this tutorial lesson.
 
-<p align="center"><img src="images/viewlsnGUI.png" alt="Picture of lesson GUI"></p>
-
+<p align="center"><img src="images/userGuide/pages/LessonPage.png" 
+   alt="Picture of lesson GUI" border="1px solid black"></p>
 <p align="center"><i>Figure 3.2.2.4 User interface showing the layout of the lesson tab.</i></p>
 
 #### 3.2.3. General symbols and syntax
@@ -344,7 +344,6 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 **Format:**
 
 `addlsn grp/GROUP_NAME lsn/LESSON_NAME`
-
 
 <div markdown="block" class="alert alert-danger">
 
