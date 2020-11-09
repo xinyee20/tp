@@ -119,7 +119,7 @@ The Class Diagrams given in Figure 4.2.1.1 and Figure 4.2.1.2 below describe the
 
 <p align="center"><i>Figure 4.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
-<p align="center"><img src="images/developerGuide/UiDataPanelClassDiagram2.png" alt="Figure 4.2.1.2" width="720"></p>
+<p align="center"><img src="images/developerGuide/UiDataPanelClassDiagram2.png" alt="Figure 4.2.1.2" width="360"></p>
 
 <p align="center"><i>Figure 4.2.1.2 Structure of the <code>ui.datapanel</code> component.</i></p>
 
