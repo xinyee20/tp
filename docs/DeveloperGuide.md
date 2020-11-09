@@ -1045,12 +1045,11 @@ for a certain portion of **Serenity**, empowering them to focus on said features
 
 ### G.3. Conclusion
 
-Overall, we managed to create an all-in-one CS2101 tutorial group manager that is equipped with
-user-focused features and a neat user interface. Our team put in a huge amount of effort 
-in enhancing our features andensuring that the features work as intended. 
-Throughout the development process, we consistently helped one another
+Overall, we managed to create an all-in-one CS2101 management software for tutors
+that is equipped with user-focused features and a neat user interface. 
+Our team put in a huge amount of effort in enhancing our features and ensuring that 
+the features work as intended. Throughout the development process, we consistently helped one another
 in identifying and solving implementation and documentation bugs, 
-as well as assisted one another in implementing
-tricky functionalities. The development process has been a wholly enjoyable one, and each one of us
-have turned into a better developer in this journey. 
+as well as assisted one another in implementing tricky functionalities.
+The development process has been a wholly enjoyable one, and each one of us have turned into a better developer in this journey. 
 
