@@ -34,6 +34,8 @@ and implementation of **Serenity** so that you can get started on your contribut
 
 Refer to the [_Setting Up_](SettingUp.md) guide.
 
+<div style="page-break-after: always;"></div>
+
 ## **3. About**
 
 (Contributed by Neo Rui En)
@@ -424,8 +426,6 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 4. The ModelManager’s `updateLessonList` method is called.
 5. The ModelManager then calls the method `setListOfLessonsToGroup` of `LessonManager`.
 
-<div style="page-break-after: always;"></div>
-
 #### 5.3.3. Design Consideration
 
 **Aspect:** Number of `UniqueLists` to hold
@@ -439,6 +439,8 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 We picked option 2 for greater flexibility and separation, allowing us to easily retrieve
 the list of lessons for a specific tutorial group.
+
+<div style="page-break-after: always;"></div>
 
 ### 5.4. Student Manager
 
@@ -496,6 +498,8 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 
 * As we often need to access the list of students, we cannot afford the greater overhead involved in Option 1. Thus, we decided to opt for the option with greater efficiency.
 * As we will sort the list of students of a group after a student is added, we do not require the order of addition of students to be maintained.
+
+<div style="page-break-after: always;"></div>
 
 ### 5.5. StudentInfo Manager
 
