@@ -30,7 +30,7 @@ and implementation of **Serenity** so that you can get started on your contribut
 
 ## **2. Setting Up**
 
-Refer to the [_SettingUp_](SettingUp.md) guide.
+Refer to the [_Setting Up_](SettingUp.md) guide.
 
 ## **3. About**
 
