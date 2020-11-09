@@ -9,18 +9,6 @@ Serenity is a desktop application that helps CS2101 tutors manage their tutorial
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
 It is written in Java, and has about 25k LoC.
 
-### About the project
-
-My team of 4 software engineering students and I were tasked with enhancing a basic command line 
-interface (CLI) desktop addressbook application for our Software Engineering project. We chose to 
-morph it into a CS2101 tutor's lesson management application called Serenity. 
-
-This enhanced application enables CS2101 tutors to:
- * Import and export student and lesson data,
- * Record students' attendance,
- * Grade students' class participation score, and 
- * Jot down questions asked by students directly without opening an external note-taking application.
-
 ### Summary of contributions
 
 Given below are my contributions to the project.
