@@ -28,6 +28,7 @@ and ability to view a tutorial group's detail
     * Highlights: Moderate amount of effort was done in as implementation was rather straightforward, faced minor issues with 
     displaying lesson data in the Ui but managed to do a workaround by implementing an `ObservableList` and `FilteredList` 
     meant for lesson data for a specified group
+<div style="page-break-after: always;"></div>
 * **New Feature 3**: Improved upon base code of the following managers
     1. `StudentInfoManager`
     2. `GroupManager`
@@ -43,7 +44,6 @@ and ability to view a tutorial group's detail
     our original architecture design, and it required careful coordination and communication to prevent major conflicts.
     
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=ryanlimjr&tabRepo=AY2021S1-CS2103T-W12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
-
 * **Project management**:
     * Brainstormed ideas to improve architecture design (use of individual mangers to handle the data instead of deep nesting)
     * Contributed to weekly team meetings regrading design details and implementation constraints and possible issues in design alternatives
