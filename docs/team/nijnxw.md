@@ -30,11 +30,9 @@ Given below are my contributions to the project.
   * What it does: Allows user to use the addressing question feature
   * Justification: This feature improves the product significantly because it is helps a user to 
     keep track of the questions asked during tutorial lessons.
-  * Highlights: As questions are related to specific groups and lessons, this enhancement requires an 
-    in-depth analysis of the model design alternatives. The implementation too was challenging especially
-    for the find command, as I decided that the keywords inputted by users does not need to match the full
-    word in a sentence for the question to be displayed. For instance, if user input "work", questions 
-    containing words such as "coursework" and "homework" will also be displayed to the user.
+  * Highlights: This enhancement requires an in-depth analysis of the model design alternatives. The 
+    implementation too was challenging especially for the find command, as I decided that the keywords 
+    inputted by users does not need to match the full word in a sentence for the question to be displayed.
     
 * **New Feature 3**: Added the ability to view all questions and view a lesson's details 
   * What it does: Allows user to switch between views in Serenity
