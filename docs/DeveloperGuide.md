@@ -113,21 +113,28 @@ This segment will explain the structure and responsibilities of the Ui component
 
 #### **4.2.1. Structure**
 
-The Class Diagrams given in Figure 4.2.1.1 and Figure 4.2.1.2 below describe the structure of the Ui-related classes.
+The Class Diagram given in Figure 4.2.1.1 below describes the structure of the Ui-related classes.
 
-<p align="center"><img src="images/developerGuide/UiClassDiagram2.png" alt="Figure 4.2.1.1"></p>
+<p align="center"><img src="images/developerGuide/UiClassDiagram.png" alt="Figure 4.2.1.1"></p>
 
 <p align="center"><i>Figure 4.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
-<p align="center"><img src="images/developerGuide/UiDataPanelClassDiagram2.png" alt="Figure 4.2.1.2" width="480"></p>
+The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
+as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
+The `Ui` component also contains 1 more window, namely the `HelpWindow`.
+
+The Class Diagram given in Figure 4.2.1.2 below shows how the components in the `Datapanel` interact with each other.
+
+<p align="center"><img src="images/developerGuide/UiDataPanelClassDiagram.png" alt="Figure 4.2.1.2" width="480"></p>
 
 <p align="center"><i>Figure 4.2.1.2 Structure of the <code>ui.datapanel</code> component.</i></p>
 
-The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
-as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
+The `Ui` contains 3 `DataPanels`, namely `SerenityDataPanel`, `GroupDataPanel` and `LessonDataPanel`.
+They facilitate the display of the home page, tutorial group page and tutorial lesson page respectively.
+Each of these `DataPanels` consists of one or more cards.
 
 The `Ui` component uses <span><a href="#appendix-e-glossary" style="color:purple"><i>JavaFX</i></a></span> UI framework.
-The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder.
+The layout of these UI parts are defined in matching .fxml files that are in the `src/main/resources/view` folder.
 For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
 #### **4.2.2. Responsibilities**
@@ -146,7 +153,7 @@ This segment will explain the structure and responsibilities of the `Logic` comp
 
 The Class Diagram given in Figure 4.3.1.1 below describes the structure of Logic-related classes.
 
-<p align="center"><img src="images/developerGuide/LogicClassDiagram2.png" alt="Figure 4.3.1.1"></p>
+<p align="center"><img src="images/developerGuide/LogicClassDiagram.png" alt="Figure 4.3.1.1"></p>
 
 <p align="center"><i>Figure 4.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
