@@ -275,7 +275,7 @@ The package contains three sub-packages: `core`, `exceptions` and `util`.
 
 #### 4.6.1. Core Class
 
-This package contains classes for user configuration, GUI settings, logging manager, guiding messages, index number,
+This package contains classes for user configuration,  <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> settings, logging manager, guiding messages, index number,
  `Model` object sorters and version number.
 
 #### 4.6.2. Exceptions Class
@@ -418,8 +418,13 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 |   |**Pros**|**Cons**|
 |---|---|---|
-| **Option 1**<br>More than 1 `UniqueList`. | Easy retrieval of `UniqueList` of Lesson tagged to each `group`. | Greater overhead, more testing and implementation involved.
-| **Option 2 (current)**<br>1 `UniqueList`. | Easy to implement, easier to retrieve all lessons taught by a single tutor. | More difficult to retrieve lessons tied to a specific group. |
+| **Option 1**<br>1 `UniqueList`. |  Easy to implement, easier to retrieve all lessons taught by a single tutor.   | More difficult to retrieve lessons tied to a specific group. 
+| **Option 2 (current)**<br>More than 1 `UniqueList`. | Easy retrieval of `UniqueList` of Lesson tagged to each `group`.| Greater overhead, more testing and implementation involved. |
+
+**Reason for choosing option 2:**
+
+We picked option 2 for greater flexibility and separation, allowing us to easily retrieve
+the list of lessons for a specific tutorial group.
 
 ### 5.4. Student Manager
 
@@ -507,7 +512,7 @@ Commands | Purpose
 -------|--------
 `markpresent` / `markabsent` | Mark student present / absent during a lesson.
 `flagatt` / `unflagatt` | Flag the attendance of a student for special scenarios.
-`setscore` / `addscore` / `subscore` | Set / add / subtract the participation score of a student for a lesson.
+ `addscore` / `subscore` / `editscore`  | Add / subtract / edit the participation score of a student for a lesson.
 
 In this section, we will outline the `markpresent` command handled by the `StudentInfoManager`
 which is summarised by the Activity Diagram given in Figure 5.5.2.2 below.
@@ -648,23 +653,22 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 
 As a... | I want to... | So that I can...
 | ------------- | ------------- | ------------- |
-Tutor | Set up tutorial groups that I am teaching at the start of every semester | Perform administrative functions more efficiently
-Tutor | Mark attendance across every lesson | Grade effectively at the end of the term
-Tutor | Flag the attendance of a student | Be reminded to check up on this student after lesson
-Tutor | View the attendance sheet for each class | Identify the students who did not attend a lesson
-Tutor | Export attendance of all my tutorial groups as a XLSX file | Submit attendance as a softcopy to the school
-Tutor | Use a participation system to keep track of participation | Grade effectively at the end of the term
-Tutor | Give a participation score to a student | Grade the student's participation
-Tutor | Generate the average score for each student across each session | Have an additional set of data to cross reference to
-Tutor | Export participation scores of each class as a XLSX file | Submit it as a softcopy for marks generation
-Tutor | Add a question to the question list | Be reminded to answer the question after the lesson ends
-Tutor | Remove a question from the question list | Prevent the list from becoming too cluttered
-Tutor | View the list of questions for each class | Identify the questions that I have not answered in class
-Forgetful Tutor | Mark the question that I have addressed as answered | Avoid re-addressing the same question in class
-Tutor | Import data of my students | Avoid manually entering the data
-Tutor | Access the list of commands easily on the software without referring to the user guide | Operate the software easily while teaching in class
-Tutor | Use an app that does not take up too much screen space | Continue to teach the content effectively
-Tutor | The list of commands to be as short as possible | Be productive trying to recall more important things for the lesson
+Tutor | Set up tutorial groups that I am teaching at the start of every semester. | Perform administrative functions more efficiently.
+Tutor | Mark attendance across every lesson. | Grade effectively at the end of the term.
+Tutor | Flag the attendance of a student. | Be reminded to check up on this student after lesson.
+Tutor | View the attendance sheet for each class. | Identify the students who did not attend a lesson.
+Tutor | Export attendance of all my tutorial groups as a XLSX file. | Submit attendance as a softcopy to the school.
+Tutor | Use a participation system to keep track of participation. | Grade effectively at the end of the term.
+Tutor | Give a participation score to a student. | Grade the student's participation.
+Tutor | Generate the average score for each student across each session. | Have an additional set of data to cross reference to.
+Tutor | Export participation scores of each class as a XLSX file. | Submit it as a softcopy for marks generation.
+Tutor | Add a question to the question list. | Be reminded to answer the question after the lesson ends.
+Tutor | Remove a question from the question list. | Prevent the list from becoming too cluttered.
+Tutor | View the list of questions for each class. | Identify the questions that I have not answered in class.
+Tutor | Import data of my students. | Avoid manually entering the data.
+Tutor | Access the list of commands easily on the software without referring to the user guide. | Operate the software easily while teaching in class.
+Tutor | Use an app that does not take up too much screen space. | Continue to teach the content effectively.
+Tutor | The list of commands to be as short as possible. | Be productive trying to recall more important things for the lesson.
 
 ## **Appendix C: Use Cases**
 For all use cases below, the System is `Serenity` and the Actor is the `User`, unless specified otherwise.
@@ -682,9 +686,9 @@ Guarantees:
     - Students are added to the student list in the respective tutorial groups upon successful command.
 
 MSS:
-    1. User chooses a csv file to upload.
-    2. User adds the csv file in the same folder as the JAR file.
-    3. Serenity reads the csv file.
+    1. User chooses an Excel file of type .xlsx to upload.
+    2. User adds the Excel file in the same folder as the JAR file.
+    3. Serenity reads the Excel file.
     4. Serenity adds the tutorial groups and students to the respective lists.
 Use case ends.
 ```
@@ -743,7 +747,8 @@ Actor: User
 
 Preconditions: Tutorial groups and students have been set up
 Guarantees:
-    - User can view the attendance list of a lesson for a specific tutorial class upon successful command.
+    - User can view the attendance list of a lesson 
+      for a specific tutorial class upon successful command.
 
 MSS:
     1. User requests to view the attendance list for a lesson of a specific tutorial class.
@@ -791,7 +796,8 @@ Actor: User
 
 Preconditions: Tutorial groups and students have been set up
 Guarantees:
-    - User can view the average class participation score of all students in a tutorial group upon successful command.
+    - User can view the average class participation score of all students 
+      in a tutorial group upon successful command.
 
 MSS:
     1. User requests to view the average class participation score of all students in a tutorial group.
@@ -907,7 +913,7 @@ testers are expected to do more **exploratory** testing.
     1. Test case: `addgrp grp grp/<GROUP_NAME> path/<FILE_NAME>.xlsx`
     <br>Expected: Tutorial group created,
     <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the tutorial lessons specified in the XLSX file.
-    1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<GROUP_NAME>`, `addgrp path/<FILE_NAME>.csv`
+    1. Other incorrect add group commands to try: `addgrp`, `addgrp grp/<GROUP_NAME>`, `addgrp path/<FILE_NAME>.xlsx`
     <br>Expected: Error message shown.
 
 1. Adding Lesson to a Group
@@ -931,11 +937,11 @@ testers are expected to do more **exploratory** testing.
 1. Missing data files
     1. Test case: In the folder where **Serenity** is stored, delete `serenity.json` in `data` folder
     <br>Expected: Tutorial group G01 created,
-    tutorial group contains two students, Aaron Tan and John Doe.
+    tutorial group contains three students, Aaron Tan, Benjamin Barker and Catherine Teo.
 
 ## **Appendix G: Effort**
 
-Creating **Serenity** was fairly difficult and required much effort from all the team members.
+Creating **Serenity** was fairly difficult and required significant effort from all the team members.
 Cumulatively, the project amassed a great **25,000 lines of code** combined.
 This was achieved from **the meticulous planning, productive weekly team meetings, consistent communication and updates
 from all team members**.
@@ -967,11 +973,70 @@ tutorial group as XLSX files. The resulting XLSX file will either contain attend
 each student across all tutorial lessons in the tutorial group. These features were designed with the user's needs in
 mind after surveying all the CS2101 tutors and interviewing a CS2101 tutor.
 
-### G.2. Conclusion
+### **G.2. Challenges**
+
+Throughout the development of **Serenity**, significant hurdles were faced in development.
+We detail some of the challenges faced, and steps we took to solve them.
+
+**Challenge 1: Design stage**
+
+The first challenge we faced involved the planning stage, where we had to have various
+different entities (tutorial groups, lessons, students and their records) come together.
+Compared to **AddressBook 3**, which had a single `Person` object in the model, we had to
+revamp it to accommodate multiple entities such as `Group`, `Lesson`, `Student` and `StudentInfo`, while
+ensuring we adhere to principles such as Separation of concerns
+and avoiding deep nesting.
+
+**Our solution to the challenge:**
+
+A key part towards solving this is laying down design requirements at the start
+of the project, to minimize the risk of refactoring and overhauling at 
+the end of our project. Requirements were clearly set up before any development began.
+Weekly team meetings were held to allocate tasks and plan for the week ahead.
+Within each week, we continued to update each other daily on our individual progress,
+to stay aware of the latest changes done in the project.
+We placed heavy emphasis on communication and put in a collaborative effort in ensuring
+that the project's challenges and tasks are clearly identified.
+
+**Challenge 2: Implementation**
+
+**Serenity** allows users to view the different aspects of their lessons, 
+such as viewing attendance records, participation records, lesson details and group details. 
+This posed a challenge in implementing an intuitive
+<span ><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> that also updated automatically
+whenever data is created, updated or removed.
+
+Starting from **AddressBook 3**, which had a single Ui panel, we had to overhaul
+and expand it to accommodate multiple different panels, each serving a different purpose
+such as viewing tutorial groups, to viewing tutorial lessons and viewing attendance records, 
+which meant a significant portion of time spent on 
+designing the interface to accommodate these different entities.
+
+Another significant functionality **Serenity** includes is the ability to import from and
+export data into Excel sheets, which was a feature requested by CS2101 tutors we 
+spoke to. A large amount of time and consideration had to be placed in developing
+these new features to ensure they worked as expected, being a completely new
+function that was not modified from **AddressBook 3**. That, combined together
+with the number of commands we implemented, **26** compared to **AddressBook 3**'s
+**7**, meant a significant increase in development time spent implementing
+these new commands.
+
+**Our solution to the challenge:**
+
+As we dived deeper into development, it became clear that there are a few
+categories we needed to work on: Ui, Storage, Model and Logic. We each took on 
+individual responsibilities in these different categories, 
+helping everyone establish a sense of responsibility
+for a certain portion of **Serenity**, empowering them to focus on said features.
+
+### **G.3. Conclusion**
 
 Overall, we managed to create an all-in-one CS2101 tutorial group manager that is equipped with
-user-focused features and a neat user interface. Our team put in a huge amount of effort in enhancing our features and
-ensuring that the features work as intended. Throughout the development process, we consistently helped one another
-in identifying and solving implementation and documentation bugs, as well as assisted one another in implementing
-tricky functionalities.
+user-focused features and a neat user interface. Our team put in a huge amount of effort 
+in enhancing our features andensuring that the features work as intended. 
+Throughout the development process, we consistently helped one another
+in identifying and solving implementation and documentation bugs, 
+as well as assisted one another in implementing
+tricky functionalities. The development process has been a wholly enjoyable one, and each one of us
+have turned into a better developer in this journey. 
 
