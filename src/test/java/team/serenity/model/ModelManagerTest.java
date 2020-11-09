@@ -20,6 +20,7 @@ import team.serenity.model.group.question.QuestionContainsKeywordPredicate;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.UserPrefs;
+import team.serenity.testutil.SerenityBuilder;
 import team.serenity.testutil.question.QuestionManagerBuilder;
 
 public class ModelManagerTest {
@@ -197,10 +198,6 @@ public class ModelManagerTest {
 
         // ====================== State equal checks ==============================
 
-        // TODO: different serenity -> returns false
-
-        // TODO: different filteredGroupList -> returns false
-
         // ====================== Question Manager Attributes ==============================
 
         // different questionManager -> returns false
@@ -213,9 +210,6 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         this.modelManager.updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
 
-        // ====================== User Prefs Attributes ==============================
-
-        // TODO: different userPrefs -> returns false
     }
 
 }
