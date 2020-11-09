@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class LessonNameTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LessonName(null));
+        assertThrows(AssertionError.class, () -> new LessonName(null));
     }
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
@@ -19,7 +19,7 @@ public class LessonNameTest {
 
     @Test
     public void isValidName() {
-        assertThrows(NullPointerException.class, () -> LessonName.isValidName(null));
+        assertThrows(AssertionError.class, () -> LessonName.isValidName(null));
         assertFalse(LessonName.isValidName(""));
         assertFalse(LessonName.isValidName(" "));
         assertFalse(LessonName.isValidName("1 - 1"));

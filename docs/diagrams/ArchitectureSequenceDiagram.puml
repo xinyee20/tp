@@ -9,32 +9,32 @@ Participant ":Logic" as logic LOGIC_COLOR_T1
 Participant ":Model" as model MODEL_COLOR_T1
 Participant ":Storage" as storage STORAGE_COLOR_T1
 
-user -[USER_COLOR]> ui : "delgrp grp/G04"
+user -[#black]> ui : "delgrp grp/G04"
 activate ui UI_COLOR_T1
 
-ui -[UI_COLOR_T1]> logic : execute("delgrp grp/G04")
+ui -[#black]> logic : execute("delgrp grp/G04")
 activate logic LOGIC_COLOR_T1
 
-logic -[LOGIC_COLOR_T1]> model : deleteGroup(target)
+logic -[#black]> model : deleteGroup(target)
 activate model MODEL_COLOR_T1
 
-model -[MODEL_COLOR_T1]-> logic
+model --[#black]> logic
 deactivate model
 
-logic -[LOGIC_COLOR_T1]> storage : saveSerenity(serenity)
+logic -[#black]> storage : saveSerenity(serenity)
 activate storage STORAGE_COLOR_T1
 
-storage -[STORAGE_COLOR_T1]> storage : Save to file
+storage -[#black]> storage : Save to file
 activate storage STORAGE_COLOR
-storage --[STORAGE_COLOR_T1]> storage
+storage --[#black]> storage
 deactivate storage
 
-storage --[STORAGE_COLOR_T1]> logic
+storage --[#black]> logic
 deactivate storage
 
-logic --[LOGIC_COLOR_T1]> ui
+logic --[#black]> ui
 deactivate logic
 
-ui--[UI_COLOR_T1]> user
+ui--[#black]> user
 deactivate ui
 @enduml

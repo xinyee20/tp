@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class GroupNameTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new GroupName(null));
+        assertThrows(AssertionError.class, () -> new GroupName(null));
     }
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
@@ -19,7 +19,7 @@ public class GroupNameTest {
 
     @Test
     public void isValidName() {
-        assertThrows(NullPointerException.class, () -> GroupName.isValidName(null));
+        assertThrows(AssertionError.class, () -> GroupName.isValidName(null));
         assertFalse(GroupName.isValidName(""));
         assertFalse(GroupName.isValidName(" "));
         assertFalse(GroupName.isValidName("11"));

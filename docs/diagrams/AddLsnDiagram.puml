@@ -1,12 +1,7 @@
 @startuml
 
-skinparam activity {
-ArrowColor DeepSkyBlue
-BorderColor DeepSkyBlue
-BackgroundColor MediumAquaMarine
-BarColor DodgerBlue
-}
-skinparam shadowing false
+!include ./style.puml
+
 start
 
 title Adding a Lesson to an existing Group

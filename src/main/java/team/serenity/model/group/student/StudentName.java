@@ -1,7 +1,5 @@
 package team.serenity.model.group.student;
 
-
-import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.AppUtil.checkArgument;
 
 /**
@@ -31,7 +29,7 @@ public class StudentName {
      * @param name A valid name.
      */
     public StudentName(String name) {
-        requireNonNull(name);
+        assert name != null;
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         this.fullName = name.toUpperCase();
     }
@@ -40,7 +38,7 @@ public class StudentName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        requireNonNull(test);
+        assert test != null;
         return test.matches(VALIDATION_REGEX) && test.length() < 50;
     }
 

@@ -13,6 +13,7 @@ import team.serenity.model.group.Group;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Description;
 import team.serenity.model.group.question.Question;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 
 /**
  * Adds a question to the Question manager.
@@ -62,6 +63,11 @@ public class AddQnCommand extends Command {
         }
 
         model.addQuestion(questionToAdd);
+
+        model.updateFilteredQuestionList(
+                new QuestionFromGroupLessonPredicate(uniqueGroup.getGroupName(), uniqueLesson.getLessonName())
+        );
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, questionToAdd));
 
     }
