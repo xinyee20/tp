@@ -176,7 +176,8 @@ The `Logic` component is in charge of command parsing from the commands given by
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
 The steps described above will be the standard command parsing and execution of every command in **Serenity**.
-To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command `delgrp grp/G04` is shown below.
+The Sequence Diagram given in Figure 4.3.2.1 below shows the interactions inside the Logic component
+when the command `delgrp grp/G04` is executed.
 The diagram starts with the `execute("delgrp grp/G04")` API call.
 
 <p align="center"><img src="images/developerGuide/DeleteSequenceDiagram.png" alt="Figure 4.3.2.1"></p>
@@ -198,6 +199,8 @@ due to a limitation of PlantUML, the lifelines reached the end of the diagram.
 This segment will explain the structure and responsibilities of the `Model` component.
 
 #### **4.4.1. Structure**
+
+The Class Diagram given in Figure 4.4.1.1 below describes the structure of Model-related classes.
 
 <p align="center">
 <img alt="Class diagram of Model component" src="images/developerGuide/ModelClassDiagram.png" width="620"></p>
@@ -242,6 +245,8 @@ The `Model` component,
 This segment will explain the structure and responsibilities of the `Storage` component.
 
 #### **4.5.1. Structure**
+
+The Class Diagram given in Figure 4.5.1.1 below describes the structure of Storage-related classes.
 
 <p align="center">
 <img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png" width="500"></p>
@@ -336,11 +341,13 @@ such as `GroupManager` and `QuestionManager`, while others store multiple `Uniqu
 a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for the `HashMap`.
 This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
 
+The Class Diagram given in Figure 5.1.2.1 below shows the structure of `GroupManager`.
+`GroupManager` is an example of a `XYZManager` which stores a single `UniqueList`.
+
 <p align="center">
 <img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager" width="380"></p>
 
-<p align="center"><i>Figure 5.1.2.1 Structure of <code>GroupManager</code>, an example of
-a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
+<p align="center"><i>Figure 5.1.2.1 Structure of <code>GroupManager</code></i></p>
 
 ### **5.2. Group Manager**
 
@@ -365,7 +372,7 @@ The following steps describe the execution of `DelGrpCommand` in detail, assumin
 1. `GroupManager` will then remove the group from its `UniqueList`.
 1. If the above steps are all successful, `DelGrpCommand` will then create a `CommandResult` object and return the result.
 
-The sequence diagram below documents the execution.
+The Sequence Diagram given in Figure 5.2.2.1 below documents the execution.
 
 <p align="center">
 <img src="images/developerGuide/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager" width="590"></p>
@@ -391,6 +398,8 @@ Having a `LessonManager` allows for easy retrieval, viewing and updating of the 
 
 The `LessonManager` contains a `HashMap` whose key is a Group and value is a UniqueList.
 In this section, we detail the workflow of adding a lesson to an existing tutorial group through the `addlsn` command.
+
+The Activity Diagram given in Figure 5.3.2.1 below illustrates the execution of the `addlsn` command.
 
 <p align="center"><img src="images/developerGuide/AddLsnDiagram.png" alt="Figure 5.3.2.1 Activity diagram detailing execution of <code>addlsn</code> command"></p>
 <p align="center"><i>Figure 5.3.2.1. Activity diagram detailing execution of <code>addlsn</code> command.</i></p>
@@ -436,7 +445,7 @@ are correctly applied to the students belonging to the specified tutorial group.
 
 The `StudentManager` contains a `HashMap` which key is a `GroupName` and value is a `UniqueList<Student>`.
 In this section, we will detail the workflow of adding a new student to an existing tutorial group
-using the `addstudent` command. The workflow is shown in the Activity Diagram below.
+using the `addstudent` command. The workflow is shown in the Activity Diagram given in Figure 5.4.2.1 below.
 
 <p align="center"><img src="images/developerGuide/AddStudentActivityDiagram.png" alt="Figure 5.4.2.1 Activity diagram of `addstudent` command" width="317px" height="709px"></p>
 <p align="center"><i>Figure 5.4.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
@@ -491,7 +500,7 @@ The following Class Diagram describes the structure of `StudentInfoManager` and 
 <p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.jpg" alt="Figure 5.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
 <p align="center"><i>Figure 5.5.2.1. Simplified class diagram of a <code>StudentInfoManager</code> and relevant classes</i></p>
 
-From the diagram above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
+From the diagram given in Figure 5.5.2.1 above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
 `UniqueStudentInfoList` for each `GroupLessonKey`. The table below shows the commands managed by the `StudentInfoManager`.
 
 Commands | Purpose
@@ -500,7 +509,8 @@ Commands | Purpose
 `flagatt` / `unflagatt` | Flag the attendance of a student for special scenarios.
 `setscore` / `addscore` / `subscore` | Set / add / subtract the participation score of a student for a lesson.
 
-In this section, we will outline the `markpresent` command handled by the `StudentInfoManager` which is summarised by the Activity Diagram below.
+In this section, we will outline the `markpresent` command handled by the `StudentInfoManager`
+which is summarised by the Activity Diagram given in Figure 5.5.2.2 below.
 We will be using the index version of the `markpresent` command.
 
 <p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 5.5.2.2 Activity Diagram of a markpresent command by index"></p>
@@ -563,7 +573,7 @@ The current implementation of the `QuestionManager` only allows the user to keep
 of the lessons for each tutorial group. It does not allow the user to add questions without a tutorial group and lesson.
 
 In this section, we will outline the `findqn` command of the `QuestionManager` which is summarised by the
-Activity Diagram below.
+Activity Diagram given in Figure 5.6.2.1 below.
 
 <p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 5.6.2.1 Activity diagram of a findqn command" width="330"></p>
 
@@ -581,7 +591,7 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 3. The `Ui` component will detect this change and update the <span style="color:purple"><i>GUI</i></span>.
 4. If the above steps are all successful, the `FindQnCommand` will then create a `CommandResult` object and return the result.
 
-The Sequence Diagram below summarises the aforementioned steps.
+The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned steps.
 
 <p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 5.6.2.2 Sequence diagram detailing execution of FindQnCommand" width="550"></p>
 
