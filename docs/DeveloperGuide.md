@@ -876,6 +876,8 @@ Preconditions: Tutorial groups and students have been set up
 Guarantees:
     - User can view the list of questions upon successful command.
 
+<div style="page-break-after: always;"></div>
+
 MSS:
     1. User requests to view the list of questions for a tutorial group.
     2. System shows the attendance list for the lesson.
@@ -900,6 +902,8 @@ Extensions:
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 1. The data should be stored locally into a human editable text file.
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix E: Glossary**
 
 **Name** | **Description**
@@ -921,8 +925,6 @@ Given below are instructions to test the app manually.
 testers are expected to do more **exploratory** testing.
 
 </div>
-
-
 
 ### F.1. Launch and Shutdown
 
@@ -966,6 +968,8 @@ testers are expected to do more **exploratory** testing.
     1. Test case: In the folder where **Serenity** is stored, delete `serenity.json` in `data` folder
     <br>Expected: Tutorial group G01 created,
     tutorial group contains three students, Aaron Tan, Benjamin Barker and Catherine Teo.
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix G: Effort**
 
