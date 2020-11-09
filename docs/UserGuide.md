@@ -52,6 +52,7 @@ To get started with using **Serenity**, you can follow these steps:
 6. Refer to the [Features](#4-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## **3. About**
 
 ### 3.1. Structure of this document
@@ -238,6 +239,7 @@ Below is an overview of the features available in **Serenity** :
 2. [Attendance taking](#42-attendance-taking) feature provides you the tools to mark attendance for your lessons.
 3. [Participation marking](#43-participation-marking) feature provides you the tools to grade student participation. 
 4. [Question addressing](#44-question-addressing) feature provides you the tools to keep track of questions asked by students.
+5. [Utility viewing](#45-utility-viewing) feature provides you the tools to view the information of the above features.
 
 ### 4.1. Setting Up
 
@@ -277,6 +279,13 @@ as pressing the button equals to typing the `viewgrp grp/GROUP_NAME` command.
 
 `addgrp grp/GROUP_NAME path/PATH_TO_XLSX`
 
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+GROUP_NAME follows the format 'XYY' where X is an alphabetical character and Y is a digit from 0 to 9. 
+
+</div>
+
 **Example:**
 
 You are adding a new tutorial group named `G04` to prepare for a new semester.
@@ -294,13 +303,20 @@ Outcome:
 3. **Serenity** will switch to tutorial group `G04` page.
 4. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
 
-<p align="center"><img src="images/userGuide/settingUp/addgrp_command.png" 
-   alt="Command box for addgrp command"></p>
-<p align="center"><i>Figure 4.1.1.1 Command for <code>addgrp</code> command.</i></p>
+<p align="center">
 
-<p align="center"><img src="images/userGuide/settingUp/addgrp_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.1.1.2 Screen displayed when the command is successfully executed.</i></p>
+<img src="images/userGuide/settingUp/addgrp_command.png" alt="Command box for addgrp command">
+<i>Figure 4.1.1.1 Command for <code>addgrp</code> command.</i>
+
+</p>
+
+<p align="center">
+
+<img src="images/userGuide/settingUp/addgrp_result.png" 
+     alt="Result upon successful execution of command" border="1px solid black">
+<i>Figure 4.1.1.2 Screen displayed when the <code>addgrp</code> command is successfully executed.</i>
+
+</p>
 
 ####  4.1.2. Delete an existing tutorial group: `delgrp`
 
@@ -344,8 +360,8 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 
 <div markdown="block" class="alert alert-danger">
 
-:warning: **Warning:** LESSON_NAME follows the format 'X-Y' where X is the week number, and Y is the lesson number. There can be 
-more than 9 weeks (as in 10-1) but not more than 9 lessons in a week (1-10 would be invalid).
+:warning: **Warning:**
+LESSON_NAME follows the format 'XX-Y' where X is the week number, and Y is the lesson number. 
 
 </div>
 
@@ -364,9 +380,13 @@ Outcome:
 2. **Serenity** will display tutorial lesson `1-3` page.
 3. You can now see that tutorial lesson `1-3` has been added to tutorial group `G01`.
 
-<p align="center"><img src="images/userGuide/settingUp/addlsn_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.1.3.1  Screen displayed when the command is successfully executed.</i></p>
+<p align="center">
+
+<img src="images/userGuide/settingUp/addlsn_result.png" 
+    alt="Result upon successful execution of command" border="1px solid black">
+<i>Figure 4.1.3.1 Screen displayed when the <code>addlsn</code> command is successfully executed.</i>
+
+</p>
 
 #### 4.1.4. Delete an existing tutorial lesson: `dellsn`
 
@@ -445,9 +465,13 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. `Aaron Tan` will no longer be in the list of students in tutorial group `G01`.
 
-<p align="center"><img src="images/userGuide/settingUp/delstudent_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.1.6.1 Screen displayed when the command is successfully executed.</i></p>
+<p align="center">
+
+<img src="images/userGuide/settingUp/delstudent_result.png" 
+    alt="Result upon successful execution of command" border="1px solid black">
+<i>Figure 4.1.6.1 Screen displayed when the <code>delstudent</code> command is successfully executed.</i>
+
+</p>
 
 ### 4.2. Attendance taking
 
