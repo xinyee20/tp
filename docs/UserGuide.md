@@ -1395,6 +1395,8 @@ Command | Example
 **Add student** <br> `addstudent grp/GROUP_NAME name/STUDENT_NAME matric/STUDENT_NUMBER` | <br>`addstudent grp/G01 name/David Chong matric/A0123456D`
 **Delete student** <br> - `delstudent grp/GROUP_NAME name/STUDENT_NAME matric/STUDENT_NUMBER`<br> - `delstudent INDEX grp/GROUP` | <br> - `delstudent grp/G01 name/Aaron Tan matric/A0123456A` <br> - `delstudent 1 grp/G01`
 
+<div style="page-break-after: always;"></div>
+
 ### 6.2. Attendance taking commands
 
 Command | Example
@@ -1406,6 +1408,8 @@ Command | Example
 **Flag attendance** <br> - `flagatt name/STUDENT_NAME matric/STUDENT_NUMBER` <br> - `flagatt INDEX` | <br> - `flagatt name/Aaron Tan matric/A0123456A` <br> - `flagatt 1`
 **Unflag attendance** <br> - `unflagatt name/STUDENT_NAME matric/STUDENT_NUMBER` <br> - `unflagatt INDEX` | <br> - `unflagatt name/Aaron Tan matric/A0123456A`<br> - `unflagatt 1` 
 **Export attendance** <br> `exportatt grp/GROUP_NAME` | `exportatt grp/G01`
+
+<div style="page-break-after: always;"></div>
 
 ### 6.3. Participation marking commands
 
