@@ -50,7 +50,7 @@ In [Section 4](#4-design), you can find the details of the components used in **
 In [Section 5](#5-implementation), you can find the rationale, current implementation and design considerations
 of our code.
 
-From [Section 6](#6-documentation) to [Section 10](#10-dev-ops), you can find the details regarding
+In [Section 6](#6-documentation-logging-testing-configuration-dev-ops), you can find the details regarding
 documentation, logging, testing, configuration and dev-ops.
 
 From [Appendix A](#appendix-a-product-scope) to [Appendix G](#appendix-g-effort), you can find the additional
@@ -578,25 +578,17 @@ The Sequence Diagram below summarises the aforementioned steps.
 * The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
 * Both options have overheads when trying to view all questions and to view an individual lesson’s questions. However, option 2 is more costly and complicated to implement given the time constraints. Thus, we decided option 1 is better.
 
-## **6. Documentation**
+## **6. Documentation, Logging, Testing, Configuration, Dev Ops**
 
-Refer to the [_Documentation_](Documentation.md) guide.
+* [Documentation guide](Documentation.md)
 
-## **7. Logging**
+* [Logging guide](Logging.md)
 
-Refer to the [_Logging_](Logging.md) guide.
+* [Testing guide](Testing.md)
 
-## **8. Testing**
+* [Configuration guide](Configuration.md)
 
-Refer to the [_Testing_](Testing.md) guide.
-
-## **9. Configuration**
-
-Refer to the [_Configuration_](Configuration.md) guide.
-
-## **10. Dev Ops**
-
-Refer to the [_DevOps_](DevOps.md) guide.
+* [DevOps guide](DevOps.md)
 
 ## **Appendix A: Product Scope**
 
