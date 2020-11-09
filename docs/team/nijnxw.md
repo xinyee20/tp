@@ -34,7 +34,10 @@ Given below are my contributions to the project.
 * **New Feature 3**: Added the ability to view all questions and view a lesson's details 
   * What it does: Allows user to switch between views in Serenity
   * Justification: This enhancement improves the product significantly because a user will want to
-    be able to switch to different views in Serenity efficiently though typing of commands. 
+    be able to switch to different views in Serenity efficiently though typing of commands.
+    
+    <div style="page-break-after: always;"></div>
+     
   * Highlights: This enhancement required the in-depth analysis of the UI and Logic component. 
     The implementation was also challenging as it involved using JavaFX which is a relatively new 
     framework that I needed to pick up quickly. I was not able to see through the implementation for 
