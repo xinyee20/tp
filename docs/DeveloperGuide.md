@@ -77,7 +77,7 @@ This section describes the details of the components used in **Serenity**.
 
 The Architecture Diagram given in Figure 4.1.1 below explains the high-level design of Serenity.
 
-![Figure 4.1.1 Architecture Diagram of Serenity](images/developerGuide/ArchitectureDiagram.png)
+<p align="center"><img src="images/developerGuide/ArchitectureDiagram.png" alt="Figure 4.1.1 Architecture Diagram of Serenity" width="400"></p>
 
 <p align="center">Figure 4.1.1 Architecture Diagram of Serenity</p>
 
@@ -99,7 +99,7 @@ Component | Description
 
 The Sequence Diagram in Figure 4.1.2 below shows how the components interact with each other for the scenario where the user issues the command `delgrp grp/G04`.
 
-![Figure 4.1.2](images/developerGuide/ArchitectureSequenceDiagram.png)
+<p align="center"><img src="images/developerGuide/ArchitectureSequenceDiagram.png" alt="Figure 4.1.2" width="650"></p>
 
 <p align="center"><i>Figure 4.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
@@ -115,7 +115,7 @@ This segment will explain the structure and responsibilities of the Ui component
 
 The Class Diagrams given in Figure 4.2.1.1 and Figure 4.2.1.2 below describe the structure of the Ui-related classes.
 
-![Figure 4.2.1.1](images/developerGuide/UiClassDiagram2.png)
+<p align="center"><img src="images/developerGuide/UiClassDiagram2.png" alt="Figure 4.2.1.1"></p>
 
 <p align="center"><i>Figure 4.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
@@ -146,7 +146,7 @@ This segment will explain the structure and responsibilities of the `Logic` comp
 
 The Class Diagram given in Figure 4.3.1.1 below describes the structure of Logic-related classes.
 
-![Figure 4.3.1.1](images/developerGuide/LogicClassDiagram2.png)
+<p align="center"><img src="images/developerGuide/LogicClassDiagram2.png" alt="Figure 4.3.1.1"></p>
 
 <p align="center"><i>Figure 4.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
@@ -168,7 +168,7 @@ The steps described above will be the standard command parsing and execution of 
 To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command `delgrp grp/G04` is shown below.
 The diagram starts with the `execute("delgrp grp/G04")` API call.
 
-![Figure 4.3.2.1](images/developerGuide/DeleteSequenceDiagram.png)
+<p align="center"><img src="images/developerGuide/DeleteSequenceDiagram.png" alt="Figure 4.3.2.1"></p>
 
 <p align="center"><i>Figure 4.3.2.1 Interactions inside the <code>Logic</code> component for the <code>delgrp grp/G04</code> command.</i></p>
 
