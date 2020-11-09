@@ -496,8 +496,6 @@ Outcome:
 Need to mark attendance of your students at the start of each lesson quickly?
 This feature allows you to mark attendance of students easily.
 
-<div style="page-break-after: always;"></div>
-
 #### 4.2.1. Mark all students as present: `markpresent all`
 
 You can use this command to mark all students in a tutorial group as present for a tutorial lesson.
