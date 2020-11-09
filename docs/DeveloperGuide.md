@@ -115,7 +115,7 @@ The Sequence Diagram in Figure 4.1.2 below shows how the components interact wit
 
 The segments below give more details of each component.
 
-### **4.2. Ui Component**
+### 4.2. Ui Component
 
 (Contributed by Neo Rui En)
 
@@ -998,7 +998,7 @@ tutorial group as XLSX files. The resulting XLSX file will either contain attend
 each student across all tutorial lessons in the tutorial group. These features were designed with the user's needs in
 mind after surveying all the CS2101 tutors and interviewing a CS2101 tutor.
 
-### **G.2. Challenges**
+### G.2. Challenges
 
 Throughout the development of **Serenity**, significant hurdles were faced in development.
 We detail some of the challenges faced, and steps we took to solve them.
@@ -1054,7 +1054,7 @@ individual responsibilities in these different categories,
 helping everyone establish a sense of responsibility
 for a certain portion of **Serenity**, empowering them to focus on said features.
 
-### **G.3. Conclusion**
+### G.3. Conclusion
 
 Overall, we managed to create an all-in-one CS2101 tutorial group manager that is equipped with
 user-focused features and a neat user interface. Our team put in a huge amount of effort 
