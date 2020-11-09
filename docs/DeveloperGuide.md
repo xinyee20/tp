@@ -5,6 +5,8 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
+<div style="page-break-after: always;"></div>
+
 ## **1. Introduction**
 
 <p><img src="images/logo.png" alt="Serenity Logo" width="310"></p>
@@ -31,6 +33,8 @@ and implementation of **Serenity** so that you can get started on your contribut
 ## **2. Setting Up**
 
 Refer to the [_Setting Up_](SettingUp.md) guide.
+
+<div style="page-break-after: always;"></div>
 
 ## **3. About**
 
@@ -66,6 +70,8 @@ Symbol/syntax | Meaning
 _GUI_ | This indicates a graphical component.
 :information_source: | This indicates a note.
 :bulb: | This indicates a tip.
+
+<div style="page-break-after: always;"></div>
 
 ## **4. Design**
 
@@ -109,7 +115,7 @@ The Sequence Diagram in Figure 4.1.2 below shows how the components interact wit
 
 The segments below give more details of each component.
 
-### **4.2. Ui Component**
+### 4.2. Ui Component
 
 (Contributed by Neo Rui En)
 
@@ -229,6 +235,8 @@ The `UniqueXYZList` is a generic name given to the following unique list, these 
 
 Each unique list implements the `UniqueList` interface.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.2. Responsibilities
 
 The `Model` component,
@@ -252,6 +260,8 @@ The Class Diagram given in Figure 4.5.1.1 below describes the structure of Stora
 <img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png" width="500"></p>
 
 <p align="center"><i>Figure 4.5.1.1 Class diagram of <code>Storage</code> component.</i></p>
+
+<div style="page-break-after: always;"></div>
 
 The `UserPrefStorage` interface, `SerenityStorage` interface, and the `QuestionStorage` interface defines the API
 for reading and saving the Model component’s data from and to the hard disk in JSON format.
@@ -286,6 +296,8 @@ This package contains classes for exceptions thrown by **Serenity**.
 
 This package contains classes for utility operations like file input and output, Excel XLSX file support,
 JSON functionalities and image processing.
+
+<div style="page-break-after: always;"></div>
 
 ## **5. Implementation**
 
@@ -359,6 +371,8 @@ The `GroupManager` is responsible for storing the tutorial groups taught by the 
 
 A tutor has multiple tutorial groups to teach, hence the implementation requires a way to store multiple tutorial groups.
 
+<div style="page-break-after: always;"></div>
+
 #### 5.2.2. Current Implementation
 
 `GroupManager` contains a `UniqueList` that can store multiple unique `Group` items.
@@ -384,11 +398,13 @@ The Sequence Diagram given in Figure 5.2.2.1 below documents the execution.
 Encapsulating tutorial groups within a `GroupManager` follows the Separation of Concerns principle,
 by ensuring that all logic and functionality related to a Tutorial group is encapsulated within `GroupManager`.
 
+<div style="page-break-after: always;"></div>
+
 ### 5.3. Lesson Manager
 
 (Contributed by Ryan Lim)
 
-The `LessonManager` is responsible for storing lessons in a tutorial group
+The `LessonManager` is responsible for storing lessons in a tutorial group.
 
 #### 5.3.1. Rationale
 
@@ -425,6 +441,8 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 
 We picked option 2 for greater flexibility and separation, allowing us to easily retrieve
 the list of lessons for a specific tutorial group.
+
+<div style="page-break-after: always;"></div>
 
 ### 5.4. Student Manager
 
@@ -481,6 +499,8 @@ a `HashMap<GroupName, UniqueList<Student>>`.
 * As we often need to access the list of students, we cannot afford the greater overhead involved in Option 1. Thus, we decided to opt for the option with greater efficiency.
 * As we will sort the list of students of a group after a student is added, we do not require the order of addition of students to be maintained.
 
+<div style="page-break-after: always;"></div>
+
 ### 5.5. StudentInfo Manager
 
 (contributed by Lau Xin Yee)
@@ -507,6 +527,8 @@ The following Class Diagram describes the structure of `StudentInfoManager` and 
 
 From the diagram given in Figure 5.5.2.1 above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
 `UniqueStudentInfoList` for each `GroupLessonKey`. The table below shows the commands managed by the `StudentInfoManager`.
+
+<div style="page-break-after: always;"></div>
 
 Commands | Purpose
 -------|--------
@@ -547,6 +569,8 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 |---|---|---|
 | **Option 1**<br>Reach into `Group`, followed by `Lesson` to retrieve `StudentInfo`. | More intuitive. | Nesting of data makes it harder to test.
 | **Option 2 (Current)**<br>Store and retrieve `StudentInfo` from a `HashMap` with the combination of `Group` name and `Lesson` name forming the key. | Easier to retrieve data. <br> <br> Less nesting of data allows testing to be done more easily. | Need to put in more thought into coming up with the Manager structures to prevent cyclic dependencies. |
+
+<div style="page-break-after: always;"></div>
 
 **Reasons for choosing option 2:**
 
@@ -611,6 +635,8 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 | **Option 1 (Current)**<br>To store the questions to a global question list. | Better user experience as the user is able to see the full list of questions from every lesson.<br><br>Reduce data nesting as the list of questions are abstracted out as a separate component. | Complicated to filter out questions for a specific tutorial group and lesson. |
 | **Option 2**<br>To store the questions in a list in each lesson. | Straight-forward and easier to implement.|Difficult to sieve through each lesson to collate all the questions from every group to display. |
 
+<div style="page-break-after: always;"></div>
+
 **Reasons for choosing option 1:**
 
 * The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
@@ -627,6 +653,8 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 * [Configuration guide](Configuration.md)
 
 * [DevOps guide](DevOps.md)
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix A: Product Scope**
 
@@ -648,6 +676,8 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
  <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>
  for convenient viewing.
 * **Serenity** gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B: User Stories**
 
@@ -872,6 +902,8 @@ Extensions:
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 1. The data should be stored locally into a human editable text file.
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix E: Glossary**
 
 **Name** | **Description**
@@ -894,7 +926,7 @@ testers are expected to do more **exploratory** testing.
 
 </div>
 
-
+<div style="page-break-after: always;"></div>
 
 ### F.1. Launch and Shutdown
 
@@ -923,8 +955,10 @@ testers are expected to do more **exploratory** testing.
     <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the student information in the tutorial lesson created.
     1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<GROUP_NAME>`, `addlsn lsn/<LESSON_NAME>`
     <br>Expected: Error message shown.
+    
+<div style="page-break-after: always;"></div>
 
-1. Adding Student to a Group
+3. Adding Student to a Group
     1. Prerequisites: Tutorial group is already set up.
     1. Test case: `addstudent grp/<GROUP_NAME> name/<STUDENT_NAME> matric/<STUDENT_MATRICULATION_NUMBER>`
     <br>Expected: Student added,
@@ -938,6 +972,8 @@ testers are expected to do more **exploratory** testing.
     1. Test case: In the folder where **Serenity** is stored, delete `serenity.json` in `data` folder
     <br>Expected: Tutorial group G01 created,
     tutorial group contains three students, Aaron Tan, Benjamin Barker and Catherine Teo.
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix G: Effort**
 
@@ -973,7 +1009,7 @@ tutorial group as XLSX files. The resulting XLSX file will either contain attend
 each student across all tutorial lessons in the tutorial group. These features were designed with the user's needs in
 mind after surveying all the CS2101 tutors and interviewing a CS2101 tutor.
 
-### **G.2. Challenges**
+### G.2. Challenges
 
 Throughout the development of **Serenity**, significant hurdles were faced in development.
 We detail some of the challenges faced, and steps we took to solve them.
@@ -1017,9 +1053,11 @@ export data into Excel sheets, which was a feature requested by CS2101 tutors we
 spoke to. A large amount of time and consideration had to be placed in developing
 these new features to ensure they worked as expected, being a completely new
 function that was not modified from **AddressBook 3**. That, combined together
-with the number of commands we implemented, **26** compared to **AddressBook 3**'s
+with the number of commands we implemented, **26**, compared to **AddressBook 3**'s
 **7**, meant a significant increase in development time spent implementing
 these new commands.
+
+<div style="page-break-after: always;"></div>
 
 **Our solution to the challenge:**
 
@@ -1029,7 +1067,7 @@ individual responsibilities in these different categories,
 helping everyone establish a sense of responsibility
 for a certain portion of **Serenity**, empowering them to focus on said features.
 
-### **G.3. Conclusion**
+### G.3. Conclusion
 
 Overall, we managed to create an all-in-one CS2101 tutorial group manager that is equipped with
 user-focused features and a neat user interface. Our team put in a huge amount of effort 

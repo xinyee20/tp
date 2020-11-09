@@ -29,6 +29,7 @@ import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.LessonContainsKeywordPredicate;
 import team.serenity.model.group.lesson.LessonName;
+import team.serenity.model.group.lesson.UniqueLessonList;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 import team.serenity.testutil.GroupBuilder;
@@ -175,7 +176,7 @@ class ViewLsnCommandTest {
         private ObservableList<Group> groupList =
                 FXCollections.observableList(Collections.singletonList(new GroupBuilder().build()));;
         private FilteredList<Group> filteredGroupList = new FilteredList<>(groupList);
-        private ObservableList<Lesson> lessonList = FXCollections.observableList(Collections.EMPTY_LIST);
+        private ObservableList<Lesson> lessonList = new UniqueLessonList().asUnmodifiableObservableList();
         private FilteredList<Lesson> filteredLessonList = new FilteredList<>(lessonList);
         private ObservableList<Question> questionList =
                 FXCollections.observableList(Collections.singletonList(new QuestionBuilder().build()));

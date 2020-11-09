@@ -16,6 +16,7 @@ import team.serenity.logic.parser.exceptions.ParseException;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonName;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 
 /**
  * Parses input arguments and creates a new AddLsnCommand object.
@@ -38,7 +39,8 @@ public class AddLsnCommandParser implements Parser<AddLsnCommand> {
         GroupName groupName = SerenityParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GRP).get());
         LessonName lessonName = SerenityParserUtil.parseLessonName(argMultimap.getValue(PREFIX_LSN).get());
 
-        return new AddLsnCommand(lessonName, new GroupContainsKeywordPredicate(groupName.groupName));
+        return new AddLsnCommand(lessonName, new GroupContainsKeywordPredicate(groupName.groupName),
+        new QuestionFromGroupLessonPredicate(groupName, lessonName));
     }
 
     /**

@@ -16,8 +16,11 @@ import team.serenity.logic.commands.lesson.AddLsnCommand;
 import team.serenity.model.Model;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
+import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.lesson.LessonName;
+import team.serenity.model.group.question.Question;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 import team.serenity.testutil.GroupBuilder;
 import team.serenity.testutil.LessonBuilder;
 import team.serenity.testutil.ModelStub;
@@ -26,13 +29,15 @@ class AddLsnCommandTest {
 
     @Test
     void execute_targetGroupDoesNotExist_throwsCommandException() throws CommandException {
-        AddLsnCommand test = new AddLsnCommand(new LessonName("1-1"), new GroupContainsKeywordPredicate("G05"));
+        AddLsnCommand test = new AddLsnCommand(new LessonName("1-1"), new GroupContainsKeywordPredicate("G05"),
+            new QuestionFromGroupLessonPredicate(new GroupName("G05"), new LessonName("1-1")));
         assertThrows(CommandException.class, () -> test.execute(new ModelStubWithGroupList()));
     }
 
     @Test
     void execute_targetDuplicateLesson_throwsCommandException() {
-        AddLsnCommand test = new AddLsnCommand(new LessonName("1-1"), new GroupContainsKeywordPredicate("G02"));
+        AddLsnCommand test = new AddLsnCommand(new LessonName("1-1"), new GroupContainsKeywordPredicate("G02"),
+            new QuestionFromGroupLessonPredicate(new GroupName("G02"), new LessonName("1-1")));
         assertThrows(CommandException.class, () -> test.execute(new ModelStubWithGroupList()));
     }
 
@@ -40,7 +45,8 @@ class AddLsnCommandTest {
     void execute_newLesson() {
         Model actual = new ModelStubWithGroupList();
         Lesson validLesson = new LessonBuilder().withName("1-2").build();
-        AddLsnCommand test = new AddLsnCommand(validLesson.getLessonName(), new GroupContainsKeywordPredicate("G02"));
+        AddLsnCommand test = new AddLsnCommand(validLesson.getLessonName(), new GroupContainsKeywordPredicate("G02"),
+            new QuestionFromGroupLessonPredicate(new GroupName("G02"), validLesson.getLessonName()));
         try {
             CommandResult result = test.execute(actual);
             assertEquals(
@@ -87,6 +93,11 @@ class AddLsnCommandTest {
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {
             this.filteredLessonList.setPredicate(predicate);
+        }
+
+        @Override
+        public void updateFilteredQuestionList(Predicate<Question> predicate) {
+
         }
     }
 
