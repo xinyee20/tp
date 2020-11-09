@@ -58,7 +58,7 @@ Given below are my contributions to the project.
   * Used Github Issues Tracker to schedule, track and assign tasks to teammates.
   * Facilitated weekly team meetings about implementation details, deliverables, and deadlines.
   * Compiled the minutes during team meetings and consultations for future referencing. 
-  * Brainstormed ideas for the different features (How we intend our application to behave, design details etc.)
+  * Brainstormed ideas for the different features and design considerations.
 
 * **Enhancements to existing features**:
   * Repackage and cleaned up code.
