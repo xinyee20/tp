@@ -536,6 +536,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.2.2. Mark a student as present: `markpresent`
 
 You can use this command to mark a specific student as present for a tutorial lesson.
@@ -629,6 +631,8 @@ Outcome:
 <i>Figure 4.2.3.1 Screen displayed when the command is successfully executed.</i>
 
 </p>
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.4. Mark all students as absent: `markabsent all`
 
