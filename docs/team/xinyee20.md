@@ -8,7 +8,9 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 It is written in Java, and has about 25k LoC
 
 #### Summary of contributions
+
 Given below are my contributions to the project.
+
 * **New Feature 1**: Added the ability to mark and flag attendance of students during lessons through commands
   * What it does: 
       * `markpresent`, `markabsent` - Allows the users to mark a student present/absent when viewing a lesson
@@ -18,9 +20,10 @@ Given below are my contributions to the project.
                    the attendance of students in special cases where they have to go for replacement lessons.
   * Highlights: The implementation of this feature was tricky due to initial deep nesting of `Student` information within `Group`. 
   Discussions were held frequently to analyse and re-adjust the project structure to reduce nesting and prevent cyclic dependencies. 
-  Changes had to be made to the implementation of the commands to infuse in the `Manager`s. We also had to review and adjust the the implementation 
+  Afterwards, changes had to be made to the implementation of the commands. We also had to review and adjust the the implementation 
    of the commands to optimise them as some commands that were applied to all the students took quite a while to run.
    All these major changes made the implementation of the code very time-consuming and rather challenging.
+   
 * **New Feature 2**: Added the ability to award and adjust participation scores of students during lessons
   * What it does: 
     * `addscore`, `subscore`, `editscore` - Allows the users to increase, decrease, edit the participation score of a student when viewing a lesson
@@ -29,6 +32,7 @@ Given below are my contributions to the project.
                 quite a few restrictions in terms of input of score, considerable amount of time was spent testing the commands and 
                 adjusting the code, making sure that proper messages are shown when different exceptions are thrown, 
                 to guide users who may misuse the commands.
+                
 * **New Feature 3**: Added the ability to use indexing to apply commands to existing students. 
   * What it does: Allows users to apply deleting of students when in group view and the marking, flagging attendance 
                   of students, as well as awarding, adjusting participation score of students using the index of the student 
@@ -36,12 +40,11 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because it is helps a user to apply commands to students 
                    without needing to type in the name and matriculation number of students which may be very long and tedious to type, 
                    increasing the efficiency of lessons.
-  * Highlights: The implementation of this feature was rather challenging. As we import our application data from excel sheets, we
-                use `Set` to store the data which resulted in the data list being unordered. This made the application confusing to the user and 
-                indexing unreliable. I looked into the usage of `Comparator` to sort the list and made use of `LinkedHashSet` so that all the `Lesson`s, `Student`s, 
-                `StudentInfo`s are sorted in the list shown in the GUI. Another highlight is that implementing index on top 
-                of name and matriculation number resulted in many permutations of the usage of the commands. 
-                More rigorous testing had to be done and more conditions were added to cover the various scenarios.
+  * Highlights: The implementation of this feature was rather challenging. As we import our application data from excel sheets, the usage of `Set` 
+                to store the data resulted in the data list being unordered. I had to look into the usage of `Comparator` to sort the list and 
+                made use of `LinkedHashSet` so that all the `Lesson`s, `Student`s, `StudentInfo`s are sorted in the list shown in the GUI. 
+                Another highlight is that implementing index on top of name and matriculation number resulted in many permutations of the usage of the commands, 
+                which requires more rigorous testing and conditions to cover the various scenarios.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=xinyee20&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
