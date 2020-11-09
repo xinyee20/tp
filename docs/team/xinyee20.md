@@ -1,6 +1,6 @@
 ---
 layout: page
-title: <h3>Xin Yee's Project Portfolio Page</h3>
+title: Xin Yee's Project Portfolio Page
 ---
 ### Project: Serenity
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
