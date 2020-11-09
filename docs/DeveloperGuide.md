@@ -526,6 +526,8 @@ The following Class Diagram describes the structure of `StudentInfoManager` and 
 From the diagram given in Figure 5.5.2.1 above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
 `UniqueStudentInfoList` for each `GroupLessonKey`. The table below shows the commands managed by the `StudentInfoManager`.
 
+<div style="page-break-after: always;"></div>
+
 Commands | Purpose
 -------|--------
 `markpresent` / `markabsent` | Mark student present / absent during a lesson.
@@ -673,6 +675,8 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
  <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>
  for convenient viewing.
 * **Serenity** gives the tutor ability to export data which can be used in other software, e.g. Microsoft Excel.
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B: User Stories**
 
