@@ -1363,3 +1363,4 @@ Command | Example
 **View participation score** <br> `viewscore grp/GROUP_NAME` | `viewscore grp/G01`
 **View flag** <br> `viewflag` | `viewflag`
 **View questions** <br> `viewqn` | `viewqn`
+
