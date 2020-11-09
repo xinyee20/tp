@@ -108,7 +108,7 @@ existing tutorial groups.
 * Tutorial group page
 * Tutorial lesson page
 
-##### **Home page** 
+##### Home page
 
 This is the default page shown when you start **Serenity**. This page consists of:
 
@@ -127,7 +127,7 @@ across your tutorial groups and lessons.
 
 </p>
 
-##### **Tutorial group page**
+##### Tutorial group page
 
 This page shows the information related to a tutorial group you are teaching. This page consists of: 
 
@@ -150,7 +150,7 @@ the class participation grades of all the students in the tutorial group across 
 
 </p>
 
-##### **Tutorial lesson page**
+##### Tutorial lesson page
 
 This page shows the records for a specific lesson. This page consists of:
 
