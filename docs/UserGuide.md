@@ -180,6 +180,8 @@ you may add, edit, find or delete a [question](#44-question-addressing) that was
 
 The table below explains the general symbols and syntax used throughout the document.
 
+<div style="page-break-after: always;"></div>
+
 Symbol/syntax | Meaning
 --------|------------------
 `command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#323-command-syntax-and-usage).
@@ -199,6 +201,8 @@ Command word | The first word of the command that tells **Serenity** which task 
 Parameter | The word or phrase following the command word that provides further details of the task (if necessary).
 Prefix | The letter that is placed at the start of each parameter to distinguish one parameter from another.
 XLSX | The excel file format that **Serenity** handles for imports and exports.
+
+<div style="page-break-after: always;"></div>
 
 #### 3.2.5. Command format
 
