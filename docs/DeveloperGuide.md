@@ -233,6 +233,8 @@ The `UniqueXYZList` is a generic name given to the following unique list, these 
 
 Each unique list implements the `UniqueList` interface.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.2. Responsibilities
 
 The `Model` component,
@@ -365,6 +367,8 @@ The `GroupManager` is responsible for storing the tutorial groups taught by the 
 
 A tutor has multiple tutorial groups to teach, hence the implementation requires a way to store multiple tutorial groups.
 
+<div style="page-break-after: always;"></div>
+
 #### 5.2.2. Current Implementation
 
 `GroupManager` contains a `UniqueList` that can store multiple unique `Group` items.
@@ -417,6 +421,8 @@ The following steps describe the execution of `addlsn` in detail, assuming that 
 3. A new `Lesson` object is created with the new UniqueList.
 4. The ModelManager’s `updateLessonList` method is called.
 5. The ModelManager then calls the method `setListOfLessonsToGroup` of `LessonManager`.
+
+<div style="page-break-after: always;"></div>
 
 #### 5.3.3. Design Consideration
 
@@ -560,6 +566,8 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 the code breaking if any intermediate classes are not functioning properly.
 * Option 2, despite being more complicated, solves our problem without adding much overhead. Thus, we decided option 2 is better.
 
+<div style="page-break-after: always;"></div>
+
 ### 5.6. Question Manager
 
 (Contributed by Bu Wen Jin)
@@ -607,6 +615,8 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 <p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 5.6.2.2 Sequence diagram detailing execution of FindQnCommand" width="550"></p>
 
 <p align="center"><i>Figure 5.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
+
+<div style="page-break-after: always;"></div>
 
 #### 5.6.3. Design Consideration
 
