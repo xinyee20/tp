@@ -79,7 +79,7 @@ Should you try to upload a file without header column onto Serenity, Serenity wi
         alt="Serenity showing invalid header error" border="1px solid black"></p>
    <p align="center"><i>Figure 5.1. Serenity showing invalid header error.</i></p>
 
-### 3. incorrect headers 
+### 3. Incorrect headers 
 
 Similar to files without headers, files with correct headers but in the wrong order are rejected by Serenity, the example below
 is an example of a file with correct headers but in the wrong order compared to a file typically downloaded from LumiNUS.
