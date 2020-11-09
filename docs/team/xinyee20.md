@@ -2,72 +2,39 @@
 layout: page
 title: Xin Yee's Project Portfolio Page
 ---
-
-## Project: Serenity
-
+### Project: Serenity
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
-It is written in Java, and has about 25k LoC.
-
-### Summary of contributions
-
+It is written in Java, and has about 25k LoC
+#### Summary of contributions
 Given below are my contributions to the project.
-
 * **New Feature 1**: Added the ability to mark and flag attendance of students during lessons through commands
   * What it does: 
-      * `markpresent` - Allows the users to mark a student present when viewing a lesson
-      * `markabsent` - Allows the users to mark a student absent when viewing a lesson
-      * `flagatt` - Allows the users to flag attendance of a student when necessary while in lesson view
-      * `unflagatt` - Allows the users to un-flag the attendance of a student after settling issue of the flagged 
-                      student while in lesson view
-  * Justification: This feature improves the product significantly because it helps a user keep track of the 
-                   attendance of students during tutorial lessons. The ability to mark attendance quickly increases 
-                   the efficiency of lessons. The ability to flag students' attendance allows user to keep track of 
-                   the attendance of students in special cases where they have to go for replacement lessons.
-  * Highlights: The implementation of this feature was tricky as students were originally deeply nested within a group. A series of 
-                discussions and analysis of the project structure (Relationship between `Group`, `Lesson`,
-                `Student`) was done so as to reduce the nesting. Changes had to be made to the implementation of the commands 
-                to infuse in the `Manager`s. Another highlight was that the mark attendance commands that are applied to all the
-                students in the class were slow so we had to look into how we can optimise the code to make it run
-                faster. All these major changes made the implementation of the code very time-consuming and rather challenging.
-                
+      * `markpresent`, `markabsent` - Allows the users to mark a student present/absent when viewing a lesson
+      * `flagatt`, `unflagatt` - Allows the users to flag / un-flag attendance of a student when necessary while in lesson view
+  * Justification: This feature helps a user keep track of the attendance of students during tutorial lessons which is an essential feature of the product. 
+  * Highlights: Initial deep nesting of `Student` information within `Group` required analysis and re-adjustment of the project structure. Optimisation of slow commands 
+  that applies to all students also had to be done. These made the implementation of the feature time-consuming and challenging.
 * **New Feature 2**: Added the ability to award and adjust participation scores of students during lessons
   * What it does: 
-    * `editscore` - Allows the users to edit the participation score of a student when viewing a lesson
-    * `addscore` - Allows the users to increase the participation score of a student when viewing a lesson
-    * `subscore` - Allows the users to decrease the participation score of a student when viewing a lesson
-  * Justification: This feature improves the product significantly because it is helps a user to 
-                       keep track of the score of students during tutorial lessons.
-  * Highlights: The implementation of this feature required some thinking through at the start as we try to take into 
-                consideration the users' needs without making the command too complicated to use. As this feature has 
-                quite a few restrictions in terms of input of score, considerable amount of time was spent testing the commands and 
-                adjusting the code, making sure that proper messages are shown when different exceptions are thrown, 
-                to guide users who may misuse the commands.
-    
+      * `addscore`, `subscore`, `editscore` - Allows the users to increase / decrease / edit the participation score of a student when viewing a lesson
+  * Justification: This feature helps a user to keep track of the score of students during tutorial lessons which is an important aspect of handling a group during lesson.
+  * Highlights: Implementation of feature took time as users' needs had to be taken into consideration (the command should be straightforward). Due to quite a few restrictions 
+  in terms of input of score, repeated testing and adjustment of code had to be done to make sure that proper messages are shown when different exceptions are thrown to guide users.
 * **New Feature 3**: Added the ability to use indexing to apply commands to existing students. 
-  * What it does: Allows users to apply deleting of students when in group view and the marking, flagging attendance 
-                  of students, as well as awarding, adjusting participation score of students using the index of the student 
-                  shown on the list when in lesson view.
-  * Justification: This feature improves the product significantly because it is helps a user to apply commands to students 
-                   without needing to type in the name and matriculation number of students which may be very long and tedious to type, 
-                   increasing the efficiency of lessons.
-  * Highlights: The implementation of this feature was rather challenging. The data in our application is obtained 
-                from excel sheets that are imported into the application. I realised that the usage of `Set` to store the 
-                data result in the data list being unordered which is not desirable for the users if they were to see
-                the list of students in different order every time they open the application. I looked into the usage of 
-                `Comparator` to sort the list and made use of `LinkedHashSet` so that all the `Lesson`s, `Student`s, 
-                `StudentInfo`s are sorted in the list shown in the GUI. Another highlight is that implementing index on top 
-                of name and matriculation number made me realise that there are many permutations of the usage of the commands. 
-                More rigorous testing had to be done and more conditions were added to cover the various scenarios.
+  * What it does: Allows users to apply deleting of students when in group view and the marking, flagging attendance of students, 
+  as well as awarding, adjusting participation score of students using the index of the student shown on the list when in lesson view.
+  * Justification: This feature improves the product significantly as it is helps a user to apply commands to students 
+  without needing to type in their name and matriculation number of students which may be long, increasing the efficiency of lessons.
+  * Highlights: Implementation of this feature was rather challenging. Research on usage of `Comparator` and `LinkedHashSet` was done to 
+  sort the unordered lists (`Lesson`, `Student`, `StudentInfo`) in the GUI. 
+  Implementing index on top of name and matriculation number resulted in many permutations of the usage of commands, which required more rigorous testing and conditions to cover the various scenarios.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=xinyee20&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**: 
-  * Brainstormed ideas for the different features. (How we intend our application to behave etc.)
-  * Contributed to weekly team meetings regarding design details and implementation constraints.
-  * Discussed ideas to improve architecture design.
-  * Used Github Issues Tracker to schedule, track and assign tasks to teammates.
-  * Reviewing and merging of PRs before deadlines.
+  * Contributed to weekly team meetings regarding ideas for features, design details and implementation constraints.
+  * Used Github Issues Tracker to schedule, track and assign tasks to teammates. Afterwards, review and merge PRs to close issues.
   
 * **Enhancements to existing features**:
     * Detected and fixed bugs for some features. ( Pull request 
@@ -93,7 +60,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
       * Added documentation for set up section. ( Pull request
-      [#27](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/27)))
+      [#27](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/27))
       * Added documentation for the features `markpresent`, `markabsent`, `flagatt`, `unflagatt`, `editscore`,
       `addscore`, `subscore`. ( Pull request 
       [#149](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/149))
