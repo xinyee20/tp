@@ -16,6 +16,7 @@ import team.serenity.logic.parser.lesson.AddLsnCommandParser;
 import team.serenity.model.group.GroupContainsKeywordPredicate;
 import team.serenity.model.group.GroupName;
 import team.serenity.model.group.lesson.LessonName;
+import team.serenity.model.group.question.QuestionFromGroupLessonPredicate;
 
 public class AddLsnCommandParserTest {
     private AddLsnCommandParser parser = new AddLsnCommandParser();
@@ -29,7 +30,9 @@ public class AddLsnCommandParserTest {
     @Test
     public void parse_success() {
         AddLsnCommand expected = new AddLsnCommand(new LessonName(VALID_LESSON_NAME_1_1),
-            new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G04));
+            new GroupContainsKeywordPredicate(VALID_GROUP_NAME_G04),
+            new QuestionFromGroupLessonPredicate(new GroupName(VALID_GROUP_NAME_G04),
+                new LessonName(VALID_LESSON_NAME_1_1)));
         assertParseSuccess(parser, GRP_DESC_GROUP_G04 + LESSON_DESC_LESSON_1_1, expected);
     }
 
