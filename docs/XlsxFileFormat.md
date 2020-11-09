@@ -27,7 +27,7 @@ However, if you would like to manually create your own attendance sheet to uploa
 
 If you would like to deviate from the stated
 format other valid file formats are described in the subsequent two sections and invalid file formats are described in the 
-[_Invalid file format_](#Invalid file formats) section.
+[_Invalid file format_](#Invalid-file-formats) section.
 
 ### 2. File without title
 
