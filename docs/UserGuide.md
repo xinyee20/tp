@@ -184,7 +184,7 @@ The table below explains the general symbols and syntax used throughout the docu
 
 Symbol/syntax | Meaning
 --------|------------------
-`command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#323-command-syntax-and-usage).
+`command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#324-command-syntax-and-usage).
 _GUI_ | This indicates a graphical component, such as a button, layout format and text input box.
 :information_source: | This indicates a note.
 :bulb: | This indicates a tip.
