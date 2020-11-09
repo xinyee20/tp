@@ -11,7 +11,7 @@ It is written in Java, and has about 25k LoC.
 ### Summary of contributions
 
 * **New Feature 1**: Implementation of initial `addgrp` functionality
-  * What it does: It allows for the addition of a new tutorial group 
+  * What it does: It allows for the addition of a new tutorial group.
   * Justification: This enhancement greatly improves the user experience by enabling users to
   import data instead of manually entering them. For instance, instead of adding 10 students in 10 commands,
   it can now be done via a single command.
@@ -82,8 +82,7 @@ It is written in Java, and has about 25k LoC.
         * Added documentation for feature managers, group managers and lesson managers,
         and implement basic skeleton structure for the rest of the Developer Guide.
         (Pull requests [\#189](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/189),
-         [\#203](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/203)
-        ) 
+         [\#203](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/203)) 
                 
    * Others
         * Fix dead links in the [repository website](https://ay2021s1-cs2103t-w12-4.github.io/tp), remove information about AddressBook 
@@ -94,7 +93,7 @@ It is written in Java, and has about 25k LoC.
   * PRs reviewed (with non-trivial review comments): 
     [\#41](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/41), 
     [\#174](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/174), 
-    [\#198](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/198), 
+    [\#198](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/198)
   * Reported bugs and suggestions for other teams in the class (examples: 
     [1](https://github.com/AY2021S1-CS2103T-T12-4/tp/issues/143),
     [2](https://github.com/AY2021S1-CS2103T-T12-4/tp/issues/144), 
