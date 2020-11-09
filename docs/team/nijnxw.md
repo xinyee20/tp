@@ -21,10 +21,7 @@ Given below are my contributions to the project.
     of data from tutorial group to tutorial lesson to list of questions.
   * Highlights: This enhancement requires an in-depth analysis of design alternatives, the Model,
     Logic and Ui components. The implementation was challenging as we decided to refactor our original 
-    model design of storing the list of questions in each lesson to storing the questions in a global 
-    list with each question tagged to the tutorial group name and lesson name. Another highlight is 
-    the abstraction and integration of the question manager into the model manager to ensure that the 
-    GUI can automatically update upon data changes.
+    model design of storing the list of questions in the middle of v1.2 which affected a lot of files.
 
 * **New Feature 2**: Added the ability to add, delete, edit and find questions through commands
   * What it does: Allows user to use the addressing question feature
@@ -41,7 +38,7 @@ Given below are my contributions to the project.
   * Highlights: This enhancement required the in-depth analysis of the UI and Logic component. 
     The implementation was also challenging as it involved using JavaFX which is a relatively new 
     framework that I needed to pick up quickly. I was not able to see through the implementation for 
-    the Ui component due to time constraint, thus I handed it over to my other team member to work on the Ui aspect of the command.
+    the Ui component due to time constraint, thus I handed it over to my other team member to work on it.
 
 * **New Feature 4**: Added the ability to load and save the questions into a json file 
   * What it does: Stores the questions in the application as a json file when a user exits the application.
