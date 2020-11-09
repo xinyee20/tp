@@ -74,6 +74,8 @@ In [Section 4](#4-features), you can find details of the main features of **Sere
 In this subsection, you can find the explanation of the technical terms, symbols and syntax that are used in this
 User Guide.
 
+<div style="page-break-after: always;"></div>
+
 #### 3.2.1. Terminology related to the _GUI_
 
 The following figure shows the _GUI_ of **Serenity**. It is annotated with the name of the _GUI_ components.
@@ -405,6 +407,8 @@ Deleting an existing lesson from a tutorial group:
 1. Type `dellsn grp/G01 lsn/1-1` into the _Command Box_.
 2. Press `Enter` to execute.
 
+<div style="page-break-after: always;"></div>
+
 Outcome:
 
 1. The _Result Display_ will show a success message. 
@@ -676,6 +680,8 @@ Flagging a student's attendance for a tutorial lesson by his `index` number:
 2. Type `flagatt 1` into the _Command Box_.
 3. Press `Enter` to execute.
 
+<div style="page-break-after: always;"></div>
+
 Outcome:
 
 1. The _Result Display_ will show a success message.
@@ -833,6 +839,8 @@ Outcome:
 <p align="center"><img src="images/userGuide/participationMarking/addscore_result.png" 
    alt="Result upon successful execution of command" border="1px solid black"></p>
 <p align="center"><i>Figure 4.3.1.1 Screen displayed when the command is successfully executed.</i></p>
+
+<div style="page-break-after: always;"></div>
 
 #### 4.3.2. Subtract participation score of a student: `subscore`
 
