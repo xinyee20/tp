@@ -42,8 +42,7 @@ Given below are my contributions to the project.
   * Highlights: This enhancement required the in-depth analysis of the UI and Logic component. 
     The implementation was also challenging as it involved using JavaFX which is a relatively new 
     framework that I needed to pick up quickly. I was not able to see through the implementation for 
-    the Ui component due to time constraint and other features that I had to work on, thus I handed 
-    it over to my other team member to work on the Ui aspect of the command.
+    the Ui component due to time constraint, thus I handed it over to my other team member to work on the Ui aspect of the command.
 
 * **New Feature 4**: Added the ability to load and save the questions into a json file 
   * What it does: Stores the questions in the application as a json file when a user exits the application.
