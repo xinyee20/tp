@@ -652,6 +652,7 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 
 * [DevOps guide](DevOps.md)
 
+<div style="page-break-after: always;"></div>
 
 ## **Appendix A: Product Scope**
 
