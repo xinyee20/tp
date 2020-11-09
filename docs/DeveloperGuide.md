@@ -83,7 +83,7 @@ The Architecture Diagram given in Figure 4.1.1 below explains the high-level des
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: Tip: The .puml files used to create diagrams in this document can be found in the *diagrams* folder.
+:bulb: **TIP:** The .puml files used to create diagrams in this document can be found in the *diagrams* folder.
 
 </div>
 
@@ -514,7 +514,7 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 
 <div markdown="block" class="alert alert-danger">
 
-:warning: If the index is not valid, an error will be thrown to prompt the user to choose another index.
+:warning: **Warning:** If the index is not valid, an error will be thrown to prompt the user to choose another index.
 
 </div>
 
@@ -872,7 +872,7 @@ Given below are instructions to test the app manually.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Note: These instructions only provide a starting point for testers to work on;
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more **exploratory** testing.
 
 </div>
