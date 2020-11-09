@@ -633,12 +633,12 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 | **Option 1 (Current)**<br>To store the questions to a global question list. | Better user experience as the user is able to see the full list of questions from every lesson.<br><br>Reduce data nesting as the list of questions are abstracted out as a separate component. | Complicated to filter out questions for a specific tutorial group and lesson. |
 | **Option 2**<br>To store the questions in a list in each lesson. | Straight-forward and easier to implement.|Difficult to sieve through each lesson to collate all the questions from every group to display. |
 
+<div style="page-break-after: always;"></div>
+
 **Reasons for choosing option 1:**
 
 * The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
 * Both options have overheads when trying to view all questions and to view an individual lesson’s questions. However, option 2 is more costly and complicated to implement given the time constraints. Thus, we decided option 1 is better.
-
-<div style="page-break-after: always;"></div>
 
 ## **6. Documentation, Logging, Testing, Configuration, Dev Ops**
 
