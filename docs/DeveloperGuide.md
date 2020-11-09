@@ -5,6 +5,8 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
+<div style="page-break-after: always"></div>
+
 ## **1. Introduction**
 
 <p><img src="images/logo.png" alt="Serenity Logo" width="310"></p>

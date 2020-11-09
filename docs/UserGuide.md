@@ -257,7 +257,8 @@ You can use this command to add a new tutorial group automatically from XLSX dat
 * A sample XLSX file can be found [here](https://github.com/AY2021S1-CS2103T-W12-4/tp/blob/master/CS2101_G04.xlsx)
 * The XLSX file should store a list of students.
 * The list of students you are importing cannot exist in another tutorial group.
-* The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS.
+* The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS. 
+Examples of valid and invalid file formats can be found in the [XLSX file format documentaion](/XlsxFileFormat.md)
 * To obtain the PATH_TO_XLSX, either:<br>
    * Get the location of the XLSX file in your computer.<br>
      e.g. `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`<br>
