@@ -1,18 +1,13 @@
 ---
 layout: page
-title: Xin Yee's Project Portfolio Page
+title: <h3>Xin Yee's Project Portfolio Page</h3>
 ---
-
-## Project: Serenity
-
+### Project: Serenity
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
-It is written in Java, and has about 25k LoC.
-
-### Summary of contributions
-
+It is written in Java, and has about 25k LoC
+#### Summary of contributions
 Given below are my contributions to the project.
-
 * **New Feature 1**: Added the ability to mark and flag attendance of students during lessons through commands
   * What it does: 
       * `markpresent` - Allows the users to mark a student present when viewing a lesson
@@ -30,7 +25,6 @@ Given below are my contributions to the project.
                 to infuse in the `Manager`s. Another highlight was that the mark attendance commands that are applied to all the
                 students in the class were slow so we had to look into how we can optimise the code to make it run
                 faster. All these major changes made the implementation of the code very time-consuming and rather challenging.
-                
 * **New Feature 2**: Added the ability to award and adjust participation scores of students during lessons
   * What it does: 
     * `editscore` - Allows the users to edit the participation score of a student when viewing a lesson
