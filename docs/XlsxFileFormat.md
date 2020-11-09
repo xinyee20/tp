@@ -2,12 +2,11 @@
 layout: page
 title: XLSX File Formats
 ---
-
-# Valid file formats
+## Valid file formats
 
 This section describes the file formatting which are accepted by Serenity.
 
-## 1. Format of typical File downloaded from LumiNUS
+### 1. Format of typical File downloaded from LumiNUS
 
 Serenity accepts attendance sheet downloaded directly from LumiNUS. A typical attendance sheet downloaded
 from LumiNUS looks like the one shown below.
@@ -30,7 +29,7 @@ If you would like to deviate from the stated
 format other valid file formats are described in the subsequent two sections and invalid file formats are described in the 
 [_Invalid file format_](#Invalid file formats) section.
 
-## 2. File without title
+### 2. File without title
 
 Serenity allows flexibility in the inclusion of title in the xlsx file provided. Below is an example of the format of a 
 file without a title compared to the format of typical attendance sheet format downloaded from LumiNUS.
@@ -40,7 +39,7 @@ file without a title compared to the format of typical attendance sheet format d
    <p align="center"><i>Figure 2. Comparison in format between a file with no title and a typical file downloaded from LumiNUS.</i></p>
 
 
-## 3. File without lessons 
+### 3. File without lessons 
 
 Serenity also allows flexibility in the inclusion of lesson columns in the xlsx file provided. Below is an example of the format of a 
 file without any lesson columns compared to the format of typical attendance sheet format downloaded from LumiNUS.
@@ -52,12 +51,12 @@ file without any lesson columns compared to the format of typical attendance she
 
 ---
 
-# Invalid file formats
+## Invalid file formats
 
 This section describes the file formatting which are rejected by Serenity. Should an invalid file be uploaded Serenity
 will give an error message stating the possible errors of the file.
 
-## 1. Empty file
+### 1. Empty file
 
 Empty files are rejected by Serenity. Should you try to upload an empty file onto Serenity, Serenity will display an error 
 message describing the error, an example is shown below.
@@ -66,7 +65,7 @@ message describing the error, an example is shown below.
         alt="Serenity showing empty file error" border="1px solid black"></p>
    <p align="center"><i>Figure 4.1. Serenity showing empty file error.</i></p>
 
-## 2. No headers 
+### 2. No headers 
 
 Files without header columns are rejected by Serenity, the example below is an example of a file without header columns compared to a file typically downloaded 
 from LumiNUS
@@ -81,7 +80,7 @@ Should you try to upload a file without header column onto Serenity, Serenity wi
         alt="Serenity showing invalid header error" border="1px solid black"></p>
    <p align="center"><i>Figure 5.1. Serenity showing invalid header error.</i></p>
 
-## 3. incorrect headers 
+### 3. incorrect headers 
 
 Similar to files without headers, files with correct headers but in the wrong order are rejected by Serenity, the example below
 is an example of a file with correct headers but in the wrong order compared to a file typically downloaded from LumiNUS.
@@ -96,7 +95,7 @@ Should you try to upload a file with  correct headers but in the wrong order ont
         alt="Serenity showing invalid header error" border="1px solid black"></p>
    <p align="center"><i>Figure 6.1. Serenity showing invalid header error.</i></p>
 
-## 4. Missing student details in file
+### 4. Missing student details in file
 
 Students are the cornerstone of every tutorial group, therefore, files with student information missing will be rejected by Serenity, the example below
 is an example of a file without student information compared to a file typically downloaded from LumiNus.
