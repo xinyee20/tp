@@ -1210,6 +1210,8 @@ The attendance sheet will be displayed in table form.
     
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Format:**
 
 `viewatt grp/GROUP_NAME`
@@ -1231,6 +1233,8 @@ Outcome:
 <p align="center"><img src="images/userGuide/utilityViewing/viewatt.png" 
    alt="User interface for viewing tutorial attendance" border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.3.1 User interface for viewing tutorial attendance.</i></p>
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.4. View participation score sheet of a tutorial group: `viewscore`
 
