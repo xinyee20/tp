@@ -21,9 +21,14 @@ import team.serenity.commons.core.index.Index;
 import team.serenity.logic.commands.exceptions.CommandException;
 import team.serenity.logic.commands.question.EditQnCommand;
 import team.serenity.model.Model;
+import team.serenity.model.group.Group;
+import team.serenity.model.group.lesson.Lesson;
 import team.serenity.model.group.question.Question;
 import team.serenity.model.group.question.QuestionContainsKeywordPredicate;
+import team.serenity.model.group.student.Student;
+import team.serenity.model.group.studentinfo.StudentInfo;
 import team.serenity.model.managers.QuestionManager;
+import team.serenity.model.managers.Serenity;
 import team.serenity.testutil.question.EditQuestionDescriptorBuilder;
 
 /**
@@ -154,18 +159,22 @@ public class CommandTestUtil {
      * selected person in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
-        // TODO: assertCommandFailure
-        /*
-        FOR REFERENCE (AB3)
-        // we are unable to defensively copy the model for comparison later, so we can
-        // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        Serenity expectedSerenity = new Serenity(actualModel.getSerenity());
+        QuestionManager expectedQuestionManager = new QuestionManager(actualModel.getQuestionManager());
+        List<Group> expectedFilteredGroupList = new ArrayList<>(actualModel.getFilteredGroupList());
+        List<Lesson> expectedFilteredLessonList = new ArrayList<>(actualModel.getFilteredLessonList());
+        List<Student> expectedFilteredStudentList = new ArrayList<>(actualModel.getStudentList());
+        List<StudentInfo> expectedFilteredStudentInfoList = new ArrayList<>(actualModel.getStudentsInfoList());
+        List<Question> expectedFilteredQuestionList = new ArrayList<>(actualModel.getFilteredQuestionList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
-         */
+        assertEquals(expectedSerenity, actualModel.getSerenity());
+        assertEquals(expectedQuestionManager, actualModel.getQuestionManager());
+        assertEquals(expectedFilteredGroupList, actualModel.getFilteredGroupList());
+        assertEquals(expectedFilteredLessonList, actualModel.getFilteredLessonList());
+        assertEquals(expectedFilteredStudentList, actualModel.getStudentList());
+        assertEquals(expectedFilteredStudentInfoList, actualModel.getStudentsInfoList());
+        assertEquals(expectedFilteredQuestionList, actualModel.getFilteredQuestionList());
     }
 
     /**
