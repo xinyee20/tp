@@ -605,6 +605,8 @@ You can use this command to mark a specific student as absent for a tutorial les
 A student named `Aaron Tan` with student number `A0123456A` is absent for your tutorial lesson `1-2` of tutorial group `G01`.
 `Aaron Tan` is the first person on the student list so his `index` number is 1. 
 
+<div style="page-break-after: always;"></div>
+
 <ins>Method 1</ins> <br>
 Marking a student as absent for a tutorial lesson by `name` and `student number`:
 
@@ -677,6 +679,8 @@ attendance at the end of class.
 :warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 **Example:**
 
