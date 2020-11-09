@@ -751,6 +751,8 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. His attendance will now be unflagged.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.2.7. Export attendance as XLSX file: `exportatt`
 
 You can use this command to export the attendance sheet of a specific tutorial group as a new Excel file.
@@ -1181,6 +1183,8 @@ Viewing a tutorial lesson:
 
 1. Type `viewlsn grp/G01 lsn/1-1` into the _Command Box_.
 2. Press `Enter` to execute.
+
+<div style="page-break-after: always;"></div>
 
 Outcome:
 
