@@ -8,40 +8,37 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 It is written in Java, and has about 25k LoC
 
 #### Summary of contributions
+
 Given below are my contributions to the project.
+
 * **New Feature 1**: Added the ability to mark and flag attendance of students during lessons through commands
   * What it does: 
       * `markpresent`, `markabsent` - Allows the users to mark a student present/absent when viewing a lesson
       * `flagatt`, `unflagatt` - Allows the users to flag / un-flag attendance of a student when necessary while in lesson view
   * Justification: This feature helps a user keep track of the attendance of students during tutorial lessons which is an essential feature of the product. 
-                   The ability to mark attendance quickly increases the efficiency of lessons. The ability to flag students' attendance allows user to keep track of 
-                   the attendance of students in special cases where they have to go for replacement lessons.
-  * Highlights: The implementation of this feature was tricky due to initial deep nesting of `Student` information within `Group`. 
-  Discussions were held frequently to analyse and re-adjust the project structure to reduce nesting and prevent cyclic dependencies. 
-  Changes had to be made to the implementation of the commands to infuse in the `Manager`s. We also had to review and adjust the the implementation 
-   of the commands to optimise them as some commands that were applied to all the students took quite a while to run.
+  * Highlights: Initial deep nesting of `Student` information within `Group` made the implementation of the command tricky. 
+  Analyse and re-adjustment of the project structure was done to reduce nesting and prevent cyclic dependencies. Optimisation of some commands 
+  that were applied to all students were required later on as we found out that they took quite a while to run.
    All these major changes made the implementation of the code very time-consuming and rather challenging.
+   
 * **New Feature 2**: Added the ability to award and adjust participation scores of students during lessons
   * What it does: 
     * `addscore`, `subscore`, `editscore` - Allows the users to increase, decrease, edit the participation score of a student when viewing a lesson
   * Justification: This feature helps a user to keep track of the score of students during tutorial lessons which is an important aspect of handling a group during lesson.
-  * Highlights: The implementation of this feature took some time as we had to take into consideration the users' needs without making the command too complicated to use. As this feature has 
-                quite a few restrictions in terms of input of score, considerable amount of time was spent testing the commands and 
-                adjusting the code, making sure that proper messages are shown when different exceptions are thrown, 
+  * Highlights: This feature took some time to be implemented as the users' needs had to be taken into consideration (the command should be straightforward). As this feature has 
+                quite a few restrictions in terms of input of score, repeated testing and adjustment of code had to be done to make sure that proper messages are shown when different exceptions are thrown, 
                 to guide users who may misuse the commands.
+   
 * **New Feature 3**: Added the ability to use indexing to apply commands to existing students. 
   * What it does: Allows users to apply deleting of students when in group view and the marking, flagging attendance 
                   of students, as well as awarding, adjusting participation score of students using the index of the student 
                   shown on the list when in lesson view.
-  * Justification: This feature improves the product significantly because it is helps a user to apply commands to students 
-                   without needing to type in the name and matriculation number of students which may be very long and tedious to type, 
-                   increasing the efficiency of lessons.
-  * Highlights: The implementation of this feature was rather challenging. As we import our application data from excel sheets, we
-                use `Set` to store the data which resulted in the data list being unordered. This made the application confusing to the user and 
-                indexing unreliable. I looked into the usage of `Comparator` to sort the list and made use of `LinkedHashSet` so that all the `Lesson`s, `Student`s, 
-                `StudentInfo`s are sorted in the list shown in the GUI. Another highlight is that implementing index on top 
-                of name and matriculation number resulted in many permutations of the usage of the commands. 
-                More rigorous testing had to be done and more conditions were added to cover the various scenarios.
+  * Justification: This feature improves the product significantly as it is helps a user to apply commands to students 
+                   without needing to type in their name and matriculation number of students which may be long, increasing the efficiency of lessons.
+  * Highlights: The implementation of this feature was rather challenging. Application data are imported from excel sheets through the usage of `Set`. 
+                This resulted in the data list being unordered.Research on usage of `Comparator` and `LinkedHashSet` was done to sort the various lists (`Lesson`, `Student`, `StudentInfo`) in the GUI.
+                Implementing index on top of name and matriculation number resulted in many permutations of the usage of the commands, 
+                which requires more rigorous testing and conditions to cover the various scenarios.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=xinyee20&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
