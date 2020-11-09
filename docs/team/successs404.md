@@ -17,21 +17,9 @@ Given below are my contributions to the project.
 
     * What it does:
     
-       * Adds the home page, which contains the tab panes for flagged attendance and pending questions.
-       This page acts as the basis of Serenity. It is the default page shown when the user first enters Serenity, and
-       Serenity transitions to this page after functions like `delgrp` is executed.
+       * Adds the home page and the side bar.
        
-       * Adds the side bar, which contains buttons for flagged attendance, pending questions and tutorial groups.
-       Pressing the flagged attendance and pending questions button leads to the respective tabs in the home page.
-       Pressing the tutorial group buttons is akin to executing the `viewgrp` command, allowing users to
-       conveniently access tutorial groups that were created previously.
-       
-       * Modifies the tutorial group page UI, such that the data panel for lessons and students are placed in
-       tab panes instead of split panes. Adds tab panes for attendance and participation score sheets as well as
-       drafted the UI for TableView.
-       
-       * Modifies the tutorial lesson page UI by improving the layout and design of the lesson tab pane.
-       Adds a tab pane for questions asked during the tutorial.
+       * Modifies the tutorial group page UI and tutorial lesson page UI.
        
        * Adds a title for each page so that users can navigate between the home page, tutorial group page and
         tutorial lesson page with greater clarity.
@@ -56,14 +44,8 @@ Given below are my contributions to the project.
 
     * What it does:
     
-        * Allows XLSX files to be read. This allows users to add a new tutorial group by importing a XLSX file
-        containing a list of students and (optionally) tutorial lessons. The resulting tutorial group will automatically
-        contain the list of students and tutorial lessons.
-        
-        * Allows XLSX files to be written. This allows users to export attendance and participation score sheets
-        of a specified tutorial group as XLSX files. The resulting XLSX file will either contain attendance or
-        participation score records of each student across all tutorial lessons in the tutorial group.
-        
+        * Allows XLSX files to be read and written.
+           
         * `exportatt` - Allows users to export attendance sheet of a specified tutorial group as a XLSX file.
         
         * `exportscore` - Allows users to export participation score sheet of a specified tutorial group as a XLSX file.
