@@ -958,7 +958,7 @@ testers are expected to do more **exploratory** testing.
     
 <div style="page-break-after: always;"></div>
 
-1. Adding Student to a Group
+3. Adding Student to a Group
     1. Prerequisites: Tutorial group is already set up.
     1. Test case: `addstudent grp/<GROUP_NAME> name/<STUDENT_NAME> matric/<STUDENT_MATRICULATION_NUMBER>`
     <br>Expected: Student added,
@@ -1056,6 +1056,8 @@ function that was not modified from **AddressBook 3**. That, combined together
 with the number of commands we implemented, **26**, compared to **AddressBook 3**'s
 **7**, meant a significant increase in development time spent implementing
 these new commands.
+
+<div style="page-break-after: always;"></div>
 
 **Our solution to the challenge:**
 
