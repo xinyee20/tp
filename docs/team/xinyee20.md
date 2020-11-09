@@ -93,7 +93,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
       * Added documentation for set up section. ( Pull request
-      [#27](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/27)))
+      [#27](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/27))
       * Added documentation for the features `markpresent`, `markabsent`, `flagatt`, `unflagatt`, `editscore`,
       `addscore`, `subscore`. ( Pull request 
       [#149](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/149))
