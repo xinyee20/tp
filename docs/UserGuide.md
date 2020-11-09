@@ -1413,6 +1413,8 @@ Command | Example
 **Edit question** <br> `editqn INDEX [grp/GROUP_NAME] [lsn/LESSON_NAME] [qn/QUESTION]` | `editqn 1 qn/Can you repeat the deadlines for all submissions?`
 **Find question** <br> `findqn KEYWORD [MORE_KEYWORDS]...` | `findqn deadline`
 
+<div style="page-break-after: always;"></div>
+
 ### 6.5. Utility viewing commands 
 
 Command | Example
