@@ -345,8 +345,13 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 
 `addlsn grp/GROUP_NAME lsn/LESSON_NAME`
 
-> :memo: LESSON_NAME follows the format 'X-Y' where X is the week number, and Y is the lesson number. There can be 
->more than 9 weeks (as in 10-1) but not more than 9 lessons in a week (1-10 would be invalid).
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** LESSON_NAME follows the format 'X-Y' where X is the week number, and Y is the lesson number. There can be 
+more than 9 weeks (as in 10-1) but not more than 9 lessons in a week (1-10 would be invalid).
+
+</div>
 
 **Example:**
 
@@ -470,7 +475,11 @@ then mark some students as absent afterwards. You can then start your tutorial l
 
 `markpresent all`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -500,7 +509,11 @@ You can use this command to mark a specific student as present for a tutorial le
 <br>`markpresent name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`markpresent INDEX`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -536,7 +549,11 @@ You can use this command to mark a specific student as absent for a tutorial les
 <br>`markabsent name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`markabsent INDEX`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -578,7 +595,11 @@ all students in a tutorial group back as absent for a tutorial lesson.
 **Format:** 
 `markabsent all`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -604,7 +625,11 @@ attendance at the end of class.
 <br>`flagatt name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`flagatt INDEX`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -641,7 +666,11 @@ using `unflagatt` command.
 <br>`unflagatt name/STUDENT_NAME matric/STUDENT_NUMBER`
 <br>`unflagatt INDEX`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -731,15 +760,24 @@ Participation score scale from 1 to 5:
 
 You can use this command to increase the participation score of a specific student for a tutorial lesson.
 
-> :warning: **Warning regarding the `addscore` command:**
-> You cannot increase the participation score of a student such that the final score is more than 5.
-> The maximum score is 5.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning regarding the `addscore` command:**
+
+You cannot increase the participation score of a student such that the final score is more than 5.
+The maximum score is 5.
+
+</div>
 
 **Format:**
 <br>`addscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE_TO_ADD`
 <br>`addscore INDEX score/SCORE_TO_ADD`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -775,16 +813,25 @@ Outcome:
 
 You can use this command to decrease the participation score of a specific student for a tutorial lesson.
 
-> :warning: **Warning regarding the `subscore` command:**
-> You cannot decrease the participation score of a student such that the final score is less than 0.
-> The minimum score is 0.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning regarding the `subscore` command:**
+
+You cannot decrease the participation score of a student such that the final score is less than 0.
+The minimum score is 0.
+
+</div>
 
 **Format:**
 
 <br>`subscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE`
 <br>`subscore INDEX score/SCORE`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -820,7 +867,11 @@ You can use this command to edit participation score of a specific student in a 
 <br>`editscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE`
 <br>`editscore INDEX score/SCORE`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
@@ -895,7 +946,11 @@ in the future.
 
 `addqn qn/QUESTION`
 
-> :memo: You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+
+</div>
 
 **Example:**
 
