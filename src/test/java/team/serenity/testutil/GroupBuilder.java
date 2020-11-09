@@ -5,7 +5,6 @@ import static team.serenity.testutil.TypicalStudent.BENJAMIN;
 import static team.serenity.testutil.TypicalStudent.CATHERINE;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,7 +14,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import team.serenity.commons.core.sorter.LessonSorter;
 import team.serenity.commons.core.sorter.StudentSorter;
-import team.serenity.commons.util.CsvUtil;
 import team.serenity.commons.util.XlsxUtil;
 import team.serenity.model.group.Group;
 import team.serenity.model.group.GroupName;
@@ -59,16 +57,6 @@ public class GroupBuilder {
         name = groupToCopy.getGroupName();
         students = groupToCopy.getStudents();
         lessons = groupToCopy.getLessons();
-    }
-
-    /**
-     * Initializes the GroupBuilder from the data inside the CSV file.
-     */
-    public GroupBuilder(String name, Path filePath) {
-        this.name = new GroupName(name);
-        students.setElementsWithList(new ArrayList<>(new CsvUtil(filePath).readStudentsFromCsv()));
-        students.sort(new StudentSorter());
-        lessons.setElementsWithList(new ArrayList<>());
     }
 
     /**

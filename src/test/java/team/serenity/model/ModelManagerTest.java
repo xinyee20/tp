@@ -20,7 +20,6 @@ import team.serenity.model.group.question.QuestionContainsKeywordPredicate;
 import team.serenity.model.managers.QuestionManager;
 import team.serenity.model.managers.Serenity;
 import team.serenity.model.userprefs.UserPrefs;
-import team.serenity.testutil.SerenityBuilder;
 import team.serenity.testutil.question.QuestionManagerBuilder;
 
 public class ModelManagerTest {
