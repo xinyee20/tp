@@ -398,6 +398,8 @@ The Sequence Diagram given in Figure 5.2.2.1 below documents the execution.
 Encapsulating tutorial groups within a `GroupManager` follows the Separation of Concerns principle,
 by ensuring that all logic and functionality related to a Tutorial group is encapsulated within `GroupManager`.
 
+<div style="page-break-after: always;"></div>
+
 ### 5.3. Lesson Manager
 
 (Contributed by Ryan Lim)
@@ -876,8 +878,6 @@ Preconditions: Tutorial groups and students have been set up
 Guarantees:
     - User can view the list of questions upon successful command.
 
-<div style="page-break-after: always;"></div>
-
 MSS:
     1. User requests to view the list of questions for a tutorial group.
     2. System shows the attendance list for the lesson.
@@ -925,6 +925,8 @@ Given below are instructions to test the app manually.
 testers are expected to do more **exploratory** testing.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### F.1. Launch and Shutdown
 
