@@ -5,6 +5,8 @@ title: XLSX File Formats
 
 # Valid file formats
 
+This section describes the file formatting which are accepted by Serenity.
+
 ## 1. Format of typical File downloaded from LumiNUS
 
 Serenity accepts attendance sheet downloaded directly from LumiNUS. A typical attendance sheet downloaded
