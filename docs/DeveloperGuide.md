@@ -7,7 +7,7 @@ title: Developer Guide
 
 ## **1. Introduction**
 
-![Serenity Logo](images/logo.png)
+<p><img src="images/logo.png" alt="Serenity Logo" width="310"></p>
 
 (Contributed by Bu Wen Jin)
 
@@ -30,7 +30,7 @@ and implementation of **Serenity** so that you can get started on your contribut
 
 ## **2. Setting Up**
 
-Refer to the [_SettingUp_](SettingUp.md) guide.
+Refer to the [_Setting Up_](SettingUp.md) guide.
 
 ## **3. About**
 
@@ -50,7 +50,7 @@ In [Section 4](#4-design), you can find the details of the components used in **
 In [Section 5](#5-implementation), you can find the rationale, current implementation and design considerations
 of our code.
 
-From [Section 6](#6-documentation) to [Section 10](#10-dev-ops), you can find the details regarding
+In [Section 6](#6-documentation-logging-testing-configuration-dev-ops), you can find the details regarding
 documentation, logging, testing, configuration and dev-ops.
 
 From [Appendix A](#appendix-a-product-scope) to [Appendix G](#appendix-g-effort), you can find the additional
@@ -77,7 +77,7 @@ This section describes the details of the components used in **Serenity**.
 
 The Architecture Diagram given in Figure 4.1.1 below explains the high-level design of Serenity.
 
-![Figure 4.1.1 Architecture Diagram of Serenity](images/developerGuide/ArchitectureDiagram.png)
+<p align="center"><img src="images/developerGuide/ArchitectureDiagram.png" alt="Figure 4.1.1 Architecture Diagram of Serenity" width="400"></p>
 
 <p align="center">Figure 4.1.1 Architecture Diagram of Serenity</p>
 
@@ -103,7 +103,7 @@ Component | Description
 
 The Sequence Diagram in Figure 4.1.2 below shows how the components interact with each other for the scenario where the user issues the command `delgrp grp/G04`.
 
-![Figure 4.1.2](images/developerGuide/ArchitectureSequenceDiagram.png)
+<p align="center"><img src="images/developerGuide/ArchitectureSequenceDiagram.png" alt="Figure 4.1.2" width="650"></p>
 
 <p align="center"><i>Figure 4.1.2 Interactions between components for the <code>delgrp grp/G04</code> command.</i></p>
 
@@ -117,21 +117,28 @@ This segment will explain the structure and responsibilities of the Ui component
 
 #### 4.2.1. Structure
 
-The Class Diagrams given in Figure 4.2.1.1 and Figure 4.2.1.2 below describe the structure of the Ui-related classes.
+The Class Diagram given in Figure 4.2.1.1 below describes the structure of the Ui-related classes.
 
-![Figure 4.2.1.1](images/developerGuide/UiClassDiagram2.png)
+<p align="center"><img src="images/developerGuide/UiClassDiagram.png" alt="Figure 4.2.1.1"></p>
 
 <p align="center"><i>Figure 4.2.1.1 Structure of the <code>Ui</code> component.</i></p>
 
-![Figure 4.2.1.2](images/developerGuide/UiDataPanelClassDiagram2.png)
+The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
+as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
+The `Ui` component also contains 1 more window, namely the `HelpWindow`.
+
+The Class Diagram given in Figure 4.2.1.2 below shows how the components in the `Datapanel` interact with each other.
+
+<p align="center"><img src="images/developerGuide/UiDataPanelClassDiagram.png" alt="Figure 4.2.1.2" width="480"></p>
 
 <p align="center"><i>Figure 4.2.1.2 Structure of the <code>ui.datapanel</code> component.</i></p>
 
-The `Ui` component contains a `MainWindow` that is made up of smaller parts such as `ResultDisplay` and `CommandBox`
-as shown in the Class Diagram above. The `MainWindow`and its parts inherit from the abstract `UiPart` class.
+The `Ui` contains 3 `DataPanels`, namely `SerenityDataPanel`, `GroupDataPanel` and `LessonDataPanel`.
+They facilitate the display of the home page, tutorial group page and tutorial lesson page respectively.
+Each of these `DataPanels` consists of one or more cards.
 
 The `Ui` component uses <span><a href="#appendix-e-glossary" style="color:purple"><i>JavaFX</i></a></span> UI framework.
-The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder.
+The layout of these UI parts are defined in matching .fxml files that are in the `src/main/resources/view` folder.
 For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
 #### 4.2.2. Responsibilities
@@ -150,7 +157,7 @@ This segment will explain the structure and responsibilities of the `Logic` comp
 
 The Class Diagram given in Figure 4.3.1.1 below describes the structure of Logic-related classes.
 
-![Figure 4.3.1.1](images/developerGuide/LogicClassDiagram2.png)
+<p align="center"><img src="images/developerGuide/LogicClassDiagram.png" alt="Figure 4.3.1.1"></p>
 
 <p align="center"><i>Figure 4.3.1.1 Structure of the <code>Logic</code> component.</i></p>
 
@@ -169,10 +176,11 @@ The `Logic` component is in charge of command parsing from the commands given by
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
 The steps described above will be the standard command parsing and execution of every command in **Serenity**.
-To illustrate these steps, the Sequence Diagram for interactions within the Logic component when the command `delgrp grp/G04` is shown below.
+The Sequence Diagram given in Figure 4.3.2.1 below shows the interactions inside the Logic component
+when the command `delgrp grp/G04` is executed.
 The diagram starts with the `execute("delgrp grp/G04")` API call.
 
-![Figure 4.3.2.1](images/developerGuide/DeleteSequenceDiagram.png)
+<p align="center"><img src="images/developerGuide/DeleteSequenceDiagram.png" alt="Figure 4.3.2.1"></p>
 
 <p align="center"><i>Figure 4.3.2.1 Interactions inside the <code>Logic</code> component for the <code>delgrp grp/G04</code> command.</i></p>
 
@@ -192,8 +200,10 @@ This segment will explain the structure and responsibilities of the `Model` comp
 
 #### 4.4.1. Structure
 
+The Class Diagram given in Figure 4.4.1.1 below describes the structure of Model-related classes.
+
 <p align="center">
-<img alt="Class diagram of Model component" src="images/developerGuide/ModelClassDiagram.png" ></p>
+<img alt="Class diagram of Model component" src="images/developerGuide/ModelClassDiagram.png" width="620"></p>
 
 <p align="center"><i>Figure 4.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
 
@@ -236,8 +246,10 @@ This segment will explain the structure and responsibilities of the `Storage` co
 
 #### 4.5.1. Structure
 
+The Class Diagram given in Figure 4.5.1.1 below describes the structure of Storage-related classes.
+
 <p align="center">
-<img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png"/></p>
+<img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png" width="500"></p>
 
 <p align="center"><i>Figure 4.5.1.1 Class diagram of <code>Storage</code> component.</i></p>
 
@@ -329,11 +341,13 @@ such as `GroupManager` and `QuestionManager`, while others store multiple `Uniqu
 a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for the `HashMap`.
 This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
 
-<p align="center">
-<img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
+The Class Diagram given in Figure 5.1.2.1 below shows the structure of `GroupManager`.
+`GroupManager` is an example of a `XYZManager` which stores a single `UniqueList`.
 
-<p align="center"><i>Figure 5.1.2.1 Structure of <code>GroupManager</code>, an example of
-a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
+<p align="center">
+<img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager" width="380"></p>
+
+<p align="center"><i>Figure 5.1.2.1 Structure of <code>GroupManager</code></i></p>
 
 ### 5.2. Group Manager
 
@@ -358,10 +372,10 @@ The following steps describe the execution of `DelGrpCommand` in detail, assumin
 1. `GroupManager` will then remove the group from its `UniqueList`.
 1. If the above steps are all successful, `DelGrpCommand` will then create a `CommandResult` object and return the result.
 
-The sequence diagram below documents the execution.
+The Sequence Diagram given in Figure 5.2.2.1 below documents the execution.
 
 <p align="center">
-<img src="images/developerGuide/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
+<img src="images/developerGuide/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager" width="590"></p>
 
 <p align="center"><i>Figure 5.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
@@ -384,6 +398,8 @@ Having a `LessonManager` allows for easy retrieval, viewing and updating of the 
 
 The `LessonManager` contains a `HashMap` whose key is a Group and value is a UniqueList.
 In this section, we detail the workflow of adding a lesson to an existing tutorial group through the `addlsn` command.
+
+The Activity Diagram given in Figure 5.3.2.1 below illustrates the execution of the `addlsn` command.
 
 <p align="center"><img src="images/developerGuide/AddLsnDiagram.png" alt="Figure 5.3.2.1 Activity diagram detailing execution of <code>addlsn</code> command"></p>
 <p align="center"><i>Figure 5.3.2.1. Activity diagram detailing execution of <code>addlsn</code> command.</i></p>
@@ -429,7 +445,7 @@ are correctly applied to the students belonging to the specified tutorial group.
 
 The `StudentManager` contains a `HashMap` which key is a `GroupName` and value is a `UniqueList<Student>`.
 In this section, we will detail the workflow of adding a new student to an existing tutorial group
-using the `addstudent` command. The workflow is shown in the Activity Diagram below.
+using the `addstudent` command. The workflow is shown in the Activity Diagram given in Figure 5.4.2.1 below.
 
 <p align="center"><img src="images/developerGuide/AddStudentActivityDiagram.png" alt="Figure 5.4.2.1 Activity diagram of `addstudent` command" width="317px" height="709px"></p>
 <p align="center"><i>Figure 5.4.2.1. Activity diagram of a <code>addstudent</code> command</i></p>
@@ -484,7 +500,7 @@ The following Class Diagram describes the structure of `StudentInfoManager` and 
 <p align="center"><img src="images/developerGuide/SimplifiedStudentInfoManagerClassDiagram.jpg" alt="Figure 5.5.2.1 Simplified Class Diagram of StudentInfoManager and relevant classes"></p>
 <p align="center"><i>Figure 5.5.2.1. Simplified class diagram of a <code>StudentInfoManager</code> and relevant classes</i></p>
 
-From the diagram above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
+From the diagram given in Figure 5.5.2.1 above, we can see that `StudentInfoManager` can contain multiple `GroupLessonKey` as well as a
 `UniqueStudentInfoList` for each `GroupLessonKey`. The table below shows the commands managed by the `StudentInfoManager`.
 
 Commands | Purpose
@@ -493,7 +509,8 @@ Commands | Purpose
 `flagatt` / `unflagatt` | Flag the attendance of a student for special scenarios.
 `setscore` / `addscore` / `subscore` | Set / add / subtract the participation score of a student for a lesson.
 
-In this section, we will outline the `markpresent` command handled by the `StudentInfoManager` which is summarised by the Activity Diagram below.
+In this section, we will outline the `markpresent` command handled by the `StudentInfoManager`
+which is summarised by the Activity Diagram given in Figure 5.5.2.2 below.
 We will be using the index version of the `markpresent` command.
 
 <p align="center"><img src="images/developerGuide/MarkPresentSequenceDiagram.png" alt="Figure 5.5.2.2 Activity Diagram of a markpresent command by index"></p>
@@ -512,7 +529,7 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 5. If the above steps are all successful, a successful message will be displayed on the
 <span ><a href="#appendix-e-glossary" style="color:purple"><i>Graphical User Interface (GUI)</i></a></span>.
 
-<div markdown="block" class="alert alert-danger">
+<div class="alert alert-danger" markdown="block">
 
 :warning: **Warning:** If the index is not valid, an error will be thrown to prompt the user to choose another index.
 
@@ -538,7 +555,7 @@ the code breaking if any intermediate classes are not functioning properly.
 
 **Serenity** allows the user to keep track of the questions asked from his/her tutorial lessons for each tutorial group.
 
-The question manager is one of the `Feature Managers` (See [Feature Manager](#51-feature-managers)).
+The question manager is one of the `Feature Managers` (See [Feature Managers](#51-feature-managers)).
 On top of the basic operations provided above it also allows the user to find questions by keywords using the `findqn`
 command. The `findqn` command does not restrict users to find via only one keyword. They are able to find via multiple
 keywords, similar to a search bar. E.g. `findqn deadline report` will search and list all question entries with
@@ -556,13 +573,14 @@ The current implementation of the `QuestionManager` only allows the user to keep
 of the lessons for each tutorial group. It does not allow the user to add questions without a tutorial group and lesson.
 
 In this section, we will outline the `findqn` command of the `QuestionManager` which is summarised by the
-Activity Diagram below.
+Activity Diagram given in Figure 5.6.2.1 below.
 
-<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 5.6.2.1 Activity diagram of a findqn command" width="392px" height="592px"></p>
+<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 5.6.2.1 Activity diagram of a findqn command" width="330"></p>
+
 <p align="center"><i>Figure 5.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
 
 When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
-parsing as described in [Design-Logic](#43-logic-component). During the parsing, a predicate is created. This predicate
+parsing as described in [Design - Logic Component](#43-logic-component). During the parsing, a predicate is created. This predicate
 checks if a given `Question`'s description contains the user input keywords. The `FindQnCommand` will then receive
 this predicate when it is created.
 
@@ -573,9 +591,10 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 3. The `Ui` component will detect this change and update the <span style="color:purple"><i>GUI</i></span>.
 4. If the above steps are all successful, the `FindQnCommand` will then create a `CommandResult` object and return the result.
 
-The Sequence Diagram below summarises the aforementioned steps.
+The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned steps.
 
-<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 5.6.2.2 Sequence diagram detailing execution of FindQnCommand"></p>
+<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 5.6.2.2 Sequence diagram detailing execution of FindQnCommand" width="550"></p>
+
 <p align="center"><i>Figure 5.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
 
 #### 5.6.3. Design Consideration
@@ -592,25 +611,17 @@ The Sequence Diagram below summarises the aforementioned steps.
 * The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
 * Both options have overheads when trying to view all questions and to view an individual lesson’s questions. However, option 2 is more costly and complicated to implement given the time constraints. Thus, we decided option 1 is better.
 
-## **6. Documentation**
+## **6. Documentation, Logging, Testing, Configuration, Dev Ops**
 
-Refer to the [_Documentation_](Documentation.md) guide.
+* [Documentation guide](Documentation.md)
 
-## **7. Logging**
+* [Logging guide](Logging.md)
 
-Refer to the [_Logging_](Logging.md) guide.
+* [Testing guide](Testing.md)
 
-## **8. Testing**
+* [Configuration guide](Configuration.md)
 
-Refer to the [_Testing_](Testing.md) guide.
-
-## **9. Configuration**
-
-Refer to the [_Configuration_](Configuration.md) guide.
-
-## **10. Dev Ops**
-
-Refer to the [_DevOps_](DevOps.md) guide.
+* [DevOps guide](DevOps.md)
 
 ## **Appendix A: Product Scope**
 
@@ -934,7 +945,7 @@ from all team members**.
 The development of **Serenity** involves huge enhancements from **Address Book 3**.
 The following points highlights the major enhancements that we have incorporated into **Serenity**.
 
-* From just keeping track of different `Person` objects in **AB3** ,
+* From just keeping track of different `Person` objects in **Address Book 3** ,
 **Serenity** is a major upgrade as it is an all-in-one application that allows the user to keep track of different
 `Group`, `Lesson`, `Student` objects. The association class `StudentInfo` was created for each `Student` in every
 tutorial `Lesson` to keep track of the student's `Attendance` and `Participation` score.
@@ -942,11 +953,11 @@ The `Question` class was also designed to handle the questions asked by students
 Following the Law of Demeter, the `Group`, `Lesson`, `Student`, `StudentInfo` and `Question` classes were
 further refactored into [Feature Managers](#51-feature-managers) to minimize coupling between the classes.
 
-* While the `Ui` of *AB3* contains only 1 `ListView`, **Serenity** has 6 `ListViews` and 2 `TableViews`.
+* While the `Ui` of *Address Book 3* contains only 1 `ListView`, **Serenity** has 6 `ListViews` and 2 `TableViews`.
 These views were placed in `TabPanes` and they were spread out across 3 pages - the home page, the tutorial group page and
 the tutorial lesson page. Furthermore, **Serenity** has additional _TitleDisplay_ and _SideBar_ `Ui` components that
 show the title of the page the user is viewing and the shortcut buttons respectively.
-These changes allowed the `Ui` of **Serenity** to be significantly more appealing than that of **AB3**'s.
+These changes allowed the `Ui` of **Serenity** to be significantly more appealing than that of **Address Book 3**'s.
 
 * **Serenity** has Excel XLSX support that allows data to be imported and exported.
 Users are able to efficiently add a new tutorial group by importing a XLSX file containing a list of students and
