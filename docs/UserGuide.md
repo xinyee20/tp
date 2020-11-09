@@ -1322,6 +1322,8 @@ Outcome:
    alt="User interface for viewing flagged attendance." border="1px solid black"></p>
 <p align="center"><i>Figure 4.5.5.1 User interface showing the layout of the flagged attendance tab.</i></p>
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.6. View pending questions: `viewqn`
 
 You can use this command to view questions that were asked across all tutorial lessons
@@ -1421,6 +1423,8 @@ Command | Example
 **Edit participation score** <br> - `editscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE` <br> - `editscore INDEX score/SCORE` | <br>- `editscore name/Aaron Tan matric/A0123456A score/2` <br> - `editscore 1 score/2`
 **Subtract participation score** <br> - `subscore name/STUDENT_NAME matric/STUDENT_NUMBER score/SCORE` <br> - `subscore INDEX score/SCORE` | <br>- `subscore name/Aaron Tan matric/A0123456A score/2` <br> - `subscore 1 score/2`
 **Export participation scores** <br> `exportscore grp/GROUP_NAME` | <br>`exportscore grp/G01`
+
+<div style="page-break-after: always;"></div>
 
 ### 6.4. Question addressing commands 
 
