@@ -14,6 +14,7 @@ import team.serenity.model.group.exceptions.DuplicateException;
 import team.serenity.model.group.exceptions.DuplicateStudentInfoException;
 import team.serenity.model.group.exceptions.NotFoundException;
 import team.serenity.model.group.exceptions.StudentInfoNotFoundException;
+import team.serenity.model.group.student.Student;
 import team.serenity.model.util.UniqueList;
 
 /**
@@ -68,9 +69,20 @@ public class UniqueStudentInfoList implements UniqueList<StudentInfo> {
     @Override
     public void remove(StudentInfo toRemove) {
         requireNonNull(toRemove);
-        if (!this.internalList.remove(toRemove)) {
-            throw new StudentInfoNotFoundException();
+        removeByStudent(toRemove.getStudent());
+    }
+
+    /**
+     * Removes the student info from the list of a particular student.
+     */
+    private void removeByStudent(Student student) {
+        for (StudentInfo studentInfo : this.internalList) {
+            if (studentInfo.getStudent().equals(student)) {
+                this.internalList.remove(studentInfo);
+                return;
+            }
         }
+        throw new StudentInfoNotFoundException();
     }
 
     @Override
