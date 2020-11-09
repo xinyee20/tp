@@ -225,7 +225,7 @@ The `XYZManager` is a generic name given to the following managers, these manage
 * `LessonManager`
 * `QuestionManager`
 
-The `UniqueXYZList` is a generic name given to the following unique list, these unique lists supports the storing and manipulation of data in-memory when the App is running:
+The `UniqueXYZList` is a generic name given to the following unique list, these unique lists supports the storing and manipulation of data in-memory when the app is running:
 
 * `UniqueGroupList`
 * `UniqueStudentList`
