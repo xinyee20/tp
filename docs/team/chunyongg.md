@@ -79,14 +79,14 @@ It is written in Java, and has about 25k LoC.
         (Pull requests [\#110](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/110)) 
         
    * Developer Guide:
-        * Added documentation for feature managers, group managers and lesson managers,
+        * Added documentation for feature managers, `GroupManager` and `LessonManager`,
         and implement basic skeleton structure for the rest of the Developer Guide.
         (Pull requests [\#189](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/189),
          [\#203](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/203)) 
                 
    * Others
-        * Fix dead links in the [repository website](https://ay2021s1-cs2103t-w12-4.github.io/tp), remove information about AddressBook 
-        and update it to show information about Serenity.
+        * Fix dead links in the [repository website](https://ay2021s1-cs2103t-w12-4.github.io/tp), remove information about **AddressBook 3**
+        and update it to show information about **Serenity**.
          (Pull requests [\#184](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/184)) 
          
 * **Community**:
