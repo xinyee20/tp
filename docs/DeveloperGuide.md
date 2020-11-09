@@ -818,36 +818,12 @@ Extensions:
 
 ```
 
-```
-UC06: View average class participation score of all students in a tutorial group
-
-System: Serenity
-Actor: User
-
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - User can view the average class participation score of all students 
-      in a tutorial group upon successful command.
-
-MSS:
-    1. User requests to view the average class participation score of all students in a tutorial group.
-    2. User receives a confirmation message.
-    3. System shows the average class participation score of all students in the tutorial group
-Use case ends.
-
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-
-```
-
 **Addressing Questions**
 
 
 ```
  
-UC07: Add a question to a tutorial group’s question list
+UC06: Add a question to a tutorial group’s question list
 
 System: Serenity
 Actor: User
@@ -869,7 +845,7 @@ Extensions:
 ```
 
 ```
-UC08: View all questions of a tutorial group
+UC07: View all questions of a tutorial group
 
 System: Serenity
 Actor: User
