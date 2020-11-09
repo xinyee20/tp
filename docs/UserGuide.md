@@ -153,7 +153,11 @@ the class participation grades of all the students in the tutorial group across 
 
 This page shows the records for a specific lesson. This page consists of:
 
-> :memo: This page is accessible using the `viewlsn` command
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:** This page is accessible using the `viewlsn` command
+
+</div>
 
 * Lesson tab: this tab contains the list of students in the tutorial group. For each student, you may
 view and change the student's [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades.
@@ -174,7 +178,7 @@ Symbol/syntax | Meaning
 --------|------------------
 `command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#323-command-syntax-and-usage).
 _GUI_ | This indicates a graphical component, such as a button, layout format and text input box.
-:memo: | This indicates a note.
+:information-source: | This indicates a note.
 :bulb: | This indicates a tip.
 :warning: | This indicates a warning.
 
@@ -198,9 +202,16 @@ You can use commands to tell **Serenity** to perform a specific task.
 
 `COMMAND_WORD prefix/PARAMETER`
 
-> :memo: **Notes regarding the command format:**
->* Words in upper case are the parameters to be supplied by you.<br>e.g. in `viewgrp grp/GROUP_NAME`, `GROUP_NAME` is a parameter which can be used as `viewgrp grp/G01`
->* Parameters have to be in the specified order.<br>e.g. if the command specifies `grp/GROUP_NAME lsn/LESSON_NAME`, `lsn/LESSON_NAME grp/GROUP_NAME` is not acceptable.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes regarding the command format:**
+
+* Words in upper case are the parameters to be supplied by you.<br>
+  e.g. in `viewgrp grp/GROUP_NAME`, `GROUP_NAME` is a parameter which can be used as `viewgrp grp/G01`
+* Parameters have to be in the specified order.<br>
+  e.g. if the command specifies `grp/GROUP_NAME lsn/LESSON_NAME`, `lsn/LESSON_NAME grp/GROUP_NAME` is not acceptable.
+
+</div>
 
 **Example:**
 
@@ -240,16 +251,21 @@ Follow the instructions below to set up your new classes, and watch **Serenity**
 
 You can use this command to add a new tutorial group automatically from XLSX data.
 
-> :memo: **Notes regarding the `addgrp` command:**
-> * A sample XLSX file can be found [here](https://github.com/AY2021S1-CS2103T-W12-4/tp/blob/master/CS2101_G04.xlsx)
-> * The XLSX file should store a list of students.
-> * The list of students you are importing cannot exist in another tutorial group.
-> * The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS.
-> * To obtain the PATH_TO_XLSX, either:<br>
->    ◦ Get the location of the XLSX file in your computer.<br>
->      e.g. `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`<br>
->    ◦ Copy and paste the XLSX file into the same folder as your **Serenity** application, then type the name of the XLSX file.<br>
->      e.g. `addgrp grp/G04 path/CS2101_G04.xlsx`
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes regarding the `addgrp` command:**
+
+* A sample XLSX file can be found [here](https://github.com/AY2021S1-CS2103T-W12-4/tp/blob/master/CS2101_G04.xlsx)
+* The XLSX file should store a list of students.
+* The list of students you are importing cannot exist in another tutorial group.
+* The format of the XLSX file should be the same as the XLSX file that you may download from LUMINUS.
+* To obtain the PATH_TO_XLSX, either:<br>
+   * Get the location of the XLSX file in your computer.<br>
+     e.g. `addgrp grp/G04 path/C:\Users\serene\CS2101_G04.xlsx`<br>
+   * Copy and paste the XLSX file into the same folder as your **Serenity** application, then type the name of the XLSX file.<br>
+     e.g. `addgrp grp/G04 path/CS2101_G04.xlsx`
+
+</div>
 
 <div markdown="block" class="alert alert-primary">
 
@@ -293,8 +309,13 @@ Outcome:
 
 You can use this command to delete an existing tutorial group.
 
-> :memo: **Notes regarding the `delgrp` command:**
-> After deleting a tutorial group, the button named after the tutorial group will be deleted as well.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes regarding the `delgrp` command:**
+
+After deleting a tutorial group, the button named after the tutorial group will be deleted as well.
+
+</div>
 
 **Format:**
 
@@ -661,9 +682,14 @@ attendance list submission as part of NUS Centre for English Language Communicat
 
 </div>
 
-> :memo: **Note regarding the `exportatt` command:**
-> The attendance sheet will be saved as a XLSX file named after the tutorial group.
-> The file will be saved at the same folder as your **Serenity** application.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes regarding the `exportatt` command:**
+
+The attendance sheet will be saved as a XLSX file named after the tutorial group.
+The file will be saved at the same folder as your **Serenity** application.
+
+</div>
 
 **Format**:
 
@@ -826,9 +852,14 @@ Outcome:
 
 You can use this command to export the participation score sheet of a specific tutorial group as a new Excel file.
 
-> :memo: **Note regarding the `exportscore` command:**
-> The participation score sheet will be saved as a XLSX file named after the tutorial group.
-> The file will be saved at the same folder as your **Serenity** application.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes regarding the `exportscore` command:**
+
+The participation score sheet will be saved as a XLSX file named after the tutorial group.
+The file will be saved at the same folder as your **Serenity** application.
+    
+</div>
 
 **Format:**
 
@@ -918,11 +949,16 @@ You can use this command to edit an existing question that was asked in a tutori
 
 `editqn INDEX [grp/GROUP_NAME] [lsn/LESSON_NAME] [qn/QUESTION]`
 
-> :memo: **Note regarding the `editqn` command:**
-> * You can edit the question's description, or the group/lesson the question was asked in.
-> * The existing values will be updated to the new values.
-> * If `grp/GROUP_NAME` or `lsn/LESSON_NAME` is supplied, ensure that the group or lesson exists.
-> Otherwise, an error message will be displayed to alert you.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes regarding the `editqn` command:**
+
+* You can edit the question's description, or the group/lesson the question was asked in.
+* The existing values will be updated to the new values.
+* If `grp/GROUP_NAME` or `lsn/LESSON_NAME` is supplied, ensure that the group or lesson exists.
+  Otherwise, an error message will be displayed to alert you.
+  
+</div>
 
 **Example:**
 
@@ -1044,10 +1080,15 @@ Outcome:
 You can use this command to view the attendance sheet of the students in a tutorial group across all tutorial lessons.
 The attendance sheet will be displayed in table form.
 
-> :memo: **Note regarding the `viewatt` command:**
-> You can view the attendance of all your students in the tutorial group at one glance.
-> You can also preview the XLSX file that you can generate with the `exportatt` command,
-> before generating the actual XLSX file.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes regarding the `viewatt` command:**
+
+* You can view the attendance of all your students in the tutorial group at one glance.
+* You can also preview the XLSX file that you can generate with the `exportatt` command,
+  before generating the actual XLSX file.
+    
+</div>
 
 **Format:**
 
@@ -1076,10 +1117,15 @@ Outcome:
 You can use this command to view the participation score sheet of the students in a tutorial group
 across all tutorial lessons. The participation score sheet will be displayed in table form.
 
-> ℹ **Note regarding the `viewscore` command:**
-> You can view the participation score of all your students in the tutorial group at one glance.
-> You can also preview the XLSX file that you can generate with the `exportscore` command,
-> before generating the actual XLSX file.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes regarding the `viewscore` command:**
+
+* You can view the participation score of all your students in the tutorial group at one glance.
+* You can also preview the XLSX file that you can generate with the `exportscore` command,
+  before generating the actual XLSX file.
+    
+</div>
 
 **Format:**
 
