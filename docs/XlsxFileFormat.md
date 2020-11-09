@@ -48,6 +48,7 @@ file without any lesson columns compared to the format of typical attendance she
         alt="Comparison in format between a file with no lesson column and a typical file downloaded from LumiNUS" border="1px solid black"></p>
    <p align="center"><i>Figure 3. Comparison in format between a file with no lesson column and a typical file downloaded from LumiNUS.</i></p>
 
+
 ---
 
 ## Invalid file formats
