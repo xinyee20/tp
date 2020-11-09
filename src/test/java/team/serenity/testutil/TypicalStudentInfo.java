@@ -19,11 +19,17 @@ import team.serenity.model.util.UniqueList;
 
 public class TypicalStudentInfo {
 
+    public static final int ORIGINAL_SCORE = 3;
+    public static final int VALID_ADD_SCORE = 1;
+    public static final int VALID_SUB_SCORE = 1;
+    public static final int SCORE_OUT_OF_RANGE = 6;
+    public static final int SUB_TILL_SCORE_OUT_OF_RANGE = 4;
+
     public static final StudentInfo AARON_ABSENT_INFO = new StudentInfoBuilder().withStudent(AARON)
             .withAttendance(false).withParticipation(0).build();
 
     public static final StudentInfo AARON_PRESENT_INFO = new StudentInfoBuilder().withStudent(AARON)
-            .withAttendance(true).withParticipation(3).build();
+            .withAttendance(true).withParticipation(ORIGINAL_SCORE).build();
 
     public static final StudentInfo AARON_FLAGGED_INFO = new StudentInfoBuilder().withStudent(AARON)
             .withAttendance(new Attendance(false, true)).withParticipation(0).build();
