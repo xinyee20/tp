@@ -568,13 +568,13 @@ The following steps will describe the execution of the `MarkPresentCommand` by i
 | **Option 1**<br>Reach into `Group`, followed by `Lesson` to retrieve `StudentInfo`. | More intuitive. | Nesting of data makes it harder to test.
 | **Option 2 (Current)**<br>Store and retrieve `StudentInfo` from a `HashMap` with the combination of `Group` name and `Lesson` name forming the key. | Easier to retrieve data. <br> <br> Less nesting of data allows testing to be done more easily. | Need to put in more thought into coming up with the Manager structures to prevent cyclic dependencies. |
 
+<div style="page-break-after: always;"></div>
+
 **Reasons for choosing option 2:**
 
 * We originally used Option 1. However, deep nesting of data is a very worrying problem as it makes it hard to test the code and increases the chances of
 the code breaking if any intermediate classes are not functioning properly.
 * Option 2, despite being more complicated, solves our problem without adding much overhead. Thus, we decided option 2 is better.
-
-<div style="page-break-after: always;"></div>
 
 ### 5.6. Question Manager
 
@@ -623,8 +623,6 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 <p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 5.6.2.2 Sequence diagram detailing execution of FindQnCommand" width="550"></p>
 
 <p align="center"><i>Figure 5.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
-
-<div style="page-break-after: always;"></div>
 
 #### 5.6.3. Design Consideration
 
