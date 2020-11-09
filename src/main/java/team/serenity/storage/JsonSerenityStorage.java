@@ -81,10 +81,15 @@ public class JsonSerenityStorage implements SerenityStorage {
      * @throws IOException
      */
     public void saveSerenity(ReadOnlyGroupManager groupManager, Path filePath) throws IOException {
-        requireNonNull(groupManager);
-        requireNonNull(filePath);
+        try {
+            requireNonNull(groupManager);
+            requireNonNull(filePath);
 
-        FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableSerenity(groupManager), filePath);
+            FileUtil.createIfMissing(filePath);
+            JsonUtil.saveJsonFile(new JsonSerializableSerenity(groupManager), filePath);
+        } catch (IOException e) {
+            logger.warning("Saving JSON file failed.");
+            throw new IOException(e.getMessage());
+        }
     }
 }

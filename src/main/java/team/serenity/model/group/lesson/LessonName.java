@@ -1,6 +1,5 @@
 package team.serenity.model.group.lesson;
 
-import static java.util.Objects.requireNonNull;
 import static team.serenity.commons.util.AppUtil.checkArgument;
 
 public class LessonName {
@@ -25,7 +24,7 @@ public class LessonName {
      * @param name A valid name.
      */
     public LessonName(String name) {
-        requireNonNull(name);
+        assert name != null;
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         this.lessonName = name;
     }
@@ -34,7 +33,7 @@ public class LessonName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        requireNonNull(test);
+        assert test != null;
         return test.matches(VALIDATION_REGEX);
     }
 
