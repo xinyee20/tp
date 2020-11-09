@@ -101,10 +101,3 @@ It is written in Java, and has about 25k LoC.
     [4](https://github.com/AY2021S1-CS2103T-T12-4/tp/issues/146),
     [5](https://github.com/AY2021S1-CS2103T-T12-4/tp/issues/147),
     [6](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/148))
-        
-        
-        
-
-  
-
-
