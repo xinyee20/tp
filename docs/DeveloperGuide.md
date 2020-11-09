@@ -818,36 +818,12 @@ Extensions:
 
 ```
 
-```
-UC06: View average class participation score of all students in a tutorial group
-
-System: Serenity
-Actor: User
-
-Preconditions: Tutorial groups and students have been set up
-Guarantees:
-    - User can view the average class participation score of all students 
-      in a tutorial group upon successful command.
-
-MSS:
-    1. User requests to view the average class participation score of all students in a tutorial group.
-    2. User receives a confirmation message.
-    3. System shows the average class participation score of all students in the tutorial group
-Use case ends.
-
-Extensions:
-    1a. Incomplete details are given.
-        1a1. System shows an error message.
-        Use case resumes at step 1.
-
-```
-
 **Addressing Questions**
 
 
 ```
  
-UC07: Add a question to a tutorial group’s question list
+UC06: Add a question to a tutorial group’s question list
 
 System: Serenity
 Actor: User
@@ -869,7 +845,7 @@ Extensions:
 ```
 
 ```
-UC08: View all questions of a tutorial group
+UC07: View all questions of a tutorial group
 
 System: Serenity
 Actor: User
@@ -1069,12 +1045,11 @@ for a certain portion of **Serenity**, empowering them to focus on said features
 
 ### G.3. Conclusion
 
-Overall, we managed to create an all-in-one CS2101 tutorial group manager that is equipped with
-user-focused features and a neat user interface. Our team put in a huge amount of effort 
-in enhancing our features andensuring that the features work as intended. 
-Throughout the development process, we consistently helped one another
+Overall, we managed to create an all-in-one CS2101 management software for tutors
+that is equipped with user-focused features and a neat user interface. 
+Our team put in a huge amount of effort in enhancing our features and ensuring that 
+the features work as intended. Throughout the development process, we consistently helped one another
 in identifying and solving implementation and documentation bugs, 
-as well as assisted one another in implementing
-tricky functionalities. The development process has been a wholly enjoyable one, and each one of us
-have turned into a better developer in this journey. 
+as well as assisted one another in implementing tricky functionalities.
+The development process has been a wholly enjoyable one, and each one of us have turned into a better developer in this journey. 
 
