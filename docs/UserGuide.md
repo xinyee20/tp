@@ -178,7 +178,7 @@ Symbol/syntax | Meaning
 --------|------------------
 `command` | This indicates a technical term, which you can find out more in [Command syntax and usage](#323-command-syntax-and-usage).
 _GUI_ | This indicates a graphical component, such as a button, layout format and text input box.
-:information-source: | This indicates a note.
+:information_source: | This indicates a note.
 :bulb: | This indicates a tip.
 :warning: | This indicates a warning.
 
