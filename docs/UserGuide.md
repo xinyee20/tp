@@ -40,30 +40,34 @@ To get started with using **Serenity**, you can follow these steps:
 
 4. Double-click the file to start the app. The _GUI_ similar to the image below should appear in a few seconds.
 
-   <p align="center"><img src="images/userGuide/Gui.png" 
-      alt="Layout of GUI" border="1px solid black"></p>
-   <p align="center"><i>Figure 2.1 Welcome screen.</i></p>
+   <p align="center">
+
+   <img src="images/userGuide/Gui.png" alt="Layout of GUI" border="1px solid black">
+   <i>Figure 2.1 Welcome screen.</i>
+
+   </p>
 
 5. Type the command in the _Command Box_ and press `Enter` to execute it. 
 
 6. Refer to the [Features](#4-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## **3. About**
 
 ### 3.1. Structure of this document
 
 This User Guide have been structured such that you can easily find what you need.
 
-In [section 3.2](#32-reading-this-document), you can find useful tips on reading this document.
+In [Section 3.2](#32-reading-this-document), you can find useful tips on reading this document.
 
-In [section 4](#4-features), you can find details of the three main features of **Serenity**:
+In [Section 4](#4-features), you can find details of the main features of **Serenity**:
 
+* Setting up
 * Attendance taking
-
 * Participation marking
-
 * Question addressing
+* Utility viewing
 
 ### 3.2. Reading this document 
 
@@ -72,12 +76,14 @@ User Guide.
 
 #### 3.2.1. Terminology related to the _GUI_
 
-The following figure shows the _GUI_ of **Serenity**.
-It is annotated with the name of the _GUI_ components.
+The following figure shows the _GUI_ of **Serenity**. It is annotated with the name of the _GUI_ components.
 
-<p align="center"><img src="images/userGuide/GuiAnnotated.png" 
-   alt="Layout of GUI"></p>
-<p align="center"><i>Figure 3.2.1.1 Annotated GUI of Serenity.</i></p>
+<p align="center">
+
+<img src="images/userGuide/GuiAnnotated.png" alt="Layout of GUI">
+<i>Figure 3.2.1.1 Annotated GUI of <b>Serenity</b>.</i>
+    
+</p>
 
 What the 6 main components of the _GUI_ do:
 
@@ -96,7 +102,7 @@ existing tutorial groups.
 
 #### 3.2.2. Layout of the _GUI_
 
-**Serenity** is divided into these three pages:
+**Serenity** is divided into these 3 pages:
 
 * Home page
 * Tutorial group page
@@ -104,71 +110,63 @@ existing tutorial groups.
 
 ##### Home page
 
-This is the default page shown when the app is started. This page consists of:
+This is the default page shown when you start **Serenity**. This page consists of:
 
-* Flagged attendance tab: this tab contains the names of students whose attendance have been flagged with
+* **Flagged attendance tab**: this tab contains the names of students whose attendance have been flagged with
 the `flagatt` command. Flagging a student's attendance serves as a reminder on the first page of the app
 for you to check on the student and perform any follow-up actions, if necessary. 
 
-<div markdown="block" class="alert alert-primary">
-
-:bulb: **TIP:** Class has started! `Aaron Tan` is not in the zoom class yet. Flag his attendance and proceed 
-with teaching. With the flag attendance tab, you will be reminded to check again after class.
-
-</div>
-
-<p align="center"><img src="images/userGuide/pages/HomePageFlagAttTab.png" 
-   alt="Picture of flag attendance GUI" border="1px solid black"></p>
-<p align="center"><i>Figure 3.2.2.1 User interface showing the layout of the flagged attendance tab.</i></p>
-
-* Pending questions tab: this tab shows the questions asked by students across all your tutorial groups,
+* **Pending questions tab**: this tab shows the questions asked by students across all your tutorial groups,
 providing a convenient place for you to keep track of all the questions asked by students
 across your tutorial groups and lessons.
 
-<p align="center"><img src="images/userGuide/pages/HomePageQuestionsTab.png" 
-   alt="Picture of questions GUI" border="1px solid black"></p>
-<p align="center"><i>Figure 3.2.2.2 User interface showing the layout of the questions tab.</i></p>
+<p align="center">
+
+<img src="images/userGuide/pages/HomePage.png" alt="Home page of Serenity" border="1px solid black">
+<i>Figure 3.2.2.1 Home page of <b>Serenity</b>.</i>
+
+</p>
 
 ##### Tutorial group page
 
-This page shows the information related to a tutorial group that you are teaching. This page consists of: 
+This page shows the information related to a tutorial group you are teaching. This page consists of: 
 
-* Lessons tab: this tab allows you to view the list of lessons scheduled for this group.
+* **Lessons tab**: this tab allows you to view the list of lessons scheduled for this group.
 
-* Students tab: this tab displays the list of students belonging in this group. You may modify this list,
+* **Students tab**: this tab displays the list of students belonging in this group. You may modify this list,
 especially at the start of each semester where there will be students entering the module,
 appealing into the module, switching between tutorial groups, and even dropping the module.
 
-* Attendance tab: this tab shows the attendance sheet of the students. You may view the attendance records
+* **Attendance tab**: this tab shows the attendance sheet of the students. You may view the attendance records
 of all the students in the tutorial group across all the tutorial lessons.
 
-* Participation tab: this tab shows the participation score sheet of the students. Similarly, you may view
+* **Participation tab**: this tab shows the participation score sheet of the students. Similarly, you may view
 the class participation grades of all the students in the tutorial group across all the tutorial lessons.
 
-<p align="center"><img src="images/userGuide/pages/GroupPage.png" 
-   alt="Picture of group GUI" border="1px solid black"></p>
-<p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the group tab.</i></p>
+<p align="center">
+
+<img src="images/userGuide/pages/GroupPage.png" alt="Group page of Serenity" border="1px solid black">
+<i>Figure 3.2.2.3 Group page of <b>Serenity</b>.</i>
+
+</p>
 
 ##### Tutorial lesson page
 
 This page shows the records for a specific lesson. This page consists of:
 
-<div markdown="block" class="alert alert-info">
-
-:information_source: **Note:** This page is accessible using the `viewlsn` command
-
-</div>
-
-* Lesson tab: this tab contains the list of students in the tutorial group. For each student, you may
+* **Students tab**: this tab contains the list of students in the tutorial group. For each student, you may
 view and change the student's [attendance](#42-attendance-taking) and [participation](#43-participation-marking) grades.
 You may also flag the student's attendance if necessary.
 
-* Questions tab: this tab contains the list of questions that were asked during this tutorial lesson. In this tab,
+* **Questions tab**: this tab contains the list of questions that were asked during this tutorial lesson. In this tab,
 you may add, edit, find or delete a [question](#44-question-addressing) that was asked during this tutorial lesson.
 
-<p align="center"><img src="images/userGuide/pages/LessonPage.png" 
-   alt="Picture of lesson GUI" border="1px solid black"></p>
-<p align="center"><i>Figure 3.2.2.4 User interface showing the layout of the lesson tab.</i></p>
+<p align="center">
+
+<img src="images/userGuide/pages/LessonPage.png" alt="Lesson page of Serenity" border="1px solid black">
+<i>Figure 3.2.2.4 Lesson Page of <b>Serenity</b>.</i>
+
+</p>
 
 #### 3.2.3. General symbols and syntax
 
@@ -192,7 +190,7 @@ Command | The instruction that the user types into the command box for **Serenit
 Command word | The first word of the command that tells **Serenity** which task should be performed.
 Parameter | The word or phrase following the command word that provides further details of the task (if necessary).
 Prefix | The letter that is placed at the start of each parameter to distinguish one parameter from another.
-XLSX | File format for all excel files.
+XLSX | The excel file format that **Serenity** handles for imports and exports.
 
 #### 3.2.5. Command format
 
@@ -241,6 +239,7 @@ Below is an overview of the features available in **Serenity** :
 2. [Attendance taking](#42-attendance-taking) feature provides you the tools to mark attendance for your lessons.
 3. [Participation marking](#43-participation-marking) feature provides you the tools to grade student participation. 
 4. [Question addressing](#44-question-addressing) feature provides you the tools to keep track of questions asked by students.
+5. [Utility viewing](#45-utility-viewing) feature provides you the tools to view the information of the above features.
 
 ### 4.1. Setting Up
 
@@ -280,6 +279,13 @@ as pressing the button equals to typing the `viewgrp grp/GROUP_NAME` command.
 
 `addgrp grp/GROUP_NAME path/PATH_TO_XLSX`
 
+<div markdown="block" class="alert alert-danger">
+
+:warning: **Warning:**
+GROUP_NAME follows the format 'XYY' where X is an alphabetical character and Y is a digit from 0 to 9. 
+
+</div>
+
 **Example:**
 
 You are adding a new tutorial group named `G04` to prepare for a new semester.
@@ -297,13 +303,20 @@ Outcome:
 3. **Serenity** will switch to tutorial group `G04` page.
 4. You can now see the list of students and a default list of tutorial lessons for tutorial group `G04`.
 
-<p align="center"><img src="images/userGuide/settingUp/addgrp_command.png" 
-   alt="Command box for addgrp command"></p>
-<p align="center"><i>Figure 4.1.1.1 Command for <code>addgrp</code> command.</i></p>
+<p align="center">
 
-<p align="center"><img src="images/userGuide/settingUp/addgrp_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.1.1.2 Screen displayed when the command is successfully executed.</i></p>
+<img src="images/userGuide/settingUp/addgrp_command.png" alt="Command box for addgrp command">
+<i>Figure 4.1.1.1 Command for <code>addgrp</code> command.</i>
+
+</p>
+
+<p align="center">
+
+<img src="images/userGuide/settingUp/addgrp_result.png" 
+     alt="Result upon successful execution of command" border="1px solid black">
+<i>Figure 4.1.1.2 Screen displayed when the <code>addgrp</code> command is successfully executed.</i>
+
+</p>
 
 ####  4.1.2. Delete an existing tutorial group: `delgrp`
 
@@ -347,8 +360,8 @@ You can use this command to add a new tutorial lesson for a specified tutorial g
 
 <div markdown="block" class="alert alert-danger">
 
-:warning: **Warning:** LESSON_NAME follows the format 'X-Y' where X is the week number, and Y is the lesson number. There can be 
-more than 9 weeks (as in 10-1) but not more than 9 lessons in a week (1-10 would be invalid).
+:warning: **Warning:**
+LESSON_NAME follows the format 'XX-Y' where X is the week number, and Y is the lesson number. 
 
 </div>
 
@@ -367,9 +380,13 @@ Outcome:
 2. **Serenity** will display tutorial lesson `1-3` page.
 3. You can now see that tutorial lesson `1-3` has been added to tutorial group `G01`.
 
-<p align="center"><img src="images/userGuide/settingUp/addlsn_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.1.3.1  Screen displayed when the command is successfully executed.</i></p>
+<p align="center">
+
+<img src="images/userGuide/settingUp/addlsn_result.png" 
+    alt="Result upon successful execution of command" border="1px solid black">
+<i>Figure 4.1.3.1 Screen displayed when the <code>addlsn</code> command is successfully executed.</i>
+
+</p>
 
 #### 4.1.4. Delete an existing tutorial lesson: `dellsn`
 
@@ -448,9 +465,13 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. `Aaron Tan` will no longer be in the list of students in tutorial group `G01`.
 
-<p align="center"><img src="images/userGuide/settingUp/delstudent_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.1.6.1 Screen displayed when the command is successfully executed.</i></p>
+<p align="center">
+
+<img src="images/userGuide/settingUp/delstudent_result.png" 
+    alt="Result upon successful execution of command" border="1px solid black">
+<i>Figure 4.1.6.1 Screen displayed when the <code>delstudent</code> command is successfully executed.</i>
+
+</p>
 
 ### 4.2. Attendance taking
 
@@ -476,7 +497,8 @@ then mark some students as absent afterwards. You can then start your tutorial l
 
 <div markdown="block" class="alert alert-danger">
 
-:warning: **Warning:** You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
+:warning: **Warning:** 
+You must navigate to the tutorial lesson page through `viewlsn` before this command can be used.
 
 </div>
 
@@ -495,10 +517,6 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that all the students' attendance have been updated on the _Student Information Panel_.
-
-<p align="center"><img src="images/userGuide/attendanceTaking/markpresent_all_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.1.1 Screen displayed when the command is successfully executed.</i></p>
 
 #### 4.2.2. Mark a student as present: `markpresent`
 
@@ -540,6 +558,14 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
+<p align="center">
+
+<img src="images/userGuide/attendanceTaking/markpresent_result.png" 
+     alt="Result upon successful execution of command" border="1px solid black">
+<i>Figure 4.2.2.1 Screen displayed when the command is successfully executed.</i>
+
+</p>
+
 #### 4.2.3. Mark a student as absent: `markabsent`
 
 You can use this command to mark a specific student as absent for a tutorial lesson.
@@ -578,13 +604,13 @@ Outcome:
 1. The _Result Display_ will show a success message.
 2. You can now see that his attendance has been updated on the _Student Information Panel_.
 
-<p align="center"><img src="images/userGuide/attendanceTaking/markabsent_command.png" 
-   alt="Command box for markabsent command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.3.1 Command for <code>markabsent</code> command. Note how Aaron Tan is present initially.</i></p>
+<p align="center">
 
-<p align="center"><img src="images/userGuide/attendanceTaking/markabsent_result.png" 
-   alt="Result upon successful execution of command" border="1px solid black"></p>
-<p align="center"><i>Figure 4.2.3.2 Screen displayed when the command is successfully executed. Note how Aaron's attendance is now absent.</i></p>
+<img src="images/userGuide/attendanceTaking/markabsent_result.png" 
+     alt="Result upon successful execution of command" border="1px solid black">
+<i>Figure 4.2.3.1 Screen displayed when the command is successfully executed.</i>
+
+</p>
 
 #### 4.2.4. Mark all students as absent: `markabsent all`
 
@@ -1363,3 +1389,4 @@ Command | Example
 **View participation score** <br> `viewscore grp/GROUP_NAME` | `viewscore grp/G01`
 **View flag** <br> `viewflag` | `viewflag`
 **View questions** <br> `viewqn` | `viewqn`
+
