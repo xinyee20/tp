@@ -3,13 +3,13 @@ layout: page
 title: Wen Jin's Project Portfolio Page
 ---
 
-## Project: Serenity
+### Project: Serenity
 
 Serenity is a desktop application that helps CS2101 tutors manage their tutorial groups and lessons. 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. 
 It is written in Java, and has about 25k LoC.
 
-### Summary of contributions
+#### Summary of contributions
 
 Given below are my contributions to the project.
 
@@ -27,11 +27,7 @@ Given below are my contributions to the project.
     GUI can automatically update upon data changes.
 
 * **New Feature 2**: Added the ability to add, delete, edit and find questions through commands
-  * What it does: 
-    * `addqn` - Allows the users to add a question when viewing a lesson
-    * `delqn` - Allows the user to delete a question after it is addressed
-    * `editqn` - Allows the user to edit a question's detail in the event that there is a mistake
-    * `findqn` - Allows the user to find questions by keywords
+  * What it does: Allows user to use the addressing question feature
   * Justification: This feature improves the product significantly because it is helps a user to 
     keep track of the questions asked during tutorial lessons.
   * Highlights: As questions are related to specific groups and lessons, this enhancement requires an 
@@ -41,9 +37,7 @@ Given below are my contributions to the project.
     containing words such as "coursework" and "homework" will also be displayed to the user.
     
 * **New Feature 3**: Added the ability to view all questions and view a lesson's details 
-  * What it does: 
-    * `viewqn` - Allows user to view the list of all the questions ask in all tutorial groups and lessons
-    * `viewlsn` Allows user to view the details of the specified lesson in a tutorial group.
+  * What it does: Allows user to switch between views in Serenity
   * Justification: This enhancement improves the product significantly because a user will want to
     be able to see all the questions that he/she added or see the details of a lesson such as the 
     attendance list, and the class participation scores of each student in that tutorial group. 
@@ -70,29 +64,20 @@ Given below are my contributions to the project.
   * Brainstormed ideas for the different features (How we intend our application to behave, design details etc.)
 
 * **Enhancements to existing features**:
-  * Refactored code to remove origins of AddressBook3 application.
+  * Repackage and cleaned up code.
     (Pull requests [\#111](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/111),
-    [\#283](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/283))
-  * Repackage and cleaned up code to improve code readability.
-    (Pull requests [\#111](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/111),
-    [\#133](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/133))
+    [\#133](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/133),
+    [\#284](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/284))
   * Detected and fixed bugs for some features.
     (Pull requests [\#168](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/168),
         [\#176](https://github.com/AY2021S1-CS2103T-W12-4/tp/issues/176),
         [\#278](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/278))
-  * Improve code quality for certain commands to adhere to coding principles.
+  * Improve code quality to adhere to coding principles.
     (Pull requests [\#262](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/262))
-  * Standardized all invalid command format error messages to improve user experience.
-    (Pull requests [\#284](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/284))
-  * Standardized sample data and examples to improve consistency.
-    (Pull requests [\#284](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/284))
-  * Standardized test case examples to improve consistency and increase readability.
-    (Pull requests [\#284](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/284))
-  * Wrote additional tests for existing features to increase test coverage.
+  * Wrote additional tests to increase test coverage.
     (Pull requests [\#144](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/144), 
         [\#296](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/296), 
         [\#306](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/306))
-
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `viewlsn`, `addqn`, `editqn`, `delqn`, `findqn` and `viewqn`: 
@@ -117,6 +102,4 @@ Given below are my contributions to the project.
     [3](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/248),
     [4](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/249),
     [5](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/250),
-    [6](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/251),
-    [7](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/252)) 
-    
+    [6](https://github.com/AY2021S1-CS2103T-W13-3/tp/issues/251)) 
