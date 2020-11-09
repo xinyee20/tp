@@ -102,7 +102,7 @@ existing tutorial groups.
 * Tutorial group page
 * Tutorial lesson page
 
-##### **Home page** 
+##### Home page
 
 This is the default page shown when the app is started. This page consists of:
 
@@ -129,7 +129,7 @@ across your tutorial groups and lessons.
    alt="Picture of questions GUI" border="1px solid black"></p>
 <p align="center"><i>Figure 3.2.2.2 User interface showing the layout of the questions tab.</i></p>
 
-##### **Tutorial group page**
+##### Tutorial group page
 
 This page shows the information related to a tutorial group that you are teaching. This page consists of: 
 
@@ -149,7 +149,7 @@ the class participation grades of all the students in the tutorial group across 
    alt="Picture of group GUI" border="1px solid black"></p>
 <p align="center"><i>Figure 3.2.2.3 User interface showing the layout of the group tab.</i></p>
 
-##### **Tutorial lesson page**
+##### Tutorial lesson page
 
 This page shows the records for a specific lesson. This page consists of:
 
