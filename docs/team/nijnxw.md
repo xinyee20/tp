@@ -71,13 +71,16 @@ Given below are my contributions to the project.
         [\#278](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/278))
   * Improve code quality to adhere to coding principles.
     (Pull requests [\#262](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/262))
+  * Made cosmetic improvements to the existing User Guide to make it more reader-friendly.
+    (Pull requests [\#355](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/355),
+        [\#370](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/370))
   * Wrote additional tests to increase test coverage.
     (Pull requests [\#144](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/144), 
         [\#296](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/296), 
         [\#306](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/306))
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `viewlsn`, `addqn`, `editqn`, `delqn`, `findqn` and `viewqn`: 
+    * Added documentation for `viewlsn`, `addqn`, `editqn`, `delqn`, `findqn` and `viewqn`: 
         [\#30](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/30),
         [\#106](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/106), 
         [\#107](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/107),
