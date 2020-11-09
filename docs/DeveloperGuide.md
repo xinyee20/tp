@@ -5,6 +5,8 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
+<div style="page-break-after: always;"></div>
+
 ## **1. Introduction**
 
 <p><img src="images/logo.png" alt="Serenity Logo" width="310"></p>
@@ -66,6 +68,8 @@ Symbol/syntax | Meaning
 _GUI_ | This indicates a graphical component.
 :information_source: | This indicates a note.
 :bulb: | This indicates a tip.
+
+<div style="page-break-after: always;"></div>
 
 ## **4. Design**
 
@@ -286,6 +290,8 @@ This package contains classes for exceptions thrown by **Serenity**.
 
 This package contains classes for utility operations like file input and output, Excel XLSX file support,
 JSON functionalities and image processing.
+
+<div style="page-break-after: always;"></div>
 
 ## **5. Implementation**
 
@@ -616,6 +622,8 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 * The question feature is a key feature in our application. Thus, we decided to opt for the option with better user experience.
 * Both options have overheads when trying to view all questions and to view an individual lesson’s questions. However, option 2 is more costly and complicated to implement given the time constraints. Thus, we decided option 1 is better.
 
+<div style="page-break-after: always;"></div>
+
 ## **6. Documentation, Logging, Testing, Configuration, Dev Ops**
 
 * [Documentation guide](Documentation.md)
@@ -627,6 +635,7 @@ The Sequence Diagram given in Figure 5.6.2.2 below summarises the aforementioned
 * [Configuration guide](Configuration.md)
 
 * [DevOps guide](DevOps.md)
+
 
 ## **Appendix A: Product Scope**
 
