@@ -462,8 +462,6 @@ be in charge of doing that.
 The `StudentManager` will also be in charge of ensuring that the actions done on a tutorial group level
 are correctly applied to the students belonging to the specified tutorial group.
 
-<div style="page-break-after: always;"></div>
-
 #### 5.4.2. Current Implementation
 
 The `StudentManager` contains a `HashMap` which key is a `GroupName` and value is a `UniqueList<Student>`.
