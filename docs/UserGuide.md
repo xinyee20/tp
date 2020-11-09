@@ -237,6 +237,8 @@ Analysis:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **4. Features**
 
 This section contains all the information you need to know about the features of **Serenity**.
@@ -487,6 +489,8 @@ Outcome:
 
 Need to mark attendance of your students at the start of each lesson quickly?
 This feature allows you to mark attendance of students easily.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.1. Mark all students as present: `markpresent all`
 
@@ -893,6 +897,8 @@ Subtracting participation score of a student in a tutorial lesson:
 2. Type `subscore 1 score/1` into the _Command Box_.
 3. Press `Enter` to execute.
 
+<div style="page-break-after: always;"></div>
+
 Outcome:
 
 1. The _Result Display_ will show a success message.
@@ -937,6 +943,8 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. You can now see that his score has been updated on the _Student Information Panel_.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.3.4. Export participation scores as XLSX file: `exportscore`
 
