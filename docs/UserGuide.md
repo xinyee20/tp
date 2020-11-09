@@ -560,7 +560,8 @@ Outcome:
 
 <p align="center">
 
-<img src="images/userGuide/attendanceTaking/markpresent_result.png" alt="Result upon successful execution of command">
+<img src="images/userGuide/attendanceTaking/markpresent_result.png" 
+     alt="Result upon successful execution of command" border="1px solid black">
 <i>Figure 4.2.2.1 Screen displayed when the command is successfully executed.</i>
 
 </p>
@@ -605,7 +606,8 @@ Outcome:
 
 <p align="center">
 
-<img src="images/userGuide/attendanceTaking/markabsent_result.png" alt="Result upon successful execution of command">
+<img src="images/userGuide/attendanceTaking/markabsent_result.png" 
+     alt="Result upon successful execution of command" border="1px solid black">
 <i>Figure 4.2.3.1 Screen displayed when the command is successfully executed.</i>
 
 </p>
