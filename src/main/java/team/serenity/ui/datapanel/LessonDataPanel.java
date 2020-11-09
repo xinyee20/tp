@@ -38,6 +38,7 @@ public class LessonDataPanel extends DataPanel {
         this.studentInfoListView.setPlaceholder(new Label(Messages.MESSAGE_NO_STUDENTS));
         this.questionListView.setItems(questionList);
         this.questionListView.setCellFactory(listView -> new QuestionListViewCell());
+        this.questionListView.setPlaceholder(new Label(Messages.MESSAGE_NO_QUESTIONS));
     }
 
     public static class StudentInfoListViewCell extends ListCell<StudentInfo> {
