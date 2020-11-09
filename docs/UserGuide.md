@@ -214,12 +214,8 @@ You can use commands to tell **Serenity** to perform a specific task.
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: **Notes regarding the command format:**
-
-* Words in upper case are the parameters to be supplied by you.<br>
+:information_source: **Note:** Words in upper case are the parameters to be supplied by you.<br>
   e.g. in `viewgrp grp/GROUP_NAME`, `GROUP_NAME` is a parameter which can be used as `viewgrp grp/G01`
-* Parameters have to be in the specified order.<br>
-  e.g. if the command specifies `grp/GROUP_NAME lsn/LESSON_NAME`, `lsn/LESSON_NAME grp/GROUP_NAME` is not acceptable.
 
 </div>
 
