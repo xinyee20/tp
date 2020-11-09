@@ -76,11 +76,11 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=xinyee20&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**: 
-  * Brainstormed ideas for the different features (How we intend our application to behave etc.)
-  * Contributed to weekly team meetings regarding design details and implementation constraints
-  * Discussed ideas to improve architecture design
+  * Brainstormed ideas for the different features. (How we intend our application to behave etc.)
+  * Contributed to weekly team meetings regarding design details and implementation constraints.
+  * Discussed ideas to improve architecture design.
   * Used Github Issues Tracker to schedule, track and assign tasks to teammates.
-  * Reviewing and merging of PRs before deadlines
+  * Reviewing and merging of PRs before deadlines.
   
 * **Enhancements to existing features**:
     * Improve consistency of error messages. ( Pull requests 
@@ -88,31 +88,37 @@ Given below are my contributions to the project.
     * Detected and fixed bugs for some features. ( Pull request 
     [#87](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/87),
     [#112](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/112),
-    [#172](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/172))
+    [#172](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/172),
     [#270](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/270),
     [#279](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/279),
     [#280](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/280),
-    [#291](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/291),
+    [#291](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/291))
     * Wrote additional tests for existing features to increase test coverage. ( Pull request
     [#138](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/138),
     [#188](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/188),
     [#270](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/270),
     [#280](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/280),
     [#291](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/291),
+    [#357](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/357))
     * Improve code quality for certain commands to adhere to coding principles. ( Pull request 
-    [#188](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/188))
-    [#291](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/291),
+    [#188](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/188),
+    [#291](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/291))
 
 * **Documentation**:
   * User Guide:
+      * Added documentation for set up section. ( Pull request
+      [#27](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/27)))
       * Added documentation for the features `markpresent`, `markabsent`, `flagatt`, `unflagatt`, `editscore`,
       `addscore`, `subscore`. ( Pull request 
       [#149](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/149))
-      * Addressed documentation issues after initial peer review. ( Pull request 
-      [#112](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/112))
-      [#120](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/120))
-      [#128](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/128))
+      * Addressed documentation issues after adjustment of commands and peer review. ( Pull request 
+      [#112](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/112),
+      [#120](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/120),
+      [#128](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/128),
+      [#350](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/350))
   * Developer Guide:
+      * Added target user profile and value proposition. ( Pull request
+      [#28](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/28))
       * Added implementation details for `StudentInfoManager`. ( Pull request 
       [#198](https://github.com/AY2021S1-CS2103T-W12-4/tp/pull/198))
 
@@ -123,5 +129,5 @@ Given below are my contributions to the project.
     [2](https://github.com/AY2021S1-CS2103T-W13-2/tp/issues/111), 
     [3](https://github.com/AY2021S1-CS2103T-W13-2/tp/issues/112),
     [4](https://github.com/AY2021S1-CS2103T-W13-2/tp/issues/113),
-    [5](https://github.com/AY2021S1-CS2103T-W13-2/tp/issues/114),
+    [5](https://github.com/AY2021S1-CS2103T-W13-2/tp/issues/114))
 
