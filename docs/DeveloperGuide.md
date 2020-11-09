@@ -200,7 +200,7 @@ This segment will explain the structure and responsibilities of the `Model` comp
 #### **4.4.1. Structure**
 
 <p align="center">
-<img alt="Class diagram of Model component" src="images/developerGuide/ModelClassDiagram.png" ></p>
+<img alt="Class diagram of Model component" src="images/developerGuide/ModelClassDiagram.png" width="620"></p>
 
 <p align="center"><i>Figure 4.4.1.1 Simplified Class Diagram of <code>model</code> component</i></p>
 
@@ -244,7 +244,7 @@ This segment will explain the structure and responsibilities of the `Storage` co
 #### **4.5.1. Structure**
 
 <p align="center">
-<img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png"/></p>
+<img alt="Class diagram of Storage component" src="images/developerGuide/StorageClassDiagram.png" width="500"></p>
 
 <p align="center"><i>Figure 4.5.1.1 Class diagram of <code>Storage</code> component.</i></p>
 
@@ -337,7 +337,7 @@ a `StudentManager` stores every `UniqueList` tagged to a `Group` as the key for 
 This enables retrieval of a specific `UniqueList` of `Student` items in a tutorial group.
 
 <p align="center">
-<img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager"></p>
+<img src="images/developerGuide/FeatureManagerDiagram.png" alt="Class diagram for GroupManager" width="380"></p>
 
 <p align="center"><i>Figure 5.1.2.1 Structure of <code>GroupManager</code>, an example of
 a <code>XYZManager</code> which stores a single <code>UniqueList</code></i></p>
@@ -368,7 +368,7 @@ The following steps describe the execution of `DelGrpCommand` in detail, assumin
 The sequence diagram below documents the execution.
 
 <p align="center">
-<img src="images/developerGuide/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager"></p>
+<img src="images/developerGuide/GroupManagerSequenceDiagram.png" alt="Class diagram for GroupManager" width="590"></p>
 
 <p align="center"><i>Figure 5.2.2.1 Sequence diagram detailing execution of <code>DelGrpCommand</code></i></p>
 
@@ -565,7 +565,8 @@ of the lessons for each tutorial group. It does not allow the user to add questi
 In this section, we will outline the `findqn` command of the `QuestionManager` which is summarised by the
 Activity Diagram below.
 
-<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 5.6.2.1 Activity diagram of a findqn command" width="392px" height="592px"></p>
+<p align="center"><img src="images/developerGuide/FindQnActivityDiagram.png" alt="Figure 5.6.2.1 Activity diagram of a findqn command" width="330"></p>
+
 <p align="center"><i>Figure 5.6.2.1. Activity diagram of a <code>findqn</code> command</i></p>
 
 When the user enters the `findqn` command to search for questions, the user input command undergoes the same command
@@ -582,7 +583,8 @@ The following steps will describe the execution of the `FindQnCommand` in detail
 
 The Sequence Diagram below summarises the aforementioned steps.
 
-<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 5.6.2.2 Sequence diagram detailing execution of FindQnCommand"></p>
+<p align="center"><img src="images/developerGuide/FindQnSequenceDiagram.png" alt="Figure 5.6.2.2 Sequence diagram detailing execution of FindQnCommand" width="550"></p>
+
 <p align="center"><i>Figure 5.6.2.2. Sequence diagram detailing execution of <code>FindQnCommand</code></i></p>
 
 #### **5.6.3. Design Consideration**
