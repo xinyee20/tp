@@ -3,6 +3,7 @@ package team.serenity.logic.parser.studentinfo;
 import static team.serenity.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NAME;
 import static team.serenity.logic.commands.CommandTestUtil.INVALID_STUDENT_WITHOUT_NUMBER;
+import static team.serenity.logic.commands.CommandTestUtil.NEG_NUMBER_SET_SCORE;
 import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER;
 import static team.serenity.logic.commands.CommandTestUtil.NON_INTEGER_SET_SCORE;
 import static team.serenity.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -65,9 +66,13 @@ class EditScoreCommandParserTest {
 
         String userInputOne = PREAMBLE_WHITESPACE + VALID_INDEX + " " + NON_INTEGER_SET_SCORE;
         String userInputTwo = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + NON_INTEGER_SET_SCORE;
+        String userInputThree = PREAMBLE_WHITESPACE + VALID_INDEX + " " + NEG_NUMBER_SET_SCORE;
+        String userInputFour = PREAMBLE_WHITESPACE + STUDENT_DESC_AARON + " " + NEG_NUMBER_SET_SCORE;
 
         assertParseFailure(parser, userInputOne, expectedMessage);
         assertParseFailure(parser, userInputTwo, expectedMessage);
+        assertParseFailure(parser, userInputThree, expectedMessage);
+        assertParseFailure(parser, userInputFour, expectedMessage);
     }
 
     @Test
