@@ -955,6 +955,8 @@ testers are expected to do more **exploratory** testing.
     <span><a href="#appendix-e-glossary" style="color:purple"><i>GUI</i></a></span> updates to show the student information in the tutorial lesson created.
     1. Other incorrect add group commands to try: `addlsn`, `addlsn grp/<GROUP_NAME>`, `addlsn lsn/<LESSON_NAME>`
     <br>Expected: Error message shown.
+    
+<div style="page-break-after: always;"></div>
 
 1. Adding Student to a Group
     1. Prerequisites: Tutorial group is already set up.
