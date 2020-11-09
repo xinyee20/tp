@@ -489,6 +489,8 @@ Outcome:
 
 </p>
 
+<div style="page-break-after: always;"></div>
+
 ### 4.2. Attendance taking
 
 Need to mark attendance of your students at the start of each lesson quickly?
@@ -702,12 +704,12 @@ Flagging a student's attendance for a tutorial lesson by his `index` number:
 2. Type `flagatt 1` into the _Command Box_.
 3. Press `Enter` to execute.
 
-<div style="page-break-after: always;"></div>
-
 Outcome:
 
 1. The _Result Display_ will show a success message.
 2. His attendance will now be flagged for future follow-up actions.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.6. Unflag attendance of a student: `unflagatt`
 
@@ -1113,6 +1115,8 @@ Outcome:
 
 1. The _Result Display_ will show a success message.
 2. The _Data Display_ will update and display the list of questions with the keyword `deadline`.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.5 Utility viewing
 
